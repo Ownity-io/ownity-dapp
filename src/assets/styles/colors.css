@@ -1,0 +1,9 @@
+.header-nav ul li a.active:after,
+.header-nav ul li button.active:after {
+    background: #12AC64;
+}
+
+.header-nav .btn-container .btn.btn-connect {
+    background: #12AC64;
+    color: #FFFFFF;
+}
