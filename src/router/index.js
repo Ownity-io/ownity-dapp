@@ -1,0 +1,32 @@
+import {createRouter, createWebHistory} from 'vue-router'
+import Main from '../views/Main.vue'
+import Marketplace from '../views/Marketplace.vue'
+
+const routes = [
+    {
+        path: '/',
+        name: 'Main',
+        component: Main,
+        redirect: "/marketplace",
+    },
+    {
+        path: '/marketplace',
+        name: 'Marketplace',
+        component: Marketplace,
+        // component:  () => {
+            // ('@/views/MarketplaceMain.vue')
+            // if (localStorage.userInfo) {
+            //     return import('@/views/Cabinet.vue')
+            // } else {
+            //     return import('@/views/error/Error404.vue')
+            // }
+        // },
+    },
+]
+
+// const router = createRouter({
+//     history: createWebHistory(process.env.BASE_URL),
+//     routes
+// })
+
+export default router
