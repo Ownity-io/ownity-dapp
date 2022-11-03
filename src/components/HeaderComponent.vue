@@ -4,10 +4,7 @@
             <div class="header-wrapper">
                 <div class="header-logo">Marketplace</div>
                 <div class="header-search">
-                    <div class="input-wrapper search-wrapper">
-                        <i class="i-search-line"></i>
-                        <input type="text" placeholder="Search NFT, collections, id">
-                    </div>
+                    <Search />
                 </div>
                 <div class="header-nav">
                     <nav>
@@ -30,6 +27,9 @@
 </template>
 
 <script>
+
+import Search from '@/components/Search.vue'
+
 export default {
     data(){
         return{
@@ -37,6 +37,9 @@ export default {
             headerItemActive2:false,
             headerItemActive3:false,
         }
+    },
+    components: {
+        Search,
     }
 }
 </script>

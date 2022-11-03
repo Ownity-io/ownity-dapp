@@ -11,8 +11,20 @@ const routes = [
     },
     {
         path: '/marketplace',
-        name: 'Marketplace',
         component: Marketplace,
+
+        children: [
+            {
+                path: '',
+                name: 'Marketplace',
+                component: () => import('@/views/marketplace/MarketplaceMain.vue'),
+            },
+            // {
+            //     path: '',
+            //     name: 'Marketplace',
+            //     component: () => import('@/views/marketplace/MarketplaceMain.vue'),
+            // },
+        ]
         // component:  () => {
             // ('@/views/MarketplaceMain.vue')
             // if (localStorage.userInfo) {
