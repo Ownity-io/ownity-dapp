@@ -1,6 +1,6 @@
 <template>
     <HeaderComponent/>
-    <router-view></router-view>
+    <RouterView />
     <FooterComponent/>
 </template>
 
