@@ -159,20 +159,22 @@ a {
     color: inherit;
     cursor: pointer;
     -webkit-tap-highlight-color: none !important;
+    box-shadow: none;
+}
+button,
+.btn,
+.btn > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
 }
 input:disabled,
 button:disabled,
 a:disabled {
     cursor: default !important;
 }
-button,
-button > div,
-.button {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
-}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -212,5 +214,8 @@ button > a {
     align-items: center;
 }
 ::-webkit-calendar-picker-indicator {
+    display: none;
+}
+input[type="checkbox"]{
     display: none;
 }

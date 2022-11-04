@@ -4,7 +4,7 @@
             <i class="i-search-line"></i>
             <input type="text" placeholder="Search NFT, collections, id">
         </div>
-        <div class="search-results">
+        <div class="search-results" :class="{'unfolded' : testOpenSearch}">
             <div class="search-results-wrapper">
                 <ul>
                     <li>
@@ -25,6 +25,7 @@ export default {
     data() {
         return {
             testBg: '@/assets/images/test-bg.png',
+            testOpenSearch: false,
         }
     }
 }
