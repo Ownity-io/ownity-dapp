@@ -1,6 +1,8 @@
 <template>
+    <div class="wrapper-main">
     <HeaderComponent/>
-    <RouterView />
+        <RouterView />    
+    </div>
     <FooterComponent/>
 </template>
 

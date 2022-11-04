@@ -1,0 +1,17 @@
+.header-nav ul li a.active:after,
+.tabs .active-tab::after,
+.header-nav ul li button.active:after {
+    background: #12AC64;
+}
+
+.header-nav .btn-container .btn.btn-connect {
+    background: #12AC64;
+    color: #FFFFFF;
+}
+
+.footer-list a:hover,
+.breadcrumbs li a:hover,
+.footer-row.footer-row-info .footer-part:not(.footer-social-links) a:hover{
+    color: #2CC07B;
+    text-decoration: underline;
+}

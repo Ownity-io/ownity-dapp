@@ -1,5 +1,5 @@
 <template>
-    <div>
-        Hello Marketplace
+    <div class="page-wrapper">
+        <router-view />
     </div>
 </template>
