@@ -11,7 +11,29 @@
 
 .footer-list a:hover,
 .breadcrumbs li a:hover,
-.footer-row.footer-row-info .footer-part:not(.footer-social-links) a:hover{
+.footer-row.footer-row-info .footer-part:not(.footer-social-links) a:hover {
     color: #2CC07B;
     text-decoration: underline;
+}
+
+.tabs button:hover,
+.tabs button.active-tab {
+    background-color: #F8F9FD;
+}
+
+.sort.unfolded .btn-sort,
+.sort .btn-sort:hover,
+.btn-param:hover {
+    background-color: #F4F5FA;
+}
+
+.sort.unfolded li:hover {
+    background: #F4F5FA;
+}
+
+
+.card-data .btn-container .btn {
+    color: #333333;
+    background: #FFFFFF;
+    border: 2px solid #DFE2EA;
 }
