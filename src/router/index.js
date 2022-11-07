@@ -19,6 +19,11 @@ const routes = [
                 name: 'Marketplace',
                 component: () => import('@/views/marketplace/MarketplaceMain.vue'),
             },
+            {
+                path: '/listing',
+                name: 'Listing',
+                component: () => import('@/views/marketplace/MarketplaceListing.vue'),
+            },
             // {
             //     path: '',
             //     name: 'Marketplace',

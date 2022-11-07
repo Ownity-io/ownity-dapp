@@ -21,7 +21,8 @@
                 </div>
                 <div class="td">
                     <div class="td-wrap td-wrap-sale">
-                        Sale
+                        <i class="i-shopping-bag-line"></i>
+                        <span>Sale</span>
                     </div>
                 </div>
                 <div class="td td-price">
