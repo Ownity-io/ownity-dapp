@@ -3,7 +3,7 @@
     <div class="card-main">
       <div class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></div>
       <div class="card-header">
-        <div class="icon-card-label"></div>
+        <div class="icon-card-label" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></div>
         <button class="btn-like" @click="testLike = !testLike">
           <i :class="{ 'icon-like': testLike, 'icon-dislike': !testLike }"></i>
         </button>
