@@ -1,12 +1,10 @@
 import { createStore } from "vuex";
+import api from "@/store/modules/api.js";
 
 const store = createStore({
-  state() {
-    return {};
+  modules: {
+    api,
   },
-  getters: {},
-  mutations: {},
-  actions: {},
 });
 
 export default store;
