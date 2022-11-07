@@ -512,6 +512,9 @@ ul.tabs {
     border: 1px solid #DFE2EA;
     background-color: #DFE2EA;
     border-radius: 8px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 .thead .td-collection span {
@@ -899,6 +902,17 @@ ul.tabs {
     height: 24px;
 }
 
+.card-img,
+.collection-img,
+.search-results-wrapper li .results-icon,
+.td-wrap-collection .collection-img,
+.card-img-wrap {
+    background-image: url(../images/img-not-found.svg);
+    /* background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center; */
+}
+
 .icon-like {
     background-image: url(../images/like.svg);
 }
@@ -909,10 +923,6 @@ ul.tabs {
 
 .icon-card-label {
     background-image: url(../images/test-label.png);
-}
-
-.card-img {
-    background-image: url(../images/test-bg.png);
 }
 
 .icon-token {
@@ -995,7 +1005,15 @@ ul.tabs {
     padding: 12px 16px;
 }
 
-.data-table {}
+.tab-info .data-table .data-td {
+    max-width: 50%;
+    width: 50%;
+    min-height: 24px;
+}
+
+.tab-info .data-table {
+    gap: 16px;
+}
 
 .card-id {
     font-weight: 700;
@@ -1025,8 +1043,14 @@ ul.tabs {
     position: absolute;
     top: 2px;
     left: 0;
-    background-image: url(../images/ethereum.svg);
 }
+
+.token-value .icon-token,
+.card-value .icon-value{
+    background-image: url(../images/ethereum.svg);
+
+}
+
 
 .data-table {
     display: flex;
@@ -1102,9 +1126,10 @@ ul.tabs {
 
 .table-activity .thead,
 .table-activity .tr {
-    grid-template-columns: 1.5fr .75fr 1fr .5fr 1fr;
+    grid-template-columns: 1.5fr .75fr 1fr 1fr 1fr;
     /* width: 100%; */
     border-bottom: 1px solid #DFE2EA;
+    gap: 16px;
 }
 
 .table-activity .thead .td.td-price,
@@ -1136,20 +1161,26 @@ ul.tabs {
 }
 
 .thead .td,
-.tr .td-light {
+.tr .td-light,
+.tab-info .data-td.data-td-name {
     color: #9A9A9A;
 }
 
 .td-wrap-sale,
+.token-value ,
 .td-wrap-price,
 .td-wrap-link {
     position: relative;
     min-height: 24px;
     display: flex;
+    align-items: center;
+    width: fit-content;
+    max-width: 100%;
 }
 
 .td-wrap-sale i,
 .td-wrap-price i,
+.token-value .icon-value,
 .td-wrap-price .icon-token,
 .td-wrap-link i {
     position: absolute;
@@ -1165,7 +1196,8 @@ ul.tabs {
 }
 
 .td-wrap-sale,
-.td-wrap-price {
+.td-wrap-price,
+.token-value  {
     padding-left: 28px;
 }
 
@@ -1188,6 +1220,7 @@ ul.tabs {
 }
 
 .td-wrap-sale i,
+.token-value .icon-token,
 .td-wrap-price .icon-token {
     left: 0;
 }
@@ -1267,7 +1300,9 @@ ul.tabs {
     position: relative;
     width: 100%;
     height: auto;
-    background-color: #92f4c6;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
 }
 
 .section-listing-header {
@@ -1321,9 +1356,58 @@ ul.tabs {
 .owned-row {
     font-weight: 400;
     font-size: 16px;
-    line-height: 19px;color: #9A9A9A;
+    line-height: 19px;
+    color: #9A9A9A;
 }
+
 .owned-row span,
-.owned-row a{
+.owned-row a {
     color: #333333;
+}
+
+.container-listing+.section-recommendation {
+    margin-top: 100px;
+}
+
+[class^='section-listing-']:not(.section-listing-header) {
+    margin-top: 40px;
+}
+
+.listing-selected-tab {
+    padding-top: 24px;
+}
+
+.tab-contain .collection-description{
+    max-width: 586px;
+}
+.collection-statistics,
+.tab-contain .collection-description {
+    margin-top: 16px;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+}
+
+.collection-statistics li{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.collection-statistics .name{
+    color: #9A9A9A;
+    margin-bottom: 4px;
+}
+
+.tab-contain .collection-statistics {
+    margin-top: 16px;
+    max-width: 586px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 32px;
 }
