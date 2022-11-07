@@ -2,9 +2,9 @@
     <div class="search">
         <div class="input-wrapper search-wrapper">
             <i class="i-search-line"></i>
-            <input type="text" placeholder="Search NFT, collections, id">
+            <input type="text" v-model="search" placeholder="Search NFT, collections, id">
         </div>
-        <div class="search-results" :class="{'unfolded' : testOpenSearch}">
+        <div class="search-results" :class="{'unfolded' : search != ''}">
             <div class="search-results-wrapper">
                 <ul>
                     <li>
@@ -26,6 +26,7 @@ export default {
         return {
             testBg: '@/assets/images/test-bg.png',
             testOpenSearch: false,
+            search: '',
         }
     }
 }

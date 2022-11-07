@@ -440,7 +440,8 @@ ul.tabs {
 
 .drop-down ul,
 .search-results-wrapper ul,
-.search-results-wrapper ul .results-data {
+.search-results-wrapper ul .results-data,
+.td-wrap-collection .collection-data {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -452,7 +453,8 @@ ul.tabs {
 }
 
 .drop-down ul li,
-.search-results-wrapper ul li {
+.search-results-wrapper ul li,
+.td-wrap.td-wrap-collection {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -485,13 +487,17 @@ ul.tabs {
     margin-top: 3px;
     color: #9A9A9A;
 }
-
+.td-wrap-collection .collection-img,
 .search-results-wrapper li .results-icon {
     width: 48px;
     height: 48px;
     border: 1px solid #DFE2EA;
     background-color: #DFE2EA;
     border-radius: 8px;
+}
+.td-wrap-collection .collection-img{
+    margin-left: 16px;
+    margin-right: 16px;
 }
 
 .params {
@@ -666,11 +672,13 @@ ul.tabs {
 .filter-section {
     border-bottom: 1px solid #DFE2EA;
 }
+
 .filter-section .input-checkbox,
 .filter-section .container-enter-price,
-.filter-section .filter-ul{
+.filter-section .filter-ul {
     transition: 0.2s;
 }
+
 .filter-section.collapse-section .input-checkbox,
 .filter-section.collapse-section .container-enter-price,
 .filter-section.collapse-section .filter-ul {
@@ -1050,4 +1058,39 @@ ul.tabs {
     line-height: 19px;
     color: #000000;
 
+}
+
+.thead,
+.tbody .tr {
+    display: grid;
+
+}
+
+.table-activity .thead,
+.table-activity .tbody .tr {
+    grid-template-columns: 1.5fr .75fr 1fr .5fr 1fr;
+    width: 100%;
+    border-bottom: 1px solid #DFE2EA;
+}
+
+.table-activity .thead .td.td-price,
+.table-activity .tbody .tr .td.td-price,
+.table-activity .thead .td.td-date,
+.table-activity .tbody .tr .td.td-date{
+    text-align: right;
+}
+.table-activity .thead .td.td-price,
+.table-activity .tbody .tr .td.td-price{
+    margin-right: 40%;
+}
+.thead .td,
+.tr .td {
+    padding: 16px;
+    font-weight: 400;
+font-size: 16px;
+line-height: 150%;
+}
+
+.thead .td{
+    color: #9A9A9A;
 }
