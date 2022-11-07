@@ -40,6 +40,13 @@ export default {
         let requestJson = await request.json();
 
         context.commit('setListingsInfo',requestJson);
+    },
+    async fetchAndSetListingsNexnInfo(context){
+        let requestUrl = state.nextListingLink;
+        let request = await fetch(requestUrl);
+        let requestJson = await request.json();
+
+        context.commit('setListingsInfo',requestJson);
     }
   }
 };
