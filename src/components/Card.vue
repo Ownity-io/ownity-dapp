@@ -22,12 +22,12 @@
           <div class="card-id">{{item.name}}</div>
           <div class="card-value">
             <div class="icon-value"></div>
-            0.40 / <span>1 ETH</span>
+            0.40 / <span>{{priceInCurrency.toFixed(2)}} ETH</span>
           </div>
         </div>
         <div class="data-tr">
           <div>{{item.collection.name}}</div>
-          <div>≈ $ 1000</div>
+          <div>≈ $ {{Math.round(priceInCurrency * currencyToUsdPrice)}}</div>
         </div>
         <div class="data-tr data-tr-date">
           <div>Ends in 07:47:21</div>
@@ -46,10 +46,31 @@ export default {
     return {
       testLike: false,
       testProgressValue: 40,
+      currencyToUsdPrice: 1,
+      priceInCurrency: 1
     };
   },
   props:[
     'item'
-  ]
+  ],
+  methods:{
+    getPriceInCurrency(){
+      this.priceInCurrency = this.item.price / (10**this.item.currency.decimals);
+    },
+    async getPriceInUsd(){
+      let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
+      let requestJson = await request.json();
+      try{
+        this.currencyToUsdPrice =  requestJson.quotes[0].priceUsd;
+      }
+      catch{
+        this.currencyToUsdPrice = 1;
+      }
+    }
+  },
+  async mounted(){
+    this.getPriceInCurrency();
+    await this.getPriceInUsd();
+  }
 };
 </script>
