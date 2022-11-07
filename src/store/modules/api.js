@@ -1,9 +1,15 @@
 import { createStore } from "vuex";
 
-const api = createStore({
-  state() {
-    return {};
-  },
-});
-
-export default api;
+export default {
+    namespaced:true,
+    state() {
+      return {
+          testValue:'OK'
+      };
+    },
+    getters:{
+      getTestValue(state){
+          return state.testValue;
+      }
+    }
+  }
