@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-main">
-      <div class="card-img"></div>
+      <div class="card-img" ></div>
       <div class="card-header">
         <div class="icon-card-label"></div>
         <button class="btn-like" @click="testLike = !testLike">
