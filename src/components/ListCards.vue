@@ -1,13 +1,7 @@
 <template>
   <div class="cards-list">
     <div class="cards-list-container">
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
+      <Card v-for="item in this.$store.getters['api/getListingsResults']" :key="item" :imgUrl="item.media" />
     </div>
     <div class="cards-list-load">
         <div class="i-wrap">
