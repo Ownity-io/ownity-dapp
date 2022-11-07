@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-main">
-      <div class="card-img" :style="{backgroundImage: `url(${imgUrl})`}" ></div>
+      <div class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></div>
       <div class="card-header">
         <div class="icon-card-label"></div>
         <button class="btn-like" @click="testLike = !testLike">
@@ -19,14 +19,14 @@
     <div class="card-data">
       <div class="data-table">
         <div class="data-tr data-tr-main">
-          <div class="card-id">18234</div>
+          <div class="card-id">{{item.name}}</div>
           <div class="card-value">
             <div class="icon-value"></div>
             0.40 / <span>1 ETH</span>
           </div>
         </div>
         <div class="data-tr">
-          <div>Mutant Ape Yacht Club</div>
+          <div>{{item.collection.name}}</div>
           <div>≈ $ 1000</div>
         </div>
         <div class="data-tr data-tr-date">
@@ -49,7 +49,7 @@ export default {
     };
   },
   props:[
-    'imgUrl'
+    'item'
   ]
 };
 </script>
