@@ -13,6 +13,15 @@ export default {
     components:{
         HeaderComponent,
         FooterComponent,
+    },
+    methods:{
+        async getLastResponse(){
+            return this.$store.getters['api/getTestValue'];
+        }
+    },
+    async mounted(){
+        let lastResponse = await this.getLastResponse();
+        console.log(lastResponse);
     }
 }
 </script>
