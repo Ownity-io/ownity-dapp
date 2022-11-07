@@ -13,6 +13,7 @@ export default defineConfig({
   },
   base:'./',
   server:{
-    host:true
+    host:true,
+    port: 5174
   }
 })
