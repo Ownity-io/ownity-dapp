@@ -15,13 +15,12 @@ export default {
         FooterComponent,
     },
     methods:{
-        async getLastResponse(){
-            return this.$store.getters['api/getTestValue'];
+        async getListings(){
+            await this.$store.dispatch('api/fetchAndSetListingsInfo');
         }
     },
     async mounted(){
-        let lastResponse = await this.getLastResponse();
-        console.log(lastResponse);
+        await this.getListings();
     }
 }
 </script>
