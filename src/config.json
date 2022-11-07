@@ -1,4 +1,4 @@
 {
     "backendApiEntryPoint":"https://api.jaxscan.com/",
-    "listingsPerPage":10
+    "listingsPerPage":20
 }

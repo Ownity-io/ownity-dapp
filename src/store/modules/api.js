@@ -1,6 +1,5 @@
 import { createStore } from "vuex";
 import config from "@/config.json";
-import store from "..";
 
 export default {
   namespaced: true,
@@ -30,14 +29,13 @@ export default {
     setListingsInfo(state,_json){
         state.nextListingLink = _json.next;
         state.prevListingLink = _json.previous;
-        state.listingsResults.concat(_json.results);
+        state.listingsResults=_json.results;
         state.lastListingsResponse = _json;
     }
   },
   actions:{
-    async fetchAndSetListingsInfo(context){
+    async fetchAndSetListingsStartInfo(context){
         let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.listingsPerPage}`;
-        console.log(requestUrl);
         let request = await fetch(requestUrl);
         let requestJson = await request.json();
 

@@ -15,12 +15,12 @@ export default {
         FooterComponent,
     },
     methods:{
-        async getListings(){
-            await this.$store.dispatch('api/fetchAndSetListingsInfo');
+        async fetchAndSetListingsStartInfo(){
+            await this.$store.dispatch('api/fetchAndSetListingsStartInfo');
         }
     },
     async mounted(){
-        await this.getListings();
+        await this.fetchAndSetListingsStartInfo();
     }
 }
 </script>
