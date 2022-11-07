@@ -1160,6 +1160,7 @@ ul.tabs {
 .td-wrap-link i{
     right: 0;
 }
+.td-wrap-sale i,
 .td-wrap-price .icon-token{
     left: 0;
 }
