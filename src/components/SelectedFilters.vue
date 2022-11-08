@@ -2,26 +2,26 @@
     <div class="selected-filters">
         <ul>
             <li>
-                <button class="btn-selected-filter">
+                <button class="btn btn-selected-filter">
                     <span>Active</span>
                     <i class="i-close-line"></i>
                 </button>
             </li>
             <li>
-                <button class="btn-selected-filter">
+                <button class="btn btn-selected-filter">
                     <div class="icon-selected-filter"></div>
                     <span>Mutant Ape Yacht Club</span>
                     <i class="i-close-line"></i>
                 </button>
             </li>
             <li>
-                <button class="btn-selected-filter">
+                <button class="btn btn-selected-filter">
                     <span>Min 1 ETH</span>
                     <i class="i-close-line"></i>
                 </button>
             </li>
             <li>
-                <button class="btn-selected-filter btn-reset">
+                <button class="btn btn-selected-filter btn-reset">
                     <span>Clear all</span>
                     <i class="i-close-line"></i>
                 </button>
