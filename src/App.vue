@@ -1,5 +1,5 @@
 <template>
-    <ConnectWallet />
+    <!-- <ConnectWallet /> -->
     <div class="wrapper-main">
         <HeaderComponent/>
         <RouterView />    
