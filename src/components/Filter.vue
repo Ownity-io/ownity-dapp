@@ -10,7 +10,8 @@
           <div class="input-checkbox">
             <input type="checkbox" :id="item" v-model="checkedStatus" :true-value="item" :false-value="null" @change="fetchAndSetListingsStartInfo"/>
             <label :for="item">
-              <span>{{item}}</span>
+              <span>{{(item  === 'CLOSED') ? 'Closed' : 'Open' }}</span>
+              <!-- "CLOSED", "OPEN -->
               <i class="i-check-line"></i>
             </label>
           </div>
