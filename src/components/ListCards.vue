@@ -1,14 +1,14 @@
 <template>
   <div class="cards-list">
-    <div class="cards-list-load">
+    <div v-if="this.$store.getters['api/getListingsResults'].length>0" class="cards-list-container">
+      <Card v-for="item in this.$store.getters['api/getListingsResults']" :key="item" :item="item" />
+    </div>
+    <div class="cards-list-load" ref="target" v-if="this.$store.getters['api/getLastListingsResponse']!=null">
         <div class="i-wrap">
             <i class="i-loader-4-line"></i>
         </div>
     </div>
-    <div v-if="this.$store.getters['api/getListingsResults'] > 0" class="cards-list-container">
-      <Card v-for="item in this.$store.getters['api/getListingsResults']" :key="item" :item="item" />
-    </div>
-    <div v-else class="cards-list-empty" ref="target">
+    <div class="cards-list-empty" v-else>
       <div class="title">Oops! Nothing here. </div>
       <button class="btn">
         Back to all items

@@ -63,13 +63,25 @@ export default {
       let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.listingsPerPage}`;
       let request = await fetch(requestUrl);
       let requestJson = await request.json();
-      context.commit("setListingsInfo", requestJson);
+      let requestCode =  request.ok;
+      if (requestCode){
+        context.commit("setListingsInfo", requestJson);
+      }
+      else{
+        context.commit("setListingsInfo", null);
+      }      
     },
     async fetchAndSetListingsNextInfo(context) {
       let requestUrl = context.getters.getNextListingLink;
       let request = await fetch(requestUrl);
       let requestJson = await request.json();
-      context.commit("setListingsInfo", requestJson);
+      let requestCode =  request.ok;
+      if (requestCode){
+        context.commit("setListingsInfo", requestJson);
+      }
+      else{
+        context.commit("setListingsInfo", null);
+      }     
     },
     //forFilters
     async fetchAndSetNftCollections(context) {
