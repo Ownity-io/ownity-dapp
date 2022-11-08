@@ -53,7 +53,7 @@
           <div v-if="showFullName" class="card-id card-id-full">{{item.name}}</div>
           <div class="card-value">
             <div class="icon-value"></div>
-            0.40 / <span>{{priceInCurrency.toFixed(2)}} ETH</span>
+            0.40/<span><b>{{priceInCurrency.toFixed(2)}}</b>ETH</span> 
           </div>
         </div>
         <div class="data-tr">

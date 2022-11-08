@@ -1135,8 +1135,11 @@ ul.tabs {
 }
 
 .card-value span {
-    font-weight: 700;
     font-size: 16px;
+}
+
+.card-value span b {
+    font-weight: 700;
 }
 
 .card-value .icon-value {
@@ -1247,7 +1250,6 @@ ul.tabs {
 .table-activity .thead,
 .table-activity .tr {
     grid-template-columns: 1.5fr .75fr 1fr 1fr 1fr;
-    /* width: 100%; */
     border-bottom: 1px solid #DFE2EA;
     gap: 16px;
 }
@@ -1255,9 +1257,15 @@ ul.tabs {
 .table-activities .thead,
 .table-activities .tr {
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    /* width: 100%; */
     border-bottom: 1px solid #DFE2EA;
     gap: 16px;
+}
+
+.table-chart .thead,
+.table-chart .tr {
+    grid-template-columns: 1fr .5fr 1.1fr;
+    border-bottom: 1px solid #DFE2EA;
+    gap: 8px;
 }
 
 .thead .td.td-price,
@@ -1368,10 +1376,14 @@ ul.tabs {
     left: 0;
 }
 
-.collection-wrap,
-.section-deposit-data {
+.collection-wrap {
     display: flex;
     align-items: center;
+}
+
+.section-deposit-data {
+    display: flex;
+    align-items: flex-start;
 }
 
 .listing-header .collection-wrap .collection-id {
@@ -1715,6 +1727,7 @@ ul.tabs {
 
 .section-deposit {
     display: flex;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 24px;
     padding: 24px 0;
@@ -1729,6 +1742,8 @@ ul.tabs {
     display: flex;
     align-items: center;
     gap: 16px;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 .section-deposit-btns .btn {
@@ -1736,6 +1751,14 @@ ul.tabs {
     font-size: 16px;
     line-height: 150%;
     min-width: 184px;
+}
+
+.deposit-listened {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #9A9A9A;
+    margin-bottom: 8px;
 }
 
 .btn-collapse {
@@ -1839,4 +1862,44 @@ ul.tabs {
     width: 16px;
     min-width: 16px;
     height: 16px;
+}
+
+.deposit-value {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 150%;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    color: #333333;
+}
+
+.deposit-value b {
+    font-weight: 700;
+
+}
+
+.deposit-value .icon-token {
+    width: 24px;
+    height: 24px;
+    margin-right: 4px;
+}
+
+.section-table-chart {
+    display: flex;
+    justify-content: stretch;
+    width: 100%;
+
+}
+
+.chart-wrap {
+    width: 31.7%;
+}
+
+.table-chart-data {
+    width: calc(100% - 31.7%);
+    padding-left: 24px;
+    display: grid;
 }
