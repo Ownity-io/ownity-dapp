@@ -14,6 +14,10 @@ export default {
       marketplaces: null,
       statuses: ["CLOSED", "OPEN"],
       nftCollections: null,
+      //selectedFilters
+      currentMarketplaceId: null,
+      currentStatus:null,
+      currentCollectionContractAddress:null
     };
   },
   getters: {
@@ -28,7 +32,6 @@ export default {
       return state.listingsResults;
     },
     getLastListingsResponse(state) {
-      console.log(state.lastListingsResponse);
       return state.lastListingsResponse;
     },
     //for filters
@@ -40,6 +43,16 @@ export default {
     },
     getStatuses(state) {
       return state.statuses;
+    },
+    //selectedFilters
+    getCurrentMarketplaceId(state) {
+      return state.currentMarketplaceId;
+    },
+    getCurrentStatus(state) {
+      return state.currentStatus;
+    },
+    getCurrentCollectionContractAddress(state) {
+      return state.currentCollectionContractAddress;
     },
   },
   mutations: {
@@ -65,25 +78,31 @@ export default {
     setMarketplaces(state, _json) {
       state.marketplaces = _json;
     },
+    //selectedFilters
+    setCurrentMarketplaceId(state,_marketplaceId) {
+      state.currentMarketplaceId = _marketplaceId;
+    },
+    setCurrentStatus(state,_status) {
+      state.currentStatus=_status;
+    },
+    setCurrentCollectionContractAddress(state,_collectionContractAddress) {
+      state.currentCollectionContractAddress = _collectionContractAddress;
+    },
   },
   actions: {
     //listings
-    async fetchAndSetListingsStartInfo(context, _data=null) {
+    async fetchAndSetListingsStartInfo(context) {
       let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.listingsPerPage}`;
-      if (_data!=null){
-        let _collectionContractAddress=_data[0];
-        let _marketplaceId=_data[1];
-        let _status = _data[2];
-        if (_collectionContractAddress!=null){
-          requestUrl+=`&collection=${_collectionContractAddress}`;
-        }
-        if (_marketplaceId!=null){
-          requestUrl+=`&marketplace=${_marketplaceId}`;
-        }
-        if (_status!=null){
-          requestUrl+=`&status=${_status}`;
-        }
+      if (context.getters.getCurrentCollectionContractAddress != null) {
+        requestUrl += `&collection=${context.getters.getCurrentCollectionContractAddress}`;
       }
+      if (context.getters.getCurrentMarketplaceId != null) {
+        requestUrl += `&marketplace=${context.getters.getCurrentMarketplaceId}`;
+      }
+      if (context.getters.getCurrentStatus != null) {
+        requestUrl += `&status=${context.getters.getCurrentStatus}`;
+      }
+
       let request = await fetch(requestUrl);
       let requestCode =  request.ok;
       if (requestCode){
@@ -122,6 +141,16 @@ export default {
       let request = await fetch(requestUrl);
       let requestJson = await request.json();
       context.commit("setMarketplaces", requestJson);
+    },
+    //selectedFilters
+    async getAndSetCurrentMarketplaceId(context,_marketplaceId){
+      context.commit('setCurrentMarketplaceId',_marketplaceId);
+    },
+    async getAndSetCurrentStatus(context,_status){
+      context.commit('setCurrentStatus',_status);
+    },
+    async getAndSetCurrentCollectionContractAddress(context,_collectionContractAddress){
+      context.commit('setCurrentCollectionContractAddress',_collectionContractAddress);
     },
   },
 };

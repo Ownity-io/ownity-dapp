@@ -90,7 +90,10 @@ export default {
   },
   methods:{
     async fetchAndSetListingsStartInfo() {
-      await this.$store.dispatch('api/fetchAndSetListingsStartInfo',[this.checkedCollection,this.checkedMarketplace,this.checkedStatus]);
+      await this.$store.dispatch('api/getAndSetCurrentMarketplaceId',this.checkedMarketplace);
+      await this.$store.dispatch('api/getAndSetCurrentStatus',this.checkedStatus);
+      await this.$store.dispatch('api/getAndSetCurrentCollectionContractAddress',this.checkedCollection);
+      await this.$store.dispatch('api/fetchAndSetListingsStartInfo');
     },
   }
 };

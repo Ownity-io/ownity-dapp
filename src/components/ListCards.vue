@@ -40,7 +40,7 @@ export default {
     },
     async loadIfVisible(){
       let isVisible = this.checkVisibility();
-      if (isVisible){
+      if (isVisible & this.$store.getters['api/getListingsResults'].length>0){
         await this.fetchAndSetListingsNextInfo();
       }
     }
