@@ -14,13 +14,5 @@ export default {
         HeaderComponent,
         FooterComponent,
     },
-    methods:{
-        async fetchAndSetListingsStartInfo(){
-            await this.$store.dispatch('api/fetchAndSetListingsStartInfo');
-        }
-    },
-    async mounted(){
-        await this.fetchAndSetListingsStartInfo();
-    }
 }
 </script>
