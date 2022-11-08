@@ -8,7 +8,7 @@
       <ul class="filter-ul">
         <li class="filter-li" v-for="item in this.$store.getters['api/getStatuses']" :key="item">
           <div class="input-checkbox">
-            <input type="checkbox" :id="item" />
+            <input type="checkbox" :id="item" v-model="checkedStatus" :true-value="item"/>
             <label :for="item">
               <span>{{item}}</span>
               <i class="i-check-line"></i>
@@ -25,7 +25,7 @@
       <ul class="filter-ul">
         <li class="filter-li" v-for="item in this.$store.getters['api/getNftCollections']" :key="item">
           <div class="input-checkbox">
-            <input type="checkbox" :id="item.contract_address" />
+            <input type="checkbox" :id="item.contract_address" v-model="checkedCollection" :true-value="item.contract_address"/>
             <label :for="item.contract_address">
               <div class="icon-filter-checkbox"></div>
               <span>{{item.name}}</span>
@@ -43,7 +43,7 @@
       <ul class="filter-ul">
         <li class="filter-li" v-for="item in this.$store.getters['api/getMarketplaces']" :key="item">
           <div class="input-checkbox">
-            <input type="checkbox" :id="item.id" />
+            <input type="checkbox" :id="item.id" v-model="checkedMarketplace" :true-value="item.id"/>
             <label :for="item.id">
               <div class="icon-filter-checkbox"></div>
               <span>{{item.name}}</span>
@@ -83,6 +83,9 @@ export default {
       filterSection2: false,
       filterSection3: false,
       filterSection4: false,
+      checkedMarketplace: null,
+      checkedCollection: null,
+      checkedStatus: null
     };
   },
 };
