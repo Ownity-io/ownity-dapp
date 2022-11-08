@@ -46,7 +46,6 @@ export default {
     }
   },
   mounted(){
-    console.log('kek');
     setInterval(this.loadIfVisible,1000)
   }
 };
