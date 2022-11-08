@@ -5,13 +5,33 @@
       <div class="card-header">
         <div class="icon-card-label" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></div>
         <button class="btn-like" @click="testLike = !testLike">
-          <i :class="{ 'icon-like': testLike, 'icon-dislike': !testLike }"></i>
+          <i :class="{ 'i-heart-3-fill': testLike, 'i-heart-3-line': !testLike }"></i>
         </button>
       </div>
       <div class="card-footer">
         <div class="card-progress progress">
           <div class="progress-value" :style="{ width: testProgressValue + '%' }">
             {{ testProgressValue }}%
+          </div>
+        </div>
+        <div class="card-members btn-more-info">
+          <button class="card-members-btn " @click="showMore = !showMore">
+            <i class="i-user-fill"></i>  
+            10
+          </button>
+          <div v-if="showMore" class="container-more-info">
+            <div class="table-more-info">
+              <div class="tr th">
+                <div class="td">Owner</div>
+                <div class="td td-wrap-price">Price</div>
+                <div class="td">Pct</div>
+              </div>
+              <div class="tr">
+                <div class="td">0x4Eb4…53C7</div>
+                <div class="td td-wrap-price">0.05 ETH</div>
+                <div class="td">5%</div>
+              </div> 
+            </div>
           </div>
         </div>
       </div>
@@ -47,7 +67,8 @@ export default {
       testLike: false,
       testProgressValue: 40,
       currencyToUsdPrice: 1,
-      priceInCurrency: 1
+      priceInCurrency: 1,
+      showMore: false,
     };
   },
   props:[

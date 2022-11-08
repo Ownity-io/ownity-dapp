@@ -50,7 +50,40 @@
             </div>
           </section>
 
-          <section class="section-listing-main"></section>
+          <section class="section-listing-main">
+            <div class="section-deposit">
+              <div class="section-deposit-data">
+                <div class="deposit-img">
+                </div>                
+                <div class="deposit-data">
+                  <div class="deposit-listened">Listened on OpenSea for </div>
+                  <div class="deposit-value">
+                            0.40 / 1 ETH
+                  </div>
+                </div>
+              </div>
+              <div class="section-deposit-btns">
+                <button class="btn btn-deposit">Deposit part</button>
+                <!-- <button class="btn btn-deposit">Start collecting</button>
+                <button class="btn btn-deposit">Deposit part</button>
+                <button class="btn btn-get">Get part back</button> -->
+              </div>
+            </div>
+            <div class="section-members" :class="{'section-unfolded' : !collapseMembers}">
+              <button class="btn-collapse"
+                @click="collapseMembers = !collapseMembers"
+                >
+                <div class="members-row">
+                  <i class="i-account-circle-line"></i>
+                  Members: <span>4</span>
+                </div>
+                <i class="i-arrow-down-s-line"></i>
+              </button>
+              <div class="section-unfolded-content">
+                section-unfolded-content
+              </div>
+            </div>
+          </section>
 
           <section class="section-listing-tabs">
             <ul class="tabs">
@@ -132,6 +165,7 @@ export default {
     return {
       activeTab: "",
       srcTest: "../../assets/images/test-bg.png",
+      collapseMembers: false
     };
   },
   components: {
