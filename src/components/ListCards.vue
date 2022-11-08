@@ -8,7 +8,7 @@
             <i class="i-loader-4-line"></i>
         </div>
     </div>
-    <div class="cards-list-empty">
+    <div class="cards-list-empty" ref="target">
       <div class="title">Oops! Nothing here. </div>
       <button class="btn">
         Back to all items
@@ -19,6 +19,8 @@
 
 <script>
 import Card from "@/components/Card.vue";
+import { ref } from 'vue';
+import { useElementVisibility } from '@vueuse/core';
 
 export default {
   data() {
@@ -27,5 +29,25 @@ export default {
   components: {
     Card,
   },
+  methods:{
+    async fetchAndSetListingsNextInfo() {
+      await this.$store.dispatch('api/fetchAndSetListingsNextInfo');
+    },
+    checkVisibility(){
+      const target = ref(this.$refs.target)
+      const targetIsVisible = useElementVisibility(target)
+      return targetIsVisible.value;
+    },
+    async loadIfVisible(){
+      let isVisible = this.checkVisibility();
+      if (isVisible){
+        await this.fetchAndSetListingsNextInfo();
+      }
+    }
+  },
+  mounted(){
+    console.log('kek');
+    setInterval(this.loadIfVisible,1000)
+  }
 };
 </script>
