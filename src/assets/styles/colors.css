@@ -4,13 +4,8 @@
     background: #12AC64;
 }
 
-.header-nav .btn-container .btn.btn-connect {
-    background: #12AC64;
-    color: #FFFFFF;
-}
-
 .footer-list a:hover,
-.breadcrumbs li a:hover,
+.breadcrumbs li a:hover span,
 .footer-row.footer-row-info .footer-part:not(.footer-social-links) a:hover {
     color: #2CC07B;
     text-decoration: underline;
@@ -30,10 +25,26 @@
 .sort.unfolded li:hover {
     background: #F4F5FA;
 }
-
-
-.card-data .btn-container .btn {
+.card-members-btn,
+.section-deposit-btns .btn.btn-get,
+.card-data .btn-container .btn,
+.modal-connect-btns .btn,
+.cards-list-empty .btn {
     color: #333333;
     background: #FFFFFF;
     border: 2px solid #DFE2EA;
+}
+
+.card-data .btn-container .btn:hover,
+.section-deposit-btns .btn.btn-deposit,
+.header-nav .btn-container .btn.btn-connect {
+    background: #2CC07B;
+    border: 2px solid #2CC07B;
+    color: #FFFFFF;
+}
+
+.section-deposit-btns .btn.btn-deposit:hover,
+.header-nav .btn-container .btn.btn-connect:hover{
+    background: #12AC64;
+    border: 2px solid #12AC64;
 }
