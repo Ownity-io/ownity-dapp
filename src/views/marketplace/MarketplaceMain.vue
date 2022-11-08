@@ -68,14 +68,14 @@
           <div class="params-block params-block-switch">
             <div class="param-wrap switch">
               <button
-                class="btn-param btn-switch"
+                class="btn btn-param btn-switch"
                 @click="switchActive = 0"
                 :class="{ 'switch-active': switchActive == 0 }"
               >
                 <i class="i-layout-grid-line"></i>
               </button>
               <button
-                class="btn-param btn-switch"
+                class="btn btn-param btn-switch"
                 @click="switchActive = 1"
                 :class="{ 'switch-active': switchActive == 1 }"
               >

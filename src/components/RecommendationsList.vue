@@ -3,7 +3,7 @@
         <div class="header-title-btn">
           <div class="title">Your Recommendations</div>
           <div class="btn-wrap">
-            <div class="btn-router-to">
+            <div class="btn btn-router-to">
               To the Collections
               <i class="i-arrow-right-s-line"></i>
             </div>
