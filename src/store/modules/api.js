@@ -29,7 +29,7 @@ export default {
     setListingsInfo(state,_json){
         state.nextListingLink = _json.next;
         state.prevListingLink = _json.previous;
-        state.listingsResults=_json.results;
+        state.listingsResults=state.listingsResults.concat(_json.results);
         state.lastListingsResponse = _json;
     }
   },
@@ -41,8 +41,8 @@ export default {
 
         context.commit('setListingsInfo',requestJson);
     },
-    async fetchAndSetListingsNexnInfo(context){
-        let requestUrl = state.nextListingLink;
+    async fetchAndSetListingsNextInfo(context){
+        let requestUrl = context.getters.getNextListingLink;
         let request = await fetch(requestUrl);
         let requestJson = await request.json();
 
