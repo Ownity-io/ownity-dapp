@@ -1,6 +1,7 @@
 <template>
+    <ConnectWallet />
     <div class="wrapper-main">
-    <HeaderComponent/>
+        <HeaderComponent/>
         <RouterView />    
     </div>
     <FooterComponent/>
@@ -9,10 +10,15 @@
 <script>
 import HeaderComponent from '@/components/HeaderComponent.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
+
+import ConnectWallet from '@/components/modal/ConnectWallet.vue'
+
 export default {
     components:{
         HeaderComponent,
         FooterComponent,
+
+        ConnectWallet
     },
 }
 </script>

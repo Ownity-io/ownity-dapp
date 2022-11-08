@@ -181,6 +181,7 @@ main>section {
 }
 
 .btn-router-to,
+.btn-show-more,
 .header-nav .btn-container .btn.btn-connect,
 .input-wrapper.search-wrapper input,
 .header-nav ul li a,
@@ -189,6 +190,13 @@ main>section {
     font-size: 16px;
     line-height: 150%;
 }
+
+.btn-show-more i {
+    margin-left: 8px;
+    color: #818899;
+    font-size: 24px;
+}
+
 
 .tabs .active-tab,
 .filter-section-name,
@@ -423,7 +431,6 @@ ul.tabs {
     overflow: hidden;
     transition: .25s;
     z-index: -5;
-    background-color: #ffff;
 }
 
 .drop-down {
@@ -577,7 +584,7 @@ ul.tabs {
     border-color: transparent;
 }
 
-.btn  {
+.btn {
     padding: 12px 16px;
     border-radius: 8px;
 }
@@ -647,8 +654,13 @@ ul.tabs {
 
 .sort.unfolded .drop-down {
     border: 1px solid #DFE2EA;
+    background-color: #ffff;
     border-top: unset;
     border-radius: 0px 0px 8px 8px;
+}
+
+.filter {
+    max-width: 275px;
 }
 
 .filter,
@@ -794,6 +806,20 @@ ul.tabs {
     margin-bottom: 16px;
 }
 
+.card-id,
+.collection-id,
+.filter-li .input-checkbox label span,
+.filter-li .input-checkbox label .icon-filter-checkbox+span {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.filter-li .input-checkbox label .icon-filter-checkbox+span {
+    max-width: calc(100% - 28px);
+}
+
 .selected-filters {
     width: 100%;
 }
@@ -814,6 +840,8 @@ ul.tabs {
     flex-direction: column;
     min-height: 760px;
 }
+
+.modal-connect-btns .btn,
 
 .cards-list-empty .btn {
     background: #FFFFFF;
@@ -946,6 +974,14 @@ ul.tabs {
     background-image: url(../images/test-token.png);
 }
 
+.meta-mask {
+    background-image: url(../images/wallet_metamask.svg);
+}
+
+.wallet-connect {
+    background-image: url(../images/wallet_connect.svg);
+}
+
 .card-img {
     background-size: contain;
     background-position: center;
@@ -973,6 +1009,8 @@ ul.tabs {
 }
 
 .card-id,
+.modal-connect-btns .btn,
+.modal-wrapper .btn,
 .cards-list-empty .btn,
 .card-data .btn-container .btn {
     font-weight: 700;
@@ -1188,7 +1226,8 @@ ul.tabs {
 .tab-contain.tab-activities .thead .td {
     padding-top: 0;
 }
-.table-btn-row{
+
+.table-btn-row {
     padding-top: 16px;
     width: 100%;
     display: flex;
@@ -1485,4 +1524,121 @@ ul.tabs {
     color: #333333;
     margin-top: 8px;
     margin-bottom: 8px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 500;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    align-content: center;
+    padding: 40px;
+}
+
+.modal .modal-header .btn-close {
+    color: #818899;
+}
+
+.modal-wrapper {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    width: 100%;
+    max-width: 780px;
+    height: fit-content;
+}
+
+.modal-header {
+    padding: 40px;
+    width: 100%;
+    position: sticky;
+    top: 0;
+
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    color: #333333;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-content {
+    padding: 0 40px;
+
+}
+
+.modal-container {
+    padding-bottom: 40px;
+    width: 100%;
+}
+
+.modal-name {
+    max-width: calc(100% - 24px);
+    padding-right: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+.modal-container,
+.modal-connect-btns {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    width: 100%;
+}
+
+.modal-connect-btns .btn {
+    width: 100%;
+    max-width: 340px;
+    margin-top: 16px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: flex-start;
+}
+
+.modal-connect-btns .btn .icon-btn-connect {
+    width: 24px;
+    min-width: 24px;
+    height: 24px;
+    margin-right: 12px;
+}
+
+.modal-connect .modal-wrapper {
+    max-width: 780px;
+}
+
+.modal-connect .modal-container {
+    max-width: 413px;
+}
+
+.modal-describe {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+}
+
+.modal-p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    text-align: center;
+    color: #9A9A9A;
+}
+
+.modal-connect-btns+.modal-p {
+    margin-top: 38px;
 }
