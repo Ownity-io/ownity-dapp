@@ -28,6 +28,7 @@ export default {
       return state.listingsResults;
     },
     getLastListingsResponse(state) {
+      console.log(state.lastListingsResponse);
       return state.lastListingsResponse;
     },
     //for filters
@@ -46,7 +47,15 @@ export default {
     setListingsInfo(state, _json) {
       state.nextListingLink = _json.next;
       state.prevListingLink = _json.previous;
-      state.listingsResults = state.listingsResults.concat(_json.results);
+      state.listingsResults = _json.results;
+      state.lastListingsResponse = _json;
+    },
+    addListingsInfo(state, _json) {
+      if (_json!=null){
+        state.nextListingLink = _json.next;
+        state.prevListingLink = _json.previous;
+        state.listingsResults = state.listingsResults.concat(_json.results);        
+      }
       state.lastListingsResponse = _json;
     },
     //forFilters
@@ -59,12 +68,26 @@ export default {
   },
   actions: {
     //listings
-    async fetchAndSetListingsStartInfo(context) {
+    async fetchAndSetListingsStartInfo(context, _data=null) {
       let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.listingsPerPage}`;
+      if (_data!=null){
+        let _collectionContractAddress=_data[0];
+        let _marketplaceId=_data[1];
+        let _status = _data[2];
+        if (_collectionContractAddress!=null){
+          requestUrl+=`&collection=${_collectionContractAddress}`;
+        }
+        if (_marketplaceId!=null){
+          requestUrl+=`&marketplace=${_marketplaceId}`;
+        }
+        if (_status!=null){
+          requestUrl+=`&status=${_status}`;
+        }
+      }
       let request = await fetch(requestUrl);
-      let requestJson = await request.json();
       let requestCode =  request.ok;
       if (requestCode){
+        let requestJson = await request.json();
         context.commit("setListingsInfo", requestJson);
       }
       else{
@@ -73,15 +96,19 @@ export default {
     },
     async fetchAndSetListingsNextInfo(context) {
       let requestUrl = context.getters.getNextListingLink;
-      let request = await fetch(requestUrl);
-      let requestJson = await request.json();
-      let requestCode =  request.ok;
-      if (requestCode){
-        context.commit("setListingsInfo", requestJson);
+      if (requestUrl != null) {
+        let request = await fetch(requestUrl);
+        let requestCode = request.ok;
+        if (requestCode) {
+          let requestJson = await request.json();
+          context.commit("addListingsInfo", requestJson);
+        } else {
+          context.commit("addListingsInfo", null);
+        }
       }
       else{
-        context.commit("setListingsInfo", null);
-      }     
+        context.commit("addListingsInfo", null);
+      }
     },
     //forFilters
     async fetchAndSetNftCollections(context) {

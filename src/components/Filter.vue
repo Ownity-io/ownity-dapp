@@ -8,7 +8,7 @@
       <ul class="filter-ul">
         <li class="filter-li" v-for="item in this.$store.getters['api/getStatuses']" :key="item">
           <div class="input-checkbox">
-            <input type="checkbox" :id="item" v-model="checkedStatus" :true-value="item"/>
+            <input type="checkbox" :id="item" v-model="checkedStatus" :true-value="item" :false-value="null" @change="fetchAndSetListingsStartInfo"/>
             <label :for="item">
               <span>{{item}}</span>
               <i class="i-check-line"></i>
@@ -25,7 +25,7 @@
       <ul class="filter-ul">
         <li class="filter-li" v-for="item in this.$store.getters['api/getNftCollections']" :key="item">
           <div class="input-checkbox">
-            <input type="checkbox" :id="item.contract_address" v-model="checkedCollection" :true-value="item.contract_address"/>
+            <input type="checkbox" :id="item.contract_address" v-model="checkedCollection" :true-value="item.contract_address" :false-value="null" @change="fetchAndSetListingsStartInfo"/>
             <label :for="item.contract_address">
               <div class="icon-filter-checkbox"></div>
               <span>{{item.name}}</span>
@@ -43,7 +43,7 @@
       <ul class="filter-ul">
         <li class="filter-li" v-for="item in this.$store.getters['api/getMarketplaces']" :key="item">
           <div class="input-checkbox">
-            <input type="checkbox" :id="item.id" v-model="checkedMarketplace" :true-value="item.id"/>
+            <input type="checkbox" :id="item.id" v-model="checkedMarketplace" :true-value="item.id" :false-value="null" @change="fetchAndSetListingsStartInfo"/>
             <label :for="item.id">
               <div class="icon-filter-checkbox"></div>
               <span>{{item.name}}</span>
@@ -88,5 +88,10 @@ export default {
       checkedStatus: null
     };
   },
+  methods:{
+    async fetchAndSetListingsStartInfo() {
+      await this.$store.dispatch('api/fetchAndSetListingsStartInfo',[this.checkedCollection,this.checkedMarketplace,this.checkedStatus]);
+    },
+  }
 };
 </script>
