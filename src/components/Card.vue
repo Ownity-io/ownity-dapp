@@ -15,7 +15,9 @@
           </div>
         </div>
         <div class="card-members btn-more-info">
-          <button class="card-members-btn " @click="showMore = !showMore">
+          <button class="card-members-btn "
+            @mouseover="showMore = true"
+            @mouseout="showMore = false">
             <i class="i-user-fill"></i>  
             10
           </button>
@@ -23,12 +25,17 @@
             <div class="table-more-info">
               <div class="tr th">
                 <div class="td">Owner</div>
-                <div class="td td-wrap-price">Price</div>
+                <div class="td td-price">Price</div>
                 <div class="td">Pct</div>
               </div>
               <div class="tr">
                 <div class="td">0x4Eb4…53C7</div>
-                <div class="td td-wrap-price">0.05 ETH</div>
+                <div class="td">
+                  <div class="td-wrap-price">
+                    <div class="icon-token"></div> 
+                    0.05 ETH
+                  </div>
+                  </div>
                 <div class="td">5%</div>
               </div> 
             </div>
@@ -39,7 +46,11 @@
     <div class="card-data">
       <div class="data-table">
         <div class="data-tr data-tr-main">
-          <div class="card-id">{{item.name}}</div>
+          <div class="card-id"
+            @mouseover="showFullName = true"
+            @mouseout="showFullName = false"
+            >{{item.name}}</div>
+          <div v-if="showFullName" class="card-id card-id-full">{{item.name}}</div>
           <div class="card-value">
             <div class="icon-value"></div>
             0.40 / <span>{{priceInCurrency.toFixed(2)}} ETH</span>
@@ -69,6 +80,7 @@ export default {
       currencyToUsdPrice: 1,
       priceInCurrency: 1,
       showMore: false,
+      showFullName:false,
     };
   },
   props:[
