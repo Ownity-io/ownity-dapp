@@ -83,17 +83,37 @@ export default {
       filterSection2: false,
       filterSection3: false,
       filterSection4: false,
-      checkedMarketplace: null,
-      checkedCollection: null,
-      checkedStatus: null
     };
   },
   methods:{
     async fetchAndSetListingsStartInfo() {
-      await this.$store.dispatch('api/getAndSetCurrentMarketplaceId',this.checkedMarketplace);
-      await this.$store.dispatch('api/getAndSetCurrentStatus',this.checkedStatus);
-      await this.$store.dispatch('api/getAndSetCurrentCollectionContractAddress',this.checkedCollection);
       await this.$store.dispatch('api/fetchAndSetListingsStartInfo');
+    },
+  },
+  computed:{
+    checkedStatus:{
+      get(){
+        return this.$store.getters['api/getCurrentStatus'];
+      },
+      set(value){
+        this.$store.dispatch('api/getAndSetCurrentStatus',value);
+      }
+    },
+    checkedMarketplace:{
+      get(){
+        return this.$store.getters['api/getCurrentMarketplaceId'];
+      },
+      set(value){
+        this.$store.dispatch('api/getAndSetCurrentMarketplaceId',value);
+      }
+    },
+    checkedCollection:{
+      get(){
+        return this.$store.getters['api/getCurrentCollectionContractAddress'];
+      },
+      set(value){
+        this.$store.dispatch('api/getAndSetCurrentCollectionContractAddress',value);
+      }
     },
   }
 };

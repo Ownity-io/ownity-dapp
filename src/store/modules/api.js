@@ -17,7 +17,11 @@ export default {
       //selectedFilters
       currentMarketplaceId: null,
       currentStatus:null,
-      currentCollectionContractAddress:null
+      currentCollectionContractAddress:null,
+      currentMinPrice:null,
+      currentMaxPrice:null,
+      currentMarketplace:null,
+      currentCollection:null
     };
   },
   getters: {
