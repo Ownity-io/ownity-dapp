@@ -10,7 +10,7 @@
     </div>
     <div class="cards-list-empty" v-if="this.$store.getters['api/getListingsResults'].length==0">
       <div class="title">Oops! Nothing here. </div>
-      <button class="btn">
+      <button class="btn" @click="this.$store.dispatch('api/setAllFiltersToNull');this.$store.dispatch('api/fetchAndSetListingsStartInfo')">
         Back to all items
       </button>
     </div>
