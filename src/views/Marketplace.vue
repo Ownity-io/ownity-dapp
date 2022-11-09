@@ -8,13 +8,13 @@
 export default{
     methods:{
         async fetchAndSetListingsStartInfo(){
-            await this.$store.dispatch('api/fetchAndSetListingsStartInfo');
+            await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
         },
         async fetchAndSetNftCollections(){
-            await this.$store.dispatch('api/fetchAndSetNftCollections');
+            await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
         },
         async fetchAndSetMarketplaces(){
-            await this.$store.dispatch('api/fetchAndSetMarketplaces');
+            await this.$store.dispatch('marketplace/fetchAndSetMarketplaces');
         }
     },
     async mounted(){

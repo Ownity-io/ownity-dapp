@@ -1,16 +1,16 @@
 <template>
   <div class="cards-list">
-    <div v-if="this.$store.getters['api/getListingsResults'].length>0" class="cards-list-container">
-      <Card v-for="item in this.$store.getters['api/getListingsResults']" :key="item" :item="item" />
+    <div v-if="this.$store.getters['marketplace/getListingsResults'].length>0" class="cards-list-container">
+      <Card v-for="item in this.$store.getters['marketplace/getListingsResults']" :key="item" :item="item" />
     </div>
-    <div class="cards-list-load" ref="target" v-if="this.$store.getters['api/getLastListingsResponse']!=null & this.$store.getters['api/getListingsResults'].length>0">
+    <div class="cards-list-load" ref="target" v-if="this.$store.getters['marketplace/getLastListingsResponse']!=null & this.$store.getters['marketplace/getListingsResults'].length>0">
         <div class="i-wrap">
             <i class="i-loader-4-line"></i>
         </div>
     </div>
-    <div class="cards-list-empty" v-if="this.$store.getters['api/getListingsResults'].length==0">
+    <div class="cards-list-empty" v-if="this.$store.getters['marketplace/getListingsResults'].length==0">
       <div class="title">Oops! Nothing here. </div>
-      <button class="btn" @click="this.$store.dispatch('api/setAllFiltersToNull');this.$store.dispatch('api/fetchAndSetListingsStartInfo')">
+      <button class="btn" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')">
         Back to all items
       </button>
     </div>
@@ -31,7 +31,7 @@ export default {
   },
   methods:{
     async fetchAndSetListingsNextInfo() {
-      await this.$store.dispatch('api/fetchAndSetListingsNextInfo');
+      await this.$store.dispatch('marketplace/fetchAndSetListingsNextInfo');
     },
     checkVisibility(){
       const target = ref(this.$refs.target)
@@ -40,7 +40,7 @@ export default {
     },
     async loadIfVisible(){
       let isVisible = this.checkVisibility();
-      if (isVisible & this.$store.getters['api/getListingsResults'].length>0){
+      if (isVisible & this.$store.getters['marketplace/getListingsResults'].length>0){
         await this.fetchAndSetListingsNextInfo();
       }
     }

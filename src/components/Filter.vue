@@ -6,7 +6,7 @@
         <i class="i-arrow-up-s-line"></i>
       </button>
       <ul class="filter-ul">
-        <li class="filter-li" v-for="item in this.$store.getters['api/getStatuses']" :key="item">
+        <li class="filter-li" v-for="item in this.$store.getters['marketplace/getStatuses']" :key="item">
           <div class="input-checkbox">
             <input type="checkbox" :id="item" v-model="checkedStatus" :true-value="item" :false-value="null" @change="fetchAndSetListingsStartInfo"/>
             <label :for="item">
@@ -24,7 +24,7 @@
         <i class="i-arrow-up-s-line"></i>
       </button>
       <ul class="filter-ul">
-        <li class="filter-li" v-for="item in this.$store.getters['api/getNftCollections']" :key="item">
+        <li class="filter-li" v-for="item in this.$store.getters['marketplace/getNftCollections']" :key="item">
           <div class="input-checkbox">
             <input type="checkbox" :id="item.contract_address" v-model="checkedCollection" :true-value="item.contract_address" :false-value="null" @change="fetchAndSetListingsStartInfo"/>
             <label :for="item.contract_address">
@@ -42,7 +42,7 @@
         <i class="i-arrow-up-s-line"></i>
       </button>
       <ul class="filter-ul">
-        <li class="filter-li" v-for="item in this.$store.getters['api/getMarketplaces']" :key="item">
+        <li class="filter-li" v-for="item in this.$store.getters['marketplace/getMarketplaces']" :key="item">
           <div class="input-checkbox">
             <input type="checkbox" :id="item.id" v-model="checkedMarketplace" :true-value="item.id" :false-value="null" @change="fetchAndSetListingsStartInfo"/>
             <label :for="item.id">
@@ -88,57 +88,57 @@ export default {
   },
   methods:{
     async fetchAndSetListingsStartInfo() {
-      await this.$store.dispatch('api/fetchAndSetListingsStartInfo');
+      await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
     },
   },
   computed:{
     checkedStatus:{
       get(){
-        return this.$store.getters['api/getCurrentStatus'];
+        return this.$store.getters['marketplace/getCurrentStatus'];
       },
       set(value){
-        this.$store.dispatch('api/getAndSetCurrentStatus',value);
+        this.$store.dispatch('marketplace/getAndSetCurrentStatus',value);
       }
     },
     checkedMarketplace:{
       get(){
-        return this.$store.getters['api/getCurrentMarketplaceId'];
+        return this.$store.getters['marketplace/getCurrentMarketplaceId'];
       },
       set(value){
-        this.$store.dispatch('api/getAndSetCurrentMarketplaceId',value);
+        this.$store.dispatch('marketplace/getAndSetCurrentMarketplaceId',value);
       }
     },
     checkedCollection:{
       get(){
-        return this.$store.getters['api/getCurrentCollectionContractAddress'];
+        return this.$store.getters['marketplace/getCurrentCollectionContractAddress'];
       },
       set(value){
-        this.$store.dispatch('api/getAndSetCurrentCollectionContractAddress',value);
+        this.$store.dispatch('marketplace/getAndSetCurrentCollectionContractAddress',value);
       }
     },
     minPrice:{
       get(){
-        return this.$store.getters['api/getCurrentMinPrice'];
+        return this.$store.getters['marketplace/getCurrentMinPrice'];
       },
       set(value){
         if (value) {
-          this.$store.dispatch('api/getAndSetCurrentMinPrice', value);
+          this.$store.dispatch('marketplace/getAndSetCurrentMinPrice', value);
         }
         else {
-          this.$store.dispatch('api/getAndSetCurrentMinPrice', null);
+          this.$store.dispatch('marketplace/getAndSetCurrentMinPrice', null);
         }
       }
     },
     maxPrice:{
       get(){
-        return this.$store.getters['api/getCurrentMaxPrice'];
+        return this.$store.getters['marketplace/getCurrentMaxPrice'];
       },
       set(value){
         if (value) {
-          this.$store.dispatch('api/getAndSetCurrentMaxPrice', value);
+          this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', value);
         }
         else {
-          this.$store.dispatch('api/getAndSetCurrentMaxPrice', null);
+          this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', null);
         }
       }
     },
