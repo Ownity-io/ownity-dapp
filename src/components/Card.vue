@@ -49,7 +49,7 @@
           <div class="card-id"
             @mouseover="showFullName = true"
             @mouseout="showFullName = false"
-            >{{item.name}}</div>
+            >#{{item.token_id}}</div>
           <div v-if="showFullName" class="card-id card-id-full">{{item.name}}</div>
           <div class="card-value">
             <div class="icon-value"></div>
