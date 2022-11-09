@@ -17,7 +17,7 @@
               <div class="icon-btn-connect meta-mask"></div>
               <span>MetaMask</span>
             </button>
-            <button class="btn btn-modal-connect">
+            <button class="btn btn-modal-connect" @click="this.$store.dispatch('walletsAndProvider/connectWithWalletConnect')">
               <div class="icon-btn-connect wallet-connect"></div>
               <span>WalletConnect</span>
             </button>

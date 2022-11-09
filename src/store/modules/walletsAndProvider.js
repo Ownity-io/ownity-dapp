@@ -1,4 +1,5 @@
 import { ethers } from "ethers";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 export default {
   namespaced: true,
   state() {
@@ -26,5 +27,11 @@ export default {
         console.log('Metamask Connection Error');
       }
     },
+    async connectWithWalletConnect(context){
+        const provider = new WalletConnectProvider({infuraId: "bdc7f317cedb484da4d3953c54344944"});
+        await provider.enable()
+        const web3Provider = new ethers.providers.Web3Provider(provider);
+        context.commit('setGlobalProvider',web3Provider);
+    }
   },
 };
