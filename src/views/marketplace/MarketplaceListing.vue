@@ -53,12 +53,12 @@
           <section class="section-listing-main">
             <div class="section-deposit">
               <div class="section-deposit-data">
-                <div class="deposit-img">
-                </div>                
+                <div class="deposit-img"></div>
                 <div class="deposit-data">
-                  <div class="deposit-listened">Listened on OpenSea for </div>
+                  <div class="deposit-listened">Listened on OpenSea for</div>
                   <div class="deposit-value">
-                            0.40 / 1 ETH
+                    <div class="icon-token"></div>
+                    <span>0.40 / <b>1 ETH</b> </span>
                   </div>
                 </div>
               </div>
@@ -69,10 +69,11 @@
                 <button class="btn btn-get">Get part back</button> -->
               </div>
             </div>
-            <div class="section-members" :class="{'section-unfolded' : !collapseMembers}">
-              <button class="btn-collapse"
-                @click="collapseMembers = !collapseMembers"
-                >
+            <div
+              class="section-members"
+              :class="{ 'section-unfolded': !collapseMembers }"
+            >
+              <button class="btn-collapse" @click="collapseMembers = !collapseMembers">
                 <div class="members-row">
                   <i class="i-account-circle-line"></i>
                   Members: <span>4</span>
@@ -80,7 +81,43 @@
                 <i class="i-arrow-down-s-line"></i>
               </button>
               <div class="section-unfolded-content">
-                section-unfolded-content
+                <div class="section-table-chart">
+                  <div class="chart-wrap">chart-wrap</div>
+                  <div class="table-chart-data">
+                    <div class="table table-chart">
+                      <div class="thead">
+                        <div class="td">Owner</div>
+                        <div class="td">Pct</div>
+                        <div class="td td-price">Price</div>
+                      </div>
+
+                      <div class="tr">
+                        <div class="td">
+                          <a
+                            class="td-wrap"
+                            href=""
+                            target="_blank"
+                            rel="nofollow"
+                          >
+                            <span>0x4Eb4…53C7</span>
+                          </a>
+                        </div>
+                        <div class="td">
+                          <div class="td-wrap">20%</div>
+                        </div>
+                        <div class="td td-price">
+                          <div class="td-wrap">
+                            <div class="td-wrap-price">
+                              <div class="icon-token"></div>
+                              <span>0.20 ETH</span>
+                              <span class="td-light">≈ $ 1000</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
@@ -165,7 +202,7 @@ export default {
     return {
       activeTab: "",
       srcTest: "../../assets/images/test-bg.png",
-      collapseMembers: false
+      collapseMembers: false,
     };
   },
   components: {
