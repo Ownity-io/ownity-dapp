@@ -1,9 +1,9 @@
 <template>
     <div class="selected-filters">
         <ul>
-            <li>
+            <li v-if="this.$store.getters['api/getCurrentStatus']!=null" @click="this.$store.dispatch('api/getAndSetCurrentStatus',null);">
                 <button class="btn btn-selected-filter">
-                    <span>Active</span>
+                    <span>{{this.$store.getters['api/getCurrentStatus']}}</span>
                     <i class="i-close-line"></i>
                 </button>
             </li>
