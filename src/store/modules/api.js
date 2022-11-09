@@ -1,4 +1,3 @@
-import { createStore } from "vuex";
 import config from "@/config.json";
 import { ethers } from "ethers";
 export default {

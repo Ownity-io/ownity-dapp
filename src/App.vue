@@ -1,5 +1,5 @@
 <template>
-    <!-- <ConnectWallet /> -->
+    <ConnectWallet v-if="this.$store.getters['appGlobal/getShowConnectWalletModal']"/>
     <div class="wrapper-main">
         <HeaderComponent/>
         <RouterView />    

@@ -15,7 +15,7 @@
                         </ul>
                     </nav>
                     <div class="btn-container">
-                        <button class="btn btn-connect">
+                        <button class="btn btn-connect" @click="this.$store.dispatch('appGlobal/changeshowConnectWalletModal');">
                             Connect Wallet
                         </button>
                     </div>
