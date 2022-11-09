@@ -13,7 +13,7 @@
             Sign in with your wallet or create one to start your Marketplace
           </div>
           <div class="modal-connect-btns">
-            <button class="btn btn-modal-connect">
+            <button class="btn btn-modal-connect" @click="this.$store.dispatch('walletsAndProvider/connectToMetamask')">
               <div class="icon-btn-connect meta-mask"></div>
               <span>MetaMask</span>
             </button>
