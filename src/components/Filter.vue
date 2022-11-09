@@ -62,13 +62,13 @@
       <div class="container-enter-price">
         <div class="container-input">
           <div class="input-wrapper">
-            <input type="number" placeholder="Min" />
+            <input type="number" placeholder="Min" v-model="minPrice" @input="fetchAndSetListingsStartInfo"/>
           </div>
         </div>
         <span class="between-inputs">to</span>
         <div class="container-input">
           <div class="input-wrapper">
-            <input type="number" placeholder="Max" />
+            <input type="number" placeholder="Max" v-model="maxPrice" @input="fetchAndSetListingsStartInfo"/>
           </div>
         </div>
       </div>
@@ -114,6 +114,32 @@ export default {
       },
       set(value){
         this.$store.dispatch('api/getAndSetCurrentCollectionContractAddress',value);
+      }
+    },
+    minPrice:{
+      get(){
+        return this.$store.getters['api/getCurrentMinPrice'];
+      },
+      set(value){
+        if (value) {
+          this.$store.dispatch('api/getAndSetCurrentMinPrice', value);
+        }
+        else {
+          this.$store.dispatch('api/getAndSetCurrentMinPrice', null);
+        }
+      }
+    },
+    maxPrice:{
+      get(){
+        return this.$store.getters['api/getCurrentMaxPrice'];
+      },
+      set(value){
+        if (value) {
+          this.$store.dispatch('api/getAndSetCurrentMaxPrice', value);
+        }
+        else {
+          this.$store.dispatch('api/getAndSetCurrentMaxPrice', null);
+        }
       }
     },
   }

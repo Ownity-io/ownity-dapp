@@ -1,6 +1,6 @@
 import { createStore } from "vuex";
 import config from "@/config.json";
-
+import { ethers } from "ethers";
 export default {
   namespaced: true,
   state() {
@@ -16,12 +16,12 @@ export default {
       nftCollections: null,
       //selectedFilters
       currentMarketplaceId: null,
-      currentStatus:null,
-      currentCollectionContractAddress:null,
-      currentMinPrice:null,
-      currentMaxPrice:null,
-      currentMarketplace:null,
-      currentCollection:null
+      currentStatus: null,
+      currentCollectionContractAddress: null,
+      currentMinPrice: null,
+      currentMaxPrice: null,
+      currentMarketplace: null,
+      currentCollection: null,
     };
   },
   getters: {
@@ -58,6 +58,43 @@ export default {
     getCurrentCollectionContractAddress(state) {
       return state.currentCollectionContractAddress;
     },
+    getCurrentNftCollection(state, getters) {
+      let collections = state.nftCollections;
+      let address = state.currentCollectionContractAddress;
+      if (collections != null) {
+        for (let item of collections) {
+          if (item.contract_address == address) {
+            return item;
+          }
+        }
+      }
+    },
+    getCurrentMarketplace(state, getters) {
+      let collections = state.marketplaces;
+      let id = state.currentMarketplaceId;
+      if (collections != null) {
+        for (let item of collections) {
+          if (item.id == id) {
+            return item;
+          }
+        }
+      }
+    },
+    getCurrentMinPrice(state){
+      return state.currentMinPrice;
+    },    
+    getCurrentMaxPrice(state){
+      return state.currentMaxPrice;
+    },
+    getFiltersCount(state){
+      let count = 0;
+      if (state.currentMarketplaceId!=null){count++;}
+      if (state.currentCollectionContractAddress!=null){count++;}
+      if (state.currentStatus!=null){count++;}
+      if (state.currentMinPrice!=null){count++;}
+      if (state.currentMaxPrice!=null){count++;}
+      return count;
+    }
   },
   mutations: {
     //listings
@@ -68,10 +105,10 @@ export default {
       state.lastListingsResponse = _json;
     },
     addListingsInfo(state, _json) {
-      if (_json!=null){
+      if (_json != null) {
         state.nextListingLink = _json.next;
         state.prevListingLink = _json.previous;
-        state.listingsResults = state.listingsResults.concat(_json.results);        
+        state.listingsResults = state.listingsResults.concat(_json.results);
       }
       state.lastListingsResponse = _json;
     },
@@ -82,14 +119,20 @@ export default {
     setMarketplaces(state, _json) {
       state.marketplaces = _json;
     },
+    setCurrentMinPrice(state, _price){
+      state.currentMinPrice = _price;
+    },
+    setCurrentMaxPrice(state, _price){
+      state.currentMaxPrice = _price;
+    },
     //selectedFilters
-    setCurrentMarketplaceId(state,_marketplaceId) {
+    setCurrentMarketplaceId(state, _marketplaceId) {
       state.currentMarketplaceId = _marketplaceId;
     },
-    setCurrentStatus(state,_status) {
-      state.currentStatus=_status;
+    setCurrentStatus(state, _status) {
+      state.currentStatus = _status;
     },
-    setCurrentCollectionContractAddress(state,_collectionContractAddress) {
+    setCurrentCollectionContractAddress(state, _collectionContractAddress) {
       state.currentCollectionContractAddress = _collectionContractAddress;
     },
   },
@@ -106,16 +149,20 @@ export default {
       if (context.getters.getCurrentStatus != null) {
         requestUrl += `&status=${context.getters.getCurrentStatus}`;
       }
-
+      if (context.getters.getCurrentMinPrice!=null){
+        requestUrl += `&price_gt=${ethers.utils.parseEther(String(context.getters.getCurrentMinPrice)).toString()}`;
+      }
+      if (context.getters.getCurrentMaxPrice!=null){
+        requestUrl += `&price_lt=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
+      }
       let request = await fetch(requestUrl);
-      let requestCode =  request.ok;
-      if (requestCode){
+      let requestCode = request.ok;
+      if (requestCode) {
         let requestJson = await request.json();
         context.commit("setListingsInfo", requestJson);
-      }
-      else{
+      } else {
         context.commit("setListingsInfo", null);
-      }      
+      }
     },
     async fetchAndSetListingsNextInfo(context) {
       let requestUrl = context.getters.getNextListingLink;
@@ -128,8 +175,7 @@ export default {
         } else {
           context.commit("addListingsInfo", null);
         }
-      }
-      else{
+      } else {
         context.commit("addListingsInfo", null);
       }
     },
@@ -147,14 +193,28 @@ export default {
       context.commit("setMarketplaces", requestJson);
     },
     //selectedFilters
-    async getAndSetCurrentMarketplaceId(context,_marketplaceId){
-      context.commit('setCurrentMarketplaceId',_marketplaceId);
+    async getAndSetCurrentMarketplaceId(context, _marketplaceId) {
+      context.commit("setCurrentMarketplaceId", _marketplaceId);
     },
-    async getAndSetCurrentStatus(context,_status){
-      context.commit('setCurrentStatus',_status);
+    async getAndSetCurrentStatus(context, _status) {
+      context.commit("setCurrentStatus", _status);
     },
-    async getAndSetCurrentCollectionContractAddress(context,_collectionContractAddress){
-      context.commit('setCurrentCollectionContractAddress',_collectionContractAddress);
+    async getAndSetCurrentCollectionContractAddress(context,_collectionContractAddress) {
+      context.commit("setCurrentCollectionContractAddress",_collectionContractAddress);
     },
+    async getAndSetCurrentMinPrice(context,_price) {
+      context.commit("setCurrentMinPrice",_price);
+    },
+    async getAndSetCurrentMaxPrice(context,_price) {
+      context.commit("setCurrentMaxPrice",_price);
+    },
+    async setAllFiltersToNull(context){
+      context.commit("setCurrentMarketplaceId", null);
+      context.commit("setCurrentStatus", null);
+      context.commit("setCurrentCollectionContractAddress",null);
+      context.commit("setCurrentMinPrice", null);
+      context.commit("setCurrentMaxPrice", null);
+    }
+
   },
 };
