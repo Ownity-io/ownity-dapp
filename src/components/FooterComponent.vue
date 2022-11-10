@@ -45,6 +45,18 @@
                             <li><a href="">Sitemap</a></li>
                         </ul>
                     </div>
+                    <div class="footer-block footer-block-form">
+                        <div class="footer-block-name">
+                            Stay in the loop
+                        </div>
+                        <form action="" class="footer-form">
+                            <div class="input-wrapper">
+                                <input type="text" placeholder="Your email">
+                                <button type="submit" class="btn btn-subscribe">Subscribe</button>
+                            </div>
+                            <p class="agree">By subscribing, you agree to the <a href="#">Terms of Use</a></p>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -53,11 +65,11 @@
                 <div class="footer-section">
                     <div class="footer-part">
                         <span class="copyright">&#169; 2022 Marketplace</span>
-                        <a href="" rel="nowolow">Terms of Use</a>
-                        <a href="" rel="nowolow">Privacy Policy</a>
+                        <a href="" rel="nofollow">Terms of Use</a>
+                        <a href="" rel="nofollow">Privacy Policy</a>
                     </div>
                     <div class="footer-part footer-social-links">
-                        <ul class="socila-links-wrap">
+                        <ul class="social-links-wrap">
                             <li><a href=""><i class="i-twitter-fill"></i></a></li>  
                             <li><a href=""><i class="i-facebook-fill"></i></a></li>  
                             <li><a href=""><i class="i-telegram-fill"></i></a></li>  
