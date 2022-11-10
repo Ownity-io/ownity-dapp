@@ -22,7 +22,7 @@
             @mouseover="showMore = true"
             @mouseout="showMore = false">
             <i class="i-user-fill"></i>  
-            10
+            {{this.item.bids.length}}
           </button>
           <div v-if="showMore" class="container-more-info">
             <div class="table-more-info">
@@ -31,15 +31,15 @@
                 <div class="td td-price">Price</div>
                 <div class="td">Pct</div>
               </div>
-              <div class="tr">
-                <div class="td">0x4Eb4…53C7</div>
+              <div class="tr" v-for="element in this.item.bids" :key="element">
+                <div class="td">{{element.address.substring(0,6)+'...'+element.address.substring(38,42)}}</div>
                 <div class="td">
                   <div class="td-wrap-price">
                     <div class="icon-token"></div> 
-                    0.05 ETH
+                    {{convertToEther(element.amount)}}
                   </div>
                   </div>
-                <div class="td">5%</div>
+                <div class="td">{{element.fraction}}</div>
               </div> 
             </div>
           </div>
@@ -84,6 +84,7 @@
 </template>
 
 <script>
+import { ethers } from 'ethers';
 export default {
   data() {
     return {
@@ -112,8 +113,12 @@ export default {
       catch{
         this.currencyToUsdPrice = 1;
       }
+    },
+    convertToEther(value){
+      return ethers.utils.formatEther(value);
     }
   },
+  
   async mounted(){
     this.getPriceInCurrency();
     await this.getPriceInUsd();
