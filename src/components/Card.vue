@@ -10,6 +10,9 @@
       </div>
       <div class="card-footer">
         <div class="card-progress progress">
+          <div class="progress-value owner" :style="{ width: testProgressValue + '%' }">
+            {{ testProgressValue }}%
+          </div>
           <div class="progress-value" :style="{ width: testProgressValue + '%' }">
             {{ testProgressValue }}%
           </div>

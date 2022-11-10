@@ -1093,9 +1093,13 @@ ul.tabs {
     height: 24px;
     flex-grow: 1;
     overflow: hidden;
+    position: relative;
 }
 
 .progress-value {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 0;
     overflow: hidden;
     height: 100%;
@@ -1106,6 +1110,12 @@ ul.tabs {
     font-size: 14px;
     line-height: 150%;
     color: #ffff;
+    z-index: 1;
+}
+
+.progress-value.own{
+    background: #993CFC;
+    z-index: 2;
 }
 
 .cards-list-empty {
