@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import Main from '../views/Main.vue'
 import Marketplace from '../views/Marketplace.vue'
+import Profile from '../views/Profile.vue'
 
 const routes = [
     {
@@ -39,6 +40,11 @@ const routes = [
             // }
         // },
     },
+    {
+        path: '/profile',
+        component: Profile,
+        
+    }
 ]
 
 const router = createRouter({
