@@ -95,6 +95,8 @@ export default {
       priceInCurrency: 1,
       showMore: false,
       showFullName:false,
+      allBidsAmount:0,
+      userBidAmount:0
     };
   },
   props:[
@@ -116,12 +118,34 @@ export default {
     },
     convertToEther(value){
       return ethers.utils.formatEther(value);
+    },
+    setAllBidsAmount(){
+      if (this.item.bids!=null){
+        for (let element of this.item.bids){
+          this.allBidsAmount+=parseInt(element.amount);
+        }
+      }
+    },
+    setUserBidAmount(){
+      let userAddress = localStorage.getItem('userAddress');
+      if (this.item.bids!=null & userAddress!=null & userAddress!='null'){
+        for (let element of this.item.bids){
+          if (element.address == userAddress){
+            this.userBidAmount = parseInt(element.amount);
+          }
+        }
+      }
     }
   },
   
   async mounted(){
     this.getPriceInCurrency();
     await this.getPriceInUsd();
+    this.setAllBidsAmount();
+    this.setUserBidAmount();
+    this.allProgressValue = (this.allBidsAmount/this.item.price)*100;
+    this.userProgressValue = (this.userBidAmount/this.item.price)*100;
+    console.log((this.userBidAmount/this.item.price)*100);
   }
 };
 </script>
