@@ -3,7 +3,10 @@
         <ul v-if="this.$store.getters['marketplace/getFiltersCount']>0">
             <li v-if="this.$store.getters['marketplace/getCurrentStatus']!=null" @click="this.$store.dispatch('marketplace/getAndSetCurrentStatus',null);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')">
                 <button class="btn btn-selected-filter">
-                    <span>{{this.$store.getters['marketplace/getCurrentStatus']}}</span>
+                    <span>
+                        {{(this.$store.getters['marketplace/getCurrentStatus']  === 'CLOSED') 
+                        ? 'Closed' : 'Open' }}
+                    </span>
                     <i class="i-close-line"></i>
                 </button>
             </li>
