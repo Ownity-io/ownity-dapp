@@ -144,17 +144,22 @@ main>section {
     border-radius: var(--radius);
 }
 
-.header-wrapper .input-wrapper.search-wrapper {
+.header-wrapper .input-wrapper.search-wrapper,
+.footer-form .input-wrapper {
     min-height: 48px;
-    max-height: 48px;
 }
 
-.input-wrapper.search-wrapper input {
+.input-wrapper.search-wrapper input,
+.footer-form .input-wrapper input {
     height: 100%;
     padding: var(--grid-pad-half);
     color: #333333;
     display: flex;
     flex-grow: 1;
+}
+
+.footer-form .input-wrapper input {
+    padding-left: 16px;
 }
 
 .input-wrapper {
@@ -291,7 +296,27 @@ input::placeholder {
     border-top: 1px solid #DFE2EA;
 }
 
-.footer-row .copyright {}
+.footer-form {
+    margin-top: 16px;
+}
+
+.footer-form .btn-subscribe {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 150%;
+    min-width: 160px;
+}
+
+.footer-form .agree {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #333333;
+    margin-top: 8px;
+}
+.footer-form .agree a{
+    text-decoration: underline;
+}
 
 footer {
     padding-top: 32px;
@@ -318,7 +343,7 @@ footer::after {
     margin-right: var(--grid-pad);
 }
 
-.footer-part.footer-social-links .socila-links-wrap {
+.footer-part.footer-social-links .social-links-wrap {
     margin: -8px;
     margin-left: auto;
 }
@@ -615,9 +640,16 @@ ul.tabs {
 
 .switch {
     max-width: fit-content;
+    overflow: hidden;
 }
 
 
+.btn.btn-switch{
+    padding-top: 0;
+    padding-bottom: 0;
+    min-height: 100%;
+    border-radius: 6px;
+}
 .btn-switch.switch-active {
     background: #818899;
     color: #ffff;
@@ -1149,6 +1181,7 @@ ul.tabs {
     position: relative;
     padding-left: 16px;
     white-space: nowrap;
+    color: #333333;
 }
 
 .card-value {
@@ -1972,6 +2005,28 @@ ul.tabs {
     gap: 16px;
 }
 
-.profile-container-btns .btn-log-out i{
+.profile-container-btns .btn-log-out i {
     margin-right: 12px;
+}
+
+.container-btn-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.card-data .btn-container .container-btn-part .btn {
+    margin-top: 0;
+    min-width: 125px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.part-data {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;
+    color: #9A9A9A;
 }
