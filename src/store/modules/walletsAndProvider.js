@@ -45,6 +45,7 @@ export default {
         );
         context.commit('setUserInfo',await provider.getSigner().getAddress());
         localStorage.setItem('connectedWallet','metamask');
+        localStorage.setItem('userAddress',await provider.getSigner().getAddress());
       } catch {
         localStorage.setItem('connectedWallet',null);
         console.log('Metamask Connection Error');
@@ -62,6 +63,7 @@ export default {
         );
         context.commit('setUserInfo',await web3Provider.getSigner().getAddress());
         localStorage.setItem('connectedWallet','walletconnect');
+        localStorage.setItem('userAddress',await web3Provider.getSigner().getAddress());
       } catch{
         localStorage.setItem('connectedWallet',null);
         console.log('WalletConnect Connection Error');
