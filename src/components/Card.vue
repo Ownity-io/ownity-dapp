@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="card-footer">
-        <div class="card-progress progress">
+        <div class="card-progress progress" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
           <div class="progress-value owner" :style="{ width: userProgressValue + '%' }">
             {{ userProgressValue }}%
           </div>
@@ -17,12 +17,12 @@
             {{ allProgressValue }}%
           </div>
         </div>
-        <div class="card-members btn-more-info">
+        <div class="card-members btn-more-info" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
           <button class="card-members-btn "
             @mouseover="showMore = true"
             @mouseout="showMore = false">
             <i class="i-user-fill"></i>  
-            10
+            {{this.item.bids.length}}
           </button>
           <div v-if="showMore" class="container-more-info">
             <table class="table-more-info">
@@ -34,15 +34,15 @@
                 </tr>
               </thead>
               <tbody>             
-                <tr  >
-                  <td>0x4Eb4…53C7</td>
+                <tr  v-for="element in this.item.bids" :key="element">
+                  <td>{{element.address.substring(0,6)+'...'+element.address.substring(38,42)}}</td>
                   <td>
                     <div class="td-wrap-price">
                       <div class="icon-token"></div> 
-                      0.05 ETH
+                      {{convertToEther(element.amount)}}
                     </div>
                     </td>
-                  <td>5%</td>
+                  <td>{{element.fraction}}%</td>
                 </tr> 
               </tbody>
             </table>
@@ -58,27 +58,37 @@
             @mouseout="showFullName = false"
             >#{{item.token_id}}</div>
           <div v-if="showFullName" class="card-id card-id-full">{{item.name}}</div>
-          <div class="card-value">
+          <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">
+            <div class="icon-value"></div>
+            <span><b>{{priceInCurrency.toFixed(2)}} {{' '}}</b>ETH</span> 
+          </div>
+          <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
             <div class="icon-value"></div>
             0.40/<span><b>{{priceInCurrency.toFixed(2)}}</b>ETH</span> 
           </div>
         </div>
-        <div class="data-tr">
+        <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">
           <div>{{item.collection.name}}</div>
           <div>≈ $ {{Math.round(priceInCurrency * currencyToUsdPrice)}}</div>
+        </div>
+        <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
+          <div>{{item.collection.name}}</div>
+          <div>≈ $ 400/{{Math.round(priceInCurrency * currencyToUsdPrice)}}</div>
         </div>
         <div class="data-tr data-tr-date">
           <div>Ends in 07:47:21</div>
         </div>
       </div>
       <div class="btn-container">
-        <button class="btn">Start collecting</button>
+        <button class="btn" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">Start collecting</button>
+        <button class="btn" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">Deposit part</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { ethers } from 'ethers';
 export default {
   data() {
     return {
@@ -107,8 +117,12 @@ export default {
       catch{
         this.currencyToUsdPrice = 1;
       }
+    },
+    convertToEther(value){
+      return ethers.utils.formatEther(value);
     }
   },
+  
   async mounted(){
     this.getPriceInCurrency();
     await this.getPriceInUsd();
