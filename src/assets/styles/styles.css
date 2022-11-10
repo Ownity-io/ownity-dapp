@@ -1941,3 +1941,16 @@ ul.tabs {
 .profile-data{
     
 }
+
+.link-wrapper{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #333333;
+    width: fit-content;
+}
+.link-wrapper i{
+    color: #818899;
+    margin-left: 12px;
+    font-size: 24px;
+}

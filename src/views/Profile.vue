@@ -8,13 +8,18 @@
                 </div>
                 </section>
             </div>
+
             <section>
                 <div class="container">
                     <div class="profile-header">
                         <div class="icon-profile"></div>
                         <div class="profile-data">
                             <div class="section-name-h1">
-                                0x7c05...371b
+                                {{this.$store.getters['walletsAndProvider/getUserShortAddress']}}
+                            </div>
+                            <div class="btn link-wrapper">
+                                <div class="link">{{this.$store.getters['walletsAndProvider/getUserShortAddress']}}</div>
+                                <button class="btn-copy"><i class="i-checkbox-multiple-blank-line"></i></button>
                             </div>
                         </div>
                     </div>
@@ -29,7 +34,17 @@
                             :class="{ 'active-tab': activeTab === 'ListCards' }"
                             @click="letsCheck('ListCards')"
                             >
-                            Info
+                                Items
+                            </button>
+                        </li>
+                        <li>
+                            <button>
+                                Favourites
+                            </button>
+                        </li>
+                        <li>
+                            <button >
+                                Vote
                             </button>
                         </li>
                         <li>
@@ -37,7 +52,7 @@
                             :class="{ 'active-tab': activeTab === 'ActivityTable' }"
                             @click="letsCheck('ActivityTable')"
                             >
-                            Info
+                                Activities
                             </button>
                         </li>
                     </ul>
