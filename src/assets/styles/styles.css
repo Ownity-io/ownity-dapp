@@ -1822,7 +1822,8 @@ ul.tabs {
 
 .container-more-info {
     position: absolute;
-    min-width: 342px;
+    /* min-width: 342px; */
+    display: flex;
     z-index: 5;
     width: fit-content;
     bottom: 0;
@@ -1837,7 +1838,6 @@ ul.tabs {
     background: #FFFFFF;
     border: 1px solid #DFE2EA;
     box-shadow: 4px 4px 20px rgba(129, 136, 153, 0.1);
-    /* display: none; */
 }
 
 .container-more-info .tr.th {
@@ -1845,12 +1845,13 @@ ul.tabs {
 }
 
 .table-more-info {
-    width: 100%;
+    width: fit-content;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     white-space: nowrap;
     min-width: fit-content;
+    position: relative;
 }
 
 .table-more-info .tr {
@@ -1861,6 +1862,10 @@ ul.tabs {
 
 .table-more-info .tr .td {
     padding: 6px 8px;
+    width: fit-content;
+}
+.card .table-more-info .tr .td:first-child{
+    min-width: 130px;
 }
 
 .container-more-info .tr .td-wrap-price {
@@ -1872,6 +1877,8 @@ ul.tabs {
     width: 16px;
     min-width: 16px;
     height: 16px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .deposit-value {
