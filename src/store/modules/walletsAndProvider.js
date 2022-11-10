@@ -30,7 +30,7 @@ export default {
     },
     setUserInfo(state,_userAddress){
       state.address=_userAddress;
-      state.shortAddress = _userAddress.substring(0,5)+'...'+_userAddress.substring(37,42);
+      state.shortAddress = _userAddress.substring(0,6)+'...'+_userAddress.substring(39,42);
     }
   },
   actions: {
