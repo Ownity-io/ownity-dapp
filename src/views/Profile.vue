@@ -22,6 +22,12 @@
                                 <button class="btn-copy"><i class="i-checkbox-multiple-blank-line"></i></button>
                             </div>
                         </div>
+                        <div class="profile-container-btns">
+                            <button class="btn btn-log-out">
+                                <i class="i-logout-box-line"></i>
+                                <span>Log Out</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </section>
