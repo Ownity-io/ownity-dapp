@@ -13,7 +13,7 @@
           <div class="progress-value owner" :style="{ width: userProgressValue + '%' }">
             {{ userProgressValue }}%
           </div>
-          <div class="progress-value" :style="{ width: allProgressValue + '%' }">
+          <div class="progress-value" :style="{ width: allProgressValue + '%', 'padding-left' :  userProgressValue + '%' }">
             {{ allProgressValue }}%
           </div>
         </div>
@@ -25,23 +25,27 @@
             {{this.item.bids.length}}
           </button>
           <div v-if="showMore" class="container-more-info">
-            <div class="table-more-info">
-              <div class="tr th">
-                <div class="td">Owner</div>
-                <div class="td td-price">Price</div>
-                <div class="td">Pct</div>
-              </div>
-              <div class="tr" v-for="element in this.item.bids" :key="element">
-                <div class="td">{{element.address.substring(0,6)+'...'+element.address.substring(38,42)}}</div>
-                <div class="td">
-                  <div class="td-wrap-price">
-                    <div class="icon-token"></div> 
-                    {{convertToEther(element.amount)}}
-                  </div>
-                  </div>
-                <div class="td">{{element.fraction}}</div>
-              </div> 
-            </div>
+            <table class="table-more-info">
+              <thead>
+                <tr>
+                  <td >Owner</td>
+                  <td class="td td-price">Price</td>
+                  <td >Pct</td>
+                </tr>
+              </thead>
+              <tbody>             
+                <tr  v-for="element in this.item.bids" :key="element">
+                  <td>{{element.address.substring(0,6)+'...'+element.address.substring(38,42)}}</td>
+                  <td>
+                    <div class="td-wrap-price">
+                      <div class="icon-token"></div> 
+                      {{convertToEther(element.amount)}}
+                    </div>
+                    </td>
+                  <td>{{element.fraction}}%</td>
+                </tr> 
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
