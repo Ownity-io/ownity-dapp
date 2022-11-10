@@ -578,6 +578,10 @@ ul.tabs {
     width: 100%;
 }
 
+.params.params-profile .params-block-filter {
+    margin-right: auto;
+}
+
 .switch {
     display: flex;
     width: fit-content;
@@ -998,15 +1002,14 @@ ul.tabs {
 
 .card-img,
 .collection-img,
-.header-nav .btn-container .btn.btn-address .icon-address,
 .deposit-img,
+.profile-header .icon-profile,
+.header-nav .btn-container .btn.btn-address .icon-address,
 .search-results-wrapper li .results-icon,
 .td-wrap-collection .collection-img,
 .card-img-wrap {
     background-image: url(../images/img-not-found.svg);
-    /* background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: center; */
+
 }
 
 .icon-like {
@@ -1921,4 +1924,54 @@ ul.tabs {
     width: calc(100% - 31.7%);
     padding-left: 24px;
     display: grid;
+}
+
+.profile-header {
+    display: flex;
+}
+
+.profile-header .icon-profile {
+    width: 120px;
+    height: 120px;
+    margin-right: 40px;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.profile-data {}
+
+.link-wrapper {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #333333;
+    width: fit-content;
+}
+
+.link-wrapper i {
+    margin-left: 12px;
+
+}
+
+.profile-container-btns i,
+.link-wrapper i {
+    color: #818899;
+    font-size: 24px;
+}
+
+.btn-log-out {
+    height: fit-content;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    margin-left: auto;
+}
+
+.profile-container-btns {
+    margin-left: auto;
+    gap: 16px;
+}
+
+.profile-container-btns .btn-log-out i{
+    margin-right: 12px;
 }

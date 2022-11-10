@@ -44,16 +44,21 @@
     border: 2px solid #12AC64;
 }
 
-.section-listing-main,
 .switch,
 .btn-param,
-.btn-selected-filter ,
-.tab-blocks-list .tab-block,.sort.unfolded .drop-down,
+.btn-log-out,
+.btn-selected-filter,
+.section-listing-main,
+.profile-container-btns button,
+.tab-blocks-list .tab-block,
+.sort.unfolded .drop-down,
 .header-nav .btn-container .btn.btn-address {
     background: #FFFFFF;
     border: 1px solid #DFE2EA;
 }
 
+.btn-log-out:hover,
+.profile-container-btns button:hover,
 .header-nav .btn-container .btn.btn-address:hover,
 .sort.unfolded .btn-sort,
 .sort .btn-sort:hover,
