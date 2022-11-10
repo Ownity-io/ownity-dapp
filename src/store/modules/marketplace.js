@@ -146,7 +146,7 @@ export default {
         requestUrl += `&marketplace=${context.getters.getCurrentMarketplaceId}`;
       }
       if (context.getters.getCurrentStatus != null) {
-        requestUrl += `&status=${context.getters.getCurrentStatus}`;
+        requestUrl += `&marketplace_status=${context.getters.getCurrentStatus}`;
       }
       if (context.getters.getCurrentMinPrice!=null){
         requestUrl += `&price_gt=${ethers.utils.parseEther(String(context.getters.getCurrentMinPrice)).toString()}`;
