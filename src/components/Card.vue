@@ -76,7 +76,7 @@
           <div>≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
         </div>
         <div class="data-tr data-tr-date">
-          <div>Ends in 07:47:21</div>
+          <div>Ends in {{remainTimeString}}</div>
         </div>
       </div>
       <div class="btn-container">
@@ -101,6 +101,7 @@ export default {
       showFullName:false,
       allBidsAmount:0,
       userBidAmount:0,
+      remainTimeString:null,
     };
   },
   props:[
@@ -177,6 +178,9 @@ export default {
       this.setUserBidAmount();
       this.allProgressValue = (this.allBidsAmount/this.item.price)*100;
       this.userProgressValue = (this.userBidAmount/this.item.price)*100;
+      // console.log(Date.parse(this.item.end_date));
+      // console.log(Date.now());
+      this.remainTimeString = new Date( (this.item.end_date - Date.now())).toISOString().substring(11, 19);
     },1000);
   }
 };
