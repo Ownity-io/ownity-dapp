@@ -100,7 +100,7 @@ export default {
       showMore: false,
       showFullName:false,
       allBidsAmount:0,
-      userBidAmount:0
+      userBidAmount:0,
     };
   },
   props:[
@@ -124,10 +124,12 @@ export default {
       return ethers.utils.formatEther(value);
     },
     setAllBidsAmount(){
+      this.allBidsAmount=0;
       if (this.item.bids!=null){
         for (let element of this.item.bids){
           this.allBidsAmount+=parseInt(element.amount);
         }
+        return;
       }
     },
     setUserBidAmount(){
@@ -136,9 +138,12 @@ export default {
         for (let element of this.item.bids){
           if (element.address == userAddress){
             this.userBidAmount = parseInt(element.amount);
+            return;
           }
         }
+        return
       }
+      this.userBidAmount=0;      
     },
     abbrNum(number, decPlaces) {
     // 2 decimal places => 100, 3 => 1000, etc
@@ -184,7 +189,12 @@ export default {
     this.setUserBidAmount();
     this.allProgressValue = (this.allBidsAmount/this.item.price)*100;
     this.userProgressValue = (this.userBidAmount/this.item.price)*100;
-    console.log((this.userBidAmount/this.item.price)*100);
+    setInterval(()=>{
+      this.setAllBidsAmount();
+      this.setUserBidAmount();
+      this.allProgressValue = (this.allBidsAmount/this.item.price)*100;
+      this.userProgressValue = (this.userBidAmount/this.item.price)*100;
+    },1000);
   }
 };
 </script>
