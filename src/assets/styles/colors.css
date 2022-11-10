@@ -16,15 +16,10 @@
     background-color: #F8F9FD;
 }
 
-.sort.unfolded .btn-sort,
-.sort .btn-sort:hover,
-.btn-param:hover {
-    background-color: #F4F5FA;
-}
-
 .sort.unfolded li:hover {
     background: #F4F5FA;
 }
+
 .card-members-btn,
 .section-deposit-btns .btn.btn-get,
 .card-data .btn-container .btn,
@@ -44,7 +39,24 @@
 }
 
 .section-deposit-btns .btn.btn-deposit:hover,
-.header-nav .btn-container .btn.btn-connect:hover{
+.header-nav .btn-container .btn.btn-connect:hover {
     background: #12AC64;
     border: 2px solid #12AC64;
+}
+
+.section-listing-main,
+.switch,
+.btn-param,
+.btn-selected-filter ,
+.tab-blocks-list .tab-block,.sort.unfolded .drop-down,
+.header-nav .btn-container .btn.btn-address {
+    background: #FFFFFF;
+    border: 1px solid #DFE2EA;
+}
+
+.header-nav .btn-container .btn.btn-address:hover,
+.sort.unfolded .btn-sort,
+.sort .btn-sort:hover,
+.btn-param:hover {
+    background-color: #F4F5FA;
 }

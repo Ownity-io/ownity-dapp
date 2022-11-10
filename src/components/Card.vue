@@ -13,7 +13,7 @@
           <div class="progress-value owner" :style="{ width: userProgressValue + '%' }">
             {{ userProgressValue }}%
           </div>
-          <div class="progress-value" :style="{ width: allProgressValue + '%' }">
+          <div class="progress-value" :style="{ width: allProgressValue + '%', 'padding-left' :  userProgressValue + '%' }">
             {{ allProgressValue }}%
           </div>
         </div>
@@ -25,23 +25,27 @@
             10
           </button>
           <div v-if="showMore" class="container-more-info">
-            <div class="table-more-info">
-              <div class="tr th">
-                <div class="td">Owner</div>
-                <div class="td td-price">Price</div>
-                <div class="td">Pct</div>
-              </div>
-              <div class="tr">
-                <div class="td">0x4Eb4…53C7</div>
-                <div class="td">
-                  <div class="td-wrap-price">
-                    <div class="icon-token"></div> 
-                    0.05 ETH
-                  </div>
-                  </div>
-                <div class="td">5%</div>
-              </div> 
-            </div>
+            <table class="table-more-info">
+              <thead>
+                <tr>
+                  <td >Owner</td>
+                  <td class="td td-price">Price</td>
+                  <td >Pct</td>
+                </tr>
+              </thead>
+              <tbody>             
+                <tr  >
+                  <td>0x4Eb4…53C7</td>
+                  <td>
+                    <div class="td-wrap-price">
+                      <div class="icon-token"></div> 
+                      0.05 ETH
+                    </div>
+                    </td>
+                  <td>5%</td>
+                </tr> 
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

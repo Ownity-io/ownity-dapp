@@ -20,6 +20,14 @@
                             Connect Wallet
                         </button>
                     </div>
+                    <div class="btn-container" v-else>
+                        <button class="btn btn-address">
+                            <div class="icon-address"
+                                :style="bs"
+                            ></div>
+                            <span>0x7c05...371b</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="header-mobile"></div>
             </div>
