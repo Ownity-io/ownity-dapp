@@ -1149,6 +1149,7 @@ ul.tabs {
     position: relative;
     padding-left: 16px;
     white-space: nowrap;
+    color: #333333;
 }
 
 .card-value {
@@ -1974,4 +1975,24 @@ ul.tabs {
 
 .profile-container-btns .btn-log-out i{
     margin-right: 12px;
+}
+
+.container-btn-part{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-top: 8px;
+}
+.card-data .btn-container  .container-btn-part .btn{
+    margin-top: 0;
+    min-width: 125px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.part-data{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;color: #9A9A9A;
 }

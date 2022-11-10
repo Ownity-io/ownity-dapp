@@ -57,6 +57,8 @@
     border: 1px solid #DFE2EA;
 }
 
+.btn-selected-filter:hover,
+.input-checkbox label:hover .i-check-line,
 .btn-log-out:hover,
 .profile-container-btns button:hover,
 .header-nav .btn-container .btn.btn-address:hover,

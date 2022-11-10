@@ -10,11 +10,11 @@
       </div>
       <div class="card-footer">
         <div class="card-progress progress" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
-          <div class="progress-value owner" :style="{ width: userProgressValue + '%' }">
-            {{ userProgressValue }}%
+          <div v-if="userProgressValue>0" class="progress-value owner" :style="{ width: userProgressValue + '%' }">
+            <span v-if="userProgressValue>=20">{{ userProgressValue }}%</span>
           </div>
           <div class="progress-value" :style="{ width: allProgressValue + '%', 'padding-left' :  userProgressValue + '%' }">
-            {{ allProgressValue }}%
+            <span v-if="allProgressValue>=20 && userProgressValue<80">{{ allProgressValue }}%</span>
           </div>
         </div>
         <div class="card-members btn-more-info" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
@@ -80,8 +80,28 @@
         </div>
       </div>
       <div class="btn-container">
-        <button class="btn" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">Start collecting</button>
-        <button class="btn" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">Deposit part</button>
+
+        <button class="btn" 
+        v-if="item.marketplace_status=='OPEN' & 
+        item.internal_status=='OPEN'">Start collecting
+        </button>
+
+        <button class="btn" 
+        v-if="item.marketplace_status=='OPEN' & 
+        item.internal_status=='GATHER'">Deposit part
+        </button>
+
+        <div class="container-btn-part">
+            <div class="part-data">
+              Моя частка 
+              <div class="card-value">
+                <div class="icon-value"></div>
+                <span>0.05 ETH</span> 
+              </div>
+            </div>
+            <button class="btn">Відмінити</button>
+        </div>
+
       </div>
     </div>
   </div>
