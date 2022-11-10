@@ -42,7 +42,7 @@
                       {{convertToEther(element.amount)}}
                     </div>
                     </td>
-                  <td>{{element.fraction}}%</td>
+                  <td>{{userProgressValue}}%</td>
                 </tr> 
               </tbody>
             </table>
@@ -60,20 +60,20 @@
           <div v-if="showFullName" class="card-id card-id-full">{{item.name}}</div>
           <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">
             <div class="icon-value"></div>
-            <span><b>{{priceInCurrency.toFixed(2)}} {{' '}}</b>ETH</span> 
+            <span><b>{{abbrNum(priceInCurrency,1)}} {{' '}}</b>ETH</span> 
           </div>
           <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
             <div class="icon-value"></div>
-            0.40/<span><b>{{priceInCurrency.toFixed(2)}}</b>ETH</span> 
+            {{abbrNum(convertToEther(allBidsAmount),1)}}/<span><b>{{abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH</span> 
           </div>
         </div>
         <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">
           <div>{{item.collection.name}}</div>
-          <div>≈ $ {{Math.round(priceInCurrency * currencyToUsdPrice)}}</div>
+          <div>≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
         </div>
         <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
           <div>{{item.collection.name}}</div>
-          <div>≈ $ 400/{{Math.round(priceInCurrency * currencyToUsdPrice)}}</div>
+          <div>≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
         </div>
         <div class="data-tr data-tr-date">
           <div>Ends in 07:47:21</div>
@@ -93,8 +93,8 @@ export default {
   data() {
     return {
       testLike: false,
-      allProgressValue: 100,
-      userProgressValue:30,
+      allProgressValue: 0,
+      userProgressValue:0,
       currencyToUsdPrice: 1,
       priceInCurrency: 1,
       showMore: false,
@@ -139,7 +139,42 @@ export default {
           }
         }
       }
+    },
+    abbrNum(number, decPlaces) {
+    // 2 decimal places => 100, 3 => 1000, etc
+    decPlaces = Math.pow(10,decPlaces);
+
+    // Enumerate number abbreviations
+    var abbrev = [ "k", "m", "b", "t" ];
+
+    // Go through the array backwards, so we do the largest first
+    for (var i=abbrev.length-1; i>=0; i--) {
+
+        // Convert array index to "1000", "1000000", etc
+        var size = Math.pow(10,(i+1)*3);
+
+        // If the number is bigger or equal do the abbreviation
+        if(size <= number) {
+             // Here, we multiply by decPlaces, round, and then divide by decPlaces.
+             // This gives us nice rounding to a particular decimal place.
+             number = Math.round(number*decPlaces/size)/decPlaces;
+
+             // Handle special case where we round up to the next abbreviation
+             if((number == 1000) && (i < abbrev.length - 1)) {
+                 number = 1;
+                 i++;
+             }
+
+             // Add the letter for the abbreviation
+             number += abbrev[i];
+
+             // We are done... stop
+             break;
+        }
     }
+
+    return number;
+}
   },
   
   async mounted(){
