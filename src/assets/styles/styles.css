@@ -1113,7 +1113,7 @@ ul.tabs {
     z-index: 1;
 }
 
-.progress-value.own{
+.progress-value.owner{
     background: #993CFC;
     z-index: 2;
 }

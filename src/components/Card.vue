@@ -10,11 +10,11 @@
       </div>
       <div class="card-footer">
         <div class="card-progress progress">
-          <div class="progress-value owner" :style="{ width: testProgressValue + '%' }">
-            {{ testProgressValue }}%
+          <div class="progress-value owner" :style="{ width: userProgressValue + '%' }">
+            {{ userProgressValue }}%
           </div>
-          <div class="progress-value" :style="{ width: testProgressValue + '%' }">
-            {{ testProgressValue }}%
+          <div class="progress-value" :style="{ width: allProgressValue + '%' }">
+            {{ allProgressValue }}%
           </div>
         </div>
         <div class="card-members btn-more-info">
@@ -79,7 +79,8 @@ export default {
   data() {
     return {
       testLike: false,
-      testProgressValue: 40,
+      allProgressValue: 100,
+      userProgressValue:30,
       currencyToUsdPrice: 1,
       priceInCurrency: 1,
       showMore: false,
