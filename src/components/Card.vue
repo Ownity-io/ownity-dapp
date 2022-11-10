@@ -75,7 +75,7 @@
           <div>{{item.collection.name}}</div>
           <div>≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
         </div>
-        <div class="data-tr data-tr-date">
+        <div class="data-tr data-tr-date" v-if="remainTimeString!=null">
           <div>Ends in {{remainTimeString}}</div>
         </div>
       </div>
@@ -178,8 +178,6 @@ export default {
       this.setUserBidAmount();
       this.allProgressValue = (this.allBidsAmount/this.item.price)*100;
       this.userProgressValue = (this.userBidAmount/this.item.price)*100;
-      // console.log(Date.parse(this.item.end_date));
-      // console.log(Date.now());
       this.remainTimeString = new Date( (this.item.end_date - Date.now())).toISOString().substring(11, 19);
     },1000);
   }
