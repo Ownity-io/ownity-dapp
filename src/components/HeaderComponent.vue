@@ -12,7 +12,6 @@
                             <li><a :class="{active: headerItemActive1}" href="">Marketplace</a></li>
                             <li><a :class="{active: headerItemActive2}" href="">Collections</a></li>
                             <li><a :class="{active: headerItemActive3}" href="">Help</a></li>
-                            <li v-if="walletConnected!=null & walletConnected!='null'">{{this.$store.getters['walletsAndProvider/getUserShortAddress']}}</li>
                         </ul>
                     </nav>
                     <div class="btn-container" v-if="walletConnected==null||walletConnected=='null'">
@@ -25,7 +24,7 @@
                             <div class="icon-address"
                                 :style="bs"
                             ></div>
-                            <span>0x7c05...371b</span>
+                            <span>{{this.$store.getters['walletsAndProvider/getUserShortAddress']}}</span>
                         </button>
                     </div>
                 </div>
