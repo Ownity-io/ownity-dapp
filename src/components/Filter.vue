@@ -16,6 +16,54 @@
             </label>
           </div>
         </li>
+        <li class="filter-li" >
+          <div class="input-checkbox">
+            <input type="checkbox"/>
+            <label :for="item">
+              <div class="i-wrap">
+                <i class="i-shopping-bag-line"></i>
+              </div>
+              <span>Sale</span>
+              <i class="i-check-line"></i>
+            </label>
+          </div>
+        </li>
+        <li class="filter-li" >
+          <div class="input-checkbox">
+            <input type="checkbox"/>
+            <label :for="item">
+              <div class="i-wrap">
+                <i class="i-price-tag-3-line"></i>
+              </div>
+              <span>Listing</span>
+              <i class="i-check-line"></i>
+            </label>
+          </div>
+        </li>
+        <li class="filter-li" >
+          <div class="input-checkbox">
+            <input type="checkbox"/>
+            <label :for="item">
+              <div class="i-wrap">
+                <i class="i-hand-coin-line"></i>
+              </div>
+              <span>Offer</span>
+              <i class="i-check-line"></i>
+            </label>
+          </div>
+        </li>
+        <li class="filter-li" >
+          <div class="input-checkbox">
+            <input type="checkbox"/>
+            <label :for="item">
+              <div class="i-wrap">
+                <i class="i-truck-line"></i>
+              </div>
+              <span>Transfer</span>
+              <i class="i-check-line"></i>
+            </label>
+          </div>
+        </li>
       </ul>
     </div>
     <div class="filter-section" :class="{ 'collapse-section': filterSection2 }">

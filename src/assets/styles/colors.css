@@ -3,7 +3,9 @@
 .header-nav ul li button.active:after {
     background: #12AC64;
 }
-
+.card-data .btn-container .btn.btn-card-completed{
+    color: #2CC07B;
+}
 .footer-list a:hover,
 .breadcrumbs li a:hover span,
 .footer-form .agree a:hover,
@@ -15,10 +17,6 @@
 .tabs button:hover,
 .tabs button.active-tab {
     background-color: #F8F9FD;
-}
-
-.sort.unfolded li:hover {
-    background: #F4F5FA;
 }
 
 .card-members-btn,
@@ -40,15 +38,11 @@
     color: #FFFFFF;
 }
 
+.footer-form .btn-subscribe:hover,
 .section-deposit-btns .btn.btn-deposit:hover,
 .header-nav .btn-container .btn.btn-connect:hover {
     background: #12AC64;
     border: 2px solid #12AC64;
-}
-
-.footer-form .btn-subscribe:hover {
-    background: #12AC64;
-    border: 2px solid #2CC07B;
 }
 
 .switch,
@@ -64,6 +58,7 @@
     border: 1px solid #DFE2EA;
 }
 
+.sort.unfolded li:hover,
 .btn-selected-filter:hover,
 .input-checkbox label:hover .i-check-line,
 .btn-log-out:hover,
@@ -73,4 +68,13 @@
 .sort .btn-sort:hover,
 .btn-param:hover {
     background-color: #F4F5FA;
+}
+
+@media (hover: hover) {
+    .card:not(.card-inactive):hover{
+        transform: translateY(-2px);   border: 1px solid #DFE2EA;
+        /* Shadow hoder */
+        z-index: 5;
+        box-shadow: 4px 4px 15px rgba(129, 136, 153, 0.25);
+    }
 }
