@@ -5,13 +5,16 @@
     background: #12AC64;
 }
 
+.td-wrap-completed,
 .card-data .btn-container .btn.btn-card-completed {
     color: #2CC07B;
 }
-
+.total-block-describe a{
+    text-decoration: underline;
+}
 .footer-list a:hover,
 .breadcrumbs li a:hover span,
-.footer-form .agree a:hover,
+.footer-form .agree a:hover,.total-block-describe a:hover,
 .footer-row.footer-row-info .footer-part:not(.footer-social-links) a:hover {
     color: #2CC07B;
     text-decoration: underline;
@@ -33,6 +36,7 @@
 }
 
 .footer-form .btn-subscribe,
+.btn-modal-main,
 .card-data .btn-container .btn:not(.btn-card-completed):hover,
 .section-deposit-btns .btn.btn-deposit,
 .header-nav .btn-container .btn.btn-connect {
@@ -42,6 +46,7 @@
 }
 
 .footer-form .btn-subscribe:hover,
+.btn-modal-main:hover,
 .section-deposit-btns .btn.btn-deposit:hover,
 .header-nav .btn-container .btn.btn-connect:hover {
     background: #12AC64;

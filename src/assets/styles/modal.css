@@ -1,0 +1,189 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 500;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    align-content: center;
+    padding: 40px;
+}
+
+.modal .modal-header .btn-close {
+    color: #818899;
+    margin-left: auto;
+}
+
+.modal-header-img [class^='icon-'] {
+    width: 96px;
+    height: 96px;
+    margin-bottom: 16px;
+    margin-top: -24px;
+}
+
+.modal-header-img,
+.modal-header,
+.modal-content,
+.modal-section-total {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.modal-section-total {
+    margin-left: -40px;
+    margin-right: -40px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    background: #F8F9FD;
+}
+
+.modal-header-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: -40px;
+    margin-bottom: 24px;
+}
+
+.modal-header-img .modal-header-img-name {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 150%;
+}
+
+.modal-wrapper {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    width: 100%;
+    max-width: 516px;
+    height: fit-content;
+}
+
+.modal-header {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    width: 100%;
+    position: sticky;
+    top: 0;
+
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    color: #333333;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-connect .modal-content {
+    padding: 0 40px;
+
+}
+
+.modal-container {
+    padding-bottom: 40px;
+    width: 100%;
+}
+
+.modal-name {
+    max-width: calc(100% - 24px);
+    padding-right: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+.modal-container,
+.modal-connect-btns {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    width: 100%;
+}
+
+.btn-modal-main {
+    width: fit-content;
+    min-width: 184px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.modal-connect-btns .btn {
+    width: 100%;
+    /* max-width: 340px; */
+    margin-top: 16px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: flex-start;
+}
+
+.modal-connect-btns .btn .icon-btn-connect {
+    width: 24px;
+    min-width: 24px;
+    height: 24px;
+    margin-right: 12px;
+}
+
+.modal-connect .modal-wrapper {
+    max-width: 516px;
+}
+
+.modal-connect .modal-container {
+    max-width: 436px;
+}
+
+.modal-describe {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+}
+
+.modal-p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    text-align: center;
+    color: #9A9A9A;
+}
+
+.modal-connect-btns+.modal-p {
+    margin-top: 38px;
+}
+
+.btn-modal-main {
+    margin-top: 24px;
+}
+
+.table-modal+.btn-modal-main {
+    margin-top: 28px;
+}
+
+.modal-section-nft-data {
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #DFE2EA;
+    width: 100%;
+    display: flex;
+    justify-content: stretch;
+    align-items: flex-start;
+}
+
+.modal-nft-data {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.modal-nft-data .icon-nft {}
