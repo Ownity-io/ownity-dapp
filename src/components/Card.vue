@@ -1,11 +1,12 @@
 <template>
-  <a class="card" :class="{'card-inactive' : false}">
+  <a class="card card-finished" :class="{'card-inactive' : false}">
     <div class="card-main">
       <a href="#" class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></a>
       <div class="card-header">
-        <div class="icon-card-label" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></div>
-        <button class="btn-like" @click="testLike = !testLike">
-          <i :class="{ 'i-heart-3-fill': testLike, 'i-heart-3-line': !testLike }"></i>
+        <div class="icon-card-label " :style="{backgroundImage: `url(${item.marketplace.logo})`}"></div>
+        <button class="btn-like" :class="{'liked':testLike}" @click="testLike = !testLike">
+          <i class="i-heart-3-fill"></i>
+          <i class="i-heart-3-line"></i>
         </button>
       </div>
       <div class="card-footer">

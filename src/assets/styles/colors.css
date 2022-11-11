@@ -3,9 +3,11 @@
 .header-nav ul li button.active:after {
     background: #12AC64;
 }
-.card-data .btn-container .btn.btn-card-completed{
+
+.card-data .btn-container .btn.btn-card-completed {
     color: #2CC07B;
 }
+
 .footer-list a:hover,
 .breadcrumbs li a:hover span,
 .footer-form .agree a:hover,
@@ -30,7 +32,7 @@
 }
 
 .footer-form .btn-subscribe,
-.card-data .btn-container .btn:hover,
+.card-data .btn-container .btn:not(.btn-card-completed):hover,
 .section-deposit-btns .btn.btn-deposit,
 .header-nav .btn-container .btn.btn-connect {
     background: #2CC07B;
@@ -61,7 +63,9 @@
 .sort.unfolded li:hover,
 .btn-selected-filter:hover,
 .input-checkbox label:hover .i-check-line,
-.btn-log-out:hover,
+.btn-log-out:hover, 
+.table-chart-data .tr:hover,
+.table-activity .tr:hover,
 .profile-container-btns button:hover,
 .header-nav .btn-container .btn.btn-address:hover,
 .sort.unfolded .btn-sort,
@@ -71,8 +75,9 @@
 }
 
 @media (hover: hover) {
-    .card:not(.card-inactive):hover{
-        transform: translateY(-2px);   border: 1px solid #DFE2EA;
+    .card:not(.card-inactive):hover {
+        transform: translateY(-2px);
+        border: 1px solid #DFE2EA;
         /* Shadow hoder */
         z-index: 5;
         box-shadow: 4px 4px 15px rgba(129, 136, 153, 0.25);
