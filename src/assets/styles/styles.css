@@ -208,6 +208,7 @@ main>section {
 .filter-section-name,
 .header-nav .btn-container .btn.btn-connect,
 .header-nav ul li a.active,
+.header-nav ul li a:hover,
 .header-nav ul li button.active {
     font-weight: 700;
 }
