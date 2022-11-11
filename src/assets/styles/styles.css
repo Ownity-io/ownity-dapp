@@ -314,7 +314,8 @@ input::placeholder {
     color: #333333;
     margin-top: 8px;
 }
-.footer-form .agree a{
+
+.footer-form .agree a {
     text-decoration: underline;
 }
 
@@ -644,12 +645,13 @@ ul.tabs {
 }
 
 
-.btn.btn-switch{
+.btn.btn-switch {
     padding-top: 0;
     padding-bottom: 0;
     min-height: 100%;
     border-radius: 6px;
 }
+
 .btn-switch.switch-active {
     background: #818899;
     color: #ffff;
@@ -840,13 +842,18 @@ ul.tabs {
     border: 0px solid #2CC07B;
     font-size: 24px;
 }
-
+.i-wrap,
 .icon-filter-checkbox {
-    border: 1px solid #DFE2EA;
     border-radius: 4px;
     width: 24px;
     height: 24px;
     margin-right: 8px;
+}
+.icon-filter-checkbox{
+    border: 1px solid #DFE2EA;}
+.i-wrap{
+    font-size: 24px;
+    color: #818899;
 }
 
 .selected-filters ul {
@@ -937,12 +944,12 @@ ul.tabs {
     grid-template-rows: 1fr; */
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: stretch;
     align-content: flex-start;
     justify-content: flex-start;
     margin-right: -16px;
     flex-wrap: wrap;
-    width: calc(100% + 16x);
+    width: calc(100% + 16px);
     gap: 16px;
 }
 
@@ -975,6 +982,18 @@ ul.tabs {
     box-shadow: 4px 4px 20px rgba(129, 136, 153, 0.1);
     border-radius: 8px;
     /* overflow: hidden; */
+    cursor: pointer;
+    transform: translateY(0);
+    transition: all 200ms ease-out 0s;
+}
+
+.card.card-inactive {
+    opacity: .5;
+    cursor: default !important;
+}
+
+.card.card-inactive a {
+    cursor: default !important;
 }
 
 .card,
@@ -1086,7 +1105,8 @@ ul.tabs {
 }
 
 .card-data {
-    margin-top: auto;
+    /* margin-top: auto; */
+    flex-grow: 1;
     max-width: 100%;
 }
 
@@ -1103,6 +1123,11 @@ ul.tabs {
     font-weight: 700;
     font-size: 16px;
     line-height: 150%;
+}
+
+.card-data .btn-container .btn.btn-card-completed{
+    font-weight: 400;
+    border-color: transparent;
 }
 
 .cards-list-empty .btn,

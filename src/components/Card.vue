@@ -1,7 +1,7 @@
 <template>
-  <div class="card">
+  <a class="card" :class="{'card-inactive' : false}">
     <div class="card-main">
-      <div class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></div>
+      <a href="#" class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></a>
       <div class="card-header">
         <div class="icon-card-label" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></div>
         <button class="btn-like" @click="testLike = !testLike">
@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="card-footer">
-        <div class="card-progress progress" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
+        <div class="card-progress progress" >
           <div v-if="userProgressValue>0" class="progress-value owner" :style="{ width: userProgressValue + '%' }">
             <span v-if="userProgressValue>=20">{{ userProgressValue }}%</span>
           </div>
@@ -17,7 +17,22 @@
             <span v-if="allProgressValue>=20 && userProgressValue<80">{{ allProgressValue }}%</span>
           </div>
         </div>
-        <div class="card-members btn-more-info" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
+        <div class="card-members" >
+          <button class="card-members-btn ">
+            8/10
+          </button>
+        </div>
+      </div>
+      <div class="card-footer" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
+        <div class="card-progress progress" >
+          <div v-if="userProgressValue>0" class="progress-value owner" :style="{ width: userProgressValue + '%' }">
+            <span v-if="userProgressValue>=20">{{ userProgressValue }}%</span>
+          </div>
+          <div class="progress-value" :style="{ width: allProgressValue + '%', 'padding-left' :  userProgressValue + '%' }">
+            <span v-if="allProgressValue>=20 && userProgressValue<80">{{ allProgressValue }}%</span>
+          </div>
+        </div>
+        <div class="card-members btn-more-info">
           <button class="card-members-btn "
             @mouseover="showMore = true"
             @mouseout="showMore = false">
@@ -91,6 +106,12 @@
         item.internal_status=='GATHER'">Deposit part
         </button>
 
+        <button class="btn" 
+        >Vote
+        </button>
+
+        <div class="btn btn-card-completed">Completed</div>
+
         <div class="container-btn-part">
             <div class="part-data">
               Моя частка 
@@ -104,7 +125,7 @@
 
       </div>
     </div>
-  </div>
+  </a>
 </template>
 
 <script>
