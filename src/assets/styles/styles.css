@@ -2020,12 +2020,14 @@ ul.tabs {
 
 .chart-wrap {
     width: 31.7%;
+    height: fit-content;
 }
 
 .table-chart-data {
     width: calc(100% - 31.7%);
     padding-left: 24px;
     display: grid;
+    height: fit-content;
 }
 
 .profile-header {
