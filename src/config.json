@@ -1,4 +1,5 @@
 {
     "backendApiEntryPoint":"https://api.jaxscan.com/",
-    "listingsPerPage":20
+    "listingsPerPage":20,
+    "messageToSignStart":"Sign the message to continue working with NFT Aggregator: "
 }
