@@ -198,7 +198,27 @@ export default {
       this.setUserBidAmount();
       this.allProgressValue = (this.allBidsAmount/this.item.price)*100;
       this.userProgressValue = (this.userBidAmount/this.item.price)*100;
-      this.remainTimeString = new Date( (this.item.end_date - Date.now())).toISOString().substring(11, 19);
+      let timeNow = Date.now()/1000;
+      let remTimeInSeconds = this.item.end_date-timeNow;
+      String.prototype.toHHMMSS = function () {
+        var sec_num = parseInt(this, 10); // don't forget the second param
+        var hours = Math.floor(sec_num / 3600);
+        var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+        var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+        if (hours < 10) { hours = "0" + hours; }
+        if (minutes < 10) { minutes = "0" + minutes; }
+        if (seconds < 10) { seconds = "0" + seconds; }
+        return hours + ':' + minutes + ':' + seconds;
+      }
+      if (remTimeInSeconds>0){
+
+        this.remainTimeString = String(remTimeInSeconds).toHHMMSS();
+      }
+      else{
+        this.remainTimeString = null;
+      }
+      
     },1000);
   }
 };
