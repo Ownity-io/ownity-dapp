@@ -1,5 +1,7 @@
 <template>
     <ConnectWallet v-if="this.$store.getters['appGlobal/getShowConnectWalletModal'] & (this.walletConnected==null||this.walletConnected=='null')"/>
+    <DepositPart />
+    <!-- <TransSuccess /> -->
     <div class="wrapper-main">
         <HeaderComponent/>
         <RouterView />    
@@ -11,14 +13,22 @@
 import HeaderComponent from '@/components/HeaderComponent.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
 
+// -----------MODAL_WINDOWS----------------
 import ConnectWallet from '@/components/modal/ConnectWallet.vue'
+import DepositPart from '@/components/modal/DepositPart.vue'
+import TransSuccess from '@/components/modal/TransSuccess.vue'
+// ----------------------------------------
 
 export default {
     components:{
         HeaderComponent,
         FooterComponent,
 
-        ConnectWallet
+// -----------MODAL_WINDOWS----------------
+        ConnectWallet,
+        DepositPart,
+        TransSuccess
+// ----------------------------------------
     },
     methods:{
         async checkWalletInLS() {

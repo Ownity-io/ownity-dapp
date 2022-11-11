@@ -117,6 +117,28 @@ main>section {
     position: relative;
 }
 
+.tabs li button span:nth-child(1),
+.header-nav ul li a span:nth-child(1),
+.header-nav ul li button span:nth-child(1) {
+    font-weight: 700;
+    opacity: 0;
+}
+
+.tabs li button span:nth-child(2),
+.header-nav ul li a span:nth-child(2),
+.header-nav ul li button span:nth-child(2) {
+    position: absolute;
+}
+
+.header-nav ul li a,
+.header-nav ul li button,
+.tabs li button {
+    position: relative;
+    text-align: center;
+    transition: all .2s;
+
+}
+
 .header-nav ul li,
 .header-nav ul li {
     margin-left: 4px;
@@ -208,6 +230,7 @@ main>section {
 .filter-section-name,
 .header-nav .btn-container .btn.btn-connect,
 .header-nav ul li a.active,
+.header-nav ul li a:hover,
 .header-nav ul li button.active {
     font-weight: 700;
 }
@@ -523,7 +546,8 @@ ul.tabs {
 
 .drop-down ul li,
 .search-results-wrapper ul li,
-.td-wrap.td-wrap-collection {
+.td-wrap.td-wrap-collection,
+.modal-nft-data {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -551,7 +575,8 @@ ul.tabs {
     padding-bottom: 12px;
 }
 
-.search-results-wrapper ul li .results-data> :not(.name) {
+.search-results-wrapper ul li .results-data> :not(.name),
+.nft-data> :not(.nft-id) {
     font-size: 14px;
     margin-top: 3px;
     color: #9A9A9A;
@@ -559,6 +584,7 @@ ul.tabs {
 
 .deposit-img,
 .collection-img,
+.modal-nft-data .icon-nft,
 .search-results-wrapper li .results-icon {
     height: 48px;
     width: 48px;
@@ -574,6 +600,10 @@ ul.tabs {
 .thead .td-collection span {
     padding-left: 16px;
     padding-right: 16px;
+}
+
+.modal-nft-data .icon-nft {
+    margin-right: 16px;
 }
 
 .td-wrap-collection .collection-img {
@@ -872,6 +902,7 @@ ul.tabs {
 }
 
 .card-id,
+.nft-id,
 .collection-id,
 .filter-li .input-checkbox label span,
 .filter-li .input-checkbox label .icon-filter-checkbox+span {
@@ -1037,10 +1068,12 @@ ul.tabs {
     width: 24px;
     height: 24px;
 }
-.card-finished .icon-card-label{
+
+.card-finished .icon-card-label {
     position: relative;
 }
-.card-finished .icon-card-label::after{
+
+.card-finished .icon-card-label::after {
     position: absolute;
     content: '';
     top: 0;
@@ -1093,6 +1126,7 @@ ul.tabs {
 .card-img,
 .collection-img,
 .deposit-img,
+.modal-nft-data .icon-nft,
 .profile-header .icon-profile,
 .header-nav .btn-container .btn.btn-address .icon-address,
 .search-results-wrapper li .results-icon,
@@ -1124,6 +1158,10 @@ ul.tabs {
 
 .wallet-connect {
     background-image: url(../images/wallet_connect.svg);
+}
+
+.icon-congrats {
+    background-image: url(../images/modal/congrats.svg);
 }
 
 .card-img {
@@ -1270,6 +1308,7 @@ ul.tabs {
     left: 0;
 }
 
+.total-block-value .icon-value,
 .token-value .icon-value,
 .card-value .icon-value {
     background-image: url(../images/ethereum.svg);
@@ -1381,6 +1420,13 @@ ul.tabs {
     gap: 16px;
 }
 
+.table-modal-trans .thead,
+.table-modal-trans .tr {
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid #DFE2EA;
+    gap: 16px;
+}
+
 .table-chart-data .tr,
 .table-activity .tr {
     cursor: pointer;
@@ -1457,6 +1503,7 @@ ul.tabs {
 .td-wrap-sale i,
 .td-wrap-price i,
 .token-value .icon-value,
+.total-block-value .icon-value,
 .td-wrap-price .icon-token,
 .td-wrap-link i {
     position: absolute;
@@ -1465,6 +1512,25 @@ ul.tabs {
     font-size: 24px;
     color: #818899;
     top: 0;
+}
+
+.total-block-value .total-amount {
+    padding-left: 26px;
+    position: relative;
+    vertical-align: center;
+}
+
+.total-block-value .total-amount b {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 150%;
+}
+
+.total-block-value .total-amount b+span {
+    margin-left: 4px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
 }
 
 .td-wrap-link {
@@ -1496,6 +1562,7 @@ ul.tabs {
 }
 
 .td-wrap-sale i,
+.total-block-value .icon-value,
 .token-value .icon-value,
 .td-wrap-price .icon-token {
     left: 0;
@@ -1721,123 +1788,6 @@ ul.tabs {
     color: #333333;
     margin-top: 8px;
     margin-bottom: 8px;
-}
-
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 500;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    align-content: center;
-    padding: 40px;
-}
-
-.modal .modal-header .btn-close {
-    color: #818899;
-}
-
-.modal-wrapper {
-    background: #FFFFFF;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
-    border-radius: 4px;
-    width: 100%;
-    max-width: 780px;
-    height: fit-content;
-}
-
-.modal-header {
-    padding: 40px;
-    width: 100%;
-    position: sticky;
-    top: 0;
-
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 28px;
-    color: #333333;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.modal-content {
-    padding: 0 40px;
-
-}
-
-.modal-container {
-    padding-bottom: 40px;
-    width: 100%;
-}
-
-.modal-name {
-    max-width: calc(100% - 24px);
-    padding-right: 16px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
-}
-
-.modal-container,
-.modal-connect-btns {
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-    width: 100%;
-}
-
-.modal-connect-btns .btn {
-    width: 100%;
-    max-width: 340px;
-    margin-top: 16px;
-    margin-left: auto;
-    margin-right: auto;
-    justify-content: flex-start;
-}
-
-.modal-connect-btns .btn .icon-btn-connect {
-    width: 24px;
-    min-width: 24px;
-    height: 24px;
-    margin-right: 12px;
-}
-
-.modal-connect .modal-wrapper {
-    max-width: 780px;
-}
-
-.modal-connect .modal-container {
-    max-width: 413px;
-}
-
-.modal-describe {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 150%;
-    text-align: center;
-}
-
-.modal-p {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 150%;
-    text-align: center;
-    color: #9A9A9A;
-}
-
-.modal-connect-btns+.modal-p {
-    margin-top: 38px;
 }
 
 .section-listing-main {
@@ -2093,9 +2043,57 @@ ul.tabs {
     padding-right: 12px;
 }
 
-.part-data {
+.part-data,
+.total-fees {
     font-weight: 400;
     font-size: 12px;
     line-height: 150%;
     color: #9A9A9A;
+}
+
+.total-fees {
+    margin-top: 8px;
+    margin-left: auto;
+}
+
+.total-block {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.total-block-name {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #333333;
+}
+
+.total-block-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.total-block-value {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.total-block-describe {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    color: #9A9A9A;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 16px;
+}
+.total-block-describe a{
+    display: inline;
 }

@@ -17,12 +17,14 @@
         <ul class="tabs">
           <li>
             <button @click="activeTab = 0" :class="{ 'active-tab': activeTab == 0 }">
-              Items
+              <span>Items</span>
+              <span>Items</span>
             </button>
           </li>
           <li>
             <button @click="activeTab = 1" :class="{ 'active-tab': activeTab == 1 }">
-              Activity
+              <span>Activity</span>
+              <span>Activity</span>
             </button>
           </li>
         </ul>
