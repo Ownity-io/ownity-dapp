@@ -129,7 +129,8 @@
                   :class="{ 'active-tab': activeTab === 'ListingInfo' }"
                   @click="letsCheck('ListingInfo')"
                 >
-                  Info
+                <span>Info</span>
+                <span>Info</span>
                 </button>
               </li>
 
@@ -138,7 +139,8 @@
                   :class="{ 'active-tab': activeTab === 'ListingProperties' }"
                   @click="letsCheck('ListingProperties')"
                 >
-                  Properties
+                <span>Properties</span>
+                <span>Properties</span>
                 </button>
               </li>
 
@@ -147,7 +149,8 @@
                   :class="{ 'active-tab': activeTab === 'ListingAbout' }"
                   @click="letsCheck('ListingAbout')"
                 >
-                  About Collection
+                <span>About Collection</span>
+                <span>About Collection</span>
                 </button>
               </li>
 
@@ -156,7 +159,8 @@
                   :class="{ 'active-tab': activeTab === 'ListingActivities' }"
                   @click="letsCheck('ListingActivities')"
                 >
-                  Activities
+                <span>Activities</span>
+                <span>Activities</span>
                 </button>
               </li>
 
@@ -165,7 +169,8 @@
                   :class="{ 'active-tab': activeTab === 'ListingChat' }"
                   @click="letsCheck('ListingChat')"
                 >
-                  Chat
+                <span>Chat</span>
+                <span>Chat</span>
                 </button>
               </li>
             </ul>

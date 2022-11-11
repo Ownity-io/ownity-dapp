@@ -9,9 +9,9 @@
                 <div class="header-nav">
                     <nav>
                         <ul class="">
-                            <li><a :class="{active: headerItemActive1}" href="">Marketplace</a></li>
-                            <li><a :class="{active: headerItemActive2}" href="">Collections</a></li>
-                            <li><a :class="{active: headerItemActive3}" href="">Help</a></li>
+                            <li><a :class="{active: headerItemActive1}" href=""><span>Marketplace</span><span>Marketplace</span></a></li>
+                            <li><a :class="{active: headerItemActive2}" href=""><span>Collections</span><span>Collections</span></a></li>
+                            <li><a :class="{active: headerItemActive3}" href=""><span>Help</span><span>Help</span></a></li>
                         </ul>
                     </nav>
                     <div class="btn-container" v-if="walletConnected==null||walletConnected=='null'">

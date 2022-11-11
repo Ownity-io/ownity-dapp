@@ -117,6 +117,27 @@ main>section {
     position: relative;
 }
 
+.tabs li button span:nth-child(1),
+.header-nav ul li a span:nth-child(1),
+.header-nav ul li button  span:nth-child(1){
+    font-weight: 700;
+    opacity: 0;
+}
+.tabs li button span:nth-child(2),
+.header-nav ul li a span:nth-child(2),
+.header-nav ul li button  span:nth-child(2){
+    position: absolute;
+}
+
+.header-nav ul li a,
+.header-nav ul li button,
+.tabs li button{
+    position: relative;
+    text-align: center;
+    transition: all .2s;
+
+}
+
 .header-nav ul li,
 .header-nav ul li {
     margin-left: 4px;
@@ -1038,10 +1059,12 @@ ul.tabs {
     width: 24px;
     height: 24px;
 }
-.card-finished .icon-card-label{
+
+.card-finished .icon-card-label {
     position: relative;
 }
-.card-finished .icon-card-label::after{
+
+.card-finished .icon-card-label::after {
     position: absolute;
     content: '';
     top: 0;
