@@ -161,7 +161,7 @@ export default {
   ],
   methods:{
     getPriceInCurrency(){
-      this.priceInCurrency = this.item.price / (10**this.item.currency.decimals);
+      this.priceInCurrency = this.toFixedIfNecessary((this.item.price / (10**this.item.currency.decimals)),6);
     },
     async getPriceInUsd(){
       let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
@@ -222,6 +222,9 @@ export default {
       let token_id = this.item.token_id;
 
       this.linkToMarketplacePage = eval('`'+exampleStr+'`');
+    },
+    toFixedIfNecessary(value, dp) {
+      return +parseFloat(value).toFixed(dp);
     }
   },
   
