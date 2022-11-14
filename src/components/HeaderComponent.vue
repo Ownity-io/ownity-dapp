@@ -20,7 +20,7 @@
                         </button>
                     </div>
                     <div class="btn-container" v-else>
-                        <button class="btn btn-address">
+                        <button class="btn btn-address" @click="this.$store.dispatch('appGlobal/changeshowConnectWalletModal');clearLocalStorage()">
                             <div class="icon-address"
                                 :style="bs"
                             ></div>
@@ -53,6 +53,9 @@ export default {
     methods:{
         getWalletFromLS() {
             this.walletConnected = localStorage.getItem('connectedWallet');
+        },
+        clearLocalStorage(){
+            localStorage.clear();
         }
     },
     mounted(){
