@@ -51,7 +51,25 @@
           </section>
 
           <section class="section-listing-main">
-            <div class="section-deposit">
+            <div class="section-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">
+              <div class="section-deposit-data">
+                <div class="deposit-img"></div>
+                <div class="deposit-data">
+                  <div class="deposit-listened">Listened on OpenSea for</div>
+                  <div class="deposit-value">
+                    <div class="icon-token"></div>
+                    <span><b>{{priceInCurrency}}</b> ETH <span>(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span> </span>
+                  </div>
+                </div>
+              </div>
+              <div class="section-deposit-btns">
+                <button class="btn btn-deposit">Deposit part</button>
+                <!-- <button class="btn btn-deposit">Start collecting</button>
+                <button class="btn btn-deposit">Deposit part</button>
+                <button class="btn btn-get">Get part back</button> -->
+              </div>
+            </div>
+            <div class="section-deposit" v-else>
               <div class="section-deposit-data">
                 <div class="deposit-img"></div>
                 <div class="deposit-data">
@@ -72,7 +90,7 @@
             <div
               class="section-members"
               :class="{ 'section-unfolded': !collapseMembers }"
-            >
+              v-if="false">
               <button class="btn-collapse" @click="collapseMembers = !collapseMembers">
                 <div class="members-row">
                   <i class="i-account-circle-line"></i>
@@ -208,7 +226,9 @@ export default {
       activeTab: "",
       srcTest: "../../assets/images/test-bg.png",
       collapseMembers: false,
-      item:{}
+      item:{},
+      priceInCurrency:1,
+      currencyToUsdPrice:1
     };
   },
   components: {
@@ -223,6 +243,8 @@ export default {
   async mounted() {
     this.activeTab = "ListingInfo";
     await this.getAndSetListingInfo();
+    this.setPriceInCurrency();
+    this.setCurrencyToUsd();
   },
   methods: {
     letsCheck(name) {
@@ -231,7 +253,41 @@ export default {
     async getAndSetListingInfo(){
       await this.$store.dispatch('marketplaceListing/getAndSetItem',this.$route.params.id);
       this.item = await this.$store.getters['marketplaceListing/getItem'];
-    }
+    },
+    setPriceInCurrency(){
+      this.priceInCurrency = this.toFixedIfNecessary((this.item.price / (10**this.item.currency.decimals)),6);
+    },
+    toFixedIfNecessary(value, dp) {
+      return +parseFloat(value).toFixed(dp);
+    },
+    async setCurrencyToUsd(){
+      let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
+      let requestJson = await request.json();
+      try{
+        this.currencyToUsdPrice =  requestJson.quotes[0].priceUsd;
+      }
+      catch{
+        this.currencyToUsdPrice = 1;
+      }
+    },
+    abbrNum(number, decPlaces) {
+      decPlaces = Math.pow(10, decPlaces);
+      var abbrev = ["k", "m", "b", "t"];
+      for (var i = abbrev.length - 1; i >= 0; i--) {
+        var size = Math.pow(10, (i + 1) * 3);
+        if (size <= number) {
+          number = Math.round(number * decPlaces / size) / decPlaces;
+          if ((number == 1000) && (i < abbrev.length - 1)) {
+            number = 1;
+            i++;
+          }
+          number += abbrev[i];
+          break;
+        }
+      }
+
+      return number;
+    },
   },
 };
 </script>
