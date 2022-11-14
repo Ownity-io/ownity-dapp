@@ -263,7 +263,7 @@ input::placeholder {
 input {
     display: flex;
     flex-grow: 1;
-    min-width:32px;
+    min-width: 32px;
 }
 
 .footer-section {
@@ -718,11 +718,11 @@ ul.tabs {
     min-width: 216px;
 }
 
-.modal-main-input-select .input-selected{
+.modal-main-input-select .input-selected {
     min-width: auto;
 }
 
-.modal-main-input-select .modal-data-block-price{
+.modal-main-input-select .modal-data-block-price {
     max-width: 256px;
 }
 
@@ -1408,7 +1408,7 @@ ul.tabs {
     width: 100%;
 }
 
-.container-input{
+.container-input {
     display: flex;
     flex-grow: 1;
     flex-direction: column;
@@ -1692,10 +1692,12 @@ ul.tabs {
     background-size: 100% 100%;
     background-position: center;
 }
-.card-img-wrap img{
+
+.card-img-wrap img {
     width: 100%;
     aspect-ratio: 1 / 1;
 }
+
 .section-listing-header {
     display: flex;
     width: 100%;
@@ -2140,27 +2142,4 @@ ul.tabs {
 
 .total-block-describe a {
     display: inline;
-}
-
-.modal-current-part {
-    display: flex;
-    align-items: center;
-    background: #F8F9FD;
-    border-radius: 8px;
-    padding: 12px;
-    width: fit-content;
-}
-
-.modal-section-nft-data .modal-current-part {
-    margin-left: auto;
-}
-
-.modal-current-part i {
-    font-size: 24px;
-    margin-right: 8px;
-    color: #818899;
-}
-
-.modal-current-part span {
-    margin-left: 4px;
 }

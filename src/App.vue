@@ -7,6 +7,8 @@
     <!-- <SellCancelPart /> -->
     <!-- <SellCancel /> -->
     <!-- <Claim /> -->
+    <!-- <ClaimReward /> -->
+    <!-- <PriceChanged /> -->
     <!-- <VoteConfirm /> -->
     <!-- <VoteStart /> -->
     <!-- <TransSuccess /> -->
@@ -32,6 +34,8 @@ import SellPart from '@/components/modal/SellPart.vue'
 import SellCancelPart from '@/components/modal/SellCancelPart.vue'
 import SellCancel from '@/components/modal/SellCancel.vue'
 import Claim from '@/components/modal/Claim.vue'
+import ClaimReward from '@/components/modal/ClaimReward.vue'
+import PriceChanged from '@/components/modal/PriceChanged.vue'
 import VoteStart from '@/components/modal/VoteStart.vue'
 import VoteConfirm from '@/components/modal/VoteConfirm.vue'
 import BuyPart from '@/components/modal/BuyPart.vue'
@@ -52,6 +56,8 @@ export default {
         SellCancelPart,
         SellCancel,
         Claim,
+        ClaimReward,
+        PriceChanged,
         VoteStart,
         VoteConfirm,
         BuyPart,

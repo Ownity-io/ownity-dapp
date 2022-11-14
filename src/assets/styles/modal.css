@@ -183,9 +183,11 @@
     justify-content: stretch;
     align-items: flex-start;
 }
-.modal-claim .modal-section-nft-data{
+
+.modal-claim .modal-section-nft-data {
     border-bottom: unset;
 }
+
 .modal-nft-data {
     display: flex;
     align-items: center;
@@ -350,3 +352,70 @@ input+.input-equivalent {
 }
 
 .modal-main-data-container {}
+
+
+.modal-section-amount {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: flex-start;
+    text-align: center;
+}
+
+.modal-amount-title {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #333333;
+    margin-bottom: 24px;
+}
+
+.modal-section-amount +  .modal-section-total,
+.modal-section-amount +  .btn-modal-main{
+    margin-top: 40px;
+}
+.modal-current-part {
+    display: flex;
+    align-items: center;
+    background: #F8F9FD;
+    border-radius: 8px;
+    padding: 12px;
+    width: fit-content;
+}
+
+.modal-section-nft-data .modal-current-part {
+    margin-left: auto;
+}
+
+.modal-current-part i {
+    font-size: 24px;
+    margin-right: 8px;
+    color: #818899;
+}
+
+.modal-current-part span {
+    margin-left: 4px;
+}
+
+.modal-section-amount .token-value {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 150%;
+    color: #333333;
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+.modal-section-amount .token-value .icon-value{
+    top: 50%;
+    transform: translateY(-50%);
+}
+.modal-section-amount .token-value .equivalent{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    margin-left: 4px;
+}
