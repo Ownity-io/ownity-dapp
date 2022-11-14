@@ -1,5 +1,6 @@
 <template>
-  <a class="card card-finished" :class="{'card-inactive' : false}">
+  <!-- <a class="card card-finished" :class="{'card-inactive' : false}"> -->
+  <a class="card" :class="{'card-inactive' : false}">
     <div class="card-main">
       <a href="#" class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></a>
       <div class="card-header">
@@ -9,7 +10,7 @@
           <i class="i-heart-3-line"></i>
         </button>
       </div>
-      <div class="card-footer">
+      <!-- <div class="card-footer">
         <div class="card-progress progress" >
           <div v-if="userProgressValue>0" class="progress-value owner" :style="{ width: userProgressValue + '%' }">
             <span v-if="userProgressValue>=20">{{ userProgressValue }}%</span>
@@ -23,7 +24,7 @@
             8/10
           </button>
         </div>
-      </div>
+      </div> -->
       <div class="card-footer" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
         <div class="card-progress progress" >
           <div v-if="userProgressValue>0" class="progress-value owner" :style="{ width: userProgressValue + '%' }">
@@ -74,51 +75,57 @@
             @mouseout="showFullName = false"
             >#{{item.token_id}}</div>
           <div v-if="showFullName" class="card-id card-id-full">{{item.name}}</div>
-          <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">
+          <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & this.$route.path=='/marketplace'">
             <div class="icon-value"></div>
             <span><b>{{abbrNum(priceInCurrency,1)}} {{' '}}</b>ETH</span> 
           </div>
-          <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
+          <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & this.$route.path=='/marketplace'">
             <div class="icon-value"></div>
             {{abbrNum(convertToEther(allBidsAmount),1)}}/<span><b>{{abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH</span> 
           </div>
         </div>
-        <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">
+        <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & this.$route.path=='/marketplace'">
           <div>{{item.collection.name}}</div>
           <div>≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
         </div>
-        <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
+        <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & this.$route.path=='/marketplace'">
           <div>{{item.collection.name}}</div>
           <div>≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
         </div>
         <div class="data-tr data-tr-date" v-if="remainTimeString!=null">
           <div>Ends in {{remainTimeString}}</div>
         </div>
+        <div class="data-tr data-tr-date" v-else>
+          <div>Expired</div>
+        </div>
       </div>
       <div class="btn-container">
 
         <button class="btn" 
         v-if="item.marketplace_status=='OPEN' & 
-        item.internal_status=='OPEN'">Start collecting
+        item.internal_status=='OPEN' 
+        & this.$route.path=='/marketplace'">Start collecting
         </button>
 
         <button class="btn" 
         v-if="item.marketplace_status=='OPEN' & 
-        item.internal_status=='GATHER'">Deposit part
+        item.internal_status=='GATHER' 
+        & this.$route.path=='/marketplace'
+        & userBidAmount<=0">Deposit part
         </button>
 
-        <button class="btn" 
+        <!-- <button class="btn" 
         >Vote
-        </button>
+        </button> -->
 
-        <div class="btn btn-card-completed">Completed</div>
+        <!-- <div class="btn btn-card-completed">Completed</div> -->
 
-        <div class="container-btn-part">
+        <div class="container-btn-part" v-if="userBidAmount>0">
             <div class="part-data">
               Моя частка 
               <div class="card-value">
                 <div class="icon-value"></div>
-                <span>0.05 ETH</span> 
+                <span>{{convertToEther(userBidAmount)}} ETH</span> 
               </div>
             </div>
             <button class="btn">Відмінити</button>
