@@ -7,7 +7,7 @@
                     <span>Contract Address</span>
                 </div>
                 <div class="data-td data-td-value">
-                    <a class="td-wrap td-wrap-link" href="" target="_blank" rel="nofollow">
+                    <a class="td-wrap td-wrap-link" :href="config.etherscanTokenUrlStart+item.collection.contract_address" target="_blank" rel="nofollow">
                         <span>{{String(item.collection.contract_address).substring(0,6)+'...'+String(item.collection.contract_address).substring(38,42)}}</span>
                         <i class="i-external-link-line"></i>
                     </a> 
@@ -49,7 +49,13 @@
 </template>
 
 <script>
+import config from "@/config.json";
 export default{
-    props:['item']
+    props:['item'],
+    data(){
+        return{
+            config:config
+        }
+    }
 }
 </script>
