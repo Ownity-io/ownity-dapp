@@ -7,8 +7,8 @@
                     <span>Contract Address</span>
                 </div>
                 <div class="data-td data-td-value">
-                    <a class="td-wrap td-wrap-link" href="" target="_blank" rel="nofollow">
-                        <span>a1565...d48d</span>
+                    <a class="td-wrap td-wrap-link" :href="config.etherscanTokenUrlStart+item.collection.contract_address" target="_blank" rel="nofollow">
+                        <span>{{String(item.collection.contract_address).substring(0,6)+'...'+String(item.collection.contract_address).substring(38,42)}}</span>
                         <i class="i-external-link-line"></i>
                     </a> 
                 </div>
@@ -19,8 +19,8 @@
                     <span>Token ID</span>
                 </div>
                 <div class="data-td data-td-value">
-                    <a class="td-wrap td-wrap-link" href="" target="_blank" rel="nofollow">
-                        <span>4951399</span>
+                    <a class="td-wrap td-wrap-link" :href="config.etherscanTokenUrlStart+item.collection.contract_address+'?a='+item.token_id+'#inventory'" target="_blank" rel="nofollow">
+                        <span>{{item.token_id}}</span>
                         <i class="i-external-link-line"></i>
                     </a> 
                 </div>
@@ -31,7 +31,7 @@
                     <span>Blockchain</span>
                 </div>
                 <div class="data-td data-td-value">
-                    <span>Ethereum</span>
+                    <span>{{item.collection.blockchain}}</span>
                 </div>
             </div>
                         
@@ -40,10 +40,22 @@
                     <span>Token standard</span>
                 </div>
                 <div class="data-td data-td-value">
-                    <span>ERC-721</span>
+                    <span>ERC-{{item.collection.erc_type}}</span>
                 </div>
             </div>
             
         </div>
     </div>
 </template>
+
+<script>
+import config from "@/config.json";
+export default{
+    props:['item'],
+    data(){
+        return{
+            config:config
+        }
+    }
+}
+</script>

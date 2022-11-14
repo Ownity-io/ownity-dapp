@@ -2,10 +2,9 @@
   <!-- <a class="card card-finished" :class="{'card-inactive' : false}"> -->
   <a class="card" :class="{'card-inactive' : false}">
     <div class="card-main">
-      <a href="#" class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></a>
+      <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></a>
       <div class="card-header">
-        <a :href="linkToMarketplacePage">
-          <div class="icon-card-label " :style="{backgroundImage: `url(${item.marketplace.logo})`}" h></div>
+        <a  class="icon-card-label " :href="linkToMarketplacePage" :style="{backgroundImage: `url(${item.marketplace.logo})`}">
         </a>
         <button class="btn-like" :class="{'liked':testLike}" @click="testLike = !testLike">
           <i class="i-heart-3-fill"></i>
@@ -77,20 +76,20 @@
             @mouseout="showFullName = false"
             >#{{item.token_id}}</div>
           <div v-if="showFullName" class="card-id card-id-full">{{item.name}}</div>
-          <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & this.$route.path=='/marketplace'">
+          <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">
             <div class="icon-value"></div>
             <span><b>{{abbrNum(priceInCurrency,1)}} {{' '}}</b>ETH</span> 
           </div>
-          <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & this.$route.path=='/marketplace'">
+          <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">
             <div class="icon-value"></div>
             {{abbrNum(convertToEther(allBidsAmount),1)}}/<span><b>{{abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH</span> 
           </div>
         </div>
-        <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & this.$route.path=='/marketplace'">
+        <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">
           <div>{{item.collection.name}}</div>
           <div>≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
         </div>
-        <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & this.$route.path=='/marketplace'">
+        <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">
           <div>{{item.collection.name}}</div>
           <div>≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
         </div>
@@ -102,20 +101,21 @@
         </div>
       </div>
       <div class="btn-container">
-
-        <button class="btn" 
-        v-if="item.marketplace_status=='OPEN' & 
-        item.internal_status=='OPEN' 
-        & this.$route.path=='/marketplace'">Start collecting
-        </button>
-
-        <button class="btn" 
-        v-if="item.marketplace_status=='OPEN' & 
-        item.internal_status=='GATHER' 
-        & this.$route.path=='/marketplace'
-        & userBidAmount<=0">Deposit part
-        </button>
-
+        <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
+          <button class="btn" 
+          v-if="item.marketplace_status=='OPEN' & 
+          item.internal_status=='OPEN' 
+          & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">Start collecting
+          </button>
+        </a>
+        <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
+          <button class="btn" 
+          v-if="item.marketplace_status=='OPEN' & 
+          item.internal_status=='GATHER' 
+          & (this.$route.name=='Marketplace' || this.$route.name=='Listing')
+          & userBidAmount<=0">Deposit part
+          </button>
+        </a>
         <!-- <button class="btn" 
         >Vote
         </button> -->
@@ -130,7 +130,9 @@
                 <span>{{convertToEther(userBidAmount)}} ETH</span> 
               </div>
             </div>
-            <button class="btn">Відмінити</button>
+            <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
+              <button class="btn">Відмінити</button>
+            </a>
         </div>
 
       </div>
