@@ -183,7 +183,9 @@
     justify-content: stretch;
     align-items: flex-start;
 }
-
+.modal-claim .modal-section-nft-data{
+    border-bottom: unset;
+}
 .modal-nft-data {
     display: flex;
     align-items: center;

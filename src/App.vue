@@ -4,7 +4,9 @@
     <!-- <DepositPartContinue /> -->
     <!-- <DepositCancel /> -->
     <!-- <SellPart /> -->
+    <!-- <SellCancelPart /> -->
     <!-- <SellCancel /> -->
+    <!-- <Claim /> -->
     <!-- <VoteConfirm /> -->
     <!-- <VoteStart /> -->
     <!-- <TransSuccess /> -->
@@ -27,7 +29,9 @@ import DepositPartStart from '@/components/modal/DepositPartStart.vue'
 import DepositPartContinue from '@/components/modal/DepositPartContinue.vue'
 import DepositCancel from '@/components/modal/DepositCancel.vue'
 import SellPart from '@/components/modal/SellPart.vue'
+import SellCancelPart from '@/components/modal/SellCancelPart.vue'
 import SellCancel from '@/components/modal/SellCancel.vue'
+import Claim from '@/components/modal/Claim.vue'
 import VoteStart from '@/components/modal/VoteStart.vue'
 import VoteConfirm from '@/components/modal/VoteConfirm.vue'
 import BuyPart from '@/components/modal/BuyPart.vue'
@@ -45,7 +49,9 @@ export default {
         DepositPartContinue,
         DepositCancel,
         SellPart,
+        SellCancelPart,
         SellCancel,
+        Claim,
         VoteStart,
         VoteConfirm,
         BuyPart,
