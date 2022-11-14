@@ -195,7 +195,7 @@
 
             <div class="listing-selected-tab">
               <ListingInfo v-if="activeTab === 'ListingInfo'" :item="item"/>
-              <ListingProperties v-if="activeTab === 'ListingProperties'" />
+              <ListingProperties v-if="activeTab === 'ListingProperties'" :item="item" />
               <ListingAbout v-if="activeTab === 'ListingAbout'" />
               <ListingActivities v-if="activeTab === 'ListingActivities'" />
               <ListingChat v-if="activeTab === 'ListingChat'" />
