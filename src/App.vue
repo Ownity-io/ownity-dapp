@@ -4,7 +4,9 @@
     <!-- <DepositPartContinue /> -->
     <!-- <DepositCancel /> -->
     <!-- <SellCancel /> -->
+    <!-- <VoteStart /> -->
     <!-- <TransSuccess /> -->
+
     <div class="wrapper-main">
         <HeaderComponent/>
         <RouterView />    
@@ -22,6 +24,7 @@ import DepositPartStart from '@/components/modal/DepositPartStart.vue'
 import DepositPartContinue from '@/components/modal/DepositPartContinue.vue'
 import DepositCancel from '@/components/modal/DepositCancel.vue'
 import SellCancel from '@/components/modal/SellCancel.vue'
+import VoteStart from '@/components/modal/VoteStart.vue'
 import TransSuccess from '@/components/modal/TransSuccess.vue'
 // ----------------------------------------
 
@@ -36,6 +39,7 @@ export default {
         DepositPartContinue,
         DepositCancel,
         SellCancel,
+        VoteStart,
         TransSuccess
 // ----------------------------------------
     },

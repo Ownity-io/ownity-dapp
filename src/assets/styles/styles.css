@@ -176,8 +176,6 @@ main>section {
     height: 100%;
     padding: var(--grid-pad-half);
     color: #333333;
-    display: flex;
-    flex-grow: 1;
 }
 
 .footer-form .input-wrapper input {
@@ -259,6 +257,11 @@ main>section {
 
 input::placeholder {
     color: #A8B0C4;
+}
+
+input {
+    display: flex;
+    flex-grow: 1;
 }
 
 .footer-section {
@@ -857,7 +860,7 @@ ul.tabs {
 }
 
 .input-checkbox label {
-    padding-right: calc(24px + var(--grid-pad));
+    padding-right: calc(24px + 16px);
     cursor: pointer;
     width: 100%;
     display: flex;
@@ -1392,6 +1395,12 @@ ul.tabs {
     justify-content: stretch;
     align-items: center;
     width: 100%;
+}
+
+.container-input{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
 }
 
 .container-enter-price .container-input {
@@ -2127,14 +2136,16 @@ ul.tabs {
     padding: 12px;
 }
 
-.modal-section-nft-data .modal-current-part{
+.modal-section-nft-data .modal-current-part {
     margin-left: auto;
 }
+
 .modal-current-part i {
     font-size: 24px;
     margin-right: 8px;
     color: #818899;
 }
-.modal-current-part span{
+
+.modal-current-part span {
     margin-left: 4px;
 }

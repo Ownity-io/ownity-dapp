@@ -199,7 +199,7 @@
     column-gap: 40px;
 }
 
-.modal-data-block{
+.modal-data-block {
     flex-grow: 1;
     margin-bottom: 24px;
 }
@@ -217,36 +217,101 @@
     width: fit-content;
 }
 
-.price-block-title{
+.price-block-title {
     margin-bottom: 9px;
     line-height: 19px;
 }
-.price-block-equivalent{
+
+.price-block-equivalent {
     margin-top: 5px;
 }
-.equivalent{
+
+.equivalent {
     color: #9A9A9A;
     font-size: .875em;
     line-height: 150%;
 }
 
-.input-select-title{
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    margin-bottom: 8px;
+input+.input-equivalent {
+    margin-left: auto;
 }
-.input-select-title{
+
+.input-select-title {
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
     margin-bottom: 8px;
 }
 
-.input-select-prompt{
+.input-select-title {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    margin-bottom: 8px;
+}
+
+.input-select-prompt {
     margin-top: 8px;
     font-weight: 400;
     font-size: 12px;
     line-height: 14px;
     color: #9A9A9A;
+}
+
+.modal-input {}
+
+.input-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #333333;
+}
+
+.input-header .price-value {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 150%;
+}
+
+.input-prompt {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    margin-top: 8px;
+    color: #9A9A9A;
+}
+
+.input-wrapper-amount {
+    gap: 16px;
+    padding: 12px 16px;
+}
+
+.input-equivalent {
+    white-space: nowrap;
+    min-width: fit-content;
+}
+
+.modal-section-name {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #333333;
+}
+
+.modal-filter .filter-ul {
+    flex-direction: row;
+    margin-left: -13px;
+    margin-right: -13px;
+    flex-wrap: wrap;
+}
+
+.modal-filter .filter-ul li{
+    margin-top: 16px;
+    margin-left: 13px;
+    margin-right: 13px;
+    width: calc(100% / 2 - 13px * 2);
 }
