@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main v-if="item!=null">
     <div class="container">
       <section class="section-breadcrumbs">
         <div class="container">
@@ -21,7 +21,7 @@
                 <div class="collection-img"></div>
                 <div class="collection-data">
                   <span class="collection-id collection-label">
-                    <span>Mutant Ape Yacht Club</span>
+                    <span>{{item.collection.name}}</span>
                     <i class="i-checkbox-circle-fill"></i>
                   </span>
                 </div>
@@ -53,9 +53,9 @@
           <section class="section-listing-main">
             <div class="section-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">
               <div class="section-deposit-data">
-                <div class="deposit-img"></div>
+                <div class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></div>
                 <div class="deposit-data">
-                  <div class="deposit-listened">Listened on OpenSea for</div>
+                  <div class="deposit-listened">Listened on {{item.marketplace.name}} for</div>
                   <div class="deposit-value">
                     <div class="icon-token"></div>
                     <span><b>{{priceInCurrency}}</b> ETH <span>(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span> </span>
@@ -226,7 +226,7 @@ export default {
       activeTab: "",
       srcTest: "../../assets/images/test-bg.png",
       collapseMembers: false,
-      item:{},
+      item:null,
       priceInCurrency:1,
       currencyToUsdPrice:1
     };
