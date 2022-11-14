@@ -2,7 +2,7 @@
   <!-- <a class="card card-finished" :class="{'card-inactive' : false}"> -->
   <a class="card" :class="{'card-inactive' : false}">
     <div class="card-main">
-      <a href="#" class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></a>
+      <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></a>
       <div class="card-header">
         <a :href="linkToMarketplacePage">
           <div class="icon-card-label " :style="{backgroundImage: `url(${item.marketplace.logo})`}" h></div>
