@@ -160,10 +160,10 @@ export default {
     'item'
   ],
   methods:{
-    getPriceInCurrency(){
+    setPriceInCurrency(){
       this.priceInCurrency = this.toFixedIfNecessary((this.item.price / (10**this.item.currency.decimals)),6);
     },
-    async getPriceInUsd(){
+    async setCurrencyToUsd(){
       let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
       let requestJson = await request.json();
       try{
@@ -229,9 +229,9 @@ export default {
   },
   
   async mounted(){
-    this.getPriceInCurrency();
+    this.setPriceInCurrency();
     this.setLinkToMarketplacePage();
-    await this.getPriceInUsd();
+    await this.setCurrencyToUsd();
     this.setAllBidsAmount();
     this.setUserBidAmount();
     this.allProgressValue = (this.allBidsAmount/this.item.price)*100;
