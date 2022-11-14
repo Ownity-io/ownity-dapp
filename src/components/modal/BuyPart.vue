@@ -2,12 +2,12 @@
   <div class="modal">
     <div class="modal-wrapper">
       <div class="modal-header">
-        <div class="modal-name">Deposit part</div>
-        <button class="btn-close" >
+        <div class="modal-name">Buy part</div>
+        <button class="btn-close">
           <i class="i-close-line"></i>
         </button>
       </div>
-      
+
       <div class="modal-content">
         <div class="modal-container">
           <div class="modal-section-nft-data">
@@ -19,6 +19,18 @@
               </div>
             </div>
           </div>
+
+          <div class="modal-section-main-data">
+            <div class="modal-main-data-container">
+              <div class="modal-data-block">
+                <div class="modal-current-part">
+                  <i class="i-coupon-3-line"></i>
+                  Your part: <span>10%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="modal-section-total">
             <div class="total-block">
               <div class="total-block-row">
@@ -28,15 +40,14 @@
                     <div class="icon-value"></div>
                     <b>0.103 ETH</b><span>≈ $ 103K</span>
                   </div>
-                  <div class="total-fees">
-                    Fees:<span>3%</span>
-                  </div>
+                  <div class="total-fees">Fees:<span>3%</span></div>
                 </div>
               </div>
             </div>
           </div>
           <div class="total-block-describe">
-            The marketplace charges a fee for each transaction. <a href="#">Terms of Use</a>
+            The marketplace charges a fee for each transaction.
+            <a href="#">Terms of Use</a>
           </div>
           <button class="btn btn-modal-main">Deposit part</button>
         </div>
@@ -44,3 +55,13 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      selectOpen: false,
+    };
+  },
+};
+</script>

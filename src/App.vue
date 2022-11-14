@@ -1,7 +1,17 @@
 <template>
     <ConnectWallet v-if="this.$store.getters['appGlobal/getShowConnectWalletModal'] & (this.walletConnected==null||this.walletConnected=='null')"/>
-    <DepositPart />
+    <!-- <DepositPartStart /> -->
+    <!-- <DepositPartContinue /> -->
+    <!-- <DepositCancel /> -->
+    <!-- <SellPart /> -->
+    <!-- <SellCancelPart /> -->
+    <!-- <SellCancel /> -->
+    <!-- <Claim /> -->
+    <!-- <VoteConfirm /> -->
+    <!-- <VoteStart /> -->
     <!-- <TransSuccess /> -->
+    <!-- <BuyPart />  -->
+
     <div class="wrapper-main">
         <HeaderComponent/>
         <RouterView />    
@@ -15,7 +25,16 @@ import FooterComponent from '@/components/FooterComponent.vue'
 
 // -----------MODAL_WINDOWS----------------
 import ConnectWallet from '@/components/modal/ConnectWallet.vue'
-import DepositPart from '@/components/modal/DepositPart.vue'
+import DepositPartStart from '@/components/modal/DepositPartStart.vue'
+import DepositPartContinue from '@/components/modal/DepositPartContinue.vue'
+import DepositCancel from '@/components/modal/DepositCancel.vue'
+import SellPart from '@/components/modal/SellPart.vue'
+import SellCancelPart from '@/components/modal/SellCancelPart.vue'
+import SellCancel from '@/components/modal/SellCancel.vue'
+import Claim from '@/components/modal/Claim.vue'
+import VoteStart from '@/components/modal/VoteStart.vue'
+import VoteConfirm from '@/components/modal/VoteConfirm.vue'
+import BuyPart from '@/components/modal/BuyPart.vue'
 import TransSuccess from '@/components/modal/TransSuccess.vue'
 // ----------------------------------------
 
@@ -26,7 +45,16 @@ export default {
 
 // -----------MODAL_WINDOWS----------------
         ConnectWallet,
-        DepositPart,
+        DepositPartStart,
+        DepositPartContinue,
+        DepositCancel,
+        SellPart,
+        SellCancelPart,
+        SellCancel,
+        Claim,
+        VoteStart,
+        VoteConfirm,
+        BuyPart,
         TransSuccess
 // ----------------------------------------
     },

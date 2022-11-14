@@ -176,8 +176,6 @@ main>section {
     height: 100%;
     padding: var(--grid-pad-half);
     color: #333333;
-    display: flex;
-    flex-grow: 1;
 }
 
 .footer-form .input-wrapper input {
@@ -189,6 +187,7 @@ main>section {
     justify-content: stretch;
     align-items: center;
     width: 100%;
+    max-width: 100%;
     background: #F8F9FD;
     border: 1px solid #DFE2EA;
     border-radius: 8px;
@@ -259,6 +258,12 @@ main>section {
 
 input::placeholder {
     color: #A8B0C4;
+}
+
+input {
+    display: flex;
+    flex-grow: 1;
+    min-width:32px;
 }
 
 .footer-section {
@@ -500,6 +505,7 @@ ul.tabs {
 }
 
 .section-unfolded .section-unfolded-content,
+.input-select-wrap.unfolded .drop-down,
 .search-results.unfolded,
 .sort.unfolded .drop-down {
     height: fit-content;
@@ -570,6 +576,7 @@ ul.tabs {
     padding-bottom: 8px;
 }
 
+.input-select-wrap.unfolded .drop-down ul li,
 .sort.unfolded .drop-down ul li {
     padding-top: 12px;
     padding-bottom: 12px;
@@ -629,6 +636,7 @@ ul.tabs {
     flex-grow: 1;
 }
 
+.input-select-wrap,
 .params-block .param-wrap {
     position: relative;
     width: 100%;
@@ -645,6 +653,7 @@ ul.tabs {
 
 .switch,
 .btn-param,
+.input-selected,
 .btn-selected-filter {
     border-radius: 8px;
     min-height: 48px;
@@ -703,7 +712,21 @@ ul.tabs {
     min-width: 154px;
 }
 
+.input-selected {
+    padding-left: 16px;
+    padding-right: 16px;
+    min-width: 216px;
+}
 
+.modal-main-input-select .input-selected{
+    min-width: auto;
+}
+
+.modal-main-input-select .modal-data-block-price{
+    max-width: 256px;
+}
+
+.input-selected i,
 .btn-param i {
     color: #818899;
     font-size: 24px;
@@ -711,6 +734,7 @@ ul.tabs {
 
 .btn-param i+span,
 .btn-param span+i,
+.input-selected span+i,
 .btn-selected-filter i+span,
 .btn-selected-filter .icon-selected-filter+span,
 .btn-selected-filter span+i {
@@ -731,15 +755,18 @@ ul.tabs {
     color: #818899;
 }
 
+.input-selected,
 .btn-sort {
     justify-content: space-between;
 }
 
+.input-select-wrap.unfolded .input-selected,
 .sort.unfolded .btn-sort {
     border-radius: 8px 8px 0px 0px;
     background: #F4F5FA;
 }
 
+.input-select-wrap.unfolded .drop-down,
 .sort.unfolded .drop-down {
     border-top: unset;
     border-radius: 0px 0px 8px 8px;
@@ -788,6 +815,7 @@ ul.tabs {
 
 .section-unfolded .btn-collapse i.i-arrow-down-s-line,
 .sort.unfolded .btn-sort i.i-arrow-down-s-line,
+.input-select-wrap.unfolded .input-selected i.i-arrow-down-s-line,
 .filter-section.collapse-section .filter-section-name i.i-arrow-up-s-line {
     transform: scaleY(-1);
     transition: .25s;
@@ -842,7 +870,7 @@ ul.tabs {
 }
 
 .input-checkbox label {
-    padding-right: calc(24px + var(--grid-pad));
+    padding-right: calc(24px + 16px);
     cursor: pointer;
     width: 100%;
     display: flex;
@@ -1125,13 +1153,14 @@ ul.tabs {
 
 .card-img,
 .collection-img,
+.icon-card-label,
+.icon-nft-block,
 .deposit-img,
 .modal-nft-data .icon-nft,
 .profile-header .icon-profile,
 .header-nav .btn-container .btn.btn-address .icon-address,
 .search-results-wrapper li .results-icon,
-.td-wrap-collection .collection-img,
-.card-img-wrap {
+.td-wrap-collection .collection-img {
     background-image: url(../images/img-not-found.svg);
 
 }
@@ -1144,9 +1173,9 @@ ul.tabs {
     background-image: url(../images/dislike.svg);
 }
 
-.icon-card-label {
+/* .icon-card-label {
     background-image: url(../images/test-label.png);
-}
+} */
 
 .icon-token {
     background-image: url(../images/test-token.png);
@@ -1279,6 +1308,7 @@ ul.tabs {
     gap: 16px;
 }
 
+.price-value,
 .card-value {
     position: relative;
     padding-left: 16px;
@@ -1300,6 +1330,8 @@ ul.tabs {
     font-weight: 700;
 }
 
+.price-value .icon-value,
+
 .card-value .icon-value {
     width: 16px;
     height: 16px;
@@ -1308,6 +1340,7 @@ ul.tabs {
     left: 0;
 }
 
+.price-value .icon-value,
 .total-block-value .icon-value,
 .token-value .icon-value,
 .card-value .icon-value {
@@ -1373,6 +1406,12 @@ ul.tabs {
     justify-content: stretch;
     align-items: center;
     width: 100%;
+}
+
+.container-input{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
 }
 
 .container-enter-price .container-input {
@@ -1531,6 +1570,7 @@ ul.tabs {
     font-weight: 400;
     font-size: 14px;
     line-height: 150%;
+    color: #9A9A9A;
 }
 
 .td-wrap-link {
@@ -1652,7 +1692,10 @@ ul.tabs {
     background-size: 100% 100%;
     background-position: center;
 }
-
+.card-img-wrap img{
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
 .section-listing-header {
     display: flex;
     width: 100%;
@@ -2094,6 +2137,30 @@ ul.tabs {
     margin-right: auto;
     margin-top: 16px;
 }
-.total-block-describe a{
+
+.total-block-describe a {
     display: inline;
+}
+
+.modal-current-part {
+    display: flex;
+    align-items: center;
+    background: #F8F9FD;
+    border-radius: 8px;
+    padding: 12px;
+    width: fit-content;
+}
+
+.modal-section-nft-data .modal-current-part {
+    margin-left: auto;
+}
+
+.modal-current-part i {
+    font-size: 24px;
+    margin-right: 8px;
+    color: #818899;
+}
+
+.modal-current-part span {
+    margin-left: 4px;
 }
