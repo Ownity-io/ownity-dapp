@@ -4,7 +4,9 @@
     <div class="card-main">
       <a href="#" class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></a>
       <div class="card-header">
-        <div class="icon-card-label " :style="{backgroundImage: `url(${item.marketplace.logo})`}"></div>
+        <a :href="linkToMarketplacePage">
+          <div class="icon-card-label " :style="{backgroundImage: `url(${item.marketplace.logo})`}" h></div>
+        </a>
         <button class="btn-like" :class="{'liked':testLike}" @click="testLike = !testLike">
           <i class="i-heart-3-fill"></i>
           <i class="i-heart-3-line"></i>
@@ -151,6 +153,7 @@ export default {
       allBidsAmount:0,
       userBidAmount:0,
       remainTimeString:null,
+      linkToMarketplacePage:null
     };
   },
   props:[
@@ -196,27 +199,35 @@ export default {
       this.userBidAmount=0;      
     },
     abbrNum(number, decPlaces) {
-    decPlaces = Math.pow(10,decPlaces);
-    var abbrev = [ "k", "m", "b", "t" ];
-    for (var i=abbrev.length-1; i>=0; i--) {
-        var size = Math.pow(10,(i+1)*3);
-        if(size <= number) {
-             number = Math.round(number*decPlaces/size)/decPlaces;
-             if((number == 1000) && (i < abbrev.length - 1)) {
-                 number = 1;
-                 i++;
-             }
-             number += abbrev[i];
-             break;
+      decPlaces = Math.pow(10, decPlaces);
+      var abbrev = ["k", "m", "b", "t"];
+      for (var i = abbrev.length - 1; i >= 0; i--) {
+        var size = Math.pow(10, (i + 1) * 3);
+        if (size <= number) {
+          number = Math.round(number * decPlaces / size) / decPlaces;
+          if ((number == 1000) && (i < abbrev.length - 1)) {
+            number = 1;
+            i++;
+          }
+          number += abbrev[i];
+          break;
         }
-    }
+      }
 
-    return number;
-}
+      return number;
+    },
+    setLinkToMarketplacePage(){
+      let exampleStr = this.item.marketplace.listing_link;
+      let collection_address = this.item.collection.contract_address;
+      let token_id = this.item.token_id;
+
+      this.linkToMarketplacePage = eval('`'+exampleStr+'`');
+    }
   },
   
   async mounted(){
     this.getPriceInCurrency();
+    this.setLinkToMarketplacePage();
     await this.getPriceInUsd();
     this.setAllBidsAmount();
     this.setUserBidAmount();
