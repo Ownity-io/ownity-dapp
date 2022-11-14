@@ -101,20 +101,21 @@
         </div>
       </div>
       <div class="btn-container">
-
-        <button class="btn" 
-        v-if="item.marketplace_status=='OPEN' & 
-        item.internal_status=='OPEN' 
-        & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">Start collecting
-        </button>
-
-        <button class="btn" 
-        v-if="item.marketplace_status=='OPEN' & 
-        item.internal_status=='GATHER' 
-        & (this.$route.name=='Marketplace' || this.$route.name=='Listing')
-        & userBidAmount<=0">Deposit part
-        </button>
-
+        <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
+          <button class="btn" 
+          v-if="item.marketplace_status=='OPEN' & 
+          item.internal_status=='OPEN' 
+          & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">Start collecting
+          </button>
+        </a>
+        <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
+          <button class="btn" 
+          v-if="item.marketplace_status=='OPEN' & 
+          item.internal_status=='GATHER' 
+          & (this.$route.name=='Marketplace' || this.$route.name=='Listing')
+          & userBidAmount<=0">Deposit part
+          </button>
+        </a>
         <!-- <button class="btn" 
         >Vote
         </button> -->
@@ -129,7 +130,9 @@
                 <span>{{convertToEther(userBidAmount)}} ETH</span> 
               </div>
             </div>
-            <button class="btn">Відмінити</button>
+            <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
+              <button class="btn">Відмінити</button>
+            </a>
         </div>
 
       </div>
