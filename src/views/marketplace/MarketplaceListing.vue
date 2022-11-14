@@ -53,7 +53,7 @@
           <section class="section-listing-main">
             <div class="section-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">
               <div class="section-deposit-data">
-                <div class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></div>
+                <a  :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></a>
                 <div class="deposit-data">
                   <div class="deposit-listened">Listened on {{item.marketplace.name}} for</div>
                   <div class="deposit-value">
@@ -228,7 +228,8 @@ export default {
       collapseMembers: false,
       item:null,
       priceInCurrency:1,
-      currencyToUsdPrice:1
+      currencyToUsdPrice:1,
+      linkToMarketplacePage:null
     };
   },
   components: {
@@ -245,6 +246,7 @@ export default {
     await this.getAndSetListingInfo();
     this.setPriceInCurrency();
     this.setCurrencyToUsd();
+    this.setLinkToMarketplacePage();
   },
   methods: {
     letsCheck(name) {
@@ -287,6 +289,13 @@ export default {
       }
 
       return number;
+    },
+    setLinkToMarketplacePage(){
+      let exampleStr = this.item.marketplace.listing_link;
+      let collection_address = this.item.collection.contract_address;
+      let token_id = this.item.token_id;
+
+      this.linkToMarketplacePage = eval('`'+exampleStr+'`');
     },
   },
 };
