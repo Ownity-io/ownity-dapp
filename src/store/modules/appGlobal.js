@@ -11,13 +11,13 @@ export default {
     },
   },
   mutations:{
-    changeshowConnectWalletModal(state){
-        state.showConnectWalletModal = !state.showConnectWalletModal;
+    setShowConnectWalletModal(state,value){
+        state.showConnectWalletModal =value;
     }
   },
   actions:{
-    changeshowConnectWalletModal(context){
-        context.commit('changeshowConnectWalletModal');
+    setShowConnectWalletModal(context,value){
+        context.commit('setShowConnectWalletModal',value);
     }
   }
 };

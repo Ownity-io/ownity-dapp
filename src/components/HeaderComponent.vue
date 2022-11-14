@@ -15,12 +15,12 @@
                         </ul>
                     </nav>
                     <div class="btn-container" v-if="walletConnected==null||walletConnected=='null'">
-                        <button class="btn btn-connect" @click="this.$store.dispatch('appGlobal/changeshowConnectWalletModal');">
+                        <button class="btn btn-connect" @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true);">
                             Connect Wallet
                         </button>
                     </div>
                     <div class="btn-container" v-else>
-                        <button class="btn btn-address" @click="this.$store.dispatch('appGlobal/changeshowConnectWalletModal');clearLocalStorage()">
+                        <button class="btn btn-address" @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',false);clearLocalStorage()">
                             <div class="icon-address"
                                 :style="bs"
                             ></div>
