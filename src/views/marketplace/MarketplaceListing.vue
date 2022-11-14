@@ -11,7 +11,7 @@
       <div class="card-listing">
         <section class="section-card-img">
           <div class="card-img-wrap">
-            <img :src="srcTest" alt="img" />
+            <!-- <img :src="item.media" alt="img" /> -->
           </div>
         </section>
         <div class="listing-main">
