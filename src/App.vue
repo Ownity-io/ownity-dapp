@@ -8,6 +8,7 @@
     <!-- <VoteConfirm /> -->
     <!-- <VoteStart /> -->
     <!-- <TransSuccess /> -->
+    <!-- <BuyPart />  -->
 
     <div class="wrapper-main">
         <HeaderComponent/>
@@ -29,6 +30,7 @@ import SellPart from '@/components/modal/SellPart.vue'
 import SellCancel from '@/components/modal/SellCancel.vue'
 import VoteStart from '@/components/modal/VoteStart.vue'
 import VoteConfirm from '@/components/modal/VoteConfirm.vue'
+import BuyPart from '@/components/modal/BuyPart.vue'
 import TransSuccess from '@/components/modal/TransSuccess.vue'
 // ----------------------------------------
 
@@ -46,6 +48,7 @@ export default {
         SellCancel,
         VoteStart,
         VoteConfirm,
+        BuyPart,
         TransSuccess
 // ----------------------------------------
     },

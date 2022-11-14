@@ -2148,6 +2148,7 @@ ul.tabs {
     background: #F8F9FD;
     border-radius: 8px;
     padding: 12px;
+    width: fit-content;
 }
 
 .modal-section-nft-data .modal-current-part {

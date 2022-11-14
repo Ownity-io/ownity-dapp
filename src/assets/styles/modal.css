@@ -165,9 +165,11 @@
 .btn-modal-main {
     margin-top: 24px;
 }
-.modal-confirm-vote    .btn-modal-main {
+
+.modal-confirm-vote .btn-modal-main {
     margin-top: 0px;
 }
+
 .table-modal+.btn-modal-main {
     margin-top: 28px;
 }
@@ -344,6 +346,5 @@ input+.input-equivalent {
     height: 40px;
     margin-right: 8px;
 }
-.modal-main-data-container{
 
-}
+.modal-main-data-container {}
