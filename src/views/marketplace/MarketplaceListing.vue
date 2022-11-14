@@ -44,9 +44,9 @@
                 </div>
               </div>
             </div>
-            <div class="listing-name">BoredApeYachtClub #27866</div>
+            <div class="listing-name">{{item.name}}</div>
             <div class="owned-row">
-              Owned by <a href="#" target="_blank">0x4Eb4…53C7</a>
+              Owned by <a href="#" target="_blank">{{String(item.owner).substring(0,6)+'...'+String(item.owner).substring(38,42)}}</a> <!-- TODO: href to etherscan-->
             </div>
           </section>
 
@@ -208,6 +208,7 @@ export default {
       activeTab: "",
       srcTest: "../../assets/images/test-bg.png",
       collapseMembers: false,
+      item:{}
     };
   },
   components: {
@@ -219,13 +220,18 @@ export default {
     ListingActivities,
     ListingChat,
   },
-  mounted() {
+  async mounted() {
     this.activeTab = "ListingInfo";
+    await this.getAndSetListingInfo();
   },
   methods: {
     letsCheck(name) {
       this.activeTab = name;
     },
+    async getAndSetListingInfo(){
+      await this.$store.dispatch('marketplaceListing/getAndSetItem',this.$route.params.id);
+      this.item = await this.$store.getters['marketplaceListing/getItem'];
+    }
   },
 };
 </script>
