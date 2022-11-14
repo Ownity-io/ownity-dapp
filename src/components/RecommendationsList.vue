@@ -10,20 +10,8 @@
           </div>
         </div>
         <ul class="recommendations-list">
-          <li>
-            <Card/>
-          </li>
-          <li>
-            <Card/>
-          </li>
-          <li>
-            <Card/>
-          </li>
-          <li>
-            <Card/>
-          </li>
-          <li>
-            <Card/>
+          <li v-for="item in cards" :key="item">
+            <Card :item="item"/>
           </li>
         </ul>
     </div>
@@ -34,10 +22,16 @@ import Card from "@/components/Card.vue";
 
 export default {
   data() {
-    return {};
+    return {
+      cards:[]
+    };
   },
   components: {
     Card,
   },
+  props:['items'],
+  async mounted(){
+    this.cards = await this.items;
+  }
 };
 </script>

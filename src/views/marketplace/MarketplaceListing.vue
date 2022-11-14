@@ -206,7 +206,7 @@
     </div>
     <section class="section-recommendation">
       <div class="container">
-        <!-- <RecommendationsList /> -->
+        <RecommendationsList :items="this.$store.dispatch('marketplaceListing/getRecomendations',item.collection.contract_address)"/>
       </div>
     </section>
   </main>
