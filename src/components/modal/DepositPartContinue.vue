@@ -26,7 +26,7 @@
 
           <div class="modal-section-main-data">
             <div class="modal-main-data-container">
-              <div class="modal-data-block modal-data-block-select-part">
+              <div class="modal-data-block modal-select-part">
                 <div class="input-select-block">
                   <div class="input-select-title">Add some part</div>
                   <div class="input-select-wrap" :class="{ 'unfolded': selectOpen }">

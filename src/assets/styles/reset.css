@@ -160,6 +160,7 @@ a {
     cursor: pointer;
     -webkit-tap-highlight-color: none !important;
     box-shadow: none;
+    appearance:none;
 }
 button,
 .btn,

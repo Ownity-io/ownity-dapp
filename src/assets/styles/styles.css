@@ -187,6 +187,7 @@ main>section {
     justify-content: stretch;
     align-items: center;
     width: 100%;
+    max-width: 100%;
     background: #F8F9FD;
     border: 1px solid #DFE2EA;
     border-radius: 8px;
@@ -262,6 +263,7 @@ input::placeholder {
 input {
     display: flex;
     flex-grow: 1;
+    min-width:32px;
 }
 
 .footer-section {
@@ -716,6 +718,14 @@ ul.tabs {
     min-width: 216px;
 }
 
+.modal-main-input-select .input-selected{
+    min-width: auto;
+}
+
+.modal-main-input-select .modal-data-block-price{
+    max-width: 256px;
+}
+
 .input-selected i,
 .btn-param i {
     color: #818899;
@@ -1143,6 +1153,8 @@ ul.tabs {
 
 .card-img,
 .collection-img,
+.icon-card-label,
+.icon-nft-block,
 .deposit-img,
 .modal-nft-data .icon-nft,
 .profile-header .icon-profile,
@@ -1162,9 +1174,9 @@ ul.tabs {
     background-image: url(../images/dislike.svg);
 }
 
-.icon-card-label {
+/* .icon-card-label {
     background-image: url(../images/test-label.png);
-}
+} */
 
 .icon-token {
     background-image: url(../images/test-token.png);

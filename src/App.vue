@@ -3,7 +3,9 @@
     <!-- <DepositPartStart /> -->
     <!-- <DepositPartContinue /> -->
     <!-- <DepositCancel /> -->
+    <!-- <SellPart /> -->
     <!-- <SellCancel /> -->
+    <VoteConfirm />
     <!-- <VoteStart /> -->
     <!-- <TransSuccess /> -->
 
@@ -23,8 +25,10 @@ import ConnectWallet from '@/components/modal/ConnectWallet.vue'
 import DepositPartStart from '@/components/modal/DepositPartStart.vue'
 import DepositPartContinue from '@/components/modal/DepositPartContinue.vue'
 import DepositCancel from '@/components/modal/DepositCancel.vue'
+import SellPart from '@/components/modal/SellPart.vue'
 import SellCancel from '@/components/modal/SellCancel.vue'
 import VoteStart from '@/components/modal/VoteStart.vue'
+import VoteConfirm from '@/components/modal/VoteConfirm.vue'
 import TransSuccess from '@/components/modal/TransSuccess.vue'
 // ----------------------------------------
 
@@ -38,8 +42,10 @@ export default {
         DepositPartStart,
         DepositPartContinue,
         DepositCancel,
+        SellPart,
         SellCancel,
         VoteStart,
+        VoteConfirm,
         TransSuccess
 // ----------------------------------------
     },

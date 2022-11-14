@@ -28,7 +28,7 @@
                     <div>Price</div>
                     <div class="price-value">
                       <div class="icon-value"></div>
-                      <span>0.10 ETH</span>
+                      <span>ETH</span>
                     </div>
                   </div>
                   <div class="input-wrapper input-wrapper-amount">

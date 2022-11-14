@@ -2,7 +2,7 @@
   <div class="modal">
     <div class="modal-wrapper">
       <div class="modal-header">
-        <div class="modal-name">Deposit part</div>
+        <div class="modal-name">Sell your NFT</div>
         <button class="btn-close">
           <i class="i-close-line"></i>
         </button>
@@ -21,7 +21,23 @@
           </div>
 
           <div class="modal-section-main-data">
-            <div class="modal-main-data-container">
+            <div class="modal-main-data-container modal-main-input-select">
+              <div class="modal-data-block modal-data-block-price">
+                <div class="modal-input container-input">
+                  <div class="input-header">
+                    <div>Price</div>
+                    <div class="price-value">
+                      <div class="icon-value"></div>
+                      <span>ETH</span>
+                    </div>
+                  </div>
+                  <div class="input-wrapper input-wrapper-amount">
+                    <input type="text" placeholder="Input amount">
+                    <div class="input-equivalent equivalent">≈ $ 20K</div>
+                  </div>
+                  <div class="input-prompt">Item will be on sale until you cancelled</div>
+                </div>
+              </div>
               <div class="modal-data-block modal-select-part">
                 <div class="input-select-block">
                   <div class="input-select-title">Choose part</div>
@@ -50,16 +66,6 @@
                   <div class="input-select-prompt">Min 1% to Max 10%</div>
                 </div>
               </div>
-              <div class="modal-data-block modal-data-block-price">
-                <div class="price-block">
-                  <div class="price-block-title">Min 5% to Max 20%</div>
-                  <div class="price-block-value price-value">
-                    <div class="icon-value"></div>
-                    <span>0.10 ETH</span>
-                  </div>
-                  <div class="price-block-equivalent equivalent">≈ $ 100</div>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -81,12 +87,13 @@
             The marketplace charges a fee for each transaction.
             <a href="#">Terms of Use</a>
           </div>
-          <button class="btn btn-modal-main">Deposit part</button>
+          <button class="btn btn-modal-main">Sell</button>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 export default {
   data() {
