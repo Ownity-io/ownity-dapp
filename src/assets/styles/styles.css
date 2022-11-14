@@ -1550,6 +1550,7 @@ ul.tabs {
     font-weight: 400;
     font-size: 14px;
     line-height: 150%;
+    color: #9A9A9A;
 }
 
 .td-wrap-link {
@@ -2121,12 +2122,14 @@ ul.tabs {
 .modal-current-part {
     display: flex;
     align-items: center;
-    margin-left: auto;
     background: #F8F9FD;
     border-radius: 8px;
     padding: 12px;
 }
 
+.modal-section-nft-data .modal-current-part{
+    margin-left: auto;
+}
 .modal-current-part i {
     font-size: 24px;
     margin-right: 8px;
