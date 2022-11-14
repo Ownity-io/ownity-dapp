@@ -4,8 +4,7 @@
     <div class="card-main">
       <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></a>
       <div class="card-header">
-        <a :href="linkToMarketplacePage">
-          <div class="icon-card-label " :style="{backgroundImage: `url(${item.marketplace.logo})`}" h></div>
+        <a  class="icon-card-label " :href="linkToMarketplacePage" :style="{backgroundImage: `url(${item.marketplace.logo})`}">
         </a>
         <button class="btn-like" :class="{'liked':testLike}" @click="testLike = !testLike">
           <i class="i-heart-3-fill"></i>
