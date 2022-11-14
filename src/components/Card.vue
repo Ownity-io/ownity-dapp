@@ -77,20 +77,20 @@
             @mouseout="showFullName = false"
             >#{{item.token_id}}</div>
           <div v-if="showFullName" class="card-id card-id-full">{{item.name}}</div>
-          <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & this.$route.path=='/marketplace'">
+          <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">
             <div class="icon-value"></div>
             <span><b>{{abbrNum(priceInCurrency,1)}} {{' '}}</b>ETH</span> 
           </div>
-          <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & this.$route.path=='/marketplace'">
+          <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">
             <div class="icon-value"></div>
             {{abbrNum(convertToEther(allBidsAmount),1)}}/<span><b>{{abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH</span> 
           </div>
         </div>
-        <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & this.$route.path=='/marketplace'">
+        <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">
           <div>{{item.collection.name}}</div>
           <div>≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
         </div>
-        <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & this.$route.path=='/marketplace'">
+        <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">
           <div>{{item.collection.name}}</div>
           <div>≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
         </div>
@@ -106,13 +106,13 @@
         <button class="btn" 
         v-if="item.marketplace_status=='OPEN' & 
         item.internal_status=='OPEN' 
-        & this.$route.path=='/marketplace'">Start collecting
+        & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">Start collecting
         </button>
 
         <button class="btn" 
         v-if="item.marketplace_status=='OPEN' & 
         item.internal_status=='GATHER' 
-        & this.$route.path=='/marketplace'
+        & (this.$route.name=='Marketplace' || this.$route.name=='Listing')
         & userBidAmount<=0">Deposit part
         </button>
 
