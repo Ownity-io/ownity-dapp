@@ -500,6 +500,7 @@ ul.tabs {
 }
 
 .section-unfolded .section-unfolded-content,
+.input-select-wrap.unfolded .drop-down,
 .search-results.unfolded,
 .sort.unfolded .drop-down {
     height: fit-content;
@@ -570,6 +571,7 @@ ul.tabs {
     padding-bottom: 8px;
 }
 
+.input-select-wrap.unfolded .drop-down ul li,
 .sort.unfolded .drop-down ul li {
     padding-top: 12px;
     padding-bottom: 12px;
@@ -629,6 +631,7 @@ ul.tabs {
     flex-grow: 1;
 }
 
+.input-select-wrap,
 .params-block .param-wrap {
     position: relative;
     width: 100%;
@@ -645,6 +648,7 @@ ul.tabs {
 
 .switch,
 .btn-param,
+.input-selected,
 .btn-selected-filter {
     border-radius: 8px;
     min-height: 48px;
@@ -703,7 +707,13 @@ ul.tabs {
     min-width: 154px;
 }
 
+.input-selected {
+    padding-left: 16px;
+    padding-right: 16px;
+    min-width: 216px;
+}
 
+.input-selected i,
 .btn-param i {
     color: #818899;
     font-size: 24px;
@@ -711,6 +721,7 @@ ul.tabs {
 
 .btn-param i+span,
 .btn-param span+i,
+.input-selected span+i,
 .btn-selected-filter i+span,
 .btn-selected-filter .icon-selected-filter+span,
 .btn-selected-filter span+i {
@@ -731,15 +742,18 @@ ul.tabs {
     color: #818899;
 }
 
+.input-selected,
 .btn-sort {
     justify-content: space-between;
 }
 
+.input-select-wrap.unfolded .input-selected,
 .sort.unfolded .btn-sort {
     border-radius: 8px 8px 0px 0px;
     background: #F4F5FA;
 }
 
+.input-select-wrap.unfolded .drop-down,
 .sort.unfolded .drop-down {
     border-top: unset;
     border-radius: 0px 0px 8px 8px;
@@ -788,6 +802,7 @@ ul.tabs {
 
 .section-unfolded .btn-collapse i.i-arrow-down-s-line,
 .sort.unfolded .btn-sort i.i-arrow-down-s-line,
+.input-select-wrap.unfolded .input-selected i.i-arrow-down-s-line,
 .filter-section.collapse-section .filter-section-name i.i-arrow-up-s-line {
     transform: scaleY(-1);
     transition: .25s;
@@ -1279,6 +1294,7 @@ ul.tabs {
     gap: 16px;
 }
 
+.price-value,
 .card-value {
     position: relative;
     padding-left: 16px;
@@ -1300,6 +1316,8 @@ ul.tabs {
     font-weight: 700;
 }
 
+.price-value .icon-value,
+
 .card-value .icon-value {
     width: 16px;
     height: 16px;
@@ -1308,6 +1326,7 @@ ul.tabs {
     left: 0;
 }
 
+.price-value .icon-value,
 .total-block-value .icon-value,
 .token-value .icon-value,
 .card-value .icon-value {
@@ -2094,6 +2113,25 @@ ul.tabs {
     margin-right: auto;
     margin-top: 16px;
 }
-.total-block-describe a{
+
+.total-block-describe a {
     display: inline;
+}
+
+.modal-current-part {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    background: #F8F9FD;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.modal-current-part i {
+    font-size: 24px;
+    margin-right: 8px;
+    color: #818899;
+}
+.modal-current-part span{
+    margin-left: 4px;
 }

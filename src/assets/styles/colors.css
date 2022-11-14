@@ -56,17 +56,19 @@
 .switch,
 .btn-param,
 .btn-log-out,
+.input-selected,
 .btn-selected-filter,
 .section-listing-main,
 .profile-container-btns button,
 .tab-blocks-list .tab-block,
 .sort.unfolded .drop-down,
+.input-select-wrap.unfolded .drop-down,
 .header-nav .btn-container .btn.btn-address {
     background: #FFFFFF;
     border: 1px solid #DFE2EA;
 }
 
-.sort.unfolded li:hover,
+.drop-down li:hover,
 .btn-selected-filter:hover,
 .input-checkbox label:hover .i-check-line,
 .btn-log-out:hover, 
@@ -76,7 +78,9 @@
 .header-nav .btn-container .btn.btn-address:hover,
 .listing-additional-options .btn-block:hover,
 .sort.unfolded .btn-sort,
+.input-select-wrap.unfolded .input-selected,
 .sort .btn-sort:hover,
+.input-selected:hover,
 .btn-param:hover {
     background-color: #F4F5FA;
 }

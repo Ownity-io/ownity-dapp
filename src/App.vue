@@ -1,6 +1,7 @@
 <template>
     <ConnectWallet v-if="this.$store.getters['appGlobal/getShowConnectWalletModal'] & (this.walletConnected==null||this.walletConnected=='null')"/>
-    <DepositPart />
+    <!-- <DepositPartStart /> -->
+    <DepositPartContinue />
     <!-- <TransSuccess /> -->
     <div class="wrapper-main">
         <HeaderComponent/>
@@ -15,7 +16,8 @@ import FooterComponent from '@/components/FooterComponent.vue'
 
 // -----------MODAL_WINDOWS----------------
 import ConnectWallet from '@/components/modal/ConnectWallet.vue'
-import DepositPart from '@/components/modal/DepositPart.vue'
+import DepositPartStart from '@/components/modal/DepositPartStart.vue'
+import DepositPartContinue from '@/components/modal/DepositPartContinue.vue'
 import TransSuccess from '@/components/modal/TransSuccess.vue'
 // ----------------------------------------
 
@@ -26,7 +28,8 @@ export default {
 
 // -----------MODAL_WINDOWS----------------
         ConnectWallet,
-        DepositPart,
+        DepositPartStart,
+        DepositPartContinue,
         TransSuccess
 // ----------------------------------------
     },
