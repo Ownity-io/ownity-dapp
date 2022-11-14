@@ -5,7 +5,7 @@
     <!-- <DepositCancel /> -->
     <!-- <SellPart /> -->
     <!-- <SellCancel /> -->
-    <VoteConfirm />
+    <!-- <VoteConfirm /> -->
     <!-- <VoteStart /> -->
     <!-- <TransSuccess /> -->
 

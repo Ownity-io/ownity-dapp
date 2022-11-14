@@ -11,7 +11,8 @@
       <div class="card-listing">
         <section class="section-card-img">
           <div class="card-img-wrap">
-            <!-- <img :src="item.media" alt="img" /> -->
+            <img v-if="!item.media" src="@/assets/images/img-not-found.svg" alt="img" />
+            <img v-else :src="item.media" alt="img" />
           </div>
         </section>
         <div class="listing-main">

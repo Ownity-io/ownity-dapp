@@ -1160,8 +1160,7 @@ ul.tabs {
 .profile-header .icon-profile,
 .header-nav .btn-container .btn.btn-address .icon-address,
 .search-results-wrapper li .results-icon,
-.td-wrap-collection .collection-img,
-.card-img-wrap {
+.td-wrap-collection .collection-img {
     background-image: url(../images/img-not-found.svg);
 
 }
@@ -1693,7 +1692,10 @@ ul.tabs {
     background-size: 100% 100%;
     background-position: center;
 }
-
+.card-img-wrap img{
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
 .section-listing-header {
     display: flex;
     width: 100%;
