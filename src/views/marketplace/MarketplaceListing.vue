@@ -271,10 +271,14 @@ export default {
     this.setLinkToMarketplacePage();
     this.setAllBidsAmount();
     this.setUserBidAmount();
-    setInterval(()=>{
+    const delay = (delayInms) => {
+      return new Promise(resolve => setTimeout(resolve, delayInms));
+    }
+    while (true) {
+      await delay(1000);
       this.setAllBidsAmount();
-      this.setUserBidAmount();},
-      1000)
+      this.setUserBidAmount();
+    }
   },
   methods: {
     convertToEther(value){
