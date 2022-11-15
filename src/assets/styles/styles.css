@@ -596,12 +596,18 @@ ul.tabs {
     height: 48px;
     width: 48px;
     min-width: 48px;
-    border: 1px solid #DFE2EA;
-    background-color: #DFE2EA;
     border-radius: 8px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+}
+
+/* .deposit-img, */
+.collection-img,
+.modal-nft-data .icon-nft,
+.search-results-wrapper li .results-icon{
+    border: 1px solid #DFE2EA;
+    background-color: #DFE2EA;
 }
 
 .thead .td-collection span {
@@ -1544,6 +1550,7 @@ ul.tabs {
 .token-value .icon-value,
 .total-block-value .icon-value,
 .td-wrap-price .icon-token,
+.deposit-listened.deposit-listened-link i,
 .td-wrap-link i {
     position: absolute;
     width: 24px;
@@ -1596,6 +1603,7 @@ ul.tabs {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.deposit-listened.deposit-listened-link i,
 
 .td-wrap-link i {
     right: 0;
@@ -1678,7 +1686,8 @@ ul.tabs {
 .card-listing .section-card-img {
     width: 100%;
     position: sticky;
-    top: 200px;
+    top: 100px;
+    height: fit-content;
 }
 
 .card-img-wrap {
@@ -1876,6 +1885,13 @@ ul.tabs {
     margin-bottom: 8px;
 }
 
+.deposit-listened.deposit-listened-link {
+    text-decoration-line: underline;
+    color: #333333;
+    position: relative;
+    padding-right: 28px;
+}
+
 .btn-collapse {
     width: 100%;
     justify-content: space-between;
@@ -1993,6 +2009,13 @@ ul.tabs {
     align-items: center;
 
     color: #333333;
+}
+
+.deposit-value .equivalent {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    padding-left: 4px;
 }
 
 .deposit-value b {

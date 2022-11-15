@@ -57,9 +57,11 @@
                 <a  :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></a>
                 <div class="deposit-data">
                   <div class="deposit-listened">Listened on {{item.marketplace.name}} for</div>
+                  <div class="deposit-listened deposit-listened-link"><a :href='linkToMarketplacePage' >Listened on {{item.marketplace.name}} for </a><i class="i-external-link-line"></i></div>
                   <div class="deposit-value">
                     <div class="icon-token"></div>
-                    <span><b>{{priceInCurrency}}</b> ETH <span>(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span> </span>
+                    <span><b>{{priceInCurrency}} ETH</b></span>
+                    <span class="equivalent">(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
                   </div>
                 </div>
               </div>
@@ -75,9 +77,11 @@
                 <a  :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></a>
                 <div class="deposit-data">
                   <div class="deposit-listened">Listened on {{item.marketplace.name}} for</div>
+                  <div class="deposit-listened deposit-listened-link"><a :href='linkToMarketplacePage' >Listened on {{item.marketplace.name}} for </a><i class="i-external-link-line"></i></div>
                   <div class="deposit-value">
                     <div class="icon-token"></div>
-                    <span>{{abbrNum(convertToEther(allBidsAmount),1)}}/<b>{{abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH <span>(≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span></span>
+                    <span>{{abbrNum(convertToEther(allBidsAmount),1)}} / <b>{{abbrNum(priceInCurrency,1)}}{{' '}} ETH</b></span>
+                    <span class="equivalent">(≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
                   </div>
                 </div>
               </div>
@@ -93,9 +97,10 @@
                 <div class="deposit-img"></div>
                 <div class="deposit-data">
                   <div class="deposit-listened">Listened on OpenSea for</div>
+                  <div class="deposit-listened deposit-listened-link"><a :href='linkToMarketplacePage' >Listened on {{item.marketplace.name}} for </a><i class="i-external-link-line"></i></div> 
                   <div class="deposit-value">
                     <div class="icon-token"></div>
-                    <span>0.40 / <b>1 ETH</b> </span>
+                    <span class="equivalent">0.40 / <b>1 ETH</b> </span>
                   </div>
                 </div>
               </div>
