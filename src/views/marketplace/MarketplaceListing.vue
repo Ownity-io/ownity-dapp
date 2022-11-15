@@ -134,7 +134,7 @@
                         <div class="td">
                           <a
                             class="td-wrap"
-                            href=""
+                            :href="`${config.etherscanAddressUrlStart+bid.address}`"
                             target="_blank"
                             rel="nofollow"
                           >
