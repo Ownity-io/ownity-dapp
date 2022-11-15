@@ -119,7 +119,9 @@
               </button>
               <div class="section-unfolded-content">
                 <div class="section-table-chart">
-                  <div class="chart-wrap">chart-wrap</div>
+                  <div class="chart-wrap">
+                    <Chart/>
+                  </div>
                   <div class="table-chart-data">
                     <div class="table table-chart">
                       <div class="thead">
@@ -238,8 +240,12 @@ import ListingProperties from "@/components/listing/ListingProperties.vue";
 import ListingAbout from "@/components/listing/ListingAbout.vue";
 import ListingActivities from "@/components/listing/ListingActivities.vue";
 import ListingChat from "@/components/listing/ListingChat.vue";
+
+import Chart from "@/components/listing/chart/Chart.vue";
+
 import { ethers } from "ethers";
 import config from '@/config.json';
+
 
 export default {
   data() {
@@ -264,6 +270,7 @@ export default {
     ListingAbout,
     ListingActivities,
     ListingChat,
+    Chart
   },
   async mounted() {
     this.activeTab = "ListingInfo";
