@@ -70,6 +70,24 @@
                 <button class="btn btn-get">Get part back</button> -->
               </div>
             </div>
+            <div class="section-deposit" v-else-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
+              <div class="section-deposit-data">
+                <a  :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></a>
+                <div class="deposit-data">
+                  <div class="deposit-listened">Listened on {{item.marketplace.name}} for</div>
+                  <div class="deposit-value">
+                    <div class="icon-token"></div>
+                    <span><b>{{priceInCurrency}}</b> ETH <span>(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span> </span>
+                  </div>
+                </div>
+              </div>
+              <div class="section-deposit-btns">
+                <button class="btn btn-deposit">Deposit part</button>
+                <!-- <button class="btn btn-deposit">Start collecting</button>
+                <button class="btn btn-deposit">Deposit part</button>
+                <button class="btn btn-get">Get part back</button> -->
+              </div>
+            </div>
             <div class="section-deposit" v-else>
               <div class="section-deposit-data">
                 <div class="deposit-img"></div>
@@ -91,11 +109,11 @@
             <div
               class="section-members"
               :class="{ 'section-unfolded': !collapseMembers }"
-              v-if="false">
+              :v-if="this.item.bids!=null & this.item.bids>0">
               <button class="btn-collapse" @click="collapseMembers = !collapseMembers">
                 <div class="members-row">
                   <i class="i-account-circle-line"></i>
-                  Members: <span>4</span>
+                  Members: <span>{{this.item.bids.length}}</span>
                 </div>
                 <i class="i-arrow-down-s-line"></i>
               </button>
@@ -110,7 +128,7 @@
                         <div class="td td-price">Price</div>
                       </div>
 
-                      <div class="tr">
+                      <div class="tr" v-for="bid in this.item.bids" :key="bid">
                         <div class="td">
                           <a
                             class="td-wrap"
@@ -118,18 +136,18 @@
                             target="_blank"
                             rel="nofollow"
                           >
-                            <span>0x4Eb4…53C7</span>
+                            <span>{{bid.address.substring(0,6)+'...'+bid.address.substring(38,42)}}</span>
                           </a>
                         </div>
                         <div class="td">
-                          <div class="td-wrap">20%</div>
+                          <div class="td-wrap">{{bid.fraction}}</div>
                         </div>
                         <div class="td td-price">
                           <div class="td-wrap">
                             <div class="td-wrap-price">
                               <div class="icon-token"></div>
-                              <span>0.20 ETH</span>
-                              <span class="td-light">≈ $ 1000</span>
+                              <span>{{this.toFixedIfNecessary((bid.amount / (10**this.item.currency.decimals)),6)}} ETH</span>
+                              <span class="td-light">≈ $ {{this.toFixedIfNecessary(abbrNum((bid.amount / (10**this.item.currency.decimals) * currencyToUsdPrice),1),2)}}</span>
                             </div>
                           </div>
                         </div>
@@ -230,7 +248,9 @@ export default {
       item:null,
       priceInCurrency:1,
       currencyToUsdPrice:1,
-      linkToMarketplacePage:null
+      linkToMarketplacePage:null,
+      allBidsAmount:null,
+      userBidAmount:null
     };
   },
   components: {
@@ -248,6 +268,8 @@ export default {
     this.setPriceInCurrency();
     this.setCurrencyToUsd();
     this.setLinkToMarketplacePage();
+    this.setAllBidsAmount();
+    this.setUserBidAmount();
   },
   methods: {
     letsCheck(name) {
@@ -297,6 +319,28 @@ export default {
       let token_id = this.item.token_id;
 
       this.linkToMarketplacePage = eval('`'+exampleStr+'`');
+    },
+    setAllBidsAmount(){
+      this.allBidsAmount=0;
+      if (this.item.bids!=null){
+        for (let element of this.item.bids){
+          this.allBidsAmount+=parseInt(element.amount);
+        }
+        return;
+      }
+    },
+    setUserBidAmount(){
+      let userAddress = localStorage.getItem('userAddress');
+      if (this.item.bids!=null & userAddress!=null & userAddress!='null'){
+        for (let element of this.item.bids){
+          if (element.address == userAddress){
+            this.userBidAmount = parseInt(element.amount);
+            return;
+          }
+        }
+        return
+      }
+      this.userBidAmount=0;      
     },
   },
 };
