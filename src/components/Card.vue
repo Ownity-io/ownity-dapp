@@ -154,8 +154,8 @@ export default {
       showFullName:false,
       allBidsAmount:0,
       userBidAmount:0,
-      remainTimeString:null,
-      linkToMarketplacePage:null
+      linkToMarketplacePage:null,
+      remainTimeString:null
     };
   },
   props:[
@@ -227,9 +227,26 @@ export default {
     },
     toFixedIfNecessary(value, dp) {
       return +parseFloat(value).toFixed(dp);
-    }
-  },
-  
+    },
+    updateTimeString(){
+      let timeNow = Date.now() / 1000;
+      let remTimeInSeconds = this.item.end_date - timeNow;
+      var sec_num = parseInt(remTimeInSeconds, 10);
+      var days = Math.floor(sec_num / 86400);
+      var hours = Math.floor((sec_num - (days * 86400)) / 3600);
+      var minutes = Math.floor((sec_num - ((days * 86400) + (hours * 3600))) / 60);
+      var seconds = sec_num - (days * 86400) - (hours * 3600) - (minutes * 60);
+      if (days < 10) { days = "0" + days; }
+      if (hours < 10) { hours = "0" + hours; }
+      if (minutes < 10) { minutes = "0" + minutes; }
+      if (seconds < 10) { seconds = "0" + seconds; }
+      if (days > 0) {
+        this.remainTimeString =  days + 'd:' + hours + 'h:' + minutes + 'm';
+      } else {
+        this.remainTimeString = hours + 'h:' + minutes + 'm:' + seconds + 's';
+      }
+    },
+  },  
   async mounted(){
     this.setPriceInCurrency();
     this.setLinkToMarketplacePage();
@@ -238,40 +255,14 @@ export default {
     this.setUserBidAmount();
     this.allProgressValue = (this.allBidsAmount/this.item.price)*100;
     this.userProgressValue = (this.userBidAmount/this.item.price)*100;
-    setInterval(()=>{
-      this.setAllBidsAmount();
-      this.setUserBidAmount();
-      this.allProgressValue = (this.allBidsAmount/this.item.price)*100;
-      this.userProgressValue = (this.userBidAmount/this.item.price)*100;
-      let timeNow = Date.now()/1000;
-      let remTimeInSeconds = this.item.end_date-timeNow;
-      String.prototype.toDDHHMMSS = function () {
-        var sec_num = parseInt(this, 10); // don't forget the second param
-        var days = Math.floor(sec_num/86400);
-        var hours = Math.floor((sec_num - (days*86400)) / 3600);
-        var minutes = Math.floor((sec_num - ((days*86400)+(hours * 3600))) / 60);
-        // console.log(minutes);
-        var seconds = sec_num -(days*86400)- (hours * 3600) - (minutes * 60);
-        
-        if (days < 10) { days = "0" + days; }
-        if (hours < 10) { hours = "0" + hours; }
-        if (minutes < 10) { minutes = "0" + minutes; }
-        if (seconds < 10) { seconds = "0" + seconds; }
-        if (days>0){
-        return days + 'd:' + hours + 'h:' + minutes+'m';
-        }else{
-          return hours + 'h:' + minutes + 'm:' + seconds+'s';
-        }
-      }
-      if (remTimeInSeconds>0){
-
-        this.remainTimeString = String(remTimeInSeconds).toDDHHMMSS();
-      }
-      else{
-        this.remainTimeString = null;
-      }
-      
-    },1000);
+    this.updateTimeString();
+    const delay = (delayInms) => {
+      return new Promise(resolve => setTimeout(resolve, delayInms));
+    }
+    while(true){
+      await delay(1000);
+      this.updateTimeString();
+    }
   }
 };
 </script>
