@@ -47,7 +47,7 @@
             </div>
             <div class="listing-name">{{item.name}}</div>
             <div class="owned-row">
-              Owned by <a href="#" target="_blank">{{String(item.owner).substring(0,6)+'...'+String(item.owner).substring(38,42)}}</a> <!-- TODO: href to etherscan-->
+              Owned by <a :href="config.etherscanAddressUrlStart+item.owner" target="_blank">{{String(item.owner).substring(0,6)+'...'+String(item.owner).substring(38,42)}}</a> <!-- TODO: href to etherscan-->
             </div>
           </section>
 
@@ -239,6 +239,7 @@ import ListingAbout from "@/components/listing/ListingAbout.vue";
 import ListingActivities from "@/components/listing/ListingActivities.vue";
 import ListingChat from "@/components/listing/ListingChat.vue";
 import { ethers } from "ethers";
+import config from '@/config.json';
 
 export default {
   data() {
@@ -251,7 +252,8 @@ export default {
       currencyToUsdPrice:1,
       linkToMarketplacePage:null,
       allBidsAmount:null,
-      userBidAmount:null
+      userBidAmount:null,
+      config:config
     };
   },
   components: {

@@ -2,5 +2,6 @@
     "backendApiEntryPoint":"https://api.jaxscan.com/",
     "listingsPerPage":20,
     "messageToSignStart":"Sign the message to continue working with NFT Aggregator: ",
-    "etherscanTokenUrlStart":"https://etherscan.io/token/"
+    "etherscanTokenUrlStart":"https://etherscan.io/token/",
+    "etherscanAddressUrlStart":"https://etherscan.io/address/"
 }
