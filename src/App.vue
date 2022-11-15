@@ -84,9 +84,13 @@ export default {
     async mounted() {
         this.checkWalletInLS();
         this.getWalletFromLS();
-        setInterval(() => {
+        const delay = (delayInms) => {
+            return new Promise(resolve => setTimeout(resolve, delayInms));
+        }
+        while (true) {
+            await delay(1000);
             this.getWalletFromLS();
-            }, 1000);
+        }
     },
     data(){
         return{

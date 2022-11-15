@@ -262,6 +262,10 @@ export default {
     while(true){
       await delay(1000);
       this.updateTimeString();
+      this.setAllBidsAmount();
+      this.setUserBidAmount();
+      this.allProgressValue = (this.allBidsAmount / this.item.price) * 100;
+      this.userProgressValue = (this.userBidAmount / this.item.price) * 100;
     }
   }
 };
