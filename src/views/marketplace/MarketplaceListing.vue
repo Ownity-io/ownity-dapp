@@ -64,9 +64,9 @@
                 </div>
               </div>
               <div class="section-deposit-btns">
-                <button class="btn btn-deposit">Deposit part</button>
-                <!-- <button class="btn btn-deposit">Start collecting</button>
-                <button class="btn btn-deposit">Deposit part</button>
+                <!-- <button class="btn btn-deposit">Deposit part</button> -->
+                <button class="btn btn-deposit">Start collecting</button>
+                <!-- <button class="btn btn-deposit">Deposit part</button>
                 <button class="btn btn-get">Get part back</button> -->
               </div>
             </div>
@@ -77,15 +77,15 @@
                   <div class="deposit-listened">Listened on {{item.marketplace.name}} for</div>
                   <div class="deposit-value">
                     <div class="icon-token"></div>
-                    <span><b>{{priceInCurrency}}</b> ETH <span>(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span> </span>
+                    <span>{{abbrNum(convertToEther(allBidsAmount),1)}}/<b>{{abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH <span>(≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span></span>
                   </div>
                 </div>
               </div>
               <div class="section-deposit-btns">
-                <button class="btn btn-deposit">Deposit part</button>
-                <!-- <button class="btn btn-deposit">Start collecting</button>
-                <button class="btn btn-deposit">Deposit part</button>
-                <button class="btn btn-get">Get part back</button> -->
+                <!-- <button class="btn btn-deposit">Deposit part</button> -->
+                 <!-- <button class="btn btn-deposit">Start collecting</button> -->
+                <button class="btn btn-deposit" v-if="!(userBidAmount>0) || (((userBidAmount/this.item.price)*100)<20)">Deposit part</button>
+                <button class="btn btn-get" v-if="userBidAmount>0">Get part back</button>
               </div>
             </div>
             <div class="section-deposit" v-else>
@@ -109,7 +109,7 @@
             <div
               class="section-members"
               :class="{ 'section-unfolded': !collapseMembers }"
-              :v-if="this.item.bids!=null & this.item.bids>0">
+              v-if="this.item.bids">
               <button class="btn-collapse" @click="collapseMembers = !collapseMembers">
                 <div class="members-row">
                   <i class="i-account-circle-line"></i>
@@ -238,6 +238,7 @@ import ListingProperties from "@/components/listing/ListingProperties.vue";
 import ListingAbout from "@/components/listing/ListingAbout.vue";
 import ListingActivities from "@/components/listing/ListingActivities.vue";
 import ListingChat from "@/components/listing/ListingChat.vue";
+import { ethers } from "ethers";
 
 export default {
   data() {
@@ -270,8 +271,15 @@ export default {
     this.setLinkToMarketplacePage();
     this.setAllBidsAmount();
     this.setUserBidAmount();
+    setInterval(()=>{
+      this.setAllBidsAmount();
+      this.setUserBidAmount();},
+      1000)
   },
   methods: {
+    convertToEther(value){
+      return ethers.utils.formatEther(String(value));
+    },
     letsCheck(name) {
       this.activeTab = name;
     },
