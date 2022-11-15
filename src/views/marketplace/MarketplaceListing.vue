@@ -2,9 +2,7 @@
   <main v-if="item!=null">
     <div class="container">
       <section class="section-breadcrumbs">
-        <div class="container">
-          <Breadcrumbs />
-        </div>
+        <Breadcrumbs />
       </section>
     </div>
     <div class="container container-listing">
@@ -29,7 +27,13 @@
               </div>
               <div class="listing-additional-options">
                 <div class="btn-wrap">
-                  <button class="btn btn-block">
+                  <!-- <button class="btn btn-block">
+                    <i class="i-heart-3-line"></i>
+                  </button> -->
+                  <button class="btn btn-block btn-like" 
+                    :class="{'liked':testLike}" 
+                    @click="testLike = !testLike">
+                    <i class="i-heart-3-fill"></i>
                     <i class="i-heart-3-line"></i>
                   </button>
                 </div>
@@ -122,7 +126,33 @@
                 </div>
                 <i class="i-arrow-down-s-line"></i>
               </button>
+              <button class="btn-collapse" @click="collapseMembers = !collapseMembers">
+                <div class="actions-row">
+                  Actions with their a part
+                </div>
+                <i class="i-arrow-down-s-line"></i>
+              </button>
               <div class="section-unfolded-content">
+                <ul class="tabs">
+                  <li>
+                    <button class='active-tab'>
+                      <span>Info</span>
+                      <span>Info</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button>
+                      <span>Sell a part</span>
+                      <span>Sell a part</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button>
+                      <span>Vote</span>
+                      <span>Vote</span>
+                    </button>
+                  </li>
+                </ul>
                 <div class="section-table-chart">
                   <div class="chart-wrap">
                     <Chart :chartData='chartData'/>
@@ -136,7 +166,7 @@
                       </div>
 
                       <div class="tr" v-for="bid in this.item.bids" :key="bid">
-                        <div class="td">
+                        <div class="td td-owner">
                           <a
                             class="td-wrap"
                             :href="`${config.etherscanAddressUrlStart+bid.address}`"
@@ -145,6 +175,7 @@
                           >
                             <span>{{bid.address.substring(0,6)+'...'+bid.address.substring(38,42)}}</span>
                           </a>
+                          <span class="label-owner">You</span>
                         </div>
                         <div class="td">
                           <div class="td-wrap">{{bid.fraction}}</div>
@@ -257,6 +288,8 @@ export default {
     return {
       activeTab: "",
       srcTest: "../../assets/images/test-bg.png",
+      testLike: false,
+
       collapseMembers: false,
       item:null,
       priceInCurrency:1,

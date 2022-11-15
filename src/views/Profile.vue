@@ -3,9 +3,7 @@
         <main>
             <div class="container">
                 <section class="section-breadcrumbs">
-                <div class="container">
                     <Breadcrumbs />
-                </div>
                 </section>
             </div>
 

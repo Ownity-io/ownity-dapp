@@ -517,6 +517,10 @@ ul.tabs {
     padding-top: 4px;
 }
 
+.section-unfolded .section-unfolded-content > .tabs{
+    margin-top: 24px;
+}
+
 .search-results-wrapper {
     background: #FFFFFF;
     border: 1px solid #DFE2EA;
@@ -605,7 +609,7 @@ ul.tabs {
 /* .deposit-img, */
 .collection-img,
 .modal-nft-data .icon-nft,
-.search-results-wrapper li .results-icon{
+.search-results-wrapper li .results-icon {
     border: 1px solid #DFE2EA;
     background-color: #DFE2EA;
 }
@@ -1266,6 +1270,7 @@ ul.tabs {
     overflow: hidden;
     padding-top: 0;
     padding-bottom: 0;
+    transition: .25s;
 }
 
 .card-progress {
@@ -1299,7 +1304,27 @@ ul.tabs {
     background: #993CFC;
     z-index: 2;
 }
+.label-owner{
+    background: #993CFC;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;
+    border-radius: 8px;
+    color: #FFFFFF;
+    padding: 0 8px;
+    display: inline-block;
+    width: fit-content;
+    height: 16px;
+    /* margin-left: 12px; */
+}
+.td-owner{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 12px;
+    flex-wrap: wrap;
 
+}
 .cards-list-empty {
     padding: 12px 16px;
 }
@@ -1603,6 +1628,7 @@ ul.tabs {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .deposit-listened.deposit-listened-link i,
 
 .td-wrap-link i {
@@ -1688,6 +1714,7 @@ ul.tabs {
     position: sticky;
     top: 100px;
     height: fit-content;
+    /* max-width: 586px; */
 }
 
 .card-img-wrap {
@@ -1895,6 +1922,13 @@ ul.tabs {
 .btn-collapse {
     width: 100%;
     justify-content: space-between;
+}
+
+.actions-row {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #333333;
 }
 
 .members-row {
