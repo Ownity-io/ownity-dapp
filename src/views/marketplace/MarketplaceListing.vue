@@ -282,7 +282,12 @@ export default {
   },
   methods: {
     convertToEther(value){
-      return ethers.utils.formatEther(String(value));
+      try{
+        return ethers.utils.formatEther(String(value));
+      }
+      catch{
+        console.log('ethers error');
+      }
     },
     letsCheck(name) {
       this.activeTab = name;
