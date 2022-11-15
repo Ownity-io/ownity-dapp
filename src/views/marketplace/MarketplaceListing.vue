@@ -120,7 +120,7 @@
               <div class="section-unfolded-content">
                 <div class="section-table-chart">
                   <div class="chart-wrap">
-                    <Chart/>
+                    <Chart :chartData='chartData'/>
                   </div>
                   <div class="table-chart-data">
                     <div class="table table-chart">
@@ -258,8 +258,9 @@ export default {
       currencyToUsdPrice:1,
       linkToMarketplacePage:null,
       allBidsAmount:null,
-      userBidAmount:null,
-      config:config
+      userBidAmount:0,
+      config:config,
+      chartData:[]
     };
   },
   components: {
@@ -280,6 +281,7 @@ export default {
     this.setLinkToMarketplacePage();
     this.setAllBidsAmount();
     this.setUserBidAmount();
+    this.setChartData();
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
     }
@@ -287,6 +289,7 @@ export default {
       await delay(1000);
       this.setAllBidsAmount();
       this.setUserBidAmount();
+      this.setChartData();
     }
   },
   methods: {
@@ -367,6 +370,25 @@ export default {
         return
       }
       this.userBidAmount=0;      
+    },
+    async setChartData(){
+      this.chartData = [];
+      if (this.item.bids!=null){
+        let tempArray = [{region:'Your Bid',val:'0'}]
+        this.chartData = this.chartData.concat(tempArray);
+        for (let element of this.item.bids){
+          if (element.address!=localStorage.getItem('userAddress')){
+            tempArray = [{ region: element.address, val: ((element.amount / this.item.price) * 100).toFixed(0) }]
+            this.chartData = this.chartData.concat(tempArray);
+          }
+          else{
+            this.chartData[0]={ region: element.address, val: ((element.amount / this.item.price) * 100).toFixed(0) };
+          }
+        }
+        tempArray = [{region:'Avaliable to buy',val:((this.item.price - this.allBidsAmount)/this.item.price)*100 }]
+        this.chartData = this.chartData.concat(tempArray);
+        return;
+      }
     },
   },
 };

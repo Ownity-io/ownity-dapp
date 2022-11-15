@@ -22,7 +22,6 @@ import DxPieChart, {
   DxExport,
 } from "devextreme-vue/pie-chart";
 
-import { chartData } from "./data.js";
 import { customPlate } from "./platet.js";
 
 export default {
@@ -38,10 +37,10 @@ export default {
   },
   data() {
     return {
-      chartData,
       customPlate,
     };
   },
+  props:['chartData']
   // methods: {
   //   customizeTooltip({ valueText, percent }) {
   //     return {
