@@ -2,9 +2,7 @@
   <main v-if="item!=null">
     <div class="container">
       <section class="section-breadcrumbs">
-        <div class="container">
-          <Breadcrumbs />
-        </div>
+        <Breadcrumbs />
       </section>
     </div>
     <div class="container container-listing">
@@ -29,7 +27,13 @@
               </div>
               <div class="listing-additional-options">
                 <div class="btn-wrap">
-                  <button class="btn btn-block">
+                  <!-- <button class="btn btn-block">
+                    <i class="i-heart-3-line"></i>
+                  </button> -->
+                  <button class="btn btn-block btn-like" 
+                    :class="{'liked':testLike}" 
+                    @click="testLike = !testLike">
+                    <i class="i-heart-3-fill"></i>
                     <i class="i-heart-3-line"></i>
                   </button>
                 </div>
@@ -57,9 +61,14 @@
                 <a  :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></a>
                 <div class="deposit-data">
                   <div class="deposit-listened">Listened on {{item.marketplace.name}} for</div>
+                  <div class="deposit-listened deposit-listened-link"><a :href='linkToMarketplacePage' >Listened on {{item.marketplace.name}} for </a><i class="i-external-link-line"></i></div>
                   <div class="deposit-value">
                     <div class="icon-token"></div>
-                    <span><b>{{priceInCurrency}}</b> ETH <span>(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span> </span>
+                    <span><b>{{priceInCurrency}} ETH</b></span>
+                    <span class="equivalent">(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
+                  </div>
+                  <div class="deposit-part">
+                    Your part : <span>20 %</span>
                   </div>
                 </div>
               </div>
@@ -75,9 +84,14 @@
                 <a  :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></a>
                 <div class="deposit-data">
                   <div class="deposit-listened">Listened on {{item.marketplace.name}} for</div>
+                  <div class="deposit-listened deposit-listened-link"><a :href='linkToMarketplacePage' >Listened on {{item.marketplace.name}} for </a><i class="i-external-link-line"></i></div>
                   <div class="deposit-value">
                     <div class="icon-token"></div>
-                    <span>{{abbrNum(convertToEther(allBidsAmount),1)}}/<b>{{abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH <span>(≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span></span>
+                    <span>{{abbrNum(convertToEther(allBidsAmount),1)}} / <b>{{abbrNum(priceInCurrency,1)}}{{' '}} ETH</b></span>
+                    <span class="equivalent">(≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
+                  </div>
+                  <div class="deposit-part">
+                    Your part : <span>20 %</span>
                   </div>
                 </div>
               </div>
@@ -87,15 +101,40 @@
                 <button class="btn btn-deposit" v-if="!(userBidAmount>0) || (((userBidAmount/this.item.price)*100)<20)">Deposit part</button>
                 <button class="btn btn-get" v-if="userBidAmount>0">Get part back</button>
               </div>
+              <div class="section-deposit-labels">
+                <div class="deposit-label">
+                  <i class="i-shopping-bag-line"></i>
+                  Your part: <span><b>12 ETH</b> (10%)</span>
+                </div>
+                <div class="deposit-label">
+                  <i class="i-volume-vibrate-line"></i>
+                  Vote:
+                  <div class="label-col">
+                    <div class="icon-label" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></div>
+                    <div><b>2 ETH</b></div>
+                    <div>Progress: 20%</div>
+                  </div>
+                  <div class="label-col">
+                    <div class="icon-label" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></div>
+                    <div><b>2.1 ETH</b></div>
+                    <div>Progress: 20%</div>
+                  </div>
+                </div>
+
+              </div>
             </div>
             <div class="section-deposit" v-else>
               <div class="section-deposit-data">
                 <div class="deposit-img"></div>
                 <div class="deposit-data">
                   <div class="deposit-listened">Listened on OpenSea for</div>
+                  <div class="deposit-listened deposit-listened-link"><a :href='linkToMarketplacePage' >Listened on {{item.marketplace.name}} for </a><i class="i-external-link-line"></i></div> 
                   <div class="deposit-value">
                     <div class="icon-token"></div>
-                    <span>0.40 / <b>1 ETH</b> </span>
+                    <span class="equivalent">0.40 / <b>1 ETH</b> </span>
+                  </div>
+                  <div class="deposit-part">
+                    Your part : <span>20 %</span>
                   </div>
                 </div>
               </div>
@@ -105,6 +144,7 @@
                 <button class="btn btn-deposit">Deposit part</button>
                 <button class="btn btn-get">Get part back</button> -->
               </div>
+              
             </div>
             <div
               class="section-members"
@@ -117,7 +157,33 @@
                 </div>
                 <i class="i-arrow-down-s-line"></i>
               </button>
+              <button class="btn-collapse" @click="collapseMembers = !collapseMembers">
+                <div class="actions-row">
+                  Actions with their a part
+                </div>
+                <i class="i-arrow-down-s-line"></i>
+              </button>
               <div class="section-unfolded-content">
+                <ul class="tabs">
+                  <li>
+                    <button class='active-tab'>
+                      <span>Info</span>
+                      <span>Info</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button>
+                      <span>Sell a part</span>
+                      <span>Sell a part</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button>
+                      <span>Vote</span>
+                      <span>Vote</span>
+                    </button>
+                  </li>
+                </ul>
                 <div class="section-table-chart">
                   <div class="chart-wrap">
                     <Chart :chartData='chartData'/>
@@ -131,7 +197,7 @@
                       </div>
 
                       <div class="tr" v-for="bid in this.item.bids" :key="bid">
-                        <div class="td">
+                        <div class="td td-owner">
                           <a
                             class="td-wrap"
                             :href="`${config.etherscanAddressUrlStart+bid.address}`"
@@ -140,6 +206,7 @@
                           >
                             <span>{{bid.address.substring(0,6)+'...'+bid.address.substring(38,42)}}</span>
                           </a>
+                          <span class="label-owner">You</span>
                         </div>
                         <div class="td">
                           <div class="td-wrap">{{bid.fraction}}</div>
@@ -252,6 +319,8 @@ export default {
     return {
       activeTab: "",
       srcTest: "../../assets/images/test-bg.png",
+      testLike: false,
+
       collapseMembers: false,
       item:null,
       priceInCurrency:1,

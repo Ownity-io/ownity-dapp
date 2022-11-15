@@ -2,9 +2,7 @@
   <main>
     <div class="container">
       <section class="section-breadcrumbs">
-        <div class="container">
-          <Breadcrumbs />
-        </div>
+        <Breadcrumbs />
       </section>
     </div>
     <section class="section-header">
