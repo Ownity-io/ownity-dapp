@@ -67,6 +67,9 @@
                     <span><b>{{priceInCurrency}} ETH</b></span>
                     <span class="equivalent">(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
                   </div>
+                  <div class="deposit-part">
+                    Your part : <span>20 %</span>
+                  </div>
                 </div>
               </div>
               <div class="section-deposit-btns">
@@ -87,6 +90,9 @@
                     <span>{{abbrNum(convertToEther(allBidsAmount),1)}} / <b>{{abbrNum(priceInCurrency,1)}}{{' '}} ETH</b></span>
                     <span class="equivalent">(≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
                   </div>
+                  <div class="deposit-part">
+                    Your part : <span>20 %</span>
+                  </div>
                 </div>
               </div>
               <div class="section-deposit-btns">
@@ -94,6 +100,27 @@
                  <!-- <button class="btn btn-deposit">Start collecting</button> -->
                 <button class="btn btn-deposit" v-if="!(userBidAmount>0) || (((userBidAmount/this.item.price)*100)<20)">Deposit part</button>
                 <button class="btn btn-get" v-if="userBidAmount>0">Get part back</button>
+              </div>
+              <div class="section-deposit-labels">
+                <div class="deposit-label">
+                  <i class="i-shopping-bag-line"></i>
+                  Your part: <span><b>12 ETH</b> (10%)</span>
+                </div>
+                <div class="deposit-label">
+                  <i class="i-volume-vibrate-line"></i>
+                  Vote:
+                  <div class="label-col">
+                    <div class="icon-label" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></div>
+                    <div><b>2 ETH</b></div>
+                    <div>Progress: 20%</div>
+                  </div>
+                  <div class="label-col">
+                    <div class="icon-label" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></div>
+                    <div><b>2.1 ETH</b></div>
+                    <div>Progress: 20%</div>
+                  </div>
+                </div>
+
               </div>
             </div>
             <div class="section-deposit" v-else>
@@ -106,6 +133,9 @@
                     <div class="icon-token"></div>
                     <span class="equivalent">0.40 / <b>1 ETH</b> </span>
                   </div>
+                  <div class="deposit-part">
+                    Your part : <span>20 %</span>
+                  </div>
                 </div>
               </div>
               <div class="section-deposit-btns">
@@ -114,6 +144,7 @@
                 <button class="btn btn-deposit">Deposit part</button>
                 <button class="btn btn-get">Get part back</button> -->
               </div>
+              
             </div>
             <div
               class="section-members"

@@ -370,10 +370,12 @@ input+.input-equivalent {
     margin-bottom: 24px;
 }
 
-.modal-section-amount +  .modal-section-total,
-.modal-section-amount +  .btn-modal-main{
+.modal-section-amount+.modal-section-total,
+.modal-section-amount+.btn-modal-main {
     margin-top: 40px;
 }
+
+.deposit-label,
 .modal-current-part {
     display: flex;
     align-items: center;
@@ -382,10 +384,17 @@ input+.input-equivalent {
     padding: 12px;
     width: fit-content;
 }
+.deposit-label {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    min-height: 48px;
+}
 
 .modal-section-nft-data .modal-current-part {
     margin-left: auto;
 }
+
+.deposit-label i,
 
 .modal-current-part i {
     font-size: 24px;
@@ -393,6 +402,7 @@ input+.input-equivalent {
     color: #818899;
 }
 
+.deposit-label span,
 .modal-current-part span {
     margin-left: 4px;
 }
@@ -409,11 +419,13 @@ input+.input-equivalent {
     margin-left: auto;
     margin-right: auto;
 }
-.modal-section-amount .token-value .icon-value{
+
+.modal-section-amount .token-value .icon-value {
     top: 50%;
     transform: translateY(-50%);
 }
-.modal-section-amount .token-value .equivalent{
+
+.modal-section-amount .token-value .equivalent {
     font-weight: 400;
     font-size: 14px;
     line-height: 150%;
