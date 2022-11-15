@@ -145,15 +145,13 @@ export default {
       if (context.getters.getCurrentMarketplaceId != null) {
         requestUrl += `&marketplace=${context.getters.getCurrentMarketplaceId}`;
       }
-      if (context.getters.getCurrentStatus != null) {
-        requestUrl += `&marketplace_status=${context.getters.getCurrentStatus}`;
-      }
       if (context.getters.getCurrentMinPrice!=null){
         requestUrl += `&price_gt=${ethers.utils.parseEther(String(context.getters.getCurrentMinPrice)).toString()}`;
       }
       if (context.getters.getCurrentMaxPrice!=null){
         requestUrl += `&price_lt=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
       }
+      requestUrl += `&marketplace_status=OPEN`;
       let request = await fetch(requestUrl);
       let requestCode = request.ok;
       if (requestCode) {

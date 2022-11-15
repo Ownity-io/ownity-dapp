@@ -1,15 +1,17 @@
 <template>
-  <a class="card card-finished" :class="{'card-inactive' : false}">
+  <!-- <a class="card card-finished" :class="{'card-inactive' : false}"> -->
+  <a class="card" :class="{'card-inactive' : false}">
     <div class="card-main">
-      <a href="#" class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></a>
+      <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></a>
       <div class="card-header">
-        <div class="icon-card-label " :style="{backgroundImage: `url(${item.marketplace.logo})`}"></div>
+        <a  class="icon-card-label " :href="linkToMarketplacePage" :style="{backgroundImage: `url(${item.marketplace.logo})`}">
+        </a>
         <button class="btn-like" :class="{'liked':testLike}" @click="testLike = !testLike">
           <i class="i-heart-3-fill"></i>
           <i class="i-heart-3-line"></i>
         </button>
       </div>
-      <div class="card-footer">
+      <!-- <div class="card-footer">
         <div class="card-progress progress" >
           <div v-if="userProgressValue>0" class="progress-value owner" :style="{ width: userProgressValue + '%' }">
             <span v-if="userProgressValue>=20">{{ userProgressValue }}%</span>
@@ -23,7 +25,7 @@
             8/10
           </button>
         </div>
-      </div>
+      </div> -->
       <div class="card-footer" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
         <div class="card-progress progress" >
           <div v-if="userProgressValue>0" class="progress-value owner" :style="{ width: userProgressValue + '%' }">
@@ -74,54 +76,63 @@
             @mouseout="showFullName = false"
             >#{{item.token_id}}</div>
           <div v-if="showFullName" class="card-id card-id-full">{{item.name}}</div>
-          <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">
+          <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">
             <div class="icon-value"></div>
             <span><b>{{abbrNum(priceInCurrency,1)}} {{' '}}</b>ETH</span> 
           </div>
-          <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
+          <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">
             <div class="icon-value"></div>
             {{abbrNum(convertToEther(allBidsAmount),1)}}/<span><b>{{abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH</span> 
           </div>
         </div>
-        <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">
+        <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">
           <div>{{item.collection.name}}</div>
           <div>≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
         </div>
-        <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
+        <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">
           <div>{{item.collection.name}}</div>
           <div>≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
         </div>
         <div class="data-tr data-tr-date" v-if="remainTimeString!=null">
           <div>Ends in {{remainTimeString}}</div>
         </div>
+        <div class="data-tr data-tr-date" v-else>
+          <div>Expired</div>
+        </div>
       </div>
       <div class="btn-container">
-
-        <button class="btn" 
-        v-if="item.marketplace_status=='OPEN' & 
-        item.internal_status=='OPEN'">Start collecting
-        </button>
-
-        <button class="btn" 
-        v-if="item.marketplace_status=='OPEN' & 
-        item.internal_status=='GATHER'">Deposit part
-        </button>
-
-        <button class="btn" 
+        <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
+          <button class="btn" 
+          v-if="item.marketplace_status=='OPEN' & 
+          item.internal_status=='OPEN' 
+          & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">Start collecting
+          </button>
+        </a>
+        <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
+          <button class="btn" 
+          v-if="item.marketplace_status=='OPEN' & 
+          item.internal_status=='GATHER' 
+          & (this.$route.name=='Marketplace' || this.$route.name=='Listing')
+          & userBidAmount<=0">Deposit part
+          </button>
+        </a>
+        <!-- <button class="btn" 
         >Vote
-        </button>
+        </button> -->
 
-        <div class="btn btn-card-completed">Completed</div>
+        <!-- <div class="btn btn-card-completed">Completed</div> -->
 
-        <div class="container-btn-part">
+        <div class="container-btn-part" v-if="userBidAmount>0">
             <div class="part-data">
               Моя частка 
               <div class="card-value">
                 <div class="icon-value"></div>
-                <span>0.05 ETH</span> 
+                <span>{{convertToEther(userBidAmount)}} ETH</span> 
               </div>
             </div>
-            <button class="btn">Відмінити</button>
+            <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
+              <button class="btn">Відмінити</button>
+            </a>
         </div>
 
       </div>
@@ -143,17 +154,18 @@ export default {
       showFullName:false,
       allBidsAmount:0,
       userBidAmount:0,
-      remainTimeString:null,
+      linkToMarketplacePage:null,
+      remainTimeString:null
     };
   },
   props:[
     'item'
   ],
   methods:{
-    getPriceInCurrency(){
-      this.priceInCurrency = this.item.price / (10**this.item.currency.decimals);
+    setPriceInCurrency(){
+      this.priceInCurrency = this.toFixedIfNecessary((this.item.price / (10**this.item.currency.decimals)),6);
     },
-    async getPriceInUsd(){
+    async setCurrencyToUsd(){
       let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
       let requestJson = await request.json();
       try{
@@ -189,59 +201,72 @@ export default {
       this.userBidAmount=0;      
     },
     abbrNum(number, decPlaces) {
-    decPlaces = Math.pow(10,decPlaces);
-    var abbrev = [ "k", "m", "b", "t" ];
-    for (var i=abbrev.length-1; i>=0; i--) {
-        var size = Math.pow(10,(i+1)*3);
-        if(size <= number) {
-             number = Math.round(number*decPlaces/size)/decPlaces;
-             if((number == 1000) && (i < abbrev.length - 1)) {
-                 number = 1;
-                 i++;
-             }
-             number += abbrev[i];
-             break;
+      decPlaces = Math.pow(10, decPlaces);
+      var abbrev = ["k", "m", "b", "t"];
+      for (var i = abbrev.length - 1; i >= 0; i--) {
+        var size = Math.pow(10, (i + 1) * 3);
+        if (size <= number) {
+          number = Math.round(number * decPlaces / size) / decPlaces;
+          if ((number == 1000) && (i < abbrev.length - 1)) {
+            number = 1;
+            i++;
+          }
+          number += abbrev[i];
+          break;
         }
-    }
+      }
 
-    return number;
-}
-  },
-  
+      return number;
+    },
+    setLinkToMarketplacePage(){
+      let exampleStr = this.item.marketplace.listing_link;
+      let collection_address = this.item.collection.contract_address;
+      let token_id = this.item.token_id;
+
+      this.linkToMarketplacePage = eval('`'+exampleStr+'`');
+    },
+    toFixedIfNecessary(value, dp) {
+      return +parseFloat(value).toFixed(dp);
+    },
+    updateTimeString(){
+      let timeNow = Date.now() / 1000;
+      let remTimeInSeconds = this.item.end_date - timeNow;
+      var sec_num = parseInt(remTimeInSeconds, 10);
+      var days = Math.floor(sec_num / 86400);
+      var hours = Math.floor((sec_num - (days * 86400)) / 3600);
+      var minutes = Math.floor((sec_num - ((days * 86400) + (hours * 3600))) / 60);
+      var seconds = sec_num - (days * 86400) - (hours * 3600) - (minutes * 60);
+      if (days < 10) { days = "0" + days; }
+      if (hours < 10) { hours = "0" + hours; }
+      if (minutes < 10) { minutes = "0" + minutes; }
+      if (seconds < 10) { seconds = "0" + seconds; }
+      if (days > 0) {
+        this.remainTimeString =  days + 'd:' + hours + 'h:' + minutes + 'm';
+      } else {
+        this.remainTimeString = hours + 'h:' + minutes + 'm:' + seconds + 's';
+      }
+    },
+  },  
   async mounted(){
-    this.getPriceInCurrency();
-    await this.getPriceInUsd();
+    this.setPriceInCurrency();
+    this.setLinkToMarketplacePage();
+    await this.setCurrencyToUsd();
     this.setAllBidsAmount();
     this.setUserBidAmount();
     this.allProgressValue = (this.allBidsAmount/this.item.price)*100;
     this.userProgressValue = (this.userBidAmount/this.item.price)*100;
-    setInterval(()=>{
+    this.updateTimeString();
+    const delay = (delayInms) => {
+      return new Promise(resolve => setTimeout(resolve, delayInms));
+    }
+    while(true){
+      await delay(1000);
+      this.updateTimeString();
       this.setAllBidsAmount();
       this.setUserBidAmount();
-      this.allProgressValue = (this.allBidsAmount/this.item.price)*100;
-      this.userProgressValue = (this.userBidAmount/this.item.price)*100;
-      let timeNow = Date.now()/1000;
-      let remTimeInSeconds = this.item.end_date-timeNow;
-      String.prototype.toHHMMSS = function () {
-        var sec_num = parseInt(this, 10); // don't forget the second param
-        var hours = Math.floor(sec_num / 3600);
-        var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-        var seconds = sec_num - (hours * 3600) - (minutes * 60);
-
-        if (hours < 10) { hours = "0" + hours; }
-        if (minutes < 10) { minutes = "0" + minutes; }
-        if (seconds < 10) { seconds = "0" + seconds; }
-        return hours + ':' + minutes + ':' + seconds;
-      }
-      if (remTimeInSeconds>0){
-
-        this.remainTimeString = String(remTimeInSeconds).toHHMMSS();
-      }
-      else{
-        this.remainTimeString = null;
-      }
-      
-    },1000);
+      this.allProgressValue = (this.allBidsAmount / this.item.price) * 100;
+      this.userProgressValue = (this.userBidAmount / this.item.price) * 100;
+    }
   }
 };
 </script>

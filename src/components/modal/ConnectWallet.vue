@@ -3,9 +3,9 @@
     <div class="modal-wrapper">
       <div class="modal-header">
         <div class="modal-name">Connect Your Wallet</div>
-        <div class="btn-close" @click="this.$store.dispatch('appGlobal/changeshowConnectWalletModal');">
+        <button class="btn-close" @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',false);">
           <i class="i-close-line"></i>
-        </div>
+        </button>
       </div>
       <div class="modal-content">
         <div class="modal-container">

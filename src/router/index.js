@@ -21,7 +21,7 @@ const routes = [
                 component: () => import('@/views/marketplace/MarketplaceMain.vue'),
             },
             {
-                path: '/listing',
+                path: '/listing/:contract_address/:tokenID&:id',
                 name: 'Listing',
                 component: () => import('@/views/marketplace/MarketplaceListing.vue'),
             },

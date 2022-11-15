@@ -40,17 +40,20 @@
                             :class="{ 'active-tab': activeTab === 'ListCards' }"
                             @click="letsCheck('ListCards')"
                             >
-                                Items
+                                <span>Items</span>                                
+                                <span>Items</span>
                             </button>
                         </li>
                         <li>
                             <button>
-                                Favourites
+                                <span>Favourites</span>                                
+                                <span>Favourites</span>
                             </button>
                         </li>
                         <li>
                             <button >
-                                Vote
+                                <span>Vote</span>                                
+                                <span>Vote</span>
                             </button>
                         </li>
                         <li>
@@ -58,7 +61,8 @@
                             :class="{ 'active-tab': activeTab === 'ActivityTable' }"
                             @click="letsCheck('ActivityTable')"
                             >
-                                Activities
+                                <span>Activities</span>                                
+                                <span>Activities</span>
                             </button>
                         </li>
                     </ul>

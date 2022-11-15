@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main v-if="item!=null">
     <div class="container">
       <section class="section-breadcrumbs">
         <div class="container">
@@ -11,7 +11,8 @@
       <div class="card-listing">
         <section class="section-card-img">
           <div class="card-img-wrap">
-            <img :src="srcTest" alt="img" />
+            <img v-if="!item.media" src="@/assets/images/img-not-found.svg" alt="img" />
+            <img v-else :src="item.media" alt="img" />
           </div>
         </section>
         <div class="listing-main">
@@ -21,7 +22,7 @@
                 <div class="collection-img"></div>
                 <div class="collection-data">
                   <span class="collection-id collection-label">
-                    <span>Mutant Ape Yacht Club</span>
+                    <span>{{item.collection.name}}</span>
                     <i class="i-checkbox-circle-fill"></i>
                   </span>
                 </div>
@@ -44,14 +45,50 @@
                 </div>
               </div>
             </div>
-            <div class="listing-name">BoredApeYachtClub #27866</div>
+            <div class="listing-name">{{item.name}}</div>
             <div class="owned-row">
-              Owned by <a href="#" target="_blank">0x4Eb4…53C7</a>
+              Owned by <a href="#" target="_blank">{{String(item.owner).substring(0,6)+'...'+String(item.owner).substring(38,42)}}</a> <!-- TODO: href to etherscan-->
             </div>
           </section>
 
           <section class="section-listing-main">
-            <div class="section-deposit">
+            <div class="section-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">
+              <div class="section-deposit-data">
+                <a  :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></a>
+                <div class="deposit-data">
+                  <div class="deposit-listened">Listened on {{item.marketplace.name}} for</div>
+                  <div class="deposit-value">
+                    <div class="icon-token"></div>
+                    <span><b>{{priceInCurrency}}</b> ETH <span>(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span> </span>
+                  </div>
+                </div>
+              </div>
+              <div class="section-deposit-btns">
+                <!-- <button class="btn btn-deposit">Deposit part</button> -->
+                <button class="btn btn-deposit">Start collecting</button>
+                <!-- <button class="btn btn-deposit">Deposit part</button>
+                <button class="btn btn-get">Get part back</button> -->
+              </div>
+            </div>
+            <div class="section-deposit" v-else-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
+              <div class="section-deposit-data">
+                <a  :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></a>
+                <div class="deposit-data">
+                  <div class="deposit-listened">Listened on {{item.marketplace.name}} for</div>
+                  <div class="deposit-value">
+                    <div class="icon-token"></div>
+                    <span>{{abbrNum(convertToEther(allBidsAmount),1)}}/<b>{{abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH <span>(≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span></span>
+                  </div>
+                </div>
+              </div>
+              <div class="section-deposit-btns">
+                <!-- <button class="btn btn-deposit">Deposit part</button> -->
+                 <!-- <button class="btn btn-deposit">Start collecting</button> -->
+                <button class="btn btn-deposit" v-if="!(userBidAmount>0) || (((userBidAmount/this.item.price)*100)<20)">Deposit part</button>
+                <button class="btn btn-get" v-if="userBidAmount>0">Get part back</button>
+              </div>
+            </div>
+            <div class="section-deposit" v-else>
               <div class="section-deposit-data">
                 <div class="deposit-img"></div>
                 <div class="deposit-data">
@@ -72,11 +109,11 @@
             <div
               class="section-members"
               :class="{ 'section-unfolded': !collapseMembers }"
-            >
+              v-if="this.item.bids">
               <button class="btn-collapse" @click="collapseMembers = !collapseMembers">
                 <div class="members-row">
                   <i class="i-account-circle-line"></i>
-                  Members: <span>4</span>
+                  Members: <span>{{this.item.bids.length}}</span>
                 </div>
                 <i class="i-arrow-down-s-line"></i>
               </button>
@@ -93,7 +130,7 @@
                         <div class="td td-price">Price</div>
                       </div>
 
-                      <div class="tr">
+                      <div class="tr" v-for="bid in this.item.bids" :key="bid">
                         <div class="td">
                           <a
                             class="td-wrap"
@@ -101,18 +138,18 @@
                             target="_blank"
                             rel="nofollow"
                           >
-                            <span>0x4Eb4…53C7</span>
+                            <span>{{bid.address.substring(0,6)+'...'+bid.address.substring(38,42)}}</span>
                           </a>
                         </div>
                         <div class="td">
-                          <div class="td-wrap">20%</div>
+                          <div class="td-wrap">{{bid.fraction}}</div>
                         </div>
                         <div class="td td-price">
                           <div class="td-wrap">
                             <div class="td-wrap-price">
                               <div class="icon-token"></div>
-                              <span>0.20 ETH</span>
-                              <span class="td-light">≈ $ 1000</span>
+                              <span>{{this.toFixedIfNecessary((bid.amount / (10**this.item.currency.decimals)),6)}} ETH</span>
+                              <span class="td-light">≈ $ {{this.toFixedIfNecessary(abbrNum((bid.amount / (10**this.item.currency.decimals) * currencyToUsdPrice),1),2)}}</span>
                             </div>
                           </div>
                         </div>
@@ -131,7 +168,8 @@
                   :class="{ 'active-tab': activeTab === 'ListingInfo' }"
                   @click="letsCheck('ListingInfo')"
                 >
-                  Info
+                <span>Info</span>
+                <span>Info</span>
                 </button>
               </li>
 
@@ -140,7 +178,8 @@
                   :class="{ 'active-tab': activeTab === 'ListingProperties' }"
                   @click="letsCheck('ListingProperties')"
                 >
-                  Properties
+                <span>Properties</span>
+                <span>Properties</span>
                 </button>
               </li>
 
@@ -149,7 +188,8 @@
                   :class="{ 'active-tab': activeTab === 'ListingAbout' }"
                   @click="letsCheck('ListingAbout')"
                 >
-                  About Collection
+                <span>About Collection</span>
+                <span>About Collection</span>
                 </button>
               </li>
 
@@ -158,7 +198,8 @@
                   :class="{ 'active-tab': activeTab === 'ListingActivities' }"
                   @click="letsCheck('ListingActivities')"
                 >
-                  Activities
+                <span>Activities</span>
+                <span>Activities</span>
                 </button>
               </li>
 
@@ -167,14 +208,15 @@
                   :class="{ 'active-tab': activeTab === 'ListingChat' }"
                   @click="letsCheck('ListingChat')"
                 >
-                  Chat
+                <span>Chat</span>
+                <span>Chat</span>
                 </button>
               </li>
             </ul>
 
             <div class="listing-selected-tab">
-              <ListingInfo v-if="activeTab === 'ListingInfo'" />
-              <ListingProperties v-if="activeTab === 'ListingProperties'" />
+              <ListingInfo v-if="activeTab === 'ListingInfo'" :item="item"/>
+              <ListingProperties v-if="activeTab === 'ListingProperties'" :item="item" />
               <ListingAbout v-if="activeTab === 'ListingAbout'" />
               <ListingActivities v-if="activeTab === 'ListingActivities'" />
               <ListingChat v-if="activeTab === 'ListingChat'" />
@@ -185,7 +227,7 @@
     </div>
     <section class="section-recommendation">
       <div class="container">
-        <!-- <RecommendationsList /> -->
+        <RecommendationsList :items="this.$store.dispatch('marketplaceListing/getRecomendations',item.collection.contract_address)"/>
       </div>
     </section>
   </main>
@@ -198,7 +240,11 @@ import ListingProperties from "@/components/listing/ListingProperties.vue";
 import ListingAbout from "@/components/listing/ListingAbout.vue";
 import ListingActivities from "@/components/listing/ListingActivities.vue";
 import ListingChat from "@/components/listing/ListingChat.vue";
+
 import Chart from "@/components/listing/chart/Chart.vue";
+
+import { ethers } from "ethers";
+
 
 export default {
   data() {
@@ -206,6 +252,12 @@ export default {
       activeTab: "",
       srcTest: "../../assets/images/test-bg.png",
       collapseMembers: false,
+      item:null,
+      priceInCurrency:1,
+      currencyToUsdPrice:1,
+      linkToMarketplacePage:null,
+      allBidsAmount:null,
+      userBidAmount:null
     };
   },
   components: {
@@ -218,12 +270,101 @@ export default {
     ListingChat,
     Chart
   },
-  mounted() {
+  async mounted() {
     this.activeTab = "ListingInfo";
+    await this.getAndSetListingInfo();
+    this.setPriceInCurrency();
+    this.setCurrencyToUsd();
+    this.setLinkToMarketplacePage();
+    this.setAllBidsAmount();
+    this.setUserBidAmount();
+    const delay = (delayInms) => {
+      return new Promise(resolve => setTimeout(resolve, delayInms));
+    }
+    while (true) {
+      await delay(1000);
+      this.setAllBidsAmount();
+      this.setUserBidAmount();
+    }
   },
   methods: {
+    convertToEther(value){
+      try{
+        return ethers.utils.formatEther(String(value));
+      }
+      catch{
+        console.log('ethers error');
+      }
+    },
     letsCheck(name) {
       this.activeTab = name;
+    },
+    async getAndSetListingInfo(){
+      await this.$store.dispatch('marketplaceListing/getAndSetItem',this.$route.params.id);
+      this.item = await this.$store.getters['marketplaceListing/getItem'];
+    },
+    setPriceInCurrency(){
+      this.priceInCurrency = this.toFixedIfNecessary((this.item.price / (10**this.item.currency.decimals)),6);
+    },
+    toFixedIfNecessary(value, dp) {
+      return +parseFloat(value).toFixed(dp);
+    },
+    async setCurrencyToUsd(){
+      let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
+      let requestJson = await request.json();
+      try{
+        this.currencyToUsdPrice =  requestJson.quotes[0].priceUsd;
+      }
+      catch{
+        this.currencyToUsdPrice = 1;
+      }
+    },
+    abbrNum(number, decPlaces) {
+      decPlaces = Math.pow(10, decPlaces);
+      var abbrev = ["k", "m", "b", "t"];
+      for (var i = abbrev.length - 1; i >= 0; i--) {
+        var size = Math.pow(10, (i + 1) * 3);
+        if (size <= number) {
+          number = Math.round(number * decPlaces / size) / decPlaces;
+          if ((number == 1000) && (i < abbrev.length - 1)) {
+            number = 1;
+            i++;
+          }
+          number += abbrev[i];
+          break;
+        }
+      }
+
+      return number;
+    },
+    setLinkToMarketplacePage(){
+      let exampleStr = this.item.marketplace.listing_link;
+      let collection_address = this.item.collection.contract_address;
+      let token_id = this.item.token_id;
+
+      this.linkToMarketplacePage = eval('`'+exampleStr+'`');
+    },
+    setAllBidsAmount(){
+      this.allBidsAmount=0;
+      if (this.item.bids!=null){
+        for (let element of this.item.bids){
+          this.allBidsAmount+=parseInt(element.amount);
+        }
+        return;
+      }
+    },
+    setUserBidAmount(){
+      let userAddress = localStorage.getItem('userAddress');
+      if (this.item.bids!=null & userAddress!=null & userAddress!='null'){
+        for (let element of this.item.bids){
+          if (element.address == userAddress){
+            this.userBidAmount = parseInt(element.amount);
+            return;
+          }
+        }
+        return
+      }
+      this.userBidAmount=0;      
     },
   },
 };

@@ -1,6 +1,6 @@
 <template>
   <div class="filter">
-    <div class="filter-section" :class="{ 'collapse-section': filterSection1 }">
+    <div class="filter-section" :class="{ 'collapse-section': filterSection1 }" v-if="false">
       <button class="filter-section-name" @click="filterSection1 = !filterSection1">
         <span>Status</span>
         <i class="i-arrow-up-s-line"></i>

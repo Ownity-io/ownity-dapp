@@ -9,18 +9,18 @@
                 <div class="header-nav">
                     <nav>
                         <ul class="">
-                            <li><a :class="{active: headerItemActive1}" href="">Marketplace</a></li>
-                            <li><a :class="{active: headerItemActive2}" href="">Collections</a></li>
-                            <li><a :class="{active: headerItemActive3}" href="">Help</a></li>
+                            <li><a :class="{active: headerItemActive1}" href=""><span>Marketplace</span><span>Marketplace</span></a></li>
+                            <li><a :class="{active: headerItemActive2}" href=""><span>Collections</span><span>Collections</span></a></li>
+                            <li><a :class="{active: headerItemActive3}" href=""><span>Help</span><span>Help</span></a></li>
                         </ul>
                     </nav>
                     <div class="btn-container" v-if="walletConnected==null||walletConnected=='null'">
-                        <button class="btn btn-connect" @click="this.$store.dispatch('appGlobal/changeshowConnectWalletModal');">
+                        <button class="btn btn-connect" @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true);">
                             Connect Wallet
                         </button>
                     </div>
                     <div class="btn-container" v-else>
-                        <button class="btn btn-address">
+                        <button class="btn btn-address" @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',false);clearLocalStorage()">
                             <div class="icon-address"
                                 :style="bs"
                             ></div>
@@ -53,13 +53,20 @@ export default {
     methods:{
         getWalletFromLS() {
             this.walletConnected = localStorage.getItem('connectedWallet');
+        },
+        clearLocalStorage(){
+            localStorage.clear();
         }
     },
-    mounted(){
+    async mounted(){
         this.getWalletFromLS();
-        setInterval(() => {
+        const delay = (delayInms) => {
+            return new Promise(resolve => setTimeout(resolve, delayInms));
+        }
+        while (true) {
+            await delay(1000);
             this.getWalletFromLS();
-            }, 1000);
+        }
     }
 }
 </script>

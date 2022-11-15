@@ -1,5 +1,19 @@
 <template>
     <ConnectWallet v-if="this.$store.getters['appGlobal/getShowConnectWalletModal'] & (this.walletConnected==null||this.walletConnected=='null')"/>
+    <!-- <DepositPartStart /> -->
+    <!-- <DepositPartContinue /> -->
+    <!-- <DepositCancel /> -->
+    <!-- <SellPart /> -->
+    <!-- <SellCancelPart /> -->
+    <!-- <SellCancel /> -->
+    <!-- <Claim /> -->
+    <!-- <ClaimReward /> -->
+    <!-- <PriceChanged /> -->
+    <!-- <VoteConfirm /> -->
+    <!-- <VoteStart /> -->
+    <!-- <TransSuccess /> -->
+    <!-- <BuyPart />  -->
+
     <div class="wrapper-main">
         <HeaderComponent/>
         <RouterView />    
@@ -11,14 +25,44 @@
 import HeaderComponent from '@/components/HeaderComponent.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
 
+// -----------MODAL_WINDOWS----------------
 import ConnectWallet from '@/components/modal/ConnectWallet.vue'
+import DepositPartStart from '@/components/modal/DepositPartStart.vue'
+import DepositPartContinue from '@/components/modal/DepositPartContinue.vue'
+import DepositCancel from '@/components/modal/DepositCancel.vue'
+import SellPart from '@/components/modal/SellPart.vue'
+import SellCancelPart from '@/components/modal/SellCancelPart.vue'
+import SellCancel from '@/components/modal/SellCancel.vue'
+import Claim from '@/components/modal/Claim.vue'
+import ClaimReward from '@/components/modal/ClaimReward.vue'
+import PriceChanged from '@/components/modal/PriceChanged.vue'
+import VoteStart from '@/components/modal/VoteStart.vue'
+import VoteConfirm from '@/components/modal/VoteConfirm.vue'
+import BuyPart from '@/components/modal/BuyPart.vue'
+import TransSuccess from '@/components/modal/TransSuccess.vue'
+// ----------------------------------------
 
 export default {
     components:{
         HeaderComponent,
         FooterComponent,
 
-        ConnectWallet
+// -----------MODAL_WINDOWS----------------
+        ConnectWallet,
+        DepositPartStart,
+        DepositPartContinue,
+        DepositCancel,
+        SellPart,
+        SellCancelPart,
+        SellCancel,
+        Claim,
+        ClaimReward,
+        PriceChanged,
+        VoteStart,
+        VoteConfirm,
+        BuyPart,
+        TransSuccess
+// ----------------------------------------
     },
     methods:{
         async checkWalletInLS() {
@@ -40,9 +84,13 @@ export default {
     async mounted() {
         this.checkWalletInLS();
         this.getWalletFromLS();
-        setInterval(() => {
+        const delay = (delayInms) => {
+            return new Promise(resolve => setTimeout(resolve, delayInms));
+        }
+        while (true) {
+            await delay(1000);
             this.getWalletFromLS();
-            }, 1000);
+        }
     },
     data(){
         return{

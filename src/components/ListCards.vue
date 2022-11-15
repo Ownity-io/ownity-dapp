@@ -45,8 +45,14 @@ export default {
       }
     }
   },
-  mounted(){
-    setInterval(this.loadIfVisible,1000)
+  async mounted(){
+    const delay = (delayInms) => {
+      return new Promise(resolve => setTimeout(resolve, delayInms));
+    }
+    while (true) {
+      await delay(1000);
+      this.loadIfVisible();
+    }
   }
 };
 </script>
