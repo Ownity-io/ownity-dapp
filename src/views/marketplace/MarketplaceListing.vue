@@ -60,7 +60,6 @@
               <div class="section-deposit-data">
                 <a  :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></a>
                 <div class="deposit-data">
-                  <div class="deposit-listened">Listened on {{item.marketplace.name}} for</div>
                   <div class="deposit-listened deposit-listened-link"><a :href='linkToMarketplacePage' >Listened on {{item.marketplace.name}} for </a><i class="i-external-link-line"></i></div>
                   <div class="deposit-value">
                     <div class="icon-token"></div>
@@ -83,7 +82,6 @@
               <div class="section-deposit-data">
                 <a  :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></a>
                 <div class="deposit-data">
-                  <div class="deposit-listened">Listened on {{item.marketplace.name}} for</div>
                   <div class="deposit-listened deposit-listened-link"><a :href='linkToMarketplacePage' >Listened on {{item.marketplace.name}} for </a><i class="i-external-link-line"></i></div>
                   <div class="deposit-value">
                     <div class="icon-token"></div>
@@ -127,7 +125,6 @@
               <div class="section-deposit-data">
                 <div class="deposit-img"></div>
                 <div class="deposit-data">
-                  <div class="deposit-listened">Listened on OpenSea for</div>
                   <div class="deposit-listened deposit-listened-link"><a :href='linkToMarketplacePage' >Listened on {{item.marketplace.name}} for </a><i class="i-external-link-line"></i></div> 
                   <div class="deposit-value">
                     <div class="icon-token"></div>
