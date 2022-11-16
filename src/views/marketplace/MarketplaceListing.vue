@@ -206,7 +206,7 @@
                           >
                             <span>{{bid.address.substring(0,6)+'...'+bid.address.substring(38,42)}}</span>
                           </a>
-                          <span class="label-owner">You</span>
+                          <span class="label-owner" v-if="bid.address==userAddress">You</span>
                         </div>
                         <div class="td">
                           <div class="td-wrap">{{bid.fraction}}</div>
@@ -329,7 +329,8 @@ export default {
       allBidsAmount:null,
       userBidAmount:0,
       config:config,
-      chartData:[]
+      chartData:[],
+      userAddress:null
     };
   },
   components: {
@@ -429,6 +430,7 @@ export default {
     },
     setUserBidAmount(){
       let userAddress = localStorage.getItem('userAddress');
+      this.userAddress = userAddress;
       if (this.item.bids!=null & userAddress!=null & userAddress!='null'){
         for (let element of this.item.bids){
           if (element.address == userAddress){
