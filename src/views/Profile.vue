@@ -77,7 +77,7 @@
                                 ></i>
                                 <span>Filter</span>
                                 </button>
-                                <button class="btn-param btn-param-mobile">
+                                <button class="btn-param btn-param-mobile"  @click="filterMobile=true">
                                     <i class="i-filter-2-line" ></i>
                                     <span>Filter</span>
                                 </button>
@@ -127,14 +127,14 @@
             </section>
             <div class="container">
                 <section class="section-nft" :class="{ 'with-filter': filter }">
-                    <div v-if="filter" class="section-nft-filter">
-                    <Filter />
+                    <div v-if="filter" class="section-nft-filter" :class="{'filter-mobile':filterMobile}">
+                        <Filter />
                     </div>
                     <div class="section-nft-list" :class="{'card-collapse' : switchActive == 1}">
                         <SelectedFilters v-if="filter" />
                         <ListCards v-if="activeTab === 'ListCards'" />
                         <ActivityTable v-if="activeTab === 'ActivityTable'" />
-                        <button v-if="activeTab == 0" class="btn-filter-mobile">
+                        <button v-if="activeTab == 0" class="btn-filter-mobile"  @click="filterMobile=true">
                             <i class="i-filter-2-line" ></i>
                             <span>Filter</span>
                         </button>
@@ -157,6 +157,7 @@ export default {
             activeTab: '',
             testOpenSort: false,
             filter: true,
+            filterMobile: false,
         };
     },
     components:{
