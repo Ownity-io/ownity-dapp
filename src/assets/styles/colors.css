@@ -9,12 +9,15 @@
 .card-data .btn-container .btn.btn-card-completed {
     color: #2CC07B;
 }
-.total-block-describe a{
+
+.total-block-describe a {
     text-decoration: underline;
 }
+
 .footer-list a:hover,
 .breadcrumbs li a:hover span,
-.footer-form .agree a:hover,.total-block-describe a:hover,
+.footer-form .agree a:hover,
+.total-block-describe a:hover,
 .footer-row.footer-row-info .footer-part:not(.footer-social-links) a:hover {
     color: #2CC07B;
     text-decoration: underline;
@@ -35,8 +38,9 @@
     border: 2px solid #DFE2EA;
 }
 
-.footer-form .btn-subscribe,
 .btn-modal-main,
+.btn.btn-submit,
+.footer-form .btn-subscribe,
 .card-data .btn-container .btn:not(.btn-card-completed):hover,
 .section-deposit-btns .btn.btn-deposit,
 .header-nav .btn-container .btn.btn-connect {
@@ -45,8 +49,9 @@
     color: #FFFFFF;
 }
 
-.footer-form .btn-subscribe:hover,
 .btn-modal-main:hover,
+.btn.btn-submit:hover,
+.footer-form .btn-subscribe:hover,
 .section-deposit-btns .btn.btn-deposit:hover,
 .header-nav .btn-container .btn.btn-connect:hover {
     background: #12AC64;
@@ -71,7 +76,7 @@
 .drop-down li:hover,
 .btn-selected-filter:hover,
 .input-checkbox label:hover .i-check-line,
-.btn-log-out:hover, 
+.btn-log-out:hover,
 .table-chart-data .tr:hover,
 .table-activity .tr:hover,
 .profile-container-btns button:hover,

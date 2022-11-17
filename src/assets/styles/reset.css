@@ -141,6 +141,7 @@ footer {
     margin-top: auto;
 }
 input,
+textarea,
 button,
 a {
     margin: 0;
@@ -170,6 +171,7 @@ button,
     justify-content: center;
     align-items: center;
 }
+
 input:disabled,
 button:disabled,
 a:disabled {
