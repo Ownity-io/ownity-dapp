@@ -101,12 +101,16 @@
         <div class="params">
           <div class="params-block params-block-filter">
             <div class="param-wrap">
-              <button class="btn-param" @click="filter = !filter">
+                <button class="btn-param btn-param-desktop" @click="filter = !filter">
                 <i
-                  :class="{ 'i-arrow-left-s-line': filter, 'i-filter-2-line': !filter }"
+                    :class="{ 'i-arrow-left-s-line': filter, 'i-filter-2-line': !filter }"
                 ></i>
                 <span>Filter</span>
-              </button>
+                </button>
+                <button class="btn-param btn-param-mobile">
+                  <i class="i-filter-2-line" ></i>
+                  <span>Filter</span>
+                </button>
             </div>
           </div>
           <div class="params-block params-block-search">
@@ -163,6 +167,10 @@
           <SelectedFilters v-if="filter" />
           <ListCards v-if="activeTab == 0" />
           <ActivityTable v-if="activeTab == 1" />
+          <button v-if="activeTab == 0" class="btn-filter-mobile">
+              <i class="i-filter-2-line" ></i>
+              <span>Filter</span>
+          </button>
         </div>
       </section>
     </div>
