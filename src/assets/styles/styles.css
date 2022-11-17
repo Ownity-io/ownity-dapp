@@ -276,10 +276,14 @@ textarea::placeholder {
     color: #A8B0C4;
 }
 
-input {
+input,
+textarea {
     display: flex;
     flex-grow: 1;
     min-width: 32px;
+}
+textarea{
+    min-height: 136px;
 }
 
 .footer-section {
@@ -654,16 +658,14 @@ ul.tabs {
 .params {
     display: flex;
     width: calc(100% + var(--grid-pad));
-    margin-left: calc(var(--grid-pad-half) * -1);
-    margin-right: calc(var(--grid-pad-half) * -1);
+    margin: calc(var(--grid-pad-half) * -1);
     justify-content: flex-start;
     align-items: flex-start;
 }
 
 .params-block {
     display: flex;
-    padding-left: var(--grid-pad-half);
-    padding-right: var(--grid-pad-half);
+    padding: var(--grid-pad-half);
 }
 
 .params-block.params-block-search {

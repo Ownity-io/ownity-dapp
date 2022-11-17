@@ -33,8 +33,25 @@
         grid-template-columns: 1fr;
     }
 
-    .section-nft-filter {
+    .section-nft-filter,
+    .params-block.params-block-switch {
         display: none;
+    }
+
+    .params {
+        flex-wrap: wrap;
+    }
+
+    .params-block.params-block-filter {
+        order: 1;
+    }
+
+    .params-block.params-block-sort {
+        order: 2;
+    }
+
+    .params-block.params-block-search {
+        order: 3;
     }
 
     .section-nft.with-filter .cards-list-container .card,
@@ -49,7 +66,14 @@
         padding-top: 8px;
         padding-bottom: 8px;
     }
-    .card-main, .card-data{
+
+    .card-main,
+    .card-data {
         padding: 8px;
     }
+
+    .params-block.params-block-filter,
+    .params-block.params-block-sort {
+        width: 50%;
+    } 
 }
