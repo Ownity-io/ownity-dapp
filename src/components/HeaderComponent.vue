@@ -28,7 +28,14 @@
                         </button>
                     </div>
                 </div>
-                <div class="header-mobile"></div>
+                <div class="header-mobile">
+                    <button class="btn-mob-header">
+                        <i class="i-search-line"></i>
+                    </button>
+                    <button class="btn-mob-header">
+                        <i class="i-menu-line"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
