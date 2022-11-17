@@ -2,16 +2,17 @@
     <footer>
         <div class="footer-row footer-row-nav">
             <div class="container">
-                <div class="footer-section">
+                <div class="footer-section footer-section-first">
                     <div class="footer-block footer-block-logo">
                         <div class="footer-logo">
                             Marketplace
                         </div>
                     </div>
-                    <div class="footer-block">
-                        <div class="footer-block-name">
+                    <div class="footer-block" :class="{'unfolded' : !footerBlock1}">
+                        <button class="footer-block-name" @click="footerBlock1 = !footerBlock1">
                             Marketplace
-                        </div>
+                            <i class="i-arrow-up-s-line"></i>
+                        </button>
                         <ul class="footer-list">
                             <li><a href="">Active</a></li>
                             <li><a href="">Canceled</a></li>
@@ -20,10 +21,11 @@
                             <li><a href="">Sold</a></li>
                         </ul>
                     </div>
-                    <div class="footer-block">
-                        <div class="footer-block-name">
+                    <div class="footer-block" :class="{'unfolded' : !footerBlock2}">
+                        <button class="footer-block-name" @click="footerBlock2 = !footerBlock2">
                             Collections
-                        </div>
+                            <i class="i-arrow-up-s-line"></i>
+                        </button>
                         <ul class="footer-list">
                             <li><a href="">Mutant Ape Yacht Club</a></li>
                             <li><a href="">Aopanda Party</a></li>
@@ -33,10 +35,11 @@
                             <li><a href="">ENS: Ethereum Name Ser...</a></li>
                         </ul>
                     </div>
-                    <div class="footer-block">
-                        <div class="footer-block-name">
+                    <div class="footer-block" :class="{'unfolded' : !footerBlock3}">
+                        <button class="footer-block-name" @click="footerBlock3 = !footerBlock3">
                             Resources
-                        </div>
+                            <i class="i-arrow-up-s-line"></i>
+                        </button>
                         <ul class="footer-list">
                             <li><a href="">Home</a></li>
                             <li><a href="">Marketplace</a></li>
@@ -48,6 +51,7 @@
                     <div class="footer-block footer-block-form">
                         <div class="footer-block-name">
                             Stay in the loop
+                            <!-- <i class="i-arrow-up-s-line"></i> -->
                         </div>
                         <form action="" class="footer-form">
                             <div class="input-wrapper">
@@ -63,7 +67,7 @@
         <div class="footer-row footer-row-info">
             <div class="container">
                 <div class="footer-section">
-                    <div class="footer-part">
+                    <div class="footer-part footer-service-links">
                         <span class="copyright">&#169; 2022 Marketplace</span>
                         <a href="" rel="nofollow">Terms of Use</a>
                         <a href="" rel="nofollow">Privacy Policy</a>
@@ -81,3 +85,15 @@
         </div>
     </footer>
 </template>
+<script>
+export default {
+    
+data() {
+    return {
+            footerBlock1: false,
+            footerBlock2: false,
+            footerBlock3: false,
+        }
+    },
+}
+</script>

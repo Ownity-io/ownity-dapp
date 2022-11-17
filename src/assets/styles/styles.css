@@ -331,6 +331,10 @@ textarea {
     font-weight: 700;
 }
 
+.footer-block .footer-block-name i.i-arrow-up-s-line {
+    display: none;
+}
+
 .footer-block .footer-list {
     flex-direction: column;
     justify-content: flex-start;
@@ -858,6 +862,7 @@ ul.tabs {
 
 .btn-faq i.i-arrow-up-s-line,
 .btn-collapse i.i-arrow-down-s-line,
+.footer-block-name i.i-arrow-up-s-line,
 .filter-section .filter-section-name i.i-arrow-up-s-line {
     margin-left: auto;
     width: 24px;
@@ -869,6 +874,7 @@ ul.tabs {
 
 .faq-block i.i-arrow-up-s-line,
 .btn-collapse i.i-arrow-down-s-line,
+.footer-block-name i.i-arrow-up-s-line,
 .sort .btn-sort i.i-arrow-down-s-line,
 .input-select-wrap .input-selected i.i-arrow-down-s-line,
 .filter-section .filter-section-name i.i-arrow-up-s-line {
@@ -880,6 +886,7 @@ ul.tabs {
     transform: rotate(180deg);
 }
 
+.footer-block.unfolded .footer-block-name i.i-arrow-up-s-line,
 .section-unfolded .btn-collapse i.i-arrow-down-s-line,
 .input-select-wrap.unfolded .input-selected i.i-arrow-down-s-line,
 .filter-section.collapse-section .filter-section-name i.i-arrow-up-s-line,
@@ -899,7 +906,6 @@ ul.tabs {
 }
 
 .faq-block.collapse-block .content-faq,
-
 .filter-section.collapse-section .input-checkbox,
 .filter-section.collapse-section .container-enter-price,
 .filter-section.collapse-section .filter-ul {
@@ -1475,7 +1481,7 @@ ul.tabs {
 }
 
 
-.card .data-table .data-tr .data-td{
+.card .data-table .data-tr .data-td {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
@@ -1485,19 +1491,22 @@ ul.tabs {
     flex-grow: 1;
 }
 
-.card .data-table .data-tr .data-td > div{
+.card .data-table .data-tr .data-td>div {
     margin-bottom: 8px;
 
 }
-.card .data-table .data-tr .data-td-value{
+
+.card .data-table .data-tr .data-td-value {
     min-width: fit-content;
     align-items: flex-end;
     text-align: right;
 }
-.card .data-table .data-tr .data-td div{
+
+.card .data-table .data-tr .data-td div {
     max-width: 100%;
 
 }
+
 .card .data-table .data-tr.data-tr-main .card-id {
     cursor: pointer;
 }
@@ -2436,7 +2445,7 @@ ul.tabs {
 }
 
 .container-form {
-    width: 912px;
+    max-width: 912px;
     margin-left: auto;
     margin-right: auto;
     color: #333333;
