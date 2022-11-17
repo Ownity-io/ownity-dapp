@@ -25,6 +25,11 @@ const routes = [
                 name: 'Listing',
                 component: () => import('@/views/marketplace/MarketplaceListing.vue'),
             },
+            {
+                path: '/collections',
+                name: 'Collections',
+                component: () => import('@/views/marketplace/MarketplaceCollections.vue'),
+            },
             // {
             //     path: '',
             //     name: 'Marketplace',

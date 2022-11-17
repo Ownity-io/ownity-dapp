@@ -88,17 +88,19 @@ main>section {
 .header-logo {
     margin-right: var(--grid-pad);
 }
-.header-mobile{
+
+.header-mobile {
     display: none;
     margin-left: auto;
 }
 
-.btn-mob-header{
+.btn-mob-header {
     width: 48px;
     height: 48px;
     padding: 12px;
 }
-.btn-mob-header i{
+
+.btn-mob-header i {
     color: #818899;
     font-size: 24px;
 }
@@ -276,10 +278,15 @@ textarea::placeholder {
     color: #A8B0C4;
 }
 
-input {
+input,
+textarea {
     display: flex;
     flex-grow: 1;
     min-width: 32px;
+}
+
+textarea {
+    min-height: 136px;
 }
 
 .footer-section {
@@ -630,6 +637,12 @@ ul.tabs {
     background-size: cover;
 }
 
+.section-collection .collection-img {
+    height: 80px;
+    width: 80px;
+    min-width: 80px;
+}
+
 /* .deposit-img, */
 .collection-img,
 .modal-nft-data .icon-nft,
@@ -654,16 +667,14 @@ ul.tabs {
 .params {
     display: flex;
     width: calc(100% + var(--grid-pad));
-    margin-left: calc(var(--grid-pad-half) * -1);
-    margin-right: calc(var(--grid-pad-half) * -1);
+    margin: calc(var(--grid-pad-half) * -1);
     justify-content: flex-start;
     align-items: flex-start;
 }
 
 .params-block {
     display: flex;
-    padding-left: var(--grid-pad-half);
-    padding-right: var(--grid-pad-half);
+    padding: var(--grid-pad-half);
 }
 
 .params-block.params-block-search {
@@ -1623,6 +1634,7 @@ ul.tabs {
 .token-value .icon-value,
 .total-block-value .icon-value,
 .td-wrap-price .icon-token,
+.collection-data-link i,
 .deposit-listened.deposit-listened-link i,
 .td-wrap-link i {
     position: absolute;
@@ -1732,6 +1744,13 @@ ul.tabs {
     padding-right: calc(20px + 10px);
 }
 
+.collection .collection-id.collection-label{
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 150%;
+    color: #333333;
+}
+
 .collection-id.collection-label i.i-checkbox-circle-fill {
     position: absolute;
     color: #2F80ED;
@@ -1741,6 +1760,17 @@ ul.tabs {
     font-size: 20px;
 }
 
+.collection .collection-id.collection-label i.i-checkbox-circle-fill{
+    top: 15px;
+}
+
+.collection .links-wrap{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 40px;
+
+}
 .recommendations-list {
     display: grid;
     grid-template-rows: 1fr;
@@ -1883,10 +1913,20 @@ ul.tabs {
 .collection-statistics,
 .tab-contain .collection-description {
     margin-top: 16px;
-
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
+}
+
+.section-collection .collection-statistics{
+    margin-top: 0;
+    margin-left: auto;
+    gap: 40px;
+}
+
+.section-collection .collection-statistics li{
+    align-items: flex-end;
+    text-align: right;
 }
 
 .collection-statistics li {
@@ -1990,7 +2030,7 @@ ul.tabs {
     line-height: 150%;
     padding-left: 4px;
 }
-
+.collection-data-link,
 .deposit-listened {
     font-weight: 400;
     font-size: 16px;
@@ -1999,7 +2039,8 @@ ul.tabs {
     margin-bottom: 8px;
 }
 
-.deposit-listened.deposit-listened-link {
+.deposit-listened.deposit-listened-link,
+.collection-data-link {
     text-decoration-line: underline;
     color: #333333;
     position: relative;
@@ -2384,10 +2425,11 @@ ul.tabs {
     flex-grow: 1;
 }
 
-.form-contact .btn.btn-submit{
+.form-contact .btn.btn-submit {
     min-width: 320px;
     margin-top: 40px;
 }
+
 .section-form-title {
     /* padding: 12px 16px; */
 }
@@ -2411,4 +2453,15 @@ ul.tabs {
 
 .input-wrapper+.agreement {
     margin-top: 16px;
+}
+
+.collection {
+    background: #FFFFFF;
+    border: 1px solid #DFE2EA;
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
 }
