@@ -787,12 +787,15 @@ ul.tabs {
     color: #818899;
     font-size: 24px;
 }
-.btn-vote i.i-thumb-up-line{
+
+.btn-vote i.i-thumb-up-line {
     color: #2CC07B;
 }
-.btn-vote i{
+
+.btn-vote i {
     font-size: 24px;
 }
+
 .btn-filter-mobile span,
 .btn-vote i+span,
 .btn-param i+span,
@@ -2443,12 +2446,25 @@ ul.tabs {
     background: #FFFFFF;
     filter: drop-shadow(0px 0px 20px rgba(129, 136, 153, 0.1));
     padding: 60px;
-    border: 1px solid;
-    border-image-source: linear-gradient(94.89deg, #A5FF80 3.38%, #7FFFCA 99.34%);
-    border-image: linear-gradient(#A5FF80, #7FFFCA) 30;
+    /* border: 1px solid; */
     border-radius: 8px;
     /* overflow: hidden; */
+    background-clip: padding-box;
+    background: linear-gradient(94.89deg, #A5FF80 3.38%, #7FFFCA 99.34%);
+    position: relative;
+}
 
+.form-contact::before {
+    position: absolute;
+    content: '';
+    left: 50%;
+    top: 50%;
+    border-radius: 8px;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    background-color: #ffffff;
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
 }
 
 .container-form {
@@ -2565,11 +2581,11 @@ ul.tabs {
     width: 100%;
 }
 
-.block-vote .progress{
+.block-vote .progress {
     width: 100%;
 }
 
-.vote-btn-container{
+.vote-btn-container {
     display: flex;
     margin-left: auto;
     align-items: center;
