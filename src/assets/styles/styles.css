@@ -1489,7 +1489,9 @@ ul.tabs {
 .card .data-table .data-tr.data-tr-main .card-value {
     color: #333333;
 }
-
+.card .data-table .data-tr.data-tr-main .card-id{
+    max-width:115px;
+}
 
 .card .data-table .data-tr .data-td {
     display: flex;
