@@ -132,13 +132,19 @@
                     </button>
                   </li>
                   <li>
-                    <button>
-                      <span>Sell a part</span>
-                      <span>Sell a part</span>
+                    <button
+                      :class="{ 'active-tab': activeTab === 'ListingFractionMarket' }"
+                      @click="letsCheck('ListingFractionMarket')"
+                      >
+                      <span>Fraction market</span>
+                      <span>Fraction market</span>
                     </button>
                   </li>
                   <li>
-                    <button>
+                    <button
+                      :class="{ 'active-tab': activeTab === 'ListingVote' }"
+                      @click="letsCheck('ListingVote')"
+                      >
                       <span>Vote</span>
                       <span>Vote</span>
                     </button>
@@ -245,6 +251,8 @@
               <ListingInfo v-if="activeTab === 'ListingInfo'" :item="item"/>
               <ListingProperties v-if="activeTab === 'ListingProperties'" :item="item" />
               <ListingAbout v-if="activeTab === 'ListingAbout'" :item="item" />
+              <ListingFractionMarket v-if="activeTab === 'ListingFractionMarket'" />
+              <ListingVote v-if="activeTab === 'ListingVote'" />
               <ListingActivities v-if="activeTab === 'ListingActivities'" />
               <ListingChat v-if="activeTab === 'ListingChat'" />
             </div>
@@ -266,6 +274,8 @@ import ListingInfo from "@/components/listing/ListingInfo.vue";
 import ListingProperties from "@/components/listing/ListingProperties.vue";
 import ListingAbout from "@/components/listing/ListingAbout.vue";
 import ListingActivities from "@/components/listing/ListingActivities.vue";
+import ListingFractionMarket from "@/components/ListingFractionMarket.vue";
+import ListingVote from "@/components/listing/ListingVote.vue";
 import ListingChat from "@/components/listing/ListingChat.vue";
 
 import Chart from "@/components/listing/chart/Chart.vue";
@@ -300,6 +310,8 @@ export default {
     ListingProperties,
     ListingAbout,
     ListingActivities,
+    ListingFractionMarket,
+    ListingVote,
     ListingChat,
     Chart
   },
