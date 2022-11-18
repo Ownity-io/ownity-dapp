@@ -32,7 +32,7 @@
                   </button> -->
                   <button class="btn btn-block btn-like" 
                     :class="{'liked':testLike}" 
-                    @click="testLike = !testLike">
+                    @click="changeLike">
                     <i class="i-heart-3-fill"></i>
                     <i class="i-heart-3-line"></i>
                   </button>
@@ -312,6 +312,8 @@ export default {
     this.setAllBidsAmount();
     this.setUserBidAmount();
     this.setChartData();
+    await this.$store.dispatch('marketplaceListing/checkLike');
+    await this.checkLike();
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
     }
@@ -320,6 +322,7 @@ export default {
       this.setAllBidsAmount();
       this.setUserBidAmount();
       this.setChartData();
+      this.checkLike();
     }
   },
   methods: {
@@ -421,6 +424,14 @@ export default {
         return;
       }
     },
+    async checkLike(){
+      await this.$store.dispatch('marketplaceListing/checkLike');
+      this.testLike = this.$store.getters['marketplaceListing/getLike'];
+    },
+    async changeLike(){      
+      await this.$store.dispatch('marketplaceListing/changeLike');
+      this.testLike = this.$store.getters['marketplaceListing/getLike'];
+    }
   },
 };
 </script>
