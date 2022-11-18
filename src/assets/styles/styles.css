@@ -1514,7 +1514,8 @@ ul.tabs {
 
 .card .data-table .data-tr .data-td div {
     max-width: 100%;
-
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .card .data-table .data-tr.data-tr-main .card-id {
@@ -1523,15 +1524,22 @@ ul.tabs {
 
 .card .data-table .data-tr.data-tr-main .card-id.card-id-full {
     position: absolute;
-    border: 1px solid #DFE2EA;
-    bottom: 0;
-    left: 24px;
-    transform: translateY(100%);
-    box-shadow: 4px 4px 20px rgba(129, 136, 153, 0.1);
-    border-radius: 8px;
     background: #FFFFFF;
+    border: 1px solid #DFE2EA;
+    top: 24px;
+    left: 0;
+    border-radius: 8px;
     z-index: 5;
-    padding: 8px;
+    padding: 12px;
+    font-weight: 400;
+font-size: 14px;
+line-height: 150%;
+box-shadow: 4px 4px 20px rgba(129, 136, 153, 0.1);
+max-width: 100%;
+overflow: visible;
+white-space: pre-line;
+word-wrap: break-word;
+word-break: break-all;
 }
 
 .card .data-table .data-tr.data-tr-date {

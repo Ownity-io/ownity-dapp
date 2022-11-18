@@ -73,12 +73,12 @@
         <div class="data-tr data-tr-main"
           v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')"
           >
+          <div v-if="showFullName && item.token_id.length>4" class="card-id card-id-full">{{item.token_id}}</div>    
           <div class="data-td">
             <div class="card-id"
               @mouseover="showFullName = true"
               @mouseout="showFullName = false"
-              >#{{item.token_id}}</div>
-            <div v-if="showFullName" class="card-id card-id-full">{{item.name}}</div>      
+              >#{{item.token_id}}</div>  
             <div>{{item.collection.name}}</div>
           </div>
           <div class="data-td data-td-value">
@@ -93,12 +93,12 @@
         <div class="data-tr data-tr-main"
           v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')"
           >
+          <div v-if="showFullName && item.token_id.length>4" class="card-id card-id-full">{{item.token_id}}</div> 
           <div class="data-td">
             <div class="card-id"
               @mouseover="showFullName = true"
               @mouseout="showFullName = false"
-              >#{{item.token_id}}</div>
-            <div v-if="showFullName" class="card-id card-id-full">{{item.name}}</div>      
+              >#{{item.token_id}}</div>    
             <div>{{item.collection.name}}</div>
           </div>
           <div class="data-td data-td-value"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">
@@ -110,34 +110,6 @@
 
           </div>
         </div>
-
-        <!--  -->
-
-        <!-- <div class="data-tr data-tr-main">
-          <div class="card-id"
-            @mouseover="showFullName = true"
-            @mouseout="showFullName = false"
-            >#{{item.token_id}}</div>
-          <div v-if="showFullName" class="card-id card-id-full">{{item.name}}</div>
-          <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">
-            <div class="icon-value"></div>
-            <span><b>{{abbrNum(priceInCurrency,1)}} {{' '}}</b>ETH</span> 
-          </div>
-          <div class="card-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">
-            <div class="icon-value"></div>
-            {{abbrNum(convertToEther(allBidsAmount),1)}}/<span><b>{{abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH</span> 
-          </div>
-        </div>
-        <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">
-          <div>{{item.collection.name}}</div>
-          <div>≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
-        </div> -->
-
-<!-- 
-        <div class="data-tr" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">
-          <div>{{item.collection.name}}</div>
-          <div>≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
-        </div> -->
         <div class="data-tr data-tr-date" v-if="remainTimeString!=null">
           <div>Ends in {{remainTimeString}}</div>
         </div>
