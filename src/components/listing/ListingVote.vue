@@ -25,7 +25,6 @@
         <div>Members voted: 1/6</div>
         <div class="card-progress progress">
           <div
-            v-if="userProgressValue > 0"
             class="progress-value owner"
             style="width: 40%"
           >
@@ -63,7 +62,6 @@
         <div>Members voted: 1/6</div>
         <div class="card-progress progress">
           <div
-            v-if="userProgressValue > 0"
             class="progress-value owner"
             style="width: 40%"
           >
