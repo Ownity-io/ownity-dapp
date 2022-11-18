@@ -73,7 +73,7 @@
         <div class="data-tr data-tr-main"
           v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')"
           >
-          <div v-if="showFullName && item.token_id.length>4" class="card-id card-id-full">{{item.token_id}}</div>    
+          <div v-if="showFullName && item.token_id.length>8" class="card-id card-id-full">{{item.token_id}}</div>    
           <div class="data-td">
             <div class="card-id"
               @mouseover="showFullName = true"
@@ -93,7 +93,7 @@
         <div class="data-tr data-tr-main"
           v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')"
           >
-          <div v-if="showFullName && item.token_id.length>4" class="card-id card-id-full">{{item.token_id}}</div> 
+          <div v-if="showFullName && item.token_id.length>8" class="card-id card-id-full">{{item.token_id}}</div> 
           <div class="data-td">
             <div class="card-id"
               @mouseover="showFullName = true"
