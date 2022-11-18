@@ -6,7 +6,7 @@
       <div class="card-header">
         <a  class="icon-card-label " :href="linkToMarketplacePage" :style="{backgroundImage: `url(${item.marketplace.logo})`}">
         </a>
-        <button class="btn-like" :class="{'liked':testLike}" @click="testLike = !testLike">
+        <button class="btn-like" :class="{'liked':testLike}" @click="changeLike">
           <i class="i-heart-3-fill"></i>
           <i class="i-heart-3-line"></i>
         </button>
@@ -158,6 +158,7 @@
 
 <script>
 import { ethers } from 'ethers';
+import config from "@/config.json";
 export default {
   data() {
     return {
@@ -171,7 +172,8 @@ export default {
       allBidsAmount:0,
       userBidAmount:0,
       linkToMarketplacePage:null,
-      remainTimeString:null
+      remainTimeString:null,
+      likeChecked: false
     };
   },
   props:[
@@ -262,6 +264,53 @@ export default {
         this.remainTimeString = hours + 'h:' + minutes + 'm:' + seconds + 's';
       }
     },
+    async checkLike(context){
+      if (localStorage.getItem("token") != null & localStorage.getItem("token") != 'null'){
+        if (!this.likeChecked){
+        console.log('check...');
+        let requestLink = `${config.backendApiEntryPoint}is-favorite/?lot=${this.item.id}`;
+        let requestOptions = {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        };
+        let request = await fetch(requestLink, requestOptions);
+        if (request.ok){
+        let requestJson = await request.json();
+        this.testLike = requestJson.data.favorite;}
+        this.likeChecked = true;}
+      }
+      else{
+        this.testLike = false;
+        this.likeChecked = false;
+      }
+    },
+    async changeLike(context){
+      if (localStorage.getItem("token") != null) {
+        let requestLink = `${config.backendApiEntryPoint}favorite/`;
+        let requestOptions = {
+          method: "POST",
+          headers: {
+            accept: "application/json",
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            'lot': this.item.id,
+            'favorite': !this.testLike,
+          }), 
+        };
+        let request = await fetch(requestLink, requestOptions);
+        let requestJson = await request.json();
+        this.testLike = !this.testLike;
+          
+      }else{
+        context.commit('appGlobal/setShowConnectWalletModal',true,{root:true});
+        this.testLike = false;
+      }
+    }
   },  
   async mounted(){
     this.setPriceInCurrency();
@@ -272,6 +321,7 @@ export default {
     this.allProgressValue = (this.allBidsAmount/this.item.price)*100;
     this.userProgressValue = (this.userBidAmount/this.item.price)*100;
     this.updateTimeString();
+    await this.checkLike();
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
     }
@@ -282,6 +332,7 @@ export default {
       this.setUserBidAmount();
       this.allProgressValue = (this.allBidsAmount / this.item.price) * 100;
       this.userProgressValue = (this.userBidAmount / this.item.price) * 100;
+      await this.checkLike();
     }
   }
 };
