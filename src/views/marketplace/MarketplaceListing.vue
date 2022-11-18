@@ -126,15 +126,18 @@
               <div class="section-unfolded-content">
                 <ul class="tabs">
                   <li>
-                    <button class='active-tab'>
+                    <button 
+                      :class="{ 'active-tab': activeTab2 === 'ListingInfo2' }"
+                      @click="letsCheck2('ListingInfo2')"
+                      >
                       <span>Info</span>
                       <span>Info</span>
                     </button>
                   </li>
                   <li>
                     <button
-                      :class="{ 'active-tab': activeTab === 'ListingFractionMarket' }"
-                      @click="letsCheck('ListingFractionMarket')"
+                      :class="{ 'active-tab': activeTab2 === 'ListingFractionMarket' }"
+                      @click="letsCheck2('ListingFractionMarket')"
                       >
                       <span>Fraction market</span>
                       <span>Fraction market</span>
@@ -142,15 +145,17 @@
                   </li>
                   <li>
                     <button
-                      :class="{ 'active-tab': activeTab === 'ListingVote' }"
-                      @click="letsCheck('ListingVote')"
+                      :class="{ 'active-tab': activeTab2 === 'ListingVote' }"
+                      @click="letsCheck2('ListingVote')"
                       >
                       <span>Vote</span>
                       <span>Vote</span>
                     </button>
                   </li>
                 </ul>
-                <div class="section-table-chart">
+              <div class="section-members-info">
+                <!-- flow 1 -->
+                <div v-if="activeTab2 === 'ListingInfo2'" class="section-table-chart">
                   <div class="chart-wrap">
                     <Chart :chartData='chartData'/>
                   </div>
@@ -190,6 +195,11 @@
                     </div>
                   </div>
                 </div>
+                <!-- flow2 -->
+                <ListingFractionMarket v-if="activeTab2 === 'ListingFractionMarket'" />
+                <!-- flow3 -->
+                <ListingVote v-if="activeTab2 === 'ListingVote'" />
+              </div>
               </div>
             </div>
           </section>
@@ -251,8 +261,6 @@
               <ListingInfo v-if="activeTab === 'ListingInfo'" :item="item"/>
               <ListingProperties v-if="activeTab === 'ListingProperties'" :item="item" />
               <ListingAbout v-if="activeTab === 'ListingAbout'" :item="item" />
-              <ListingFractionMarket v-if="activeTab === 'ListingFractionMarket'" />
-              <ListingVote v-if="activeTab === 'ListingVote'" />
               <ListingActivities v-if="activeTab === 'ListingActivities'" />
               <ListingChat v-if="activeTab === 'ListingChat'" />
             </div>
@@ -288,6 +296,7 @@ export default {
   data() {
     return {
       activeTab: "",
+      activeTab2: "",
       srcTest: "../../assets/images/test-bg.png",
       testLike: false,
 
@@ -317,6 +326,7 @@ export default {
   },
   async mounted() {
     this.activeTab = "ListingInfo";
+    this.activeTab2 = "ListingInfo2";
     await this.getAndSetListingInfo();
     this.setPriceInCurrency();
     this.setCurrencyToUsd();
@@ -348,6 +358,9 @@ export default {
     },
     letsCheck(name) {
       this.activeTab = name;
+    },
+    letsCheck2(name) {
+      this.activeTab2 = name;
     },
     async getAndSetListingInfo(){
       await this.$store.dispatch('marketplaceListing/getAndSetItem',this.$route.params.id);
