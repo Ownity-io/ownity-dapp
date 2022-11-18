@@ -274,7 +274,7 @@ import ListingInfo from "@/components/listing/ListingInfo.vue";
 import ListingProperties from "@/components/listing/ListingProperties.vue";
 import ListingAbout from "@/components/listing/ListingAbout.vue";
 import ListingActivities from "@/components/listing/ListingActivities.vue";
-import ListingFractionMarket from "@/components/ListingFractionMarket.vue";
+import ListingFractionMarket from "@/components/listing/ListingFractionMarket.vue";
 import ListingVote from "@/components/listing/ListingVote.vue";
 import ListingChat from "@/components/listing/ListingChat.vue";
 
