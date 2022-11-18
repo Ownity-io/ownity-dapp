@@ -787,8 +787,14 @@ ul.tabs {
     color: #818899;
     font-size: 24px;
 }
-
+.btn-vote i.i-thumb-up-line{
+    color: #2CC07B;
+}
+.btn-vote i{
+    font-size: 24px;
+}
 .btn-filter-mobile span,
+.btn-vote i+span,
 .btn-param i+span,
 .btn-param span+i,
 .input-selected span+i,
@@ -1301,6 +1307,7 @@ ul.tabs {
 }
 
 .card-id,
+.btn-vote,
 .modal-connect-btns .btn,
 .modal-wrapper .btn,
 .cards-list-empty .btn,
@@ -2534,4 +2541,38 @@ ul.tabs {
     transform: translateX(-50%);
     width: fit-content;
     z-index: 10;
+}
+
+.block-vote {
+
+    background: #FFFFFF;
+    border: 1px solid #DFE2EA;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+
+.block-vote+.block-vote {
+    margin-top: 16px;
+}
+
+.vote-progress-container {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.block-vote .progress{
+    width: 100%;
+}
+
+.vote-btn-container{
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
 }
