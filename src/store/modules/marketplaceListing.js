@@ -5,7 +5,8 @@ export default {
   state() {
     return {
         item:null,
-        isLiked:false
+        isLiked:false,
+        likeChecked:false
     };
   },
   getters:{
@@ -14,6 +15,9 @@ export default {
     },
     getLike(state){
       return state.isLiked; 
+    },
+    getChecked(state){
+      return state.likeChecked; 
     }
   },
   mutations:{
@@ -22,6 +26,9 @@ export default {
     },
     setLike(state,_like){
       state.isLiked = _like;
+    },
+    setChecked(state, _checked){
+      state.likeChecked = _checked;
     }
   },
   actions:{
@@ -38,7 +45,9 @@ export default {
       return requestJson.results;
     },
     async checkLike(context){
-      if (localStorage.getItem("token") != null & localStorage.getItem("token") != 'null') {
+      if (localStorage.getItem("token") != null & localStorage.getItem("token") != 'null'){
+        if (!context.getters.getChecked){
+        console.log('check...');
         let requestLink = `${config.backendApiEntryPoint}is-favorite/?lot=${context.getters.getItem.id}`;
         let requestOptions = {
           method: "GET",
@@ -51,9 +60,11 @@ export default {
         if (request.ok){
         let requestJson = await request.json();
         context.commit("setLike", requestJson.data.favorite);}
+        context.commit("setChecked",true);}
       }
       else{
         context.commit("setLike", false);
+        context.commit("setChecked",false);
       }
     },
     async changeLike(context){
