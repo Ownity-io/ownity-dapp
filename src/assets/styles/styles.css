@@ -1596,7 +1596,7 @@ word-break: break-all;
     width: 100%;
     display: grid;
     grid-template-rows: 1fr;
-    grid-template-columns: 1fr,
+    grid-template-columns: 1fr;
 }
 
 .table-activity .thead,
@@ -2570,7 +2570,7 @@ word-break: break-all;
 }
 
 .block-vote {
-
+    padding: 16px;
     background: #FFFFFF;
     border: 1px solid #DFE2EA;
     border-radius: 8px;
@@ -2590,6 +2590,9 @@ word-break: break-all;
     flex-direction: column;
     width: 100%;
 }
+.vote-progress-container .card-progress{
+    margin-top: 4px;
+}
 
 .block-vote .progress {
     width: 100%;
@@ -2601,4 +2604,9 @@ word-break: break-all;
     align-items: center;
     flex-wrap: wrap;
     gap: 16px;
+}
+
+.section-members-info{
+    margin-top: 24px;
+    width: 100%;
 }

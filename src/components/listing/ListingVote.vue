@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="block-vote">
       <div class="vote-data section-deposit-data">
         <a href="#" class="deposit-img"></a>
@@ -36,7 +35,7 @@
         </div>
       </div>
     </div>
-    <div class="block-vote">
+    <!-- <div class="block-vote">
       <div class="vote-data section-deposit-data">
         <a href="#" class="deposit-img"></a>
 
@@ -72,6 +71,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
+    </div> -->
+
 </template>
