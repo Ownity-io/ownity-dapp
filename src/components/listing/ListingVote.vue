@@ -15,11 +15,11 @@
         </div>
       <div class="vote-btn-container">
         <!-- display if user logged and already votes -->
-        <button class="btn btn-cancel" v-if="false">
+        <button class="btn btn-cancel" v-if="userVoted & userLogged">
             Cancel
         </button>
         <!-- display if user logged and not votes yet -->
-        <button class="btn btn-vote" v-else>
+        <button class="btn btn-vote" v-else-if="userLogged">
             <i class="i-thumb-up-line"></i>
             <span>Confirm</span>
         </button>
@@ -133,16 +133,33 @@ export default{
         this.currencyToUsdPrice = 1;
       }
     },
+    async setUserVotedAndLogged(){
+      let userAddress = localStorage.getItem('userAddress');
+      if (userAddress!=null & userAddress!='null'){
+        this.userLogged = true;
+        for (let user ofad this.voting.users){
+          if (user.address == userAddress){
+            this.userVoted=true;
+          }
+        }
+      }
+      else{
+        this.userLogged = false;
+      }
+    }
   },
   data(){
     return{
       currencyToUsdPrice:1,
+      userLogged:false,
+      userVoted:false
     }
   },
   props:['item','voting'],
   async mounted(){
     // console.log(this.voting);  
     await this.setCurrencyToUsd();
+    await this.setUserVotedAndLogged();
   }
 }
 
