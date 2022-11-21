@@ -160,6 +160,14 @@ export default{
     // console.log(this.voting);  
     await this.setCurrencyToUsd();
     await this.setUserVotedAndLogged();
+
+    const delay = (delayInms) => {
+      return new Promise(resolve => setTimeout(resolve, delayInms));
+    }
+    while (true) {
+      await delay(1000);
+      await this.setUserVotedAndLogged();
+    }
   }
 }
 
