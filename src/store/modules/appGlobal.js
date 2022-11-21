@@ -3,6 +3,8 @@ export default {
   state() {
     return {
       showConnectWalletModal: false,
+      showStartVotingModal:false,
+      showVoteConfirmModal:false,
     };
   },
   getters: {
