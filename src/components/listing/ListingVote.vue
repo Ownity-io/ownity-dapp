@@ -137,7 +137,7 @@ export default{
       let userAddress = localStorage.getItem('userAddress');
       if (userAddress!=null & userAddress!='null'){
         this.userLogged = true;
-        for (let user ofad this.voting.users){
+        for (let user of this.voting.users){
           if (user.address == userAddress){
             this.userVoted=true;
           }
