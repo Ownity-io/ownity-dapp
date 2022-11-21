@@ -5,12 +5,12 @@
 
         <div class="deposit-data">
           <div class="deposit-listened">
-            <a href="#">Listing price to OpenSea</a>
+            <a href="#">Listing price to {{this.voting.marketplace}}</a>
           </div>
           <div class="deposit-value">
             <div class="icon-token"></div>
-            <span><b>2 ETH</b></span>
-            <span class="equivalent">(≈ $ 2K)</span>
+            <span><b>{{this.abbrNum(this.toFixedIfNecessary(this.abbrNum(this.convertToEther(this.voting.amount),2),6),6)}} ETH</b></span>
+            <span class="equivalent">(≈ $ {{(this.toFixedIfNecessary(this.abbrNum(this.convertToEther(this.voting.amount)*this.currencyToUsdPrice),2),2)}})</span>
           </div>
         </div>
       <div class="vote-btn-container">
@@ -21,13 +21,17 @@
       </div>
 
       <div class="vote-progress-container">
-        <div>Members voted: 1/6</div>
+        <div>Members voted: {{this.voting.count}}/{{this.item.bids.length}}</div>
         <div class="card-progress progress">
-          <div
+          <!-- <div
             class="progress-value owner"
             style="width: 40%"
+          > -->
+          <div
+            class="progress-value"
+            :style="{width: `${(this.voting.count/this.item.bids.length)*100}%`}"
           >
-            <span>40%</span>
+            <span>{{(this.voting.count/this.item.bids.length)*100}}%</span>
           </div>
           <div class="progress-value" style=" width: 20%, 'padding-left' :  20% ">
             <span>20%</span>
@@ -74,3 +78,66 @@
     </div> -->
 
 </template>
+
+<script>
+import { ethers } from 'ethers';
+
+export default{
+  methods:{
+    abbrNum(number, decPlaces) {
+      decPlaces = Math.pow(10, decPlaces);
+      var abbrev = ["k", "m", "b", "t"];
+      for (var i = abbrev.length - 1; i >= 0; i--) {
+        var size = Math.pow(10, (i + 1) * 3);
+        if (size <= number) {
+          number = Math.round(number * decPlaces / size) / decPlaces;
+          if ((number == 1000) && (i < abbrev.length - 1)) {
+            number = 1;
+            i++;
+          }
+          number += abbrev[i];
+          break;
+        }
+      }
+      return number;
+    },
+    convertToEther(value){
+      return ethers.utils.formatEther(value);
+    },
+    async setCurrencyToUsd(){
+      let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
+      let requestJson = await request.json();
+      try{
+        this.currencyToUsdPrice =  requestJson.quotes[0].priceUsd;
+      }
+      catch{
+        this.currencyToUsdPrice = 1;
+      }
+    },
+    toFixedIfNecessary(value, dp) {
+      return +parseFloat(value).toFixed(dp);
+    },
+    async setCurrencyToUsd(){
+      let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
+      let requestJson = await request.json();
+      try{
+        this.currencyToUsdPrice =  requestJson.quotes[0].priceUsd;
+      }
+      catch{
+        this.currencyToUsdPrice = 1;
+      }
+    },
+  },
+  data(){
+    return{
+      currencyToUsdPrice:1,
+    }
+  },
+  props:['item','voting'],
+  async mounted(){
+    // console.log(this.voting);  
+    await this.setCurrencyToUsd();
+  }
+}
+
+</script>

@@ -198,7 +198,7 @@
                 <!-- flow2 -->
                 <ListingFractionMarket v-if="activeTab2 === 'ListingFractionMarket'" />
                 <!-- flow3 -->
-                <ListingVote v-if="activeTab2 === 'ListingVote'" />
+                <ListingVote v-if="activeTab2 === 'ListingVote'" v-for="voting in this.item.votings" :item="this.item" :voting="voting" />
               </div>
               </div>
             </div>
