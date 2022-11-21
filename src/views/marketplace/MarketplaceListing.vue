@@ -78,6 +78,8 @@
                 </div>
               </div>
               <div class="section-deposit-btns">
+                <!-- <button class="btn btn-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='FULLFILLED'">Start voting</button> -->
+                <button class="btn btn-deposit" v-if="true">Start voting</button>
                 <button class="btn btn-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">Start collecting</button>
                 <button class="btn btn-deposit" v-if="item.marketplace_status=='OPEN' &
                 item.internal_status=='GATHER' & (
@@ -143,7 +145,8 @@
                       <span>Fraction market</span>
                     </button>
                   </li>
-                  <li>
+                  <!-- <li v-if="item.marketplace_status=='OPEN' & item.internal_status=='FULLFILLED'"> -->
+                  <li v-if="true">
                     <button
                       :class="{ 'active-tab': activeTab2 === 'ListingVote' }"
                       @click="letsCheck2('ListingVote')"

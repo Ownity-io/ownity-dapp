@@ -1,11 +1,11 @@
 <template>
     <div class="block-vote">
       <div class="vote-data section-deposit-data">
-        <a href="#" class="deposit-img"></a>
+        <a href="#" class="deposit-img" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></a>
 
         <div class="deposit-data">
           <div class="deposit-listened">
-            <a href="#">Listing price to {{this.voting.marketplace}}</a>
+            <a href="#">Listing price to {{this.voting.marketplace.name}}</a>
           </div>
           <div class="deposit-value">
             <div class="icon-token"></div>
@@ -14,8 +14,14 @@
           </div>
         </div>
       <div class="vote-btn-container">
-        <button class="btn btn-cancel">
+        <!-- display if user logged and already votes -->
+        <button class="btn btn-cancel" v-if="false">
             Cancel
+        </button>
+        <!-- display if user logged and not votes yet -->
+        <button class="btn btn-vote" v-else>
+            <i class="i-thumb-up-line"></i>
+            <span>Confirm</span>
         </button>
       </div>
       </div>
