@@ -1,7 +1,9 @@
 <template>
     <div class="block-vote">
       <div class="vote-data section-deposit-data">
-        <a href="#" class="deposit-img" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></a>
+        <a href="#" class="deposit-img" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}">
+        <span v-if="this.voting.type=='CANCEL'">CANCELED</span>
+        </a>
 
         <div class="deposit-data">
           <div class="deposit-listened">
@@ -15,11 +17,12 @@
         </div>
       <div class="vote-btn-container">
         <!-- display if user logged and already votes -->
-        <button class="btn btn-cancel" v-if="userLogged & this.voting.type=='FULLFILLED'">
+        <button class="btn btn-cancel" v-if="userLogged & ((this.voting.count/this.item.bids.length)*100)>50 & userBidAmount>0 & this.voting.type!='CANCEL'"
+          @click="this.$store.dispatch('appGlobal/setCancellSellVotingModal',true);this.$store.dispatch('appGlobal/setCurrentVoting',this.voting);">
             Cancel
         </button>
         <!-- display if user logged and not votes yet -->
-        <button class="btn btn-vote" v-else-if="userLogged & (this.voting.type=='CANCEL'||this.voting.type=='SELL') & !userVoted & userBidAmount>0"
+        <button class="btn btn-vote" v-else-if="userLogged & ((this.voting.count/this.item.bids.length)*100)<=50 & !userVoted & userBidAmount>0"
         @click="this.$store.dispatch('appGlobal/setShowVoteConfirmModal',true);this.$store.dispatch('appGlobal/setCurrentVoting',this.voting);">
             <i class="i-thumb-up-line"></i>
             <span>Confirm</span>

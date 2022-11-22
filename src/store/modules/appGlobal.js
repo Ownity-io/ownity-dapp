@@ -5,7 +5,8 @@ export default {
       showConnectWalletModal: false,
       showStartVotingModal: false,
       showVoteConfirmModal: false,
-      currentVoting:null
+      currentVoting:null,
+      showCancelSellVotingModal:false
     };
   },
   getters: {
@@ -20,6 +21,9 @@ export default {
     },
     getCurrentVoting(state){
       return state.currentVoting;
+    },
+    getShowCancelSellVotingModal(state){
+      return state.showCancelSellVotingModal;
     }
   },
   mutations: {
@@ -34,6 +38,9 @@ export default {
     },
     setCurrentVoting(state,value){
       state.currentVoting = value;
+    },
+    setCancellSellVotingModal(state,value){
+      state.showCancelSellVotingModal = value;
     }
   },
   actions: {
@@ -48,6 +55,9 @@ export default {
     },
     setCurrentVoting(context,value){
       context.commit("setCurrentVoting", value);
+    },
+    setCancellSellVotingModal(context,value){
+      context.commit("setCancellSellVotingModal", value);
     }
   },
 };

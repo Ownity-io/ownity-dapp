@@ -4,7 +4,7 @@
     <!-- <DepositPartContinue /> -->
     <!-- <DepositCancel /> -->
     <!-- <SellPart /> -->
-    <!-- <SellCancelPart /> -->
+    <SellCancelPart v-if="this.$store.getters['appGlobal/getShowCancelSellVotingModal'] & (this.walletConnected!=null & this.walletConnected!='null')" />
     <!-- <SellCancel /> -->
     <!-- <Claim /> -->
     <!-- <ClaimReward /> -->
