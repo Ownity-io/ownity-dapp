@@ -1,6 +1,15 @@
 <template>
     <div class="page-wrapper page-profile">
         <main>
+            <div v-if="filterMobile" class="filter-mobile-wrap">
+                <div class="filter-mobile-header">
+                    <div>Filters</div>
+                    <button class="btn-close" @click="filterMobile=false">
+                        <i class="i-close-line"></i>
+                    </button>
+                </div>
+                <Filter />
+            </div>
             <div class="container">
                 <section class="section-breadcrumbs">
                     <Breadcrumbs />

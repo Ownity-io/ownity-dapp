@@ -1,3 +1,30 @@
+@media (max-width: 1245px) {
+    
+    .section-nft.with-filter .cards-list-container .card{
+        width: calc(100% / 3 - 16px);
+    }
+    .section-nft:not(.with-filter) .cards-list-container .card {
+        width: calc(100% / 4 - 16px);
+    }
+
+}
+@media (max-width: 991px) {
+    
+    .section-nft.with-filter .cards-list-container .card{
+        width: calc(100% / 2 - 16px);
+    }
+    .section-nft:not(.with-filter) .cards-list-container .card {
+        width: calc(100% / 3 - 16px);
+    }
+
+}
+@media (max-width: 768px) {
+    .section-nft.with-filter .cards-list-container .card,
+    .section-nft:not(.with-filter) .cards-list-container .card {
+        width: calc(100% /2 - 16px);
+    }
+}
+
 @media (max-width: 768px) {
 
     .page-wrapper main {
@@ -23,6 +50,38 @@
     .btn-filter-mobile,
     .btn-param.btn-param-mobile {
         display: flex;
+    }
+
+    .filter-mobile-wrap {
+        position: fixed;
+        top: 0;
+        right: 0;
+        display: block;
+        z-index: 50;
+        background: #FFFFFF;
+        width: 100%;
+        height: 100%;
+    }
+
+    .filter-mobile-wrap .filter {
+        max-width: 100%;
+        padding: 8px 16px;
+    }
+
+    .filter-mobile-header {
+        padding: 16px;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 150%;
+        color: #333333;
+        border-bottom: 1px solid #DFE2EA;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .filter-mobile-header .btn-close{
+        margin-left: auto;
+        color: #818899;
     }
 
     .section-tabs {
@@ -55,11 +114,6 @@
 
     .params-block.params-block-search {
         order: 3;
-    }
-
-    .section-nft.with-filter .cards-list-container .card,
-    .section-nft:not(.with-filter) .cards-list-container .card {
-        width: calc(100% /2 - 16px);
     }
 
     .section-nft-list.card-collapse .card-data {
@@ -208,14 +262,15 @@
         padding-right: 16px;
     }
 
-    .faq{
+    .faq {
         width: 100%;
         margin: -8px 0;
     }
+
     .faq-block {
         max-width: 100%;
-        margin : 8px 0;
-    } 
+        margin: 8px 0;
+    }
 
     .footer-row.footer-row-info {
         padding-top: 16px;
@@ -265,7 +320,8 @@
         margin-top: 24px;
     }
 
-    [class^='section-service-'], [class^='section-listing-']:not(.section-listing-header){
+    [class^='section-service-'],
+    [class^='section-listing-']:not(.section-listing-header) {
         margin-top: 24px;
     }
 }
