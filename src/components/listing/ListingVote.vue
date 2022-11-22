@@ -15,11 +15,11 @@
         </div>
       <div class="vote-btn-container">
         <!-- display if user logged and already votes -->
-        <button class="btn btn-cancel" v-if="userVoted & userLogged">
+        <button class="btn btn-cancel" v-if="userLogged & this.voting.type=='FULLFILLED'">
             Cancel
         </button>
         <!-- display if user logged and not votes yet -->
-        <button class="btn btn-vote" v-else-if="userLogged">
+        <button class="btn btn-vote" v-else-if="userLogged & (this.voting.type=='CANCEL'||this.voting.type=='SELL') & !userVoted">
             <i class="i-thumb-up-line"></i>
             <span>Confirm</span>
         </button>
