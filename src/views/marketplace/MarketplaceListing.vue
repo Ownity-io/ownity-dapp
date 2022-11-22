@@ -80,7 +80,8 @@
               <div class="section-deposit-btns">
                 <!-- <button class="btn btn-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='FULLFILLED'">Start voting</button> -->
                 <button class="btn btn-deposit" v-if="item.marketplace_status=='OPEN' &
-                item.internal_status=='GATHER' & (userBidAmount>0)">Start voting</button>
+                item.internal_status=='GATHER' & (userBidAmount>0)"
+                @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">Start voting</button>
                 <button class="btn btn-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">Start collecting</button>
                 <button class="btn btn-deposit" v-if="item.marketplace_status=='OPEN' &
                 item.internal_status=='GATHER' & (
@@ -340,6 +341,7 @@ export default {
     this.setChartData();
     await this.$store.dispatch('marketplaceListing/checkLike');
     await this.checkLike();
+    console.log(this.item.votings);
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
     }
@@ -368,6 +370,7 @@ export default {
     },
     async getAndSetListingInfo(){
       await this.$store.dispatch('marketplaceListing/getAndSetItem',this.$route.params.id);
+
       this.item = await this.$store.getters['marketplaceListing/getItem'];
     },
     setPriceInCurrency(){

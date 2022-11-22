@@ -9,7 +9,7 @@
           </div>
           <div class="deposit-value">
             <div class="icon-token"></div>
-            <span><b>{{this.abbrNum(this.toFixedIfNecessary(this.abbrNum(this.convertToEther(this.voting.amount),2),6),6)}} ETH</b></span>
+            <span><b>{{this.abbrNum(this.toFixedIfNecessary(this.convertToEther(this.voting.amount),6),2)}} ETH</b></span>
             <span class="equivalent">(≈ $ {{(this.toFixedIfNecessary(this.abbrNum(this.convertToEther(this.voting.amount)*this.currencyToUsdPrice),2),2)}})</span>
           </div>
         </div>

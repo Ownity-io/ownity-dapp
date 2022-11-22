@@ -10,7 +10,7 @@
     <!-- <ClaimReward /> -->
     <!-- <PriceChanged /> -->
     <!-- <VoteConfirm /> -->
-    <!-- <VoteStart /> -->
+    <VoteStart v-if="this.$store.getters['appGlobal/getShowStartVotingModal'] & (this.walletConnected!=null & this.walletConnected!='null')" />
     <!-- <TransSuccess /> -->
     <!-- <BuyPart />  -->
 

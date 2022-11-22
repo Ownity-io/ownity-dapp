@@ -207,6 +207,12 @@ export default {
         localStorage.setItem('connectedWallet',null);
         console.log('WalletConnect Connection Error');
       }
+    },
+    async signMessageWithGlobalProvider(context,message){
+      let globalProvider = await context.getters.getGlobalProvider;
+      let signer = await globalProvider.getSigner();
+      let signed_message = await signer.signMessage(message);
+      return signed_message;
     }
   },
 };
