@@ -19,7 +19,8 @@
             Cancel
         </button>
         <!-- display if user logged and not votes yet -->
-        <button class="btn btn-vote" v-else-if="userLogged & (this.voting.type=='CANCEL'||this.voting.type=='SELL') & !userVoted">
+        <button class="btn btn-vote" v-else-if="userLogged & (this.voting.type=='CANCEL'||this.voting.type=='SELL') & !userVoted & userBidAmount>0"
+        @click="this.$store.dispatch('appGlobal/setShowVoteConfirmModal',true);this.$store.dispatch('appGlobal/setCurrentVoting',this.voting);">
             <i class="i-thumb-up-line"></i>
             <span>Confirm</span>
         </button>
@@ -146,13 +147,28 @@ export default{
       else{
         this.userLogged = false;
       }
-    }
+    },
+    async setUserBidAmount(){
+      let userAddress = localStorage.getItem('userAddress');
+      this.userAddress = userAddress;
+      if (this.item.bids!=null & userAddress!=null & userAddress!='null'){
+        for (let element of this.item.bids){
+          if (element.address == userAddress){
+            this.userBidAmount = parseInt(element.amount);
+            return;
+          }
+        }
+        return
+      }
+      this.userBidAmount=0;      
+    },
   },
   data(){
     return{
       currencyToUsdPrice:1,
       userLogged:false,
-      userVoted:false
+      userVoted:false,
+      userBidAmount:null
     }
   },
   props:['item','voting'],
@@ -160,6 +176,7 @@ export default{
     // console.log(this.voting);  
     await this.setCurrencyToUsd();
     await this.setUserVotedAndLogged();
+    await this.setUserBidAmount();
 
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
@@ -167,6 +184,7 @@ export default{
     while (true) {
       await delay(1000);
       await this.setUserVotedAndLogged();
+      await this.setUserBidAmount();
     }
   }
 }
