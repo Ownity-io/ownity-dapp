@@ -1,31 +1,32 @@
-@media (max-width: 1245px) {
-    
-    .section-nft.with-filter .cards-list-container .card{
-        width: calc(100% / 3 - 16px);
-    }
-    .section-nft:not(.with-filter) .cards-list-container .card {
-        width: calc(100% / 4 - 16px);
+@media (min-width: 1425px) {
+
+    .table-activity .thead .td.td-price,
+    .table-activity .tr .td.td-price,
+    .table-activities .thead .td.td-price,
+    .table-activities .tr .td.td-price {
+        margin-right: 50px;
     }
 
 }
-@media (max-width: 991px) {
-    
-    .section-nft.with-filter .cards-list-container .card{
-        width: calc(100% / 2 - 16px);
-    }
-    .section-nft:not(.with-filter) .cards-list-container .card {
-        width: calc(100% / 3 - 16px);
-    }
 
-}
-@media (max-width: 768px) {
-    .section-nft.with-filter .cards-list-container .card,
-    .section-nft:not(.with-filter) .cards-list-container .card {
-        width: calc(100% /2 - 16px);
+@media (max-width: 1425px) {
+
+    .thead .td,
+    .tr .td {
+        padding: 16px 0;
     }
 }
 
 @media (max-width: 768px) {
+
+    .section-tabs .container .tabs{
+        overflow:  auto hidden;
+    }
+    .section-tabs .container .tabs::-webkit-scrollbar{
+        display: none;
+        height: 0;
+        width: 0;
+    }
 
     .page-wrapper main {
         padding-top: 16px;
@@ -79,7 +80,7 @@
         justify-content: flex-start;
     }
 
-    .filter-mobile-header .btn-close{
+    .filter-mobile-header .btn-close {
         margin-left: auto;
         color: #818899;
     }
@@ -323,5 +324,240 @@
     [class^='section-service-'],
     [class^='section-listing-']:not(.section-listing-header) {
         margin-top: 24px;
+    }
+
+    .profile-header {
+        flex-direction: column;
+    }
+
+    .profile-header .icon-profile {}
+
+    .section-name-h1 .profile-header .btn.link-wrapper {
+        padding-left: 0;
+        padding-right: 0;
+        margin-top: 8px;
+    }
+}
+
+/* ------ CARDS ------- */
+
+@media (max-width: 1245px) {
+
+    .section-nft.with-filter .cards-list-container .card {
+        width: calc(100% / 3 - 16px);
+    }
+
+    .section-nft:not(.with-filter) .cards-list-container .card {
+        width: calc(100% / 4 - 16px);
+    }
+
+}
+
+@media (max-width: 991px) {
+
+    .section-nft.with-filter .cards-list-container .card {
+        width: calc(100% / 2 - 16px);
+    }
+
+    .section-nft:not(.with-filter) .cards-list-container .card {
+        width: calc(100% / 3 - 16px);
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .section-nft.with-filter .cards-list-container .card,
+    .section-nft:not(.with-filter) .cards-list-container .card {
+        width: calc(100% /2 - 16px);
+    }
+}
+
+/* ------ TABLE ------- */
+@media (max-width: 768px) {
+
+    .thead {
+        display: none;
+    }
+
+    .thead .td,
+    .tr .td {
+        padding: 0;
+    }
+
+    .tr {
+        position: relative;
+        padding: 16px 0;
+        padding-right: calc(24px + 16px);
+        display: flex;
+        flex-wrap: wrap;
+        transition: height .25s;
+        overflow: hidden;
+    }
+
+    .table-activity .thead,
+    .table-activity .tr {
+        gap: 12px;
+    }
+
+    .tr .btn-mobile-tr-collapse {
+        display: flex;
+        position: absolute;
+        top: 36px;
+        right: 0;
+    }
+
+    /* .tr.tr-mob-collapse {
+        height: 96px;
+    }
+
+    .tr:not(.tr-mob-collapse) {
+        height: fit-content; 
+    }*/
+
+
+    .tr.tr-mob-collapse .td-date,
+    .tr.tr-mob-collapse .td-tx {
+        height: 0;
+        overflow: 0;
+        padding: 0;
+        display: none;
+    }
+
+    .tr:not(.tr-mob-collapse) .td-date,
+    .tr:not(.tr-mob-collapse) .td-tx {
+        height: fit-content;
+    }
+
+
+
+    .thead .td,
+    .tr .td,
+    .drop-down ul li,
+    .search-results-wrapper ul li,
+    .td-wrap.td-wrap-collection,
+    .modal-nft-data {
+        font-size: 14px;
+    }
+
+    .tr .td-light {
+        font-size: 12px;
+    }
+
+    .td-wrap-collection .collection-img {
+        margin-left: 0;
+    }
+
+    .deposit-data,
+    .collection-data,
+    .search-results-wrapper ul .results-data {
+        padding-left: 8px;
+    }
+
+    .td {
+        width: fit-content;
+    }
+
+    .td-date,
+    .td-tx {
+        min-width: calc(50% - 16px);
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+    }
+
+    .tr .td.td-price,
+    .tr .td.td-date {
+        text-align: left;
+    }
+
+    .td-category {
+        width: 100%;
+        order: -1;
+        flex-direction: row;
+    }
+
+    .td-wrap-category {
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        align-content: center;
+        margin-bottom: -4px;
+    }
+
+    .table-activity .thead .td.td-price,
+    .table-activity .tr .td.td-price,
+    .table-activities .thead .td.td-price,
+    .table-activities .tr .td.td-price {
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .td-mob-title {
+        display: block;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 150%;
+        display: flex;
+        align-items: center;
+        color: #9A9A9A;
+    }
+
+    .td-wrap-category .td-light {
+        margin-top: 0;
+        margin-left: 3px;
+        position: relative;
+    }
+
+    .td-wrap-category .td-light::before {
+        content: '( ';
+    }
+
+    .td-wrap-category .td-light::after {
+        content: ' )';
+    }
+
+    .td-wrap-category i,
+    .td-wrap-price i,
+    .token-value .icon-value,
+    .total-block-value .icon-value,
+    .td-wrap-price .icon-token,
+    .collection-data-link i,
+    .deposit-listened.deposit-listened-link i,
+    .td-wrap-link i {
+        width: 16px;
+        height: 16px;
+        font-size: 16px;
+    }
+
+    .td-wrap-category,
+    .td-wrap-price,
+    .token-value {
+        padding-left: 20px;
+    }
+
+    .td-wrap-category,
+    .token-value,
+    .td-wrap-price,
+    .td-wrap-link {
+        min-height: 16px;
+    }
+
+    .td-wrap-category i {
+        top: 2px;
+    }
+
+    .table-activity .tr:hover {
+        background-color: #FFFFFF;
+    }
+
+    .deposit-img,
+    .collection-img,
+    .modal-nft-data .icon-nft,
+    .search-results-wrapper li .results-icon {
+        height: 40px;
+        width: 40px;
+        min-height: 40px;
+        min-width: 40px;
     }
 }

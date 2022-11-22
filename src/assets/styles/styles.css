@@ -1639,14 +1639,6 @@ word-break: break-all;
     text-align: right;
 }
 
-.table-activity .thead .td.td-price,
-.table-activity .tr .td.td-price,
-.table-activities .thead .td.td-price,
-.table-activities .tr .td.td-price {
-    margin-right: 50px;
-}
-
-
 .thead .td,
 .tr .td {
     padding: 16px;
@@ -1655,6 +1647,17 @@ word-break: break-all;
     line-height: 150%;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.thead .td div:not(.icon-token),
+.tr .td div:not(.icon-token),
+.thead .td div:not(.icon-token) span,
+.tr .td div:not(.icon-token) span{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+
 }
 
 .tab-contain.tab-activities .thead .td {
@@ -1681,7 +1684,7 @@ word-break: break-all;
     color: #9A9A9A;
 }
 
-.td-wrap-sale,
+.td-wrap-category,
 .token-value,
 .td-wrap-price,
 .td-wrap-link {
@@ -1692,8 +1695,21 @@ word-break: break-all;
     width: fit-content;
     max-width: 100%;
 }
+.td-wrap-category{
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+}
 
-.td-wrap-sale i,
+.btn-mobile-tr-collapse{
+    font-size: 24px;
+    color: #818899;
+    display: none;
+}
+
+.td-wrap-category i,
 .td-wrap-price i,
 .token-value .icon-value,
 .total-block-value .icon-value,
@@ -1733,7 +1749,7 @@ word-break: break-all;
     padding-right: 28px;
 }
 
-.td-wrap-sale,
+.td-wrap-category,
 .td-wrap-price,
 .token-value {
     padding-left: 28px;
@@ -1758,7 +1774,7 @@ word-break: break-all;
     right: 0;
 }
 
-.td-wrap-sale i,
+.td-wrap-category i,
 .total-block-value .icon-value,
 .token-value .icon-value,
 .td-wrap-price .icon-token {
@@ -2612,5 +2628,9 @@ word-break: break-all;
 }
 
 .filter-mobile-wrap{
+    display: none;
+}
+
+.td-mob-title{
     display: none;
 }
