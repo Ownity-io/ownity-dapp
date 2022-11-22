@@ -2610,3 +2610,7 @@ word-break: break-all;
     margin-top: 24px;
     width: 100%;
 }
+
+.filter-mobile-wrap{
+    display: none;
+}
