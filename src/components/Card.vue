@@ -71,7 +71,7 @@
     <div class="card-data">
       <div class="data-table">
         <div class="data-tr data-tr-main"
-          v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')"
+          v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & (this.$route.name=='Marketplace' || this.$route.name=='Listing' || this.$route.name=='Collection')"
           >
           <div v-if="showFullName && item.token_id.length>8" class="card-id card-id-full">{{item.token_id}}</div>    
           <div class="data-td">
@@ -91,7 +91,7 @@
           </div>
         </div>
         <div class="data-tr data-tr-main"
-          v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')"
+          v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & (this.$route.name=='Marketplace' || this.$route.name=='Listing' || this.$route.name=='Collection')"
           >
           <div v-if="showFullName && item.token_id.length>8" class="card-id card-id-full">{{item.token_id}}</div> 
           <div class="data-td">
@@ -122,13 +122,13 @@
           <div class="btn" 
           v-if="item.marketplace_status=='OPEN' & 
           item.internal_status=='OPEN' 
-          & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">
+          & (this.$route.name=='Marketplace' || this.$route.name=='Listing' || this.$route.name=='Collection')">
             Start collecting
           </div>
           <div class="btn" 
           v-if="item.marketplace_status=='OPEN' & 
           item.internal_status=='GATHER' 
-          & (this.$route.name=='Marketplace' || this.$route.name=='Listing')
+          & (this.$route.name=='Marketplace' || this.$route.name=='Listing' || this.$route.name=='Collection')
           & userBidAmount<=0">Deposit part
           </div>
         </a>

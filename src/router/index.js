@@ -26,8 +26,8 @@ const routes = [
                 component: () => import('@/views/marketplace/MarketplaceListing.vue'),
             },
             {
-                path: '/collections',
-                name: 'Collections',
+                path: '/collection/:contract_address',
+                name: 'Collection',
                 component: () => import('@/views/marketplace/MarketplaceCollections.vue'),
             },
             // {
