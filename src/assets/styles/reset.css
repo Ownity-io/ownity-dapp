@@ -219,6 +219,7 @@ button > a {
 ::-webkit-calendar-picker-indicator {
     display: none;
 }
-input[type="checkbox"]{
+input[type="checkbox"],
+input[type="radio"]{
     display: none;
 }

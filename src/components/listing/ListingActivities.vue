@@ -10,7 +10,7 @@
                 
             <div class="tr">
                 <div class="td">
-                    <div class="td-wrap td-wrap-sale">
+                    <div class="td-wrap td-wrap-category">
                         <i class="i-shopping-bag-line"></i>
                         <span>Sale</span>
                     </div>

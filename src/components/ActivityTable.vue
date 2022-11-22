@@ -9,7 +9,7 @@
                 <div class="td td-date">Date</div>
             </div>
                 
-            <div class="tr">
+            <div class="tr" :class="{'tr-mob-collapse' : !rowMobileCollapse}">
                 <div class="td">
                     <div class="td-wrap td-wrap-collection">
                         <div class="collection-img"></div>
@@ -19,10 +19,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="td">
-                    <div class="td-wrap td-wrap-sale">
+                <div class="td td-category">
+                    <div class="td-wrap td-wrap-category">
+                        <i class="i-coupon-3-line"></i>
+                        <div>Collection</div>
+                        <div class="td-light">Start</div>
+                    </div>
+                    <div class="td-wrap td-wrap-category">
+                        <i class="i-coupon-3-line"></i>
+                        <div>Collection</div>
+                        <div class="td-light">Сancellation</div>
+                    </div>
+                    <div class="td-wrap td-wrap-category">
                         <i class="i-shopping-bag-line"></i>
-                        <span>Sale</span>
+                        <div>Sale</div>
+                    </div>
+                    <div class="td-wrap td-wrap-category">
+                        <i class="i-volume-vibrate-line"></i>
+                        <div>Voite</div>
+                        <div class="td-light">Start</div>
                     </div>
                 </div>
                 <div class="td td-price">
@@ -34,18 +49,33 @@
                         <span class="td-light">≈ $ 1000</span>
                     </div>
                 </div>
-                <div class="td"> 
+                <div class="td td-tx"> 
+                    <div class="td-mob-title">Tx</div>
                     <a class="td-wrap td-wrap-link" href="" target="_blank" rel="nofollow">
                         <span>a1565...d48d</span>
                         <i class="i-external-link-line"></i>
                     </a> 
                 </div>
                 <div class="td td-date">
+                    <div class="td-mob-title">Date</div>
                     <div class="td-wrap">
                         5 minutes ago
                     </div>
                 </div>
+                <button class="btn-mobile-tr-collapse" @click="rowMobileCollapse = !rowMobileCollapse">
+                    <i class="i-arrow-down-s-line"></i>
+                </button>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    data(){
+        return{
+            rowMobileCollapse: false,
+        }
+    }
+}
+</script>

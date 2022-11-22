@@ -1,5 +1,25 @@
 <template>
   <div class="filter">
+
+    <!--  ------------------ NEW : switcher-------------------- -->
+    <div class="filter-section" :class="{ 'collapse-section': filterSection0 }">
+      <button class="filter-section-name" @click="filterSection0 = !filterSection0">
+        <span>Status</span>
+        <i class="i-arrow-up-s-line"></i>
+      </button>
+      <ul class="filter-ul">
+        <li class="filter-li" >
+          <div class="input-checkbox input-switcher">
+            <input type="checkbox" id="input-switch"/>
+            <label for="input-switch">
+              <span>Live gather</span>
+              <div class="input-switch"></div>
+            </label>
+          </div>
+        </li>
+      </ul>
+    </div>
+    
     <div class="filter-section" :class="{ 'collapse-section': filterSection1 }" v-if="false">
       <button class="filter-section-name" @click="filterSection1 = !filterSection1">
         <span>Status</span>

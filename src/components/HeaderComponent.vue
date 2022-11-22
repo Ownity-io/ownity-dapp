@@ -9,9 +9,24 @@
                 <div class="header-nav">
                     <nav>
                         <ul class="">
-                            <li><a :class="{active: headerItemActive1}" href=""><span>Marketplace</span><span>Marketplace</span></a></li>
-                            <li><a :class="{active: headerItemActive2}" href=""><span>Collections</span><span>Collections</span></a></li>
-                            <li><a :class="{active: headerItemActive3}" href=""><span>Help</span><span>Help</span></a></li>
+                            <li>
+                                <router-link :class="active" :to="{name: 'Marketplace'}">
+                                    <span>Marketplace</span>
+                                    <span>Marketplace</span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link :class="active" :to="{name: 'Collections'}">
+                                    <span>Collections</span>
+                                    <span>Collections</span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link :class="active" :to="{name: 'Marketplace'}">
+                                    <span>Help</span>
+                                    <span>Help</span>
+                                </router-link>
+                            </li>
                         </ul>
                     </nav>
                     <div class="btn-container" v-if="walletConnected==null||walletConnected=='null'">
@@ -48,9 +63,9 @@ import Search from '@/components/Search.vue'
 export default {
     data(){
         return{
-            headerItemActive1:true,
-            headerItemActive2:false,
-            headerItemActive3:false,
+            // headerItemActive1:true,
+            // headerItemActive2:false,
+            // headerItemActive3:false,
             walletConnected:1
         }
     },
