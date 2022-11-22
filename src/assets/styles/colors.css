@@ -2,7 +2,7 @@
 .header-nav ul li a:hover:after,
 .tabs .active-tab::after,
 .header-nav ul li button.active:after {
-    background: #12AC64;
+    background: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%);
 }
 
 .td-wrap-completed,
@@ -28,6 +28,7 @@
     background-color: #F8F9FD;
 }
 
+.btn.btn-clear,
 .card-members-btn,
 .section-deposit-btns .btn.btn-get,
 .card-data .btn-container .btn,
@@ -44,8 +45,9 @@
 .card-data .btn-container .btn:not(.btn-card-completed):hover,
 .section-deposit-btns .btn.btn-deposit,
 .header-nav .btn-container .btn.btn-connect {
-    background: #2CC07B;
-    border: 2px solid #2CC07B;
+    /* background: #2CC07B;
+    border: 2px solid #2CC07B; */
+    background: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%);
     color: #FFFFFF;
 }
 
@@ -54,8 +56,9 @@
 .footer-form .btn-subscribe:hover,
 .section-deposit-btns .btn.btn-deposit:hover,
 .header-nav .btn-container .btn.btn-connect:hover {
-    background: #12AC64;
-    border: 2px solid #12AC64;
+    /* background: #12AC64;
+    border: 2px solid #12AC64; */
+    background: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%);
 }
 
 .switch,
