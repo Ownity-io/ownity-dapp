@@ -26,6 +26,30 @@
                 <div class="container">
                     <div class="profile-header">
                         <div class="icon-profile"></div>
+                        <div class="drop-down-mobile">                                
+                            <div class="drop-down-container" 
+                                :class="{'unfolded' : !mobileDropDown }">
+                                <button class="btn-drop-down" @click="mobileDropDown = !mobileDropDown">
+                                    <i class="i-more-2-line"></i>
+                                </button>
+                                <div class="drop-down">
+                                    <ul>
+                                        <li>
+                                            <i class="i-share-line"></i>
+                                            <span>Edit</span>
+                                        </li>
+                                        <li>
+                                            <i class="i-logout-box-line"></i>
+                                            <span>Share</span>
+                                        </li>
+                                        <li>
+                                            <i class="i-logout-box-line"></i>
+                                            <span>Log Out</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                         <div class="profile-data">
                             <div class="section-name-h1">
                                 {{this.$store.getters['walletsAndProvider/getUserShortAddress']}}
@@ -173,6 +197,7 @@ export default {
             testOpenSort: false,
             filter: true,
             filterMobile: false,
+            mobileDropDown: false,
         };
     },
     components:{

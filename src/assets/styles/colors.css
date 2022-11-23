@@ -64,12 +64,14 @@
 .switch,
 .btn-param,
 .btn-log-out,
+.btn-drop-down,
 .input-selected,
 .btn-selected-filter,
 .section-listing-main,
 .profile-container-btns button,
 .tab-blocks-list .tab-block,
 .sort.unfolded .drop-down,
+.drop-down-container .drop-down,
 .input-select-wrap.unfolded .drop-down,
 .header-nav .btn-container .btn.btn-address {
     background: #FFFFFF;
@@ -77,6 +79,7 @@
 }
 
 .drop-down li:hover,
+.btn-drop-down:hover,
 .btn-selected-filter:hover,
 .input-checkbox label:hover .i-check-line,
 .btn-log-out:hover,
