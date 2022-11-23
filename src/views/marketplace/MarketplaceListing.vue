@@ -25,6 +25,30 @@
                   </span>
                 </div>
               </div>
+              <div class="drop-down-mobile">                                
+                  <div class="drop-down-container" 
+                      :class="{'unfolded' : mobileDropDown }">
+                      <button class="btn-drop-down" @click="mobileDropDown = !mobileDropDown">
+                          <i class="i-more-2-line"></i>
+                      </button>
+                      <div class="drop-down">
+                          <ul>
+                              <li>
+                                  <i class="i-share-line"></i>
+                                  <span>Edit</span>
+                              </li>
+                              <li>
+                                  <i class="i-logout-box-line"></i>
+                                  <span>Share</span>
+                              </li>
+                              <li>
+                                  <i class="i-logout-box-line"></i>
+                                  <span>Log Out</span>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
               <div class="listing-additional-options">
                 <div class="btn-wrap">
                   <!-- <button class="btn btn-block">
@@ -52,6 +76,15 @@
             <div class="listing-name">{{item.name}}</div>
             <div class="owned-row">
               Owned by <a :href="config.etherscanAddressUrlStart+item.owner" target="_blank">{{String(item.owner).substring(0,6)+'...'+String(item.owner).substring(38,42)}}</a> <!-- TODO: href to etherscan-->
+            </div>
+          </section>
+
+          <!-- MOBILE IMG -->
+          
+          <section class="section-card-img section-card-img-mobile">
+            <div class="card-img-wrap">
+              <img v-if="!item.media" src="@/assets/images/img-not-found.svg" alt="img" />
+              <img v-else :src="item.media" alt="img" />
             </div>
           </section>
 
@@ -304,6 +337,7 @@ export default {
       activeTab2: "",
       srcTest: "../../assets/images/test-bg.png",
       testLike: false,
+      mobileDropDown: false,
 
       collapseMembers: false,
       item:null,
