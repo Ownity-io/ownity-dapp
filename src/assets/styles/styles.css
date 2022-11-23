@@ -453,7 +453,7 @@ ul.tabs {
 }
 
 .tabs li button {
-    padding: 12px;
+    padding: 12px 0;
     min-width: 152px;
     position: relative;
     border-radius: 8px 8px 0px 0px;
@@ -547,7 +547,7 @@ ul.tabs {
 }
 
 .profile-header .drop-down,
-.listing-header .drop-down {
+.listing-name .drop-down {
     right: 0;
     bottom: -8px;
 }
@@ -646,18 +646,20 @@ ul.tabs {
 .drop-down-container.unfolded .drop-down ul li {
     position: relative;
 }
+
 .drop-down-container.unfolded .drop-down ul li:not(:first-child)::after {
-    background:  #DFE2EA;
+    background: #DFE2EA;
     position: absolute;
     content: '';
     height: 1px;
-    width: calc( 100% - 12px * 2);
+    width: calc(100% - 12px * 2);
     left: 50%;
     transform: translateX(-50%);
     top: 0;
     opacity: 0;
 }
-.drop-down-container.unfolded .drop-down ul li:not(:first-child)::after{
+
+.drop-down-container.unfolded .drop-down ul li:not(:first-child)::after {
     opacity: 1;
 }
 
@@ -1393,6 +1395,14 @@ ul.tabs {
     line-height: 150%;
 }
 
+.modal-connect-btns .btn,
+.modal-wrapper .btn,
+.cards-list-empty .btn,
+.card-data .btn-container .btn,
+.btn.btn-submit {
+    min-height: 48px;
+}
+
 .card-data .btn-container .btn.btn-card-completed {
     font-weight: 400;
     border-color: transparent;
@@ -1972,7 +1982,7 @@ ul.tabs {
     /* max-width: 586px; */
 }
 
-.card-listing .section-card-img.section-card-img-mobile{
+.card-listing .section-card-img.section-card-img-mobile {
     display: none;
 }
 
@@ -1986,6 +1996,31 @@ ul.tabs {
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: center;
+}
+
+.section-card-img.section-card-img-mobile .card-img-wrap .card-header {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 16px;
+}
+
+.card-header .btn-like {
+    margin-left: auto;
+}
+
+.section-card-img.section-card-img-mobile .card-img-wrap .card-header .btn-like {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+}
+
+.section-card-img.section-card-img-mobile .card-img-wrap .card-header .btn-like i {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
 }
 
 .card-img-wrap img {
@@ -2118,6 +2153,7 @@ ul.tabs {
     justify-content: flex-start;
     align-items: flex-start;
     gap: 32px;
+    width: 100%;
 }
 
 .tab-blocks-list {
@@ -2144,8 +2180,10 @@ ul.tabs {
 .tab-blocks-list .tab-block .value {
     font-size: 16px;
     color: #333333;
+}
+
+.tab-blocks-list .tab-block span:not(:first-child) {
     margin-top: 8px;
-    margin-bottom: 8px;
 }
 
 .section-listing-main {
@@ -2708,6 +2746,7 @@ ul.tabs {
 }
 
 .drop-down-mobile,
+.btn-mobile-wrap,
 .filter-mobile-wrap {
     display: none;
 }
@@ -2737,8 +2776,10 @@ ul.tabs {
     top: 0;
     right: 0;
 }
-.listing-header .drop-down-mobile {
-    position: relative;margin-left: auto;
+
+.listing-name .drop-down-mobile {
+    position: relative;
+    margin-left: auto;
 }
 
 /* .profile-header .btn-drop-down i.i-more-2-line, */

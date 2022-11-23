@@ -15,6 +15,10 @@
     .tr .td {
         padding: 16px 0;
     }
+
+    .card-listing {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 @media (max-width: 768px) {
@@ -27,10 +31,23 @@
     /* ----------- LISTING PAGE ----------- */
 
     .listing-main,
-    .card-listing{
+    .card-listing {
         display: flex;
         flex-direction: column;
         width: 100%;
+    }
+
+
+    .listing-name {
+        font-size: 24px;
+        line-height: 28px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 100%;
+        gap: 16px;
     }
 
     .card-listing .section-card-img:not(.section-card-img-mobile) {
@@ -42,7 +59,110 @@
         position: relative;
         top: 0;
         margin-top: 24px;
+        /* margin-bottom: 24px; */
+    }
+
+    .section-deposit-btns,
+    .section-deposit-data {
+        width: 100%;
+    }
+
+    .section-deposit-btns .btn {
+        flex-grow: 1;
+    }
+
+    [class^='section-listing-']:not(.section-listing-header).section-listing-tabs {
+        /* margin-top: 0; */
+    }
+
+
+    .section-deposit-btns {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .section-listing-main .section-deposit {
+        gap: 16px;
+    }
+
+
+    .section-listing-main .deposit-data {
+        padding-left: 0;
+        width: 100%;
+    }
+
+    .section-deposit-data {
+        position: relative;
+    }
+
+    .section-deposit-data .deposit-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        min-height: 24px;
+    }
+
+    .deposit-listened.deposit-listened-link {
+        margin-left: 32px;
+    }
+
+    .section-listing-main .deposit-value {
+        font-size: 18px;
+        margin-top: 12px;
+    }
+
+    .tab-blocks-list .tab-block span:not(:first-child) {
+        margin-top: 4px;
+    }
+
+    .tab-blocks-list .tab-block {
+        padding: 8px;
+        font-weight: 400;
+        font-size: 12px;
+    }
+
+    .tab-blocks-list .tab-block .value {
+        font-size: 14px;
+    }
+
+    .tab-contain .collection-statistics {
+        gap: 16px;
+    }
+
+    .tab-contain .collection-statistics li {
+        width: 50%;
+        max-width: calc(50% - 8px);
+        flex-grow: 1;
+    }
+
+    .chart-wrap,
+    .table-chart-data{
+        width: 100%;
+    }
+
+    .table-chart-data{
+        padding-left: 0;
+    }
+    .section-table-chart{
+        flex-direction: column;
+    }
+
+    .chart-wrap .dx-visibility-change-handler{
         margin-bottom: 24px;
+        max-height: 240px;
+    }
+
+    .section-listing-main .collection-data-link,
+    .section-listing-main .deposit-listened {
+        margin-bottom: 0;
+    }
+
+    .tab-info .data-table .data-td {
+        max-width: fit-content;
+        width: fit-content;
     }
 
     .section-listing-main {
@@ -64,6 +184,7 @@
     .section-tabs .container .tabs {
         overflow: auto hidden;
     }
+
     .section-listing-tabs .tabs::-webkit-scrollbar,
     .section-tabs .container .tabs::-webkit-scrollbar {
         display: none;
@@ -275,14 +396,19 @@
         margin-top: 0;
     }
 
-    .modal-connect-btns .btn,
-    .modal-wrapper .btn,
     .cards-list-empty .btn,
     .card-data .btn-container .btn {
         font-weight: 400;
         font-size: 12px;
         line-height: 150%;
     }
+
+    /* .modal-connect-btns .btn,
+    .modal-wrapper .btn{
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 150%;
+    } */
 
     .btn {
         padding: 8px 12px;
@@ -471,6 +597,51 @@
     }
 }
 
+/* ----------------- MODALS ---------------- */
+
+@media (max-width: 768px) {
+    .modal-header {
+        padding: 16px;
+        border-bottom: 1px solid #DFE2EA;
+    }
+
+    .modal-wrapper {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+        height: 100%;
+    }
+
+    .modal-connect .modal-wrapper {
+        max-width: 100%;
+    }
+
+    .modal-connect .modal-content {
+        padding: 24px 16px 0;
+    }
+
+    .modal-header-img,
+    .modal-header,
+    .modal-content,
+    .modal-section-total {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .modal-section-total {
+        margin-left: -16px;
+        margin-right: -16px;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        background: #F8F9FD;
+    }
+
+    .modal {
+        padding: 0;
+        justify-content: stretch;
+    }
+}
+
 @media (max-width: 768px) {
 
     .recommendations-list li,
@@ -556,9 +727,23 @@
     }
 
     .deposit-data,
-    .collection-data,
+    .td-wrap-collection .collection-data,
     .search-results-wrapper ul .results-data {
         padding-left: 8px;
+    }
+
+    .recommendations-wrap .btn-mobile-wrap {
+        display: flex;
+        width: 100%;
+    }
+
+    .recommendations-wrap .btn-mobile-wrap .btn-router-to {
+        width: 100%;
+        margin-top: 24px;
+    }
+
+    .recommendations-wrap .header-title-btn .btn-wrap {
+        display: none;
     }
 
     .td {
@@ -659,7 +844,7 @@
     }
 
     .deposit-img,
-    .collection-img,
+    .td-wrap-collection .collection-img,
     .modal-nft-data .icon-nft,
     .search-results-wrapper li .results-icon {
         height: 40px;
