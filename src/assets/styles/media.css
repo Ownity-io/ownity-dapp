@@ -19,6 +19,12 @@
 
 @media (max-width: 768px) {
 
+
+    .drop-down-mobile {
+        display: flex;
+    }
+
+
     .section-tabs .container .tabs {
         overflow: auto hidden;
     }
