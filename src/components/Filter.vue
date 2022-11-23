@@ -148,6 +148,7 @@
 export default {
   data() {
     return {
+      filterSection0: false,
       filterSection1: false,
       filterSection2: false,
       filterSection3: false,
