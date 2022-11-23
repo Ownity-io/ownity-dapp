@@ -144,5 +144,10 @@ export default {
     Breadcrumbs,
     SelectedFilters,
   },
+  async mounted(){
+    await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
+    await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
+    await this.$store.dispatch('marketplace/fetchAndSetMarketplaces');
+  }
 };
 </script>

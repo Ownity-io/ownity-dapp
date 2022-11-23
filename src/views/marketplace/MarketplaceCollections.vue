@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main v-if="collection">
     <div v-if="filterMobile" class="filter-mobile-wrap">
       <div class="filter-mobile-header">
         <div>Filters</div>
@@ -24,19 +24,19 @@
       <div class="container">
         <div class="collection">
           <div class="collection-wrap">
-            <div class="collection-img"></div>
+            <div class="collection-img" :style="{backgroundImage: `url(${collection.logo})`}"></div>
             <div class="collection-data">
               <span class="collection-id collection-label">
                 <!-- <span>{{ item.collection.name }}</span> -->
-                <span>item.collection.name</span>
+                <span>{{collection.name}}</span>
                 <i class="i-checkbox-circle-fill"></i>
               </span>
               <div class="links-wrap">
                 <div class="collection-data-link">
-                  <a href="#">0xBC4C...f13D</a><i class="i-external-link-line"></i>
+                  <a :href="config.etherscanAddressUrlStart+collection.contract_address">{{collection.contract_address.substring(0,6)+'...'+collection.contract_address.substring(38,42)}}</a><i class="i-external-link-line"></i>
                 </div>
                 <div class="collection-data-link">
-                  <a href="#">Official Site</a><i class="i-external-link-line"></i>
+                  <a :href="collection.web">Official Site</a><i class="i-external-link-line"></i>
                 </div>
               </div>
             </div>
@@ -47,39 +47,39 @@
               <div class="name">Floor price</div>
               <div class="token-value">
                 <div class="icon-value"></div>
-                <span>58.40 ETH</span>
+                <span>{{abbrNum(toFixedIfNecessary(collection.floor_price,2),0)}} ETH</span>
               </div>
             </li>
             <li>
               <div class="name">Volume 24h</div>
               <div class="token-value">
                 <div class="icon-value"></div>
-                <span>1.076K ETH</span>
+                <span>{{abbrNum(toFixedIfNecessary(collection.volume_24h,2),0)}} ETH</span>
               </div>
             </li>
             <li>
               <div class="name">Volume all time</div>
               <div class="token-value">
                 <div class="icon-value"></div>
-                <span>56.79K ETH</span>
+                <span>{{abbrNum(toFixedIfNecessary(collection.volume_all,2),0)}} ETH</span>
               </div>
             </li>
             <li>
               <div class="name">Holders</div>
               <div>
-                <span>6.4K</span>
+                <span>{{abbrNum(collection.holders,0)}}</span>
               </div>
             </li>
             <li>
               <div class="name">Supply</div>
               <div>
-                <span>10K</span>
+                <span>{{abbrNum(collection.total_supply,1)}}</span>
               </div>
             </li>
             <li>
               <div class="name">Royalty</div>
               <div>
-                <span>2.5%</span>
+                <span>{{collection.royalty}}%</span>
               </div>
             </li>
           </ul>
@@ -187,13 +187,13 @@
 </template>
 
 <script>
+import config from '@/config.json'
 import Search from "@/components/Search.vue";
 import Filter from "@/components/Filter.vue";
 import ListCards from "@/components/ListCards.vue";
 import ActivityTable from "@/components/ActivityTable.vue";
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
-import SelectedFilters from "@/components/SelectedFilters.vue";
-
+import SelectedFilters from "@/components/SelectedFilters.vue"; 
 export default {
   data() {
     return {
@@ -202,6 +202,8 @@ export default {
       testOpenSort: false,
       filter: true,
       filterMobile: false,
+      collection:null,
+      config:config
     };
   },
   components: {
@@ -212,5 +214,48 @@ export default {
     Breadcrumbs,
     SelectedFilters,
   },
+  async mounted(){
+    await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address);
+    await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
+    await this.$store.dispatch('marketplace/fetchAndSetMarketplaces');
+    await this.getAndSetCollection();
+  },
+  methods:{
+    async getAndSetCollection(){
+      let requestUrl = `${config.backendApiEntryPoint}nft-collections/?contract_address=${this.$route.params.contract_address}`;
+      let request = await fetch(requestUrl);
+      let requestJson = await request.json();
+      this.collection = requestJson[0];
+    },
+    abbrNum(number, decPlaces) {
+      decPlaces = Math.pow(10, decPlaces);
+      var abbrev = ["k", "m", "b", "t"];
+      for (var i = abbrev.length - 1; i >= 0; i--) {
+        var size = Math.pow(10, (i + 1) * 3);
+        if (size <= number) {
+          number = Math.round(number * decPlaces / size) / decPlaces;
+          if ((number == 1000) && (i < abbrev.length - 1)) {
+            number = 1;
+            i++;
+          }
+          number += abbrev[i];
+          break;
+        }
+      }
+      return number;
+    },
+    convertToEther(value) {
+      try {
+        return ethers.utils.formatEther(String(value));
+      }
+      catch {
+        console.log('ethers error');
+      }
+    },
+    toFixedIfNecessary(value, dp) {
+      return +parseFloat(value).toFixed(dp);
+    },
+  }
+
 };
 </script>

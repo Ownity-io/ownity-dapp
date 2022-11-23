@@ -79,7 +79,7 @@
               @mouseover="showFullName = true"
               @mouseout="showFullName = false"
               >#{{item.token_id}}</div>  
-            <div>{{item.collection.name}}</div>
+            <a :href="'/collection/'+item.collection.contract_address">{{item.collection.name}}</a>
           </div>
           <div class="data-td data-td-value">
             <div class="card-value">

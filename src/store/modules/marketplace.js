@@ -21,6 +21,7 @@ export default {
       currentMaxPrice: null,
       currentMarketplace: null,
       currentCollection: null,
+      currentlyGatehring:false
     };
   },
   getters: {
@@ -93,6 +94,9 @@ export default {
       if (state.currentMinPrice!=null){count++;}
       if (state.currentMaxPrice!=null){count++;}
       return count;
+    },
+    getCurrentlyGathering(state){
+      return state.currentlyGatehring;
     }
   },
   mutations: {
@@ -134,14 +138,23 @@ export default {
     setCurrentCollectionContractAddress(state, _collectionContractAddress) {
       state.currentCollectionContractAddress = _collectionContractAddress;
     },
+    setCurrentlyGathering(state,value){
+      state.currentlyGatehring = value;
+    }
   },
   actions: {
     //listings
-    async fetchAndSetListingsStartInfo(context) {
+    async fetchAndSetListingsStartInfo(context,_collectionContractAddress = null) {
       let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.listingsPerPage}`;
-      if (context.getters.getCurrentCollectionContractAddress != null) {
-        requestUrl += `&collection=${context.getters.getCurrentCollectionContractAddress}`;
+      if (_collectionContractAddress==null){
+        if (context.getters.getCurrentCollectionContractAddress != null) {
+          requestUrl += `&collection=${context.getters.getCurrentCollectionContractAddress}`;
+        }
       }
+      else{
+        requestUrl += `&collection=${_collectionContractAddress}`;
+      }
+      
       if (context.getters.getCurrentMarketplaceId != null) {
         requestUrl += `&marketplace=${context.getters.getCurrentMarketplaceId}`;
       }
@@ -152,6 +165,11 @@ export default {
         requestUrl += `&price_lt=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
       }
       requestUrl += `&marketplace_status=OPEN`;
+      console.log(context.getters.getCurrentlyGathering);
+      if (context.getters.getCurrentlyGathering){
+        requestUrl+='&internal_status=GATHER';
+      }
+      console.log(requestUrl)
       let request = await fetch(requestUrl);
       let requestCode = request.ok;
       if (requestCode) {
@@ -211,6 +229,10 @@ export default {
       context.commit("setCurrentCollectionContractAddress",null);
       context.commit("setCurrentMinPrice", null);
       context.commit("setCurrentMaxPrice", null);
+      context.commit("setCurrentlyGathering",false);
+    },
+    async setCurrentlyGathering(context,value){
+      context.commit("setCurrentlyGathering", value);
     }
 
   },

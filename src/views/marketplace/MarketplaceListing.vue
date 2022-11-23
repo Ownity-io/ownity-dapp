@@ -17,7 +17,7 @@
           <section class="section-listing-header">
             <div class="listing-header">
               <div class="collection-wrap">
-                <div class="collection-img"></div>
+                <a class="collection-img" :href="'/collection/'+item.collection.contract_address" :style="{backgroundImage:`url(${item.collection.logo})`}"></a>
                 <div class="collection-data">
                   <span class="collection-id collection-label">
                     <span>{{item.collection.name}}</span>

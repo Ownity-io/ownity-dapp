@@ -10,7 +10,7 @@
     </div>
     <div class="cards-list-empty" v-if="this.$store.getters['marketplace/getListingsResults'].length==0">
       <div class="title">Oops! Nothing here. </div>
-      <button class="btn" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')">
+      <button class="btn" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.fetchAndSetListingsStartInfo()">
         Back to all items
       </button>
     </div>
@@ -42,6 +42,14 @@ export default {
       let isVisible = this.checkVisibility();
       if (isVisible & this.$store.getters['marketplace/getListingsResults'].length>0){
         await this.fetchAndSetListingsNextInfo();
+      }
+    },
+    async fetchAndSetListingsStartInfo(){
+      if (this.$route.name == 'Marketplace'){
+        this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
+      }
+      if (this.$route.name == 'Collection'){
+        this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address)
       }
     }
   },

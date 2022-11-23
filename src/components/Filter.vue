@@ -2,7 +2,7 @@
   <div class="filter">
 
     <!--  ------------------ NEW : switcher-------------------- -->
-    <div class="filter-section" :class="{ 'collapse-section': filterSection0 }">
+    <div class="filter-section" :class="{ 'collapse-section': filterSection0 }" v-if="this.$route.name=='Collection'">
       <button class="filter-section-name" @click="filterSection0 = !filterSection0">
         <span>Status</span>
         <i class="i-arrow-up-s-line"></i>
@@ -10,7 +10,7 @@
       <ul class="filter-ul">
         <li class="filter-li" >
           <div class="input-checkbox input-switcher">
-            <input type="checkbox" id="input-switch"/>
+            <input type="checkbox" id="input-switch" v-model="currentlyGathering" @change="fetchAndSetListingsStartInfo"/>
             <label for="input-switch">
               <span>Live gather</span>
               <div class="input-switch"></div>
@@ -86,7 +86,7 @@
         </li>
       </ul>
     </div>
-    <div class="filter-section" :class="{ 'collapse-section': filterSection2 }">
+    <div class="filter-section" :class="{ 'collapse-section': filterSection2 }" v-if="this.$route.name=='Marketplace'">
       <button class="filter-section-name" @click="filterSection2 = !filterSection2">
         <span>Collection</span>
         <i class="i-arrow-up-s-line"></i>
@@ -156,7 +156,14 @@ export default {
   },
   methods:{
     async fetchAndSetListingsStartInfo() {
-      await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
+      if (this.$route.name == 'Marketplace'){
+        await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
+      }
+      else if (this.$route.name == 'Collection'){
+        console.log(this.currentlyGathering);
+        await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address);
+      }
+      
     },
   },
   computed:{
@@ -210,6 +217,14 @@ export default {
         }
       }
     },
+    currentlyGathering:{
+      get(){
+        return this.$store.getters['marketplace/getCurrentlyGathering'];
+      },
+      set(value){
+        this.$store.dispatch('marketplace/setCurrentlyGathering',value)
+      }
+    }
   }
 };
 </script>
