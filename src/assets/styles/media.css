@@ -24,15 +24,55 @@
         display: flex;
     }
 
+    /* ----------- LISTING PAGE ----------- */
 
+    .listing-main,
+    .card-listing{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .card-listing .section-card-img:not(.section-card-img-mobile) {
+        display: none;
+    }
+
+    .card-listing .section-card-img.section-card-img-mobile {
+        display: flex;
+        position: relative;
+        top: 0;
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+
+    .section-listing-main {
+        padding: 0;
+        border: none;
+        flex-direction: column;
+    }
+
+    .section-listing-main .section-deposit {
+        padding: 0;
+        flex-direction: column;
+    }
+
+    .listing-main .section-listing-header .listing-additional-options {
+        display: none;
+    }
+
+    .section-listing-tabs .tabs,
     .section-tabs .container .tabs {
         overflow: auto hidden;
     }
-
+    .section-listing-tabs .tabs::-webkit-scrollbar,
     .section-tabs .container .tabs::-webkit-scrollbar {
         display: none;
         height: 0;
         width: 0;
+    }
+
+    .tab-blocks-list {
+        grid-template-columns: 1fr 1fr;
     }
 
     .page-wrapper main {
@@ -413,14 +453,27 @@
         width: calc(100% / 2 - 16px);
     }
 
+    .recommendations-list li,
     .section-nft:not(.with-filter) .cards-list-container .card {
         width: calc(100% / 3 - 16px);
     }
 
+    .recommendations-list {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        align-content: flex-start;
+        justify-content: flex-start;
+        margin-right: -16px;
+        flex-wrap: wrap;
+        width: calc(100% + 16px);
+        gap: 16px;
+    }
 }
 
 @media (max-width: 768px) {
 
+    .recommendations-list li,
     .section-nft.with-filter .cards-list-container .card,
     .section-nft:not(.with-filter) .cards-list-container .card {
         width: calc(100% /2 - 16px);

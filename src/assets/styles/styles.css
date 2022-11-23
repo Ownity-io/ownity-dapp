@@ -546,7 +546,8 @@ ul.tabs {
     border-radius: 8px;
 }
 
-.profile-header .drop-down {
+.profile-header .drop-down,
+.listing-header .drop-down {
     right: 0;
     bottom: -8px;
 }
@@ -1971,6 +1972,10 @@ ul.tabs {
     /* max-width: 586px; */
 }
 
+.card-listing .section-card-img.section-card-img-mobile{
+    display: none;
+}
+
 .card-img-wrap {
     aspect-ratio: 1 / 1;
     border-radius: 8px;
@@ -2731,6 +2736,9 @@ ul.tabs {
     position: absolute;
     top: 0;
     right: 0;
+}
+.listing-header .drop-down-mobile {
+    position: relative;margin-left: auto;
 }
 
 /* .profile-header .btn-drop-down i.i-more-2-line, */

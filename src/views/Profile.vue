@@ -28,7 +28,7 @@
                         <div class="icon-profile"></div>
                         <div class="drop-down-mobile">                                
                             <div class="drop-down-container" 
-                                :class="{'unfolded' : !mobileDropDown }">
+                                :class="{'unfolded' : mobileDropDown }">
                                 <button class="btn-drop-down" @click="mobileDropDown = !mobileDropDown">
                                     <i class="i-more-2-line"></i>
                                 </button>
