@@ -16,10 +16,10 @@
                                 </router-link>
                             </li>
                             <li>
-                                <router-link :class="active" :to="{name: 'Collections'}">
+                                <a>
                                     <span>Collections</span>
                                     <span>Collections</span>
-                                </router-link>
+                                </a>
                             </li>
                             <li>
                                 <router-link :class="active" :to="{name: 'Marketplace'}">
