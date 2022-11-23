@@ -25,30 +25,6 @@
                   </span>
                 </div>
               </div>
-              <div class="drop-down-mobile">                                
-                  <div class="drop-down-container" 
-                      :class="{'unfolded' : mobileDropDown }">
-                      <button class="btn-drop-down" @click="mobileDropDown = !mobileDropDown">
-                          <i class="i-more-2-line"></i>
-                      </button>
-                      <div class="drop-down">
-                          <ul>
-                              <li>
-                                  <i class="i-share-line"></i>
-                                  <span>Edit</span>
-                              </li>
-                              <li>
-                                  <i class="i-logout-box-line"></i>
-                                  <span>Share</span>
-                              </li>
-                              <li>
-                                  <i class="i-logout-box-line"></i>
-                                  <span>Log Out</span>
-                              </li>
-                          </ul>
-                      </div>
-                  </div>
-              </div>
               <div class="listing-additional-options">
                 <div class="btn-wrap">
                   <!-- <button class="btn btn-block">
@@ -73,7 +49,33 @@
                 </div>
               </div>
             </div>
-            <div class="listing-name">{{item.name}}</div>
+            <div class="listing-name">{{item.name}}
+              
+              <div class="drop-down-mobile">                                
+                  <div class="drop-down-container" 
+                      :class="{'unfolded' : mobileDropDown }">
+                      <button class="btn-drop-down" @click="mobileDropDown = !mobileDropDown">
+                          <i class="i-more-2-line"></i>
+                      </button>
+                      <div class="drop-down">
+                          <ul>
+                              <li>
+                                  <i class="i-pencil-line"></i>
+                                  <span>Edit</span>
+                              </li>
+                              <li>
+                                  <i class="i-share-line"></i>
+                                  <span>Share</span>
+                              </li>
+                              <li>
+                                  <i class="i-logout-box-line"></i>
+                                  <span>Log Out</span>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+            </div>
             <div class="owned-row">
               Owned by <a :href="config.etherscanAddressUrlStart+item.owner" target="_blank">{{String(item.owner).substring(0,6)+'...'+String(item.owner).substring(38,42)}}</a> <!-- TODO: href to etherscan-->
             </div>
@@ -83,6 +85,14 @@
           
           <section class="section-card-img section-card-img-mobile">
             <div class="card-img-wrap">
+              <div class="card-header">
+                <!-- <a  class="icon-card-label " :href="linkToMarketplacePage" :style="{backgroundImage: `url(${item.marketplace.logo})`}">
+                </a> -->
+                <button class="btn-like" :class="{'liked':testLike}" @click="changeLike">
+                  <i class="i-heart-3-fill"></i>
+                  <i class="i-heart-3-line"></i>
+                </button>
+              </div>
               <img v-if="!item.media" src="@/assets/images/img-not-found.svg" alt="img" />
               <img v-else :src="item.media" alt="img" />
             </div>

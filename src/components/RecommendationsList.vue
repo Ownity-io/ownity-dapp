@@ -14,6 +14,12 @@
             <Card :item="item"/>
           </li>
         </ul>
+        <div class="btn-mobile-wrap">
+          <router-link :to="{name: 'Marketplace' }" class="btn btn-router-to">
+            To the Collections
+            <i class="i-arrow-right-s-line"></i>
+          </router-link>
+        </div>
     </div>
 </template>
 

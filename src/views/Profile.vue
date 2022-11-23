@@ -35,11 +35,11 @@
                                 <div class="drop-down">
                                     <ul>
                                         <li>
-                                            <i class="i-share-line"></i>
+                                            <i class="i-pencil-line"></i>
                                             <span>Edit</span>
                                         </li>
                                         <li>
-                                            <i class="i-logout-box-line"></i>
+                                            <i class="i-share-line"></i>
                                             <span>Share</span>
                                         </li>
                                         <li>
