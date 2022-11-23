@@ -1,9 +1,18 @@
 <template>
     <div class="block-vote">
-      <div class="vote-data section-deposit-data">
-        <a href="#" class="deposit-img" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}">
-        <span v-if="this.voting.type=='CANCEL'">CANCELED</span>
-        </a>
+      <div class="vote-data section-deposit-data">       
+        <div class="deposit-img-container">
+          <a href="#" class="deposit-img" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}">
+            
+          </a> 
+          <div class="deposit-img-type">
+              <!-- <span v-if="this.voting.type=='CANCEL'">CANCELED</span> -->
+              <i class="i-arrow-go-back-line" v-if="this.voting.type=='CANCEL'" 
+              ></i>
+              <i class="i-shopping-bag-line" v-else 
+              ></i>
+          </div>
+        </div>
 
         <div class="deposit-data">
           <div class="deposit-listened">
@@ -31,21 +40,26 @@
       </div>
 
       <div class="vote-progress-container">
-        <div>Members voted: {{this.voting.count}}/{{this.item.bids.length}}</div>
-        <div class="card-progress progress">
-          <!-- <div
-            class="progress-value owner"
-            style="width: 40%"
-          > -->
-          <div
-            class="progress-value"
-            :style="{width: `${(this.voting.count/this.item.bids.length)*100}%`}"
-          >
-            <span>{{(this.voting.count/this.item.bids.length)*100}}%</span>
+        <div class="data-counter">Members voted: {{this.voting.count}}/{{this.item.bids.length}}</div>
+        <div class="vote-progress-row">
+          <div class="card-progress progress">
+            <!-- <div
+              class="progress-value owner"
+              style="width: 40%"
+            > -->
+            <div
+              class="progress-value"
+              :style="{width: `${(this.voting.count/this.item.bids.length)*100}%`}"
+            >
+              <span>{{(this.voting.count/this.item.bids.length)*100}}%</span>
+            </div>
+            <div class="progress-value" style=" width: 20%, 'padding-left' :  20% ">
+              <span>20%</span>
+            </div>
           </div>
-          <div class="progress-value" style=" width: 20%, 'padding-left' :  20% ">
-            <span>20%</span>
-          </div>
+          <button class="btn-vote-more">
+            <i class="i-more-2-line"></i>
+          </button>
         </div>
       </div>
     </div>

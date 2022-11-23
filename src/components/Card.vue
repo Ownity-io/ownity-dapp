@@ -118,14 +118,14 @@
         </div>
       </div>
       <div class="btn-container">
-        <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
-          <div class="btn" 
+        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
+          <div 
           v-if="item.marketplace_status=='OPEN' & 
           item.internal_status=='OPEN' 
           & (this.$route.name=='Marketplace' || this.$route.name=='Listing' || this.$route.name=='Collection')">
             Start collecting
           </div>
-          <div class="btn" 
+          <div
           v-if="item.marketplace_status=='OPEN' & 
           item.internal_status=='GATHER' 
           & (this.$route.name=='Marketplace' || this.$route.name=='Listing' || this.$route.name=='Collection')

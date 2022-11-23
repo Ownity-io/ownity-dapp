@@ -3,6 +3,9 @@
 .tabs .active-tab::after,
 .header-nav ul li button.active:after {
     background: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%);
+    background-size: 100% 100%;
+    border-width: 0;
+    border: none;
 }
 
 .td-wrap-completed,
@@ -30,6 +33,7 @@
 
 .btn.btn-clear,
 .card-members-btn,
+.btn-vote,
 .section-deposit-btns .btn.btn-get,
 .card-data .btn-container .btn,
 .modal-connect-btns .btn,
@@ -49,6 +53,10 @@
     border: 2px solid #2CC07B; */
     background: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%);
     color: #FFFFFF;
+    background-size: 100% 100%;
+    border-width: 0;
+    border: none;
+
 }
 
 .btn-modal-main:hover,
@@ -59,6 +67,9 @@
     /* background: #12AC64;
     border: 2px solid #12AC64; */
     background: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%);
+    background-size: 100% 100%;
+    border-width: 0;
+    border: none;
 }
 
 .switch,

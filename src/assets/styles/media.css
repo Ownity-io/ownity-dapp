@@ -95,16 +95,19 @@
         position: relative;
     }
 
-    .section-deposit-data .deposit-img {
+    .section-deposit-data .deposit-img-container {
         position: absolute;
         top: 0;
         left: 0;
+    }
+    .section-deposit-data .deposit-img {
         width: 24px;
         height: 24px;
         min-width: 24px;
         min-height: 24px;
     }
 
+    .deposit-listened,
     .deposit-listened.deposit-listened-link {
         margin-left: 32px;
     }
@@ -398,9 +401,9 @@
 
     .cards-list-empty .btn,
     .card-data .btn-container .btn {
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 150%;
+        /* font-weight: 400; */
+        /* font-size: 12px; */
+        /* line-height: 150%; */
     }
 
     /* .modal-connect-btns .btn,
@@ -414,6 +417,14 @@
         padding: 8px 12px;
     }
 
+    .vote-progress-container .card-progress{
+        height: 16px;
+    }
+
+    .vote-progress-container  .progress-value{
+        font-size: 14px;
+        line-height: 17px;
+    }
     /* footer */
 
     .footer-section.footer-section-first {
