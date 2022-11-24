@@ -59,9 +59,14 @@
             The marketplace charges a fee for each transaction.
             <a href="#">Terms of Use</a>
           </div>
-          <button class="btn btn-modal-main">Deposit part</button>
+          <button class="btn btn-modal-main btn-modal-desktop">Deposit part</button>
         </div>
       </div>
+      
+      <div class="modal-mobile-footer">
+        <button class="btn btn-modal-main">Deposit part</button>
+      </div>
+      
     </div>
   </div>
 </template>

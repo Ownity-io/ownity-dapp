@@ -60,9 +60,14 @@
             </div>
           </div>
 
-          <button class="btn btn-modal-main" @click="startVote">Start vote</button>
+          <button class="btn btn-modal-main btn-modal-desktop" @click="startVote">Start vote</button>
         </div>
       </div>
+            
+      <div class="modal-mobile-footer">
+        <button class="btn btn-modal-main">Start vote</button>
+      </div>
+      
     </div>
   </div>
 </template>

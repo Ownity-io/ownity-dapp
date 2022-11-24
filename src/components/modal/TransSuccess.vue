@@ -40,9 +40,14 @@
                   <button class="btn btn-show-more">Show more <i class="i-arrow-down-s-line"></i></button>
               </div> -->
           </div>
-          <button class="btn btn-modal-main">Done</button>
+          <button class="btn btn-modal-main btn-modal-desktop">Done</button>
         </div>
+      </div>   
+
+      <div class="modal-mobile-footer">
+        <button class="btn btn-modal-main">Done</button>
       </div>
+      
     </div>
   </div>
 </template>

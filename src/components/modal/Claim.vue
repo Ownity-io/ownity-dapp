@@ -38,9 +38,14 @@
             The marketplace charges a fee for each transaction.
             <a href="#">Terms of Use</a>
           </div>
-          <button class="btn btn-modal-main">Claim</button>
+          <button class="btn btn-modal-main btn-modal-desktop">Claim</button>
         </div>
       </div>
+      
+      <div class="modal-mobile-footer">
+        <button class="btn btn-modal-main">Claim</button>
+      </div>
+      
     </div>
   </div>
 </template>

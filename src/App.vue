@@ -1,6 +1,6 @@
 <template>
     <ConnectWallet v-if="this.$store.getters['appGlobal/getShowConnectWalletModal'] & (this.walletConnected==null||this.walletConnected=='null')"/>
-    <!-- <DepositPartStart /> -->
+    <DepositPartStart />
     <!-- <DepositPartContinue /> -->
     <!-- <DepositCancel /> -->
     <!-- <SellPart /> -->

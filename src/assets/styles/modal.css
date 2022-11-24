@@ -81,6 +81,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    z-index: 5;
 }
 
 .modal-connect .modal-content {
@@ -162,7 +164,7 @@
     margin-top: 38px;
 }
 
-.btn-modal-main {
+.btn-modal-main.btn-modal-desktop {
     margin-top: 24px;
 }
 

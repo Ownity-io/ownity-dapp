@@ -1414,6 +1414,10 @@ ul.tabs {
     min-height: 48px;
 }
 
+.modal-mobile-footer{
+    display: none;
+}
+
 .card-data .btn-container .btn.btn-card-completed {
     font-weight: 400;
     border-color: transparent;
