@@ -19,10 +19,10 @@
               <div class="collection-wrap">
                 <a class="collection-img" :href="'/collection/'+item.collection.contract_address" :style="{backgroundImage:`url(${item.collection.logo})`}"></a>
                 <div class="collection-data">
-                  <span class="collection-id collection-label">
+                  <a target="_blank" rel="nofollow" class="collection-id collection-label">
                     <span>{{item.collection.name}}</span>
                     <i class="i-checkbox-circle-fill"></i>
-                  </span>
+                  </a>
                 </div>
               </div>
               <div class="listing-additional-options">
@@ -166,12 +166,12 @@
                 </div>
                 <i class="i-arrow-down-s-line"></i>
               </button>
-              <button class="btn-collapse" @click="collapseMembers = !collapseMembers">
+              <!-- <button class="btn-collapse" @click="collapseMembers = !collapseMembers">
                 <div class="actions-row">
                   Actions with their a part
                 </div>
                 <i class="i-arrow-down-s-line"></i>
-              </button>
+              </button> -->
               <div class="section-unfolded-content">
                 <ul class="tabs">
                   <li>
@@ -248,7 +248,24 @@
                 <!-- flow2 -->
                 <ListingFractionMarket v-if="activeTab2 === 'ListingFractionMarket'" />
                 <!-- flow3 -->
-                <ListingVote v-if="activeTab2 === 'ListingVote'" v-for="voting in this.item.votings" :item="this.item" :voting="voting" />
+                <div v-if="activeTab2 === 'ListingVote'" 
+                  class="section-votes-wrap">
+
+                  <div class="active-votes">
+                    <div class="votes-wrap-title">
+                      Active
+                    </div>
+                    <ListingVote v-for="voting in this.item.votings" :item="this.item" :voting="voting"/>
+                  </div>
+
+                  <div class="inactive-votes">
+                    <div class="votes-wrap-title">
+                      Inactive
+                    </div>
+                    <ListingVote v-for="voting in this.item.votings" :item="this.item" :voting="voting"/>
+                  </div>
+
+                </div>
               </div>
               </div>
             </div>

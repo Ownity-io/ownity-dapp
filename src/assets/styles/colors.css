@@ -13,17 +13,28 @@
     color: #2CC07B;
 }
 
-.total-block-describe a {
+.deposit-listened.deposit-listened-link:hover,
+.collection-data-link:hover,
+.total-block-describe a:hover {
     text-decoration: underline;
 }
 
+/* */
 .footer-list a:hover,
 .breadcrumbs li a:hover span,
 .footer-form .agree a:hover,
 .total-block-describe a:hover,
+.data-td a:hover span,
+a.collection-id:hover span,
 .footer-row.footer-row-info .footer-part:not(.footer-social-links) a:hover {
-    color: #2CC07B;
-    text-decoration: underline;
+    background-image: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;
+    transition: background-image 2ms ease;
+    text-decoration: underline !important;
 }
 
 .tabs button:hover,

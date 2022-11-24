@@ -26,17 +26,17 @@
           <div class="collection-wrap">
             <div class="collection-img" :style="{backgroundImage: `url(${collection.logo})`}"></div>
             <div class="collection-data">
-              <span class="collection-id collection-label">
+              <a target="_blank" rel="nofollow" class="collection-id collection-label">
                 <!-- <span>{{ item.collection.name }}</span> -->
                 <span>{{collection.name}}</span>
                 <i class="i-checkbox-circle-fill"></i>
-              </span>
+              </a>
               <div class="links-wrap">
                 <div class="collection-data-link">
-                  <a :href="config.etherscanAddressUrlStart+collection.contract_address">{{collection.contract_address.substring(0,6)+'...'+collection.contract_address.substring(38,42)}}</a><i class="i-external-link-line"></i>
+                  <a target="_blank" rel="nofollow" :href="config.etherscanAddressUrlStart+collection.contract_address">{{collection.contract_address.substring(0,6)+'...'+collection.contract_address.substring(38,42)}}</a><i class="i-external-link-line"></i>
                 </div>
                 <div class="collection-data-link">
-                  <a :href="collection.web">Official Site</a><i class="i-external-link-line"></i>
+                  <a target="_blank" rel="nofollow" :href="collection.web">Official Site</a><i class="i-external-link-line"></i>
                 </div>
               </div>
             </div>

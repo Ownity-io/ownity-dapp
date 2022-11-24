@@ -33,7 +33,13 @@
 
 @media (max-width: 768px) {
 
-
+    .footer-section{
+        row-gap: 0;
+    }
+    .footer-form .btn-subscribe{
+        min-width: fit-content;
+        padding: 12px 8px;
+    }
     .drop-down-mobile {
         display: flex;
     }
@@ -176,7 +182,7 @@
     }
 
     .tab-info .data-table .data-td {
-        max-width: fit-content;
+        /* max-width: fit-content; */
         width: fit-content;
     }
 
@@ -501,6 +507,7 @@
 
     .footer-form {
         width: 100%;
+        margin-top: 0;
     }
 
     .footer-row-info .footer-section {
@@ -785,6 +792,7 @@
 /* ------ TABLE ------- */
 @media (max-width: 768px) {
 
+    .section-nft-list .table-activities .thead,
     .section-nft-list .table-activity .thead {
         display: none;
     }

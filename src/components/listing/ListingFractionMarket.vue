@@ -8,7 +8,7 @@
                 <div class="td td-button">Date</div>
             </div>
                 
-            <div class="tr">
+            <div class="tr tr-mob-collapse">
                 <div class="td td-category">
                     <div class="td-wrap td-wrap-category">
                         <i class="i-shopping-bag-line"></i>
@@ -35,6 +35,10 @@
                        <button class="btn btn-td btn-buy">Buy</button>
                     </div>
                 </div>
+                
+                <button class="btn-mobile-tr-collapse" @click="rowMobileCollapse = !rowMobileCollapse">
+                    <i class="i-arrow-down-s-line"></i>
+                </button>
             </div>
             
             <div class="table-btn-row">
@@ -43,3 +47,13 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    data(){
+        return{
+            rowMobileCollapse: false,
+        }
+    }
+}
+</script>
