@@ -1,3 +1,13 @@
+@media (max-width: 1472px) {
+    .recommendations-list li {
+        width: calc(100% / 4 - 16px);
+    }
+
+    .recommendations-list li:not( :nth-child(-n+4)) {
+        display: none;
+    }
+}
+
 @media (min-width: 1425px) {
 
     .table-activity .thead .td.td-price,
@@ -23,7 +33,13 @@
 
 @media (max-width: 768px) {
 
-
+    .footer-section{
+        row-gap: 0;
+    }
+    .footer-form .btn-subscribe{
+        min-width: fit-content;
+        padding: 12px 8px;
+    }
     .drop-down-mobile {
         display: flex;
     }
@@ -166,7 +182,7 @@
     }
 
     .tab-info .data-table .data-td {
-        max-width: fit-content;
+        /* max-width: fit-content; */
         width: fit-content;
     }
 
@@ -491,6 +507,7 @@
 
     .footer-form {
         width: 100%;
+        margin-top: 0;
     }
 
     .footer-row-info .footer-section {
@@ -598,16 +615,8 @@
         width: calc(100% / 3 - 16px);
     }
 
-    .recommendations-list {
+    .recommendations-list li:not( :nth-child(-n+4)) {
         display: flex;
-        flex-direction: row;
-        align-items: stretch;
-        align-content: flex-start;
-        justify-content: flex-start;
-        margin-right: -16px;
-        flex-wrap: wrap;
-        width: calc(100% + 16px);
-        gap: 16px;
     }
 }
 
@@ -660,17 +669,18 @@
         /* max-width: calc(50% - 20px); */
     }
 
-    .modal-main-input-select .modal-data-block-price{
+    .modal-main-input-select .modal-data-block-price {
         max-width: 100%;
     }
 
-    .modal-main-data-container.modal-main-input-select{
+    .modal-main-data-container.modal-main-input-select {
         flex-direction: column;
     }
 
-    .modal-main-data-container.modal-main-input-select .modal-data-block-price{
-    width: 100%;
+    .modal-main-data-container.modal-main-input-select .modal-data-block-price {
+        width: 100%;
     }
+
     .modal-section-main-data .modal-main-data-container .modal-data-block .input-selected {
         min-width: 156px;
     }
@@ -728,9 +738,10 @@
         width: 100%;
     }
 
-    .modal-section-nft-data{
+    .modal-section-nft-data {
         flex-direction: column;
     }
+
     .modal-nft-data {
         width: 100%;
     }
@@ -739,12 +750,12 @@
         margin-left: 0;
     }
 
-    .modal-section-main-data .modal-main-data-container{
+    .modal-section-main-data .modal-main-data-container {
         column-gap: 16px
     }
 
     .modal-header-img [class^='icon-'],
-    .modal-header-img{
+    .modal-header-img {
         margin-top: 0;
     }
 
@@ -752,7 +763,7 @@
         padding-top: 40px;
         margin-bottom: 0;
     }
-    
+
 }
 
 @media (max-width: 768px) {
@@ -762,89 +773,7 @@
     .section-nft:not(.with-filter) .cards-list-container .card {
         width: calc(100% / 2 - 16px);
     }
-}
-
-/* ------ TABLE ------- */
-@media (max-width: 768px) {
-
-    .thead {
-        display: none;
-    }
-
-    .thead .td,
-    .tr .td {
-        padding: 0;
-    }
-
-    .tr {
-        position: relative;
-        padding: 16px 0;
-        padding-right: calc(24px + 16px);
-        display: flex;
-        flex-wrap: wrap;
-        transition: height .25s;
-        overflow: hidden;
-    }
-
-    .table-activity .thead,
-    .table-activity .tr {
-        gap: 12px;
-    }
-
-    .tr .btn-mobile-tr-collapse {
-        display: flex;
-        position: absolute;
-        top: 36px;
-        right: 0;
-    }
-
-    /* .tr.tr-mob-collapse {
-        height: 96px;
-    }
-
-    .tr:not(.tr-mob-collapse) {
-        height: fit-content; 
-    }*/
-
-
-    .tr.tr-mob-collapse .td-date,
-    .tr.tr-mob-collapse .td-tx {
-        height: 0;
-        overflow: 0;
-        padding: 0;
-        display: none;
-    }
-
-    .tr:not(.tr-mob-collapse) .td-date,
-    .tr:not(.tr-mob-collapse) .td-tx {
-        height: fit-content;
-    }
-
-
-
-    .thead .td,
-    .tr .td,
-    .drop-down ul li,
-    .search-results-wrapper ul li,
-    .td-wrap.td-wrap-collection,
-    .modal-nft-data {
-        font-size: 14px;
-    }
-
-    .tr .td-light {
-        font-size: 12px;
-    }
-
-    .td-wrap-collection .collection-img {
-        margin-left: 0;
-    }
-
-    .deposit-data,
-    .td-wrap-collection .collection-data,
-    .search-results-wrapper ul .results-data {
-        padding-left: 8px;
-    }
-
+    
     .recommendations-wrap .btn-mobile-wrap {
         display: flex;
         width: 100%;
@@ -858,31 +787,104 @@
     .recommendations-wrap .header-title-btn .btn-wrap {
         display: none;
     }
+}
 
-    .td {
+/* ------ TABLE ------- */
+@media (max-width: 768px) {
+
+    .section-nft-list .table-activities .thead,
+    .section-nft-list .table-activity .thead {
+        display: none;
+    }
+
+    .section-nft-list .table-activity .thead .td,
+    .section-nft-list .table-activity .tr .td {
+        padding: 0;
+    }
+
+    .section-nft-list .table-activity .tr {
+        position: relative;
+        padding: 16px 0;
+        padding-right: calc(24px + 16px);
+        display: flex;
+        flex-wrap: wrap;
+        transition: height .25s;
+        overflow: hidden;
+    }
+
+    .section-nft-list .table-activity .table-activity .thead,
+    .section-nft-list .table-activity .table-activity .tr {
+        gap: 12px;
+    }
+
+    .section-nft-list .table-activity .tr .btn-mobile-tr-collapse {
+        display: flex;
+        position: absolute;
+        top: 36px;
+        right: 0;
+    }
+
+
+    .section-nft-list .table-activity .tr.tr-mob-collapse .td-date,
+    .section-nft-list .table-activity .tr.tr-mob-collapse .td-tx {
+        height: 0;
+        overflow: 0;
+        padding: 0;
+        display: none;
+    }
+
+    .section-nft-list .table-activity .tr:not(.tr-mob-collapse) .td-date,
+    .section-nft-list .table-activity .tr:not(.tr-mob-collapse) .td-tx {
+        height: fit-content;
+    }
+
+    .section-nft-list .table-activity .thead .td,
+    .section-nft-list .table-activity .tr .td,
+    .section-nft-list .table-activity .drop-down ul li,
+    .section-nft-list .table-activity .search-results-wrapper ul li,
+    .section-nft-list .table-activity .td-wrap.td-wrap-collection,
+    .section-nft-list .table-activity .modal-nft-data {
+        font-size: 14px;
+    }
+
+    .section-nft-list .table-activity .tr .td-light {
+        font-size: 12px;
+    }
+
+    .section-nft-list .table-activity .td-wrap-collection .collection-img {
+        margin-left: 0;
+    }
+
+    .section-nft-list .table-activity .deposit-data,
+    .section-nft-list .table-activity .td-wrap-collection .collection-data,
+    .section-nft-list .table-activity .search-results-wrapper ul .results-data {
+        padding-left: 8px;
+    }
+
+    .section-nft-list .table-activity .td {
         width: fit-content;
     }
 
-    .td-date,
-    .td-tx {
+    .section-nft-list .table-activity .td-date,
+    .section-nft-list .table-activity .td-tx {
         min-width: calc(50% - 16px);
         display: flex;
         flex-direction: column;
         text-align: left;
     }
 
-    .tr .td.td-price,
-    .tr .td.td-date {
+    .section-nft-list .table-activity .tr .td.td-price,
+    .section-nft-list .table-activity .tr .td.td-date {
         text-align: left;
     }
 
-    .td-category {
+    .section-nft-list .table-activity .td-category {
         width: 100%;
         order: -1;
         flex-direction: row;
     }
 
-    .td-wrap-category {
+    .section-nft-list .table-activity .td-wrap-category {
         width: 100%;
         flex-direction: row;
         align-items: center;
@@ -890,15 +892,15 @@
         margin-bottom: -4px;
     }
 
-    .table-activity .thead .td.td-price,
-    .table-activity .tr .td.td-price,
-    .table-activities .thead .td.td-price,
-    .table-activities .tr .td.td-price {
+    .section-nft-list .table-activity .thead .td.td-price,
+    .section-nft-list .table-activity .tr .td.td-price,
+    .section-nft-list .table-activity .thead .td.td-price,
+    .section-nft-list .table-activity .tr .td.td-price {
         margin-left: auto;
         margin-right: 0;
     }
 
-    .td-mob-title {
+    .section-nft-list .table-activity .td-mob-title {
         display: block;
         font-weight: 400;
         font-size: 14px;
@@ -908,56 +910,56 @@
         color: #9A9A9A;
     }
 
-    .td-wrap-category .td-light {
+    .section-nft-list .table-activity .td-wrap-category .td-light {
         margin-top: 0;
         margin-left: 3px;
         position: relative;
     }
 
-    .td-wrap-category .td-light::before {
+    .section-nft-list .table-activity .td-wrap-category .td-light::before {
         content: '( ';
     }
 
-    .td-wrap-category .td-light::after {
+    .section-nft-list .table-activity .td-wrap-category .td-light::after {
         content: ' )';
     }
 
-    .td-wrap-category i,
-    .td-wrap-price i,
-    .token-value .icon-value,
-    .total-block-value .icon-value,
-    .td-wrap-price .icon-token,
-    .collection-data-link i,
-    .deposit-listened.deposit-listened-link i,
-    .td-wrap-link i {
+    .section-nft-list .table-activity .td-wrap-category i,
+    .section-nft-list .table-activity .td-wrap-price i,
+    .section-nft-list .table-activity .token-value .icon-value,
+    .section-nft-list .table-activity .total-block-value .icon-value,
+    .section-nft-list .table-activity .td-wrap-price .icon-token,
+    .section-nft-list .table-activity .collection-data-link i,
+    .section-nft-list .table-activity .deposit-listened.deposit-listened-link i,
+    .section-nft-list .table-activity .td-wrap-link i {
         width: 16px;
         height: 16px;
         font-size: 16px;
     }
 
-    .td-wrap-category,
-    .td-wrap-price,
-    .token-value {
+    .section-nft-list .table-activity .td-wrap-category,
+    .section-nft-list .table-activity .td-wrap-price,
+    .section-nft-list .table-activity .token-value {
         padding-left: 20px;
     }
 
-    .td-wrap-category,
-    .token-value,
-    .td-wrap-price,
-    .td-wrap-link {
+    .section-nft-list .table-activity .td-wrap-category,
+    .section-nft-list .table-activity .token-value,
+    .section-nft-list .table-activity .td-wrap-price,
+    .section-nft-list .table-activity .td-wrap-link {
         min-height: 16px;
     }
 
-    .td-wrap-category i {
+    .section-nft-list .table-activity .td-wrap-category i {
         top: 2px;
     }
 
-    .table-activity .tr:hover {
+    .section-nft-list .table-activity .table-activity .tr:hover {
         background-color: #FFFFFF;
     }
 
-    .deposit-img,
-    .td-wrap-collection .collection-img,
+    .section-nft-list .table-activity .deposit-img,
+    .section-nft-list .table-activity .td-wrap-collection .collection-img,
     .search-results-wrapper li .results-icon {
         height: 40px;
         width: 40px;

@@ -3,10 +3,10 @@
     <div class="collection-wrap">
       <div class="collection-img"></div>
       <div class="collection-data">
-        <span class="collection-id collection-label">
+        <a target="_blank" rel="nofollow" class="collection-id collection-label">
           <span>{{item.collection.name}}</span>
           <i class="i-checkbox-circle-fill"></i>
-        </span>
+        </a>
       </div>
     </div>
     <div class="collection-description">

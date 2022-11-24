@@ -79,7 +79,7 @@
               @mouseover="showFullName = true"
               @mouseout="showFullName = false"
               >#{{item.token_id}}</div>  
-            <a :href="'/collection/'+item.collection.contract_address">{{item.collection.name}}</a>
+            <a :href="'/collection/'+item.collection.contract_address"><span>{{item.collection.name}}</span></a>
           </div>
           <div class="data-td data-td-value">
             <div class="card-value">
@@ -98,7 +98,7 @@
             <div class="card-id"
               @mouseover="showFullName = true"
               @mouseout="showFullName = false"
-              >#{{item.token_id}}</div>    
+              ><span>#{{item.token_id}}</span></div>    
             <div>{{item.collection.name}}</div>
           </div>
           <div class="data-td data-td-value"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">
