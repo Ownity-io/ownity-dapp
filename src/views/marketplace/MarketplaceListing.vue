@@ -106,7 +106,7 @@
                   <a  :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></a>
                 </div>
                 <div class="deposit-data">
-                  <div class="deposit-listened deposit-listened-link"><a :href='linkToMarketplacePage' >Listened on {{item.marketplace.name}} for </a><i class="i-external-link-line"></i></div>
+                  <div class="deposit-listened deposit-listened-link"><a target="_blank" :href='linkToMarketplacePage' >Listened on {{item.marketplace.name}} for </a><i class="i-external-link-line"></i></div>
                   <div class="deposit-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">
                     <div class="icon-token"></div>
                     <span><b>{{priceInCurrency}} ETH</b></span>

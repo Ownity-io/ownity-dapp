@@ -1953,15 +1953,39 @@ ul.tabs {
 
 }
 
-.recommendations-list {
+/* .recommendations-list {
     display: grid;
     grid-template-rows: 1fr;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
     justify-items: start;
+    gap: 16px;
+} */
+
+/* .recommendations-list {
+    display: flex;
+    align-items: flex-start;
+    align-content: flex-start;
+    justify-items: start;
+    width: calc(100% + 16px);
+    margin-left: -16px;
+} */
+.recommendations-list {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    align-content: flex-start;
+    justify-content: flex-start;
+    margin-right: -16px;
+    flex-wrap: wrap;
+    width: calc(100% + 16px);
     gap: 16px;
 }
 
-.recommendations-list li,
+.recommendations-list li{
+    width: calc(100% / 5 - 16px);
+    /* margin-left: 16px; */
+}
+
 .recommendations-list li .card {
     width: 100%;
 }
