@@ -42,9 +42,14 @@
             </div>
           </div>
           
-          <button class="btn btn-modal-main" @click="vote">Confirm your part</button>
+          <button class="btn btn-modal-main btn-modal-desktop" @click="vote">Confirm your part</button>
         </div>
+      </div>    
+
+      <div class="modal-mobile-footer">
+        <button class="btn btn-modal-main">Confirm your part</button>
       </div>
+      
     </div>
   </div>
 </template>

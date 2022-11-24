@@ -31,9 +31,14 @@
             </div>
           </div>
 
-          <button class="btn btn-modal-main">Show</button>
+          <button class="btn btn-modal-main btn-modal-desktop">Show</button>
         </div>
       </div>
+            
+      <div class="modal-mobile-footer">
+        <button class="btn btn-modal-main">Show</button>
+      </div>
+      
     </div>
   </div>
 </template>

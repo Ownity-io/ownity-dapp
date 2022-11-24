@@ -59,9 +59,14 @@
             The marketplace charges a fee for each transaction.
             <a href="#">Terms of Use</a>
           </div>
-          <button class="btn btn-modal-main">Cancel sell</button>
+          <button class="btn btn-modal-main btn-modal-desktop">Cancel sell</button>
         </div>
+      </div>     
+
+      <div class="modal-mobile-footer">
+        <button class="btn btn-modal-main">Cancel sell</button>
       </div>
+      
     </div>
   </div>
 </template>
