@@ -2,7 +2,7 @@
   <div class="filter">
 
     <!--  ------------------ NEW : switcher-------------------- -->
-    <div class="filter-section" :class="{ 'collapse-section': filterSection0 }" v-if="this.$route.name=='Collection'">
+    <div class="filter-section" :class="{ 'collapse-section': filterSection0 }" v-if="this.$route.name=='Collection' ||this.$route.name=='Marketplace'">
       <button class="filter-section-name" @click="filterSection0 = !filterSection0">
         <span>Status</span>
         <i class="i-arrow-up-s-line"></i>
