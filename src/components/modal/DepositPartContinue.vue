@@ -107,9 +107,10 @@ export default {
       config:config,
       provider:null,
       signer:null,
-      partVariants:[0,5,10,15,20],
+      partVariants:[0,2,3,4,5,10,15,20],
       currentPart:0,
-      currencyToUsdPrice:1
+      currencyToUsdPrice:1,
+      allBidsAmount:0
     };
   },
   async mounted(){
@@ -117,6 +118,7 @@ export default {
     this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
     this.signer = await this.$store.getters['walletsAndProvider/getSigner'];
     this.setCurrencyToUsd();
+    this.setAllBidsAmount();
     this.render = true;
   },
   methods:{
@@ -127,8 +129,14 @@ export default {
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());
       let markeplaceId = ethers.utils.formatBytes32String(this.item.marketplace.id).substring(0, 10);
       let options = {};
+      let valueToBuy = (ethers.BigNumber.from(String((this.item.price/100)*this.currentPart))).toString();
+      conso
+      if (valueToBuy>(this.item.price-this.allBidsAmount)){
+        console.log('Part is too big');
+        valueToBuy = this.item.price-this.allBidsAmount;
+      }
       if (this.item.currency.address == '0x0000000000000000000000000000000000000000'){
-        options.value = (ethers.BigNumber.from(String((this.item.price/100)*this.currentPart))).toString();
+        options.value = valueToBuy;
       }      
       options.gasLimit ='300000' ;
       let requestUrl = `${config.backendApiEntryPoint}buy-nft/`;
@@ -165,12 +173,12 @@ export default {
       requestJson = await request.json();
       console.log(requestJson);
       let signature = requestJson.data.signature;
-      let part = (ethers.BigNumber.from(String((this.item.price/100)*this.currentPart))).toString();
+      // let part = (ethers.BigNumber.from(String((this.item.price/100)*this.currentPart))).toString();
       try{
         let buyLot = await contract.buyLot(
           markeplaceId,
           this.item.id,
-          part,
+          valueToBuy,
           {
             tokenAddress: this.item.currency.address,
             decimals: this.item.currency.decimals,
@@ -222,6 +230,15 @@ export default {
     },
     toFixedIfNecessary(value, dp) {
       return +parseFloat(value).toFixed(dp);
+    },
+    setAllBidsAmount(){
+      this.allBidsAmount=0;
+      if (this.item.bids!=null){
+        for (let element of this.item.bids){
+          this.allBidsAmount+=parseInt(element.amount);
+        }
+        return;
+      }
     },
   }
 };

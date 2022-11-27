@@ -124,11 +124,11 @@
               </div>
               <div class="section-deposit-btns">
                 <!-- <button class="btn btn-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='FULLFILLED'">Start voting</button> -->
-                <button class="btn btn-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='FULLFILLED'"
+                <button class="btn btn-deposit" v-if="(item.marketplace_status=='OPEN'||item.marketplace_status=='TEST') & item.internal_status=='FULLFILLED'"
                 @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">Start voting</button>
-                <button class="btn btn-deposit" v-if="((item.marketplace_status=='OPEN' & item.internal_status=='OPEN'))|| item.id == 40997"
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN'||item.marketplace_status=='TEST')  & item.internal_status=='OPEN'))|| item.id == 40997"
                 @click="this.$store.dispatch('appGlobal/setshowStartCollectingModal',true)">Start collecting</button>
-                <button class="btn btn-deposit" v-if="(item.marketplace_status=='OPEN' &
+                <button class="btn btn-deposit" v-if="((item.marketplace_status=='OPEN'||item.marketplace_status=='TEST')  &
                 item.internal_status=='GATHER' & (
                 !(userBidAmount>0) || 
                 (((userBidAmount/this.item.price)*100)<20)))|| item.id == 40997" 
