@@ -124,10 +124,10 @@
               </div>
               <div class="section-deposit-btns">
                 <!-- <button class="btn btn-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='FULLFILLED'">Start voting</button> -->
-                <button class="btn btn-deposit" v-if="item.marketplace_status=='OPEN' &
-                item.internal_status=='GATHER' & (userBidAmount>0)"
+                <button class="btn btn-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='FULLFILLED'"
                 @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">Start voting</button>
-                <button class="btn btn-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">Start collecting</button>
+                <button class="btn btn-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'"
+                @click="this.$store.dispatch('appGlobal/setshowStartCollectingModal',true)">Start collecting</button>
                 <button class="btn btn-deposit" v-if="item.marketplace_status=='OPEN' &
                 item.internal_status=='GATHER' & (
                 !(userBidAmount>0) || 

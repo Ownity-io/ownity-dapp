@@ -6,7 +6,8 @@ export default {
       showStartVotingModal: false,
       showVoteConfirmModal: false,
       currentVoting:null,
-      showCancelSellVotingModal:false
+      showCancelSellVotingModal:false,
+      showStartCollectingModal:false
     };
   },
   getters: {
@@ -24,6 +25,9 @@ export default {
     },
     getShowCancelSellVotingModal(state){
       return state.showCancelSellVotingModal;
+    },
+    getshowStartCollectingModal(state){
+      return state.showStartCollectingModal;
     }
   },
   mutations: {
@@ -41,6 +45,9 @@ export default {
     },
     setCancellSellVotingModal(state,value){
       state.showCancelSellVotingModal = value;
+    },
+    setshowStartCollectingModal(state,value){
+      state.showStartCollectingModal = value;
     }
   },
   actions: {
@@ -58,6 +65,9 @@ export default {
     },
     setCancellSellVotingModal(context,value){
       context.commit("setCancellSellVotingModal", value);
+    },
+    setshowStartCollectingModal(context,value){
+      context.commit("setshowStartCollectingModal", value);
     }
   },
 };

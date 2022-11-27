@@ -109,7 +109,7 @@ export default {
           localStorage.setItem('tokenEndTimestamp', (Date.now()/1000)+86400);
           localStorage.setItem('refreshToken', requestJson.refresh);
         }
-        await provider.send('wallet_switchEthereumChain',[{ chainId: "0x1"}]);
+        await provider.send('wallet_switchEthereumChain',[{ chainId: "0x5"}]);
         context.commit('setUserInfo',await provider.getSigner().getAddress());
         localStorage.setItem('connectedWallet','metamask');
         localStorage.setItem('userAddress',await provider.getSigner().getAddress());
@@ -198,7 +198,7 @@ export default {
         }
         await web3Provider.send(
           'wallet_switchEthereumChain',
-          [{ chainId: "0x1"}],
+          [{ chainId: "0x5"}],
         );
         context.commit('setUserInfo',await web3Provider.getSigner().getAddress());
         localStorage.setItem('connectedWallet','walletconnect');

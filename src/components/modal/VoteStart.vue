@@ -86,8 +86,7 @@ export default {
       currencyToUsdPrice:1
     };
   },
-  async mounted(){
-    
+  async mounted(){    
     this.item = await this.$store.getters['marketplaceListing/getItem'];
     let requestUrl = `${config.backendApiEntryPoint}marketplaces/`;
     let request = await fetch(requestUrl);
