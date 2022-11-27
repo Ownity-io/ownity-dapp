@@ -90,7 +90,7 @@
 import { ethers } from 'ethers';
 import ABI from '@/abi.json';
 import config from '@/config.json';
-import { markRaw, toRaw } from '@vue/reactivity';
+import { toRaw } from '@vue/reactivity';
 export default {
   data() {
     return {
