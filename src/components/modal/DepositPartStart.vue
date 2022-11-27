@@ -30,19 +30,13 @@
                       class="input-selected"
                       @click="selectOpen = !selectOpen"
                     >
-                      <span>0%</span>
+                      <span>{{currentPart}}%</span>
                       <i class="i-arrow-down-s-line"></i>
                     </button>
                     <div class="drop-down">
                       <ul>
-                        <li>
-                          <span>5%</span>
-                        </li>
-                        <li>
-                          <span>10%</span>
-                        </li>
-                        <li>
-                          <span>15%</span>
+                        <li v-for="value in partVariants" :key="value" @click="this.currentPart = value;selectOpen = !selectOpen">
+                          <span>{{value}}%</span>
                         </li>
                       </ul>
                     </div>
@@ -55,9 +49,9 @@
                   <div class="price-block-title">Min 5% to Max 20%</div>
                   <div class="price-block-value price-value">
                     <div class="icon-value"></div>
-                    <span>0.10 ETH</span>
+                    <span>{{abbrNum(((this.item.price/100)*currentPart)/(10**item.currency.decimals),1)}} ETH</span>
                   </div>
-                  <div class="price-block-equivalent equivalent">≈ $ 100</div>
+                  <div class="price-block-equivalent equivalent">≈ $ {{abbrNum(toFixedIfNecessary(((this.item.price/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</div>
                 </div>
               </div>
             </div>
@@ -70,7 +64,7 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>0.103 ETH</b><span>≈ $ 103K</span>
+                    <b>{{abbrNum(((this.item.price/100)*currentPart)/(10**item.currency.decimals),1)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(((this.item.price/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</span>
                   </div>
                   <div class="total-fees">Fees:<span>3%</span></div>
                 </div>
@@ -81,12 +75,12 @@
             The marketplace charges a fee for each transaction.
             <a href="#">Terms of Use</a>
           </div>
-          <button class="btn btn-modal-main btn-modal-desktop" @click="this.buyLot()">Deposit part</button>
+          <button class="btn btn-modal-main btn-modal-desktop" @click="this.buyLot()" v-if="currentPart>0">Deposit part</button>
         </div>
       </div>
             
       <div class="modal-mobile-footer">
-        <button class="btn btn-modal-main" @click="this.buyLot()">Deposit part</button>
+        <button class="btn btn-modal-main" @click="this.buyLot()" v-if="currentPart>0">Deposit part</button>
       </div>
       
     </div>
@@ -97,6 +91,7 @@ import { ethers } from 'ethers';
 import ABI from '@/abi.json';
 import config from '@/config.json';
 import { markRaw, toRaw } from '@vue/reactivity';
+import { ref } from 'vue';
 export default {
   data() {
     return {
@@ -105,22 +100,29 @@ export default {
       ABI:ABI,
       render:false,
       config:config,
-      provider:null
+      provider:null,
+      signer:null,
+      partVariants:[0,5,10,15,20],
+      currentPart:0,
+      currencyToUsdPrice:1
     };
   },
   async mounted(){
     this.item = await this.$store.getters['marketplaceListing/getItem'];
     this.provider = toRaw(await this.$store.getters['walletsAndProvider/getGlobalProvider']);
+    this.signer = toRaw(await this.$store.getters['walletsAndProvider/getSigner']);
+    this.setCurrencyToUsd();
     this.render = true;
   },
   methods:{
-    async buyLot(){
-      const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi, toRaw(this.provider));
-      console.log(await contract.ORACLE_ADDRESS());
+    async buyLot(){  
+      console.log(await this.signer.getAddress());    
+      const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi, toRaw(this.signer));
+      // console.log(await contract.ORACLE_ADDRESS());
       let markeplaceId = ethers.utils.formatBytes32String(this.item.marketplace.id).substring(0, 10);
       let options = {};
       if (this.item.currency.address == '0x0000000000000000000000000000000000000000'){
-        options.value = this.item.price/10;
+        options.value = (ethers.BigNumber.from(String((this.item.price/100)*this.currentPart))).toString();
       }      
       options.gasLimit ='300000' ;
       let requestUrl = `${config.backendApiEntryPoint}buy-nft/`;
@@ -157,27 +159,65 @@ export default {
       requestJson = await request.json();
       console.log(requestJson);
       let signature = requestJson.data.signature;
-      let buyLot = await contract.buyLot(
-        markeplaceId,
-        this.item.id,
-        this.item.price/10,
-        {
-          tokenAddress: this.item.currency.address,
-          decimals: this.item.currency.decimals,
-          price: this.item.price,
-          collected: '0',
-          occupancy: '0',
-          tokenContractAddress: this.item.collection.contract_address,
-          tokenId: this.item.token_id,
-          tokenAmount: this.item.amount,
-          status: '0',
-        },
-        inputData,
-        signature,
-        options
-      );
-      console.log(buyLot);
-    }
+      let part = (ethers.BigNumber.from(String((this.item.price/100)*this.currentPart))).toString();
+      // console.log(part.toString());
+      try{
+        let buyLot = await contract.buyLot(
+          markeplaceId,
+          this.item.id,
+          part,
+          {
+            tokenAddress: this.item.currency.address,
+            decimals: this.item.currency.decimals,
+            price: this.item.price,
+            collected: '0',
+            occupancy: '0',
+            tokenContractAddress: this.item.collection.contract_address,
+            tokenId: this.item.token_id,
+            tokenAmount: this.item.amount,
+            status: '0',
+          },
+          inputData,
+          signature,
+          options
+        );
+        location.reload();
+      }
+      catch{
+        alert('Error');
+      }
+    },
+    abbrNum(number, decPlaces) {
+      decPlaces = Math.pow(10, decPlaces);
+      var abbrev = ["k", "m", "b", "t"];
+      for (var i = abbrev.length - 1; i >= 0; i--) {
+        var size = Math.pow(10, (i + 1) * 3);
+        if (size <= number) {
+          number = Math.round(number * decPlaces / size) / decPlaces;
+          if ((number == 1000) && (i < abbrev.length - 1)) {
+            number = 1;
+            i++;
+          }
+          number += abbrev[i];
+          break;
+        }
+      }
+
+      return number;
+    },
+    async setCurrencyToUsd(){
+      let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
+      let requestJson = await request.json();
+      try{
+        this.currencyToUsdPrice =  requestJson.quotes[0].priceUsd;
+      }
+      catch{
+        this.currencyToUsdPrice = 1;
+      }
+    },
+    toFixedIfNecessary(value, dp) {
+      return +parseFloat(value).toFixed(dp);
+    },
   }
 };
 </script>

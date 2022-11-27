@@ -26,6 +26,9 @@ export default {
     },
     getUserToken(state){
       return state.token;
+    },
+    async getSigner(state){
+      return (await state.globalProvider.getSigner());
     }
   },
   mutations: {
