@@ -91,7 +91,6 @@ import { ethers } from 'ethers';
 import ABI from '@/abi.json';
 import config from '@/config.json';
 import { markRaw, toRaw } from '@vue/reactivity';
-import { ref } from 'vue';
 export default {
   data() {
     return {
@@ -109,16 +108,17 @@ export default {
   },
   async mounted(){
     this.item = await this.$store.getters['marketplaceListing/getItem'];
-    this.provider = toRaw(await this.$store.getters['walletsAndProvider/getGlobalProvider']);
-    this.signer = toRaw(await this.$store.getters['walletsAndProvider/getSigner']);
+    this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
+    this.signer = await this.$store.getters['walletsAndProvider/getSigner'];
     this.setCurrencyToUsd();
     this.render = true;
   },
   methods:{
     async buyLot(){  
       console.log(await this.signer.getAddress());    
-      const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi, toRaw(this.signer));
-      // console.log(await contract.ORACLE_ADDRESS());
+      console.log(typeof(this.signer));
+      console.log(toRaw(this.signer));
+      const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());
       let markeplaceId = ethers.utils.formatBytes32String(this.item.marketplace.id).substring(0, 10);
       let options = {};
       if (this.item.currency.address == '0x0000000000000000000000000000000000000000'){
@@ -160,7 +160,6 @@ export default {
       console.log(requestJson);
       let signature = requestJson.data.signature;
       let part = (ethers.BigNumber.from(String((this.item.price/100)*this.currentPart))).toString();
-      // console.log(part.toString());
       try{
         let buyLot = await contract.buyLot(
           markeplaceId,
