@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
+    text-overflow: ellipsis;
 }
 html,
 body,
@@ -119,7 +120,13 @@ body,
     align-content: center;
     align-items: stretch;
     flex-direction: column;
+    flex: 1 1 auto;
     width: 100%;
+}
+
+.home-page,
+.page-wrapper{
+    flex: 1 1 auto;
 }
 
 .router-view {
