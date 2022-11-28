@@ -2,7 +2,8 @@
     <header>
         <div class="container">
             <div class="header-wrapper">
-                <div class="header-logo">Marketplace</div>
+                <div v-if="$route.fullPath ==='/'" @click="goToTop()" class="header-logo">Marketplace</div>
+                <router-link :to="{name: 'Main'}" v-else class="header-logo">Marketplace</router-link>
                 <div class="header-search">
                     <Search />
                 </div>
@@ -78,6 +79,9 @@ export default {
         },
         clearLocalStorage(){
             localStorage.clear();
+        },
+        goToTop(){
+            window.scrollTo(0, 0);
         }
     },
     async mounted(){

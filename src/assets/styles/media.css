@@ -33,13 +33,15 @@
 
 @media (max-width: 768px) {
 
-    .footer-section{
+    .footer-section {
         row-gap: 0;
     }
-    .footer-form .btn-subscribe{
+
+    .footer-form .btn-subscribe {
         min-width: fit-content;
         padding: 12px 8px;
     }
+
     .drop-down-mobile {
         display: flex;
     }
@@ -588,6 +590,31 @@
         padding-right: 0;
         margin-top: 8px;
     }
+
+    .main-screen-container {
+        padding-left: 0;
+        padding-right: 0;
+        flex-direction: column;
+        gap: 80px;
+    }
+
+    .page-wrapper main.main-home {
+        padding-top: 0;
+    }
+
+    .main-screen h1.section-name-h1 {
+        font-size: 72px;
+        line-height: 85px;
+    }
+
+    .main-screen .section-name-h3 {
+        margin-top: 16px;
+    }
+    .main-screen .btn.btn-home{
+        min-width: fit-content;
+        width: 100%;
+        margin-top: 40px;
+    }
 }
 
 /* ------ CARDS ------- */
@@ -773,7 +800,7 @@
     .section-nft:not(.with-filter) .cards-list-container .card {
         width: calc(100% / 2 - 16px);
     }
-    
+
     .recommendations-wrap .btn-mobile-wrap {
         display: flex;
         width: 100%;
