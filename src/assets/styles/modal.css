@@ -33,8 +33,9 @@
     padding-left: 40px;
     padding-right: 40px;
 }
-.modal-content{
-    overflow: hidden auto ;
+
+.modal-content {
+    overflow: hidden auto;
 }
 
 .modal-section-total {
@@ -392,6 +393,7 @@ input+.input-equivalent {
     padding: 12px;
     width: fit-content;
 }
+
 .deposit-label {
     padding-top: 8px;
     padding-bottom: 8px;
@@ -438,4 +440,66 @@ input+.input-equivalent {
     font-size: 14px;
     line-height: 150%;
     margin-left: 4px;
+}
+
+.snackbar-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 400px;
+    position: fixed;
+    top: 64px;
+    right: 64px;
+    z-index: 501;
+}
+
+.snackbar {
+    display: flex;
+    align-items: stretch;
+    background: #FFFFFF;
+    border: 1px solid #DFE2EA;
+    box-shadow: 4px 4px 20px rgba(129, 136, 153, 0.1);
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #333333;
+    position: relative;
+    padding-left: 48px;
+    padding-right: calc(12px + 24px);
+    overflow: hidden;
+}
+
+.snackbar-status {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 100%;
+    font-size: 24px;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #DFE2EA;    ;
+}
+
+.snackbar-describe {
+    padding: 12px;
+    min-height: calc(12px * 2 + 24px);
+}
+
+.snackbar.success .snackbar-status {
+    background: #2CC07B;
+}
+.snackbar.wrong .snackbar-status {
+    background: #F32727;
+}
+
+.snackbar .btn-close{
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    font-size: 24px;
 }
