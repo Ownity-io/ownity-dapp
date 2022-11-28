@@ -55,6 +55,7 @@ a.collection-id:hover span,
 }
 
 .btn-modal-main,
+.btn.btn-home,
 .btn.btn-submit,
 .footer-form .btn-subscribe,
 .card-data .btn-container .btn:not(.btn-card-completed):hover,
