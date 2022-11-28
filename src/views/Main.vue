@@ -22,52 +22,57 @@
                   <span>Marketplace</span>
                 </router-link>
               </div>
-              <div class="section-block block-slider">                
+              <div class="section-block block-slider">
                 <BannerSlider />
               </div>
             </div>
           </div>
         </section>
 
-        <section class="section-home">
-            <div class="container">
-                <div class="recommendations-wrap">
-                    <div class="header-title-btn">
-                    <div class="title">Active</div>
-                    <div class="btn-wrap">
-                        <router-link :to="{name: 'Marketplace' }" class="btn btn-router-to">
-                        View all
-                        <i class="i-arrow-right-s-line"></i>
-                        </router-link>
-                    </div>
-                    </div>
-                    <ul class="recommendations-list">
-                    <li >
-                        <!-- <Card />
-                        <Card />
-                        <Card />
-                        <Card />
-                        <Card /> -->
-                    </li>
-                    </ul>
-                    <div class="btn-mobile-wrap">
-                    <router-link :to="{name: 'Marketplace' }" class="btn btn-router-to">
-                        View all
-                        <i class="i-arrow-right-s-line"></i>
-                    </router-link>
-                    </div>
-                </div>
+        <div class="content-home">
+          <div class="content-home-ui">
+            <div>
+              <img src="../assets/images/main-bg-left.png" alt="">
             </div>
-        </section>
-
-        <section class="section-home"></section>
-
-        <section class="section-home">
-          <div class="container">
-            <Faq />
+            <div>
+              <img src="../assets/images/main-bg-right.png" alt="">
+            </div>
           </div>
-        </section>
+          <section class="section-home">
+            <div class="container">
+              <div>
+                <div class="header-title-btn">
+                  <div class="title">Active</div>
+                  <div class="btn-wrap">
+                    <router-link :to="{ name: 'Marketplace' }" class="btn btn-router-to">
+                      View all
+                      <i class="i-arrow-right-s-line"></i>
+                    </router-link>
+                  </div>
+                </div>
 
+                <CardsCarousel />
+
+                <div class="btn-mobile-wrap">
+                  <router-link :to="{ name: 'Marketplace' }" class="btn btn-router-to">
+                    View all
+                    <i class="i-arrow-right-s-line"></i>
+                  </router-link>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section-home"></section>
+
+          <section class="section-home">
+            <div class="container">
+              <Faq />
+            </div>
+          </section>
+
+        </div>
+        
       </main>
     </div>
   </div>
@@ -78,6 +83,7 @@ import Faq from "@/components/Faq.vue";
 import Card from "@/components/Card.vue";
 import Animation from "@/components/main/Animation.vue";
 import BannerSlider from "@/components/main/BannerSlider.vue";
+import CardsCarousel from "@/components/main/CardsCarousel.vue"
 
 export default {
   data() {
@@ -88,6 +94,7 @@ export default {
     Card,
     Animation,
     BannerSlider,
+    CardsCarousel,
   },
   mounted() {},
   methods: {},

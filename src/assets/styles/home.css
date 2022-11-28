@@ -81,3 +81,51 @@
 .main-screen-container .section-block {
     flex: 1;
 }
+
+.main-home .btn-router-to{
+    min-width: fit-content;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.content-home{
+    position: relative;
+}
+
+.content-home-ui{
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+}
+
+.content-home-ui div{
+    flex: 1;
+    width: 50%;
+    height: fit-content;
+    min-height: 2120px;
+}
+.content-home-ui div img{
+    width: 100%;
+    height: auto;
+}
+
+.content-home-ui div:first-child img{
+    margin-top: 30%;
+    margin-bottom: auto;
+}
+
+.content-home-ui div:first-child img{
+    margin-top: auto;
+    margin-bottom: 30%;
+}
+
+.section-block.block-slider{
+    overflow: hidden;
+    max-width: 100%;
+    display: flex;
+}
