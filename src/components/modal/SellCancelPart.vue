@@ -137,9 +137,8 @@ export default {
       return value * 10**this.item.currency.decimals;
     },
     async startVote() {
-      if (this.amount>0 & this.checkedMarketplace!=null) {
         let signed_message = await this.$store.dispatch('walletsAndProvider/signMessageWithGlobalProvider',
-          `${this.checkedMarketplace}-${this.item.id}-${this.item.currency.address}-${this.noExponents(this.amount * 10 ** this.item.currency.decimals)}-${this.item.end_date}`);
+          `${this.item.marketplace.id}-${this.item.id}-${this.item.currency.address}-${this.noExponents(this.voting.amount)}-${this.item.end_date}`);
         console.log(signed_message);
         let requestLink = `${config.backendApiEntryPoint}voting-create/`;
         let requestOptions = {
@@ -150,10 +149,10 @@ export default {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           body: JSON.stringify({
-            "marketplace_id": this.checkedMarketplace,
+            "marketplace_id": this.item.marketplace.id,
             "lot_id": this.item.id,
             "currency": this.item.currency.address,
-            "amount": this.noExponents(this.amount * 10 ** this.item.currency.decimals),
+            "amount": this.noExponents(this.voting.amount),
             "end_date": this.item.end_date,
             "signed_message": signed_message,
             "type": "CANCEL",
@@ -168,7 +167,6 @@ export default {
         else {
           alert('Error!');
         }
-      }
     },
     async setUserBidAmount(){
       let userAddress = localStorage.getItem('userAddress');
@@ -183,6 +181,24 @@ export default {
         return
       }
       this.userBidAmount=0;      
+    },
+    noExponents (value) {
+      var data = String(value).split(/[eE]/);
+      if (data.length == 1) return data[0];
+
+      var z = '',
+        sign = value < 0 ? '-' : '',
+        str = data[0].replace('.', ''),
+        mag = Number(data[1]) + 1;
+
+      if (mag < 0) {
+        z = sign + '0.';
+        while (mag++) z += '0';
+        return z + str.replace(/^\-/, '');
+      }
+      mag -= str.length;
+      while (mag--) z += '0';
+      return str + z;
     }
   }
 };
