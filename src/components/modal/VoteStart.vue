@@ -143,7 +143,7 @@ export default {
         let signed_message = await this.$store.dispatch('walletsAndProvider/signMessageWithGlobalProvider',
           `${this.checkedMarketplace}-${this.item.id}-${this.item.currency.address}-${this.noExponents(this.amount * 10 ** this.item.currency.decimals)}-${this.item.end_date}`);
         console.log(signed_message);
-        let requestLink = `${config.backendApiEntryPoint}voting/`;
+        let requestLink = `${config.backendApiEntryPoint}voting-create/`;
         let requestOptions = {
           method: "POST",
           headers: {
@@ -158,7 +158,8 @@ export default {
             "amount": this.noExponents(this.amount * 10 ** this.item.currency.decimals),
             "end_date": this.item.end_date,
             "signed_message": signed_message,
-            "type": "SELL"
+            "type": "SELL",
+            "blockchain":this.item.collection.blockchain
           })
         };
         let request = await fetch(requestLink, requestOptions);

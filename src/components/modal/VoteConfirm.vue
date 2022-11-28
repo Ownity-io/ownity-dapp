@@ -36,13 +36,13 @@
                     <div class="icon-value"></div>
                     <span>{{this.abbrNum(this.toFixedIfNecessary(this.voting.amount/(10**this.item.currency.decimals),6),1)}} ETH</span>
                   </div>
-                  <div class="price-block-equivalent equivalent">≈ $ {{abbrNum(this.toFixedIfNecessary((this.voting.amount/(10**this.item.currency.decimals)) * currencyToUsdPrice,6))}}</div>
+                  <div class="price-block-equivalent equivalent">≈ $ {{abbrNum(this.toFixedIfNecessary((this.voting.amount/(10**this.item.currency.decimals)) * currencyToUsdPrice,6),1)}}</div>
                 </div>
               </div>
             </div>
           </div>
           
-          <button class="btn btn-modal-main btn-modal-desktop" @click="vote">Confirm your part</button>
+          <button class="btn btn-modal-main btn-modal-desktop" @click="confirmVote">Confirm your part</button>
         </div>
       </div>    
 
@@ -115,11 +115,11 @@ export default {
     convertFromEtherToWei(value){
       return value * 10**this.item.currency.decimals;
     },
-    async vote() {
+    async confirmVote() {
         let signed_message = await this.$store.dispatch('walletsAndProvider/signMessageWithGlobalProvider',
           `${this.voting.marketplace.id}-${this.item.id}-${this.item.currency.address}-${this.voting.amount}-${this.voting.end_date}`);
         console.log(signed_message);
-        let requestLink = `${config.backendApiEntryPoint}voting/`;
+        let requestLink = `${config.backendApiEntryPoint}voting-confirm/`;
         let requestOptions = {
           method: "POST",
           headers: {
@@ -134,7 +134,8 @@ export default {
             "amount":this.voting.amount,
             "end_date":this.voting.end_date,
             "signed_message": signed_message,
-            "type": this.voting.type
+            "type": this.voting.type,
+            "blockchain":this.item.collection.blockchain
           })
         };
         let request = await fetch(requestLink, requestOptions);

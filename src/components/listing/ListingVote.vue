@@ -51,7 +51,7 @@
               class="progress-value"
               :style="{width: `${(this.voting.count/this.item.bids.length)*100}%`}"
             >
-              <span>{{(this.voting.count/this.item.bids.length)*100}}%</span>
+              <span>{{toFixedIfNecessary((this.voting.count/this.item.bids.length)*100,1)}}%</span>
             </div>
             <div class="progress-value" style=" width: 20%, 'padding-left' :  20% ">
               <span>20%</span>
