@@ -60,12 +60,12 @@
             The marketplace charges a fee for each transaction.
             <a href="#">Terms of Use</a>
           </div>
-          <button class="btn btn-modal-main btn-modal-desktop" @click="vote">Cancel sell</button>
+          <button class="btn btn-modal-main btn-modal-desktop" @click="startVote">Cancel sell</button>
         </div>
       </div>   
 
       <div class="modal-mobile-footer">
-        <button class="btn btn-modal-main">Cancel sell</button>
+        <button class="btn btn-modal-main" @click="startVote">Cancel sell</button>
       </div>
       
     </div>
@@ -136,11 +136,12 @@ export default {
     convertFromEtherToWei(value){
       return value * 10**this.item.currency.decimals;
     },
-    async vote() {
+    async startVote() {
+      if (this.amount>0 & this.checkedMarketplace!=null) {
         let signed_message = await this.$store.dispatch('walletsAndProvider/signMessageWithGlobalProvider',
-          `${this.voting.marketplace.id}-${this.item.id}-${this.item.currency.address}-${this.voting.amount}-${this.voting.end_date}`);
+          `${this.checkedMarketplace}-${this.item.id}-${this.item.currency.address}-${this.noExponents(this.amount * 10 ** this.item.currency.decimals)}-${this.item.end_date}`);
         console.log(signed_message);
-        let requestLink = `${config.backendApiEntryPoint}voting/`;
+        let requestLink = `${config.backendApiEntryPoint}voting-create/`;
         let requestOptions = {
           method: "POST",
           headers: {
@@ -149,13 +150,14 @@ export default {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           body: JSON.stringify({
-            "marketplace_id": this.voting.marketplace.id,
+            "marketplace_id": this.checkedMarketplace,
             "lot_id": this.item.id,
             "currency": this.item.currency.address,
-            "amount":this.voting.amount,
-            "end_date":this.voting.end_date,
+            "amount": this.noExponents(this.amount * 10 ** this.item.currency.decimals),
+            "end_date": this.item.end_date,
             "signed_message": signed_message,
-            "type": 'CANCEL'
+            "type": "CANCEL",
+            "blockchain":this.item.collection.blockchain
           })
         };
         let request = await fetch(requestLink, requestOptions);
@@ -166,6 +168,7 @@ export default {
         else {
           alert('Error!');
         }
+      }
     },
     async setUserBidAmount(){
       let userAddress = localStorage.getItem('userAddress');
