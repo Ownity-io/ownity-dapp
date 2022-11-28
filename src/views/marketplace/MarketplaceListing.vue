@@ -1,5 +1,5 @@
 <template>
-  <main v-if="item!=null">
+  <main v-if="render">
     <div class="container">
       <section class="section-breadcrumbs">
         <Breadcrumbs />
@@ -378,7 +378,8 @@ export default {
       userBidAmount:0,
       config:config,
       chartData:[],
-      userAddress:null
+      userAddress:null,
+      render:false
     };
   },
   components: {
@@ -405,7 +406,7 @@ export default {
     this.setChartData();
     await this.$store.dispatch('marketplaceListing/checkLike');
     await this.checkLike();
-    console.log(this.item.votings);
+    this.render = true;
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
     }
