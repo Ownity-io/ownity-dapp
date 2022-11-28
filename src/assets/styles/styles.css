@@ -76,6 +76,7 @@ main>section {
     font-weight: 700;
     font-size: 24px;
     line-height: 150%;
+    cursor: pointer;
 }
 
 .footer-logo,
@@ -1725,6 +1726,20 @@ ul.tabs {
     gap: 16px;
 }
 
+
+.table-top-collections .thead,
+.table-top-collections .tr {
+    grid-template-columns: 2fr 1.5fr 1.5fr 1fr 1fr;
+    border-bottom: 1px solid #DFE2EA;
+    gap: 16px;
+}
+
+.table-top-collections .thead,
+.table-top-collections .tr
+/* ---------### START ### try flex for gris like at binance ----------- */
+
+/* ---------### END ##### try flex for gris like at binance ----------- */
+
 .table-chart-data .tr,
 .table-activity .tr {
     cursor: pointer;
@@ -2014,10 +2029,14 @@ a.td-wrap-link span {
     margin-left: auto;
 }
 
+.section-home-name,
 .header-title-btn .title {
     font-weight: 700;
     font-size: 24px;
     line-height: 28px;
+}
+
+.header-title-btn .title {
     margin-bottom: 16px;
 }
 
@@ -2768,10 +2787,11 @@ a.td-wrap-link span {
     margin-top: 24px;
 }
 
-.votes-wrap-title ,
-.votes-wrap-title +.block-vote {
-    margin-top: 24px; 
+.votes-wrap-title,
+.votes-wrap-title+.block-vote {
+    margin-top: 24px;
 }
+
 .block-vote {
     padding: 16px;
     background: #FFFFFF;
@@ -2893,4 +2913,29 @@ a.td-wrap-link span {
     width: fit-content;
     height: fit-content;
     font-size: 24px;
+}
+
+
+.cards-carousel .carousel__prev,
+.cards-carousel .carousel__next {
+    background: #FFFFFF;
+    border: 1px solid #DFE2EA;
+    width: 48px;
+    height: 48px;
+    box-shadow: 4px 4px 20px rgba(129, 136, 153, 0.1);
+    border-radius: 8px;
+    top: 50%;
+}
+
+.cards-carousel .carousel__prev svg path,
+.cards-carousel .carousel__next svg path {
+    fill: #818899;
+}
+
+.cards-carousel .carousel__prev {
+    transform: translate(-50%, -100%);
+}
+
+.cards-carousel .carousel__next {
+    transform: translate(50%, -100%);
 }

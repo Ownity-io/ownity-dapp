@@ -4,6 +4,9 @@
       <Slide key="0">
         <img src="@/assets/images/banners/Slide1.png" alt="" />
       </Slide>
+      <Slide key="1">
+        <img src="@/assets/images/banners/Slide2.png" alt="" />
+      </Slide>
       <template #addons>
         <Pagination />
       </template>
@@ -30,7 +33,7 @@ export default ({
 });
 </script>
 
-<style>
+<style scoped>
 .carousel__slide img {
   width: 100%;
   height: auto;
@@ -41,12 +44,15 @@ export default ({
 }
 .carousel__viewport{
     overflow: hidden;
+    margin: auto;
 }
 
 .banner-slider{
     overflow: hidden;
     width: 100%;
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .carousel{

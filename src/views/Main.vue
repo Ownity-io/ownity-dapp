@@ -15,10 +15,7 @@
                   industry. Lorem Ipsum has been the indus
                 </h3>
 
-                <router-link
-                  class="btn btn-home btn-home-main"
-                  :to="{ name: 'Marketplace' }"
-                >
+                <router-link class="btn btn-home btn-home-main" :to="{ name: 'Marketplace' }">
                   <span>Marketplace</span>
                 </router-link>
               </div>
@@ -40,7 +37,7 @@
           </div>
           <section class="section-home">
             <div class="container">
-              <div>
+              <div class="cards-carousel">
                 <div class="header-title-btn">
                   <div class="title">Active</div>
                   <div class="btn-wrap">
@@ -63,7 +60,62 @@
             </div>
           </section>
 
-          <section class="section-home"></section>
+          <section class="section-home">
+            <div class="container">
+              <div class="section-home-header">
+                <div class="section-home-name">Top Collections</div>
+              </div>
+
+              <div class="table table-top-collections">
+                <div class="thead">
+                  <div class="td td-collection"><span>Collection</span></div>
+                  <div class="td td-price">Volume</div>
+                  <div class="td td-price">Floor price</div>
+                  <div class="td">Owners</div>
+                  <div class="td">Supply</div>
+                </div>
+
+                <div class="tr">
+
+                  <div class="td">
+                    <div class="td-wrap td-wrap-collection">
+                      <div class="collection-img"></div>
+                      <div class="collection-data">
+                        <span class="collection-id">18234</span>
+                        <span class="td-light collection-id">Mutant Ape Yacht Club</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="td td-price">
+                    <div class="td-wrap">
+                      <div class="td-wrap-price">
+                        <div class="icon-token"></div>
+                        <span>12.90 ETH</span>
+                      </div>
+                      <!-- <span class="td-light">≈ $ 1000</span> -->
+                    </div>
+                  </div>
+
+                  <div class="td td-price">
+                    <div class="td-wrap">
+                      <div class="td-wrap-price">
+                        <div class="icon-token"></div>
+                        <span>12.90 ETH</span>
+                      </div>
+                      <!-- <span class="td-light">≈ $ 1000</span> -->
+                    </div>
+                  </div>
+
+                  <div class="td">
+                    <div class="td-wrap">
+                      1K
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
 
           <section class="section-home">
             <div class="container">
@@ -72,7 +124,7 @@
           </section>
 
         </div>
-        
+
       </main>
     </div>
   </div>
@@ -96,7 +148,7 @@ export default {
     BannerSlider,
     CardsCarousel,
   },
-  mounted() {},
+  mounted() { console.log(this.$router)},
   methods: {},
 };
 </script>
