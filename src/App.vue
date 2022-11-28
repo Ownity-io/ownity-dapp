@@ -1,4 +1,5 @@
 <template>
+    <SnackBar />
     <ConnectWallet v-if="this.$store.getters['appGlobal/getShowConnectWalletModal'] & (this.walletConnected==null||this.walletConnected=='null')"/>
     <DepositPartStart v-if="this.$store.getters['appGlobal/getshowStartCollectingModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
     <DepositPartContinue v-if="this.$store.getters['appGlobal/getshowContinueCollectingModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
@@ -41,6 +42,8 @@ import VoteConfirm from '@/components/modal/VoteConfirm.vue'
 import BuyPart from '@/components/modal/BuyPart.vue'
 import TransSuccess from '@/components/modal/TransSuccess.vue'
 // ----------------------------------------
+import SnackBar from '@/components/SnackBar.vue'
+
 
 export default {
     components:{
@@ -61,8 +64,9 @@ export default {
         VoteStart,
         VoteConfirm,
         BuyPart,
-        TransSuccess
+        TransSuccess,
 // ----------------------------------------
+        SnackBar,
     },
     methods:{
         async checkWalletInLS() {
