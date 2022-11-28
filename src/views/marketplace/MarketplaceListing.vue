@@ -193,8 +193,8 @@
                       <span>Fraction market</span>
                     </button>
                   </li>
-                  <!-- <li v-if="item.marketplace_status=='OPEN' & item.internal_status=='FULLFILLED'"> -->
-                  <li v-if="true">
+                  <li v-if="item.marketplace_status=='OPEN' & item.internal_status=='FULLFILLED'">
+                  <!-- <li v-if="true"> -->
                     <button
                       :class="{ 'active-tab': activeTab2 === 'ListingVote' }"
                       @click="letsCheck2('ListingVote')"
