@@ -123,8 +123,8 @@
                 </div>
               </div>
               <div class="section-deposit-btns">
-                <!-- <button class="btn btn-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='FULLFILLED'">Start voting</button> -->
-                <button class="btn btn-deposit" v-if="(item.marketplace_status=='OPEN'||item.marketplace_status=='TEST') & item.internal_status=='FULLFILLED'"
+                <!-- <button class="btn btn-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='FULFILLED'">Start voting</button> -->
+                <button class="btn btn-deposit" v-if="(item.marketplace_status=='OPEN'||item.marketplace_status=='TEST') & item.internal_status=='FULFILLED'"
                 @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">Start voting</button>
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN'||item.marketplace_status=='TEST')  & item.internal_status=='OPEN'))|| item.id == 40997"
                 @click="this.$store.dispatch('appGlobal/setshowStartCollectingModal',true)">Start collecting</button>
@@ -193,7 +193,7 @@
                       <span>Fraction market</span>
                     </button>
                   </li>
-                  <li v-if="item.marketplace_status=='OPEN' & item.internal_status=='FULLFILLED'">
+                  <li v-if="(item.marketplace_status=='OPEN'||item.marketplace_status=='TEST') & item.internal_status=='FULFILLED' & item.votings!=null">
                   <!-- <li v-if="true"> -->
                     <button
                       :class="{ 'active-tab': activeTab2 === 'ListingVote' }"
