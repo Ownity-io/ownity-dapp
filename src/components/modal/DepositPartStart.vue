@@ -124,7 +124,6 @@ export default {
       let markeplaceId = ethers.utils.formatBytes32String(this.item.marketplace.id).substring(0, 10);
       let options = {};
       let valueToBuy = (ethers.BigNumber.from(String((this.item.price/100)*this.currentPart))).toString();
-      conso
       if (valueToBuy>(this.item.price-this.allBidsAmount)){
         console.log('Part is too big');
         valueToBuy = this.item.price-this.allBidsAmount;
