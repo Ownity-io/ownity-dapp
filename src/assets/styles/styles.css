@@ -1734,8 +1734,10 @@ ul.tabs {
     gap: 16px;
 }
 
-.table-top-collections .thead,
-.table-top-collections .tr
+.table-top-collections .thead .td-data,
+.table-top-collections .tr  .td-data{
+    text-align: right;
+}
 /* ---------### START ### try flex for gris like at binance ----------- */
 
 /* ---------### END ##### try flex for gris like at binance ----------- */
@@ -2927,15 +2929,36 @@ a.td-wrap-link span {
     top: 50%;
 }
 
+.cards-carousel .carousel__viewport {
+    margin: -16px;
+    padding: 16px  8px;
+    width: calc(100%  + 16px );
+}
+
+
+
+.cards-carousel .carousel__track{
+width: calc(100% - 16px);
+}
+
+
+
+.cards-carousel .carousel__viewport li{
+    padding: 8px ;
+}
+
 .cards-carousel .carousel__prev svg path,
 .cards-carousel .carousel__next svg path {
     fill: #818899;
 }
 
 .cards-carousel .carousel__prev {
-    transform: translate(-50%, -100%);
+    transform: translate(calc( -50% - 8px), -100%);
 }
 
 .cards-carousel .carousel__next {
-    transform: translate(50%, -100%);
+    transform: translate(calc( 50% + 8px), -100%);
 }
+/* .cards-carousel  .card{
+    background-color: pink;
+} */

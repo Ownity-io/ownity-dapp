@@ -33,8 +33,9 @@ a.collection-id:hover span,
     background-clip: text;
     text-fill-color: transparent;
     -webkit-text-fill-color: transparent;
-    transition: background-image 2ms ease;
+    transition: background-image 200ms ease;
     text-decoration: underline !important;
+    background-position: center;
 }
 
 .tabs button:hover,
@@ -65,10 +66,10 @@ a.collection-id:hover span,
     border: 2px solid #2CC07B; */
     background: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%);
     color: #FFFFFF;
-    background-size: 100% 100%;
-    border-width: 0;
-    border: none;
-
+    background-size: calc(100% + 2px * 2);
+    background-position: center;
+    border-color: transparent;
+    transition: background-image 200ms ease;
 }
 
 .btn-modal-main:hover,
@@ -115,6 +116,7 @@ a.collection-id:hover span,
 .input-select-wrap.unfolded .input-selected,
 .sort .btn-sort:hover,
 .input-selected:hover,
+.btn-router-to:hover,
 .btn-param:hover {
     background-color: #F4F5FA;
 }

@@ -610,7 +610,8 @@
     .main-screen .section-name-h3 {
         margin-top: 16px;
     }
-    .main-screen .btn.btn-home{
+
+    .main-screen .btn.btn-home {
         min-width: fit-content;
         width: 100%;
         margin-top: 40px;
@@ -863,6 +864,17 @@
     .section-nft-list .table-activity .tr:not(.tr-mob-collapse) .td-date,
     .section-nft-list .table-activity .tr:not(.tr-mob-collapse) .td-tx {
         height: fit-content;
+    }
+
+    .table-top-collections .thead .td-data,
+    .table-top-collections .tr .td-data {
+        display: none;
+    }
+
+
+    .table-top-collections .thead,
+    .table-top-collections .tr {
+        grid-template-columns: 2fr 1.5fr 1.5fr;
     }
 
     .section-nft-list .table-activity .thead .td,
