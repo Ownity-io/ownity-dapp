@@ -6,27 +6,27 @@
         alt=""
         style="position: absolute; top: 0; width: 100%; height: auto; left: 0"
       /> -->
-      <AnimationImg ref="AnimationImg" />
-      <AnimationImg2
-        :class="{ active: animationPlay2 }"
-        ref="AnimationImg2"
-        :animationPlay2="animationPlay2"
-      />
-      <AnimationImg3 ref="AnimationImg3" />
+      <AnimationImg1 :status="img1.status" :class="{ active: img1.status }" ref="AnimationImg1" />
+      <AnimationImg2 :status="img2.status" :class="{ active: img2.status }" ref="AnimationImg2" />
+      <!-- 
+        :animationPlay2="animationPlay2" -->
+      <AnimationImg3 :status="img3.status" :class="{ active: img3.status }" ref="AnimationImg3" />
     </div>
   </div>
 </template>
 
 <script>
-import AnimationImg from "./animation/images/AnimationImg.vue";
+import AnimationImg1 from "./animation/images/AnimationImg1.vue";
 import AnimationImg2 from "./animation/images/AnimationImg2.vue";
 import AnimationImg3 from "./animation/images/AnimationImg3.vue";
 
 export default {
   data() {
     return {
-      animationPlay2: false,
-
+      // animationPlay2: false,
+      // el1: '',
+      // el2: '',
+      // el3: '',
       img1: {
         top: 0,
         left: 0,
@@ -51,21 +51,22 @@ export default {
     };
   },
   components: {
-    AnimationImg,
+    AnimationImg1,
     AnimationImg2,
     AnimationImg3,
   },
   mounted() {
-    // document.addEventListener("mousemove", this.cursorMove);
+    this.checkElPosition();
     // window.onresize = function () {
     //   setTimeout(() => {
     //     this.checkElPosition();
     //   }, "3000");
     // };
-    // this.checkElPosition();
+    document.addEventListener("mousemove", this.cursorMove);
   },
   methods: {
     checkElPosition() {
+
       this.img1.top = this.$refs.AnimationImg1.$el.getBoundingClientRect().top;
       this.img1.left = this.$refs.AnimationImg1.$el.getBoundingClientRect().left;
       this.img1.bottom = this.$refs.AnimationImg1.$el.getBoundingClientRect().bottom;
@@ -80,28 +81,29 @@ export default {
       this.img3.left = this.$refs.AnimationImg3.$el.getBoundingClientRect().left;
       this.img3.bottom = this.$refs.AnimationImg3.$el.getBoundingClientRect().bottom;
       this.img3.right = this.$refs.AnimationImg3.$el.getBoundingClientRect().right;
+
     },
 
     cursorMove($event) {
-      // this.statusAnimation($event.pageX, $event.pageX, this.img1);
+      this.statusAnimation($event.pageX, $event.pageX, this.img1);
       this.statusAnimation($event.pageX, $event.pageX, this.img2);
-      // this.statusAnimation($event.pageX, $event.pageX, this.img3);
+      this.statusAnimation($event.pageX, $event.pageX, this.img3);
     },
 
     statusAnimation(cursorX, cursorY, obj) {
       // console.log(
       //   " top:" +
-      //     obj.top +
-      //     " left:" +
-      //     obj.left +
-      //     " bottom:" +
-      //     obj.bottom +
-      //     " right:" +
-      //     obj.right +
-      //     " cursorX:" +
-      //     cursorX +
-      //     " cursorY:" +
-      //     cursorY
+      //   obj.top +
+      //   " left:" +
+      //   obj.left +
+      //   " bottom:" +
+      //   obj.bottom +
+      //   " right:" +
+      //   obj.right +
+      //   " cursorX:" +
+      //   cursorX +
+      //   " cursorY:" +
+      //   cursorY
       // );
       if (
         cursorX > obj.left &&
@@ -109,9 +111,9 @@ export default {
         cursorY > obj.top &&
         cursorY < obj.bottom
       ) {
-        return (this.animationPlay2 = true);
+        return (obj.status = true);
       } else {
-        return (this.animationPlay2 = false);
+        return (obj.status = false);
       }
     },
   },
@@ -144,15 +146,13 @@ export default {
 .screen-animation-container svg:nth-child(3) {
   right: 10px;
   top: -10px;
+  z-index: -1;
 }
 
-svg:nth-child(1).active {
-  background: pink;
+svg.active {
+  background: rgb(205, 255, 185);
 }
-svg:nth-child(2).active {
-  background: rgb(210, 255, 192);
-}
-svg:nth-child(3).active {
-  background: rgb(255, 218, 192);
+svg.play .path1 {
+  background: rgb(255, 185, 185);
 }
 </style>

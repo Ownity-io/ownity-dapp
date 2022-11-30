@@ -155,7 +155,6 @@ export default {
     BannerSlider,
     CardsCarousel,
   },
-  mounted() { console.log(this.$router)},
   methods: {},
 };
 </script>
