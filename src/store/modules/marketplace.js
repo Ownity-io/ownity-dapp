@@ -233,7 +233,43 @@ export default {
     },
     async setCurrentlyGathering(context,value){
       context.commit("setCurrentlyGathering", value);
-    }
+    },
+    async fetchAndSetListingsStartInfoByUser(context) {
+      let requestUrl = `${config.backendApiEntryPoint}listings-by-user/?limit=${config.listingsPerPage}`;
+      if (context.getters.getCurrentCollectionContractAddress != null) {
+          requestUrl += `&collection=${context.getters.getCurrentCollectionContractAddress}`;
+        }
+      
+      if (context.getters.getCurrentMarketplaceId != null) {
+        requestUrl += `&marketplace=${context.getters.getCurrentMarketplaceId}`;
+      }
+      if (context.getters.getCurrentMinPrice!=null){
+        requestUrl += `&price_gt=${ethers.utils.parseEther(String(context.getters.getCurrentMinPrice)).toString()}`;
+      }
+      if (context.getters.getCurrentMaxPrice!=null){
+        requestUrl += `&price_lt=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
+      }
+      if (context.getters.getCurrentlyGathering){
+        requestUrl += `&marketplace_status=${context.getters.getCurrentStatus}`;
+      }
+      console.log(requestUrl)
+      let requestOptions = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
+      };
+      let request = await fetch(requestUrl,requestOptions);
+      let requestCode = request.ok;
+      if (requestCode) {
+        let requestJson = await request.json();
+        context.commit("setListingsInfo", requestJson);
+      } else {
+        context.commit("setListingsInfo", null);
+      }
+    },
 
   },
 };

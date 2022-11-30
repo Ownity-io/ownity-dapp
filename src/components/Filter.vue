@@ -19,6 +19,24 @@
         </li>
       </ul>
     </div>
+
+    <div class="filter-section" :class="{ 'collapse-section': filterSection0 }" v-if="this.$route.name=='Profile'">
+      <button class="filter-section-name" @click="filterSection0 = !filterSection0">
+        <span>Status</span>
+        <i class="i-arrow-up-s-line"></i>
+      </button>
+      <ul class="filter-ul">
+        <li class="filter-li" >
+          <div class="input-checkbox input-switcher">
+            <input type="checkbox" id="input-switch" v-model="checkedStatus" :true-value="CLOSED" :false-value="OPEN" @change="fetchAndSetListingsStartInfo"/>
+            <label for="input-switch">
+              <span>Open/Close</span>
+              <div class="input-switch"></div>
+            </label>
+          </div>
+        </li>
+      </ul>
+    </div>
     
     <div class="filter-section" :class="{ 'collapse-section': filterSection1 }" v-if="false">
       <button class="filter-section-name" @click="filterSection1 = !filterSection1">
@@ -86,7 +104,7 @@
         </li>
       </ul>
     </div>
-    <div class="filter-section" :class="{ 'collapse-section': filterSection2 }" v-if="this.$route.name=='Marketplace'">
+    <div class="filter-section" :class="{ 'collapse-section': filterSection2 }" v-if="this.$route.name=='Marketplace'||this.$route.name=='Profile'">
       <button class="filter-section-name" @click="filterSection2 = !filterSection2">
         <span>Collection</span>
         <i class="i-arrow-up-s-line"></i>
@@ -163,6 +181,10 @@ export default {
       else if (this.$route.name == 'Collection'){
         console.log(this.currentlyGathering);
         await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address);
+      }
+      else if (this.$route.name == 'Profile'){
+        console.log(this.currentlyGathering);
+        await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
       }
       
     },

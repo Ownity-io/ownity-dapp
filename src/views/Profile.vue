@@ -206,8 +206,11 @@ export default {
         SelectedFilters,
         ListCards
     }, 
-    mounted() {
+    async mounted() {
         this.activeTab = "ListCards";
+        await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
+        await this.$store.dispatch('marketplace/fetchAndSetMarketplaces');
+        await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
     },
     methods: {
         letsCheck(name) {
