@@ -3,7 +3,7 @@
     <div class="page-wrapper">
       <main class="main-home">
         <!-- animation as another screen with position absolute -->
-        <Animation class="screen-animation" />
+        <Animation />
 
         <section class="section-home main-screen">
           <div class="container">
@@ -20,7 +20,7 @@
                 </router-link>
               </div>
               <div class="section-block block-slider">
-                <BannerSlider />
+                <!-- <BannerSlider /> -->
               </div>
             </div>
           </div>
