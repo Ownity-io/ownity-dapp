@@ -10,8 +10,7 @@
       <AnimationImg2
         :class="{ active: animationPlay2 }"
         ref="AnimationImg2"
-        :mouseEventX="mouseEventX"
-        :mouseEventY="mouseEventY"
+        :animationPlay2="animationPlay2"
       />
       <AnimationImg3 ref="AnimationImg3" />
     </div>
@@ -26,20 +25,8 @@ import AnimationImg3 from "./animation/images/AnimationImg3.vue";
 export default {
   data() {
     return {
-      // props:[]
-
-      mouseEvent: false,
-      mouseEventX: false,
-      mouseEventY: false,
-
       animationPlay2: false,
 
-      // x1:0,
-      // y1:0,
-      // x2:0,
-      // y2:0,
-      // x3:0,
-      // y3:0,
       img1: {
         top: 0,
         left: 0,
@@ -69,71 +56,64 @@ export default {
     AnimationImg3,
   },
   mounted() {
-    document.addEventListener("mousemove", this.cursorMove);
-    // document.addEventListener("resize", this.cursorMove);
-    window.onresize = function () {
-      setTimeout(() => {
-        this.checkElPosition();
-      }, "3000");
-    };
-    // this.statusEl()
-    this.checkElPosition();
+    // document.addEventListener("mousemove", this.cursorMove);
+    // window.onresize = function () {
+    //   setTimeout(() => {
+    //     this.checkElPosition();
+    //   }, "3000");
+    // };
+    // this.checkElPosition();
   },
   methods: {
-    // chekPositionMouse
-
     checkElPosition() {
+      this.img1.top = this.$refs.AnimationImg1.$el.getBoundingClientRect().top;
+      this.img1.left = this.$refs.AnimationImg1.$el.getBoundingClientRect().left;
+      this.img1.bottom = this.$refs.AnimationImg1.$el.getBoundingClientRect().bottom;
+      this.img1.right = this.$refs.AnimationImg1.$el.getBoundingClientRect().right;
+
       this.img2.top = this.$refs.AnimationImg2.$el.getBoundingClientRect().top;
       this.img2.left = this.$refs.AnimationImg2.$el.getBoundingClientRect().left;
       this.img2.bottom = this.$refs.AnimationImg2.$el.getBoundingClientRect().bottom;
       this.img2.right = this.$refs.AnimationImg2.$el.getBoundingClientRect().right;
+
+      this.img3.top = this.$refs.AnimationImg3.$el.getBoundingClientRect().top;
+      this.img3.left = this.$refs.AnimationImg3.$el.getBoundingClientRect().left;
+      this.img3.bottom = this.$refs.AnimationImg3.$el.getBoundingClientRect().bottom;
+      this.img3.right = this.$refs.AnimationImg3.$el.getBoundingClientRect().right;
     },
 
     cursorMove($event) {
-      this.mouseEventX = $event.pageX;
-      this.mouseEventY = $event.pageY;
-      this.statusAnimation(this.mouseEventX, this.mouseEventY, this.img2);
+      // this.statusAnimation($event.pageX, $event.pageX, this.img1);
+      this.statusAnimation($event.pageX, $event.pageX, this.img2);
+      // this.statusAnimation($event.pageX, $event.pageX, this.img3);
     },
 
     statusAnimation(cursorX, cursorY, obj) {
-      console.log(
-        " top:" +
-          obj.top +
-          " left:" +
-          obj.left +
-          " bottom:" +
-          obj.bottom +
-          " right:" +
-          obj.right +
-          " cursorX:" +
-          cursorX +
-          " cursorY:" +
-          cursorY
-      );
+      // console.log(
+      //   " top:" +
+      //     obj.top +
+      //     " left:" +
+      //     obj.left +
+      //     " bottom:" +
+      //     obj.bottom +
+      //     " right:" +
+      //     obj.right +
+      //     " cursorX:" +
+      //     cursorX +
+      //     " cursorY:" +
+      //     cursorY
+      // );
       if (
         cursorX > obj.left &&
         cursorX < obj.right &&
         cursorY > obj.top &&
         cursorY < obj.bottom
-      )
+      ) {
         return (this.animationPlay2 = true);
-      else this.animationPlay2 = false;
+      } else {
+        return (this.animationPlay2 = false);
+      }
     },
-
-    // statusEl(el) {
-    //     if (
-    //       el.getBoundingClientRect().top >= 0 &&
-    //       el.getBoundingClientRect().top <
-    //       el.getBoundingClientRect().height + 15
-    //     ) {
-    //       return true;
-    //     } else {
-    //       return false;
-    //     }
-    // },
-  },
-  beforeUnmount() {
-    window.removeEventListener("mousemove", this.cursorMove);
   },
 };
 </script>
@@ -164,5 +144,15 @@ export default {
 .screen-animation-container svg:nth-child(3) {
   right: 10px;
   top: -10px;
+}
+
+svg:nth-child(1).active {
+  background: pink;
+}
+svg:nth-child(2).active {
+  background: rgb(210, 255, 192);
+}
+svg:nth-child(3).active {
+  background: rgb(255, 218, 192);
 }
 </style>

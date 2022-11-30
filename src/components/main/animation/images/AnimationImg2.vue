@@ -925,15 +925,12 @@
 
 <script>
   export default {
-    props: ["mouseEvent", "mouseEventX", "mouseEventY"],
+    
     data() {
       return {};
     },
+    // mounted:{
+
+    // }
   };
 </script>
-
-<style>
-.svg2.active{
-  background: pink;
-}
-</style>
