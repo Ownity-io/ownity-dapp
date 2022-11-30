@@ -48,6 +48,7 @@ const routes = [
     {
         path: '/profile',
         component: Profile,
+        name:'Profile'
         
     },
     {
