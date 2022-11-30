@@ -4,5 +4,27 @@
     "messageToSignStart":"Sign the message to continue working with NFT Aggregator: ",
     "etherscanTokenUrlStart":"https://etherscan.io/token/",
     "etherscanAddressUrlStart":"https://etherscan.io/address/",
-    "contractAddress":"0x6c894a6cbBda2c4E6420D0c381925Dc56d08c6DE"
+    "contractAddress":"0x6c894a6cbBda2c4E6420D0c381925Dc56d08c6DE",
+    "profilePageBidsStatuses":[
+        {
+            "name":"On sale",
+            "codeName":"ON SALE"
+        },
+        {
+            "name":"Canceled",
+            "codeName":"CANCELLED"
+        },
+        {
+            "name":"Gathering",
+            "codeName":"IN GATHER"
+        },
+        {
+            "name":"Owned",
+            "codeName":"OWNED"
+        },
+        {
+            "name":"Sold",
+            "codeName":"SOLD"
+        }        
+    ]
 }

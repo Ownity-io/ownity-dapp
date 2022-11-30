@@ -21,7 +21,8 @@ export default {
       currentMaxPrice: null,
       currentMarketplace: null,
       currentCollection: null,
-      currentlyGatehring:false
+      currentlyGatehring:false,
+      currentBidStatus:null
     };
   },
   getters: {
@@ -97,6 +98,9 @@ export default {
     },
     getCurrentlyGathering(state){
       return state.currentlyGatehring;
+    },
+    getCurrentBidStatus(state){
+      return state.currentBidStatus;
     }
   },
   mutations: {
@@ -140,6 +144,9 @@ export default {
     },
     setCurrentlyGathering(state,value){
       state.currentlyGatehring = value;
+    },
+    setCurrentBidStatus(state,value){
+      state.currentBidStatus = value;
     }
   },
   actions: {
@@ -256,6 +263,9 @@ export default {
       else{
         requestUrl += `&marketplace_status=OPEN`;
       }
+      if (context.getters.getCurrentBidStatus!=null){
+        requestUrl += `&bid_status=${context.getters.getCurrentBidStatus}`;
+      }
       console.log(requestUrl)
       let requestOptions = {
         method: "GET",
@@ -274,6 +284,9 @@ export default {
         context.commit("setListingsInfo", null);
       }
     },
+    setCurrentBidStatus(context,value){
+      context.commit("setCurrentBidStatus", value);
+    }
 
   },
 };

@@ -104,6 +104,24 @@
         </li>
       </ul>
     </div>
+    <div class="filter-section" :class="{ 'collapse-section': filterSection2 }" v-if="this.$route.name=='Profile'">
+      <button class="filter-section-name" @click="filterSection2 = !filterSection2">
+        <span>[Bid Status]</span>
+        <i class="i-arrow-up-s-line"></i>
+      </button>
+      <ul class="filter-ul">
+        <li class="filter-li" v-for="item in this.config.profilePageBidsStatuses" :key="item">
+          <div class="input-checkbox">
+            <input type="checkbox" :id="item.codeName" v-model="checkedBidStatus" :true-value="item.codeName" :false-value="null" @change="fetchAndSetListingsStartInfo"/>
+            <label :for="item.codeName">
+              <div class="icon-filter-checkbox"></div>
+              <span>{{item.name}}</span>
+              <i class="i-check-line"></i>
+            </label>
+          </div>
+        </li>
+      </ul>
+    </div>
     <div class="filter-section" :class="{ 'collapse-section': filterSection2 }" v-if="this.$route.name=='Marketplace'||this.$route.name=='Profile'">
       <button class="filter-section-name" @click="filterSection2 = !filterSection2">
         <span>Collection</span>
@@ -163,6 +181,7 @@
 </template>
 
 <script>
+import config from '@/config.json';
 export default {
   data() {
     return {
@@ -171,6 +190,7 @@ export default {
       filterSection2: false,
       filterSection3: false,
       filterSection4: false,
+      config:config
     };
   },
   methods:{
@@ -246,6 +266,14 @@ export default {
       },
       set(value){
         this.$store.dispatch('marketplace/setCurrentlyGathering',value)
+      }
+    },
+    checkedBidStatus:{
+      get(){
+        return this.$store.getters['marketplace/getCurrentBidStatus'];
+      },
+      set(value){
+        this.$store.dispatch('marketplace/setCurrentBidStatus',value)
       }
     }
   }
