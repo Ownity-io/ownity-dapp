@@ -28,7 +28,7 @@
       <ul class="filter-ul">
         <li class="filter-li" >
           <div class="input-checkbox input-switcher">
-            <input type="checkbox" id="input-switch" v-model="checkedStatus" :true-value="CLOSED" :false-value="OPEN" @change="fetchAndSetListingsStartInfo"/>
+            <input type="checkbox" id="input-switch" v-model="checkedStatus" @change="fetchAndSetListingsStartInfo"/>
             <label for="input-switch">
               <span>Open/Close</span>
               <div class="input-switch"></div>
@@ -183,7 +183,7 @@ export default {
         await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address);
       }
       else if (this.$route.name == 'Profile'){
-        console.log(this.currentlyGathering);
+        console.log(this.checkedStatus);
         await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
       }
       

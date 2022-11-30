@@ -249,8 +249,12 @@ export default {
       if (context.getters.getCurrentMaxPrice!=null){
         requestUrl += `&price_lt=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
       }
-      if (context.getters.getCurrentlyGathering){
-        requestUrl += `&marketplace_status=${context.getters.getCurrentStatus}`;
+      console.log(context.getters.getCurrentStatus);
+      if (context.getters.getCurrentStatus){
+        requestUrl += `&marketplace_status=CLOSED`;
+      }
+      else{
+        requestUrl += `&marketplace_status=OPEN`;
       }
       console.log(requestUrl)
       let requestOptions = {
