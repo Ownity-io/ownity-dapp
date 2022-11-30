@@ -36,7 +36,13 @@
                     <i class="i-close-line"></i>
                 </button>
             </li>
-            <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')">
+            <li v-if="this.$route.name!='Profile'" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')">
+                <button class="btn btn-selected-filter btn-reset">
+                    <span>Clear all</span>
+                    <i class="i-close-line"></i>
+                </button>
+            </li>
+            <li v-else @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')">
                 <button class="btn btn-selected-filter btn-reset">
                     <span>Clear all</span>
                     <i class="i-close-line"></i>

@@ -237,6 +237,7 @@ export default {
       context.commit("setCurrentMinPrice", null);
       context.commit("setCurrentMaxPrice", null);
       context.commit("setCurrentlyGathering",false);
+      context.commit("setCurrentBidStatus",false);
     },
     async setCurrentlyGathering(context,value){
       context.commit("setCurrentlyGathering", value);

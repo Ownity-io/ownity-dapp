@@ -51,6 +51,9 @@ export default {
       if (this.$route.name == 'Collection'){
         this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address)
       }
+      if (this.$route.name == 'Profile'){
+        await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
+      }
     }
   },
   async mounted(){
