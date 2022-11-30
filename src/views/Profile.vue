@@ -43,8 +43,10 @@
                                             <span>Share</span>
                                         </li>
                                         <li>
-                                            <i class="i-logout-box-line"></i>
-                                            <span>Log Out</span>
+                                            <router-link :to="{name:'Main'}" @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',false);clearLocalStorage()">
+                                                <i class="i-logout-box-line"></i>
+                                                <span>Log Out</span>
+                                            </router-link>                                            
                                         </li>
                                     </ul>
                                 </div>
@@ -60,10 +62,10 @@
                             </div>
                         </div>
                         <div class="profile-container-btns">
-                            <button class="btn btn-log-out">
+                            <router-link :to="{name:'Main'}" class="btn btn-log-out" @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',false);clearLocalStorage()">
                                 <i class="i-logout-box-line"></i>
                                 <span>Log Out</span>
-                            </button>
+                            </router-link>
                         </div>
                     </div>
                 </div>
@@ -215,6 +217,10 @@ export default {
     methods: {
         letsCheck(name) {
           this.activeTab = name;
+        },
+        clearLocalStorage(){
+            localStorage.clear();
+            
         },
     },
 }

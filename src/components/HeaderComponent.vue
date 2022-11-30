@@ -36,12 +36,12 @@
                         </button>
                     </div>
                     <div class="btn-container" v-else>
-                        <button class="btn btn-address" @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',false);clearLocalStorage()">
+                        <router-link :to="{name:'Profile'}" class="btn btn-address">
                             <div class="icon-address"
                                 :style="bs"
                             ></div>
                             <span>{{this.$store.getters['walletsAndProvider/getUserShortAddress']}}</span>
-                        </button>
+                        </router-link>
                     </div>
                 </div>
                 <div class="header-mobile">
