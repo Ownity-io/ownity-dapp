@@ -1,5 +1,6 @@
 <template>
   <svg
+    class="svg2"
     width="940"
     height="811"
     viewBox="0 0 940 811"
@@ -921,3 +922,18 @@
     </defs>
   </svg>
 </template>
+
+<script>
+  export default {
+    props: ["mouseEvent", "mouseEventX", "mouseEventY"],
+    data() {
+      return {};
+    },
+  };
+</script>
+
+<style>
+.svg2.active{
+  background: pink;
+}
+</style>
