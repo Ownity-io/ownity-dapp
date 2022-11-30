@@ -1,0 +1,26 @@
+<svg width="173" height="171" viewBox="0 0 173 171" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M147.511 54.1003L99.0044 143.676C102.855 136.561 103.832 126.406 101.065 114.524C95.035 88.6783 73.5518 64.4778 53.0772 60.458C50.5933 59.9657 48.2373 59.8004 46.0326 59.9283C79.8637 57.9812 113.681 56.0332 147.512 54.0862L147.511 54.1003Z" fill="url(#paint0_linear_594_23786)"/>
+<path d="M53.0763 60.4715C32.6017 56.4517 20.8958 74.1377 26.9261 99.983C32.9499 125.821 54.4397 150.029 74.9143 154.049C95.389 158.068 107.095 140.382 101.065 114.537C95.0343 88.6917 73.551 64.4913 53.0763 60.4715Z" fill="url(#paint1_linear_594_23786)"/>
+<path style="mix-blend-mode:multiply" d="M35.2128 127.32C17.3463 102.629 13.2524 75.0935 26.0699 65.8186C38.8874 56.5436 63.7493 69.0499 81.6158 93.7412C99.4822 118.432 103.576 145.967 90.7586 155.242C77.9412 164.517 53.0792 152.011 35.2128 127.32Z" fill="url(#paint2_radial_594_23786)"/>
+<g style="mix-blend-mode:overlay">
+<path d="M53.0758 60.472C50.592 59.9797 48.236 59.8145 46.0313 59.9423C48.0582 59.8243 50.0918 59.7138 52.1188 59.5958C52.6806 59.6744 53.2415 59.767 53.8156 59.8747C74.2902 63.8945 95.7734 88.095 101.804 113.94C104.093 123.766 103.822 132.407 101.478 139.13L99.0106 143.684C102.861 136.569 103.838 126.414 101.072 114.531C95.0412 88.6857 73.558 64.4852 53.0833 60.4654L53.0758 60.472Z" fill="white"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_594_23786" x1="128.42" y1="105.295" x2="73.6385" y2="37.0657" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="0.24" stop-color="#F9F1F1"/>
+<stop offset="0.69" stop-color="#F0DEDE"/>
+<stop offset="1" stop-color="#EDD7D7"/>
+</linearGradient>
+<linearGradient id="paint1_linear_594_23786" x1="112.213" y1="201.232" x2="42.8968" y2="66.0695" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="0.39" stop-color="#F2E2E2"/>
+<stop offset="0.75" stop-color="#E9CFCF"/>
+<stop offset="1" stop-color="#E6C8C8"/>
+</linearGradient>
+<radialGradient id="paint2_radial_594_23786" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(56.4089 110.16) rotate(144.12) scale(27.6017 52.9502)">
+<stop stop-color="#E8C6C6"/>
+<stop offset="1" stop-color="#FFEDED" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>

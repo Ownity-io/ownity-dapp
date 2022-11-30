@@ -6,11 +6,26 @@
         alt=""
         style="position: absolute; top: 0; width: 100%; height: auto; left: 0"
       /> -->
-      <AnimationImg1 :status="img1.status" :class="{ active: img1.status }" ref="AnimationImg1" />
-      <AnimationImg2 :status="img2.status" :class="{ active: img2.status }" ref="AnimationImg2" />
+      <AnimationImg1 class="img" 
+        
+        :status="img1.status" 
+        :cursorX="img1.cursorX" 
+        :cursorY="img1.cursorY" 
+        ref="AnimationImg1" />
+      <AnimationImg2 class="img" 
+        
+        :status="img2.status" 
+        :cursorX="img2.cursorX" 
+        :cursorY="img2.cursorY" 
+        ref="AnimationImg2" />
       <!-- 
         :animationPlay2="animationPlay2" -->
-      <AnimationImg3 :status="img3.status" :class="{ active: img3.status }" ref="AnimationImg3" />
+      <AnimationImg3 class="img" 
+        
+        :status="img3.status" 
+        :cursorX="img3.cursorX" 
+        :cursorY="img3.cursorY" 
+        ref="AnimationImg3" />
     </div>
   </div>
 </template>
@@ -33,6 +48,8 @@ export default {
         bottom: 0,
         right: 0,
         status: false,
+        cursorX: 0,
+        cursorY: 0,
       },
       img2: {
         top: 0,
@@ -40,6 +57,8 @@ export default {
         bottom: 0,
         right: 0,
         status: false,
+        cursorX: 0,
+        cursorY: 0,
       },
       img3: {
         top: 0,
@@ -47,6 +66,8 @@ export default {
         bottom: 0,
         right: 0,
         status: false,
+        cursorX: 0,
+        cursorY: 0,
       },
     };
   },
@@ -72,6 +93,9 @@ export default {
       this.img1.bottom = this.$refs.AnimationImg1.$el.getBoundingClientRect().bottom;
       this.img1.right = this.$refs.AnimationImg1.$el.getBoundingClientRect().right;
 
+      // console.log(this.$refs.AnimationImg1.$el.offsetHeight)
+      // console.log(this.img1)
+
       this.img2.top = this.$refs.AnimationImg2.$el.getBoundingClientRect().top;
       this.img2.left = this.$refs.AnimationImg2.$el.getBoundingClientRect().left;
       this.img2.bottom = this.$refs.AnimationImg2.$el.getBoundingClientRect().bottom;
@@ -85,38 +109,54 @@ export default {
     },
 
     cursorMove($event) {
-      this.statusAnimation($event.pageX, $event.pageX, this.img1);
-      this.statusAnimation($event.pageX, $event.pageX, this.img2);
-      this.statusAnimation($event.pageX, $event.pageX, this.img3);
+      this.statusAnimation($event.pageX, $event.pageY, this.img1);
+      // this.statusAnimation($event.pageX, $event.pageY, this.img2);
+      // this.statusAnimation($event.pageX, $event.pageY, this.img3);
     },
 
     statusAnimation(cursorX, cursorY, obj) {
-      // console.log(
-      //   " top:" +
-      //   obj.top +
-      //   " left:" +
-      //   obj.left +
-      //   " bottom:" +
-      //   obj.bottom +
-      //   " right:" +
-      //   obj.right +
-      //   " cursorX:" +
-      //   cursorX +
-      //   " cursorY:" +
-      //   cursorY
-      // );
+      console.log(
+        " top:" +
+        obj.top +
+        " right:" +
+        obj.right +
+        " bottom:" +
+        obj.bottom +
+        " left:" +
+        obj.left +
+        " cursorX:" +
+        cursorX +
+        " cursorY:" +
+        cursorY
+      );
       if (
         cursorX > obj.left &&
         cursorX < obj.right &&
         cursorY > obj.top &&
         cursorY < obj.bottom
       ) {
-        return (obj.status = true);
+        // return (obj.status = true);
+        return {
+          obj: {
+            status: true,
+            cursorX: cursorX,
+            cursorY: cursorY,
+          }
+        };
       } else {
-        return (obj.status = false);
+        return {
+          obj: {
+            status: false,
+            cursorX: 0,
+            cursorY: 0,
+          }
+        };
       }
     },
   },
+  unmounted() {
+    removeEventListener("mousemove", this.cursorMove)
+  }
 };
 </script>
 
@@ -129,30 +169,39 @@ export default {
   max-width: 100%;
 }
 
-.screen-animation-container svg {
+.screen-animation-container .img {
   position: absolute;
 }
 
-.screen-animation-container svg:nth-child(1) {
-  top: -737px;
-  left: -383px;
+.screen-animation-container .img:nth-child(1) {
+  /* top: -737px; */
+  /* left: -383px; */
+  top: 0;
+  left: 0;
+  width: 904.76px;
+height: 636.25px;
+
+/* transform: rotate(138.67deg); */
 }
 
-.screen-animation-container svg:nth-child(2) {
-  top: -432px;
+.screen-animation-container .img:nth-child(2) {
+  /* top: -432px; */
   left: 37%;
+  width: 904.76px;
+height: 636.25px;
+
+/* transform: rotate(-165.84deg); */
 }
 
-.screen-animation-container svg:nth-child(3) {
+.screen-animation-container .img:nth-child(3) {
   right: 10px;
   top: -10px;
-  z-index: -1;
+  width: 904.76px;
+height: 636.25px;
+
 }
 
-svg.active {
+.img.active {
   background: rgb(205, 255, 185);
-}
-svg.play .path1 {
-  background: rgb(255, 185, 185);
 }
 </style>

@@ -24,7 +24,7 @@
 export default {
     data() {
         return {
-            testBg: '@/assets/images/test-bg.png',
+            testBg: '',
             testOpenSearch: false,
             search: '',
         }
