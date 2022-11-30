@@ -117,9 +117,9 @@ export default {
   },
   methods:{
     async buyLot(){  
-      console.log(await this.signer.getAddress());    
-      console.log(typeof(this.signer));
-      console.log(toRaw(this.signer));
+      // console.log(await this.signer.getAddress());    
+      // console.log(typeof(this.signer));
+      // console.log(toRaw(this.signer));
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());
       let markeplaceId = ethers.utils.formatBytes32String(this.item.marketplace.id).substring(0, 10);
       let options = {};
@@ -149,7 +149,7 @@ export default {
       let request = await fetch(requestUrl,requestOptions);
       let requestJson = await request.json();
       let inputData = requestJson.data.data;
-      console.log(requestJson);
+      // console.log(requestJson);
       requestUrl = `${config.backendApiEntryPoint}sign/`;
       requestOptions = {
           method: "POST",
@@ -164,10 +164,26 @@ export default {
         };
       request = await fetch(requestUrl,requestOptions);
       requestJson = await request.json();
-      console.log(requestJson);
+      // console.log(requestJson);
       let signature = requestJson.data.signature;
       // let part = (ethers.BigNumber.from(String((this.item.price/100)*this.currentPart))).toString();
       try{
+        console.log('-----------------');
+        console.log(`Marketplace ID: ${markeplaceId}`);
+        console.log(`Lot ID: ${this.item.id}`);
+        console.log(`Amount: ${valueToBuy}`);
+        console.log('--------LOT_DATA--------');
+        console.log(`tokenAddress: ${this.item.currency.address}`);
+        console.log(`Decimals: ${this.item.currency.decimals}`);
+        console.log(`price: ${this.item.price}`);
+        console.log(`tokenContractAddress: ${this.item.collection.contract_address}`);
+        console.log(`tokenId: ${this.item.token_id}`);
+        console.log(`tokenAmount: ${this.item.amount}`);
+        console.log('--------LOT_DATA--------');
+        console.log(`Input data: ${inputData}`);
+        console.log(`Signature: ${signature}`);
+        // console.log(`Options: ${options.value}`);
+        console.log('-----------------');
         let buyLot = await contract.buyLot(
           markeplaceId,
           this.item.id,
