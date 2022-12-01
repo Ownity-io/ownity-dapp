@@ -57,6 +57,9 @@ export default {
           console.log('fav');
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');
         }
+        else if(this.vote){
+          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');
+        }
         else{
           console.log('no-fav');
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
@@ -73,6 +76,6 @@ export default {
       this.loadIfVisible();
     }
   },
-  props:['onlyFav']
+  props:['onlyFav','vote']
 };
 </script>

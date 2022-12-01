@@ -104,7 +104,7 @@
         </li>
       </ul>
     </div>
-    <div class="filter-section" :class="{ 'collapse-section': filterSection2 }" v-if="this.$route.name=='Profile' & onlyFav">
+    <div class="filter-section" :class="{ 'collapse-section': filterSection2 }" v-if="this.$route.name=='Profile' & (onlyFav||vote)">
       <button class="filter-section-name" @click="filterSection2 = !filterSection2">
         <span>[Bid Status]</span>
         <i class="i-arrow-up-s-line"></i>
@@ -182,6 +182,7 @@
 
 <script>
 import config from '@/config.json';
+import VoteConfirmVue from './modal/VoteConfirm.vue';
 export default {
   data() {
     return {
@@ -206,7 +207,11 @@ export default {
         console.log(this.checkedStatus);
         if (this.onlyFav){
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
-        }else{
+        }
+        else if(this.vote){
+          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');
+        }
+        else{
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');
         }
         
@@ -282,6 +287,6 @@ export default {
       }
     }
   },
-  props:['onlyFav']
+  props:['onlyFav','vote']
 };
 </script>

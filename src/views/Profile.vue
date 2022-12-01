@@ -9,7 +9,7 @@
                             <i class="i-close-line"></i>
                         </button>
                     </div>
-                    <Filter />
+                    <Filter :onlyFav="activeTab == 'ListCards'" :vote="activeTab == 'Vote'"/>
                     <div class="filter-mobile-footer">
                         <button class="btn btn-clear">Clear all</button>
                         <button class="btn btn-submit">Apply</button>
@@ -92,7 +92,8 @@
                             </button>
                         </li>
                         <li>
-                            <button >
+                            <button :class="{ 'active-tab': activeTab === 'Vote' }"
+                            @click="letsCheck('Vote');this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');">
                                 <span>Vote</span>                                
                                 <span>Vote</span>
                             </button>
@@ -171,12 +172,13 @@
             <div class="container">
                 <section class="section-nft" :class="{ 'with-filter': filter }">
                     <div v-if="filter" class="section-nft-filter" :class="{'filter-mobile':filterMobile}">
-                        <Filter :onlyFav="activeTab == 'ListCards'"/>
+                        <Filter :onlyFav="activeTab == 'ListCards'" :vote="activeTab == 'Vote'"/>
                     </div>
                     <div class="section-nft-list" :class="{'card-collapse' : switchActive == 1}">
                         <SelectedFilters v-if="filter" />
-                        <ListCards v-if="activeTab === 'ListCards'" :onlyFav="false"/>
-                        <ListCards v-if="activeTab === 'Favourites'" :onlyFav="true" />
+                        <ListCards v-if="activeTab === 'ListCards'" :onlyFav="false" :vote="false"/>
+                        <ListCards v-if="activeTab === 'Favourites'" :onlyFav="true" :vote="false"/>
+                        <ListCards v-if="activeTab === 'Vote'" :onlyFav="false" :vote="true"/>
                         <ActivityTable v-if="activeTab === 'ActivityTable'" />
                         <button v-if="activeTab == 0" class="btn-filter-mobile"  @click="filterMobile=true">
                             <i class="i-filter-2-line" ></i>
