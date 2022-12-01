@@ -262,7 +262,7 @@ export default {
         requestUrl += `&marketplace_status=CLOSED`;
       }
       else{
-        requestUrl += `&marketplace_status=OPEN`;
+        requestUrl += `&marketplace_status=TEST`;
       }
       if (context.getters.getCurrentBidStatus!=null){
         requestUrl += `&bid_status=${context.getters.getCurrentBidStatus}`;
@@ -287,7 +287,47 @@ export default {
     },
     setCurrentBidStatus(context,value){
       context.commit("setCurrentBidStatus", value);
-    }
+    },
+    async fetchAndSetListingsStartInfoByUserFav(context) {
+      let requestUrl = `${config.backendApiEntryPoint}favorite-listings-by-user/?limit=${config.listingsPerPage}`;
+      if (context.getters.getCurrentCollectionContractAddress != null) {
+          requestUrl += `&collection=${context.getters.getCurrentCollectionContractAddress}`;
+        }
+      
+      if (context.getters.getCurrentMarketplaceId != null) {
+        requestUrl += `&marketplace=${context.getters.getCurrentMarketplaceId}`;
+      }
+      if (context.getters.getCurrentMinPrice!=null){
+        requestUrl += `&price_gt=${ethers.utils.parseEther(String(context.getters.getCurrentMinPrice)).toString()}`;
+      }
+      if (context.getters.getCurrentMaxPrice!=null){
+        requestUrl += `&price_lt=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
+      }
+      console.log(context.getters.getCurrentStatus);
+      if (context.getters.getCurrentStatus){
+        requestUrl += `&marketplace_status=CLOSED`;
+      }
+      else{
+        requestUrl += `&marketplace_status=TEST`;
+      }
+      console.log(requestUrl)
+      let requestOptions = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
+      };
+      let request = await fetch(requestUrl,requestOptions);
+      let requestCode = request.ok;
+      if (requestCode) {
+        let requestJson = await request.json();
+        context.commit("setListingsInfo", requestJson);
+      } else {
+        context.commit("setListingsInfo", null);
+      }
+    },
 
   },
 };

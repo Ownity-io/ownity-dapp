@@ -104,7 +104,7 @@
         </li>
       </ul>
     </div>
-    <div class="filter-section" :class="{ 'collapse-section': filterSection2 }" v-if="this.$route.name=='Profile'">
+    <div class="filter-section" :class="{ 'collapse-section': filterSection2 }" v-if="this.$route.name=='Profile' & onlyFav">
       <button class="filter-section-name" @click="filterSection2 = !filterSection2">
         <span>[Bid Status]</span>
         <i class="i-arrow-up-s-line"></i>
@@ -276,6 +276,7 @@ export default {
         this.$store.dispatch('marketplace/setCurrentBidStatus',value)
       }
     }
-  }
+  },
+  props:['onlyFav']
 };
 </script>

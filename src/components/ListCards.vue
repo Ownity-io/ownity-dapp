@@ -51,8 +51,16 @@ export default {
       if (this.$route.name == 'Collection'){
         this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address)
       }
-      if (this.$route.name == 'Profile'){
-        await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
+      if (this.$route.name == 'Profile'){      
+        console.log  
+        if (this.onlyFav) {
+          console.log('fav');
+          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');
+        }
+        else{
+          console.log('no-fav');
+          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
+        }
       }
     }
   },
@@ -64,6 +72,7 @@ export default {
       await delay(1000);
       this.loadIfVisible();
     }
-  }
+  },
+  props:['onlyFav']
 };
 </script>

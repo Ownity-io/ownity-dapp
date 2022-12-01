@@ -77,14 +77,16 @@
                         <li>
                             <button
                             :class="{ 'active-tab': activeTab === 'ListCards' }"
-                            @click="letsCheck('ListCards')"
+                            @click="letsCheck('ListCards');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');"
                             >
                                 <span>Items</span>                                
                                 <span>Items</span>
                             </button>
                         </li>
                         <li>
-                            <button>
+                            <button
+                            :class="{ 'active-tab': activeTab === 'Favourites' }"
+                            @click="letsCheck('Favourites');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');">
                                 <span>Favourites</span>                                
                                 <span>Favourites</span>
                             </button>
@@ -169,11 +171,12 @@
             <div class="container">
                 <section class="section-nft" :class="{ 'with-filter': filter }">
                     <div v-if="filter" class="section-nft-filter" :class="{'filter-mobile':filterMobile}">
-                        <Filter />
+                        <Filter :onlyFav="activeTab == 'ListCards'"/>
                     </div>
                     <div class="section-nft-list" :class="{'card-collapse' : switchActive == 1}">
                         <SelectedFilters v-if="filter" />
-                        <ListCards v-if="activeTab === 'ListCards'" />
+                        <ListCards v-if="activeTab === 'ListCards'" :onlyFav="false"/>
+                        <ListCards v-if="activeTab === 'Favourites'" :onlyFav="true" />
                         <ActivityTable v-if="activeTab === 'ActivityTable'" />
                         <button v-if="activeTab == 0" class="btn-filter-mobile"  @click="filterMobile=true">
                             <i class="i-filter-2-line" ></i>
