@@ -4,6 +4,7 @@
     max-width: 150px;
     max-height: 150px;
     transition: transform 1.2s  cubic-bezier(0.16, 1, 0.3, 1);
+    position: absolute;
 }
 .img-container {
     max-width: 45%;
@@ -12,11 +13,41 @@
 
 
 .img-container.active img:nth-child(1){
+    transform: translate(-10px, 80px);
+}
+.img-container img:nth-child(2){
+    transform: translate(15px, -20px);
+}
+.img-container img:nth-child(3){
+    transform: translate(330px, 150px);
+}
+.img-container img:nth-child(4){
+    transform: translate(-40px, 400px);
+}
+.img-container img:nth-child(5){
+    transform: translate(0px, -60px);
+}
+.img-container img:nth-child(6){
+    transform: translate(80px, 45px);
+}
+
+/* ------------------- */
+
+.img-container.active img:nth-child(1){
     transform: translate(-20px, 20px);
 }
 .img-container.active img:nth-child(2){
     transform: translate(0px, -20px);
 }
 .img-container.active img:nth-child(3){
-    transform: translate(45px, 45px);
+    transform: translate(275px, 205px);
+}
+.img-container.active img:nth-child(4){
+    transform: translate(-40px, 20px);
+}
+.img-container.active img:nth-child(5){
+    transform: translate(0px, -60px);
+}
+.img-container.active img:nth-child(6){
+    transform: translate(80px, 45px);
 }

@@ -199,7 +199,7 @@ height: 636.25px;
   width: 904.76px;
 height: 636.25px;
 
-/* transform: rotate(-165.84deg); */
+transform: rotate(-45deg);
 }
 
 .screen-animation-container .img:nth-child(3) {
