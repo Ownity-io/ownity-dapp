@@ -4,7 +4,7 @@
       alt="figure">
     <img :style="{ left: cursorX + 'px', right: cursorY + 'px' }" src="@/assets/images/main-animation/2.svg"
       alt="figure">
-    <img :style="{ left: cursorX + 'px', right: cursorY + 'px' }" src="@/assets/images/main-animation/3.svg"
+    <img :class="{status: !status }" :style="{ left: cursorX + 'px', right: cursorY + 'px' }" src="@/assets/images/main-animation/3.svg"
       alt="figure">
     <img :style="{ left: cursorX + 'px', right: cursorY + 'px' }" src="@/assets/images/main-animation/4.svg"
       alt="figure">
@@ -44,8 +44,8 @@ export default {
 .img2 .img-container {
   /* width: 1100px;
   height: 1075px; */
-  /* width: 904.76px;
-  height: 636.25px; */
+  width: 904.76px;
+  height: 636.25px;
 
   /* transform: rotate(138.67deg); */
   /* position: relative; */

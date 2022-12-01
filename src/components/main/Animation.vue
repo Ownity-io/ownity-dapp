@@ -8,11 +8,15 @@
       /> -->
       <AnimationImg1 class="img" 
         
+        :class="{active: img1.status}"
+        
         :status="img1.status" 
         :cursorX="img1.cursorX" 
         :cursorY="img1.cursorY" 
         ref="AnimationImg1" />
       <AnimationImg2 class="img" 
+        
+        :class="{active: img2.status}"
         
         :status="img2.status" 
         :cursorX="img2.cursorX" 
@@ -21,6 +25,8 @@
       <!-- 
         :animationPlay2="animationPlay2" -->
       <AnimationImg3 class="img" 
+        
+        :class="{active: img3.status}"
         
         :status="img3.status" 
         :cursorX="img3.cursorX" 
@@ -31,14 +37,18 @@
 </template>
 
 <script>
+
 import AnimationImg1 from "./animation/images/AnimationImg1.vue";
 import AnimationImg2 from "./animation/images/AnimationImg2.vue";
 import AnimationImg3 from "./animation/images/AnimationImg3.vue";
+import '../main/animation/animation.css';
 
 export default {
   data() {
     return {
+      // animationPlay1: false,
       // animationPlay2: false,
+      // animationPlay3: false,
       // el1: '',
       // el2: '',
       // el3: '',
@@ -110,48 +120,47 @@ export default {
 
     cursorMove($event) {
       this.statusAnimation($event.pageX, $event.pageY, this.img1);
-      // this.statusAnimation($event.pageX, $event.pageY, this.img2);
-      // this.statusAnimation($event.pageX, $event.pageY, this.img3);
+      this.statusAnimation($event.pageX, $event.pageY, this.img2);
+      this.statusAnimation($event.pageX, $event.pageY, this.img3);
     },
 
     statusAnimation(cursorX, cursorY, obj) {
-      console.log(
-        " top:" +
-        obj.top +
-        " right:" +
-        obj.right +
-        " bottom:" +
-        obj.bottom +
-        " left:" +
-        obj.left +
-        " cursorX:" +
-        cursorX +
-        " cursorY:" +
-        cursorY
-      );
+      // console.log(
+      //   " top: " + obj.top +
+      //   " right: " + obj.right +
+      //   " bottom: " + obj.bottom +
+      //   " left: " + obj.left +
+      //   " cursorX: " + cursorX +
+      //   " cursorY: " + cursorY+
+      //   " 1: " + (cursorX > obj.left) +
+      //   " 2: " +(cursorX < obj.right)+
+      //   " 3: " +(cursorY > obj.top)+
+      //   " 4: " +(cursorY < obj.bottom)
+      // );
       if (
         cursorX > obj.left &&
         cursorX < obj.right &&
         cursorY > obj.top &&
         cursorY < obj.bottom
       ) {
-        // return (obj.status = true);
-        return {
-          obj: {
-            status: true,
-            cursorX: cursorX,
-            cursorY: cursorY,
-          }
-        };
-      } else {
-        return {
-          obj: {
-            status: false,
-            cursorX: 0,
-            cursorY: 0,
-          }
-        };
-      }
+        return (obj.status = true);
+        // return {
+        //   obj: {
+        //     status: true,
+        //     cursorX: cursorX,
+        //     cursorY: cursorY,
+        //   }
+        // };
+      } else return (obj.status = false)
+      // {
+        // return {
+          // obj: {
+          //   status: false,
+          //   cursorX: 0,
+          //   cursorY: 0,
+          // }
+        // };
+      // },
     },
   },
   unmounted() {
@@ -202,6 +211,6 @@ height: 636.25px;
 }
 
 .img.active {
-  background: rgb(205, 255, 185);
+  /* background: rgb(205, 255, 185); */
 }
 </style>
