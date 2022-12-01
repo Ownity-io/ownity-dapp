@@ -1,0 +1,10 @@
+.block-text {
+    opacity: 0;
+    transform: translateX(50%);
+    transition: transform 1s cubic-bezier(0.25, .1, .25, 1),  opacity 1s cubic-bezier(0.25, .1, .25, 1);
+}
+
+.block-text.play-text {
+    opacity: 1;
+    transform: translateX(0%);
+}
