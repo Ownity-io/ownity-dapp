@@ -11,19 +11,3 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  // props: ["status"],
-  data() {
-    return {
-      // play: false,
-      // figure: [],
-    };
-  },
-  mounted() {
-  },
-  methods: {
-  },
-};
-</script>

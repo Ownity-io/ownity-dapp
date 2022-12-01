@@ -4,25 +4,16 @@
       <AnimationImg1
         class="img img1"
         :class="{ active: img1.status }"
-        :status="img1.status"
-        :cursorX="img1.cursorX"
-        :cursorY="img1.cursorY"
         ref="AnimationImg1"
       />
       <AnimationImg2
         class="img img2"
         :class="{ active: img2.status }"
-        :status="img2.status"
-        :cursorX="img2.cursorX"
-        :cursorY="img2.cursorY"
         ref="AnimationImg2"
       />
       <AnimationImg3
         class="img img3"
         :class="{ active: img3.status }"
-        :status="img3.status"
-        :cursorX="img3.cursorX"
-        :cursorY="img3.cursorY"
         ref="AnimationImg3"
       />
     </div>
