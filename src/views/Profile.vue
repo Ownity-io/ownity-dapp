@@ -77,7 +77,7 @@
                         <li>
                             <button
                             :class="{ 'active-tab': activeTab === 'ListCards' }"
-                            @click="letsCheck('ListCards');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');"
+                            @click="letsCheck('ListCards');this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');"
                             >
                                 <span>Items</span>                                
                                 <span>Items</span>
@@ -86,7 +86,7 @@
                         <li>
                             <button
                             :class="{ 'active-tab': activeTab === 'Favourites' }"
-                            @click="letsCheck('Favourites');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');">
+                            @click="letsCheck('Favourites');this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');">
                                 <span>Favourites</span>                                
                                 <span>Favourites</span>
                             </button>

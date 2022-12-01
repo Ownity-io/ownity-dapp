@@ -264,7 +264,7 @@ export default {
       else{
         requestUrl += `&marketplace_status=TEST`;
       }
-      if (context.getters.getCurrentBidStatus!=null){
+      if (context.getters.getCurrentBidStatus!=null & context.getters.getCurrentBidStatus!=false){
         requestUrl += `&bid_status=${context.getters.getCurrentBidStatus}`;
       }
       console.log(requestUrl)
