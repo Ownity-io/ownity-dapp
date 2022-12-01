@@ -147,6 +147,7 @@ export default {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           body:JSON.stringify({
+            "blockchain":this.item.collection.bockchain,
             "marketplace": this.item.marketplace.id,
             "collection": this.item.collection.contract_address,
             "token_id": this.item.token_id
