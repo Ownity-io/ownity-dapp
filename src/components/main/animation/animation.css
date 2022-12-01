@@ -1,53 +1,103 @@
 /* class="img-container img active" */
 
-.img-container img{
-    max-width: 150px;
-    max-height: 150px;
-    transition: transform 1.2s  cubic-bezier(0.16, 1, 0.3, 1);
+.screen-animation-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.screen-animation-container .img {
     position: absolute;
 }
-.img-container {
-    max-width: 45%;
-    max-height: 45%;
+
+/* .img-container img {
+    max-width: 150px;
+    max-height: 150px;
+    position: absolute;
+} */
+
+.screen-animation-container .img-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
 
+.screen-animation-container img {
+    position: absolute;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-.img-container.active img:nth-child(1){
-    transform: translate(-10px, 80px);
+.screen-animation-container .img.img1 {
+    transform: rotate(138.11deg);
+    width: 390.9px;
+    height: 428.97px;
+    /* top: -144px;
+    left: -230px; */
+    top: -180px;
+    left: -40px;
 }
-.img-container img:nth-child(2){
-    transform: translate(15px, -20px);
+
+.screen-animation-container .img.img2 {
+    transform: rotate(138.11deg);
+    top: -144px;
+    right: -230px;
+    width: 390.9px;
+    height: 428.97px;
+    opacity: 0;
 }
-.img-container img:nth-child(3){
-    transform: translate(330px, 150px);
+
+.screen-animation-container .img.img3 {
+    transform: rotate(138.11deg);
+    top: -144px;
+    right: -230px;
+    width: 390.9px;
+    height: 428.97px;
+    opacity: 0;
 }
-.img-container img:nth-child(4){
-    transform: translate(-40px, 400px);
+
+/* svg size */
+.svg11 {
+    width: 133.17px;
+    height: 110.01px;
+    top: 267px;
+    left: 0;
 }
-.img-container img:nth-child(5){
-    transform: translate(0px, -60px);
+
+.svg12 {
+    width: 130px;
+    height: 156.45px;
+    top: 129px;
+    left: 260.9px;
 }
-.img-container img:nth-child(6){
-    transform: translate(80px, 45px);
+
+.svg13 {
+    width: 228px;
+    height: 228px;
+    top: 187px;
+    left: 97px;
+}
+
+.svg14 {
+    width: 123.66px;
+    height: 121.82px;
+    top: 306px;
+    left: 219px;
+}
+
+.svg15 {
+    width: 134.97px;
+    height: 141.05px;
+    top: 148px;
+    left: 91px;
+}
+
+.svg16 {
+    width: 120.24px;
+    height: 124.75px;
+    top: 2px;
+    left: 158px;
 }
 
 /* ------------------- */
-
-.img-container.active img:nth-child(1){
-    transform: translate(-20px, 20px);
-}
-.img-container.active img:nth-child(2){
-    transform: translate(0px, -20px);
-}
-.img-container.active img:nth-child(3){
-    transform: translate(275px, 205px);
-}
-.img-container.active img:nth-child(4){
-    transform: translate(-40px, 20px);
-}
-.img-container.active img:nth-child(5){
-    transform: translate(0px, -60px);
-}
-.img-container.active img:nth-child(6){
-    transform: translate(80px, 45px);
-}

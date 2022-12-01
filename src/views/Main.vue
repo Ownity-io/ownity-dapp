@@ -8,7 +8,7 @@
         <section class="section-home main-screen">
           <div class="container">
             <div class="main-screen-container">
-              <div class="section-block block-text">
+              <div class="section-block block-text" :class="{'play-text': playText}">
                 <h1 class="section-name-h1">Quant</h1>
                 <h3 class="section-name-h3">
                   Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -146,7 +146,9 @@ import CardsCarousel from "@/components/main/CardsCarousel.vue"
 
 export default {
   data() {
-    return {};
+    return {
+      playText: false,
+    };
   },
   components: {
     Faq,
@@ -154,6 +156,9 @@ export default {
     Animation,
     BannerSlider,
     CardsCarousel,
+  },
+  mounted(){
+    this.playText = true;
   },
   methods: {},
 };

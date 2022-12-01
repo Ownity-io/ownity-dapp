@@ -4,26 +4,6 @@
       alt="figure">
     <img :style="{ left: cursorX + 'px', right: cursorY + 'px' }" src="@/assets/images/main-animation/2.svg"
       alt="figure">
-    <img :class="{status: !status }" :style="{ left: cursorX + 'px', right: cursorY + 'px' }" src="@/assets/images/main-animation/3.svg"
-      alt="figure">
-    <img :style="{ left: cursorX + 'px', right: cursorY + 'px' }" src="@/assets/images/main-animation/4.svg"
-      alt="figure">
-    <img :style="{ left: cursorX + 'px', right: cursorY + 'px' }" src="@/assets/images/main-animation/5.svg"
-      alt="figure">
-    <img :style="{ left: cursorX + 'px', right: cursorY + 'px' }" src="@/assets/images/main-animation/6.svg"
-      alt="figure">
-    <img :style="{ left: cursorX + 'px', right: cursorY + 'px' }" src="@/assets/images/main-animation/7.svg"
-      alt="figure">
-    <img :style="{ left: cursorX + 'px', right: cursorY + 'px' }" src="@/assets/images/main-animation/8.svg"
-      alt="figure">
-    <img :style="{ left: cursorX + 'px', right: cursorY + 'px' }" src="@/assets/images/main-animation/9.svg"
-      alt="figure">
-    <img :style="{ left: cursorX + 'px', right: cursorY + 'px' }" src="@/assets/images/main-animation/10.svg"
-      alt="figure">
-    <img :style="{ left: cursorX + 'px', right: cursorY + 'px' }" src="@/assets/images/main-animation/11.svg"
-      alt="figure">
-    <img :style="{ left: cursorX + 'px', right: cursorY + 'px' }" src="@/assets/images/main-animation/12.svg"
-      alt="figure">
   </div>
 </template>
 

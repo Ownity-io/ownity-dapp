@@ -1,47 +1,39 @@
 <template>
   <div class="screen-animation">
     <div class="screen-animation-container">
-      <!-- <img
-        src="../../assets/images/main-bg.svg"
-        alt=""
-        style="position: absolute; top: 0; width: 100%; height: auto; left: 0"
-      /> -->
-      <AnimationImg1 class="img" 
-        
-        :class="{active: img1.status}"
-        
-        :status="img1.status" 
-        :cursorX="img1.cursorX" 
-        :cursorY="img1.cursorY" 
-        ref="AnimationImg1" />
-      <AnimationImg2 class="img" 
-        
-        :class="{active: img2.status}"
-        
-        :status="img2.status" 
-        :cursorX="img2.cursorX" 
-        :cursorY="img2.cursorY" 
-        ref="AnimationImg2" />
-      <!-- 
-        :animationPlay2="animationPlay2" -->
-      <AnimationImg3 class="img" 
-        
-        :class="{active: img3.status}"
-        
-        :status="img3.status" 
-        :cursorX="img3.cursorX" 
-        :cursorY="img3.cursorY" 
-        ref="AnimationImg3" />
+      <AnimationImg1
+        class="img img1"
+        :class="{ active: img1.status }"
+        :status="img1.status"
+        :cursorX="img1.cursorX"
+        :cursorY="img1.cursorY"
+        ref="AnimationImg1"
+      />
+      <AnimationImg2
+        class="img img2"
+        :class="{ active: img2.status }"
+        :status="img2.status"
+        :cursorX="img2.cursorX"
+        :cursorY="img2.cursorY"
+        ref="AnimationImg2"
+      />
+      <AnimationImg3
+        class="img img3"
+        :class="{ active: img3.status }"
+        :status="img3.status"
+        :cursorX="img3.cursorX"
+        :cursorY="img3.cursorY"
+        ref="AnimationImg3"
+      />
     </div>
   </div>
 </template>
 
 <script>
-
 import AnimationImg1 from "./animation/images/AnimationImg1.vue";
 import AnimationImg2 from "./animation/images/AnimationImg2.vue";
 import AnimationImg3 from "./animation/images/AnimationImg3.vue";
-import '../main/animation/animation.css';
+import "../main/animation/animation.css";
 
 export default {
   data() {
@@ -97,14 +89,10 @@ export default {
   },
   methods: {
     checkElPosition() {
-
       this.img1.top = this.$refs.AnimationImg1.$el.getBoundingClientRect().top;
       this.img1.left = this.$refs.AnimationImg1.$el.getBoundingClientRect().left;
       this.img1.bottom = this.$refs.AnimationImg1.$el.getBoundingClientRect().bottom;
       this.img1.right = this.$refs.AnimationImg1.$el.getBoundingClientRect().right;
-
-      // console.log(this.$refs.AnimationImg1.$el.offsetHeight)
-      // console.log(this.img1)
 
       this.img2.top = this.$refs.AnimationImg2.$el.getBoundingClientRect().top;
       this.img2.left = this.$refs.AnimationImg2.$el.getBoundingClientRect().left;
@@ -115,7 +103,6 @@ export default {
       this.img3.left = this.$refs.AnimationImg3.$el.getBoundingClientRect().left;
       this.img3.bottom = this.$refs.AnimationImg3.$el.getBoundingClientRect().bottom;
       this.img3.right = this.$refs.AnimationImg3.$el.getBoundingClientRect().right;
-
     },
 
     cursorMove($event) {
@@ -151,64 +138,25 @@ export default {
         //     cursorY: cursorY,
         //   }
         // };
-      } else return (obj.status = false)
+      } else return (obj.status = false);
       // {
-        // return {
-          // obj: {
-          //   status: false,
-          //   cursorX: 0,
-          //   cursorY: 0,
-          // }
-        // };
+      // return {
+      // obj: {
+      //   status: false,
+      //   cursorX: 0,
+      //   cursorY: 0,
+      // }
+      // };
       // },
     },
   },
   unmounted() {
-    removeEventListener("mousemove", this.cursorMove)
-  }
+    removeEventListener("mousemove", this.cursorMove);
+  },
 };
 </script>
 
 <style scoped>
-.screen-animation-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  max-width: 100%;
-}
-
-.screen-animation-container .img {
-  position: absolute;
-}
-
-.screen-animation-container .img:nth-child(1) {
-  /* top: -737px; */
-  /* left: -383px; */
-  top: 0;
-  left: 0;
-  width: 904.76px;
-height: 636.25px;
-
-/* transform: rotate(138.67deg); */
-}
-
-.screen-animation-container .img:nth-child(2) {
-  /* top: -432px; */
-  left: 37%;
-  width: 904.76px;
-height: 636.25px;
-
-transform: rotate(-45deg);
-}
-
-.screen-animation-container .img:nth-child(3) {
-  right: 10px;
-  top: -10px;
-  width: 904.76px;
-height: 636.25px;
-
-}
 
 .img.active {
   /* background: rgb(205, 255, 185); */
