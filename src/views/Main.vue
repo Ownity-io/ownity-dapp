@@ -2,13 +2,12 @@
   <div class="home-page">
     <div class="page-wrapper">
       <main class="main-home">
-        <!-- animation as another screen with position absolute -->
-        <Animation class="screen-animation" />
+        <Animation />
 
         <section class="section-home main-screen">
           <div class="container">
             <div class="main-screen-container">
-              <div class="section-block block-text">
+              <div class="section-block block-text" :class="{'play-text': playText}">
                 <h1 class="section-name-h1">Quant</h1>
                 <h3 class="section-name-h3">
                   Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -146,7 +145,9 @@ import CardsCarousel from "@/components/main/CardsCarousel.vue"
 
 export default {
   data() {
-    return {};
+    return {
+      playText: false,
+    };
   },
   components: {
     Faq,
@@ -155,7 +156,9 @@ export default {
     BannerSlider,
     CardsCarousel,
   },
-  mounted() { console.log(this.$router)},
+  mounted(){
+    this.playText = true;
+  },
   methods: {},
 };
 </script>

@@ -365,7 +365,7 @@ export default {
     return {
       activeTab: "",
       activeTab2: "",
-      srcTest: "../../assets/images/test-bg.png",
+      srcTest: "",
       testLike: false,
       mobileDropDown: false,
 
