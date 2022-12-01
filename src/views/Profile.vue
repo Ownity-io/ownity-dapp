@@ -130,20 +130,15 @@
                         <div class="params-block params-block-sort">
                             <div class="param-wrap sort" :class="{ unfolded: testOpenSort }">
                                 <button class="btn-param btn-sort" @click="testOpenSort = !testOpenSort">
-                                <span>Sort by</span>
+                                <span v-if="this.selectedSort == null">Sort by</span>
+                                <span v-else>{{this.selectedSort.name}}</span>
                                 <i class="i-arrow-down-s-line"></i>
                                 </button>
                                 <div class="drop-down">
                                 <ul>
-                                    <li>
-                                    <span>Price low to higt</span>
-                                    </li>
-                                    <li>
-                                    <span>Price higt to low</span>
-                                    </li>
-                                    <li>
-                                    <span>Newest</span>
-                                    </li>
+                                    <li v-for="element in config.sortParams" :key="element" @click="testOpenSort = !testOpenSort;selectedSort=element;fetchAndSetListingsStartInfo();">
+                                        <span>{{element.name}}</span>
+                                    </li>                        
                                 </ul>
                                 </div>
                             </div>
@@ -195,6 +190,7 @@ import Filter from "@/components/Filter.vue";
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
 import SelectedFilters from "@/components/SelectedFilters.vue";
 import ListCards from "@/components/ListCards.vue";
+import config from '@/config.json';
 
 export default {
     data() {
@@ -205,6 +201,7 @@ export default {
             filter: true,
             filterMobile: false,
             mobileDropDown: false,
+            config:config
         };
     },
     components:{
@@ -225,8 +222,42 @@ export default {
         },
         clearLocalStorage(){
             localStorage.clear();
-            
+        },
+        async fetchAndSetListingsStartInfo() {
+            if (this.$route.name == 'Marketplace') {
+                await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
+            }
+            else if (this.$route.name == 'Collection') {
+                console.log(this.currentlyGathering);
+                await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo', this.$route.params.contract_address);
+            }
+            else if (this.$route.name == 'Profile') {
+                console.log(this.checkedStatus);
+                if (this.onlyFav) {
+                    await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
+                }
+                else if (this.vote) {
+                    await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');
+                }
+                else {
+                    await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');
+                }
+
+            }
+
         },
     },
+    computed:{
+        selectedSort:{
+            get(){
+                return this.$store.getters['marketplace/getSelectedSort'];
+            },
+            async set(value){
+                console.log(value);
+                this.$store.dispatch('marketplace/setSelectedSort',value);
+                console.log(await this.$store.getters['marketplace/getSelectedSort']);
+            }
+        }
+    }
 }
 </script>

@@ -26,5 +26,23 @@
             "name":"Sold",
             "codeName":"SOLD"
         }        
+    ],
+    "sortParams":[
+        {
+            "name":"Price low to high",
+            "codeName":"price"
+        },
+        {
+            "name":"Price high to low",
+            "codeName":"-price"
+        },
+        {
+            "name":"Oldest",
+            "codeName":"timestamp"
+        },
+        {
+            "name":"Newest ",
+            "codeName":"-timestamp"
+        }
     ]
 }

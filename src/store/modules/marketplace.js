@@ -22,7 +22,8 @@ export default {
       currentMarketplace: null,
       currentCollection: null,
       currentlyGatehring:false,
-      currentBidStatus:null
+      currentBidStatus:null,
+      selectedSort:null
     };
   },
   getters: {
@@ -101,6 +102,9 @@ export default {
     },
     getCurrentBidStatus(state){
       return state.currentBidStatus;
+    },
+    getSelectedSort(state){
+      return state.selectedSort;
     }
   },
   mutations: {
@@ -147,6 +151,9 @@ export default {
     },
     setCurrentBidStatus(state,value){
       state.currentBidStatus = value;
+    },
+    setSelectedSort(state,value){
+      state.selectedSort = value;
     }
   },
   actions: {
@@ -267,6 +274,9 @@ export default {
       if (context.getters.getCurrentBidStatus!=null & context.getters.getCurrentBidStatus!=false){
         requestUrl += `&bid_status=${context.getters.getCurrentBidStatus}`;
       }
+      if (context.getters.getSelectedSort!=null){
+        requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;
+      }
       console.log(requestUrl)
       let requestOptions = {
         method: "GET",
@@ -310,6 +320,9 @@ export default {
       else{
         requestUrl += `&marketplace_status=TEST`;
       }
+      if (context.getters.getSelectedSort!=null){
+        requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;
+      }
       console.log(requestUrl)
       let requestOptions = {
         method: "GET",
@@ -350,6 +363,9 @@ export default {
       else{
         requestUrl += `&marketplace_status=TEST`;
       }
+      if (context.getters.getSelectedSort!=null){
+        requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;
+      }
       console.log(requestUrl)
       let requestOptions = {
         method: "GET",
@@ -368,6 +384,8 @@ export default {
         context.commit("setListingsInfo", null);
       }
     },
-
+    setSelectedSort(context,value){
+      context.commit("setSelectedSort", value);
+    }
   },
 };
