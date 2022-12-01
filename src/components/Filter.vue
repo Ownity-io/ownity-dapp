@@ -204,7 +204,12 @@ export default {
       }
       else if (this.$route.name == 'Profile'){
         console.log(this.checkedStatus);
-        await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
+        if (this.onlyFav){
+          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
+        }else{
+          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');
+        }
+        
       }
       
     },
