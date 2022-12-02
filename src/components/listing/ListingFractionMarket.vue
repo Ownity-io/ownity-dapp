@@ -9,13 +9,13 @@
             </div>
                 
             <div class="tr tr-mob-collapse" v-for="element in item.bids" :key="element">
-                <div class="td td-category">
+                <div class="td td-category" v-if="element.status == 'ON SALE'">
                     <div class="td-wrap td-wrap-category">
                         <i class="i-shopping-bag-line"></i>
                         <span>Sale</span>
                     </div>
                 </div>
-                <div class="td td-price">
+                <div class="td td-price" v-if="element.status == 'ON SALE'">
                     <div class="td-wrap">
                         <div class="td-wrap-price">
                             <div class="icon-token"></div> 
@@ -24,12 +24,13 @@
                         <span class="td-light">≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(element.amount)*currencyToUsdPrice,6),2)}}</span>
                     </div>
                 </div>
-                <div class="td"> 
+                <div class="td" v-if="element.status == 'ON SALE'"> 
                   {{element.fraction}}
                 </div>
-                <div class="td td-date">
+                <div class="td td-date" v-if="element.status == 'ON SALE'">
                     <div class="td-button">
-                       <button class="btn btn-td btn-buy">Buy</button>
+                       <button class="btn btn-td btn-buy" v-if="userAddress != element.address">Buy</button>
+                       <button class="btn btn-td btn-buy" v-else>Sell</button>
                     </div>
                 </div>
                 
@@ -51,7 +52,8 @@ export default {
     data(){
         return{
             rowMobileCollapse: false,
-            currencyToUsdPrice:1
+            currencyToUsdPrice:1,
+            userAddress:false
         }
     },
     props:['item'],
@@ -98,6 +100,7 @@ export default {
     },
     async mounted(){
         await this.setCurrencyToUsd();
+        this.userAddress = localStorage.getItem('userAddress');
     }
 }
 </script>
