@@ -25,10 +25,7 @@
                     </div>
                 </div>
                 <div class="td"> 
-                    <a class="td-wrap td-wrap-link" href="" target="_blank" rel="nofollow">
-                        <span>a1565...d48d</span>
-                        <i class="i-external-link-line"></i>
-                    </a> 
+                  {{element.fraction}}
                 </div>
                 <div class="td td-date">
                     <div class="td-button">
