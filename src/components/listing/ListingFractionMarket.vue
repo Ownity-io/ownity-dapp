@@ -30,7 +30,7 @@
                 <div class="td td-date" v-if="element.status == 'ON SALE'">
                     <div class="td-button">
                        <button class="btn btn-td btn-buy" v-if="userAddress != element.address">Buy</button>
-                       <button class="btn btn-td btn-buy" v-else>Sell</button>
+                       <button class="btn btn-td btn-buy" v-else>Cancel</button>
                     </div>
                 </div>
                 
