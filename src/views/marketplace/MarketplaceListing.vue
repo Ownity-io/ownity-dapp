@@ -117,7 +117,7 @@
                     <span>{{abbrNum(convertToEther(allBidsAmount),1)}} / <b>{{abbrNum(priceInCurrency,1)}}{{' '}} ETH</b></span>
                     <span class="equivalent">(≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
                   </div>
-                  <div class="deposit-part" v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='OWNED'">
+                  <div class="deposit-part" v-if="userBid & (item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='OWNED'">
                     Your part : <span>{{userBid.fraction}}</span>
                   </div>
                 </div>
@@ -126,6 +126,8 @@
                 <!-- <button class="btn btn-deposit" v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='OWNED'">Start voting</button> -->
                 <button class="btn btn-deposit" v-if="((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST')||item.marketplace_status=='TEST') & item.internal_status=='OWNED' & this.userBidAmount>0"
                 @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">Start voting</button>
+                <button class="btn btn-deposit" v-if="((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST')||item.marketplace_status=='TEST') & item.internal_status=='OWNED' & this.userBidAmount<=0">
+                  Buy</button>
                 <button class="btn btn-get" v-if="((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST')) & item.internal_status=='OWNED' & this.userBidAmount>0">Sell part</button>
                 <button class="btn btn-deposit" v-if="((((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST')||item.marketplace_status=='TEST')  & item.internal_status=='OPEN'))|| item.id == 40997"
                 @click="this.$store.dispatch('appGlobal/setshowStartCollectingModal',true)">Start collecting</button>
