@@ -26,7 +26,7 @@
           </button>
         </div>
       </div> -->
-      <div class="card-footer" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
+      <div class="card-footer" v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='GATHER'">
         <div class="card-progress progress" >
           <div v-if="userProgressValue>0" class="progress-value owner" :style="{ width: userProgressValue + '%' }">
             <span v-if="userProgressValue>=20">{{ userProgressValue }}%</span>
@@ -71,7 +71,7 @@
     <div class="card-data">
       <div class="data-table">
         <div class="data-tr data-tr-main"
-          v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & (this.$route.name=='Marketplace' || this.$route.name=='Listing' || this.$route.name=='Collection')"
+          v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='OPEN'"
           >
           <div v-if="showFullName && item.token_id.length>8" class="card-id card-id-full">{{item.token_id}}</div>    
           <div class="data-td">
@@ -91,7 +91,7 @@
           </div>
         </div>
         <div class="data-tr data-tr-main"
-          v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & (this.$route.name=='Marketplace' || this.$route.name=='Listing' || this.$route.name=='Collection')"
+          v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='GATHER'"
           >
           <div v-if="showFullName && item.token_id.length>8" class="card-id card-id-full">{{item.token_id}}</div> 
           <div class="data-td">
@@ -101,7 +101,7 @@
               ><span>#{{item.token_id}}</span></div>    
             <div>{{item.collection.name}}</div>
           </div>
-          <div class="data-td data-td-value"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & (this.$route.name=='Marketplace' || this.$route.name=='Listing')">
+          <div class="data-td data-td-value"  v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='GATHER'">
             <div class="card-value">
               <div class="icon-value"></div>
               {{abbrNum(convertToEther(allBidsAmount),1)}}/<span><b>{{abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH</span>              
@@ -118,18 +118,14 @@
         </div>
       </div>
       <div class="btn-container">
-        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
-          <div 
-          v-if="item.marketplace_status=='OPEN' & 
-          item.internal_status=='OPEN' 
-          & (this.$route.name=='Marketplace' || this.$route.name=='Listing' || this.$route.name=='Collection')">
+        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='OPEN'">
+          <div>
             Start collecting
           </div>
-          <div
-          v-if="item.marketplace_status=='OPEN' & 
-          item.internal_status=='GATHER' 
-          & (this.$route.name=='Marketplace' || this.$route.name=='Listing' || this.$route.name=='Collection')
-          & userBidAmount<=0">Deposit part
+        </a>
+        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='GATHER' & userBidAmount<=0">
+          <div>
+            Deposit part
           </div>
         </a>
         <!-- <button class="btn" 
