@@ -116,11 +116,12 @@ export default {
       //   " 4: " +(cursorY < obj.bottom)
       // );
       if (
-        cursorX > obj.left &&
-        cursorX < obj.right &&
-        cursorY > obj.top &&
-        cursorY < obj.bottom
+        cursorX > obj.left-100 &&
+        cursorX < obj.right+100 &&
+        cursorY > obj.top-100 &&
+        cursorY < obj.bottom-100
       ) {
+        console.log(this.img2.status);
         return (obj.status = true);
         // return {
         //   obj: {
