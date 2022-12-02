@@ -8,7 +8,7 @@
                 <div class="td td-button">Date</div>
             </div>
                 
-            <div class="tr tr-mob-collapse">
+            <div class="tr tr-mob-collapse" v-for="element in item.bids" :key="element">
                 <div class="td td-category">
                     <div class="td-wrap td-wrap-category">
                         <i class="i-shopping-bag-line"></i>
@@ -19,9 +19,9 @@
                     <div class="td-wrap">
                         <div class="td-wrap-price">
                             <div class="icon-token"></div> 
-                            <span>12.90 ETH</span>
+                            <span>{{abbrNum(toFixedIfNecessary(convertToEther(element.amount),6),2)}} ETH</span>
                         </div>
-                        <span class="td-light">≈ $ 1000</span>
+                        <span class="td-light">≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(element.amount)*currencyToUsdPrice,6),2)}}</span>
                     </div>
                 </div>
                 <div class="td"> 
@@ -49,11 +49,58 @@
 </template>
 
 <script>
+import { ethers } from 'ethers';
 export default {
     data(){
         return{
             rowMobileCollapse: false,
+            currencyToUsdPrice:1
         }
+    },
+    props:['item'],
+    methods:{
+        toFixedIfNecessary(value, dp) {
+            return +parseFloat(value).toFixed(dp);
+        },
+        abbrNum(number, decPlaces) {
+            decPlaces = Math.pow(10, decPlaces);
+            var abbrev = ["k", "m", "b", "t"];
+            for (var i = abbrev.length - 1; i >= 0; i--) {
+                var size = Math.pow(10, (i + 1) * 3);
+                if (size <= number) {
+                    number = Math.round(number * decPlaces / size) / decPlaces;
+                    if ((number == 1000) && (i < abbrev.length - 1)) {
+                        number = 1;
+                        i++;
+                    }
+                    number += abbrev[i];
+                    break;
+                }
+            }
+
+            return number;
+        },
+        convertToEther(value) {
+            // try {
+                return ethers.utils.formatEther(parseInt(value));
+            // }
+            // catch {
+            //     console.log('ethers error');
+            // }
+        },
+        async setCurrencyToUsd() {
+            let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
+            let requestJson = await request.json();
+            try {
+                this.currencyToUsdPrice = requestJson.quotes[0].priceUsd;
+            }
+            catch {
+                this.currencyToUsdPrice = 1;
+            }
+        },
+    },
+    async mounted(){
+        await this.setCurrencyToUsd();
     }
 }
 </script>
