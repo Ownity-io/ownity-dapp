@@ -117,8 +117,8 @@
                     <span>{{abbrNum(convertToEther(allBidsAmount),1)}} / <b>{{abbrNum(priceInCurrency,1)}}{{' '}} ETH</b></span>
                     <span class="equivalent">(≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
                   </div>
-                  <div class="deposit-part" v-if="false">
-                    Your part : <span>20 %</span>
+                  <div class="deposit-part" v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='OWNED'">
+                    Your part : <span>{{userBid.fraction}}</span>
                   </div>
                 </div>
               </div>
@@ -377,6 +377,7 @@ export default {
       linkToMarketplacePage:null,
       allBidsAmount:null,
       userBidAmount:0,
+      userBid:null,
       config:config,
       chartData:[],
       userAddress:null,
@@ -496,6 +497,7 @@ export default {
         for (let element of this.item.bids){
           if (element.address == userAddress){
             this.userBidAmount = parseInt(element.amount);
+            this.userBid = element;
             return;
           }
         }
