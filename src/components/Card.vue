@@ -1,6 +1,6 @@
 <template>
   <!-- <a class="card card-finished" :class="{'card-inactive' : false}"> -->
-  <a class="card" :class="{'card-inactive' : false}">
+  <a class="card" :class="{'card-inactive' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER'),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER')}">
     <div class="card-main">
       <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></a>
       <div class="card-header">
@@ -113,7 +113,26 @@
 
           </div>
         </div>
-        
+        <div class="data-tr data-tr-main"
+        v-if="item.marketplace_status=='CLOSED' & item.internal_status=='GATHER'"
+          >
+          <div v-if="showFullName && item.token_id.length>8" class="card-id card-id-full">{{item.token_id}}</div>    
+          <div class="data-td">
+            <div class="card-id"
+              @mouseover="showFullName = true"
+              @mouseout="showFullName = false"
+              >#{{item.token_id}}</div>  
+            <a :href="'/collection/'+item.collection.contract_address"><span>{{item.collection.name}}</span></a>
+          </div>
+          <div class="data-td data-td-value">
+            <div class="card-value">
+              <div class="icon-value"></div>
+              <span><b>{{abbrNum(priceInCurrency,1)}} {{' '}}</b>ETH</span> 
+            </div>
+            <div class="equivalent">≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
+
+          </div>
+        </div>
         
         <div class="data-tr data-tr-main"
           v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='GATHER'"
@@ -153,7 +172,7 @@
             Deposit part
           </div>
         </a>
-        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='CLOSED' & item.internal_status=='CLOSED' & userBidAmount>0">
+        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='CLOSED' & (item.internal_status=='CLOSED'||item.internal_status=='GATHER') & userBidAmount>0">
           <div>
             Claim reward
           </div>
