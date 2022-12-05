@@ -71,7 +71,7 @@
     <div class="card-data">
       <div class="data-table">
         <div class="data-tr data-tr-main"
-          v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='OPEN'"
+          v-if="true"
           >
           <div v-if="showFullName && item.token_id.length>8" class="card-id card-id-full">{{item.token_id}}</div>    
           <div class="data-td">
