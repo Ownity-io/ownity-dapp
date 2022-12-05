@@ -101,7 +101,7 @@
               ><span>#{{item.token_id}}</span></div>    
             <div>{{item.collection.name}}</div>
           </div>
-          <div class="data-td data-td-value"  v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='GATHER'">
+          <div class="data-td data-td-value">
             <div class="card-value">
               <div class="icon-value"></div>
               {{abbrNum(convertToEther(allBidsAmount),1)}}/<span><b>{{abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH</span>              
