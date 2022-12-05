@@ -38,7 +38,7 @@
         <div class="card-members btn-more-info">
           <button class="card-members-btn "
             @mouseover="showMore = true"
-            @mouseout="showMore = false">
+            @mouseout="showMore = false" v-if="item.bids!=null">
             <i class="i-user-fill"></i>  
             {{this.item.bids.length}}
           </button>
@@ -46,7 +46,7 @@
             <table class="table-more-info">
               <thead>
                 <tr>
-                  <td >Owner</td>
+                  <td>Owner</td>
                   <td class="td td-price">Price</td>
                   <td >Pct</td>
                 </tr>
