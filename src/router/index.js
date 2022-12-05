@@ -54,6 +54,14 @@ const routes = [
     {
         path: '/serve',
         component: () => import('@/views/services/Serve.vue'),     
+    },
+    {
+        path: '/terms_of_use',
+        component: () => import('@/views/services/TermsOfUse.vue'),  
+    },
+    {
+        path: '/privacy_policy',
+        component: () => import('@/views/services/PrivacyPolicy.vue'),  
     }
 ]
 

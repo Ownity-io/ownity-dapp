@@ -1,5 +1,6 @@
 <template>
     <!-- <SnackBar /> -->
+    <Cookies />
     <ConnectWallet v-if="this.$store.getters['appGlobal/getShowConnectWalletModal'] & (this.walletConnected==null||this.walletConnected=='null')"/>
     <DepositPartStart v-if="this.$store.getters['appGlobal/getshowStartCollectingModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
     <DepositPartContinue v-if="this.$store.getters['appGlobal/getshowContinueCollectingModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
@@ -43,6 +44,7 @@ import BuyPart from '@/components/modal/BuyPart.vue'
 import TransSuccess from '@/components/modal/TransSuccess.vue'
 // ----------------------------------------
 import SnackBar from '@/components/SnackBar.vue'
+import Cookies from '@/components/Cookies.vue'
 
 
 export default {
@@ -67,6 +69,7 @@ export default {
         TransSuccess,
 // ----------------------------------------
         SnackBar,
+        Cookies
     },
     methods:{
         async checkWalletInLS() {

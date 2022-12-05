@@ -1,0 +1,51 @@
+.section-service-exposition {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #333333;
+}
+
+.exposition-name {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.section-service-exposition {
+    margin-top: 24px;
+}
+
+.exposition-container {
+    max-width: 840px;
+}
+
+.section-service-exposition b {
+    font-weight: 700;
+
+}
+
+.section-service-exposition ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.section-service-exposition ul li{
+    position: relative;
+    padding-left: 24px;
+    display: block;
+}
+.section-service-exposition ul li::before{
+    position: absolute;
+    content: '';
+    border-radius: 100%;
+    width: 4px;
+    height: 4px;
+    left: 10px;
+    top: 10px;
+    background-color: #333333;
+}
+.section-service-exposition a{
+    text-decoration: underline;
+}

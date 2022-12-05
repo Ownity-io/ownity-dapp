@@ -14,7 +14,8 @@
     padding: 40px;
 }
 
-.modal .modal-header .btn-close {
+.modal-header .btn-close,
+.cookies-header .btn-close {
     color: #818899;
     margin-left: auto;
 }
@@ -72,28 +73,57 @@
     height: fit-content;
 }
 
-.modal-header {
-    padding-top: 40px;
-    padding-bottom: 40px;
+.cookies-wrap {
+    background: #FFFFFF;
+    border-bottom: 1px solid #DFE2EA;
+    box-shadow: 4px 4px 20px rgba(129, 136, 153, 0.1);
+    border-radius: 8px;
     width: 100%;
-    position: sticky;
-    top: 0;
+    max-width: 640px;
+    height: fit-content;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #333333;
 
+
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 501;
+}
+
+.modal-header,
+.cookies-header {
+    width: 100%;
     font-weight: 700;
     font-size: 24px;
     line-height: 28px;
     color: #333333;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     z-index: 5;
 }
 
-.modal-connect .modal-content {
-    padding: 0 40px;
+.modal-header {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
 
+.cookies-header {
+    padding: 24px;
+}
+
+.cookies-content {
+    padding:0 24px;
+}
+.cookies-content a{
+    text-decoration: underline;
+}
+.modal-content {
+    padding: 0 40px;
 }
 
 .modal-container {
@@ -442,6 +472,7 @@ input+.input-equivalent {
     margin-left: 4px;
 }
 
+/* snackbar */
 .snackbar-wrap {
     display: flex;
     flex-direction: column;
@@ -482,7 +513,8 @@ input+.input-equivalent {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-right: 1px solid #DFE2EA;    ;
+    border-right: 1px solid #DFE2EA;
+    ;
 }
 
 .snackbar-describe {
@@ -493,11 +525,12 @@ input+.input-equivalent {
 .snackbar.success .snackbar-status {
     background: #2CC07B;
 }
+
 .snackbar.wrong .snackbar-status {
     background: #F32727;
 }
 
-.snackbar .btn-close{
+.snackbar .btn-close {
     position: absolute;
     right: 12px;
     top: 12px;

@@ -1406,6 +1406,7 @@ ul.tabs {
 .modal-connect-btns .btn,
 .modal-wrapper .btn,
 .cards-list-empty .btn,
+.cookies-btns-container .btn,
 .card-data .btn-container .btn,
 .btn.btn-submit {
     font-weight: 700;
@@ -1416,6 +1417,7 @@ ul.tabs {
 .modal-connect-btns .btn,
 .modal-wrapper .btn,
 .cards-list-empty .btn,
+.cookies-btns-container .btn,
 .card-data .btn-container .btn,
 .btn.btn-submit {
     min-height: 48px;
@@ -1726,6 +1728,16 @@ ul.tabs {
     gap: 16px;
 }
 
+.table-top-collections .td-wrap.td-wrap-collection {
+    align-items: center;
+}
+
+.table-top-collections .td.td-price ,
+.table-top-collections .td.td-data {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+}
 
 .table-top-collections .thead,
 .table-top-collections .tr {
@@ -1735,9 +1747,10 @@ ul.tabs {
 }
 
 .table-top-collections .thead .td-data,
-.table-top-collections .tr  .td-data{
+.table-top-collections .tr .td-data {
     text-align: right;
 }
+
 /* ---------### START ### try flex for gris like at binance ----------- */
 
 /* ---------### END ##### try flex for gris like at binance ----------- */
@@ -2294,6 +2307,7 @@ a.td-wrap-link span {
     font-size: 16px;
     line-height: 150%;
     min-width: 184px;
+    min-height: 48px;
 }
 
 .deposit-part {
@@ -2929,22 +2943,30 @@ a.td-wrap-link span {
     top: 50%;
 }
 
+@media (max-width: 768px) {
+
+    .cards-carousel .carousel__prev,
+    .cards-carousel .carousel__next {
+        display: none;
+    }
+}
+
 .cards-carousel .carousel__viewport {
     margin: -16px;
-    padding: 16px  8px;
-    width: calc(100%  + 16px );
+    padding: 16px 8px;
+    width: calc(100% + 16px);
 }
 
 
 
-.cards-carousel .carousel__track{
-width: calc(100% - 16px);
+.cards-carousel .carousel__track {
+    width: calc(100% - 16px);
 }
 
 
 
-.cards-carousel .carousel__viewport li{
-    padding: 8px ;
+.cards-carousel .carousel__viewport li {
+    padding: 8px;
 }
 
 .cards-carousel .carousel__prev svg path,
@@ -2953,12 +2975,24 @@ width: calc(100% - 16px);
 }
 
 .cards-carousel .carousel__prev {
-    transform: translate(calc( -50% - 8px), -100%);
+    transform: translate(calc(-50% - 8px), -100%);
 }
 
 .cards-carousel .carousel__next {
-    transform: translate(calc( 50% + 8px), -100%);
+    transform: translate(calc(50% + 8px), -100%);
 }
-/* .cards-carousel  .card{
-    background-color: pink;
-} */
+
+.cookies-btns-container {
+    margin-top: 16px;
+    padding: 0 24px 24px;
+    gap: 24px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.cookies-btns-container .btn {
+    padding: 12px;
+    min-width: 184px;
+}
