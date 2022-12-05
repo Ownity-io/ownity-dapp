@@ -2959,6 +2959,3 @@ width: calc(100% - 16px);
 .cards-carousel .carousel__next {
     transform: translate(calc( 50% + 8px), -100%);
 }
-/* .cards-carousel  .card{
-    background-color: pink;
-} */
