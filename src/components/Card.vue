@@ -26,7 +26,7 @@
           </button>
         </div>
       </div> -->
-      <div class="card-footer" v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='GATHER'">
+      <div class="card-footer" v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='GATHER' & allProgressValue">
         <div class="card-progress progress" >
           <div v-if="userProgressValue>0" class="progress-value owner" :style="{ width: userProgressValue + '%' }">
             <span v-if="userProgressValue>=20">{{ userProgressValue }}%</span>
@@ -71,7 +71,7 @@
     <div class="card-data">
       <div class="data-table">
         <div class="data-tr data-tr-main"
-          v-if="true"
+        v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='OPEN'"
           >
           <div v-if="showFullName && item.token_id.length>8" class="card-id card-id-full">{{item.token_id}}</div>    
           <div class="data-td">
