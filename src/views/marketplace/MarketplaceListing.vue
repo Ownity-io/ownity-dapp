@@ -117,7 +117,7 @@
                     <span>{{abbrNum(convertToEther(allBidsAmount),1)}} / <b>{{abbrNum(priceInCurrency,1)}}{{' '}} ETH</b></span>
                     <span class="equivalent">(≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
                   </div>
-                  <div class="deposit-part" v-if="userBid & (item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='OWNED'">
+                  <div class="deposit-part" v-if="userBid!=null & (item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='OWNED'">
                     Your part : <span>{{userBid.fraction}}</span>
                   </div>
                 </div>
@@ -138,12 +138,12 @@
                  @click="this.$store.dispatch('appGlobal/setshowContinueCollectingModal',true)">Deposit part</button>
                 <button class="btn btn-get" v-if="userBidAmount>0">Get part back</button>
               </div>
-              <div class="section-deposit-labels" v-if="false">
-                <div class="deposit-label">
+              <div class="section-deposit-labels" v-if="userBid!=null">
+                <div class="deposit-label" v-if="userBid.status == 'ON SALE'">
                   <i class="i-shopping-bag-line"></i>
-                  Your part: <span><b>12 ETH</b> (10%)</span>
+                  On Sale: <span><b>{{abbrNum(toFixedIfNecessary(convertToEther(userBidAmount),6,2))}} ETH</b> ({{userBid.fraction}})</span>
                 </div>
-                <div class="deposit-label">
+                <div class="deposit-label" v-if="false">
                   <i class="i-volume-vibrate-line"></i>
                   Vote:
                   <div class="label-col">
