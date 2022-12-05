@@ -171,7 +171,7 @@
 .carousel__pagination-button.carousel__pagination-button--active::after {
     display: block !important;
     background: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%);
-    border-radius: 0 8px 8px 0 !important;
+    border-radius: 8px !important;
     height: 100% !important;
     /* transition: width 5s;
     width: 100%; */
