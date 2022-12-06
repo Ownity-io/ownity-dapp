@@ -93,7 +93,6 @@
         /* margin-top: 0; */
     }
 
-
     .section-deposit-btns {
         padding-top: 0;
         padding-bottom: 0;
@@ -632,6 +631,22 @@
 
 }
 
+@media (max-width: 1425px) {
+    .screen-animation-container .img.img1,
+    .screen-animation-container .img.img3 {
+        transform: scale(.8);
+    }
+}
+@media (max-width: 1200px) {
+    .screen-animation-container .img.img2 {
+        display: none;
+    }
+    .screen-animation-container .img.img1,
+    .screen-animation-container .img.img3 {
+        transform: scale(.7);
+    }
+}
+
 @media (max-width: 991px) {
 
     .section-nft.with-filter .cards-list-container .card {
@@ -646,6 +661,27 @@
     .recommendations-list li:not( :nth-child(-n+4)) {
         display: flex;
     }
+
+    .screen-animation .screen-animation-container,
+    .content-home-ui div {
+        display: none;
+    }
+
+    .home-page::before {
+        background-image: url(../images/main-screen-bg-mob.png);
+        min-height: 827px;
+    }
+
+    .screen-animation {
+        background-image: url(../images/main-screen-animation-mob.png);
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%;
+        background-position: top center;
+        background-size: 100% auto;
+    }
+
+    /* main-screen-animation-mob.png */
 }
 
 /* ----------------- MODALS ---------------- */
@@ -675,9 +711,32 @@
     .modal-header-img,
     .modal-header,
     .modal-content,
-    .modal-section-total {
+    .modal-section-total,
+    .cookies-content {
         padding-left: 16px;
         padding-right: 16px;
+    }
+
+    .cookies-btns-container {
+        padding: 0 16px 16px;
+        justify-content: stretch;
+        gap: 16px;
+    }
+
+    .cookies-btns-container .btn {
+        min-width: calc(100% / 2 - 8px);
+        flex-grow: 1;
+    }
+
+    .cookies-wrap {
+        max-width: 100%;
+    }
+
+    .cookies-wrap {
+        bottom: 0;
+        box-shadow: 4px 0px 15px rgba(129, 136, 153, 0.25);
+        border-top: 1px solid #DFE2EA;
+        border-radius: 0;
     }
 
     .modal-section-total {
@@ -736,11 +795,7 @@
     }
 
     .modal-wrapper {
-        display: flex;
         flex-direction: column;
-
-
-
         display: -ms-flexbox;
         display: -webkit-flex;
         display: flex;
@@ -790,6 +845,10 @@
     .modal-header-img {
         padding-top: 40px;
         margin-bottom: 0;
+    }
+
+    .cookies-header {
+        padding: 16px;
     }
 
 }
