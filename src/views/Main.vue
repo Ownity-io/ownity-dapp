@@ -74,7 +74,7 @@
                   <div class="td td-data">Supply</div>
                 </div>
 
-                <div class="tr">
+                <div class="tr" v-for="collection in collections" :key="collection">
 
                   <div class="td td-collection">
                     <div class="td-wrap td-wrap-collection">
@@ -142,11 +142,14 @@ import Card from "@/components/Card.vue";
 import Animation from "@/components/main/Animation.vue";
 import BannerSlider from "@/components/main/BannerSlider.vue";
 import CardsCarousel from "@/components/main/CardsCarousel.vue"
+import config from '@/config.json'
 
 export default {
   data() {
     return {
       playText: false,
+      collections:null,
+      render:false
     };
   },
   components: {
@@ -156,9 +159,18 @@ export default {
     BannerSlider,
     CardsCarousel,
   },
-  mounted(){
+  async mounted(){
     this.playText = true;
+    await this.fetchAndSetNftCollections();
+    this.render = true;
   },
-  methods: {},
+  methods: {
+    async fetchAndSetNftCollections() {
+      let requestUrl = `${config.backendApiEntryPoint}nft-collections/`;
+      let request = await fetch(requestUrl);
+      let requestJson = await request.json();
+      this.collections = requestJson;
+    }
+  },
 };
 </script>
