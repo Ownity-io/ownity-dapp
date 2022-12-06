@@ -78,10 +78,10 @@
 
                   <div class="td td-collection">
                     <div class="td-wrap td-wrap-collection">
-                      <div class="collection-img"></div>
+                      <div class="collection-img" :style="{backgroundImage: `url(${collection.logo})`}"></div>
                       <div class="collection-data">
-                        <span class="collection-id">18234</span>
-                        <span class="td-light collection-id">Mutant Ape Yacht Club</span>
+                        <span class="collection-id">{{collection.name}}</span>
+                        <span class="td-light collection-id"></span>
                       </div>
                     </div>
                   </div>
@@ -90,7 +90,7 @@
                     <div class="td-wrap">
                       <div class="td-wrap-price">
                         <div class="icon-token"></div>
-                        <span>12.90 ETH</span>
+                        <span>{{abbrNum(toFixedIfNecessary(collection.volume_all,2),2)}} ETH</span>
                       </div>
                       <!-- <span class="td-light">≈ $ 1000</span> -->
                     </div>
@@ -100,7 +100,7 @@
                     <div class="td-wrap">
                       <div class="td-wrap-price">
                         <div class="icon-token"></div>
-                        <span>12.90 ETH</span>
+                        <span>{{abbrNum(toFixedIfNecessary(collection.floor_price,2),0)}} ETH</span>
                       </div>
                       <!-- <span class="td-light">≈ $ 1000</span> -->
                     </div>
@@ -108,13 +108,13 @@
 
                   <div class="td td-data">
                     <div class="td-wrap">
-                      3.2K
+                      {{abbrNum(collection.holders,1)}}
                     </div>
                   </div>
 
                   <div class="td td-data">
                     <div class="td-wrap">
-                      1K
+                      {{abbrNum(collection.total_supply,1)}}
                     </div>
                   </div>
 
@@ -170,7 +170,27 @@ export default {
       let request = await fetch(requestUrl);
       let requestJson = await request.json();
       this.collections = requestJson;
-    }
+    },
+    toFixedIfNecessary(value, dp) {
+      return +parseFloat(value).toFixed(dp);
+    },
+    abbrNum(number, decPlaces) {
+      decPlaces = Math.pow(10, decPlaces);
+      var abbrev = ["k", "m", "b", "t"];
+      for (var i = abbrev.length - 1; i >= 0; i--) {
+        var size = Math.pow(10, (i + 1) * 3);
+        if (size <= number) {
+          number = Math.round(number * decPlaces / size) / decPlaces;
+          if ((number == 1000) && (i < abbrev.length - 1)) {
+            number = 1;
+            i++;
+          }
+          number += abbrev[i];
+          break;
+        }
+      }
+      return number;
+    },
   },
 };
 </script>
