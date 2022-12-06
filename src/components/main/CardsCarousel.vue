@@ -17,6 +17,7 @@
 import { defineComponent } from 'vue'
 import { Carousel, Navigation, Slide } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
+import Card from '@/components/Card.vue';
 // import '~vue3-carousel/carousel.css'
 
 export default defineComponent({
@@ -56,7 +57,11 @@ export default defineComponent({
   mounted(){
     this.render = true;
   },
-  props:['nfts']
+  props:['nfts'],
+  components:{
+    Card
+  }
+
 })
 </script>
 
