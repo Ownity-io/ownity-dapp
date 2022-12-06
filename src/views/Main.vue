@@ -74,7 +74,7 @@
                   <div class="td td-data">Supply</div>
                 </div>
 
-                <div class="tr" v-for="collection in collections" :key="collection">
+                <div class="tr" v-for="collection in collections.results" :key="collection" v-if="collections!=null">
 
                   <div class="td td-collection">
                     <div class="td-wrap td-wrap-collection">
@@ -119,6 +119,11 @@
                   </div>
 
                 </div>
+                <div class="cards-list-load" ref="target" v-if="showCardsLoaderAnimation">
+                  <div class="i-wrap">
+                    <i class="i-loader-4-line"></i>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
@@ -143,6 +148,8 @@ import Animation from "@/components/main/Animation.vue";
 import BannerSlider from "@/components/main/BannerSlider.vue";
 import CardsCarousel from "@/components/main/CardsCarousel.vue"
 import config from '@/config.json'
+import { ref } from 'vue';
+import { useElementVisibility } from '@vueuse/core';
 
 export default {
   data() {
@@ -152,7 +159,8 @@ export default {
       render:false,
       nfts:null,
       config:config,
-      banners:null
+      banners:null,
+      showCardsLoaderAnimation:true
     };
   },
   components: {
@@ -163,15 +171,23 @@ export default {
     CardsCarousel,
   },
   async mounted(){
+    const delay = (delayInms) => {
+      return new Promise(resolve => setTimeout(resolve, delayInms));
+    }
     this.playText = true;
     await this.fetchAndSetNftCollections();
     await this.fetchAndSetNfts();
     await this.fetchAndSetBanners();
     this.render = true;
+    while (true) {
+      await delay(1000);
+      this.loadIfVisible();
+    }
   },
   methods: {
     async fetchAndSetNftCollections() {
-      let requestUrl = `${config.backendApiEntryPoint}nft-collections/`;
+      let requestUrl = `${config.backendApiEntryPoint}nft-collections/?limit=${config.collectionsPerPage}`;
+      console.log(requestUrl);
       let request = await fetch(requestUrl);
       let requestJson = await request.json();
       this.collections = requestJson;
@@ -213,6 +229,36 @@ export default {
       }
       return number;
     },
+    checkVisibility(){
+      const target = ref(this.$refs.target)
+      const targetIsVisible = useElementVisibility(target)
+      return targetIsVisible.value;
+    },
+    async loadIfVisible(){
+      let isVisible = this.checkVisibility();
+      if (isVisible){
+        console.log(this.showCardsLoaderAnimation);
+        await this.loadNextCollectionsInfo();
+      }
+    },
+    async loadNextCollectionsInfo(){
+      if (this.collections.next!=null){
+        let requestUrl = this.collections.next;
+        let request = await fetch(requestUrl);
+        let requestJson = await request.json();
+        if (requestJson.results.length>0){
+          let results = this.collections.results.concat(requestJson.results);
+          this.collections = requestJson;
+          this.collections.results = results;
+        }        
+        else{
+          this.showCardsLoaderAnimation=false;
+        }
+      }
+      else{
+          this.showCardsLoaderAnimation=false;
+      }      
+    }
   },
 };
 </script>
