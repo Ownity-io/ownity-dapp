@@ -5,7 +5,7 @@
     <Slide v-for="item in this.nfts" :key="item">      
       <Card :item="item" />
     </Slide>
-    <template #addons>
+    <template #addons v-if="(this.nfts.length>5)">
       <Navigation />
       <Pagination />
     </template>
