@@ -124,7 +124,7 @@
               </div>
               <div class="section-deposit-btns">
                 <!-- <button class="btn btn-deposit" v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='OWNED'">Start voting</button> -->
-                <button class="btn btn-deposit" v-if="((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST')||item.marketplace_status=='TEST') & item.internal_status=='OWNED' & this.userBidAmount>0"
+                <!-- <button class="btn btn-deposit" v-if="((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST')||item.marketplace_status=='TEST') & item.internal_status=='OWNED' & this.userBidAmount>0"
                 @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">Start voting</button>
                 <button class="btn btn-deposit" v-if="((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST')||item.marketplace_status=='TEST') & item.internal_status=='OWNED' & this.userBidAmount<=0">
                   Buy</button>
@@ -136,7 +136,30 @@
                 !(userBidAmount>0) || 
                 (((userBidAmount/this.item.price)*100)<20)))|| item.id == 40997" 
                  @click="this.$store.dispatch('appGlobal/setshowContinueCollectingModal',true)">Deposit part</button>
-                <button class="btn btn-get" v-if="userBidAmount>0">Get part back</button>
+                <button class="btn btn-get" v-if="userBidAmount>0">Get part back</button> -->
+
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='OPEN' & userAddress!=null)"
+                @click="this.$store.dispatch('appGlobal/setshowStartCollectingModal',true)">Start collecting</button>
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='OPEN' & userAddress==null)"
+                @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)">Start collecting</button>
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='GATHER' & userAddress!=null)"
+                @click="this.$store.dispatch('appGlobal/setshowContinueCollectingModal',true)">Deposit part</button>
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='GATHER' & userAddress==null)"
+                @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)">Deposit part</button>
+                <button class="btn btn-get" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='GATHER' & userAddress!=null & userBidAmount>0)"
+                >Cancel</button>
+                <button class="btn btn-deposit" v-if="((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST')||item.marketplace_status=='TEST') & item.internal_status=='OWNED' & userAddress!=null & this.userBidAmount>0"
+                @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">Start voting</button>
+                <button class="btn btn-get" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount>0)"
+                >Sell a part</button> 
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='OWNED' & userAddress!=null & userBid.fraction=='100.0%')"
+                >Claim NFT</button> 
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount==0 & bidsOnSale)"
+                >Buy</button> 
+                <button class="btn btn-get" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='ON SALE' & userAddress!=null & userBidAmount>=0)"
+                >Cancel sale</button> 
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='SOLD' & userAddress!=null & userBidAmount>=0)"
+                >Claim reward</button> 
               </div>
               <div class="section-deposit-labels" v-if="userBid!=null">
                 <div class="deposit-label" v-if="userBid.status == 'ON SALE'">
@@ -371,7 +394,6 @@ export default {
       srcTest: "",
       testLike: false,
       mobileDropDown: false,
-
       collapseMembers: false,
       item:null,
       priceInCurrency:1,
@@ -383,7 +405,8 @@ export default {
       config:config,
       chartData:[],
       userAddress:null,
-      render:false
+      render:false,
+      bidsOnSale:false
     };
   },
   components: {
@@ -501,6 +524,9 @@ export default {
             this.userBidAmount = parseInt(element.amount);
             this.userBid = element;
             return;
+          }
+          if (element.status == 'ON SALE'){
+            this.bidsOnSale = true;
           }
         }
         return
