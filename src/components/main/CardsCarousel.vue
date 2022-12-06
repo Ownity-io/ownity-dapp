@@ -1,7 +1,7 @@
 <template>
   <Carousel 
    :settings="settings" :breakpoints="breakpoints"
-  :items-to-show="1.5" v-if="render">
+  :items-to-show="1.5">
     <Slide v-for="item in this.nfts" :key="item">      
       <Card :item="item" />
     </Slide>
@@ -52,11 +52,7 @@ export default defineComponent({
         snapAlign: 'start',
       },
     },
-    render:false
   }),
-  mounted(){
-    this.render = true;
-  },
   props:['nfts'],
   components:{
     Card
