@@ -137,7 +137,7 @@ export default {
       if (this.item.currency.address == '0x0000000000000000000000000000000000000000'){
         options.value = valueToBuy;
       }      
-      options.gasLimit ='300000' ;
+      options.gasLimit ='600000' ;
       let requestUrl = `${config.backendApiEntryPoint}buy-nft/`;
       let requestOptions = {
           method: "POST",
