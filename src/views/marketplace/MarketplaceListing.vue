@@ -152,7 +152,7 @@
                 @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">Start voting</button>
                 <button class="btn btn-get" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount>0)"
                 >Sell a part</button> 
-                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='OWNED' & userAddress!=null & userBid.fraction=='100.0%')"
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='OWNED' & userAddress!=null & userBidBuyedAll)"
                 >Claim NFT</button> 
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount==0 & bidsOnSale)"
                 >Buy</button> 
@@ -406,7 +406,7 @@ export default {
       chartData:[],
       userAddress:null,
       render:false,
-      bidsOnSale:false
+      userBidBuyedAll:false
     };
   },
   components: {
@@ -523,10 +523,10 @@ export default {
           if (element.address == userAddress){
             this.userBidAmount = parseInt(element.amount);
             this.userBid = element;
+            if (element.status == 'ON SALE'){
+              this.userBidBuyedAll = true;
+            }
             return;
-          }
-          if (element.status == 'ON SALE'){
-            this.bidsOnSale = true;
           }
         }
         return
