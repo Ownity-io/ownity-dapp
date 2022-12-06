@@ -47,7 +47,7 @@
                   </div>
                 </div>
 
-                <CardsCarousel />
+                <CardsCarousel :nfts = 'nfts' v-if="nfts!=null"/>
 
                 <div class="btn-mobile-wrap">
                   <router-link :to="{ name: 'Marketplace' }" class="btn btn-router-to">
@@ -149,7 +149,9 @@ export default {
     return {
       playText: false,
       collections:null,
-      render:false
+      render:false,
+      nfts:null,
+      config:config
     };
   },
   components: {
@@ -162,6 +164,7 @@ export default {
   async mounted(){
     this.playText = true;
     await this.fetchAndSetNftCollections();
+    await this.fetchAndSetNfts();
     this.render = true;
   },
   methods: {
@@ -170,6 +173,17 @@ export default {
       let request = await fetch(requestUrl);
       let requestJson = await request.json();
       this.collections = requestJson;
+    },
+    async fetchAndSetNfts() {
+      let requestUrl = `${config.backendApiEntryPoint}listings/?internal_status=GATHER&limit=${this.config.listingsPerPage}&marketplace_status=OPEN&ordering=-timestamp/`;
+      let request = await fetch(requestUrl);
+      let requestJson = await request.json();
+      if (requestJson.count == 0){
+        requestUrl = `${config.backendApiEntryPoint}listings/?limit=${this.config.listingsPerPage}&marketplace_status=OPEN&ordering=-timestamp/`;
+        request = await fetch(requestUrl);
+        requestJson = await request.json();
+      }
+      this.nfts = requestJson.results;
     },
     toFixedIfNecessary(value, dp) {
       return +parseFloat(value).toFixed(dp);
