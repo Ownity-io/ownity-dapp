@@ -1,14 +1,13 @@
 <template>
   <div class="banner-slider">
     <Carousel :autoplay="5000" :wrap-around="true">
-      <Slide key="0">
-        <img src="@/assets/images/banners/Slide1.png" alt="" />
-      </Slide>
-      <Slide key="1">
-        <img src="@/assets/images/banners/Slide2.png" alt="" />
+      <Slide v-for="banner in banners" :key="banner">
+        <a :href="banner.link">
+          <img :src="banner.image" alt="" />
+        </a>        
       </Slide>
       <template #addons>
-        <Pagination />
+        <Pagination v-if="(banners.length>1)"/>
       </template>
     </Carousel>
   </div>
@@ -30,6 +29,7 @@ export default ({
     Slide,
     Pagination,
   },
+  props:['banners']
 });
 </script>
 

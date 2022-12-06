@@ -19,7 +19,7 @@
                 </router-link>
               </div>
               <div class="section-block block-slider">
-                <BannerSlider />
+                <BannerSlider :banners="banners" v-if="banners!=null"/>
               </div>
             </div>
           </div>
@@ -151,7 +151,8 @@ export default {
       collections:null,
       render:false,
       nfts:null,
-      config:config
+      config:config,
+      banners:null
     };
   },
   components: {
@@ -165,6 +166,7 @@ export default {
     this.playText = true;
     await this.fetchAndSetNftCollections();
     await this.fetchAndSetNfts();
+    await this.fetchAndSetBanners();
     this.render = true;
   },
   methods: {
@@ -184,6 +186,12 @@ export default {
         requestJson = await request.json();
       }
       this.nfts = requestJson.results;
+    },
+    async fetchAndSetBanners() {
+      let requestUrl = `${config.backendApiEntryPoint}slider-pics/`;
+      let request = await fetch(requestUrl);
+      let requestJson = await request.json();
+      this.banners = requestJson;
     },
     toFixedIfNecessary(value, dp) {
       return +parseFloat(value).toFixed(dp);
