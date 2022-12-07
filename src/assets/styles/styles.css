@@ -832,6 +832,13 @@ ul.tabs {
 .modal-main-input-select .modal-data-block-price {
     max-width: 256px;
 }
+.modal-main-input-select .modal-data-block-price +  .modal-select-part {
+    max-width: calc(100% - 40px - 40px * 2);
+}
+
+.modal-main-input-select .modal-data-block-price +   .modal-select-part  .input-wrapper.input-percent{
+    max-width: calc(100% - 40px * 2);
+}
 
 .btn-filter-mobile i,
 .input-selected i,
