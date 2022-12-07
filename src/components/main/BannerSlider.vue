@@ -2,7 +2,7 @@
   <div class="banner-slider">
     <Carousel :autoplay="5000" :wrap-around="true">
       <Slide v-for="banner in banners" :key="banner">
-        <a :href="banner.link">
+        <a target="_blank" rel="nofollow" :href="banner.link">
           <img :src="banner.image" alt="" />
         </a>        
       </Slide>
