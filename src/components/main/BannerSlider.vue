@@ -2,7 +2,7 @@
   <div class="banner-slider">
     <Carousel :autoplay="5000" :wrap-around="true">
       <Slide v-for="banner in banners" :key="banner">
-        <a target="_blank" rel="nofollow" :href="banner.link">
+        <a class="banner" target="_blank" rel="nofollow" :href="banner.link">
           <img :src="banner.image" alt="" />
         </a>        
       </Slide>
@@ -54,7 +54,17 @@ export default ({
     align-items: center;
     justify-content: center;
 }
+.banner-slider .carousel .carousel__track li .banner{
+  width: 100%;
+}
+.banner-slider .carousel .carousel__track li .banner img
+{
+  border: 1px solid #DFE2EA;
+/* shadow1 */
 
+filter: drop-shadow(4px 4px 20px rgba(129, 136, 153, 0.1));
+border-radius: 8px;
+}
 .carousel{
     width: 100%;
 }
