@@ -26,20 +26,23 @@
                 <div class="input-select-block">
                   <div class="input-select-title">Choose part</div>
                   <div class="input-select-wrap" :class="{ 'unfolded': selectOpen }">
-                    <button
+                    <input type="text" class="input-selected" v-model="partComputed"
+                    onkeypress="return (event.charCode >= 48 && event.charCode <=57 && ((this.value<100 && this.value>=1 )|| this.value==''))"
+                    >                    
+                    <!-- <button
                       class="input-selected"
                       @click="selectOpen = !selectOpen"
                     >
                       <span>{{currentPart}}%</span>
                       <i class="i-arrow-down-s-line"></i>
-                    </button>
-                    <div class="drop-down">
+                    </button> -->
+                    <!-- <div class="drop-down">
                       <ul>
                         <li v-for="value in partVariants" :key="value" @click="this.currentPart = value;selectOpen = !selectOpen">
                           <span>{{value}}%</span>
                         </li>
                       </ul>
-                    </div>
+                    </div> -->
                   </div>
                   <div class="input-select-prompt">Min 1% to Max 10%</div>
                 </div>
@@ -75,7 +78,7 @@
             The marketplace charges a fee for each transaction.
             <a href="#">Terms of Use</a>
           </div>
-          <button class="btn btn-modal-main btn-modal-desktop" @click="this.buyLot()" v-if="currentPart>0">Deposit part</button>
+          <button class="btn btn-modal-main btn-modal-desktop" @click="this.buyLot()" v-if="(currentPart>0 & currentPart!='')">Deposit part</button>
         </div>
       </div>
             
@@ -101,8 +104,7 @@ export default {
       config:config,
       provider:null,
       signer:null,
-      partVariants:[0,2,3,4,5,10,15,20],
-      currentPart:0,
+      currentPart:null,
       currencyToUsdPrice:1,
       allBidsAmount:0
     };
@@ -115,11 +117,30 @@ export default {
     this.setAllBidsAmount();
     this.render = true;
   },
+  computed:{
+    partComputed:{
+      get(){
+        return this.currentPart
+      },
+      set(value){
+        if (parseInt(value)>=100){
+          this.currentPart=100
+        }
+        else if(parseInt(value)<=1){
+          this.currentPart=1
+        }
+        else if(value == ''){
+          this.currentPart=null
+        }
+        else{
+          this.currentPart = value
+        }
+        
+      }
+    }
+  },
   methods:{
     async buyLot(){  
-      // console.log(await this.signer.getAddress());    
-      // console.log(typeof(this.signer));
-      // console.log(toRaw(this.signer));
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());
       let markeplaceId = ethers.utils.formatBytes32String(this.item.marketplace.id).substring(0, 10);
       let options = {};
