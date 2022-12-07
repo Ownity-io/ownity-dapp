@@ -225,7 +225,13 @@ export default {
           signature,
           options
         );
-        location.reload();
+        let trx = await (toRaw(this.provider)).waitForTransaction(buyLot.hash);
+        if (trx.status==1){
+          location.reload();
+        }
+        else{
+          alert('Error!')
+        }          
       }
       catch{
         alert('Error');
