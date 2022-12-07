@@ -26,10 +26,30 @@
                 <div class="input-select-block">
                   <div class="input-select-title">Choose part</div>
                   <div class="input-wrapper input-percent">
+                    <input type="text" v-model="partComputed"
+                    placeholder="0%"
+                    onkeypress="return (event.charCode >= 48 && event.charCode <=57 && ((this.value<100 && this.value>=1 )|| this.value==''))"
+                    > 
+                  </div>
+                  <!--  <div class="input-select-wrap" :class="{ 'unfolded': selectOpen }">
                     <input type="text" class="input-selected" v-model="partComputed"
                     onkeypress="return (event.charCode >= 48 && event.charCode <=57 && ((this.value<100 && this.value>=1 )|| this.value==''))"
-                    >                                                          
-                  </div>
+                    >                    
+                   <button
+                      class="input-selected"
+                      @click="selectOpen = !selectOpen"
+                    >
+                      <span>{{currentPart}}%</span>
+                      <i class="i-arrow-down-s-line"></i>
+                    </button> -->
+                    <!-- <div class="drop-down">
+                      <ul>
+                        <li v-for="value in partVariants" :key="value" @click="this.currentPart = value;selectOpen = !selectOpen">
+                          <span>{{value}}%</span>
+                        </li>
+                      </ul>
+                    </div> 
+                  </div>-->
                   <div class="input-select-prompt">Min 1% to Max 10%</div>
                 </div>
               </div>
