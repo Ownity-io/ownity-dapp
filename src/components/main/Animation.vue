@@ -29,12 +29,6 @@ import "../main/animation/animation.css";
 export default {
   data() {
     return {
-      // animationPlay1: false,
-      // animationPlay2: false,
-      // animationPlay3: false,
-      // el1: '',
-      // el2: '',
-      // el3: '',
       img1: {
         top: 0,
         left: 0,
@@ -121,7 +115,6 @@ export default {
         cursorY > obj.top-100 &&
         cursorY < obj.bottom-100
       ) {
-        console.log(this.img2.status);
         return (obj.status = true);
         // return {
         //   obj: {
