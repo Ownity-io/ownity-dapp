@@ -832,11 +832,12 @@ ul.tabs {
 .modal-main-input-select .modal-data-block-price {
     max-width: 256px;
 }
-.modal-main-input-select .modal-data-block-price +  .modal-select-part {
+
+.modal-main-input-select .modal-data-block-price+.modal-select-part {
     max-width: calc(100% - 40px - 40px * 2);
 }
 
-.modal-main-input-select .modal-data-block-price +   .modal-select-part  .input-wrapper.input-percent{
+.modal-main-input-select .modal-data-block-price+.modal-select-part .input-wrapper.input-percent {
     max-width: calc(100% - 40px * 2);
 }
 
@@ -1178,6 +1179,17 @@ ul.tabs {
     animation: icon-load .8s ease-out infinite;
 }
 
+.btn-modal-main svg.loader {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    animation: icon-load-btn .8s ease-out infinite;
+}
+.btn-modal-main svg.loader path{
+    fill: #ffffff;
+}
+
 @keyframes icon-load {
     form {
         transform: translate(-50%, -50%) rotate(0);
@@ -1185,6 +1197,16 @@ ul.tabs {
 
     to {
         transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes icon-load-btn {
+    form {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
     }
 }
 
@@ -1739,7 +1761,7 @@ ul.tabs {
     align-items: center;
 }
 
-.table-top-collections .td.td-price ,
+.table-top-collections .td.td-price,
 .table-top-collections .td.td-data {
     align-items: center;
     display: flex;

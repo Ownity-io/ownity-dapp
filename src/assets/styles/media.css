@@ -790,7 +790,7 @@
         width: 100%;
     }
 
-    .btn-modal-main.btn-modal-desktop {
+    .modal-desktop-footer {
         display: none;
     }
 
