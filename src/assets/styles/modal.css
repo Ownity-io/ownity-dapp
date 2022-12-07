@@ -332,9 +332,11 @@ input+.input-equivalent {
     color: #9A9A9A;
 }
 
+.input-percent ,
 .input-wrapper-amount {
     gap: 16px;
     padding: 12px 16px;
+    height: 48px;
 }
 
 .input-equivalent {

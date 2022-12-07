@@ -26,6 +26,7 @@ export default defineComponent({
     Carousel,
     Slide,
     Navigation,
+    Card,
   },
   data: () => ({
     // carousel settings
@@ -54,10 +55,6 @@ export default defineComponent({
     },
   }),
   props:['nfts'],
-  components:{
-    Card
-  }
-
 })
 </script>
 
