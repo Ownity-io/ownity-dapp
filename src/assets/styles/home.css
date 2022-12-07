@@ -155,6 +155,10 @@
 .carousel__pagination {
     margin: 0 auto !important;
 }
+.banner-slider .carousel__pagination {
+  margin-top: 8px !important;
+}
+
 
 .carousel__pagination-button::after {
     display: none !important;

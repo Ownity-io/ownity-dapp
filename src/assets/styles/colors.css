@@ -82,7 +82,9 @@ a.collection-id:hover span,
 .header-nav .btn-container .btn.btn-connect:hover {
     background-position: -100% center;
 }
-
+.btn-modal-main:disabled{
+    background: linear-gradient(89.43deg, #9A9A9A -3.17%, #818387 109.46%);
+}
 .switch,
 .btn-param,
 .btn-log-out,
