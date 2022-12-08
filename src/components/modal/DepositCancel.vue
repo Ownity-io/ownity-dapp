@@ -1,9 +1,9 @@
 <template>
-  <div class="modal">
+  <div class="modal" v-if ='render'>
     <div class="modal-wrapper">
       <div class="modal-header">
         <div class="modal-name">Cancel deposit part</div>
-        <button class="btn-close">
+        <button class="btn-close" @click="this.$store.dispatch('appGlobal/setshowDepositCancelModal',false)">
           <i class="i-close-line"></i>
         </button>
       </div>
@@ -72,11 +72,30 @@
 </template>
 
 <script>
+import { ethers } from 'ethers';
+import ABI from '@/abi.json';
+import config from '@/config.json';
+import { toRaw } from '@vue/reactivity';
 export default {
   data() {
     return {
-      selectOpen: false,
+      item:null,
+      ABI:ABI,
+      render:false,
+      config:config,
+      provider:null,
+      signer:null,
+      currencyToUsdPrice:1,
+      userBidAmount
     };
+  },
+  async mounted(){
+    this.item = await this.$store.getters['marketplaceListing/getItem'];
+    this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
+    this.signer = await this.$store.getters['walletsAndProvider/getSigner'];
+    this.setCurrencyToUsd();
+    this.setUserBidAmount();
+    this.render = true;
   },
 };
 </script>

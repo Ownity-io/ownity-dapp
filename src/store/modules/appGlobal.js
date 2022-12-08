@@ -8,7 +8,8 @@ export default {
       currentVoting:null,
       showCancelSellVotingModal:false,
       showStartCollectingModal:false,
-      showContinueCollectingModal:false
+      showContinueCollectingModal:false,
+      showDepositCancelModal:false
     };
   },
   getters: {
@@ -32,7 +33,10 @@ export default {
     },
     getshowContinueCollectingModal(state){
       return state.showContinueCollectingModal;
-    }
+    },
+    getshowDepositCancelModal(state){
+      return state.showDepositCancelModal;
+    },
   },
   mutations: {
     setShowConnectWalletModal(state, value) {
@@ -55,7 +59,10 @@ export default {
     },
     setshowContinueCollectingModal(state,value){
       state.showContinueCollectingModal = value;
-    }
+    },
+    setshowDepositCancelModal(state,value){
+      state.showDepositCancelModal = value;
+    },
   },
   actions: {
     setShowConnectWalletModal(context, value) {
@@ -78,6 +85,9 @@ export default {
     },
     setshowContinueCollectingModal(context,value){
       context.commit("setshowContinueCollectingModal", value);
-    }
+    },
+    setshowDepositCancelModal(context,value){
+      context.commit("setshowDepositCancelModal", value);
+    },
   },
 };

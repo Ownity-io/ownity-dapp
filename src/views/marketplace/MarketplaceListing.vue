@@ -147,7 +147,7 @@
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='GATHER' & userAddress==null)"
                 @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)">Deposit part</button>
                 <button class="btn btn-get" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='GATHER' & userAddress!=null & userBidAmount>0)"
-                >Cancel</button>
+                @click="this.$store.dispatch('appGlobal/setshowDepositCancelModal',true)">Cancel</button>
                 <button class="btn btn-deposit" v-if="((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST')||item.marketplace_status=='TEST') & item.internal_status=='OWNED' & userAddress!=null & this.userBidAmount>0"
                 @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">Start voting</button>
                 <button class="btn btn-get" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount>0)"
