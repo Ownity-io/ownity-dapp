@@ -231,8 +231,8 @@ main>section {
 
 .btn-router-to,
 .btn-show-more,
-.header-nav .btn-container .btn.btn-connect,
-.header-nav .btn-container .btn.btn-address,
+ .btn.btn-connect,
+ .btn.btn-address,
 .input-wrapper.search-wrapper input,
 .header-nav ul li a,
 .header-nav ul li button {
@@ -250,7 +250,7 @@ main>section {
 
 .tabs .active-tab,
 .filter-section-name,
-.header-nav .btn-container .btn.btn-connect,
+.btn.btn-connect,
 .header-nav ul li a.active,
 .header-nav ul li a:hover,
 .header-nav ul li button.active {
