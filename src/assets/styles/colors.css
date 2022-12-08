@@ -63,7 +63,7 @@ a.collection-id:hover span,
 .cookies-btns-container .btn-main,
 .card-data .btn-container .btn:not(.btn-card-completed):hover,
 .section-deposit-btns .btn.btn-deposit,
-.header-nav .btn-container .btn.btn-connect {
+.btn.btn-connect {
     /* background: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%); */
     background: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 49.91%, #E15595 109.46%);
     color: #FFFFFF;
@@ -79,7 +79,7 @@ a.collection-id:hover span,
 .footer-form .btn-subscribe:hover,
 .cookies-btns-container .btn-main:hover,
 .section-deposit-btns .btn.btn-deposit:hover,
-.header-nav .btn-container .btn.btn-connect:hover {
+.btn.btn-connect:hover {
     background-position: -100% center;
 }
 .btn-modal-main:disabled{
@@ -97,7 +97,7 @@ a.collection-id:hover span,
 .sort.unfolded .drop-down,
 .drop-down-container .drop-down,
 .input-select-wrap.unfolded .drop-down,
-.header-nav .btn-container .btn.btn-address {
+.btn.btn-address {
     background: #FFFFFF;
     border: 1px solid #DFE2EA;
 }
@@ -110,7 +110,7 @@ a.collection-id:hover span,
 .table-chart-data .tr:hover,
 .table-activity .tr:hover,
 .profile-container-btns button:hover,
-.header-nav .btn-container .btn.btn-address:hover,
+.btn.btn-address:hover,
 .listing-additional-options .btn-block:hover,
 .sort.unfolded .btn-sort,
 .input-select-wrap.unfolded .input-selected,
