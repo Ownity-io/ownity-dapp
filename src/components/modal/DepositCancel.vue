@@ -12,10 +12,10 @@
         <div class="modal-container">
           <div class="modal-section-nft-data">
             <div class="modal-nft-data">
-              <div class="icon-nft"></div>
+              <div class="icon-nft" :style="{backgroundImage: `url(${item.media})`}"></div>
               <div class="nft-data">
-                <div class="nft-id">18234</div>
-                <div>Mutant Ape Yacht Club</div>
+                <div class="nft-id">{{item.token_id}}</div>
+                <div>{{item.collection.name}}</div>
               </div>
             </div>
           </div>
@@ -25,7 +25,7 @@
               <div class="modal-data-block">
                 <div class="modal-current-part">
                   <i class="i-coupon-3-line"></i>
-                  Your part: <span>10%</span>
+                  Your part: <span>{{(userBidAmount/item.price)*100}}%</span>
                 </div>
               </div>
               <div class="modal-data-block modal-data-block-price">
@@ -33,9 +33,9 @@
                   <div class="price-block-title">Price of your part</div>
                   <div class="price-block-value price-value">
                     <div class="icon-value"></div>
-                    <span>0.10 ETH</span>
+                    <span>{{abbrNum(toFixedIfNecessary(convertToEther(String(userBidAmount)),6),2)}} ETH</span>
                   </div>
-                  <div class="price-block-equivalent equivalent">≈ $ 100</div>
+                  <div class="price-block-equivalent equivalent">≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(String(userBidAmount))*currencyToUsdPrice,6),2)}}</div>
                 </div>
               </div>
             </div>
@@ -48,7 +48,7 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>0.103 ETH</b><span>≈ $ 103K</span>
+                    <b>{{abbrNum(toFixedIfNecessary(convertToEther(String(userBidAmount)),6),2)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(String(userBidAmount))*currencyToUsdPrice,6),2)}}</span>
                   </div>
                   <!-- <div class="total-fees">Fees:<span>3%</span></div> -->
                 </div>
@@ -62,11 +62,12 @@
           
           <!-- v-if="currentPart "  -->
           <div class="modal-desktop-footer">
-            <button disabled class="btn btn-modal-main">Deposit part</button>
+            <!-- <button disabled class="btn btn-modal-main">Deposit part</button> -->
+            <button class="btn btn-modal-main" @click="declineBid">Cancel</button>
           </div>
 
           <!-- v-else  -->
-          <div class="modal-desktop-footer">
+          <div class="modal-desktop-footer" v-if="false">
             <button class="btn btn-modal-main">Deposit part</button>
             <button class="btn btn-modal-main">
               <svg class="loader" viewBox="0 0 18 18"  xmlns="http://www.w3.org/2000/svg">
@@ -87,12 +88,12 @@
       </div>
             
       <!-- v-if="currentPart "  -->
-      <div  class="modal-mobile-footer">
+      <div  class="modal-mobile-footer" >
         <button disabled class="btn btn-modal-main">Deposit part</button>
       </div>
 
       <!-- v-else  -->
-      <div   class="modal-mobile-footer">
+      <div   class="modal-mobile-footer" v-if="false">
         <button   class="btn btn-modal-main">Deposit part</button>
         <button class="btn btn-modal-main">
           <svg class="loader" viewBox="0 0 18 18"  xmlns="http://www.w3.org/2000/svg">
@@ -128,7 +129,7 @@ export default {
       provider:null,
       signer:null,
       currencyToUsdPrice:1,
-      userBidAmount
+      userBidAmount:null
     };
   },
   async mounted(){
@@ -139,5 +140,72 @@ export default {
     this.setUserBidAmount();
     this.render = true;
   },
+  methods:{
+    abbrNum(number, decPlaces) {
+      decPlaces = Math.pow(10, decPlaces);
+      var abbrev = ["k", "m", "b", "t"];
+      for (var i = abbrev.length - 1; i >= 0; i--) {
+        var size = Math.pow(10, (i + 1) * 3);
+        if (size <= number) {
+          number = Math.round(number * decPlaces / size) / decPlaces;
+          if ((number == 1000) && (i < abbrev.length - 1)) {
+            number = 1;
+            i++;
+          }
+          number += abbrev[i];
+          break;
+        }
+      }
+
+      return number;
+    },
+    async setCurrencyToUsd(){
+      let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
+      let requestJson = await request.json();
+      try{
+        this.currencyToUsdPrice =  requestJson.quotes[0].priceUsd;
+      }
+      catch{
+        this.currencyToUsdPrice = 1;
+      }
+    },
+    toFixedIfNecessary(value, dp) {
+      return +parseFloat(value).toFixed(dp);
+    },
+    setUserBidAmount(){
+      let userAddress = localStorage.getItem('userAddress');
+      if (this.item.bids!=null & userAddress!=null & userAddress!='null'){
+        for (let element of this.item.bids){
+          if (element.address == userAddress){
+            this.userBidAmount = parseInt(element.amount);
+            return;
+          }
+        }
+        return
+      }
+      this.userBidAmount=0;      
+    },
+    convertToEther(value){
+      return ethers.utils.formatEther(value);
+    },
+    async declineBid(){  
+      const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());
+      try{
+        let declineBid = await contract.declineBid(
+          this.item.id,
+        );
+        let trx = await (toRaw(this.provider)).waitForTransaction(declineBid.hash);
+        if (trx.status==1){
+          location.reload();
+        }
+        else{
+          alert('Error!')
+        }          
+      }
+      catch{
+        alert('Error');
+      }
+    },
+  }
 };
 </script>

@@ -87,6 +87,7 @@ export default {
       context.commit("setshowContinueCollectingModal", value);
     },
     setshowDepositCancelModal(context,value){
+      console.log(value);
       context.commit("setshowDepositCancelModal", value);
     },
   },
