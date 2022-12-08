@@ -45,7 +45,7 @@
           <!-- v-if="currentPart "  -->
           <div class="modal-desktop-footer">
             <!-- <button disabled class="btn btn-modal-main">Confirm your part</button> -->
-            <button class="btn btn-modal-main">Confirm your part</button>
+            <button class="btn btn-modal-main" @click="confirmVote">Confirm your part</button>
           </div>
 
           <!-- v-else  -->
@@ -72,7 +72,7 @@
       <!-- v-if="currentPart "  -->
       <div  class="modal-mobile-footer">
         <!-- <button disabled class="btn btn-modal-main">Confirm your part</button> -->
-        <button class="btn btn-modal-main">Confirm your part</button>
+        <button class="btn btn-modal-main" @click="confirmVote">Confirm your part</button>
       </div>
 
       <!-- v-else  -->
@@ -184,11 +184,66 @@ export default {
         let request = await fetch(requestLink, requestOptions);
         let requestJson = await request.json();
         if (requestJson.success) {
-          location.reload();
+          console.log('OK');
+          if (parseInt((requestJson.voting_percentage.replace('%', ''))) > 50) {
+            console.log('OK2');
+            console.log(requestJson.voting_id);
+            await this.sellLot(requestJson.voting_id)
+          }
+          else{
+            location.reload();  
+          }          
         }
         else {
           alert('Error!');
         }
+    },
+    async sellLot(_voting_Id) {
+      console.log(this.config.contractAddress);
+      const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());      
+      let requestLink = `${config.backendApiEntryPoint}finish-voting/`;
+      let requestOptions = {
+          method: "POST",
+          headers: {
+            accept: "application/json",
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body:JSON.stringify({
+            voting_id: _voting_Id
+          })
+        };
+      let request = await fetch(requestLink,requestOptions);
+      let requestJson = await request.json();
+      console.log(requestJson);
+      
+      let markeplaceId = ethers.utils.formatBytes32String(requestJson.data.marketplace).substring(0, 10);
+      let lot = {
+          tokenAddress: requestJson.data.lot.currency,
+          decimals: String(requestJson.data.lot.decimals),
+          price: String(requestJson.data.lot.price),
+          collected: '0',
+          occupancy: '0',
+          tokenContractAddress: requestJson.data.lot.collection,
+          tokenId: requestJson.data.lot.token_id,
+          tokenAmount: requestJson.data.lot.token_amount,
+          status: '0',
+        };
+      console.log(lot);
+      let sellLot = await contract.sellLot(
+        markeplaceId,
+        requestJson.data.lot.id,
+        lot,
+        requestJson.data.signature,
+        { gasLimit: '600000' }
+      
+      );
+      console.log(sellLot);
+      let trx = await (toRaw(this.provider)).waitForTransaction(sellLot.hash);
+      if (trx.status == 1) {
+        location.reload();
+      }
+      
     }
   }
 };
