@@ -98,15 +98,20 @@
 </template>
 
 <script>
-import { ethers } from 'ethers';
 import config from '@/config.json';
+import ABI from '@/abi.json';
+import { ethers } from 'ethers';
+import { toRaw } from '@vue/reactivity';
 export default {
   data() {
     return {
       voting:null,
       render:false,
       item:null,
-      currencyToUsdPrice:1
+      currencyToUsdPrice:1,
+      config:config,
+      ABI:ABI,
+      provider:null
     };
   },
   async mounted(){
@@ -114,6 +119,7 @@ export default {
     this.voting = this.$store.getters['appGlobal/getCurrentVoting'];
     this.setCurrencyToUsd();
     this.render = true;
+    this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
   },
   methods:{
     abbrNum(number, decPlaces) {
@@ -185,7 +191,7 @@ export default {
         let requestJson = await request.json();
         if (requestJson.success) {
           console.log('OK');
-          if (parseInt((requestJson.voting_percentage.replace('%', ''))) > 50) {
+          if (parseInt((requestJson.voting_percentage.replace('%', ''))) >= 51) {
             console.log('OK2');
             console.log(requestJson.voting_id);
             await this.sellLot(requestJson.voting_id)

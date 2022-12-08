@@ -151,7 +151,7 @@ export default {
       config:config,
       provider:null,
       signer:null,
-      partVariants:[0,2,3,4,5,10,15,20],
+      partVariants:[0,1,2,3,4,5,10,15,20,49],
       currentPart:0,
       currencyToUsdPrice:1,
       allBidsAmount:0

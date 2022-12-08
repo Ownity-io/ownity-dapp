@@ -216,7 +216,7 @@ export default {
         console.log(requestJson);
         if (requestJson.success) {
           console.log('OK');
-          if (parseInt((requestJson.voting_percentage.replace('%', ''))) > 50) {
+          if (parseInt((requestJson.voting_percentage.replace('%', ''))) >= 51) {
             console.log('OK2');
             console.log(requestJson.voting_id);
             await this.sellLot(requestJson.voting_id)
