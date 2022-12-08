@@ -179,7 +179,7 @@ export default {
     },
     async startVote() {
         let signed_message = await this.$store.dispatch('walletsAndProvider/signMessageWithGlobalProvider',
-          `${this.item.marketplace.id}-${this.item.id}-${this.item.currency.address}-${this.noExponents(this.voting.amount)}-${this.item.end_date}`);
+          `${this.voting.marketplace.id}-${this.item.id}-${this.item.currency.address}-${this.noExponents(this.voting.amount)}-${this.item.end_date}`);
         console.log(signed_message);
         let requestLink = `${config.backendApiEntryPoint}voting-create/`;
         let requestOptions = {
@@ -190,7 +190,7 @@ export default {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           body: JSON.stringify({
-            "marketplace_id": this.item.marketplace.id,
+            "marketplace_id": this.voting.marketplace.id,
             "lot_id": this.item.id,
             "currency": this.item.currency.address,
             "amount": this.noExponents(this.voting.amount),
