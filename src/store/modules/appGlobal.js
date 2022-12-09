@@ -13,7 +13,8 @@ export default {
       showSellPartModal:false,
       showCancelSellPartModal:false,
       currentPartOnMarket:null,
-      showBuyPartModal:false
+      showBuyPartModal:false,
+      showClaimNftModal:false
     };
   },
   getters: {
@@ -52,6 +53,9 @@ export default {
     },
     getShowBuyPartModal(state){
       return state.showBuyPartModal;
+    },
+    getShowClaimNftModal(state){
+      return state.showClaimNftModal;
     }
   },
   mutations: {
@@ -90,6 +94,9 @@ export default {
     },
     setShowBuyPartModal(state,value){
       state.showBuyPartModal = value;
+    },
+    setShowClaimNftModal(state,value){
+      state.showClaimNftModal = value;
     }
   },
   actions: {
@@ -129,6 +136,9 @@ export default {
     },
     setShowBuyPartModal(context,value){
       context.commit("setShowBuyPartModal", value);
+    },
+    setShowClaimNftModal(context,value){
+      context.commit("setShowClaimNftModal", value);
     }
   },
 };
