@@ -9,7 +9,8 @@ export default {
       showCancelSellVotingModal:false,
       showStartCollectingModal:false,
       showContinueCollectingModal:false,
-      showDepositCancelModal:false
+      showDepositCancelModal:false,
+      showSellPartModal:false
     };
   },
   getters: {
@@ -37,6 +38,9 @@ export default {
     getshowDepositCancelModal(state){
       return state.showDepositCancelModal;
     },
+    getShowSellPartModal(state){
+      return state.showSellPartModal;
+    }
   },
   mutations: {
     setShowConnectWalletModal(state, value) {
@@ -63,6 +67,9 @@ export default {
     setshowDepositCancelModal(state,value){
       state.showDepositCancelModal = value;
     },
+    setShowSellPartModal(state,value){
+      state.showSellPartModal = value;
+    }
   },
   actions: {
     setShowConnectWalletModal(context, value) {
@@ -90,5 +97,8 @@ export default {
       console.log(value);
       context.commit("setshowDepositCancelModal", value);
     },
+    setShowSellPartModal(context,value){
+      context.commit("setShowSellPartModal", value);
+    }
   },
 };

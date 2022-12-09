@@ -5,7 +5,7 @@
     <DepositPartStart v-if="this.$store.getters['appGlobal/getshowStartCollectingModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
     <DepositPartContinue v-if="this.$store.getters['appGlobal/getshowContinueCollectingModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
     <DepositCancel v-if="this.$store.getters['appGlobal/getshowDepositCancelModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
-    <!-- <SellPart /> -->
+    <SellPart v-if="this.$store.getters['appGlobal/getShowSellPartModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
     <SellCancelPart v-if="this.$store.getters['appGlobal/getShowCancelSellVotingModal'] & (this.walletConnected!=null & this.walletConnected!='null')" />
     <!-- <SellCancel /> -->
     <!-- <Claim /> -->
