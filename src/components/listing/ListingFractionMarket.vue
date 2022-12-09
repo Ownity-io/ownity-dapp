@@ -9,25 +9,25 @@
             </div>
                 
             <div class="tr tr-mob-collapse" v-for="element in item.bids" :key="element">
-                <div class="td td-category" v-if="element.status == 'ON SALE'">
+                <div class="td td-category">
                     <div class="td-wrap td-wrap-category">
                         <i class="i-shopping-bag-line"></i>
                         <span>Sale</span>
                     </div>
                 </div>
-                <div class="td td-price" v-if="element.status == 'ON SALE'">
+                <div class="td td-price">
                     <div class="td-wrap">
                         <div class="td-wrap-price">
                             <div class="icon-token"></div> 
-                            <span>{{abbrNum(toFixedIfNecessary(convertToEther(element.amount),6),2)}} ETH</span>
+                            <span>{{abbrNum(toFixedIfNecessary(convertToEther(element.price),6),2)}} ETH</span>
                         </div>
-                        <span class="td-light">≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(element.amount)*currencyToUsdPrice,6),2)}}</span>
+                        <span class="td-light">≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(element.price)*currencyToUsdPrice,6),2)}}</span>
                     </div>
                 </div>
-                <div class="td" v-if="element.status == 'ON SALE'"> 
-                  {{element.fraction}}
+                <div class="td"> 
+                  {{((element.fraction_amount/item.price)*100)}}%
                 </div>
-                <div class="td td-date" v-if="element.status == 'ON SALE'">
+                <div class="td td-date">
                     <div class="td-button">
                        <button class="btn btn-td btn-buy" v-if="userAddress != element.address">Buy</button>
                        <button class="btn btn-td btn-buy" v-else @click="showCancelModal(element)">Cancel</button>

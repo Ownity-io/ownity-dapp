@@ -273,7 +273,7 @@
                   </div>
                 </div>
                 <!-- flow2 -->
-                <ListingFractionMarket v-if="activeTab2 === 'ListingFractionMarket'" :item="item"/>
+                <ListingFractionMarket v-if="activeTab2 === 'ListingFractionMarket'" :item="itemWithBidsOnSale"/>
                 <!-- flow3 -->
                 <div v-if="activeTab2 === 'ListingVote'" 
                   class="section-votes-wrap">
@@ -406,7 +406,8 @@ export default {
       chartData:[],
       userAddress:null,
       render:false,
-      userBidBuyedAll:false
+      userBidBuyedAll:false,
+      itemWithBidsOnSale:false
     };
   },
   components: {
@@ -464,6 +465,7 @@ export default {
       await this.$store.dispatch('marketplaceListing/getAndSetItem',this.$route.params.id);
 
       this.item = await this.$store.getters['marketplaceListing/getItem'];
+      this.itemWithBidsOnSale = await (await fetch(`${config.backendApiEntryPoint}listing-with-on-sale-bids/${this.item.id}`)).json();
     },
     setPriceInCurrency(){
       this.priceInCurrency = this.toFixedIfNecessary((this.item.price / (10**this.item.currency.decimals)),6);

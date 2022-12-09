@@ -25,7 +25,7 @@
               <div class="modal-data-block">
                 <div class="modal-current-part">
                   <i class="i-coupon-3-line"></i>
-                  Your part: <span>{{(partOnMarket.amount/item.price*100)}}%</span>
+                  Your part: <span>{{(partOnMarket.fraction_amount/item.price*100)}}%</span>
                 </div>
               </div>
               <div class="modal-data-block modal-data-block-price">
@@ -33,9 +33,9 @@
                   <div class="price-block-title">Price of your part</div>
                   <div class="price-block-value price-value">
                     <div class="icon-value"></div>
-                    <span>{{abbrNum(toFixedIfNecessary(convertToEther(partOnMarket.amount),6),2)}} ETH</span>
+                    <span>{{abbrNum(toFixedIfNecessary(convertToEther(partOnMarket.price),6),2)}} ETH</span>
                   </div>
-                  <div class="price-block-equivalent equivalent">≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(partOnMarket.amount)*currencyToUsdPrice,2),2)}}</div>
+                  <div class="price-block-equivalent equivalent">≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(partOnMarket.price)*currencyToUsdPrice,2),2)}}</div>
                 </div>
               </div>
             </div>
@@ -48,7 +48,7 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>{{abbrNum(toFixedIfNecessary(convertToEther(partOnMarket.amount),6),2)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(partOnMarket.amount)*currencyToUsdPrice,2),2)}}</span>
+                    <b>{{abbrNum(toFixedIfNecessary(convertToEther(partOnMarket.price),6),2)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(partOnMarket.price)*currencyToUsdPrice,2),2)}}</span>
                   </div>
                   <!-- <div class="total-fees">Fees:<span>3%</span></div> -->
                 </div>
@@ -178,7 +178,7 @@ export default {
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());
       try{
         let cancelSellFraction = await contract.cancelSellFraction(
-          this.partOnMarket.id,
+          this.partOnMarket.fraction_lot_id,
           {gasLimit:'600000'}
         );
         let trx = await (toRaw(this.provider)).waitForTransaction(cancelSellFraction.hash);
