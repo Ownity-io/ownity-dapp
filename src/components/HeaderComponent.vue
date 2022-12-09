@@ -1,4 +1,5 @@
 <template>
+    <MobileMenu :class="{show: (mobileMenu==true)}" :walletConnected="(walletConnected=walletConnected)"/>
     <header>
         <div class="container">
             <div class="header-wrapper">
@@ -37,9 +38,7 @@
                     </div>
                     <div class="btn-container" v-else>
                         <router-link :to="{name:'Profile'}" class="btn btn-address">
-                            <div class="icon-address"
-                                :style="bs"
-                            ></div>
+                            <div class="icon-address"></div>
                             <span>{{this.$store.getters['walletsAndProvider/getUserShortAddress']}}</span>
                         </router-link>
                     </div>
@@ -48,8 +47,11 @@
                     <button class="btn-mob-header">
                         <i class="i-search-line"></i>
                     </button>
-                    <button class="btn-mob-header">
+                    <button @click="(mobileMenu=true)" class="btn-mob-header"  v-if="(mobileMenu==false)">
                         <i class="i-menu-line"></i>
+                    </button>
+                    <button @click="(mobileMenu=false)" class="btn-mob-header"  v-if="(mobileMenu==true)">
+                        <i class="i-close-line"></i>
                     </button>
                 </div>
             </div>
@@ -60,18 +62,18 @@
 <script>
 
 import Search from '@/components/Search.vue'
+import MobileMenu from '@/components/MobileMenu.vue'
 
 export default {
     data(){
         return{
-            // headerItemActive1:true,
-            // headerItemActive2:false,
-            // headerItemActive3:false,
-            walletConnected:1
+            walletConnected:1,
+            mobileMenu: false,
         }
     },
     components: {
         Search,
+        MobileMenu,
     },
     methods:{
         getWalletFromLS() {
