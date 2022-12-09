@@ -150,7 +150,7 @@ export default {
       currentPart:0,
       priceForPart:0,
       item:null,
-      partVariants:[0,1,2,3,4,5,10,15,20,49],
+      partVariants:[0,1,2,3,4,5,10,15,20,49,50,100],
       provider:null,
       currencyToUsdPrice:1,
       render:false,
@@ -207,7 +207,7 @@ export default {
       }
     },
     convertFromEtherToWei(value){
-      return value * 10**this.item.currency.decimals;
+      return String(value * 10**this.item.currency.decimals);
     },
     setUserBidAmount(){
       let userAddress = localStorage.getItem('userAddress');
@@ -223,8 +223,11 @@ export default {
       this.userBidAmount=0;      
     },
     async sellPart(){
+      // console.log(this.currentPart);
+      // console.log(this.item.price);
+      // console.log(this.item.price/100*this.currentPart);
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());  
-      let sellFraction = await contract.sellFraction(this.item.id, (this.item.price/100)*this.currentPart, this.convertFromEtherToWei(this.priceForPart));
+      let sellFraction = await contract.sellFraction(this.item.id, String(this.item.price/100*this.currentPart), String(this.convertFromEtherToWei(this.priceForPart)));
       console.log(sellFraction);
       let trx = await (toRaw(this.provider)).waitForTransaction(sellFraction.hash);
       if (trx.status == 1) {
@@ -233,7 +236,7 @@ export default {
       else{
         console.log('Error in contract');
       }
-    }
+    },
   }
 };
 </script>

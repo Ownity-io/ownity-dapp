@@ -29,7 +29,7 @@
                 </div>
                 <div class="td td-date">
                     <div class="td-button">
-                       <button class="btn btn-td btn-buy" v-if="userAddress != element.address">Buy</button>
+                       <button class="btn btn-td btn-buy" v-if="userAddress != element.address" @click="showBuyModal(element)">Buy</button>
                        <button class="btn btn-td btn-buy" v-else @click="showCancelModal(element)">Cancel</button>
                     </div>
                 </div>
@@ -100,6 +100,10 @@ export default {
         },
         async showCancelModal(element){
             await this.$store.dispatch('appGlobal/setShowCancelSellPartModal',true); 
+            await this.$store.dispatch('appGlobal/setCurrentPartOnMarket',element);
+        },
+        async showBuyModal(element){
+            await this.$store.dispatch('appGlobal/setShowBuyPartModal',true); 
             await this.$store.dispatch('appGlobal/setCurrentPartOnMarket',element);
         }
     },
