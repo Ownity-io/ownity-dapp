@@ -14,7 +14,9 @@ export default {
       showCancelSellPartModal:false,
       currentPartOnMarket:null,
       showBuyPartModal:false,
-      showClaimNftModal:false
+      showClaimNftModal:false,
+      showTransSuccessModal:false,
+      lastTransactionHash:null
     };
   },
   getters: {
@@ -56,6 +58,12 @@ export default {
     },
     getShowClaimNftModal(state){
       return state.showClaimNftModal;
+    },
+    getShowTransSuccessModal(state){
+      return state.showTransSuccessModal;
+    },
+    getLastTransactionHash(state){
+      return state.lastTransactionHash;
     }
   },
   mutations: {
@@ -97,6 +105,12 @@ export default {
     },
     setShowClaimNftModal(state,value){
       state.showClaimNftModal = value;
+    },
+    setShowTransSuccessModal(state,value){
+      state.showTransSuccessModal = value;
+    },
+    setLastTransactionHash(state,value){
+      state.lastTransactionHash = value;
     }
   },
   actions: {
@@ -139,6 +153,12 @@ export default {
     },
     setShowClaimNftModal(context,value){
       context.commit("setShowClaimNftModal", value);
+    },
+    setShowTransSuccessModal(context,value){
+      context.commit("setShowTransSuccessModal", value);
+    },
+    setLastTransactionHash(context,value){
+      context.commit("setLastTransactionHash", value);
     }
   },
 };
