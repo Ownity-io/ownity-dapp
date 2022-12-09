@@ -9,7 +9,7 @@
     <SellCancelPart v-if="this.$store.getters['appGlobal/getShowCancelSellVotingModal'] & (this.walletConnected!=null & this.walletConnected!='null')" />
     <SellCancel v-if="this.$store.getters['appGlobal/getShowCancelSellPartModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
     <Claim v-if="this.$store.getters['appGlobal/getShowClaimNftModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
-    <!-- <ClaimReward /> -->
+    <ClaimReward v-if="this.$store.getters['appGlobal/getShowClaimRewardModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
     <!-- <PriceChanged /> -->
     <VoteConfirm v-if="this.$store.getters['appGlobal/getVoteConfirmModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
     <VoteStart v-if="this.$store.getters['appGlobal/getShowStartVotingModal'] & (this.walletConnected!=null & this.walletConnected!='null')" />
