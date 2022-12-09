@@ -1,5 +1,5 @@
 <template>
-    <div class="tab-contain tab-activities">
+    <div class="tab-contain tab-activities" v-if="render">
         <div class="table table-activities">
             <div class="thead">
                 <div class="td">Status</div>
@@ -30,7 +30,7 @@
                 <div class="td td-date" v-if="element.status == 'ON SALE'">
                     <div class="td-button">
                        <button class="btn btn-td btn-buy" v-if="userAddress != element.address">Buy</button>
-                       <button class="btn btn-td btn-buy" v-else>Cancel</button>
+                       <button class="btn btn-td btn-buy" v-else @click="showCancelModal(element)">Cancel</button>
                     </div>
                 </div>
                 
@@ -53,7 +53,8 @@ export default {
         return{
             rowMobileCollapse: false,
             currencyToUsdPrice:1,
-            userAddress:false
+            userAddress:false,
+            render:false
         }
     },
     props:['item'],
@@ -80,12 +81,12 @@ export default {
             return number;
         },
         convertToEther(value) {
-            // try {
-                return ethers.utils.formatEther(parseInt(value));
-            // }
-            // catch {
-            //     console.log('ethers error');
-            // }
+            try {
+                return ethers.utils.formatEther(String(parseInt(value)));
+            }
+            catch {
+                console.log('ethers error');
+            }
         },
         async setCurrencyToUsd() {
             let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
@@ -97,10 +98,15 @@ export default {
                 this.currencyToUsdPrice = 1;
             }
         },
+        async showCancelModal(element){
+            await this.$store.dispatch('appGlobal/setShowCancelSellPartModal',true); 
+            await this.$store.dispatch('appGlobal/setCurrentPartOnMarket',element);
+        }
     },
     async mounted(){
-        await this.setCurrencyToUsd();
         this.userAddress = localStorage.getItem('userAddress');
+        this.render = true;
+        await this.setCurrencyToUsd();
     }
 }
 </script>

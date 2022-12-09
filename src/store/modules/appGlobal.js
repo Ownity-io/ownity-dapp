@@ -10,7 +10,9 @@ export default {
       showStartCollectingModal:false,
       showContinueCollectingModal:false,
       showDepositCancelModal:false,
-      showSellPartModal:false
+      showSellPartModal:false,
+      showCancelSellPartModal:false,
+      currentPartOnMarket:null,
     };
   },
   getters: {
@@ -40,6 +42,12 @@ export default {
     },
     getShowSellPartModal(state){
       return state.showSellPartModal;
+    },
+    getShowCancelSellPartModal(state){
+      return state.showCancelSellPartModal;
+    },
+    getCurrentPartOnMarket(state){
+      return state.currentPartOnMarket;
     }
   },
   mutations: {
@@ -69,6 +77,12 @@ export default {
     },
     setShowSellPartModal(state,value){
       state.showSellPartModal = value;
+    },
+    setShowCancelSellPartModal(state,value){
+      state.showCancelSellPartModal = value;
+    },
+    setCurrentPartOnMarket(state,value){
+      state.currentPartOnMarket = value;
     }
   },
   actions: {
@@ -99,6 +113,12 @@ export default {
     },
     setShowSellPartModal(context,value){
       context.commit("setShowSellPartModal", value);
+    },
+    setShowCancelSellPartModal(context,value){
+      context.commit("setShowCancelSellPartModal", value);
+    },
+    setCurrentPartOnMarket(context,value){
+      context.commit("setCurrentPartOnMarket", value);
     }
   },
 };

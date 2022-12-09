@@ -523,7 +523,7 @@ export default {
           if (element.address == userAddress){
             this.userBidAmount = parseInt(element.amount);
             this.userBid = element;
-            if (element.status == 'ON SALE'){
+            if (element.status == this.item.price){
               this.userBidBuyedAll = true;
             }
             return;

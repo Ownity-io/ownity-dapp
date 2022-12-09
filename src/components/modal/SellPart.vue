@@ -142,6 +142,7 @@
 import ABI from '@/abi.json';
 import { ethers } from 'ethers';
 import { toRaw } from '@vue/reactivity';
+import config from '@/config';
 export default {
   data() {
     return {
