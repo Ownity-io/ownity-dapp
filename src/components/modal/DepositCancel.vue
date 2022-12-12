@@ -61,14 +61,12 @@
           </div>
           
           <!-- v-if="currentPart "  -->
-          <div class="modal-desktop-footer">
-            <!-- <button disabled class="btn btn-modal-main">Deposit part</button> -->
+          <div class="modal-desktop-footer" v-if="!buttonWaiting">
             <button class="btn btn-modal-main" @click="declineBid">Cancel</button>
           </div>
 
           <!-- v-else  -->
-          <div class="modal-desktop-footer" v-if="false">
-            <button class="btn btn-modal-main">Deposit part</button>
+          <div class="modal-desktop-footer" v-if="buttonWaiting">
             <button class="btn btn-modal-main">
               <svg class="loader" viewBox="0 0 18 18"  xmlns="http://www.w3.org/2000/svg">
                 <path d="M15.364 2.63609L13.95 4.05009C12.8049 2.90489 
@@ -88,13 +86,12 @@
       </div>
             
       <!-- v-if="currentPart "  -->
-      <div  class="modal-mobile-footer" >
-        <button disabled class="btn btn-modal-main">Deposit part</button>
+      <div  class="modal-mobile-footer" v-if="!buttonWaiting" >
+        <button class="btn btn-modal-main" @click="declineBid">Cancel</button>
       </div>
 
       <!-- v-else  -->
-      <div   class="modal-mobile-footer" v-if="false">
-        <button   class="btn btn-modal-main">Deposit part</button>
+      <div   class="modal-mobile-footer" v-if="buttonWaiting">
         <button class="btn btn-modal-main">
           <svg class="loader" viewBox="0 0 18 18"  xmlns="http://www.w3.org/2000/svg">
             <path d="M15.364 2.63609L13.95 4.05009C12.8049 2.90489 
@@ -129,7 +126,8 @@ export default {
       provider:null,
       signer:null,
       currencyToUsdPrice:1,
-      userBidAmount:null
+      userBidAmount:null,
+      buttonWaiting:false
     };
   },
   async mounted(){
@@ -189,6 +187,7 @@ export default {
       return ethers.utils.formatEther(value);
     },
     async declineBid(){  
+      this.buttonWaiting = true;
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());
       try{
         let declineBid = await contract.declineBid(
@@ -197,13 +196,17 @@ export default {
         );
         let trx = await (toRaw(this.provider)).waitForTransaction(declineBid.hash);
         if (trx.status==1){
-          location.reload();
+          await this.$store.dispatch('appGlobal/setLastTransactionHash',declineBid.hash);
+          await this.$store.dispatch('appGlobal/setshowDepositCancelModal',false);
+          await this.$store.dispatch('appGlobal/setShowTransSuccessModal',true);
         }
         else{
+          this.buttonWaiting = false;
           alert('Error!')
         }          
       }
       catch{
+        this.buttonWaiting = false;
         alert('Error');
       }
     },
