@@ -1,6 +1,6 @@
 <template>
   <!-- <a class="card card-finished" :class="{'card-inactive' : false}"> -->
-  <a class="card" :class="{'card-inactive' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER'),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER')}">
+  <a class="card" :class="{'card-inactive' : (this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN')),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER')}">
     <div class="card-main">
       <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></a>
       <div class="card-header">
