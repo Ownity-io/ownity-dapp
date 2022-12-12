@@ -26,7 +26,7 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b> {{abbrNum(toFixedIfNecessary((item.reward/100)*(userBidAmount/item.price*100),6),2)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(((item.reward/100)*(userBidAmount/item.price*100))*currencyToUsdPrice,2),2)}}</span>
+                    <b> {{abbrNum(toFixedIfNecessary(convertToEther((item.reward/100)*(userBidAmount/item.price*100)),6),2)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(convertToEther((item.reward/100)*(userBidAmount/item.price*100))*currencyToUsdPrice,2),2)}}</span>
                   </div>
                   <!-- <div class="total-fees">Fees:<span>3%</span></div> -->
                 </div>
