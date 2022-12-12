@@ -5,6 +5,7 @@
     "messageToSignStart":"Sign the message to continue working with NFT Aggregator: ",
     "etherscanTokenUrlStart":"https://etherscan.io/token/",
     "etherscanAddressUrlStart":"https://etherscan.io/address/",
+    "etherscanTxUrlStart":"https://goerli.etherscan.io/tx/",
     "contractAddress":"0xeA6EC71b9D571513B8dd6C027a7DB7ab097DC4Ee",
     "profilePageBidsStatuses":[
         {
