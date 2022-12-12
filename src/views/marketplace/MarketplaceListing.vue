@@ -210,7 +210,7 @@
                       <span>Info</span>
                     </button>
                   </li>
-                  <li>
+                  <li v-if="(itemWithBidsOnSale)">
                     <button
                       :class="{ 'active-tab': activeTab2 === 'ListingFractionMarket' }"
                       @click="letsCheck2('ListingFractionMarket')"
