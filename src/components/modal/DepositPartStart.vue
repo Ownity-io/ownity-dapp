@@ -50,12 +50,12 @@
                       </ul>
                     </div> 
                   </div>-->
-                  <div class="input-select-prompt">Min 1% to Max 10%</div>
+                  <div class="input-select-prompt">Min 1% to Max 100%</div>
                 </div>
               </div>
               <div class="modal-data-block modal-data-block-price">
                 <div class="price-block">
-                  <div class="price-block-title">Min 5% to Max 20%</div>
+                  <div class="price-block-title">Min 1% to Max 100%</div>
                   <div class="price-block-value price-value">
                     <div class="icon-value"></div>
                     <span>{{abbrNum(((this.item.price/100)*currentPart)/(10**item.currency.decimals),1)}} ETH</span>

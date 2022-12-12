@@ -55,7 +55,7 @@
                       </ul>
                     </div> 
                   </div>-->
-                  <div class="input-select-prompt">Min 1% to Max 10%</div>
+                  <div class="input-select-prompt">Min 1% to Max 100%</div>
                 </div>
               </div>
               <div class="modal-data-block modal-data-block-price">
