@@ -305,7 +305,7 @@ export default {
       console.log(sellLot);
       let trx = await (toRaw(this.provider)).waitForTransaction(sellLot.hash);
       if (trx.status == 1) {
-        await this.$store.dispatch('appGlobal/setLastTransactionHash', declineBid.hash);
+        await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);
         await this.$store.dispatch('appGlobal/setShowStartVotingModal', false);
         await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
       }
