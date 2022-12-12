@@ -112,6 +112,11 @@
                     <span><b>{{priceInCurrency}} ETH</b></span>
                     <span class="equivalent">(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
                   </div>
+                  <div class="deposit-value" v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='SOLD'">
+                    <div class="icon-token"></div>
+                    <span><b>{{priceInCurrency}} ETH</b></span>
+                    <span class="equivalent">(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
+                  </div>
                   <div class="deposit-value" v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='GATHER'">
                     <div class="icon-token"></div>
                     <span>{{abbrNum(convertToEther(allBidsAmount),1)}} / <b>{{abbrNum(priceInCurrency,1)}}{{' '}} ETH</b></span>
