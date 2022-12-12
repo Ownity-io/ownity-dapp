@@ -19,7 +19,7 @@
               <div class="collection-wrap">
                 <a class="collection-img" :href="'/collection/'+item.collection.contract_address" :style="{backgroundImage:`url(${item.collection.logo})`}"></a>
                 <div class="collection-data">
-                  <a target="_blank" rel="nofollow" class="collection-id collection-label">
+                  <a target="_blank" rel="nofollow" class="collection-id collection-label" :href="'/collection/'+item.collection.contract_address">
                     <span>{{item.collection.name}}</span>
                     <i class="i-checkbox-circle-fill"></i>
                   </a>
