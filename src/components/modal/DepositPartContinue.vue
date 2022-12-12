@@ -91,14 +91,13 @@
           </div>
 
           <!-- v-if="currentPart "  -->
-          <div v-if="(currentPart>0 & currentPart!='')" class="modal-desktop-footer">
-            <!-- <button disabled class="btn btn-modal-main">Deposit part</button> -->
-            <button class="btn btn-modal-main" @click="buyLot">Deposit part</button>
+          <div v-if="!buttonWaiting" class="modal-desktop-footer">
+            <button disabled class="btn btn-modal-main" v-if="!(currentPart>0 & currentPart!='')">Deposit part</button>
+            <button class="btn btn-modal-main" @click="buyLot" v-else>Deposit part</button>
           </div>
 
           <!-- v-else  -->
-          <!-- <div v-if="(currentPart>0 & currentPart!='')" class="modal-desktop-footer">
-            <button  @click="this.buyLot()" class="btn btn-modal-main">Deposit part</button>
+          <div v-if="buttonWaiting" class="modal-desktop-footer">
             <button class="btn btn-modal-main">
               <svg class="loader" viewBox="0 0 18 18"  xmlns="http://www.w3.org/2000/svg">
                 <path d="M15.364 2.63609L13.95 4.05009C12.8049 2.90489 
@@ -112,20 +111,19 @@
                 15.9999 10.6196 16 9.00009H18C18 11.0823 17.278 13.1001 15.957 14.7096C14.6361 16.3192 12.7979 17.4209 10.7557 17.8271C8.71355 18.2333 6.5937 17.9188 4.75737 16.9373C2.92104 15.9557 1.48187 14.3678 0.685061 12.4441C-0.111747 10.5204 -0.216886 8.37992 0.387558 6.38739C0.992002 4.39486 2.26863 2.67355 3.99992 1.51675C5.73121 0.359959 7.81004 -0.160747 9.88221 0.0433572C11.9544 0.247462 13.8917 1.16375 15.364 2.63609V2.63609Z" fill="white"/>
               </svg>
             </button>
-          </div> -->
+          </div>
           
         </div>
       </div>
             
       <!-- v-if="currentPart "  -->
-      <div v-if="(currentPart>0 & currentPart!='')" class="modal-mobile-footer">
-        <!-- <button disabled class="btn btn-modal-main">Deposit part</button> -->
-        <button class="btn btn-modal-main" @click="buyLot">Deposit part</button>
+      <div v-if="!buttonWaiting" class="modal-mobile-footer">
+        <button disabled class="btn btn-modal-main" v-if="!(currentPart>0 & currentPart!='')">Deposit part</button>
+        <button class="btn btn-modal-main" @click="buyLot" v-else>Deposit part</button>
       </div>
 
       <!-- v-else  -->
-      <!-- <div v-if="(currentPart>0 & currentPart!='')" class="modal-mobile-footer">
-        <button  @click="this.buyLot()" class="btn btn-modal-main">Deposit part</button>
+      <div v-if="buttonWaiting" class="modal-mobile-footer">
         <button class="btn btn-modal-main">
           <svg class="loader" viewBox="0 0 18 18"  xmlns="http://www.w3.org/2000/svg">
             <path d="M15.364 2.63609L13.95 4.05009C12.8049 2.90489 
@@ -139,7 +137,7 @@
             15.9999 10.6196 16 9.00009H18C18 11.0823 17.278 13.1001 15.957 14.7096C14.6361 16.3192 12.7979 17.4209 10.7557 17.8271C8.71355 18.2333 6.5937 17.9188 4.75737 16.9373C2.92104 15.9557 1.48187 14.3678 0.685061 12.4441C-0.111747 10.5204 -0.216886 8.37992 0.387558 6.38739C0.992002 4.39486 2.26863 2.67355 3.99992 1.51675C5.73121 0.359959 7.81004 -0.160747 9.88221 0.0433572C11.9544 0.247462 13.8917 1.16375 15.364 2.63609V2.63609Z" fill="white"/>
           </svg>
         </button>
-      </div> -->
+      </div>
       
     </div>
   </div>
@@ -163,7 +161,8 @@ export default {
       partVariants:[0,1,2,3,4,5,10,15,20,49],
       currentPart:0,
       currencyToUsdPrice:1,
-      allBidsAmount:0
+      allBidsAmount:0,
+      buttonWaiting:false
     };
   },
   async mounted(){
@@ -175,10 +174,8 @@ export default {
     this.render = true;
   },
   methods:{
-    async buyLot(){  
-      console.log(await this.signer.getAddress());    
-      console.log(typeof(this.signer));
-      console.log(toRaw(this.signer));
+    async buyLot(){ 
+      this.buttonWaiting = true; 
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());
       let markeplaceId = ethers.utils.formatBytes32String(this.item.marketplace.id).substring(0, 10);
       let options = {};
@@ -209,7 +206,7 @@ export default {
       let request = await fetch(requestUrl,requestOptions);
       let requestJson = await request.json();
       let inputData = requestJson.data.data;
-      console.log(requestJson);
+      // console.log(requestJson);
       requestUrl = `${config.backendApiEntryPoint}sign/`;
       requestOptions = {
           method: "POST",
@@ -224,10 +221,26 @@ export default {
         };
       request = await fetch(requestUrl,requestOptions);
       requestJson = await request.json();
-      console.log(requestJson);
+      // console.log(requestJson);
       let signature = requestJson.data.signature;
       // let part = (ethers.BigNumber.from(String((this.item.price/100)*this.currentPart))).toString();
       try{
+        console.log('-----------------');
+        console.log(`Marketplace ID: ${markeplaceId}`);
+        console.log(`Lot ID: ${this.item.id}`);
+        console.log(`Amount: ${valueToBuy}`);
+        console.log('--------LOT_DATA--------');
+        console.log(`tokenAddress: ${this.item.currency.address}`);
+        console.log(`Decimals: ${this.item.currency.decimals}`);
+        console.log(`price: ${this.item.price}`);
+        console.log(`tokenContractAddress: ${this.item.collection.contract_address}`);
+        console.log(`tokenId: ${this.item.token_id}`);
+        console.log(`tokenAmount: ${this.item.amount}`);
+        console.log('--------LOT_DATA--------');
+        console.log(`Input data: ${inputData}`);
+        console.log(`Signature: ${signature}`);
+        // console.log(`Options: ${options.value}`);
+        console.log('-----------------');
         let buyLot = await contract.buyLot(
           markeplaceId,
           this.item.id,
@@ -247,10 +260,22 @@ export default {
           signature,
           options
         );
-        location.reload();
+        let trx = await (toRaw(this.provider)).waitForTransaction(buyLot.hash);
+        if (trx.status==1){
+          await this.$store.dispatch('appGlobal/setLastTransactionHash',buyLot.hash);
+          await this.$store.dispatch('appGlobal/setshowContinueCollectingModal',false);
+          await this.$store.dispatch('appGlobal/setShowTransSuccessModal',true);
+          // show succesModal and set transactionHash
+          // location.reload();
+        }
+        else{
+          this.buttonWaiting = false; 
+          alert('Error!')
+        }          
       }
       catch{
-        alert('Error');
+        this.buttonWaiting = false; 
+        alert('Error!');
       }
     },
     abbrNum(number, decPlaces) {
