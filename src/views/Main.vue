@@ -79,10 +79,9 @@
                   <div class="td td-collection">
                     <div class="td-wrap td-wrap-collection">
                       <div class="collection-img" :style="{backgroundImage: `url(${collection.logo})`}"></div>
-                      <div class="collection-data">
+                      <a class="collection-data" :href="'/collection/'+collection.contract_address">
                         <span class="collection-id">{{collection.name}}</span>
-                        <span class="td-light collection-id"></span>
-                      </div>
+                      </a>
                     </div>
                   </div>
 
