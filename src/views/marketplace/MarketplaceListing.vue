@@ -564,8 +564,14 @@ export default {
       this.testLike = this.$store.getters['marketplaceListing/getLike'];
     },
     async changeLike(){      
+      if (localStorage.getItem("token") != null) {
       await this.$store.dispatch('marketplaceListing/changeLike');
       this.testLike = this.$store.getters['marketplaceListing/getLike'];
+      }
+      else{
+        await this.$store.dispatch('appGlobal/setShowConnectWalletModal',true);
+        this.testLike = false;
+      }
     }
   },
 };

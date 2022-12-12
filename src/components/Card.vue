@@ -371,7 +371,7 @@ export default {
         this.testLike = !this.testLike;
           
       }else{
-        context.commit('appGlobal/setShowConnectWalletModal',true,{root:true});
+        await this.$store.dispatch('appGlobal/setShowConnectWalletModal',true);
         this.testLike = false;
       }
     }
