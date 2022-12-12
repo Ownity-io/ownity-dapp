@@ -258,7 +258,7 @@ export default {
       }
     },
     convertToEther(value){
-      return ethers.utils.formatEther(value);
+      return ethers.utils.formatEther(String(value));
     },
     setAllBidsAmount(){
       this.allBidsAmount=0;
