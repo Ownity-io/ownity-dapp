@@ -14,8 +14,8 @@
             <div class="modal-amount-title">Your amount to be credited to the wallet</div>
             <div class="token-value">
               <div class="icon-value"></div>
-              {{abbrNum(toFixedIfNecessary((item.reward/100)*(userBidAmount/item.price*100),6),2)}} ETH
-              <span class="input-equivalent equivalent">(≈ $ {{abbrNum(toFixedIfNecessary(((item.reward/100)*(userBidAmount/item.price*100))*currencyToUsdPrice,2),2)}})</span>
+              {{abbrNum(toFixedIfNecessary(convertToEther((item.reward/100)*(userBidAmount/item.price*100)),6),2)}} ETH
+              <span class="input-equivalent equivalent">(≈ $ {{abbrNum(toFixedIfNecessary(convertToEther((item.reward/100)*(userBidAmount/item.price*100))*currencyToUsdPrice,2),2)}})</span>
             </div>
           </div>
 
@@ -172,7 +172,7 @@ export default {
       return +parseFloat(value).toFixed(dp);
     },
     convertToEther(value){
-      return ethers.utils.formatEther(value);
+      return ethers.utils.formatEther(String(value));
     },
     setUserBidAmount(){
       let userAddress = localStorage.getItem('userAddress');
