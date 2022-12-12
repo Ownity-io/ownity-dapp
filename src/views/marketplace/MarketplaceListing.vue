@@ -367,9 +367,9 @@
         </div>
       </div>
     </div>
-    <section class="section-recommendation">
+    <section class="section-recommendation" v-if="recommendations">
       <div class="container">
-        <RecommendationsList :items="this.$store.dispatch('marketplaceListing/getRecomendations',item.collection.contract_address)"/>
+        <RecommendationsList :items="recommendations"/>
       </div>
     </section>
   </main>
@@ -412,7 +412,8 @@ export default {
       userAddress:null,
       render:false,
       userBidBuyedAll:false,
-      itemWithBidsOnSale:false
+      itemWithBidsOnSale:false,
+      recommendations:null
     };
   },
   components: {
@@ -439,6 +440,7 @@ export default {
     this.setChartData();
     await this.$store.dispatch('marketplaceListing/checkLike');
     await this.checkLike();
+    this.recommendations = await this.$store.dispatch('marketplaceListing/getRecomendations',this.item.collection.contract_address);
     this.render = true;
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
