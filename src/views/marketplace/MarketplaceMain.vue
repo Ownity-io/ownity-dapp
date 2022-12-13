@@ -58,26 +58,21 @@
             <Search />
           </div>
           <div class="params-block params-block-sort">
-            <div class="param-wrap sort" :class="{ unfolded: testOpenSort }">
-              <button class="btn-param btn-sort" @click="testOpenSort = !testOpenSort">
-                <span>Sort by</span>
-                <i class="i-arrow-down-s-line"></i>
-              </button>
-              <div class="drop-down">
-                <ul>
-                  <li>
-                    <span>Price low to higt</span>
-                  </li>
-                  <li>
-                    <span>Price higt to low</span>
-                  </li>
-                  <li>
-                    <span>Newest</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+                            <div class="param-wrap sort" :class="{ unfolded: testOpenSort }">
+                                <button class="btn-param btn-sort" @click="testOpenSort = !testOpenSort">
+                                <span v-if="this.selectedSort == null">Sort by</span>
+                                <span v-else>{{this.selectedSort.name}}</span>
+                                <i class="i-arrow-down-s-line"></i>
+                                </button>
+                                <div class="drop-down">
+                                <ul>
+                                    <li v-for="element in config.sortParams" :key="element" @click="testOpenSort = !testOpenSort;selectedSort=element;initInfo();">
+                                        <span>{{element.name}}</span>
+                                    </li>                        
+                                </ul>
+                                </div>
+                            </div>
+                        </div>
           <div class="params-block params-block-switch">
             <div class="param-wrap switch">
               <button
@@ -125,6 +120,7 @@ import ListCards from "@/components/ListCards.vue";
 import ActivityTable from "@/components/ActivityTable.vue";
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
 import SelectedFilters from "@/components/SelectedFilters.vue";
+import config from '@/config.json';
 
 export default {
   data() {
@@ -134,6 +130,7 @@ export default {
       testOpenSort: false,
       filter: true,
       filterMobile: false,
+      config:config
     };
   },
   components: {
@@ -145,9 +142,26 @@ export default {
     SelectedFilters,
   },
   async mounted(){
-    await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
-    await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
-    await this.$store.dispatch('marketplace/fetchAndSetMarketplaces');
-  }
+    await this.initInfo();
+  },
+  methods:{
+    async initInfo(){
+      await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
+      await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
+      await this.$store.dispatch('marketplace/fetchAndSetMarketplaces');
+    }
+  },
+  computed:{
+        selectedSort:{
+            get(){
+                return this.$store.getters['marketplace/getSelectedSort'];
+            },
+            async set(value){
+                console.log(value);
+                this.$store.dispatch('marketplace/setSelectedSort',value);
+                console.log(await this.$store.getters['marketplace/getSelectedSort']);
+            }
+        }
+    }
 };
 </script>
