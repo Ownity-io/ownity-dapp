@@ -180,10 +180,10 @@ export default {
       let markeplaceId = ethers.utils.formatBytes32String(this.item.marketplace.id).substring(0, 10);
       let options = {};
       let valueToBuy = (ethers.BigNumber.from(String(parseInt((this.item.price/100)*this.currentPart)))).toString();
-      if (valueToBuy>(this.item.price-this.allBidsAmount)){
-        console.log('Part is too big');
-        valueToBuy = this.item.price-this.allBidsAmount;
-      }
+      // if (valueToBuy>(this.item.price-this.allBidsAmount)){
+      //   console.log('Part is too big');
+      //   valueToBuy = this.item.price-this.allBidsAmount;
+      // }
       if (this.item.currency.address == '0x0000000000000000000000000000000000000000'){
         options.value = valueToBuy;
       }      
