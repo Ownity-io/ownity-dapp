@@ -179,7 +179,7 @@ export default {
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());
       let markeplaceId = ethers.utils.formatBytes32String(this.item.marketplace.id).substring(0, 10);
       let options = {};
-      let valueToBuy = (ethers.BigNumber.from(String((this.item.price/100)*this.currentPart))).toString();
+      let valueToBuy = (ethers.BigNumber.from(String(parseInt((this.item.price/100)*this.currentPart)))).toString();
       if (valueToBuy>(this.item.price-this.allBidsAmount)){
         console.log('Part is too big');
         valueToBuy = this.item.price-this.allBidsAmount;
