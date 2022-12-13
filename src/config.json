@@ -31,11 +31,11 @@
     ],
     "sortParams":[
         {
-            "name":"Price low to hight",
+            "name":"Price low to high",
             "codeName":"price"
         },
         {
-            "name":"Price hight to low",
+            "name":"Price high to low",
             "codeName":"-price"
         },
         {
