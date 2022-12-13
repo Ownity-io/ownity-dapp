@@ -3,8 +3,8 @@
     <header>
         <div class="container">
             <div class="header-wrapper">
-                <div v-if="$route.fullPath ==='/'" @click="goToTop()" class="header-logo">Marketplace</div>
-                <router-link :to="{name: 'Main'}" v-else class="header-logo">Marketplace</router-link>
+                <div v-if="$route.fullPath ==='/'" @click="goToTop()" class="header-logo"></div>
+                <router-link :to="{name: 'Main'}" v-else class="header-logo"></router-link>
                 <div class="header-search">
                     <Search />
                 </div>
