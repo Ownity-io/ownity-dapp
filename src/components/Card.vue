@@ -237,7 +237,7 @@
         <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="(item.internal_status=='SOLD' & userBidAmount>0)">
           Claim reward
         </a>
-        <div v-if="item.marketplace_status=='OPEN' & item.internal_status=='OWNED'" class="container-btn-part container-btn-part-vote">
+        <div v-if="item.marketplace_status=='CLOSED' & item.internal_status=='OWNED'" class="container-btn-part container-btn-part-vote">
           <a class="btn btn-vote" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" >
             Vote
           </a>
