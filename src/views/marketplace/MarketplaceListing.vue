@@ -275,12 +275,12 @@
                     <ListingVote v-for="voting in this.item.votings" :item="this.item" :voting="voting"/>
                   </div>
 
-                  <div class="inactive-votes">
+                  <!-- <div class="inactive-votes">
                     <div class="votes-wrap-title">
                       Inactive
                     </div>
                     <ListingVote v-for="voting in this.item.votings" :item="this.item" :voting="voting"/>
-                  </div>
+                  </div> -->
 
                 </div>
               </div>
