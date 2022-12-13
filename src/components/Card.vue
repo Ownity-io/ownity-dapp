@@ -64,7 +64,7 @@
                   <td>
                     <div class="td-wrap-price">
                       <div class="icon-token"></div> 
-                      {{convertToEther(element.amount)}}
+                      abbrNum(toFixedIfNecessary(convertToEther(element.amount),6),2)
                     </div>
                     </td>
                   <td>{{userProgressValue}}%</td>
@@ -166,7 +166,7 @@
           <div class="data-td data-td-value">
             <div class="card-value">
               <div class="icon-value"></div>
-              {{abbrNum(convertToEther(allBidsAmount),1)}}/<span><b>{{abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH</span>              
+              {{abbrNum(toFixedIfNecessary(convertToEther(allBidsAmount),6),1)}}/<span><b>{{abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH</span>              
             </div>
             <div class="equivalent">≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
 
@@ -228,10 +228,10 @@
 
         <div class="container-btn-part" v-if="userBidAmount>0">
             <div class="part-data">
-              Моя частка 
+              My part 
               <div class="card-value">
                 <div class="icon-value"></div>
-                <span>{{convertToEther(userBidAmount)}} ETH</span> 
+                <span>{{abbrNum(toFixedIfNecessary(convertToEther(userBidAmount),6),2)}} ETH</span> 
               </div>
             </div>
             <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
