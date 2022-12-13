@@ -151,7 +151,7 @@
           <div class="input-checkbox">
             <input type="checkbox" :id="item.contract_address" v-model="checkedCollection" :true-value="item.contract_address" :false-value="null" @change="fetchAndSetListingsStartInfo"/>
             <label :for="item.contract_address">
-              <div class="icon-filter-checkbox"></div>
+              <div class="icon-filter-checkbox" :style="{backgroundImage: `url(${item.logo})`}"></div>
               <span>{{item.name}}</span>
               <i class="i-check-line"></i>
             </label>
@@ -169,7 +169,7 @@
           <div class="input-checkbox">
             <input type="checkbox" :id="item.id" v-model="checkedMarketplace" :true-value="item.id" :false-value="null" @change="fetchAndSetListingsStartInfo"/>
             <label :for="item.id">
-              <div class="icon-filter-checkbox"></div>
+              <div class="icon-filter-checkbox" :style="{backgroundImage: `url(${item.logo})`}"></div>
               <span>{{item.name}}</span>
               <i class="i-check-line"></i>
             </label>
