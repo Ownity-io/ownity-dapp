@@ -253,7 +253,7 @@
                           <div class="td-wrap">
                             <div class="td-wrap-price">
                               <div class="icon-token"></div>
-                              <span>{{this.toFixedIfNecessary((bid.amount / (10**this.item.currency.decimals)),6)}} ETH</span>
+                              <span>{{abbrNum(this.toFixedIfNecessary((bid.amount / (10**this.item.currency.decimals)),6),2)}} ETH</span>
                               <span class="td-light">≈ $ {{this.toFixedIfNecessary(abbrNum((bid.amount / (10**this.item.currency.decimals) * currencyToUsdPrice),1),2)}}</span>
                             </div>
                           </div>
