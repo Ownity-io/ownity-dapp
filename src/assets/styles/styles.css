@@ -77,6 +77,13 @@ main>section {
     font-size: 24px;
     line-height: 150%;
     cursor: pointer;
+    background-image: url(../images/logo.webp);
+    background-position:left  center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    min-width: 219px;
+    min-height: 32px;
+    /* height: 100%; */
 }
 
 .footer-logo,
@@ -748,6 +755,10 @@ ul.tabs {
     width: 100%;
 }
 
+.params-block .param-wrap.sort.unfolded{
+    z-index: 10;
+}
+
 .params.params-profile .params-block-filter {
     margin-right: auto;
 }
@@ -1166,9 +1177,17 @@ ul.tabs {
 .cards-list-load .i-wrap {
     width: 48px;
     height: 48px;
-    color: #2CC07B;
+    color: #E15595;
     position: relative;
     font-size: 48px;
+    /* background-image: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;
+    transition: background-image 200ms ease;
+    background-position: center; */
 }
 
 .cards-list-load .i-wrap i {
