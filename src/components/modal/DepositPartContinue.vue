@@ -63,7 +63,7 @@
                   <div class="price-block-title">Price of your part</div>
                   <div class="price-block-value price-value">
                     <div class="icon-value"></div>
-                    <span>{{abbrNum(((this.item.price/100)*currentPart)/(10**item.currency.decimals),1)}} ETH</span>
+                    <span>{{abbrNum(toFixedIfNecessary(((this.item.price/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</span>
                   </div>
                   <div class="price-block-equivalent equivalent">≈ $ {{abbrNum(toFixedIfNecessary(((this.item.price/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</div>
                 </div>
@@ -78,7 +78,7 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>{{abbrNum(((this.item.price/100)*currentPart)/(10**item.currency.decimals),1)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(((this.item.price/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</span>
+                    <b>{{abbrNum(toFixedIfNecessary(((this.item.price/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(((this.item.price/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</span>
                   </div>
                   <div class="total-fees">Fees:<span>3%</span></div>
                 </div>
