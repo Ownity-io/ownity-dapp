@@ -128,19 +128,15 @@
           <div class="params-block params-block-sort">
             <div class="param-wrap sort" :class="{ unfolded: testOpenSort }">
               <button class="btn-param btn-sort" @click="testOpenSort = !testOpenSort">
-                <span>Sort by</span>
+                <span v-if="this.selectedSort == null">Sort by</span>
+                <span v-else>{{this.selectedSort.name}}</span>
                 <i class="i-arrow-down-s-line"></i>
               </button>
               <div class="drop-down">
                 <ul>
-                  <li>
-                    <span>Price low to higt</span>
-                  </li>
-                  <li>
-                    <span>Price higt to low</span>
-                  </li>
-                  <li>
-                    <span>Newest</span>
+                  <li v-for="element in config.sortParams" :key="element"
+                    @click="testOpenSort = !testOpenSort;selectedSort=element;initInfo();">
+                    <span>{{element.name}}</span>
                   </li>
                 </ul>
               </div>
@@ -255,7 +251,24 @@ export default {
     toFixedIfNecessary(value, dp) {
       return +parseFloat(value).toFixed(dp);
     },
-  }
+    async initInfo(){
+      await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address);
+      await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
+      await this.$store.dispatch('marketplace/fetchAndSetMarketplaces');
+    }
+  },
+  computed:{
+        selectedSort:{
+            get(){
+                return this.$store.getters['marketplace/getSelectedSort'];
+            },
+            async set(value){
+                console.log(value);
+                this.$store.dispatch('marketplace/setSelectedSort',value);
+                console.log(await this.$store.getters['marketplace/getSelectedSort']);
+            }
+        }
+    }
 
 };
 </script>
