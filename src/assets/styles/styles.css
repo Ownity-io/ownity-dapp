@@ -78,7 +78,7 @@ main>section {
     line-height: 150%;
     cursor: pointer;
     background-image: url(../images/logo.webp);
-    background-position:left  center;
+    background-position: left center;
     background-size: contain;
     background-repeat: no-repeat;
     min-width: 219px;
@@ -238,8 +238,8 @@ main>section {
 
 .btn-router-to,
 .btn-show-more,
- .btn.btn-connect,
- .btn.btn-address,
+.btn.btn-connect,
+.btn.btn-address,
 .input-wrapper.search-wrapper input,
 .header-nav ul li a,
 .header-nav ul li button {
@@ -755,7 +755,7 @@ ul.tabs {
     width: 100%;
 }
 
-.params-block .param-wrap.sort.unfolded{
+.params-block .param-wrap.sort.unfolded {
     z-index: 10;
 }
 
@@ -1205,7 +1205,8 @@ ul.tabs {
     font-size: 18px;
     animation: icon-load-btn .8s ease-out infinite;
 }
-.btn-modal-main svg.loader path{
+
+.btn-modal-main svg.loader path {
     fill: #ffffff;
 }
 
@@ -2617,7 +2618,12 @@ a.td-wrap-link span {
     padding-left: 12px;
     padding-right: 12px;
 }
-
+.card-data .btn-container .container-btn-part-vote   .btn  {
+    min-width: calc((100% - 16px) / 2);
+}
+.card-data .btn-container .container-btn-part .card-col .btn{
+    min-width: calc((100% - 16px) / 2);
+}
 .part-data,
 .total-fees {
     font-weight: 400;
@@ -3043,4 +3049,67 @@ a.td-wrap-link span {
 .cookies-btns-container .btn {
     padding: 12px;
     min-width: 184px;
+}
+
+.card-to-buy {
+    background-color: #ffff;
+    border-radius: 8px;
+    padding: 8px 12px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-col {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    color: #9A9A9A;
+}
+
+.card-col .card-col-name {
+    margin-bottom: 4px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;
+}
+
+.card-col strong {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #333333;
+}
+
+.container-btn-part .card-col:first-child,
+.card-to-buy .card-col:first-child {
+    align-items: flex-start;
+}
+
+.container-btn-part .card-col:not(:first-child),
+.card-to-buy .card-col:not(:first-child) {
+    align-items: flex-end;
+}
+
+.card-col-value .equivalent {
+    margin-left: 4px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+}
+
+.card .label-col{
+    margin-left: 0;
+    font-weight: 400;
+font-size: 14px;
+line-height: 150%;
+/* or 21px */
+text-align: left;
+
+color: #333333;
+}
+.card .deposit-label{
+    padding: 0;
+    background: none;
+    min-height: auto;
 }
