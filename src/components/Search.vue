@@ -15,6 +15,9 @@
                         </div>
                     </li>
                 </ul>
+                <div class="empty-list">
+                    Nothing Found
+                </div>
             </div>
         </div>
     </div>
@@ -31,3 +34,13 @@ export default {
     }
 }
 </script>
+
+<style >
+.search-results-wrapper .empty-list{
+    padding: 60px 16px; 
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+}
+</style>
