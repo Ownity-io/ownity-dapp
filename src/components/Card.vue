@@ -5,7 +5,9 @@
       <a v-if="item.media" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></a>
       <a v-else :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="card-img"  ></a>
       <div class="card-header">
-        <a  class="icon-card-label" target="_blank" :href="linkToMarketplacePage" :style="{backgroundImage: `url(${item.marketplace.logo})`}">
+        <a  class="icon-card-label" target="_blank" :href="linkToMarketplacePage" :style="{backgroundImage: `url(${item.marketplace.logo})`}" v-if="this.item.internal_status!='OWNED'">
+        </a>
+        <a  class="icon-card-label" :style="{backgroundImage: `url('../../public/favicon.webp')`}" v-else>
         </a>
         <button class="btn-like" :class="{'liked':testLike}" @click="changeLike">
           <i class="i-heart-3-fill"></i>
@@ -77,7 +79,7 @@
       </div>
 
       <!-- ######## 1 ######## -->
-      <div class="card-footer">
+      <!-- <div class="card-footer">
         <div class="card-to-buy">
           <div class="card-col">
             <span class="card-col-name">Part</span>
@@ -96,7 +98,7 @@
 
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="card-data">
       <div class="data-table">
@@ -257,7 +259,7 @@
         </div>
 
         <!-- ######## 2 ######## -->
-        <div class="container-btn-part" >
+        <!-- <div class="container-btn-part" >
           <div class="card-col">
             <span class="card-col-name">Part</span>
             <span><strong>5%</strong></span>
@@ -272,15 +274,14 @@
               </div> 
             </div>
           </div>
-        </div>
+        </div> -->
 
         <!-- ######## 3 ######## -->
-        <div class="container-btn-part" >
-          <div class="card-col">
-            
+         <!-- <div class="container-btn-part" >
+          <div class="card-col">            
             <div class="deposit-label">
                   <div class="label-col">
-                    <!-- :style="{backgroundImage: `url(${item.marketplace.logo})`}" -->
+                    :style="{backgroundImage: `url(${item.marketplace.logo})`}" 
                     <div class="icon-label"></div>
                     <b>2.1 ETH</b>
                     <div>Progress: 20%</div>
@@ -288,13 +289,12 @@
                 </div>
           </div>
           <div class="card-col">
-            <button class="btn">Confirm</button>
-           
+            <button class="btn">Confirm</button>           
           </div>
-        </div>
+        </div>  -->
 
         <!-- ######## 4 ######## -->
-        <div class="container-btn-part" >
+        <!-- <div class="container-btn-part" >
           <div class="card-col">
             <div class="deposit-label">
               <i class="i-volume-vibrate-line"></i>
@@ -304,7 +304,7 @@
           <div class="card-col">
             <strong>5/5</strong>
           </div>
-        </div>
+        </div> -->
 
         <!-- <div class="deposit-label" >
           <i class="i-shopping-bag-line"></i>
