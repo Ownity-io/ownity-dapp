@@ -134,9 +134,9 @@
               </div>
               <div class="section-deposit-btns">
                 <button class="btn btn-deposit" v-if="((item.marketplace_status=='OPEN')  & item.internal_status=='OPEN' & userAddress!=null)"
-                @click="this.$store.dispatch('appGlobal/setshowStartCollectingModal',true)">Start collecting</button>
+                @click="this.$store.dispatch('appGlobal/setshowStartCollectingModal',true)">Buy together</button>
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='OPEN' & userAddress==null)"
-                @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)">Start collecting</button>
+                @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)">Buy together</button>
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='GATHER' & userAddress!=null)"
                 @click="this.$store.dispatch('appGlobal/setshowContinueCollectingModal',true)">Deposit part</button>
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='GATHER' & userAddress==null)"
