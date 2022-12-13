@@ -59,7 +59,7 @@
             </div>
           </section>
 
-          <section class="section-home">
+          <section class="section-home" id="screen-collections">
             <div class="container">
               <div class="section-home-header">
                 <div class="section-home-name">Top Collections</div>

@@ -1647,6 +1647,7 @@ ul.tabs {
 
 .card .data-table .data-tr.data-tr-main .card-id {
     max-width: 115px;
+    text-align: left;
 }
 
 .card .data-table .data-tr .data-td {
