@@ -2614,18 +2614,25 @@ a.td-wrap-link span {
     margin-top: 8px;
 }
 
+.container-btn-part.container-btn-part-row {
+    gap: 4px;
+}
+
 .card-data .btn-container .container-btn-part .btn {
     margin-top: 0;
     min-width: 125px;
     padding-left: 12px;
     padding-right: 12px;
 }
-.card-data .btn-container .container-btn-part-vote   .btn  {
+
+.card-data .btn-container .container-btn-part-vote .btn {
     min-width: calc((100% - 16px) / 2);
 }
-.card-data .btn-container .container-btn-part .card-col .btn{
+
+.card-data .btn-container .container-btn-part .card-col .btn {
     min-width: calc((100% - 16px) / 2);
 }
+
 .part-data,
 .total-fees {
     font-weight: 400;
@@ -3100,18 +3107,48 @@ a.td-wrap-link span {
     line-height: 150%;
 }
 
-.card .label-col{
+.card .label-col {
     margin-left: 0;
     font-weight: 400;
-font-size: 14px;
-line-height: 150%;
-/* or 21px */
-text-align: left;
+    font-size: 14px;
+    line-height: 150%;
+    /* or 21px */
+    text-align: left;
 
-color: #333333;
+    color: #333333;
 }
-.card .deposit-label{
+
+.card .deposit-label {
     padding: 0;
     background: none;
     min-height: auto;
+}
+
+.marketplace {
+    display: flex;
+    align-items: center;
+}
+
+.icon-market {
+    display: block;
+    border: 1px solid #DFE2EA;
+    border-radius: 100%;
+    overflow: hidden;
+    margin-right: 4px;
+    width: 20px;
+    min-width: 20px;
+    height: 20px;
+}
+
+.deposit-label .marketplace{
+    margin-left: 8px;
+}
+
+.card .deposit-label i,
+.card .modal-current-part i {
+    font-size: 20px;
+    margin-right: 4px;
+    width: 20px;
+    min-width: 20px;
+    height: 20px;
 }
