@@ -20,6 +20,25 @@
       </ul>
     </div>
 
+    <!-- FOR DEMO -->
+    <!-- <div class="filter-section" :class="{ 'collapse-section': filterSection0 }" v-if="this.$route.name=='Collection' ||this.$route.name=='Marketplace'">
+      <button class="filter-section-name" @click="filterSection0 = !filterSection0">
+        <span>Status</span>
+        <i class="i-arrow-up-s-line"></i>
+      </button>
+      <ul class="filter-ul">
+        <li class="filter-li" >
+          <div class="input-checkbox input-switcher">
+            <input type="checkbox" id="input-switch" v-model="currentlyGathering" @change="fetchAndSetListingsStartInfo"/>
+            <label for="input-switch">
+              <span>Live gather</span>
+              <div class="input-switch"></div>
+            </label>
+          </div>
+        </li>
+      </ul>
+    </div> -->
+
     <div class="filter-section" :class="{ 'collapse-section': filterSection0 }" v-if="this.$route.name=='Profile'">
       <button class="filter-section-name" @click="filterSection0 = !filterSection0">
         <span>Status</span>

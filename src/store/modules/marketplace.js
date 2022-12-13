@@ -179,10 +179,14 @@ export default {
         requestUrl += `&price_lt=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
       }
       requestUrl += `&marketplace_status=OPEN`;
-      console.log(context.getters.getCurrentlyGathering);
-      if (context.getters.getCurrentlyGathering){
-        requestUrl+='&internal_status=GATHER';
-      }
+
+      //FOR DEMO
+      // if (context.getters.getCurrentlyGathering){
+      //   requestUrl+='&marketplace_status=TEST';
+      // }
+      // else{
+      //   requestUrl += `&marketplace_status=OPEN`;
+      // }
       console.log(requestUrl)
       let request = await fetch(requestUrl);
       let requestCode = request.ok;
