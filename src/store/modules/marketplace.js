@@ -182,7 +182,7 @@ export default {
 
       //FOR DEMO
       // if (context.getters.getCurrentlyGathering){
-      //   requestUrl+='&marketplace_status=TEST';
+      //   requestUrl+='&marketplace_status=OPEN';
       // }
       // else{
       //   requestUrl += `&marketplace_status=OPEN`;
@@ -273,7 +273,7 @@ export default {
         requestUrl += `&marketplace_status=CLOSED`;
       }
       else{
-        requestUrl += `&marketplace_status=TEST`;
+        requestUrl += `&marketplace_status=OPEN`;
       }
       if (context.getters.getCurrentBidStatus!=null & context.getters.getCurrentBidStatus!=false){
         requestUrl += `&bid_status=${context.getters.getCurrentBidStatus}`;
@@ -322,7 +322,7 @@ export default {
         requestUrl += `&marketplace_status=CLOSED`;
       }
       else{
-        requestUrl += `&marketplace_status=TEST`;
+        requestUrl += `&marketplace_status=OPEN`;
       }
       if (context.getters.getSelectedSort!=null){
         requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;
@@ -365,7 +365,7 @@ export default {
         requestUrl += `&marketplace_status=CLOSED`;
       }
       else{
-        requestUrl += `&marketplace_status=TEST`;
+        requestUrl += `&marketplace_status=OPEN`;
       }
       if (context.getters.getSelectedSort!=null){
         requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;

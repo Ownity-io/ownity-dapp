@@ -26,7 +26,7 @@
           </button>
         </div>
       </div> -->
-      <div class="card-footer" v-if="((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='GATHER')
+      <div class="card-footer" v-if="(item.marketplace_status=='OPEN' & item.internal_status=='GATHER')
       ||(
         item.marketplace_status=='CLOSED' & item.internal_status=='CLOSED'
       )
@@ -78,7 +78,7 @@
     <div class="card-data">
       <div class="data-table">
         <div class="data-tr data-tr-main"
-        v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST' || item.marketplace_status=='CLOSED') & item.internal_status=='OPEN'"
+        v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='CLOSED') & item.internal_status=='OPEN'"
           >
           <div v-if="showFullName && item.token_id.length>8" class="card-id card-id-full">{{item.token_id}}</div>    
           <div class="data-td">
@@ -153,7 +153,7 @@
         </div>
         
         <div class="data-tr data-tr-main"
-          v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='GATHER'"
+          v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'"
           >
           <div v-if="showFullName && item.token_id.length>8" class="card-id card-id-full">{{item.token_id}}</div> 
           <div class="data-td">
@@ -200,12 +200,12 @@
         </div>
       </div>
       <div class="btn-container">
-        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='OPEN'">
+        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">
           <div>
             Start collecting
           </div>
         </a>
-        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='GATHER' & userBidAmount<=0">
+        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & userBidAmount<=0">
           <div>
             Deposit part
           </div>

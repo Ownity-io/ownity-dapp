@@ -99,7 +99,7 @@
           </section>
 
           <section class="section-listing-main">
-            <!-- <div class="section-deposit" v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='OPEN'"> -->
+            <!-- <div class="section-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'"> -->
             <div class="section-deposit">
               <div class="section-deposit-data">
                 <div class="deposit-img-container">
@@ -107,63 +107,48 @@
                 </div>
                 <div class="deposit-data">
                   <div class="deposit-listened deposit-listened-link"><a target="_blank" :href='linkToMarketplacePage' >Listened on {{item.marketplace.name}} for </a><i class="i-external-link-line"></i></div>
-                  <div class="deposit-value" v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='OPEN'">
+                  <div class="deposit-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">
                     <div class="icon-token"></div>
                     <span><b>{{priceInCurrency}} ETH</b></span>
                     <span class="equivalent">(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
                   </div>
-                  <div class="deposit-value" v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='SOLD'">
+                  <div class="deposit-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='SOLD'">
                     <div class="icon-token"></div>
                     <span><b>{{priceInCurrency}} ETH</b></span>
                     <span class="equivalent">(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
                   </div>
-                  <div class="deposit-value" v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='GATHER'">
+                  <div class="deposit-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
                     <div class="icon-token"></div>
                     <span>{{abbrNum(convertToEther(allBidsAmount),1)}} / <b>{{abbrNum(priceInCurrency,1)}}{{' '}} ETH</b></span>
                     <span class="equivalent">(≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
                   </div>
-                  <div class="deposit-part" v-if="userBid!=null & (item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='OWNED'">
+                  <div class="deposit-part" v-if="userBid!=null & item.marketplace_status=='OPEN' & item.internal_status=='OWNED'">
                     Your part : <span>{{userBid.fraction}}</span>
                   </div>
                 </div>
               </div>
               <div class="section-deposit-btns">
-                <!-- <button class="btn btn-deposit" v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & item.internal_status=='OWNED'">Start voting</button> -->
-                <!-- <button class="btn btn-deposit" v-if="((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST')||item.marketplace_status=='TEST') & item.internal_status=='OWNED' & this.userBidAmount>0"
-                @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">Start voting</button>
-                <button class="btn btn-deposit" v-if="((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST')||item.marketplace_status=='TEST') & item.internal_status=='OWNED' & this.userBidAmount<=0">
-                  Buy</button>
-                <button class="btn btn-get" v-if="((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST')) & item.internal_status=='OWNED' & this.userBidAmount>0">Sell part</button>
-                <button class="btn btn-deposit" v-if="((((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST')||item.marketplace_status=='TEST')  & item.internal_status=='OPEN'))|| item.id == 40997"
+                <button class="btn btn-deposit" v-if="((item.marketplace_status=='OPEN')  & item.internal_status=='OPEN' & userAddress!=null)"
                 @click="this.$store.dispatch('appGlobal/setshowStartCollectingModal',true)">Start collecting</button>
-                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST')||item.marketplace_status=='TEST')  &
-                item.internal_status=='GATHER' & (
-                !(userBidAmount>0) || 
-                (((userBidAmount/this.item.price)*100)<20)))|| item.id == 40997" 
-                 @click="this.$store.dispatch('appGlobal/setshowContinueCollectingModal',true)">Deposit part</button>
-                <button class="btn btn-get" v-if="userBidAmount>0">Get part back</button> -->
-
-                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='OPEN' & userAddress!=null)"
-                @click="this.$store.dispatch('appGlobal/setshowStartCollectingModal',true)">Start collecting</button>
-                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='OPEN' & userAddress==null)"
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='OPEN' & userAddress==null)"
                 @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)">Start collecting</button>
-                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='GATHER' & userAddress!=null)"
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='GATHER' & userAddress!=null)"
                 @click="this.$store.dispatch('appGlobal/setshowContinueCollectingModal',true)">Deposit part</button>
-                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='GATHER' & userAddress==null)"
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='GATHER' & userAddress==null)"
                 @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)">Deposit part</button>
-                <button class="btn btn-get" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='GATHER' & userAddress!=null & userBidAmount>0)"
+                <button class="btn btn-get" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='GATHER' & userAddress!=null & userBidAmount>0)"
                 @click="this.$store.dispatch('appGlobal/setshowDepositCancelModal',true)">Cancel</button>
-                <button class="btn btn-deposit" v-if="((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST')||item.marketplace_status=='TEST') & item.internal_status=='OWNED' & userAddress!=null & this.userBidAmount>0"
+                <button class="btn btn-deposit" v-if="((item.marketplace_status=='OPEN')) & item.internal_status=='OWNED' & userAddress!=null & this.userBidAmount>0"
                 @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">Start voting</button>
-                <button class="btn btn-get" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount>0)"
+                <button class="btn btn-get" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount>0)"
                 @click="this.$store.dispatch('appGlobal/setShowSellPartModal',true)">Sell a part</button> 
-                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='OWNED' & userAddress!=null & userBidBuyedAll)"
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='OWNED' & userAddress!=null & userBidBuyedAll)"
                 @click="this.$store.dispatch('appGlobal/setShowClaimNftModal',true)">Claim NFT</button> 
-                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount==0 & bidsOnSale)"
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount==0 & bidsOnSale)"
                 >Buy</button> 
-                <button class="btn btn-get" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='ON SALE' & userAddress!=null & userBidAmount>0)"
+                <button class="btn btn-get" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='ON SALE' & userAddress!=null & userBidAmount>0)"
                 >Cancel sale</button> 
-                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN' || item.marketplace_status=='TEST'))  & item.internal_status=='SOLD' & userAddress!=null & userBidAmount>0)"
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='SOLD' & userAddress!=null & userBidAmount>0)"
                 @click="this.$store.dispatch('appGlobal/setShowClaimRewardModal',true)">Claim reward</button> 
               </div>
               <div class="section-deposit-labels" v-if="userBid!=null">
@@ -224,7 +209,7 @@
                       <span>Fraction market</span>
                     </button>
                   </li>
-                  <li v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST' || item.marketplace_status=='CLOSED' ) & (item.internal_status=='OWNED'||item.internal_status=='ON SALE') & item.votings!=null">
+                  <li v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='CLOSED' ) & (item.internal_status=='OWNED'||item.internal_status=='ON SALE') & item.votings!=null">
                   <!-- <li v-if="true"> -->
                     <button
                       :class="{ 'active-tab': activeTab2 === 'ListingVote' }"
