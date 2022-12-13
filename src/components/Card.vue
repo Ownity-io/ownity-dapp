@@ -243,7 +243,7 @@
             Sell a part
           </a>
         </div>
-        <div class="container-btn-part" v-if="(userBidAmount>0 & item.marketplace_status=='GATHER')">
+        <div class="container-btn-part container-btn-part-row" v-if="(userBidAmount>0 & item.marketplace_status=='GATHER')">
             <div class="part-data">
               My part 
               <div class="card-value">
@@ -288,7 +288,7 @@
         </div>
 
         <!-- ######## 3 ######## -->
-         <div class="container-btn-part" v-if="this.voting">
+         <div class="container-btn-part container-btn-part-row" v-if="this.voting">
           <div class="card-col">            
             <div class="deposit-label">
                   <div class="label-col">
@@ -305,10 +305,18 @@
 
         
 
-        <!-- <div class="deposit-label" >
+        <!-- ######## 5 ######## -->
+        <div class="deposit-value">
+          <div class="icon-token"></div>
+          <span><b>2 ETH</b></span>
+          <span class="equivalent">(≈ $ 2K)</span>
+        </div>
+
+        <!-- ######## 6 ######## -->
+        <div class="deposit-label" >
           <i class="i-shopping-bag-line"></i>
-          On Sale: <span><b>hgghj</b></span>
-        </div> -->
+          On Sale: <div class="marketplace"> <span class="icon-market"></span> LooksRare</div>
+        </div>
 
       </div>
     </div>
