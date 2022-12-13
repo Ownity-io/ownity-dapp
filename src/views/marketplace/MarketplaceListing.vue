@@ -103,11 +103,16 @@
             <div class="section-deposit">
               <div class="section-deposit-data">
                 <div class="deposit-img-container">
-                  <a  :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></a>
+                  <a  :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"
+                  v-if="this.item.internal_status!='OWNED'"></a>
+                  <a  :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url('../../public/favicon.webp')`}"
+                  v-else></a>
                 </div>
                 <div class="deposit-data">
-                  <div class="deposit-listened deposit-listened-link"><a target="_blank" :href='linkToMarketplacePage' >Available on {{item.marketplace.name}} for </a><i class="i-external-link-line"></i></div>
-                  <div class="deposit-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">
+                  <div class="deposit-listened deposit-listened-link" v-if="this.item.internal_status!='OWNED'"><a target="_blank" :href='linkToMarketplacePage' >Available on {{item.marketplace.name}} for </a><i class="i-external-link-line"></i></div>
+                  <div class="deposit-listened deposit-listened-link"><a target="_blank" :href='linkToMarketplacePage' 
+                    v-if="this.item.internal_status=='OWNED'" >Bought on {{item.marketplace.name}} for </a><i class="i-external-link-line"></i></div>
+                  <div class="deposit-value" v-if="(item.marketplace_status=='OPEN' & item.internal_status=='OPEN')||this.item.internal_status=='OWNED'">
                     <div class="icon-token"></div>
                     <span><b>{{priceInCurrency}} ETH</b></span>
                     <span class="equivalent">(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
