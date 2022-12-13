@@ -75,6 +75,28 @@
           </div>
         </div>
       </div>
+
+      <!-- ######## 1 ######## -->
+      <div class="card-footer">
+        <div class="card-to-buy">
+          <div class="card-col">
+            <span class="card-col-name">Part</span>
+            <span><strong>5%</strong></span>
+
+          </div>
+          <div class="card-col">
+            <span class="card-col-name">Sale for</span>
+            <div class="card-value">
+              <div class="icon-value"></div>
+              <div class="card-col-value">
+                <strong>0.01 ETH</strong>
+                <span class="equivalent">≈ $ 10</span>
+              </div> 
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
     <div class="card-data">
       <div class="data-table">
@@ -197,36 +219,30 @@
           <div>Ends in {{remainTimeString}}</div>
         </div>
         <div class="data-tr data-tr-date" v-else-if="this.item.marketplace_status!='CLOSED' & this.item.internal_status!='SOLD' & this.item.internal_status!='OWNED'">
-          <div>Expired</div>
+          Expired
         </div>
       </div>
       <div class="btn-container">
         <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">
-          <div>
-            Start collecting
-          </div>
+          Start collecting
         </a>
         <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & userBidAmount<=0">
-          <div>
-            Deposit part
-          </div>
+          Deposit part
         </a>
         <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='CLOSED' & (item.internal_status=='CLOSED'||item.internal_status=='GATHER') & userBidAmount>0">
-          <div>
-            Cancel
-          </div>
-        </a>
-        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OWNED'">
-          <div>Vote</div>
-        </a>
-        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OWNED'">
-          <div>Sell a part</div>
+          Cancel
         </a>
         <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="(item.internal_status=='SOLD' & userBidAmount>0)">
-          <div>Claim reward</div>
+          Claim reward
         </a>
-        <!-- <div class="btn btn-card-completed">Completed</div> -->
-
+        <div v-if="item.marketplace_status=='OPEN' & item.internal_status=='OWNED'" class="container-btn-part container-btn-part-vote">
+          <a class="btn btn-vote" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" >
+            Vote
+          </a>
+          <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
+            Sell a part
+          </a>
+        </div>
         <div class="container-btn-part" v-if="(userBidAmount>0 & item.marketplace_status=='GATHER')">
             <div class="part-data">
               My part 
@@ -239,6 +255,61 @@
               <div class="btn">Cancel</div>
             </a>
         </div>
+
+        <!-- ######## 2 ######## -->
+        <div class="container-btn-part" >
+          <div class="card-col">
+            <span class="card-col-name">Part</span>
+            <span><strong>5%</strong></span>
+          </div>
+          <div class="card-col">
+            <span class="card-col-name">Sale for</span>
+            <div class="card-value">
+              <div class="icon-value"></div>
+              <div class="card-col-value">
+                <strong>0.01 ETH</strong>
+                <span class="equivalent">≈ $ 10</span>
+              </div> 
+            </div>
+          </div>
+        </div>
+
+        <!-- ######## 3 ######## -->
+        <div class="container-btn-part" >
+          <div class="card-col">
+            
+            <div class="deposit-label">
+                  <div class="label-col">
+                    <!-- :style="{backgroundImage: `url(${item.marketplace.logo})`}" -->
+                    <div class="icon-label"></div>
+                    <b>2.1 ETH</b>
+                    <div>Progress: 20%</div>
+                  </div>
+                </div>
+          </div>
+          <div class="card-col">
+            <button class="btn">Confirm</button>
+           
+          </div>
+        </div>
+
+        <!-- ######## 4 ######## -->
+        <div class="container-btn-part" >
+          <div class="card-col">
+            <div class="deposit-label">
+              <i class="i-volume-vibrate-line"></i>
+              <strong>Vote:</strong>
+            </div>
+          </div>
+          <div class="card-col">
+            <strong>5/5</strong>
+          </div>
+        </div>
+
+        <!-- <div class="deposit-label" >
+          <i class="i-shopping-bag-line"></i>
+          On Sale: <span><b>hgghj</b></span>
+        </div> -->
 
       </div>
     </div>
