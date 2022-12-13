@@ -31,7 +31,7 @@
         item.marketplace_status=='CLOSED' & item.internal_status=='CLOSED'
       )
       ||(
-        item.marketplace_status=='CLOSED' & item.internal_status=='OWNED'
+        (item.marketplace_status=='CLOSED'||item.marketplace_status=='OPEN') & item.internal_status=='OWNED'
       )
       ||item.internal_status=='SOLD'">
         <div class="card-progress progress" >
@@ -98,7 +98,7 @@
           </div>
         </div>
         <div class="data-tr data-tr-main"
-        v-if="item.marketplace_status=='CLOSED' & item.internal_status=='OWNED'"
+        v-if="(item.marketplace_status=='CLOSED'||item.marketplace_status=='OPEN') & item.internal_status=='OWNED'"
           >
           <div v-if="showFullName && item.token_id.length>8" class="card-id card-id-full">{{item.token_id}}</div>    
           <div class="data-td">
@@ -192,10 +192,10 @@
 
           </div>
         </div>
-        <div class="data-tr data-tr-date" v-if="(remainTimeString!=null & this.item.marketplace_status!='CLOSED' & this.item.internal_status!='SOLD')" >
+        <div class="data-tr data-tr-date" v-if="(remainTimeString!=null & this.item.marketplace_status!='CLOSED' & this.item.internal_status!='SOLD' & this.item.internal_status!='OWNED')" >
           <div>Ends in {{remainTimeString}}</div>
         </div>
-        <div class="data-tr data-tr-date" v-else-if="this.item.marketplace_status!='CLOSED' & this.item.internal_status!='SOLD'">
+        <div class="data-tr data-tr-date" v-else-if="this.item.marketplace_status!='CLOSED' & this.item.internal_status!='SOLD' & this.item.internal_status!='OWNED'">
           <div>Expired</div>
         </div>
       </div>
@@ -215,10 +215,10 @@
             Cancel
           </div>
         </a>
-        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="item.marketplace_status=='CLOSED' & item.internal_status=='OWNED'">
+        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OWNED'">
           <div>Vote</div>
         </a>
-        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="item.marketplace_status=='CLOSED' & item.internal_status=='OWNED'">
+        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OWNED'">
           <div>Sell a part</div>
         </a>
         <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="(item.internal_status=='SOLD' & userBidAmount>0)">
@@ -226,7 +226,7 @@
         </a>
         <!-- <div class="btn btn-card-completed">Completed</div> -->
 
-        <div class="container-btn-part" v-if="userBidAmount>0">
+        <div class="container-btn-part" v-if="(userBidAmount>0 & item.marketplace_status=='GATHER')">
             <div class="part-data">
               My part 
               <div class="card-value">
