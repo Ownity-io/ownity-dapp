@@ -52,14 +52,17 @@ const routes = [
         
     },
     {
+        name: 'Serve',
         path: '/serve',
         component: () => import('@/views/services/Serve.vue'),     
     },
     {
+        name: 'TermsOfUse',
         path: '/terms_of_use',
         component: () => import('@/views/services/TermsOfUse.vue'),  
     },
     {
+        name: 'PrivacyPolicy',
         path: '/privacy_policy',
         component: () => import('@/views/services/PrivacyPolicy.vue'),  
     }
