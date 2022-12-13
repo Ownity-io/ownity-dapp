@@ -175,6 +175,21 @@
     .chart-wrap .dx-visibility-change-handler {
         margin-bottom: 24px;
         max-height: 240px;
+
+        transform: scale(.5) translateY(-100px);
+        position: absolute;
+        top: 0;
+    }
+
+    .dx-visibility-change-handler{
+
+    }
+
+    .chart-wrap {
+        overflow: hidden;
+        height: 240px;
+        position: relative;
+        max-height: 240px;
     }
 
     .section-listing-main .collection-data-link,
@@ -632,15 +647,18 @@
 }
 
 @media (max-width: 1425px) {
+
     .screen-animation-container .img.img1,
     .screen-animation-container .img.img3 {
         transform: scale(.8);
     }
 }
+
 @media (max-width: 1200px) {
     .screen-animation-container .img.img2 {
         display: none;
     }
+
     .screen-animation-container .img.img1,
     .screen-animation-container .img.img3 {
         transform: scale(.7);
