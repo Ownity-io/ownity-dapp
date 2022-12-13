@@ -211,6 +211,7 @@ export default {
     SelectedFilters,
   },
   async mounted(){
+    window.scrollTo(0, 0);
     await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address);
     await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
     await this.$store.dispatch('marketplace/fetchAndSetMarketplaces');

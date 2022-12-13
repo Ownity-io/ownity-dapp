@@ -38,9 +38,24 @@
                 <span>Collections</span>
               </a>
             </li>
+            <li class="mobile-menu-item"
+              v-if="$route.fullPath ==='/'">
+                <a href="#screen-collections" >
+                    <span>Collections</span>
+                    <span>Collections</span>
+                </a>
+            </li>
+            <li class="mobile-menu-item"
+              v-else >
+                <router-link :to="{name: 'Main'}">
+                    <span>Collections</span>
+                    <span>Collections</span>
+                </router-link>
+            </li>
             <li class="mobile-menu-item">
-              <router-link :class="active" :to="{ name: 'Marketplace' }">
-                <span>Help</span>
+              <router-link :class="active" :to="{name: 'Serve'}">
+                  <span>Help</span>
+                  <span>Help</span>
               </router-link>
             </li>
           </ul>

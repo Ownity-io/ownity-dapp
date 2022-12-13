@@ -419,6 +419,7 @@ export default {
     Chart
   },
   async mounted() {
+    window.scrollTo(0, 0);
     this.activeTab = "ListingInfo";
     this.activeTab2 = "ListingInfo2";
     await this.getAndSetListingInfo();

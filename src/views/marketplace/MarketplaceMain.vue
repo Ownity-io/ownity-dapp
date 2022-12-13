@@ -143,6 +143,7 @@ export default {
     SelectedFilters,
   },
   async mounted(){
+    window.scrollTo(0, 0);
     await this.initInfo();
   },
   methods:{

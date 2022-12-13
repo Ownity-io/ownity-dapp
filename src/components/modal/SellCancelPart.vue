@@ -2,7 +2,8 @@
   <div class="modal" v-if="render">
     <div class="modal-wrapper">
       <div class="modal-header">
-        <div class="modal-name">Cancel sell (Відмінити продаж на маркетплейсі)</div>
+        <div class="modal-name">Cancel sell</div>
+        <!-- (Відмінити продаж на маркетплейсі) -->
         <button class="btn-close" @click="this.$store.dispatch('appGlobal/setCancellSellVotingModal',false)">
           <i class="i-close-line"></i>
         </button>

@@ -17,14 +17,20 @@
                                     <span>Marketplace</span>
                                 </router-link>
                             </li>
-                            <li>
-                                <a>
+                            <li v-if="$route.fullPath ==='/'">
+                                <a href="#screen-collections" >
                                     <span>Collections</span>
                                     <span>Collections</span>
                                 </a>
                             </li>
+                            <li v-else >
+                                <router-link :to="{name: 'Main'}">
+                                    <span>Collections</span>
+                                    <span>Collections</span>
+                                </router-link>
+                            </li>
                             <li>
-                                <router-link :class="active" :to="{name: 'Marketplace'}">
+                                <router-link :class="active" :to="{name: 'Serve'}">
                                     <span>Help</span>
                                     <span>Help</span>
                                 </router-link>
