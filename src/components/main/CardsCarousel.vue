@@ -62,6 +62,7 @@ export default defineComponent({
 
 .carousel .card{
   width: 100%;
+  height: 100%;
 }
 .carousel__prev.carousel__prev--disabled,
 .cards-carousel .carousel__prev.carousel__prev--disabled,
