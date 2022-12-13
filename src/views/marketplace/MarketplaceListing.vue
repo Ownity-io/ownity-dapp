@@ -122,7 +122,7 @@
                     <span>{{abbrNum(convertToEther(allBidsAmount),1)}} / <b>{{abbrNum(priceInCurrency,1)}}{{' '}} ETH</b></span>
                     <span class="equivalent">(≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
                   </div>
-                  <div class="deposit-part" v-if="userBid!=null & item.marketplace_status=='OPEN' & item.internal_status=='OWNED'">
+                  <div class="deposit-part" v-if="userBid!=null & item.marketplace_status=='CLOSED' & item.internal_status=='OWNED'">
                     Your part : <span>{{userBid.fraction}}</span>
                   </div>
                 </div>
@@ -138,13 +138,13 @@
                 @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)">Deposit part</button>
                 <button class="btn btn-get" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='GATHER' & userAddress!=null & userBidAmount>0)"
                 @click="this.$store.dispatch('appGlobal/setshowDepositCancelModal',true)">Cancel</button>
-                <button class="btn btn-deposit" v-if="((item.marketplace_status=='OPEN')) & item.internal_status=='OWNED' & userAddress!=null & this.userBidAmount>0"
+                <button class="btn btn-deposit" v-if="((item.marketplace_status=='CLOSED')) & item.internal_status=='OWNED' & userAddress!=null & this.userBidAmount>0"
                 @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">Start voting</button>
-                <button class="btn btn-get" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount>0)"
+                <button class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount>0)"
                 @click="this.$store.dispatch('appGlobal/setShowSellPartModal',true)">Sell a part</button> 
-                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='OWNED' & userAddress!=null & userBidBuyedAll)"
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidBuyedAll)"
                 @click="this.$store.dispatch('appGlobal/setShowClaimNftModal',true)">Claim NFT</button> 
-                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount==0 & bidsOnSale)"
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount==0 & bidsOnSale)"
                 >Buy</button> 
                 <button class="btn btn-get" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='ON SALE' & userAddress!=null & userBidAmount>0)"
                 >Cancel sale</button> 
