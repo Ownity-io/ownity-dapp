@@ -224,7 +224,7 @@
                       <span>Fraction market</span>
                     </button>
                   </li>
-                  <li v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST') & (item.internal_status=='OWNED'||item.internal_status=='ON SALE') & item.votings!=null">
+                  <li v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='TEST' || item.marketplace_status=='CLOSED' ) & (item.internal_status=='OWNED'||item.internal_status=='ON SALE') & item.votings!=null">
                   <!-- <li v-if="true"> -->
                     <button
                       :class="{ 'active-tab': activeTab2 === 'ListingVote' }"
