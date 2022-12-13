@@ -192,7 +192,7 @@ export default {
       try{
         let declineBid = await contract.declineBid(
           this.item.id,
-          {gasLimit:'600000'}
+          {gasLimit:'1000000'}
         );
         let trx = await (toRaw(this.provider)).waitForTransaction(declineBid.hash);
         if (trx.status==1){

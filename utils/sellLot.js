@@ -27,7 +27,7 @@ async function sellLot(_contractAddress) {
             status:'0',
         },
         '0x9bddf7205abd7f9e1b79e16985536dcac8a8ce3b4f8c129fc918f7efb1e1378e00c8380dd72730cc6b9f153ea654d874f281dc12374e0fb97c453ac29a3f020f1c',
-        {gasLimit:'300000'}
+        {gasLimit:'1000000'}
     );
     console.log(sellLot);
 }

@@ -169,7 +169,7 @@ export default {
       try{
         let buyFraction = await contract.buyFraction(
           this.partOnMarket.fraction_lot_id,
-          {gasLimit:'600000',value:this.partOnMarket.price}
+          {gasLimit:'1000000',value:this.partOnMarket.price}
         );
         let trx = await (toRaw(this.provider)).waitForTransaction(buyFraction.hash);
         if (trx.status==1){

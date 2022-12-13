@@ -177,7 +177,7 @@ export default {
       try{
         let cancelSellFraction = await contract.cancelSellFraction(
           this.partOnMarket.fraction_lot_id,
-          {gasLimit:'600000'}
+          {gasLimit:'1000000'}
         );
         let trx = await (toRaw(this.provider)).waitForTransaction(cancelSellFraction.hash);
         if (trx.status==1){

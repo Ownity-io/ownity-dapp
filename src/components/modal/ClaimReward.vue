@@ -122,7 +122,7 @@ export default {
       try{
         let claimReward = await contract.claimReward(
           this.item.id,
-          {gasLimit:'600000'}
+          {gasLimit:'1000000'}
         );
         let trx = await (toRaw(this.provider)).waitForTransaction(claimReward.hash);
         if (trx.status==1){
