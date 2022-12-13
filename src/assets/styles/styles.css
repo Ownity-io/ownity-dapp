@@ -755,6 +755,10 @@ ul.tabs {
     width: 100%;
 }
 
+.params-block .param-wrap.sort.unfolded{
+    z-index: 10;
+}
+
 .params.params-profile .params-block-filter {
     margin-right: auto;
 }
