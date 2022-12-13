@@ -67,7 +67,7 @@
                   <td>
                     <div class="td-wrap-price">
                       <div class="icon-token"></div> 
-                      abbrNum(toFixedIfNecessary(convertToEther(element.amount),6),2)
+                      {{abbrNum(toFixedIfNecessary(convertToEther(element.amount),6),2)}}
                     </div>
                     </td>
                   <td>{{userProgressValue}}%</td>
@@ -156,9 +156,7 @@
 
           </div>
         </div>
-        <div class="data-tr data-tr-main"
-        v-if="item.marketplace_status=='CLOSED' & item.internal_status=='GATHER'"
-          >
+        <div class="data-tr data-tr-main" v-if="item.marketplace_status=='CLOSED' & item.internal_status=='GATHER'">
           <div v-if="showFullName && item.token_id.length>8" class="card-id card-id-full">{{item.token_id}}</div>    
           <div class="data-td">
             <div class="card-id"
@@ -237,7 +235,7 @@
         <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="(item.internal_status=='SOLD' & userBidAmount>0)">
           Claim reward
         </a>
-        <div v-if="item.marketplace_status=='CLOSED' & item.internal_status=='OWNED'" class="container-btn-part container-btn-part-vote">
+        <div v-if="(item.marketplace_status=='CLOSED' & item.internal_status=='OWNED' & this.voting==null)" class="container-btn-part container-btn-part-vote">
           <a class="btn btn-vote" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" >
             Vote
           </a>
@@ -276,25 +274,8 @@
           </div>
         </div> -->
 
-        <!-- ######## 3 ######## -->
-         <!-- <div class="container-btn-part" >
-          <div class="card-col">            
-            <div class="deposit-label">
-                  <div class="label-col">
-                    :style="{backgroundImage: `url(${item.marketplace.logo})`}" 
-                    <div class="icon-label"></div>
-                    <b>2.1 ETH</b>
-                    <div>Progress: 20%</div>
-                  </div>
-                </div>
-          </div>
-          <div class="card-col">
-            <button class="btn">Confirm</button>           
-          </div>
-        </div>  -->
-
         <!-- ######## 4 ######## -->
-        <!-- <div class="container-btn-part" >
+        <div class="container-btn-part" v-if="this.voting">
           <div class="card-col">
             <div class="deposit-label">
               <i class="i-volume-vibrate-line"></i>
@@ -302,9 +283,27 @@
             </div>
           </div>
           <div class="card-col">
-            <strong>5/5</strong>
+            <strong>{{this.voting.users.length}}/{{this.item.bids.length}}</strong>
           </div>
-        </div> -->
+        </div>
+
+        <!-- ######## 3 ######## -->
+         <div class="container-btn-part" v-if="this.voting">
+          <div class="card-col">            
+            <div class="deposit-label">
+                  <div class="label-col">
+                    <div class="icon-label" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></div>
+                    <b>{{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount),6),1)}} ETH</b>
+                    <div>Progress: {{toFixedIfNecessary((this.voting.users.length/this.item.bids.length)*100,1)}}%</div>
+                  </div>
+                </div>
+          </div>
+          <div class="card-col">
+            <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="btn" v-if="userVoted">Confirm</a>
+          </div>
+        </div> 
+
+        
 
         <!-- <div class="deposit-label" >
           <i class="i-shopping-bag-line"></i>
@@ -333,7 +332,9 @@ export default {
       userBidAmount:0,
       linkToMarketplacePage:null,
       remainTimeString:null,
-      likeChecked: false
+      likeChecked: false,
+      voting:null,
+      userVoted:false
     };
   },
   props:[
@@ -470,6 +471,27 @@ export default {
         await this.$store.dispatch('appGlobal/setShowConnectWalletModal',true);
         this.testLike = false;
       }
+    },
+    setMaxVoting(){
+      if (this.item.votings){
+        for (let element of this.item.votings){
+          if (this.voting){
+            if (element.users.length > this.voting.users.length & element.type=='SELL') {
+              this.voting = element;
+            }
+          }  
+          else if (element.type=='SELL'){
+            this.voting = element;
+          }        
+        }
+
+        for (let element of this.item.votings){
+          if (element.address = localStorage.getItem('userAddress')){
+            this.userVoted = true;
+            return;
+          }
+        }
+      }      
     }
   },  
   async mounted(){
@@ -482,6 +504,11 @@ export default {
     this.userProgressValue = (this.userBidAmount/this.item.price)*100;
     this.updateTimeString();
     await this.checkLike();
+    if (localStorage.getItem('userAddress')!=null&localStorage.getItem('userAddress')!="null"){
+      this.setMaxVoting();
+    }
+    console.log(this.voting);
+    console.log(this.userVoted);
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
     }
