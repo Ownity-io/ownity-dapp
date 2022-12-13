@@ -2477,6 +2477,7 @@ a.td-wrap-link span {
     width: fit-content;
     min-width: fit-content;
     position: relative;
+    text-align: left;
 }
 
 
