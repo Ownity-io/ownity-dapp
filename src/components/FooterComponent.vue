@@ -40,10 +40,28 @@
                             <i class="i-arrow-up-s-line"></i>
                         </button>
                         <ul class="footer-list">
-                            <li><a href="">Home</a></li>
-                            <li><a href="">Marketplace</a></li>
-                            <li><a href="">Collections</a></li>
-                            <li><a href="">Help</a></li>
+                            <li><a href="">Home</a>
+                                <div v-if="$route.fullPath ==='/'" @click="goToTop()"></div>
+                                <router-link :to="{name: 'Main'}" v-else></router-link>
+                            </li>
+                            <li><router-link :to="{ name: 'Marketplace' }" >Marketplace</router-link></li>
+                            <li
+                            v-if="$route.fullPath ==='/'">
+                                <a href="#screen-collections" >
+                                    <span>Collections</span>
+                                </a>
+                            </li>
+                            <li
+                            v-else >
+                                <router-link :to="{name: 'Main'}">
+                                    <span>Collections</span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link :class="active" :to="{name: 'Serve'}">
+                                    <span>Help</span>
+                                </router-link>
+                            </li>
                             <li><a href="">Sitemap</a></li>
                         </ul>
                     </div>
@@ -57,7 +75,11 @@
                                 <input type="text" placeholder="Your email">
                                 <button type="submit" class="btn btn-subscribe">Subscribe</button>
                             </div>
-                            <p class="agree">By subscribing, you agree to the <a href="#">Terms of Use</a></p>
+                            <p class="agree">By subscribing, you agree to the
+                                <router-link :to="{name: 'TermsOfUse'}">
+                                    <span>Terms of Use</span>
+                                </router-link>
+                            </p>
                         </form>
                     </div>
                 </div>
@@ -68,8 +90,12 @@
                 <div class="footer-section">
                     <div class="footer-part footer-service-links">
                         <span class="copyright">&#169; 2022 Marketplace</span>
-                        <a href="" rel="nofollow">Terms of Use</a>
-                        <a href="" rel="nofollow">Privacy Policy</a>
+                        <router-link :to="{name: 'TermsOfUse'}">
+                            <span>Terms of Use</span>
+                        </router-link>
+                        <router-link :to="{name: 'PrivacyPolicy'}">
+                            <span>Privacy Policy</span>
+                        </router-link>
                     </div>
                     <div class="footer-part footer-social-links">
                         <ul class="social-links-wrap">
