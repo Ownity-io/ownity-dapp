@@ -311,17 +311,17 @@
         
 
         <!-- ######## 5 ######## -->
-        <div class="deposit-value">
+        <!-- <div class="deposit-value">
           <div class="icon-token"></div>
           <span><b>2 ETH</b></span>
           <span class="equivalent">(≈ $ 2K)</span>
-        </div>
+        </div> -->
 
         <!-- ######## 6 ######## -->
-        <div class="deposit-label" >
+        <!-- <div class="deposit-label" >
           <i class="i-shopping-bag-line"></i>
           On Sale: <div class="marketplace"> <span class="icon-market"></span> LooksRare</div>
-        </div>
+        </div> -->
 
       </div>
     </div>
