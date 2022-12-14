@@ -1304,9 +1304,9 @@ ul.tabs {
     width: 100%;
     aspect-ratio: 1 / 1;
     display: flex;
-
 }
 
+.card-main .card-img img,
 .card-main .card-img {
     border-radius: 8px 8px 0 0;
 }
