@@ -38,7 +38,8 @@
       v-if="(item.marketplace_status=='OPEN' & item.internal_status=='GATHER')
       ||(item.marketplace_status=='CLOSED' & item.internal_status=='CLOSED')
       ||((item.marketplace_status=='CLOSED') & item.internal_status=='OWNED')
-      ||item.internal_status=='SOLD'">
+      ||item.internal_status=='SOLD'
+      ||item.internal_status=='ON SALE'">
         <div class="card-progress progress" v-if="!(bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0)">
           <div v-if="userProgressValue>0" class="progress-value owner" :style="{ width: userProgressValue + '%' }">
             <span v-if="userProgressValue>=20">{{ userProgressValue }}%</span>
@@ -139,6 +140,18 @@
             </div>
             <div class="equivalent">≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
 
+          </div>
+        </div>
+        <div class="data-tr data-tr-main"
+        v-if="item.internal_status=='ON SALE'"
+          >
+          <div v-if="showFullName && item.token_id.length>8" class="card-id card-id-full">{{item.token_id}}</div>    
+          <div class="data-td">
+            <div class="card-id"
+              @mouseover="showFullName = true"
+              @mouseout="showFullName = false"
+              >#{{item.token_id}}</div>  
+            <a :href="'/collection/'+item.collection.contract_address"><span>{{item.collection.name}}</span></a>
           </div>
         </div>
         <div class="data-tr data-tr-main"
@@ -325,8 +338,15 @@
           </div>
         </div> 
 
-        
-
+        <div class="deposit-label" v-if="this.item.internal_status=='ON SALE' & this.voting!=null">
+          <i class="i-shopping-bag-line"></i>
+          On Sale: <div class="marketplace"> <span class="icon-market" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></span> {{this.voting.marketplace.name}}</div>
+        </div>
+        <div class="deposit-value" v-if="this.item.internal_status=='ON SALE' & this.voting!=null">
+          <div class="icon-token"></div>
+          <span><b>{{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount),6),2)}} ETH</b></span>
+          <span class="equivalent">(≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount)*currencyToUsdPrice,6),2)}})</span>
+        </div>
         <!-- ######## 5 ######## -->
         <!-- <div class="deposit-value">
           <div class="icon-token"></div>
@@ -506,7 +526,7 @@ export default {
       }
     },
     setMaxVoting(){
-      if (this.item.votings){
+      if (this.item.votings & this.item.internal_status!='ON SALE'){
         for (let element of this.item.votings){
           if (this.voting){
             if (element.users.length > this.voting.users.length & element.type=='SELL') {
@@ -528,6 +548,14 @@ export default {
           }
         }
       }      
+      else if (this.itemWithBidsOnSale.votings){
+        for (let element of this.itemWithBidsOnSale.votings){
+            if (element.status=='FULFILLED') {
+              this.voting = element;
+              return
+            }
+        }
+      }
     },
     setBidOnSale(){
       if (this.itemWithBidsOnSale.bids){
