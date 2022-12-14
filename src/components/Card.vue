@@ -1,6 +1,6 @@
 <template>
   <!-- <a class="card card-finished" :class="{'card-inactive' : false}"> -->
-  <a class="card" :class="{'card-inactive' : (this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN')),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER')}">
+  <a class="card" :class="{'card-inactive' : (this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN')),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER')}" v-if="render">
     <div class="card-main">
       <!-- <a v-if="item.media" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></a>
       <a v-else :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="card-img"  ></a> -->
@@ -34,15 +34,12 @@
           </button>
         </div>
       </div> -->
-      <div class="card-footer" v-if="(item.marketplace_status=='OPEN' & item.internal_status=='GATHER')
-      ||(
-        item.marketplace_status=='CLOSED' & item.internal_status=='CLOSED'
-      )
-      ||(
-        (item.marketplace_status=='CLOSED'||item.marketplace_status=='OPEN') & item.internal_status=='OWNED'
-      )
+      <div class="card-footer" 
+      v-if="(item.marketplace_status=='OPEN' & item.internal_status=='GATHER')
+      ||(item.marketplace_status=='CLOSED' & item.internal_status=='CLOSED')
+      ||((item.marketplace_status=='CLOSED') & item.internal_status=='OWNED')
       ||item.internal_status=='SOLD'">
-        <div class="card-progress progress" >
+        <div class="card-progress progress" v-if="!(bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0)">
           <div v-if="userProgressValue>0" class="progress-value owner" :style="{ width: userProgressValue + '%' }">
             <span v-if="userProgressValue>=20">{{ userProgressValue }}%</span>
           </div>
@@ -50,7 +47,24 @@
             <span v-if="allProgressValue>=20 && userProgressValue<80">{{ allProgressValue }}%</span>
           </div>
         </div>
-        <div class="card-members btn-more-info">
+        <div class="card-to-buy" v-if="bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0">
+          <div class="card-col">
+            <span class="card-col-name">Part</span>
+            <span><strong>5%</strong></span>
+          </div>
+          <div class="card-col">
+            <span class="card-col-name">Sale for</span>
+            <div class="card-value">
+              <div class="icon-value"></div>
+              <div class="card-col-value">
+                <strong>0.01 ETH</strong>
+                <span class="equivalent">≈ $ 10</span>
+              </div> 
+            </div>
+
+          </div>
+        </div>
+        <div class="card-members btn-more-info" v-if="!(bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0)">
           <button class="card-members-btn "
             @mouseover="showMore = true"
             @mouseout="showMore = false" v-if="item.bids!=null">
@@ -240,6 +254,9 @@
         <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="(item.internal_status=='SOLD' & userBidAmount>0)">
           Claim reward
         </a>
+        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0">
+          Buy
+        </a>
         <div v-if="(item.marketplace_status=='CLOSED' & item.internal_status=='OWNED' & this.voting==null)" class="container-btn-part container-btn-part-vote">
           <a class="btn btn-vote" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" >
             Vote
@@ -280,7 +297,7 @@
         </div> -->
 
         <!-- ######## 4 ######## -->
-        <div class="container-btn-part" v-if="this.voting">
+        <div class="container-btn-part" v-if="this.voting & userBidAmount>0">
           <div class="card-col">
             <div class="deposit-label">
               <i class="i-volume-vibrate-line"></i>
@@ -293,7 +310,7 @@
         </div>
 
         <!-- ######## 3 ######## -->
-         <div class="container-btn-part container-btn-part-row" v-if="this.voting">
+         <div class="container-btn-part container-btn-part-row" v-if="this.voting & userBidAmount>0">
           <div class="card-col">            
             <div class="deposit-label">
                   <div class="label-col">
@@ -347,7 +364,10 @@ export default {
       remainTimeString:null,
       likeChecked: false,
       voting:null,
-      userVoted:false
+      userVoted:false,
+      itemWithBidsOnSale:null,
+      bidOnSale:null,
+      render:false
     };
   },
   props:[
@@ -499,12 +519,21 @@ export default {
         }
 
         for (let element of this.item.votings){
-          if (element.address = localStorage.getItem('userAddress')){
+          console.log('--------');
+          console.log(element.address);
+          console.log(localStorage.getItem('userAddress'));
+          if (element.users.address == localStorage.getItem('userAddress')){
             this.userVoted = true;
             return;
           }
         }
       }      
+    },
+    setBidOnSale(){
+      if (this.itemWithBidsOnSale.bids){
+          this.bidOnSale = this.itemWithBidsOnSale.bids[0];
+          console.log('founded');
+      } 
     }
   },  
   async mounted(){
@@ -516,12 +545,15 @@ export default {
     this.allProgressValue = (this.allBidsAmount/this.item.price)*100;
     this.userProgressValue = (this.userBidAmount/this.item.price)*100;
     this.updateTimeString();
+    this.itemWithBidsOnSale = await (await fetch(`${config.backendApiEntryPoint}listing-with-on-sale-bids/${this.item.id}`)).json();
+    this.setBidOnSale();
     await this.checkLike();
     if (localStorage.getItem('userAddress')!=null&localStorage.getItem('userAddress')!="null"){
       this.setMaxVoting();
     }
     console.log(this.voting);
     console.log(this.userVoted);
+    this.render=true;
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
     }
