@@ -292,7 +292,7 @@
         </div>
 
         <!-- ######## 2 ######## -->
-        <div class="container-btn-part" v-if="userBidOnSale">
+        <div class="container-btn-part" v-if="userBidOnSale & this.item.internal_status!='ON SALE'">
           <div class="card-col">
             <span class="card-col-name">Part</span>
             <span><strong>{{toFixedIfNecessary(userBidOnSale.fraction_amount/this.item.price*100,1)}}%</strong></span>
