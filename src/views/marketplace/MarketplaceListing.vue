@@ -151,9 +151,9 @@
                 @click="this.$store.dispatch('appGlobal/setShowClaimNftModal',true)">Claim NFT</button> 
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount==0 & bidsOnSale)"
                 >Buy</button> 
-                <button class="btn btn-get" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='ON SALE' & userAddress!=null & userBidAmount>0)"
+                <button class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='ON SALE' & userAddress!=null & userBidAmount>0)"
                 >Cancel sale</button> 
-                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='SOLD' & userAddress!=null & userBidAmount>0)"
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='SOLD' & userAddress!=null & userBidAmount>0)"
                 @click="this.$store.dispatch('appGlobal/setShowClaimRewardModal',true)">Claim reward</button> 
               </div>
               <div class="section-deposit-labels" v-if="userBid!=null">
