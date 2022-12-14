@@ -50,15 +50,15 @@
         <div class="card-to-buy" v-if="bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0">
           <div class="card-col">
             <span class="card-col-name">Part</span>
-            <span><strong>5%</strong></span>
+            <span><strong>{{toFixedIfNecessary(bidOnSale.fraction_amount/item.price*100,1)}}%</strong></span>
           </div>
           <div class="card-col">
             <span class="card-col-name">Sale for</span>
             <div class="card-value">
               <div class="icon-value"></div>
               <div class="card-col-value">
-                <strong>0.01 ETH</strong>
-                <span class="equivalent">≈ $ 10</span>
+                <strong>{{abbrNum(toFixedIfNecessary(convertToEther(bidOnSale.price),6),2)}} ETH</strong>
+                <span class="equivalent">≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(bidOnSale.price)*currencyToUsdPrice,6),2)}}</span>
               </div> 
             </div>
 
