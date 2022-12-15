@@ -5,7 +5,7 @@
         "MARKETPLACE":"Marketplace",
         "COLLECTIONS":"Collections",
         "HELP":"Help",
-        
+
         "STATUS-START":"Start",
         "STATUS-CANCEL":"Cancel",
         "STATUS-SALE":"Cancel",
@@ -15,6 +15,8 @@
 
         "NOTHING_HERE":"Oops! Nothing here.",
         "BACK_TO_ALL":"Back to all items",
+
+        "PRIVACY_POLICY":"Privacy policy",
 
         "---------MAIN------------": "",
         "MAIN-H1":"Quant",
@@ -47,6 +49,14 @@
         "ACTIVITY_THEAD-3": "Price",
         "ACTIVITY_THEAD-4": "Tx",
         "ACTIVITY_THEAD-5": "Date",
+
+        "---------COOKIES_TABLE------------": "",
+        "COOKIES-TITLE": "Cookies",
+        "COOKIES-ACCEPT": "Accept",
+        "COOKIES-SETTINGS": "Cookies settings",
+        "COOKIES-AGREE": "I agree",
+        "COOKIES-DESCRIBE-1": "We use cookies to enhance your experience, analyze our traffic, and for security and marketing. By visiting our website you agree to our use of cookies.",
+        "COOKIES-DESCRIBE-2": "We use cookies on our website to support technical features that enhance your user experience. We also collect anonymous analytical data, as described in our ",
 
         "":""
     }
