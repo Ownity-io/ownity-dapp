@@ -5,12 +5,16 @@
         "MARKETPLACE":"Marketplace",
         "COLLECTIONS":"Collections",
         "HELP":"Help",
+        
         "STATUS-START":"Start",
         "STATUS-CANCEL":"Cancel",
         "STATUS-SALE":"Cancel",
         "STATUS-VOITE":"Voite",
         "STATUS-CANCELLATION":"Cancellation",
         "STATUS-LISTING":"Listing",
+
+        "NOTHING_HERE":"Oops! Nothing here.",
+        "BACK_TO_ALL":"Back to all items",
 
         "---------MAIN------------": "",
         "MAIN-H1":"Quant",

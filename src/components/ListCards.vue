@@ -9,9 +9,9 @@
         </div>
     </div>
     <div class="cards-list-empty" v-if="this.$store.getters['marketplace/getListingsResults'].length==0">
-      <div class="title">Oops! Nothing here. </div>
+      <div class="title">{{translatesGet('NOTHING_HERE')}}</div>
       <button class="btn" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.fetchAndSetListingsStartInfo()">
-        Back to all items
+        {{translatesGet('BACK_TO_ALL')}}
       </button>
     </div>
   </div>
@@ -21,15 +21,21 @@
 import Card from "@/components/Card.vue";
 import { ref } from 'vue';
 import { useElementVisibility } from '@vueuse/core';
+import MultiLang from "@/core/multilang";
 
 export default {
   data() {
-    return {};
+    return {
+      lang: new MultiLang(this),
+    };
   },
   components: {
     Card,
   },
   methods:{
+    translatesGet(key) {
+        return this.lang.get(key);
+    },
     async fetchAndSetListingsNextInfo() {
       await this.$store.dispatch('marketplace/fetchAndSetListingsNextInfo');
     },

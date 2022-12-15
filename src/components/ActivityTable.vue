@@ -62,7 +62,7 @@
                     </a> 
                 </div>
                 <div class="td td-date">
-                    <div class="td-mob-title">Date</div>
+                    <div class="td-mob-title">{{translatesGet('ACTIVITY_THEAD-5')}}</div>
                     <div class="td-wrap">
                         5 minutes ago
                     </div>
