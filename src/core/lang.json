@@ -1,7 +1,22 @@
 {
     "en": {
-        "---------PRIVACY_POLICY------------": "",
-        "WORDTEST":"multilang",
+        "---------MAIN------------": "",
+        "MAIN-H1":"Quant",
+        "MAIN-H2":"Quant Lorem",
+        "MAIN-MAIN_BTN":"Marketplace",
+        "MAIN-SCREEN_2-TITLE":"Active",
+        "MAIN-SCREEN_2-BTN":"View all",
+        "MAIN-SCREEN_3-TITLE":"Top Collections",
+        "MAIN-SCREEN_3-TABLE-COL_1":"Collection",
+        "MAIN-SCREEN_3-TABLE-COL_1":"Volume",
+        "MAIN-SCREEN_3-TABLE-COL_1":"Floor price",
+        "MAIN-SCREEN_3-TABLE-COL_1":"Owners",
+        "MAIN-SCREEN_3-TABLE-COL_1":"Supply",
+        "MAIN-SCREEN_3-TABLE-COL_1":"",
+        "MAIN-SCREEN_3-TABLE-COL_1":"",
+        "MAIN-SCREEN_3-TABLE-COL_1":"",
+        "MAIN-SCREEN_3-TABLE-COL_1":"",
+        "MAIN-SCREEN_3-TABLE-COL_1":"",
         "": ""
     }
 }
