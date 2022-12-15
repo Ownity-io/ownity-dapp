@@ -104,18 +104,26 @@
               <div class="section-deposit-data">
                 <div class="deposit-img-container">
                   <a  :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"
-                  v-if="this.item.internal_status!='OWNED'"></a>
+                  v-if="this.item.internal_status!='OWNED' & this.item.internal_status!='ON SALE'"></a>
                   <a  :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url('../../public/favicon.webp')`}"
-                  v-else></a>
+                  v-else-if="this.item.internal_status=='OWNED'"></a>
+                  <a  :href='linkToMarketplacePageFromVoting' class="deposit-img" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"
+                  v-else-if="this.item.internal_status=='ON SALE'"></a>
                 </div>
                 <div class="deposit-data">
-                  <div class="deposit-listened deposit-listened-link" v-if="this.item.internal_status!='OWNED'"><a target="_blank" :href='linkToMarketplacePage' >Available on {{item.marketplace.name}} for </a><i class="i-external-link-line"></i></div>
-                  <div class="deposit-listened deposit-listened-link" v-if="this.item.internal_status=='OWNED'" ><a target="_blank" :href='linkToMarketplacePage' 
+                  <div class="deposit-listened deposit-listened-link" v-if="this.item.internal_status!='OWNED' & this.item.internal_status!='ON SALE'"><a target="_blank" :href='linkToMarketplacePage' >Available on {{item.marketplace.name}} for </a><i class="i-external-link-line"></i></div>
+                  <div class="deposit-listened deposit-listened-link" v-else-if="this.item.internal_status=='OWNED'" ><a target="_blank" :href='linkToMarketplacePage' 
                     >Bought on {{item.marketplace.name}} for </a><i class="i-external-link-line"></i></div>
+                  <div class="deposit-listened deposit-listened-link" v-if="this.item.internal_status=='ON SALE'"><a target="_blank" :href='linkToMarketplacePageFromVoting' >Available on {{voting.marketplace.name}} for </a><i class="i-external-link-line"></i></div>                
                   <div class="deposit-value" v-if="(item.marketplace_status=='OPEN' & item.internal_status=='OPEN')||this.item.internal_status=='OWNED'">
                     <div class="icon-token"></div>
                     <span><b>{{priceInCurrency}} ETH</b></span>
                     <span class="equivalent">(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
+                  </div>
+                  <div class="deposit-value" v-if="(item.internal_status=='ON SALE')">
+                    <div class="icon-token"></div>
+                    <span><b>{{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount),6),2)}} ETH</b></span>
+                    <span class="equivalent">(≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount) *currencyToUsdPrice,2),2)}})</span>
                   </div>
                   <div class="deposit-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='SOLD'">
                     <div class="icon-token"></div>
@@ -407,7 +415,8 @@ export default {
       render:false,
       userBidBuyedAll:false,
       itemWithBidsOnSale:false,
-      recommendations:null
+      recommendations:null,
+      voting:null
     };
   },
   components: {
@@ -430,12 +439,15 @@ export default {
     this.setPriceInCurrency();
     this.setCurrencyToUsd();
     this.setLinkToMarketplacePage();
+    await this.setMaxVoting();
+    this.setLinkToMarketplacePageFromVotingOnSale();
     this.setAllBidsAmount();
     this.setUserBidAmount();
     this.setChartData();
     await this.$store.dispatch('marketplaceListing/checkLike');
     await this.checkLike();
     this.recommendations = await this.$store.dispatch('marketplaceListing/getRecomendations',this.item.collection.contract_address);
+    
     this.render = true;
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
@@ -510,6 +522,15 @@ export default {
 
       this.linkToMarketplacePage = eval('`'+exampleStr+'`');
     },
+    setLinkToMarketplacePageFromVotingOnSale(){
+      if (this.voting){
+        let exampleStr = this.voting.marketplace.listing_link;
+        let collection_address = this.item.collection.contract_address;
+        let token_id = this.item.token_id;
+
+        this.linkToMarketplacePageFromVoting = eval('`' + exampleStr + '`');
+      }      
+    },
     setAllBidsAmount(){
       this.allBidsAmount=0;
       if (this.item.bids!=null){
@@ -569,7 +590,17 @@ export default {
         await this.$store.dispatch('appGlobal/setShowConnectWalletModal',true);
         this.testLike = false;
       }
-    }
+    },
+    setMaxVoting(){  
+      if (this.itemWithBidsOnSale.votings){
+        for (let element of this.itemWithBidsOnSale.votings){
+            if (element.status=='FULFILLED') {
+              this.voting = element;
+              return
+            }
+        }
+      }
+    },
   },
 };
 </script>
