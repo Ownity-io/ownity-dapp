@@ -72,7 +72,7 @@
                 </div>
               </div>
 
-              <div class="table table-top-collections">
+              <div class="table table-top-collections"  v-if="collections!=null">
                 <div class="thead">
                   <div class="td td-collection">
                     <span>                  
@@ -93,7 +93,7 @@
                   </div>
                 </div>
 
-                <div class="tr" v-for="collection in collections.results" :key="collection" v-if="collections!=null">
+                <div class="tr" v-for="collection in collections.results" :key="collection">
 
                   <div class="td td-collection">
                     <div class="td-wrap td-wrap-collection">
