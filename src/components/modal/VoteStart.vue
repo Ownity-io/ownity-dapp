@@ -138,15 +138,18 @@ export default {
     let requestUrl = `${config.backendApiEntryPoint}marketplaces/`;
     let request = await fetch(requestUrl);
     let requestJson = await request.json();
-    // let marketplaces = requestJson;
-    
-    // for ( let i of marketplaces) { 
-    //   if (i.id == 'LORA'||i.id == 'ELEM') {
-    //      delete marketplaces[k]; 
-    //     } 
-    //     k += 1; 
-    // }
-    this.marketplaces = requestJson;
+    let marketplacesTemp = requestJson;
+    console.log(marketplacesTemp);
+    let k = 0
+    for (let element of marketplacesTemp){
+      console.log(element.id);
+      if (element.id=='LORA'){
+        console.log(element);
+        marketplacesTemp = marketplacesTemp.splice(k+1,2);
+      }
+      k+=1;
+    }
+    this.marketplaces = marketplacesTemp;
     this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
     await this.setCurrencyToUsd();
     this.render = true;
