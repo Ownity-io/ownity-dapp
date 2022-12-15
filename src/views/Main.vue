@@ -10,8 +10,7 @@
               <div class="section-block block-text" :class="{'play-text': playText}">
                 <h1 class="section-name-h1">Quant</h1>
                 <h3 class="section-name-h3">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting
-                  industry. Lorem Ipsum has been the indus
+                  {{translatesGet('WORDTEST')}}
                 </h3>
 
                 <router-link class="btn btn-home btn-home-main" :to="{ name: 'Marketplace' }">
@@ -149,6 +148,7 @@ import CardsCarousel from "@/components/main/CardsCarousel.vue"
 import config from '@/config.json'
 import { ref } from 'vue';
 import { useElementVisibility } from '@vueuse/core';
+import MultiLang from "@/core/multilang";
 
 export default {
   data() {
@@ -159,7 +159,8 @@ export default {
       nfts:null,
       config:config,
       banners:null,
-      showCardsLoaderAnimation:true
+      showCardsLoaderAnimation:true,
+      lang: new MultiLang(this),
     };
   },
   components: {
@@ -257,7 +258,10 @@ export default {
       else{
           this.showCardsLoaderAnimation=false;
       }      
-    }
+    },
+    translatesGet(key) {
+      return this.lang.get(key);
+    },
   },
 };
 </script>
