@@ -1,10 +1,12 @@
 <template>
     <div class="recommendations-wrap">
         <div class="header-title-btn">
-          <div class="title">Your Recommendations</div>
+          <div class="title">
+            <span>{{translatesGet('RECOMMEND_TITLE')}}</span>
+          </div>
           <div class="btn-wrap">
             <router-link :to="{name: 'Marketplace' }" class="btn btn-router-to">
-              To the Collections
+              <span>{{translatesGet('RECOMMEND_BTN')}}</span>
               <i class="i-arrow-right-s-line"></i>
             </router-link>
           </div>
@@ -16,7 +18,7 @@
         </ul>
         <div class="btn-mobile-wrap">
           <router-link :to="{name: 'Marketplace' }" class="btn btn-router-to">
-            To the Collections
+              <span>{{translatesGet('RECOMMEND_BTN')}}</span>
             <i class="i-arrow-right-s-line"></i>
           </router-link>
         </div>
@@ -26,10 +28,12 @@
 <script>
 
 import Card from "@/components/Card.vue";
+import MultiLang from "@/core/multilang";
 
 export default {
   data() {
     return {
+      lang: new MultiLang(this),
       cards:[]
     };
   },
@@ -39,8 +43,13 @@ export default {
   props:['items'],
   async mounted(){
     this.cards = await this.items;
+  },
+  methods:{
+    translatesGet(key) {
+      return this.lang.get(key);
+    },
   }
-};
+}
 
 </script>
 
