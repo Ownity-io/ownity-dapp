@@ -5,9 +5,12 @@
         "MARKETPLACE":"Marketplace",
         "COLLECTIONS":"Collections",
         "HELP":"Help",
-        "":"",
-        "":"",
-        "":"",
+        "STATUS-START":"Start",
+        "STATUS-CANCEL":"Cancel",
+        "STATUS-SALE":"Cancel",
+        "STATUS-VOITE":"Voite",
+        "STATUS-CANCELLATION":"Cancellation",
+        "STATUS-LISTING":"Listing",
 
         "---------MAIN------------": "",
         "MAIN-H1":"Quant",
@@ -32,6 +35,15 @@
 
         "---------RECOMMEND_LIST------------": "",
         "RECOMMEND_TITLE": "Your Recommendations",
-        "To the Collections": "To the Collections"
+        "RECOMMEND_BTN": "To the Collections",
+
+        "---------ACTIVITY_TABLE------------": "",
+        "ACTIVITY_THEAD-1": "Collection",
+        "ACTIVITY_THEAD-2": "Category",
+        "ACTIVITY_THEAD-3": "Price",
+        "ACTIVITY_THEAD-4": "Tx",
+        "ACTIVITY_THEAD-5": "Date",
+
+        "":""
     }
 }

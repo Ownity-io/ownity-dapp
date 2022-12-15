@@ -2,11 +2,11 @@
     <div>
         <div class="table table-activity">
             <div class="thead">
-                <div class="td td-collection"><span>Collection</span></div>
-                <div class="td">Category</div>
-                <div class="td td-price">Price</div>
-                <div class="td">Tx</div>
-                <div class="td td-date">Date</div>
+                <div class="td td-collection"><span>{{translatesGet('ACTIVITY_THEAD-1')}}</span></div>
+                <div class="td">{{translatesGet('ACTIVITY_THEAD-2')}}</div>
+                <div class="td td-price">{{translatesGet('ACTIVITY_THEAD-3')}}</div>
+                <div class="td">{{translatesGet('ACTIVITY_THEAD-4')}}</div>
+                <div class="td td-date">{{translatesGet('ACTIVITY_THEAD-5')}}</div>
             </div>
                 
             <div class="tr" :class="{'tr-mob-collapse' : !rowMobileCollapse}">
@@ -22,22 +22,27 @@
                 <div class="td td-category">
                     <div class="td-wrap td-wrap-category">
                         <i class="i-coupon-3-line"></i>
-                        <div>Collection</div>
-                        <div class="td-light">Start</div>
+                        <div>{{translatesGet('ACTIVITY_THEAD-1')}}</div>
+                        <div class="td-light">{{translatesGet('STATUS-START')}}</div>
                     </div>
                     <div class="td-wrap td-wrap-category">
                         <i class="i-coupon-3-line"></i>
-                        <div>Collection</div>
-                        <div class="td-light">Сancellation</div>
+                        <div>{{translatesGet('ACTIVITY_THEAD-1')}}</div>
+                        <div class="td-light">{{translatesGet('STATUS-CANCEL')}}</div>
                     </div>
                     <div class="td-wrap td-wrap-category">
                         <i class="i-shopping-bag-line"></i>
-                        <div>Sale</div>
+                        <div>{{translatesGet('STATUS-SALE')}}</div>
                     </div>
                     <div class="td-wrap td-wrap-category">
                         <i class="i-volume-vibrate-line"></i>
-                        <div>Voite</div>
-                        <div class="td-light">Start</div>
+                        <div>{{translatesGet('STATUS-VOITE')}}</div>
+                        <div class="td-light">{{translatesGet('STATUS-CANCELLATION')}}</div>
+                    </div>
+                    <div class="td-wrap td-wrap-category">
+                        <i class="i-volume-vibrate-line"></i>
+                        <div>{{translatesGet('STATUS-LISTING')}}</div>
+                        <div class="td-light">{{translatesGet('STATUS-START')}}</div>
                     </div>
                 </div>
                 <div class="td td-price">
@@ -62,7 +67,8 @@
                         5 minutes ago
                     </div>
                 </div>
-                <button class="btn-mobile-tr-collapse" @click="rowMobileCollapse = !rowMobileCollapse">
+                <button class="btn-mobile-tr-collapse" 
+                    @click="rowMobileCollapse = !rowMobileCollapse">
                     <i class="i-arrow-down-s-line"></i>
                 </button>
             </div>
@@ -71,11 +77,20 @@
 </template>
 
 <script>
+
+import MultiLang from "@/core/multilang";
+
 export default {
     data(){
         return{
             rowMobileCollapse: false,
+            lang: new MultiLang(this),
         }
+    },
+    methods:{
+        translatesGet(key) {
+            return this.lang.get(key);
+        },
     }
 }
 </script>
