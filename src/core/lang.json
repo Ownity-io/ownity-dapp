@@ -1,5 +1,10 @@
 {
     "en": {
+        "---------EVENTS------------": "",
+        "CANCEL":"Cancel",
+        "BUY":"Buy",
+        "":"",
+
         "---------COMMON------------": "",
         "CONNECT_WALLET":"Connect Wallet",
         "MARKETPLACE":"Marketplace",
@@ -50,6 +55,8 @@
         "ACTIVITY_THEAD-3": "Price",
         "ACTIVITY_THEAD-4": "Tx",
         "ACTIVITY_THEAD-5": "Date",
+        "ACTIVITY_THEAD-6": "Pct",
+        "ACTIVITY_THEAD-7": "Status",
 
         "---------COOKIES_TABLE------------": "",
         "COOKIES-TITLE": "Cookies",

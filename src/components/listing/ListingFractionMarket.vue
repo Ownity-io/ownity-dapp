@@ -2,17 +2,17 @@
     <div class="tab-contain tab-activities" v-if="render">
         <div class="table table-activities">
             <div class="thead">
-                <div class="td">Status</div>
-                <div class="td td-price">Price</div>
-                <div class="td">Pct</div>
-                <div class="td td-button">Date</div>
+                <div class="td">{{translatesGet('ACTIVITY_THEAD-7')}}</div>
+                <div class="td td-price">{{translatesGet('ACTIVITY_THEAD-3')}}</div>
+                <div class="td">{{translatesGet('ACTIVITY_THEAD-6')}}</div>
+                <div class="td td-button">{{translatesGet('ACTIVITY_THEAD-5')}}</div>
             </div>
                 
             <div class="tr tr-mob-collapse" v-for="element in item.bids" :key="element">
                 <div class="td td-category">
                     <div class="td-wrap td-wrap-category">
                         <i class="i-shopping-bag-line"></i>
-                        <span>Sale</span>
+                        <span>{{translatesGet('STATUS-SALE')}}</span>
                     </div>
                 </div>
                 <div class="td td-price">
@@ -29,8 +29,8 @@
                 </div>
                 <div class="td td-date">
                     <div class="td-button">
-                       <button class="btn btn-td btn-buy" v-if="userAddress != element.address" @click="showBuyModal(element)">Buy</button>
-                       <button class="btn btn-td btn-buy" v-else @click="showCancelModal(element)">Cancel</button>
+                       <button class="btn btn-td btn-buy" v-if="userAddress != element.address" @click="showBuyModal(element)">{{translatesGet('BUY')}}</button>
+                       <button class="btn btn-td btn-buy" v-else @click="showCancelModal(element)">{{translatesGet('CANCEL')}}</button>
                     </div>
                 </div>
                 
@@ -40,25 +40,34 @@
             </div>
             
             <div class="table-btn-row">
-                <button class="btn btn-show-more">Show more <i class="i-arrow-down-s-line"></i></button>
+                <button class="btn btn-show-more">
+                    {{translatesGet('SHOW_MORE')}} 
+                    <i class="i-arrow-down-s-line"></i>
+                </button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import MultiLang from "@/core/multilang";
 import { ethers } from 'ethers';
+
 export default {
     data(){
         return{
             rowMobileCollapse: false,
             currencyToUsdPrice:1,
             userAddress:false,
-            render:false
+            render:false,
+            lang: new MultiLang(this),
         }
     },
     props:['item'],
     methods:{
+        translatesGet(key) {
+            return this.lang.get(key);
+        },
         toFixedIfNecessary(value, dp) {
             return +parseFloat(value).toFixed(dp);
         },
