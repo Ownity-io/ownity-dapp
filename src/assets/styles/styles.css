@@ -1039,8 +1039,6 @@ ul.tabs {
     justify-content: flex-start;
 }
 
-.input-checkbox.input-switcher label {}
-
 .input-checkbox.input-switcher label .input-switch {
     position: absolute;
     top: 50%;
@@ -1051,7 +1049,6 @@ ul.tabs {
     height: 14px;
     transition: .2s;
     border-radius: 4px;
-    background: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%);
     background-size: 100% 100%;
     border-width: 0;
     border: none;
@@ -1060,6 +1057,29 @@ ul.tabs {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    background-color: #ffffff;
+
+}
+
+
+.input-checkbox.input-switcher label .input-switch::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 7px;
+    box-sizing: border-box;
+    border: 2px solid #818899;
+    z-index: -1;
+}
+
+.input-checkbox.input-switcher input[type='checkbox']:checked+label .input-switch::before{
+    opacity: 0;
+}
+.input-checkbox.input-switcher input[type='checkbox']:checked+label .input-switch {
+    background: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%);
 }
 
 
@@ -1067,10 +1087,13 @@ ul.tabs {
     content: '';
     width: 6px;
     height: 6px;
-    background-color: #ffffff;
+    background-color: #818899;
     z-index: 5;
-    transition: .5s;
+    transition: .2s;
     border-radius: 100%;
+}
+.input-checkbox.input-switcher input[type='checkbox']:checked+label .input-switch::after{
+    background-color: #ffffff;
 }
 
 .input-checkbox.input-switcher input[type='checkbox']:checked+label .input-switch::after {
@@ -3140,7 +3163,7 @@ a.td-wrap-link span {
     height: 20px;
 }
 
-.deposit-label .marketplace{
+.deposit-label .marketplace {
     margin-left: 8px;
 }
 
