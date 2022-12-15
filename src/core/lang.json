@@ -24,6 +24,11 @@
 
         "PRIVACY_POLICY":"Privacy policy",
 
+        "CONTRACT_ADDRESS":"Contract Address",
+        "TOKEN_STANDARD":"Token standard",
+        "BLOCKCHAIN":"Blockchain",
+        "TOKEN_ID":"Token ID",
+
         "---------MAIN------------": "",
         "MAIN-H1":"Quant",
         "MAIN-H2":"Quant Lorem",
