@@ -4,7 +4,7 @@
 
             <div class="data-tr">
                 <div class="data-td data-td-name">
-                    <span>Contract Address</span>
+                    <span>{{translatesGet('CONTRACT_ADDRESS')}}</span>
                 </div>
                 <div class="data-td data-td-value">
                     <a class="td-wrap td-wrap-link" :href="config.etherscanTokenUrlStart+item.collection.contract_address" target="_blank" rel="nofollow">
@@ -16,7 +16,7 @@
             
             <div class="data-tr">
                 <div class="data-td data-td-name">
-                    <span>Token ID</span>
+                    <span>{{translatesGet('TOKEN_ID')}}</span>
                 </div>
                 <div class="data-td data-td-value">
                     <a class="td-wrap td-wrap-link" :href="config.etherscanTokenUrlStart+item.collection.contract_address+'?a='+item.token_id+'#inventory'" target="_blank" rel="nofollow">
@@ -28,7 +28,7 @@
                         
             <div class="data-tr">
                 <div class="data-td data-td-name">
-                    <span>Blockchain</span>
+                    <span>{{translatesGet('BLOCKCHAIN')}}</span>
                 </div>
                 <div class="data-td data-td-value">
                     <span>{{item.collection.blockchain}}</span>
@@ -37,7 +37,7 @@
                         
             <div class="data-tr">
                 <div class="data-td data-td-name">
-                    <span>Token standard</span>
+                    <span>{{translatesGet('TOKEN_STANDARD')}}</span>
                 </div>
                 <div class="data-td data-td-value">
                     <span>ERC-{{item.collection.erc_type}}</span>
@@ -50,12 +50,20 @@
 
 <script>
 import config from "@/config.json";
+import MultiLang from "@/core/multilang";
+
 export default{
     props:['item'],
     data(){
         return{
-            config:config
+            config:config,
+            lang: new MultiLang(this),
         }
+    },
+    methods:{
+        translatesGet(key) {
+            return this.lang.get(key);
+        },
     }
 }
 </script>

@@ -16,7 +16,7 @@
 
         <div class="deposit-data">
           <div class="deposit-listened">
-            <a href="#">Listing price to {{this.voting.marketplace.name}}</a>
+            <a href="#">{{translatesGet('LISTING_PRICE_TO')}} {{this.voting.marketplace.name}}</a>
           </div>
           <div class="deposit-value">
             <div class="icon-token"></div>
@@ -28,19 +28,19 @@
         <!-- display if user logged and already votes -->
         <button class="btn btn-cancel" v-if="userLogged & ((this.voting.count/this.item.bids.length)*100)>50 & userBidAmount>0 & this.voting.type!='CANCEL'"
           @click="this.$store.dispatch('appGlobal/setCancellSellVotingModal',true);this.$store.dispatch('appGlobal/setCurrentVoting',this.voting);">
-            Cancel
+            {{translatesGet('CANCEL')}}
         </button>
         <!-- display if user logged and not votes yet -->
         <button class="btn btn-vote" v-else-if="userLogged & ((this.voting.count/this.item.bids.length)*100)<=50 & !userVoted & userBidAmount>0"
         @click="this.$store.dispatch('appGlobal/setShowVoteConfirmModal',true);this.$store.dispatch('appGlobal/setCurrentVoting',this.voting);">
             <i class="i-thumb-up-line"></i>
-            <span>Confirm</span>
+            <span>{{translatesGet('CONFIRM')}}</span>
         </button>
       </div>
       </div>
 
       <div class="vote-progress-container">
-        <div class="data-counter">Members voted: {{this.voting.count}}/{{this.item.bids.length}}</div>
+        <div class="data-counter">{{translatesGet('MEMBERS_VOTED')}}: {{this.voting.count}}/{{this.item.bids.length}}</div>
         <div class="vote-progress-row">
           <div class="card-progress progress">
             <!-- <div
@@ -104,9 +104,19 @@
 </template>
 
 <script>
+import MultiLang from "@/core/multilang";
 import { ethers } from 'ethers';
 
 export default{
+  data(){
+    return{
+      currencyToUsdPrice:1,
+      userLogged:false,
+      userVoted:false,
+      userBidAmount:null,
+      lang: new MultiLang(this),
+    }
+  },
   methods:{
     abbrNum(number, decPlaces) {
       decPlaces = Math.pow(10, decPlaces);
@@ -179,14 +189,9 @@ export default{
       }
       this.userBidAmount=0;      
     },
-  },
-  data(){
-    return{
-      currencyToUsdPrice:1,
-      userLogged:false,
-      userVoted:false,
-      userBidAmount:null
-    }
+    translatesGet(key) {
+        return this.lang.get(key);
+    },
   },
   props:['item','voting'],
   async mounted(){

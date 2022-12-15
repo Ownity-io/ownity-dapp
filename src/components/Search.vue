@@ -16,7 +16,7 @@
                     </li>
                 </ul>
                 <div class="empty-list">
-                    Nothing Found
+                    {{translatesGet('NOTHING_FOUND')}}
                 </div>
             </div>
         </div>
@@ -24,13 +24,22 @@
 </template>
 
 <script>
+import MultiLang from "@/core/multilang";
+
 export default {
     data() {
         return {
             testBg: '',
             testOpenSearch: false,
             search: '',
+
+            lang: new MultiLang(this),
         }
+    },
+    methods:{
+        translatesGet(key) {
+            return this.lang.get(key);
+        },
     }
 }
 </script>

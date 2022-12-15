@@ -13,33 +13,33 @@
                         <ul class="">
                             <li>
                                 <router-link :class="active" :to="{name: 'Marketplace'}">
-                                    <span>Marketplace</span>
-                                    <span>Marketplace</span>
+                                    <span>{{translatesGet('MARKETPLACE')}}</span>
+                                    <span>{{translatesGet('MARKETPLACE')}}</span>
                                 </router-link>
                             </li>
                             <li v-if="$route.fullPath ==='/'">
                                 <a href="#screen-collections" >
-                                    <span>Collections</span>
-                                    <span>Collections</span>
+                                    <span>{{translatesGet('COLLECTIONS')}}</span>
+                                    <span>{{translatesGet('COLLECTIONS')}}</span>
                                 </a>
                             </li>
                             <li v-else >
                                 <router-link :to="{name: 'Main'}">
-                                    <span>Collections</span>
-                                    <span>Collections</span>
+                                    <span>{{translatesGet('COLLECTIONS')}}</span>
+                                    <span>{{translatesGet('COLLECTIONS')}}</span>
                                 </router-link>
                             </li>
                             <li>
                                 <router-link :class="active" :to="{name: 'Serve'}">
-                                    <span>Help</span>
-                                    <span>Help</span>
+                                    <span>{{translatesGet('HELP')}}</span>
+                                    <span>{{translatesGet('HELP')}}</span>
                                 </router-link>
                             </li>
                         </ul>
                     </nav>
                     <div class="btn-container" v-if="walletConnected==null||walletConnected=='null'">
                         <button class="btn btn-connect" @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true);">
-                            Connect Wallet
+                            {{translatesGet('CONNECT_WALLET')}}
                         </button>
                     </div>
                     <div class="btn-container" v-else>
@@ -67,6 +67,7 @@
 
 <script>
 
+import MultiLang from "@/core/multilang";
 import Search from '@/components/Search.vue'
 import MobileMenu from '@/components/MobileMenu.vue'
 
@@ -75,6 +76,7 @@ export default {
         return{
             walletConnected:1,
             mobileMenu: false,
+            lang: new MultiLang(this),
         }
     },
     components: {
@@ -90,7 +92,10 @@ export default {
         },
         goToTop(){
             window.scrollTo(0, 0);
-        }
+        },
+        translatesGet(key) {
+            return this.lang.get(key);
+        },
     },
     async mounted(){
         this.getWalletFromLS();
