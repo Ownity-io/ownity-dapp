@@ -8,14 +8,17 @@
           <div class="container">
             <div class="main-screen-container">
               <div class="section-block block-text" :class="{'play-text': playText}">
-                <h1 class="section-name-h1">Quant</h1>
+                <h1 class="section-name-h1">
+                  {{translatesGet('MAIN-H1')}}
+                </h1>
                 <h3 class="section-name-h3">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting
-                  industry. Lorem Ipsum has been the indus
+                  {{translatesGet('MAIN-H2')}}
                 </h3>
 
                 <router-link class="btn btn-home btn-home-main" :to="{ name: 'Marketplace' }">
-                  <span>Marketplace</span>
+                  <span>
+                    {{translatesGet('MAIN-MAIN_BTN')}}
+                  </span>
                 </router-link>
               </div>
               <div class="section-block block-slider">
@@ -38,10 +41,12 @@
             <div class="container">
               <div class="cards-carousel">
                 <div class="header-title-btn">
-                  <div class="title">Active</div>
+                  <div class="title">
+                    {{translatesGet('MAIN-SCREEN_2-TITLE')}}
+                  </div>
                   <div class="btn-wrap">
                     <router-link :to="{ name: 'Marketplace' }" class="btn btn-router-to">
-                      View all
+                      {{translatesGet('MAIN-SCREEN_2-BTN')}}
                       <i class="i-arrow-right-s-line"></i>
                     </router-link>
                   </div>
@@ -51,7 +56,7 @@
 
                 <div class="btn-mobile-wrap">
                   <router-link :to="{ name: 'Marketplace' }" class="btn btn-router-to">
-                    View all
+                    {{translatesGet('MAIN-SCREEN_2-BTN')}}
                     <i class="i-arrow-right-s-line"></i>
                   </router-link>
                 </div>
@@ -62,19 +67,33 @@
           <section class="section-home" id="screen-collections">
             <div class="container">
               <div class="section-home-header">
-                <div class="section-home-name">Top Collections</div>
+                <div class="section-home-name">
+                  {{translatesGet('MAIN-SCREEN_3-TITLE')}}
+                </div>
               </div>
 
-              <div class="table table-top-collections">
+              <div class="table table-top-collections"  v-if="collections!=null">
                 <div class="thead">
-                  <div class="td td-collection"><span>Collection</span></div>
-                  <div class="td td-price">Volume</div>
-                  <div class="td td-price">Floor price</div>
-                  <div class="td td-data">Owners</div>
-                  <div class="td td-data">Supply</div>
+                  <div class="td td-collection">
+                    <span>                  
+                      {{translatesGet('MAIN-SCREEN_3-TABLE-COL_1')}}
+                    </span>
+                  </div>
+                  <div class="td td-price">                  
+                    {{translatesGet('MAIN-SCREEN_3-TABLE-COL_2')}}
+                  </div>
+                  <div class="td td-price">                  
+                    {{translatesGet('MAIN-SCREEN_3-TABLE-COL_3')}}
+                  </div>
+                  <div class="td td-data">                  
+                    {{translatesGet('MAIN-SCREEN_3-TABLE-COL_4')}}
+                  </div>
+                  <div class="td td-data">                  
+                    {{translatesGet('MAIN-SCREEN_3-TABLE-COL_5')}}
+                  </div>
                 </div>
 
-                <div class="tr" v-for="collection in collections.results" :key="collection" v-if="collections!=null">
+                <div class="tr" v-for="collection in collections.results" :key="collection">
 
                   <div class="td td-collection">
                     <div class="td-wrap td-wrap-collection">
@@ -149,6 +168,7 @@ import CardsCarousel from "@/components/main/CardsCarousel.vue"
 import config from '@/config.json'
 import { ref } from 'vue';
 import { useElementVisibility } from '@vueuse/core';
+import MultiLang from "@/core/multilang";
 
 export default {
   data() {
@@ -159,7 +179,8 @@ export default {
       nfts:null,
       config:config,
       banners:null,
-      showCardsLoaderAnimation:true
+      showCardsLoaderAnimation:true,
+      lang: new MultiLang(this),
     };
   },
   components: {
@@ -257,7 +278,10 @@ export default {
       else{
           this.showCardsLoaderAnimation=false;
       }      
-    }
+    },
+    translatesGet(key) {
+      return this.lang.get(key);
+    },
   },
 };
 </script>

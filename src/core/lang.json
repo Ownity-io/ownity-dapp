@@ -1,0 +1,63 @@
+{
+    "en": {
+        "---------COMMON------------": "",
+        "CONNECT_WALLET":"Connect Wallet",
+        "MARKETPLACE":"Marketplace",
+        "COLLECTIONS":"Collections",
+        "HELP":"Help",
+
+        "STATUS-START":"Start",
+        "STATUS-CANCEL":"Cancel",
+        "STATUS-SALE":"Cancel",
+        "STATUS-VOITE":"Voite",
+        "STATUS-CANCELLATION":"Cancellation",
+        "STATUS-LISTING":"Listing",
+
+        "NOTHING_HERE":"Oops! Nothing here.",
+        "BACK_TO_ALL":"Back to all items",
+
+        "PRIVACY_POLICY":"Privacy policy",
+
+        "---------MAIN------------": "",
+        "MAIN-H1":"Quant",
+        "MAIN-H2":"Quant Lorem",
+        "MAIN-MAIN_BTN":"Marketplace",
+        "MAIN-SCREEN_2-TITLE":"Active",
+        "MAIN-SCREEN_2-BTN":"View all",
+        "MAIN-SCREEN_3-TITLE":"Top Collections",
+        "MAIN-SCREEN_3-TABLE-COL_1":"Collection",
+        "MAIN-SCREEN_3-TABLE-COL_2":"Volume",
+        "MAIN-SCREEN_3-TABLE-COL_3":"Floor price",
+        "MAIN-SCREEN_3-TABLE-COL_4":"Owners",
+        "MAIN-SCREEN_3-TABLE-COL_5":"Supply",
+
+        "---------FAQ------------": "",
+        "FAQ-H1-1":"What is Lorem Ipsum?",
+        "FAQ-H2-1":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "FAQ-H1-2":"What is Lorem Ipsum?",
+        "FAQ-H2-2":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "FAQ-H1-3":"What is Lorem Ipsum?",
+        "FAQ-H2-3":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+
+        "---------RECOMMEND_LIST------------": "",
+        "RECOMMEND_TITLE": "Your Recommendations",
+        "RECOMMEND_BTN": "To the Collections",
+
+        "---------ACTIVITY_TABLE------------": "",
+        "ACTIVITY_THEAD-1": "Collection",
+        "ACTIVITY_THEAD-2": "Category",
+        "ACTIVITY_THEAD-3": "Price",
+        "ACTIVITY_THEAD-4": "Tx",
+        "ACTIVITY_THEAD-5": "Date",
+
+        "---------COOKIES_TABLE------------": "",
+        "COOKIES-TITLE": "Cookies",
+        "COOKIES-ACCEPT": "Accept",
+        "COOKIES-SETTINGS": "Cookies settings",
+        "COOKIES-AGREE": "I agree",
+        "COOKIES-DESCRIBE-1": "We use cookies to enhance your experience, analyze our traffic, and for security and marketing. By visiting our website you agree to our use of cookies.",
+        "COOKIES-DESCRIBE-2": "We use cookies on our website to support technical features that enhance your user experience. We also collect anonymous analytical data, as described in our ",
+
+        "":""
+    }
+}

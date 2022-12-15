@@ -3,6 +3,7 @@ import marketplace from "@/store/modules/marketplace.js";
 import appGlobal from '@/store/modules/appGlobal.js'
 import walletsAndProvider from "./modules/walletsAndProvider";
 import marketplaceListing from "./modules/marketplaceListing";
+import site from "./modules/site";
 import user from './modules/user'
 const store = createStore({
   modules: {
@@ -10,7 +11,8 @@ const store = createStore({
     appGlobal,
     walletsAndProvider,
     marketplaceListing,
-    user
+    user,
+    site
   },
 });
 

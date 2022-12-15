@@ -12,7 +12,7 @@
               @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal', true)"
             >
             <!-- @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal', true)" -->
-              Connect Wallet
+              <span>{{translatesGet('CONNECT_WALLET')}}</span>
             </button>
           </div>
           <div class="btn-container" v-else>
@@ -30,24 +30,24 @@
           <ul class="">
             <li class="mobile-menu-item">
               <router-link :class="active" :to="{ name: 'Marketplace' }">
-                <span>Marketplace</span>
+                <span>{{translatesGet('MARKETPLACE')}}</span>
               </router-link>
             </li>
             <li class="mobile-menu-item"
               v-if="$route.fullPath ==='/'">
                 <a href="#screen-collections" >
-                    <span>Collections</span>
+                    <span>{{translatesGet('COLLECTIONS')}}</span>
                 </a>
             </li>
             <li class="mobile-menu-item"
               v-else >
                 <router-link :to="{name: 'Main'}">
-                    <span>Collections</span>
+                    <span>{{translatesGet('COLLECTIONS')}}</span>
                 </router-link>
             </li>
             <li class="mobile-menu-item">
               <router-link :class="active" :to="{name: 'Serve'}">
-                  <span>Help</span>
+                  <span>{{translatesGet('HELP')}}</span>
               </router-link>
             </li>
           </ul>
@@ -58,11 +58,22 @@
 </template>
 
 <script>
+import MultiLang from "@/core/multilang";
 import "@/assets/styles/menu.css";
 export default {
   props: ["walletConnected"],
+  data(){
+    return {
+      lang: new MultiLang(this),
+    }
+  },
   mounted(){
     console.log(this.walletConnected)
+  },
+  methods:{
+    translatesGet(key) {
+      return this.lang.get(key);
+    },
   }
 };
 </script>
