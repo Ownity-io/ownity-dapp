@@ -3,7 +3,7 @@
         "---------EVENTS------------": "",
         "CANCEL":"Cancel",
         "BUY":"Buy",
-        "":"",
+        "CONFIRM":"Confirm",
 
         "---------COMMON------------": "",
         "CONNECT_WALLET":"Connect Wallet",
@@ -77,6 +77,10 @@
         "OWNERS":"Owners",
         "SUPPLY":"Supply",
 
+        "LISTING_PRICE_TO":"Listing price to",
+        "MEMBERS_VOTED":"Members voted",
+
+        "---------VOTE------------": "",
         "":""
     }
 }
