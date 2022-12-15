@@ -24,6 +24,7 @@
 </template>
 
 <script>
+
 import Card from "@/components/Card.vue";
 
 export default {
@@ -40,4 +41,14 @@ export default {
     this.cards = await this.items;
   }
 };
+
 </script>
+
+<style>
+.recommendations-list li:hover {
+  z-index: 5;
+}
+.recommendations-list li .card {
+  min-height: 100%;
+}
+</style>
