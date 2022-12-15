@@ -41,23 +41,13 @@
               <div class="modal-data-block modal-select-part">
                 <div class="input-select-block">
                   <div class="input-select-title">Choose part</div>
-                  <div class="input-select-wrap" :class="{ 'unfolded': selectOpen }">
-                    <button
-                      class="input-selected"
-                      @click="selectOpen = !selectOpen"
-                    >
-                      <span>{{currentPart}}%</span>
-                      <i class="i-arrow-down-s-line"></i>
-                    </button>
-                    <div class="drop-down">
-                      <ul>
-                        <li v-for="element in partVariants" :key="element" @click="currentPart = element;selectOpen = !selectOpen;">
-                          <span>{{element}}%</span>
-                        </li>
-                      </ul>
-                    </div>
+                  <div class="input-wrapper input-percent">
+                    <input type="text" v-model="partComputed"
+                    placeholder="0%"
+                    onkeypress="return (event.charCode >= 48 && event.charCode <=57 && ((this.value<100 && this.value>=1 )|| this.value==''))"
+                    > 
                   </div>
-                  <div class="input-select-prompt">Min 1% to Max 10%</div>
+                  <div class="input-select-prompt">Min 1% to Max 100%</div>
                 </div>
               </div>
             </div>
@@ -238,6 +228,28 @@ export default {
         console.log('Error in contract');
       }
     },
-  }
+  },
+  computed:{
+    partComputed:{
+      get(){
+        return this.currentPart
+      },
+      set(value){
+        if (parseInt(value)>=100){
+          this.currentPart=100
+        }
+        else if(parseInt(value)<=1){
+          this.currentPart=1
+        }
+        else if(value == ''){
+          this.currentPart=null
+        }
+        else{
+          this.currentPart = value
+        }
+        
+      }
+    }
+  },
 };
 </script>
