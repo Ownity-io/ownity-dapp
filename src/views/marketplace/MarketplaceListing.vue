@@ -151,8 +151,8 @@
                 @click="this.$store.dispatch('appGlobal/setShowClaimNftModal',true)">Claim NFT</button> 
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount==0 & bidsOnSale)"
                 >Buy</button> 
-                <button class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='ON SALE' & userAddress!=null & userBidAmount>0)"
-                >Cancel sale</button> 
+                <a class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='ON SALE' & userAddress!=null & userBidAmount>0)"
+                @click="letsCheck2('ListingVote')" href="#votes">Cancel sale</a> 
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='SOLD' & userAddress!=null & userBidAmount>0)"
                 @click="this.$store.dispatch('appGlobal/setShowClaimRewardModal',true)">Claim reward</button> 
               </div>
@@ -273,7 +273,7 @@
                 <div v-if="activeTab2 === 'ListingVote'" 
                   class="section-votes-wrap">
 
-                  <div class="active-votes">
+                  <div class="active-votes" id="votes">
                     <div class="votes-wrap-title">
                       Active
                     </div>
