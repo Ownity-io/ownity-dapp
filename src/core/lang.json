@@ -8,15 +8,19 @@
         "MAIN-SCREEN_2-BTN":"View all",
         "MAIN-SCREEN_3-TITLE":"Top Collections",
         "MAIN-SCREEN_3-TABLE-COL_1":"Collection",
-        "MAIN-SCREEN_3-TABLE-COL_1":"Volume",
-        "MAIN-SCREEN_3-TABLE-COL_1":"Floor price",
-        "MAIN-SCREEN_3-TABLE-COL_1":"Owners",
-        "MAIN-SCREEN_3-TABLE-COL_1":"Supply",
-        "MAIN-SCREEN_3-TABLE-COL_1":"",
-        "MAIN-SCREEN_3-TABLE-COL_1":"",
-        "MAIN-SCREEN_3-TABLE-COL_1":"",
-        "MAIN-SCREEN_3-TABLE-COL_1":"",
-        "MAIN-SCREEN_3-TABLE-COL_1":"",
+        "MAIN-SCREEN_3-TABLE-COL_2":"Volume",
+        "MAIN-SCREEN_3-TABLE-COL_3":"Floor price",
+        "MAIN-SCREEN_3-TABLE-COL_4":"Owners",
+        "MAIN-SCREEN_3-TABLE-COL_5":"Supply",
+
+        "---------FAQ------------": "",
+        "FAQ-H1-1":"What is Lorem Ipsum?",
+        "FAQ-H2-1":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "FAQ-H1-2":"What is Lorem Ipsum?",
+        "FAQ-H2-2":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "FAQ-H1-3":"What is Lorem Ipsum?",
+        "FAQ-H2-3":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+
         "": ""
     }
 }
