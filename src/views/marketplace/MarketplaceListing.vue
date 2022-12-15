@@ -143,12 +143,14 @@
                 @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)">Deposit part</button>
                 <button class="btn btn-get" v-if="(((item.marketplace_status=='OPEN' ||item.marketplace_status=='CLOSED'))  & item.internal_status=='GATHER' & userAddress!=null & userBidAmount>0)"
                 @click="this.$store.dispatch('appGlobal/setshowDepositCancelModal',true)">Cancel</button>
-                <button class="btn btn-deposit" v-if="((item.marketplace_status=='CLOSED')) & item.internal_status=='OWNED' & userAddress!=null & this.userBidAmount>0"
+                <button class="btn btn-deposit" v-if="((item.marketplace_status=='CLOSED')) & item.internal_status=='OWNED' & userAddress!=null & this.userBidAmount>0 & !this.userBidBuyedAll"
                 @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">Start voting</button>
-                <button class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount>0)"
-                @click="this.$store.dispatch('appGlobal/setShowSellPartModal',true)">Sell a part</button> 
+                <button class="btn btn-deposit" v-if="((item.marketplace_status=='CLOSED')) & item.internal_status=='OWNED' & userAddress!=null & this.userBidBuyedAll"
+                @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">Sell NFT</button>
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidBuyedAll)"
                 @click="this.$store.dispatch('appGlobal/setShowClaimNftModal',true)">Claim NFT</button> 
+                <button class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount>0)"
+                @click="this.$store.dispatch('appGlobal/setShowSellPartModal',true)">Sell a part</button> 
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount==0 & bidsOnSale)"
                 >Buy</button> 
                 <a class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='ON SALE' & userAddress!=null & userBidAmount>0)"
@@ -523,7 +525,7 @@ export default {
           if (element.address == userAddress){
             this.userBidAmount = parseInt(element.amount);
             this.userBid = element;
-            if (element.status == this.item.price){
+            if (element.amount == this.item.price){
               this.userBidBuyedAll = true;
             }
             return;
