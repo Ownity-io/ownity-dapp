@@ -58,6 +58,12 @@
         "COOKIES-DESCRIBE-1": "We use cookies to enhance your experience, analyze our traffic, and for security and marketing. By visiting our website you agree to our use of cookies.",
         "COOKIES-DESCRIBE-2": "We use cookies on our website to support technical features that enhance your user experience. We also collect anonymous analytical data, as described in our ",
 
+        "---------LISTING------------": "",
+        "VOLUME":"Volume",
+        "FLOOR_PRICE":"Floor price",
+        "OWNERS":"Owners",
+        "SUPPLY":"Supply",
+
         "":""
     }
 }
