@@ -1118,8 +1118,8 @@ ul.tabs {
 
 .input-checkbox input[type='checkbox']:checked+label .i-check-line {
     color: #ffff;
-    background-color: #2CC07B;
-    border: 0px solid #2CC07B;
+    background: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%);
+    border: 0px solid #E15595;
     font-size: 24px;
 }
 
