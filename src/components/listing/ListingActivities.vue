@@ -2,17 +2,17 @@
     <div class="tab-contain tab-activities">
         <div class="table table-activities">
             <div class="thead">
-                <div class="td">Category</div>
-                <div class="td td-price">Price</div>
-                <div class="td">Tx</div>
-                <div class="td td-date">Date</div>
+                <div class="td">{{translatesGet('ACTIVITY_THEAD-2')}}</div>
+                <div class="td td-price">{{translatesGet('ACTIVITY_THEAD-3')}}</div>
+                <div class="td">{{translatesGet('ACTIVITY_THEAD-4')}}</div>
+                <div class="td td-date">{{translatesGet('ACTIVITY_THEAD-5')}}</div>
             </div>
                 
             <div class="tr">
                 <div class="td td-category">
                     <div class="td-wrap td-wrap-category">
                         <i class="i-shopping-bag-line"></i>
-                        <span>Sale</span>
+                        <span>{{translatesGet('STATUS-SALE')}}</span>
                     </div>
                 </div>
                 <div class="td td-price">
@@ -38,8 +38,26 @@
             </div>
             
             <div class="table-btn-row">
-                <button class="btn btn-show-more">Show more <i class="i-arrow-down-s-line"></i></button>
+                <button class="btn btn-show-more">{{translatesGet('SHOW_MORE')}} 
+                    <i class="i-arrow-down-s-line"></i>
+                </button>
             </div>
         </div>
     </div>
 </template>
+<script>
+import MultiLang from "@/core/multilang";
+
+export default {
+  data() {
+    return {
+      lang: new MultiLang(this),
+    };
+  },
+  methods:{
+    translatesGet(key) {
+      return this.lang.get(key);
+    },
+  }
+};
+</script>

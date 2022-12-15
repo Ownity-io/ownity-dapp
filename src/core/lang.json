@@ -8,10 +8,11 @@
 
         "STATUS-START":"Start",
         "STATUS-CANCEL":"Cancel",
-        "STATUS-SALE":"Cancel",
+        "STATUS-SALE":"Sale",
         "STATUS-VOITE":"Voite",
         "STATUS-CANCELLATION":"Cancellation",
         "STATUS-LISTING":"Listing",
+        "SHOW_MORE":"Show more",
 
         "NOTHING_HERE":"Oops! Nothing here.",
         "BACK_TO_ALL":"Back to all items",
