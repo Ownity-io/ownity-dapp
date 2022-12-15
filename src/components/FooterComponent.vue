@@ -9,7 +9,7 @@
                     </div>
                     <div class="footer-block" :class="{'unfolded' : !footerBlock1}">
                         <button class="footer-block-name" @click="footerBlock1 = !footerBlock1">
-                            Marketplace
+                            <span>{{translatesGet('MARKETPLACE')}}</span>
                             <i class="i-arrow-up-s-line"></i>
                         </button>
                         <ul class="footer-list">
@@ -22,7 +22,7 @@
                     </div>
                     <div class="footer-block" :class="{'unfolded' : !footerBlock2}">
                         <button class="footer-block-name" @click="footerBlock2 = !footerBlock2">
-                            Collections
+                            <span>{{translatesGet('COLLECTIONS')}}</span>
                             <i class="i-arrow-up-s-line"></i>
                         </button>
                         <ul class="footer-list">
@@ -36,48 +36,48 @@
                     </div>
                     <div class="footer-block" :class="{'unfolded' : !footerBlock3}">
                         <button class="footer-block-name" @click="footerBlock3 = !footerBlock3">
-                            Resources
+                            {{translatesGet('RESOURCES')}}
                             <i class="i-arrow-up-s-line"></i>
                         </button>
                         <ul class="footer-list">
-                            <li><a href="">Home</a>
+                            <li><a href="">{{translatesGet('HOME')}}</a>
                                 <div v-if="$route.fullPath ==='/'" @click="goToTop()"></div>
                                 <router-link :to="{name: 'Main'}" v-else></router-link>
                             </li>
-                            <li><router-link :to="{ name: 'Marketplace' }" >Marketplace</router-link></li>
+                            <li><router-link :to="{ name: 'Marketplace' }">{{translatesGet('MARKETPLACE')}}</router-link></li>
                             <li
                             v-if="$route.fullPath ==='/'">
                                 <a href="#screen-collections" >
-                                    <span>Collections</span>
+                                    <span>{{translatesGet('COLLECTIONS')}}</span>
                                 </a>
                             </li>
                             <li
                             v-else >
                                 <router-link :to="{name: 'Main'}">
-                                    <span>Collections</span>
+                                    <span>{{translatesGet('COLLECTIONS')}}</span>
                                 </router-link>
                             </li>
                             <li>
                                 <router-link :class="active" :to="{name: 'Serve'}">
-                                    <span>Help</span>
+                                    <span>{{translatesGet('HELP')}}</span>
                                 </router-link>
                             </li>
-                            <li><a href="">Sitemap</a></li>
+                            <li><a href="">{{translatesGet('SITEMAP')}}</a></li>
                         </ul>
                     </div>
                     <div class="footer-block footer-block-form">
                         <div class="footer-block-name">
-                            Stay in the loop
+                            {{translatesGet('FOOTER_FORM')}}
                             <!-- <i class="i-arrow-up-s-line"></i> -->
                         </div>
                         <form action="" class="footer-form">
                             <div class="input-wrapper">
                                 <input type="text" placeholder="Your email">
-                                <button type="submit" class="btn btn-subscribe">Subscribe</button>
+                                <button type="submit" class="btn btn-subscribe">{{translatesGet('SUBSCRIBE')}}</button>
                             </div>
-                            <p class="agree">By subscribing, you agree to the
+                            <p class="agree">{{translatesGet('BY_SUBSCRIBING')}}
                                 <router-link :to="{name: 'TermsOfUse'}">
-                                    <span>Terms of Use</span>
+                                    <span>{{translatesGet('TERMS_OF_USE')}}</span>
                                 </router-link>
                             </p>
                         </form>
@@ -91,10 +91,10 @@
                     <div class="footer-part footer-service-links">
                         <span class="copyright">&#169; 2022 Marketplace</span>
                         <router-link :to="{name: 'TermsOfUse'}">
-                            <span>Terms of Use</span>
+                            <span>{{translatesGet('TERMS_OF_USE')}}</span>
                         </router-link>
                         <router-link :to="{name: 'PrivacyPolicy'}">
-                            <span>Privacy Policy</span>
+                            <span>{{translatesGet('PRIVACY_POLICY')}}</span>
                         </router-link>
                     </div>
                     <div class="footer-part footer-social-links">
@@ -111,6 +111,8 @@
     </footer>
 </template>
 <script>
+import MultiLang from "@/core/multilang";
+
 export default {
     
 data() {
@@ -118,12 +120,16 @@ data() {
             footerBlock1: false,
             footerBlock2: false,
             footerBlock3: false,
+            lang: new MultiLang(this),
         }
     },
     methods:{
         goToTop(){
             window.scrollTo(0, 0);
-        }
+        },
+        translatesGet(key) {
+            return this.lang.get(key);
+        },
     }
 }
 </script>

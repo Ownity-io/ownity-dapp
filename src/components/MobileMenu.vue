@@ -67,9 +67,6 @@ export default {
       lang: new MultiLang(this),
     }
   },
-  mounted(){
-    console.log(this.walletConnected)
-  },
   methods:{
     translatesGet(key) {
       return this.lang.get(key);

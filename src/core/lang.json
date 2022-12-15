@@ -5,11 +5,18 @@
         "BUY":"Buy",
         "CONFIRM":"Confirm",
 
+        "NOTHING_FOUND": "Nothing Found",
+
         "---------COMMON------------": "",
         "CONNECT_WALLET":"Connect Wallet",
         "MARKETPLACE":"Marketplace",
         "COLLECTIONS":"Collections",
+        "RESOURCES":"Resources",
+        "HOME":"Home",
         "HELP":"Help",
+        "SITEMAP":"Sitemap",
+        "FOOTER_FORM":"Stay in the loop",
+        "SUBSCRIBE":"Subscribe",
 
         "STATUS-START":"Start",
         "STATUS-CANCEL":"Cancel",
@@ -17,12 +24,16 @@
         "STATUS-VOITE":"Voite",
         "STATUS-CANCELLATION":"Cancellation",
         "STATUS-LISTING":"Listing",
+        "STATUS-CLOSED":"Closed",
+        "STATUS-OPEN":"Open",
         "SHOW_MORE":"Show more",
 
         "NOTHING_HERE":"Oops! Nothing here.",
         "BACK_TO_ALL":"Back to all items",
 
         "PRIVACY_POLICY":"Privacy policy",
+        "TERMS_OF_USE":"Terms of Use",
+        "BY_SUBSCRIBING":"By subscribing, you agree to the",
 
         "CONTRACT_ADDRESS":"Contract Address",
         "TOKEN_STANDARD":"Token standard",
@@ -79,6 +90,11 @@
 
         "LISTING_PRICE_TO":"Listing price to",
         "MEMBERS_VOTED":"Members voted",
+
+        "---------FILTER------------": "",
+        "MIN": "Min",
+        "MAX": "Max",
+        "CLEAR_ALL": "",
 
         "---------VOTE------------": "",
         "":""
