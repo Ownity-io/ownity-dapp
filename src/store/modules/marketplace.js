@@ -23,7 +23,8 @@ export default {
       currentCollection: null,
       currentlyGatehring:false,
       currentBidStatus:null,
-      selectedSort:null
+      selectedSort:null,
+      onSale:false
     };
   },
   getters: {
@@ -105,6 +106,9 @@ export default {
     },
     getSelectedSort(state){
       return state.selectedSort;
+    },
+    getOnSale(state){
+      return state.onSale;
     }
   },
   mutations: {
@@ -154,6 +158,9 @@ export default {
     },
     setSelectedSort(state,value){
       state.selectedSort = value;
+    },
+    setOnSale(state,value){
+      state.onSale = value;
     }
   },
   actions: {
@@ -178,7 +185,6 @@ export default {
       if (context.getters.getCurrentMaxPrice!=null){
         requestUrl += `&price_lt=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
       }
-      requestUrl += `&marketplace_status=OPEN`;
       if (context.getters.getSelectedSort!=null){
         requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;
       }
@@ -254,6 +260,7 @@ export default {
       context.commit("setCurrentMaxPrice", null);
       context.commit("setCurrentlyGathering",false);
       context.commit("setCurrentBidStatus",false);
+      context.commit("setOnSale",false);
     },
     async setCurrentlyGathering(context,value){
       context.commit("setCurrentlyGathering", value);
@@ -273,13 +280,11 @@ export default {
       if (context.getters.getCurrentMaxPrice!=null){
         requestUrl += `&price_lt=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
       }
-      console.log(context.getters.getCurrentStatus);
-      if (context.getters.getCurrentStatus){
-        requestUrl += `&marketplace_status=CLOSED`;
+      if (context.getters.getCurrentlyGathering){
+        console.log(context.getters.getCurrentStatus);
+        requestUrl += `&internal_status=GATHER`;
       }
-      else{
-        requestUrl += `&marketplace_status=OPEN`;
-      }
+    
       if (context.getters.getCurrentBidStatus!=null & context.getters.getCurrentBidStatus!=false){
         requestUrl += `&bid_status=${context.getters.getCurrentBidStatus}`;
       }
@@ -323,11 +328,8 @@ export default {
         requestUrl += `&price_lt=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
       }
       console.log(context.getters.getCurrentStatus);
-      if (context.getters.getCurrentStatus){
-        requestUrl += `&marketplace_status=CLOSED`;
-      }
-      else{
-        requestUrl += `&marketplace_status=OPEN`;
+      if (context.getters.getCurrentlyGathering){
+        requestUrl += `&internal_status=GATHER`;
       }
       if (context.getters.getSelectedSort!=null){
         requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;
@@ -365,12 +367,9 @@ export default {
       if (context.getters.getCurrentMaxPrice!=null){
         requestUrl += `&price_lt=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
       }
-      console.log(context.getters.getCurrentStatus);
+      console.log(context.getters.getOnSale);
       if (context.getters.getCurrentStatus){
-        requestUrl += `&marketplace_status=CLOSED`;
-      }
-      else{
-        requestUrl += `&marketplace_status=OPEN`;
+        requestUrl += `&internal_status=ON SALE`;
       }
       if (context.getters.getSelectedSort!=null){
         requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;
@@ -395,6 +394,9 @@ export default {
     },
     setSelectedSort(context,value){
       context.commit("setSelectedSort", value);
+    },
+    setOnSale(context,value){
+      context.commit('setOnSale',value);
     }
   },
 };

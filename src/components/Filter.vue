@@ -39,7 +39,7 @@
       </ul>
     </div> -->
 
-    <div class="filter-section" :class="{ 'collapse-section': filterSection0 }" v-if="this.$route.name=='Profile'">
+    <div class="filter-section" :class="{ 'collapse-section': filterSection0 }" v-if="this.$route.name=='Profile' & (this.onlyFav||(!this.onlyFav & !this.vote))">
       <button class="filter-section-name" @click="filterSection0 = !filterSection0">
         <span>Status</span>
         <i class="i-arrow-up-s-line"></i>
@@ -47,9 +47,26 @@
       <ul class="filter-ul">
         <li class="filter-li" >
           <div class="input-checkbox input-switcher">
-            <input type="checkbox" id="input-switch" v-model="checkedStatus" @change="fetchAndSetListingsStartInfo"/>
+            <input type="checkbox" id="input-switch" v-model="currentlyGathering" @change="fetchAndSetListingsStartInfo"/>
             <label for="input-switch">
-              <span>Open/Close</span>
+              <span>Live gather </span>
+              <div class="input-switch"></div>
+            </label>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="filter-section" :class="{ 'collapse-section': filterSection0 }" v-if="this.vote">
+      <button class="filter-section-name" @click="filterSection0 = !filterSection0">
+        <span>Status</span>
+        <i class="i-arrow-up-s-line"></i>
+      </button>
+      <ul class="filter-ul">
+        <li class="filter-li" >
+          <div class="input-checkbox input-switcher">
+            <input type="checkbox" id="input-switch" v-model="onSale" @change="fetchAndSetListingsStartInfo"/>
+            <label for="input-switch">
+              <span>On Sale</span>
               <div class="input-switch"></div>
             </label>
           </div>
@@ -57,7 +74,7 @@
       </ul>
     </div>
     
-    <div class="filter-section" :class="{ 'collapse-section': filterSection1 }" v-if="false">
+    <!-- <div class="filter-section" :class="{ 'collapse-section': filterSection1 }" v-if="false">
       <button class="filter-section-name" @click="filterSection1 = !filterSection1">
         <span>Status</span>
         <i class="i-arrow-up-s-line"></i>
@@ -68,7 +85,6 @@
             <input type="checkbox" :id="item" v-model="checkedStatus" :true-value="item" :false-value="null" @change="fetchAndSetListingsStartInfo"/>
             <label :for="item">
               <span>{{(item  === 'CLOSED') ? 'Closed' : 'Open' }}</span>
-              <!-- "CLOSED", "OPEN -->
               <i class="i-check-line"></i>
             </label>
           </div>
@@ -122,7 +138,7 @@
           </div>
         </li>
       </ul>
-    </div>
+    </div>  -->
     <div class="filter-section" :class="{ 'collapse-section': filterSection2 }" v-if="this.$route.name=='Profile' & onlyFav">
       <button class="filter-section-name" @click="filterSection2 = !filterSection2">
         <span>[Bid Status]</span>
@@ -223,7 +239,6 @@ export default {
         await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address);
       }
       else if (this.$route.name == 'Profile'){
-        console.log(this.checkedStatus);
         if (this.onlyFav){          
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');
         }
@@ -304,7 +319,15 @@ export default {
       set(value){
         this.$store.dispatch('marketplace/setCurrentBidStatus',value)
       }
-    }
+    },
+    onSale:{
+      get(){
+        return this.$store.getters['marketplace/getOnSale'];
+      },
+      set(value){
+        this.$store.dispatch('marketplace/setOnSale',value);
+      }
+    },
   },
   props:['onlyFav','vote']
 };
