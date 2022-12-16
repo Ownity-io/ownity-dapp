@@ -50,11 +50,11 @@
         </div>
         <div class="card-to-buy" v-if="bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0">
           <div class="card-col">
-            <span class="card-col-name">Part</span>
+            <span class="card-col-name">{{translatesGet('PART')}}</span>
             <span><strong>{{toFixedIfNecessary(bidOnSale.fraction_amount/item.price*100,1)}}%</strong></span>
           </div>
           <div class="card-col">
-            <span class="card-col-name">Sale for</span>
+            <span class="card-col-name">{{translatesGet('SALE_FOR')}}</span>
             <div class="card-value">
               <div class="icon-value"></div>
               <div class="card-col-value">
@@ -76,9 +76,9 @@
             <table class="table-more-info">
               <thead>
                 <tr>
-                  <td>Owner</td>
-                  <td class="td td-price">Price</td>
-                  <td >Pct</td>
+                  <td>{{translatesGet('OWNER')}}</td>
+                  <td class="td td-price">{{translatesGet('PRICE')}}</td>
+                  <td >{{translatesGet('PCT')}}</td>
                 </tr>
               </thead>
               <tbody>             
@@ -248,57 +248,59 @@
           </div>
         </div>
         <div class="data-tr data-tr-date" v-if="(remainTimeString!=null & this.item.marketplace_status!='CLOSED' & this.item.internal_status!='SOLD' & this.item.internal_status!='OWNED')" >
-          <div>Ends in {{remainTimeString}}</div>
+          <div>{{translatesGet('ENDS_IN')}} {{remainTimeString}}</div>
         </div>
         <div class="data-tr data-tr-date" v-else-if="this.item.marketplace_status!='CLOSED' & this.item.internal_status!='SOLD' & this.item.internal_status!='OWNED'">
-          Expired
+          {{translatesGet('EXPIRED')}}
         </div>
       </div>
       <div class="btn-container">
         <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">
-          Buy together
+          {{translatesGet('BUY_TOGETHER')}}
         </a>
         <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & userBidAmount<=0">
-          Deposit part
+          {{translatesGet('DEPOSIT_PART')}}
         </a>
         <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='CLOSED' & (item.internal_status=='CLOSED'||item.internal_status=='GATHER') & userBidAmount>0">
-          Cancel
+          {{translatesGet('CANCEL')}}
         </a>
         <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="(item.internal_status=='SOLD' & userBidAmount>0)">
-          Claim reward
+          {{translatesGet('CLAIM_REWARD')}}
         </a>
         <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0">
-          Buy
+          {{translatesGet('BUY')}}
         </a>
         <div v-if="(item.marketplace_status=='CLOSED' & item.internal_status=='OWNED' & this.voting==null) & userBidAmount>0 & !userBidOnSale" class="container-btn-part container-btn-part-vote">
           <a class="btn btn-vote" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" >
-            Vote
+            {{translatesGet('VOTE')}}
           </a>
           <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
-            Sell a part
+            {{translatesGet('SELL_A_PART')}}
           </a>
         </div>
         <div class="container-btn-part container-btn-part-row" v-if="(userBidAmount>0 & item.marketplace_status=='GATHER')">
-            <div class="part-data">
-              My part 
+            <div class="part-data">               
+              {{translatesGet('MY_PART')}}
               <div class="card-value">
                 <div class="icon-value"></div>
                 <span>{{abbrNum(toFixedIfNecessary(convertToEther(userBidAmount),6),2)}} ETH</span> 
               </div>
             </div>
             <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
-              <div class="btn">Cancel</div>
+              <div class="btn">
+                {{translatesGet('CANCEL')}}                
+              </div>
             </a>
         </div>
 
         <!-- ######## 2 ######## -->
         <div class="container-btn-part" v-if="userBidOnSale & this.item.internal_status!='ON SALE'">
           <div class="card-col">
-            <span class="card-col-name">Part</span>
+            <span class="card-col-name">{{translatesGet('PART')}}</span>
             <span><strong>{{toFixedIfNecessary(userBidOnSale.fraction_amount/this.item.price*100,1)}}%</strong></span>
           </div>
           <div class="card-col">
-            <span class="card-col-name">Sale for</span>
+            <span class="card-col-name">{{translatesGet('SALE_FOR')}}</span>
             <div class="card-value">
               <div class="icon-value"></div>
               <div class="card-col-value">
@@ -314,7 +316,7 @@
           <div class="card-col">
             <div class="deposit-label">
               <i class="i-volume-vibrate-line"></i>
-              <strong>Vote:</strong>
+              <strong>{{translatesGet('VOTE')}}:</strong>
             </div>
           </div>
           <div class="card-col">
@@ -329,18 +331,18 @@
                   <div class="label-col">
                     <div class="icon-label" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></div>
                     <b>{{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount),6),1)}} ETH</b>
-                    <div>Progress: {{toFixedIfNecessary((this.voting.users.length/this.item.bids.length)*100,1)}}%</div>
+                    <div>{{translatesGet('PROGRESS')}}: {{toFixedIfNecessary((this.voting.users.length/this.item.bids.length)*100,1)}}%</div>
                   </div>
                 </div>
           </div>
           <div class="card-col">
-            <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="btn" v-if="userVoted">Confirm</a>
+            <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="btn" v-if="userVoted">{{translatesGet('CONFIRM')}}</a>
           </div>
         </div> 
 
         <div class="deposit-label" v-if="this.item.internal_status=='ON SALE' & this.voting!=null">
           <i class="i-shopping-bag-line"></i>
-          On Sale: <div class="marketplace"> <span class="icon-market" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></span> {{this.voting.marketplace.name}}</div>
+          {{translatesGet('ON_SALE')}}: <div class="marketplace"> <span class="icon-market" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></span> {{this.voting.marketplace.name}}</div>
         </div>
         <div class="deposit-value" v-if="this.item.internal_status=='ON SALE' & this.voting!=null">
           <div class="icon-token"></div>
@@ -357,7 +359,7 @@
         <!-- ######## 6 ######## -->
         <!-- <div class="deposit-label" >
           <i class="i-shopping-bag-line"></i>
-          On Sale: <div class="marketplace"> <span class="icon-market"></span> LooksRare</div>
+          {{translatesGet('ON_SALE')}}: <div class="marketplace"> <span class="icon-market"></span> LooksRare</div>
         </div> -->
 
       </div>
@@ -368,6 +370,7 @@
 <script>
 import { ethers } from 'ethers';
 import config from "@/config.json";
+import MultiLang from "@/core/multilang";
 export default {
   data() {
     return {
@@ -388,13 +391,17 @@ export default {
       itemWithBidsOnSale:null,
       bidOnSale:null,
       render:false,
-      userBidOnSale:null
+      userBidOnSale:null,
+      lang: new MultiLang(this),
     };
   },
   props:[
     'item'
   ],
   methods:{
+    translatesGet(key) {
+      return this.lang.get(key);
+    },
     setPriceInCurrency(){
       this.priceInCurrency = this.toFixedIfNecessary((this.item.price / (10**this.item.currency.decimals)),6);
     },

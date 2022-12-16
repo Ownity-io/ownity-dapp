@@ -10,7 +10,7 @@
       <div class="modal-header-img">
         <div class="icon-congrats"> </div>
         <div class="modal-header-img-name">
-          You have successfully transaction
+          {{translatesGet('TRANS_SUCCESS')}}
         </div>
       </div>
       
@@ -18,14 +18,14 @@
         <div class="modal-container">
           <div class="table table-modal table-modal-trans">
               <div class="thead">
-                  <div class="td">Status</div>
-                  <div class="td">Tx</div>
+                  <div class="td">{{translatesGet('ACTIVITY_THEAD-7')}}</div>
+                  <div class="td">{{translatesGet('ACTIVITY_THEAD-4')}}</div>
               </div>
                   
               <div class="tr">
                   <div class="td">
                       <div class="td-wrap td-wrap-completed">
-                          <span>Completed</span>
+                          <span>{{translatesGet('COMPLETED')}}</span>
                       </div>
                   </div>
                   <div class="td"> 
@@ -46,13 +46,13 @@
 
           <!-- v-if="currentPart "  -->
           <div class="modal-desktop-footer">
-            <!-- <button disabled class="btn btn-modal-main" @click="reloadPage">Done</button> -->
-            <button class="btn btn-modal-main" @click="reloadPage">Done</button>
+            <!-- <button disabled class="btn btn-modal-main" @click="reloadPage">{{translatesGet('DONE')}}</button> -->
+            <button class="btn btn-modal-main" @click="reloadPage">{{translatesGet('DONE')}}</button>
           </div>
 
           <!-- v-else  -->
           <!-- <div class="modal-desktop-footer">
-            <button class="btn btn-modal-main">Done</button>
+            <button class="btn btn-modal-main">{{translatesGet('DONE')}}</button>
             <button class="btn btn-modal-main">
               <svg class="loader" viewBox="0 0 18 18"  xmlns="http://www.w3.org/2000/svg">
                 <path d="M15.364 2.63609L13.95 4.05009C12.8049 2.90489 
@@ -73,13 +73,13 @@
             
       <!-- v-if="currentPart "  -->
       <div  class="modal-mobile-footer">
-        <!-- <button disabled class="btn btn-modal-main" @click="reloadPage">Done</button> -->
-        <button class="btn btn-modal-main" @click="reloadPage">Done</button>
+        <!-- <button disabled class="btn btn-modal-main" @click="reloadPage">{{translatesGet('DONE')}}</button> -->
+        <button class="btn btn-modal-main" @click="reloadPage">{{translatesGet('DONE')}}</button>
       </div>
 
       <!-- v-else  -->
       <!-- <div   class="modal-mobile-footer">
-        <button   class="btn btn-modal-main">Done</button>
+        <button   class="btn btn-modal-main">{{translatesGet('DONE')}}</button>
         <button class="btn btn-modal-main">
           <svg class="loader" viewBox="0 0 18 18"  xmlns="http://www.w3.org/2000/svg">
             <path d="M15.364 2.63609L13.95 4.05009C12.8049 2.90489 
@@ -101,16 +101,22 @@
 
 <script>
 import config from '@/config';
+import MultiLang from "@/core/multilang";
+
 export default{
 
   methods:{
     reloadPage(){
       location.reload();
-    }
+    },
+    translatesGet(key) {
+      return this.lang.get(key);
+    },
   },
   data(){
     return{
-      config:config
+      config:config,
+      lang: new MultiLang(this),
     }    
   }
 
