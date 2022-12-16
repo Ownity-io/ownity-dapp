@@ -4,6 +4,14 @@
         "CANCEL":"Cancel",
         "BUY":"Buy",
         "CONFIRM":"Confirm",
+        "SHOW_MORE":"Show more",
+        "CLAIM_REWARD":"Claim reward",
+        "DEPOSIT_PART":"Deposit part",
+        "BUY_TOGETHER":"Buy together",
+        "VOTE":"Vote",
+        "SELL_A_PART":"Sell a part",
+        "":"",
+        "":"",
 
         "NOTHING_FOUND": "Nothing Found",
 
@@ -26,7 +34,6 @@
         "STATUS-LISTING":"Listing",
         "STATUS-CLOSED":"Closed",
         "STATUS-OPEN":"Open",
-        "SHOW_MORE":"Show more",
 
         "NOTHING_HERE":"Oops! Nothing here.",
         "BACK_TO_ALL":"Back to all items",
@@ -39,6 +46,17 @@
         "TOKEN_STANDARD":"Token standard",
         "BLOCKCHAIN":"Blockchain",
         "TOKEN_ID":"Token ID",
+
+        "PART":"Part",
+        "SALE_FOR":"Sale for",
+        "ON_SALE":"On Sale",
+        "OWNER":"Owner",
+        "PRICE":"Price",
+        "PCT":"Pct",
+        "ENDS_IN":"Ends in",
+        "EXPIRED":"Expired",
+        "MY_PART":"My part",
+        "PROGRESS":"Progress",
 
         "---------MAIN------------": "",
         "MAIN-H1":"Quant",
@@ -94,7 +112,11 @@
         "---------FILTER------------": "",
         "MIN": "Min",
         "MAX": "Max",
-        "CLEAR_ALL": "",
+        "CLEAR_ALL": "Clear all",
+
+        "---------CARD------------": "",
+
+
 
         "---------VOTE------------": "",
         "":""
