@@ -9,7 +9,7 @@
 
       <section class="section-header">
         <div class="container">
-          <h1 class="section-name-h1">Privacy Policy</h1>
+          <h1 class="section-name-h1">{{translatesGet('PRIVACY_POLICY')}}</h1>
           <!-- <h3 class="section-name-h3">Frequently Asked Question</h3> -->
         </div>
       </section>
@@ -18,22 +18,15 @@
         <div class="container">
           <div class="exposition-container">
             <div class="exposition-block">
-              Octogamex.com website administration is obliged to maintain your privacy on
-              the Internet. We pay great attention to securing the data you provided to
-              us. The purposes, for which we collect your personal data are:
+              {{translatesGet('PRIVACY_POLICY_SECTION-1')}}
               <ul>
-                <li>to provide users with services</li>
-                <li>to improve our service</li>
-                <li>
-                  to communicate with visitors to this site, newsletters, online sales
-                </li>
-                <li>to present the information requested by the user</li>
-                <li>to provide services associated with the website's specialization</li>
-                <li>to provide the user with customer support</li>
-                <li>
-                  to protect the security of our services, detect and prevent fraud,
-                  comply with legal requirements
-                </li>
+                <li v-html="translatesGet('PRIVACY_POLICY_SECTION-1-LIST_1')"></li>
+                <li v-html="translatesGet('PRIVACY_POLICY_SECTION-1-LIST_2')"></li>
+                <li v-html="translatesGet('PRIVACY_POLICY_SECTION-1-LIST_3')"></li>
+                <li v-html="translatesGet('PRIVACY_POLICY_SECTION-1-LIST_4')"></li>
+                <li v-html="translatesGet('PRIVACY_POLICY_SECTION-1-LIST_5')"></li>
+                <li v-html="translatesGet('PRIVACY_POLICY_SECTION-1-LIST_6')"></li>
+                <li v-html="translatesGet('PRIVACY_POLICY_SECTION-1-LIST_7')"></li>
               </ul>
             </div>
           </div>
@@ -43,31 +36,19 @@
       <section class="section-service-exposition">
         <div class="container">
           <div class="exposition-container">
-            <div class="exposition-name">Personal Data Storage and Processing</div>
+            <div class="exposition-name">{{translatesGet('PRIVACY_POLICY_SECTION-2')}}</div>
             <div class="exposition-block">
-              We collect and process your personal data only with your willing consent.
-              With your permission, we can collect and process the following data:
+              {{translatesGet('PRIVACY_POLICY_SECTION-2-1')}}
               <ul>
-                <li>
-                  <b>Identification information:</b> name and surname, date of birth,
-                  e-mail address, phone number, home address, geolocation data
-                </li>
-                <li>
-                  <b>Transaction information:</b> public blockchain data, personal
-                  information published on the blockchain (digital wallet identifications,
-                  IP addresses)
-                </li>
-                <li>
-                  <b>Financial information:</b> bank card information, routing number,
-                  credit card number, debit card number
-                </li>
-                <li>
-                  <b>Additional information:</b> social media account information,
-                  personal photos, correspondence, data usage, device information.
-                </li>
+                <li v-html="translatesGet('PRIVACY_POLICY_SECTION-2-LIST_1')"></li>
+                <li v-html="translatesGet('PRIVACY_POLICY_SECTION-2-LIST_2')"></li>
+                <li v-html="translatesGet('PRIVACY_POLICY_SECTION-2-LIST_3')"></li>
+                <li v-html="translatesGet('PRIVACY_POLICY_SECTION-2-LIST_4')"></li>
+                <li v-html="translatesGet('PRIVACY_POLICY_SECTION-2-LIST_5')"></li>
+                <li v-html="translatesGet('PRIVACY_POLICY_SECTION-2-LIST_6')"></li>
+                <li v-html="translatesGet('PRIVACY_POLICY_SECTION-2-LIST_7')"></li>
               </ul>
-              Collection and processing of your personal information is carried out in
-              accordance with the laws of the European Union and the United Kingdom.
+              {{translatesGet('PRIVACY_POLICY_SECTION-2-2')}}
             </div>
           </div>
         </div>
@@ -76,20 +57,11 @@
       <section class="section-service-exposition">
         <div class="container">
           <div class="exposition-container">
-            <div class="exposition-name">Data Storage, Alteration, and Removal</div>
+            <div class="exposition-name">{{translatesGet('PRIVACY_POLICY_SECTION-3')}}</div>
             <div class="exposition-block">
-              The user, who has provided octogamex.com with their personal data, has the
-              right for their alteration and removal, as well as the right to recall the
-              agreement to data processing. Time, during which your personal data will be
-              stored is: commercial and taxing data storage time. After finishing with the
-              processing of your personal data, the website's administration will
-              permanently delete it. 
+              <p v-html="translatesGet('PRIVACY_POLICY_SECTION-3-1')"></p>
               <br/>
-              To access your personal data, you can contact the
-              administration at: <a href="#">support@octogamex.com</a>. We will be able to pass your data
-              to a third party only with your willing consent. If the data was transferred
-              to a third party, which is not associated with our organization, we cannot
-              perform any changes to that data.
+              <p v-html="translatesGet('PRIVACY_POLICY_SECTION-3-2')"></p>
             </div>
           </div>
         </div>
@@ -100,14 +72,25 @@
 
 <script>
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
+import MultiLang from "@/core/multilang";
 import "./styles.css";
 
 export default {
   components: {
     Breadcrumbs,
   },
+  data() {
+    return {
+      lang: new MultiLang(this),
+    };
+  },
   mounted(){
     window.scrollTo(0, 0);
+  },
+  methods:{
+    translatesGet(key) {
+      return this.lang.get(key);
+    },
   }
 };
 </script>

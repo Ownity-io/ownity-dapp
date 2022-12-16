@@ -8,6 +8,7 @@
         "CONFIRM":"Confirm",
         "SHOW_MORE":"Show more",
         "SHOW":"Show",
+        "APPLY":"Apply",
 
         "CLAIM_REWARD":"Claim reward",
         "DEPOSIT_PART":"Deposit part",
@@ -55,7 +56,7 @@
         "NOTHING_HERE":"Oops! Nothing here.",
         "BACK_TO_ALL":"Back to all items",
 
-        "PRIVACY_POLICY":"Privacy policy",
+        "PRIVACY_POLICY":"Privacy Policy",
         "TERMS_OF_USE":"Terms of Use",
         "BY_SUBSCRIBING":"By subscribing, you agree to the",
 
@@ -92,6 +93,7 @@
         "ABOUT_COLLECTION":"About Collection",
         "ACTIVITIES":"Activities",
         "CHAT":"Chat",
+        "FAVOURITES":"Favourites",
 
         "---------MAIN------------": "",
         "MAIN-H1":"Quant",
@@ -178,8 +180,52 @@
         "TRANS_SUCCESS":"You have successfully transaction",
         "VOTE_CONFIRM":"Vote confirm",
         "CHOOSE_MARKETPLACE":"Choose marketplace",
-        "":"",
-        "":"",
-        "":""
+
+        "---------PRIVACY_POLICY------------": "",
+
+        "PRIVACY_POLICY_SECTION-1":"Octogamex.com website administration is obliged to maintain your privacy on the Internet. We pay great attention to securing the data you provided to us. The purposes, for which we collect your personal data are:",
+        "PRIVACY_POLICY_SECTION-1-LIST_1":"to provide users with services",
+        "PRIVACY_POLICY_SECTION-1-LIST_2":"to improve our service",
+        "PRIVACY_POLICY_SECTION-1-LIST_3":"to communicate with visitors to this site, newsletters, online sales",
+        "PRIVACY_POLICY_SECTION-1-LIST_4":"to present the information requested by the user",
+        "PRIVACY_POLICY_SECTION-1-LIST_5":"to provide services associated with the website's specialization",
+        "PRIVACY_POLICY_SECTION-1-LIST_6":"to provide the user with customer support",
+        "PRIVACY_POLICY_SECTION-1-LIST_7":"to protect the security of our services, detect and prevent fraud, comply with legal requirements",
+    
+        "PRIVACY_POLICY_SECTION-2":"Personal Data Storage and Processing",
+        "PRIVACY_POLICY_SECTION-2-1":"We collect and process your personal data only with your willing consent. With your permission, we can collect and process the following data:",
+        "PRIVACY_POLICY_SECTION-2-LIST_1":"<b>Identification information:</b> name and surname, date of birth, e-mail address, phone number, home address, geolocation data",
+        "PRIVACY_POLICY_SECTION-2-LIST_2":"<b>Transaction information:</b> public blockchain data, personal information published on the blockchain (digital wallet identifications, IP addresses)",
+        "PRIVACY_POLICY_SECTION-2-LIST_3":"<b>Financial information:</b> bank card information, routing number, credit card number, debit card number",
+        "PRIVACY_POLICY_SECTION-2-LIST_4":"<b>Additional information:</b> social media account information, personal photos, correspondence, data usage, device information.",
+        "PRIVACY_POLICY_SECTION-2-2":"Collection and processing of your personal information is carried out in accordance with the laws of the European Union and the United Kingdom.",
+        
+        "PRIVACY_POLICY_SECTION-3":"Data Storage, Alteration, and Removal",
+        "PRIVACY_POLICY_SECTION-3-1":"The user, who has provided octogamex.com with their personal data, has the right for their alteration and removal, as well as the right to recall the agreement to data processing. Time, during which your personal data will be stored is: commercial and taxing data storage time. After finishing with the processing of your personal data, the website's administration will permanently delete it.",
+        "PRIVACY_POLICY_SECTION-3-2":"To access your personal data, you can contact the administration at: <a href=\"#\">support@octogamex.com</a>. We will be able to pass your data to a third party only with your willing consent. If the data was transferred to a third party, which is not associated with our organization, we cannot perform any changes to that data.",
+        
+
+        "---------TERMS_OF_USE------------": "",
+        "INTRODUCTION":"Introduction",
+        "TERMS_OF_USE_SECTION-1-1":"The elephantslab.com website located at https://elephantslab.com/ is a copyrighted work belonging to ELEPHANTSLAB LP. Certain features of the Site may be subject to additional guidelines, terms, or rules, which will be posted on the Site in connection with such features.All such additional terms, guidelines, and rules are incorporated by reference into these Terms.These Terms of Use describe the legally binding terms and conditions that oversee your use of the Site. BY LOGGING INTO THE SITE, YOU ARE BEING COMPLIANT THAT THESE TERMS and you represent that you have the authority and capacity to enter into these Terms. YOU SHOULD BE AT LEAST 18 YEARS OF AGE TO ACCESS THE SITE. IF YOU DISAGREE WITH ALL OF THE PROVISION OF THESE TERMS, DO NOT LOG INTO AND/OR USE THE SITE.These terms require the use of arbitration Section 10.2 on an individual basis to resolve disputes and also limit the remedies available to you in the event of a dispute.",
+        "TERMS_OF_USE_SECTION-2":"Access to the Site",
+        "TERMS_OF_USE_SECTION-2-1":"Subject to these Terms. ElephantsLab grants you a non-transferable, non-exclusive, revocable, limited license to access the Site solely for your own personal, noncommercial use.",
+        "TERMS_OF_USE_SECTION-2-2":"Certain Restrictions. The rights approved to you in these Terms are subject to the following restrictions: (a) you shall not sell, rent, lease, transfer, assign, distribute, host, or otherwise commercially exploit the Site; (b) you shall not change, make derivative works of, disassemble, reverse compile or reverse engineer any part of the Site; (c) you shall not access the Site in order to build a similar or competitive website; and (d) except as expressly stated herein, no part of the Site may be copied, reproduced, distributed, republished, downloaded, displayed, posted or transmitted in any form or by any means unless otherwise indicated, any future release, update, or other addition to functionality of the Site shall be subject to these Terms. All copyright and other proprietary notices on the Site must be retained on all copies thereof.ElephantsLab reserves the right to change, suspend, or cease the Site with or without notice to you. You approved that the ElephantsLab will not be held liable to you or any third-party for any change, interruption, or termination of the Site or any part.",
+        "TERMS_OF_USE_SECTION-2-3":"No Support or Maintenance. You agree that the ElephantsLab will have no obligation to provide you with any support in connection with the Site.Excluding any User Content that you may provide, you are aware that all the intellectual property rights, including copyrights, patents, trademarks, and trade secrets, in the Site and its content are owned by ElephantsLab or ElephantsLab's suppliers. Note that these Terms and access to the Site do not give you any rights, title or interest in or to any intellectual property rights, except for the limited access rights expressed in Section 2.1. ElephantsLab and its suppliers reserve all rights not granted in these Terms.",
+        "TERMS_OF_USE_SECTION-3":"Third-Party Links & Ads. Other Users",
+        "TERMS_OF_USE_SECTION-3-1":"Third-Party Links & Ads. The Site may contain links to third-party websites and services, and/or display advertisements for third-parties. Such Third-Party Links & Ads are not under the control of ElephantsLab, and ElephantsLab is not responsible for any Third-Party Links & Ads. ElephantsLab provides access to these Third-Party Links & Ads only as a convenience to you, and does not review, approve, monitor, endorse, warrant, or make any representations with respect to Third-Party Links & Ads.",
+
+        "---------SRVE/HELP------------": "",
+
+        "FAQ_TITLE": "Frequently Asked Question",
+        "YOUR_NAME": "Your name",
+        "CONTACT_US": "Contact us",
+        "YOUR_EMAIL": "Your email",
+        "YOUR_MSG": "Your message",
+        "AGREEMENT": "By clicking on the button «Submit» you accept our Terms of Use",
+        "": "Your name",
+        "": "Your name"
+        
+    
     }
 }

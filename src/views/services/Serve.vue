@@ -9,8 +9,8 @@
 
       <section class="section-header">
         <div class="container">
-          <h1 class="section-name-h1">Frequently Asked Question</h1>
-          <h3 class="section-name-h3">Frequently Asked Question</h3>
+          <h1 class="section-name-h1">{{translatesGet('FAQ_TITLE')}}</h1>
+          <h3 class="section-name-h3">{{translatesGet('FAQ_TITLE')}}</h3>
         </div>
       </section>
 
@@ -24,12 +24,12 @@
         <div class="container">
           <div class="form-contact">
             <div class="container-form">
-              <div class="section-form-title">Contact us</div>
+              <div class="section-form-title">{{translatesGet('CONTACT_US')}}</div>
               <form action="" class="form">
 
                 <div class="container-input">
                   <div class="input-header">
-                    <div>Your name</div>
+                    <div>{{translatesGet('YOUR_NAME')}}</div>
                   </div>
                   <div class="input-wrapper input-wrapper-form">
                     <input type="text" placeholder="Example: Alex">
@@ -38,7 +38,7 @@
 
                 <div class="container-input">
                   <div class="input-header">
-                    <div>Your email</div>
+                    <div>{{translatesGet('YOUR_EMAIL')}}</div>
                   </div>
                   <div class="input-wrapper input-wrapper-form">
                     <input type="text" placeholder="alexwork@emal.com">
@@ -47,19 +47,19 @@
 
                 <div class="container-input container-input-textarea">
                   <div class="input-header">
-                    <div>Your message</div>
+                    <div>{{translatesGet('YOUR_MSG')}}</div>
                   </div>
                   <div class="input-wrapper input-wrapper-form input-wrapper-textarea">
                     <textarea type="text" placeholder="Ask your question"></textarea>
                   </div>
-                  <p class="agreement">
-                    By clicking on the button «Submit» you accept our Terms of Use
+                  <p class="agreement" v-html="translatesGet('AGREEMENT')">
+                    
                   </p>
                 </div>
 
               </form>
 
-              <button class="btn btn-submit">Submit</button>
+              <button class="btn btn-submit">{{translatesGet('SUBMIT')}}</button>
             </div>
           </div>
         </div>
@@ -71,6 +71,7 @@
 
 <script>
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
+import MultiLang from "@/core/multilang";
 import Faq from "@/components/Faq.vue";
 
 
@@ -79,8 +80,18 @@ export default {
     Breadcrumbs,
     Faq,
   },
+  data() {
+    return {
+      lang: new MultiLang(this),
+    };
+  },
   mounted(){
     window.scrollTo(0, 0);
+  },
+  methods:{
+    translatesGet(key) {
+      return this.lang.get(key);
+    },
   }
 };
 </script>
