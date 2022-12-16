@@ -196,9 +196,10 @@
                 @click="letsCheck2('ListingVote')" href="#votes">
                   {{translatesGet('CANCEL_SELL')}}
                 </a> 
-                <a class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='ON SALE' & userAddress!=null & userBidAmount>0 & !this.item.votings)">
+                <button class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='ON SALE' & userAddress!=null & userBidAmount>0 & !this.item.votings)"
+                  @click="this.$store.dispatch('appGlobal/setCurrentVoting',this.voting);this.$store.dispatch('appGlobal/setShowVoteConfirmModal',true)">
                   {{translatesGet('CANCEL_SELL')}}
-                </a> 
+                </button> 
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='SOLD' & userAddress!=null & userBidAmount>0)"
                 @click="this.$store.dispatch('appGlobal/setShowClaimRewardModal',true)">Claim reward</button> 
               </div>

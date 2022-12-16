@@ -217,7 +217,6 @@
 
 <script>
 import config from '@/config.json';
-import VoteConfirmVue from './modal/VoteConfirm.vue';
 export default {
   data() {
     return {
