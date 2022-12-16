@@ -2,7 +2,7 @@
   <main>
     <div v-if="filterMobile" class="filter-mobile-wrap">
       <div class="filter-mobile-header">
-        <div>Filters</div>
+        <span>{{translatesGet('FILTERS')}}</span>
         <button class="btn-close" @click="filterMobile=false">
           <i class="i-close-line"></i>
         </button>
