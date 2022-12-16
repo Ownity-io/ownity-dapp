@@ -247,10 +247,8 @@ export default {
         }
         else{
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
-        }
-        
-      }
-      
+        }        
+      }      
     },
   },
   computed:{

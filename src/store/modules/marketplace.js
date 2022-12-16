@@ -195,6 +195,7 @@ export default {
       if (context.getters.getCurrentlyGathering){
         requestUrl+='&internal_status=GATHER';
       }
+      requestUrl+='&marketplace_status=OPEN';
       console.log(requestUrl)
       let request = await fetch(requestUrl);
       let requestCode = request.ok;
