@@ -8,6 +8,7 @@
         "CONFIRM":"Confirm",
         "SHOW_MORE":"Show more",
         "SHOW":"Show",
+        "APPLY":"Apply",
 
         "CLAIM_REWARD":"Claim reward",
         "DEPOSIT_PART":"Deposit part",
@@ -92,6 +93,7 @@
         "ABOUT_COLLECTION":"About Collection",
         "ACTIVITIES":"Activities",
         "CHAT":"Chat",
+        "FAVOURITES":"Favourites",
 
         "---------MAIN------------": "",
         "MAIN-H1":"Quant",

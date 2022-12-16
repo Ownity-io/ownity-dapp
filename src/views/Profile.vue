@@ -4,15 +4,15 @@
             <div v-if="filterMobile" class="filter-mobile-wrap">
                 <div class="filter-mobile-container">
                     <div class="filter-mobile-header">
-                        <div>Filters</div>
+                        <div>{{translatesGet('FILTERS')}}</div>
                         <button class="btn-close" @click="filterMobile=false">
                             <i class="i-close-line"></i>
                         </button>
                     </div>
                     <Filter :onlyFav="activeTab == 'Favourites'" :vote="activeTab == 'Vote'"/>
                     <div class="filter-mobile-footer">
-                        <button class="btn btn-clear">Clear all</button>
-                        <button class="btn btn-submit">Apply</button>
+                        <button class="btn btn-clear">{{translatesGet('CLEAR_ALL')}}</button>
+                        <button class="btn btn-submit">{{translatesGet('APPLY')}}</button>
                     </div>
                 </div>
             </div>
@@ -36,16 +36,28 @@
                                     <ul>
                                         <li>
                                             <i class="i-pencil-line"></i>
-                                            <span>Edit</span>
+                                            <span>
+                                                {{translatesGet('EDIT')}}
+                                            </span>
                                         </li>
                                         <li>
                                             <i class="i-share-line"></i>
-                                            <span>Share</span>
+                                            <span>
+                                                {{translatesGet('SHARE')}}
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <i class="i-logout-box-line"></i>
+                                            <span>
+                                                {{translatesGet('LOG_OUT')}}
+                                            </span>
                                         </li>
                                         <li>
                                             <router-link :to="{name:'Main'}" @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',false);clearLocalStorage()">
                                                 <i class="i-logout-box-line"></i>
-                                                <span>Log Out</span>
+                                                <span>
+                                                    {{translatesGet('LOG_OUT')}}
+                                                </span>
                                             </router-link>                                            
                                         </li>
                                     </ul>
@@ -64,7 +76,9 @@
                         <div class="profile-container-btns">
                             <router-link :to="{name:'Main'}" class="btn btn-log-out" @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',false);clearLocalStorage()">
                                 <i class="i-logout-box-line"></i>
-                                <span>Log Out</span>
+                                <span>
+                                    {{translatesGet('LOG_OUT')}}
+                                </span>
                             </router-link>
                         </div>
                     </div>
@@ -79,23 +93,23 @@
                             :class="{ 'active-tab': activeTab === 'ListCards' }"
                             @click="letsCheck('ListCards');this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');"
                             >
-                                <span>Items</span>                                
-                                <span>Items</span>
+                                <span>{{translatesGet('ITEMS')}}</span>
+                                <span>{{translatesGet('ITEMS')}}</span>
                             </button>
                         </li>
                         <li>
                             <button
                             :class="{ 'active-tab': activeTab === 'Favourites' }"
                             @click="letsCheck('Favourites');this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');">
-                                <span>Favourites</span>                                
-                                <span>Favourites</span>
+                                <span>{{translatesGet('FAVOURITES')}}</span>
+                                <span>{{translatesGet('FAVOURITES')}}</span>
                             </button>
                         </li>
                         <li>
                             <button :class="{ 'active-tab': activeTab === 'Vote' }"
                             @click="letsCheck('Vote');this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');">
-                                <span>Vote</span>                                
-                                <span>Vote</span>
+                                <span>{{translatesGet('VOTE')}}</span>
+                                <span>{{translatesGet('VOTE')}}</span>
                             </button>
                         </li>
                         <li>
@@ -103,8 +117,8 @@
                             :class="{ 'active-tab': activeTab === 'ActivityTable' }"
                             @click="letsCheck('ActivityTable')"
                             >
-                                <span>Activities</span>                                
-                                <span>Activities</span>
+                                <span>{{translatesGet('ACTIVITIES')}}</span>
+                                <span>{{translatesGet('ACTIVITIES')}}</span>
                             </button>
                         </li>
                     </ul>
@@ -116,14 +130,14 @@
                         <div class="params-block params-block-filter">
                             <div class="param-wrap">
                                 <button class="btn-param btn-param-desktop" @click="filter = !filter">
-                                <i
-                                    :class="{ 'i-arrow-left-s-line': filter, 'i-filter-2-line': !filter }"
-                                ></i>
-                                <span>Filter</span>
+                                    <i
+                                        :class="{ 'i-arrow-left-s-line': filter, 'i-filter-2-line': !filter }"
+                                    ></i>
+                                    <span>{{translatesGet('FILTER')}}</span>
                                 </button>
                                 <button class="btn-param btn-param-mobile"  @click="filterMobile=true">
                                     <i class="i-filter-2-line" ></i>
-                                    <span>Filter</span>
+                                    <span>{{translatesGet('FILTER')}}</span>
                                 </button>
                             </div>
                         </div>
@@ -177,7 +191,7 @@
                         <ActivityTable v-if="activeTab === 'ActivityTable'" />
                         <button v-if="activeTab == 0" class="btn-filter-mobile"  @click="filterMobile=true">
                             <i class="i-filter-2-line" ></i>
-                            <span>Filter</span>
+                            <span>{{translatesGet('FILTER')}}</span>
                         </button>
                     </div>
                 </section>
@@ -190,6 +204,7 @@ import Filter from "@/components/Filter.vue";
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
 import SelectedFilters from "@/components/SelectedFilters.vue";
 import ListCards from "@/components/ListCards.vue";
+import MultiLang from "@/core/multilang";
 import config from '@/config.json';
 
 export default {
@@ -201,7 +216,8 @@ export default {
             filter: true,
             filterMobile: false,
             mobileDropDown: false,
-            config:config
+            config:config,
+            lang: new MultiLang(this),
         };
     },
     components:{
@@ -217,6 +233,9 @@ export default {
         await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
     },
     methods: {
+        translatesGet(key) {
+        return this.lang.get(key);
+        },
         letsCheck(name) {
           this.activeTab = name;
         },
