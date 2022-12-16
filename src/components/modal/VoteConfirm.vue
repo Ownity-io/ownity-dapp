@@ -2,7 +2,7 @@
   <div class="modal" v-if="render">
     <div class="modal-wrapper modal-confirm-vote">
       <div class="modal-header">
-        <div class="modal-name">Vote confirm</div>
+        <div class="modal-name">{{translatesGet('VOTE_CONFIRM')}}</div>
         <button class="btn-close" @click="this.$store.dispatch('appGlobal/setShowVoteConfirmModal',false)">
           <i class="i-close-line"></i>
         </button>
@@ -23,7 +23,7 @@
           <div class="modal-section-main-data">
             <div class="modal-main-data-container">
               <div class="modal-data-block modal-nft-block">
-                List your NFT to sell on
+                {{translatesGet('LIST_NFT_SELL')}}
                 <div class="nft-block">
                   <div class="icon-nft-block" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></div>
                   <span>{{this.voting.marketplace.name}}</span>
@@ -44,7 +44,7 @@
           
           <!-- v-if="currentPart "  -->
           <div class="modal-desktop-footer" v-if="!buttonWainting">
-            <button class="btn btn-modal-main" @click="confirmVote">Confirm</button>
+            <button class="btn btn-modal-main" @click="confirmVote">{{translatesGet('CONFIRM')}}</button>
           </div>
 
           <!-- v-else  -->
@@ -69,7 +69,7 @@
             
       <!-- v-if="currentPart "  -->
       <div  class="modal-mobile-footer" v-if="!buttonWainting">
-        <button class="btn btn-modal-main" @click="confirmVote">Confirm</button>
+        <button class="btn btn-modal-main" @click="confirmVote">{{translatesGet('CONFIRM')}}</button>
       </div>
 
       <!-- v-else  -->
@@ -98,6 +98,8 @@ import config from '@/config.json';
 import ABI from '@/abi.json';
 import { ethers } from 'ethers';
 import { toRaw } from '@vue/reactivity';
+import MultiLang from "@/core/multilang";
+
 export default {
   data() {
     return {
@@ -108,7 +110,8 @@ export default {
       config:config,
       ABI:ABI,
       provider:null,
-      buttonWainting:false
+      buttonWainting:false,
+      lang: new MultiLang(this),
     };
   },
   async mounted(){
@@ -119,6 +122,9 @@ export default {
     this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
   },
   methods:{
+    translatesGet(key) {
+      return this.lang.get(key);
+    },
     abbrNum(number, decPlaces) {
       decPlaces = Math.pow(10, decPlaces);
       var abbrev = ["k", "m", "b", "t"];

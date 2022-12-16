@@ -2,7 +2,7 @@
   <div class="modal" v-if="render">
     <div class="modal-wrapper">
       <div class="modal-header">
-        <div class="modal-name">Buy part</div>
+        <div class="modal-name">{{translatesGet('BUY_PART')}}</div>
         <button class="btn-close" @click="this.$store.dispatch('appGlobal/setShowBuyPartModal',false)">
           <i class="i-close-line"></i>
         </button>
@@ -25,7 +25,7 @@
               <div class="modal-data-block">
                 <div class="modal-current-part">
                   <i class="i-coupon-3-line"></i>
-                  Part: <span>{{(partOnMarket.fraction_amount/item.price*100)}}%</span>
+                  {{translatesGet('PART')}}: <span>{{(partOnMarket.fraction_amount/item.price*100)}}%</span>
                 </div>
               </div>
             </div>
@@ -34,25 +34,25 @@
           <div class="modal-section-total">
             <div class="total-block">
               <div class="total-block-row">
-                <div class="total-block-name">Total:</div>
+                <div class="total-block-name">{{translatesGet('TOTAL')}}:</div>
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
                     <b>{{abbrNum(toFixedIfNecessary(convertToEther(partOnMarket.price),6),2)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(partOnMarket.price)*currencyToUsdPrice,2),2)}}</span>
                   </div>
-                  <div class="total-fees">Fees:<span>3%</span></div>
+                  <div class="total-fees">{{translatesGet('FEES')}}:<span>3%</span></div>
                 </div>
               </div>
             </div>
           </div>
           <div class="total-block-describe">
-            The marketplace charges a fee for each transaction.
-            <a href="#">Terms of Use</a>
+            {{translatesGet('TOTAL_DESCRIBE')}}
+            <a href="#">{{translatesGet('TERMS_OF_USE')}}</a>
           </div>
 
           <!-- v-if="currentPart "  -->
           <div class="modal-desktop-footer" v-if="!buttonWaiting">
-            <button class="btn btn-modal-main" @click="buyPart">Sumbit</button>
+            <button class="btn btn-modal-main" @click="buyPart">{{translatesGet('SUBMIT')}}</button>
           </div>
 
           <!-- v-else  -->
@@ -77,12 +77,16 @@
             
       <!-- v-if="currentPart "  -->
       <div  class="modal-mobile-footer" v-if="!buttonWaiting">
-        <button class="btn btn-modal-main" @click="buyPart">Sumbit</button>
+        <button class="btn btn-modal-main" @click="buyPart">
+          {{translatesGet('SUBMIT')}}
+        </button>
       </div>
 
       <!-- v-else  -->
       <div   class="modal-mobile-footer" v-if="buttonWaiting">
-        <button   class="btn btn-modal-main">Deposit part</button>
+        <button   class="btn btn-modal-main">
+          {{translatesGet('DEPOSIT_PART')}}
+        </button>
         <button class="btn btn-modal-main">
           <svg class="loader" viewBox="0 0 18 18"  xmlns="http://www.w3.org/2000/svg">
             <path d="M15.364 2.63609L13.95 4.05009C12.8049 2.90489 
@@ -107,6 +111,8 @@ import ABI from '@/abi.json';
 import { ethers } from 'ethers';
 import { toRaw } from '@vue/reactivity';
 import config from '@/config';
+import MultiLang from "@/core/multilang";
+
 export default {
   data() {
     return {
@@ -118,7 +124,8 @@ export default {
       currencyToUsdPrice:1,
       ABI:ABI,
       config:config,
-      buttonWaiting:false
+      buttonWaiting:false,
+      lang: new MultiLang(this),
     };
   },
   async mounted(){
@@ -129,6 +136,9 @@ export default {
     this.render = true;
   },
   methods:{
+    translatesGet(key) {
+      return this.lang.get(key);
+    },
     abbrNum(number, decPlaces) {
       decPlaces = Math.pow(10, decPlaces);
       var abbrev = ["k", "m", "b", "t"];

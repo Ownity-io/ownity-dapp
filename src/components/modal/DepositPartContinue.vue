@@ -2,7 +2,7 @@
   <div class="modal" v-if ='render'>
     <div class="modal-wrapper">
       <div class="modal-header">
-        <div class="modal-name">Deposit part</div>
+        <div class="modal-name">{{translatesGet('DEPOSIT_PART')}}</div>
         <button class="btn-close" @click="this.$store.dispatch('appGlobal/setshowContinueCollectingModal',false)">
           <i class="i-close-line"></i>
         </button>
@@ -21,7 +21,7 @@
             <!-- TODO: what is that? -->
             <div class="modal-current-part" v-if="false">
               <i class="i-coupon-3-line"></i>
-              Your part: <span>10%</span>
+              {{translatesGet('YOUR_PART')}}: <span>10%</span>
             </div>
           </div>
 
@@ -29,7 +29,7 @@
             <div class="modal-main-data-container">
               <div class="modal-data-block modal-select-part">
                 <div class="input-select-block">
-                  <div class="input-select-title">Choose part</div>
+                  <div class="input-select-title">{{translatesGet('CHOOSE_PART')}}</div>
                   <div class="input-wrapper input-percent">
                     <input type="text" v-model="partComputed"
                     placeholder="0%"
@@ -55,12 +55,19 @@
                       </ul>
                     </div> 
                   </div>-->
-                  <div class="input-select-prompt">Min 1% to Max 100%</div>
+                  <div class="input-select-prompt">
+                    {{translatesGet('INPUT_MIN')}}
+                    1%
+                    {{translatesGet('TO')}}
+                    {{translatesGet('INPUT_MAX')}}
+                    100%
+                    <!-- Min 1% to Max 100% -->
+                  </div>
                 </div>
               </div>
               <div class="modal-data-block modal-data-block-price">
                 <div class="price-block">
-                  <div class="price-block-title">Price of your part</div>
+                  <div class="price-block-title">{{translatesGet('PRICE_PART')}}</div>
                   <div class="price-block-value price-value">
                     <div class="icon-value"></div>
                     <span>{{abbrNum(toFixedIfNecessary(((this.item.price/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</span>
@@ -74,26 +81,26 @@
           <div class="modal-section-total">
             <div class="total-block">
               <div class="total-block-row">
-                <div class="total-block-name">Total:</div>
+                <div class="total-block-name">{{translatesGet('TOTAL')}}:</div>
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
                     <b>{{abbrNum(toFixedIfNecessary(((this.item.price/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(((this.item.price/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</span>
                   </div>
-                  <div class="total-fees">Fees:<span>3%</span></div>
+                  <div class="total-fees">{{translatesGet('FEES')}}:<span>3%</span></div>
                 </div>
               </div>
             </div>
           </div>
           <div class="total-block-describe">
-            The marketplace charges a fee for each transaction.
-            <a href="#">Terms of Use</a>
+            {{translatesGet('TOTAL_DESCRIBE')}}
+            <a href="#">{{translatesGet('TERMS_OF_USE')}}</a>
           </div>
 
           <!-- v-if="currentPart "  -->
           <div v-if="!buttonWaiting" class="modal-desktop-footer">
-            <button disabled class="btn btn-modal-main" v-if="!(currentPart>0 & currentPart!='')">Deposit part</button>
-            <button class="btn btn-modal-main" @click="buyLot" v-else>Deposit part</button>
+            <button disabled class="btn btn-modal-main" v-if="!(currentPart>0 & currentPart!='')">{{translatesGet('DEPOSIT_PART')}}</button>
+            <button class="btn btn-modal-main" @click="buyLot" v-else>{{translatesGet('DEPOSIT_PART')}}</button>
           </div>
 
           <!-- v-else  -->
@@ -118,8 +125,8 @@
             
       <!-- v-if="currentPart "  -->
       <div v-if="!buttonWaiting" class="modal-mobile-footer">
-        <button disabled class="btn btn-modal-main" v-if="!(currentPart>0 & currentPart!='')">Deposit part</button>
-        <button class="btn btn-modal-main" @click="buyLot" v-else>Deposit part</button>
+        <button disabled class="btn btn-modal-main" v-if="!(currentPart>0 & currentPart!='')">{{translatesGet('DEPOSIT_PART')}}</button>
+        <button class="btn btn-modal-main" @click="buyLot" v-else>{{translatesGet('DEPOSIT_PART')}}</button>
       </div>
 
       <!-- v-else  -->
@@ -148,6 +155,8 @@ import { ethers } from 'ethers';
 import ABI from '@/abi.json';
 import config from '@/config.json';
 import { toRaw } from '@vue/reactivity';
+import MultiLang from "@/core/multilang";
+
 export default {
   data() {
     return {
@@ -162,7 +171,8 @@ export default {
       currentPart:0,
       currencyToUsdPrice:1,
       allBidsAmount:0,
-      buttonWaiting:false
+      buttonWaiting:false,
+      lang: new MultiLang(this),
     };
   },
   async mounted(){
@@ -174,6 +184,9 @@ export default {
     this.render = true;
   },
   methods:{
+    translatesGet(key) {
+      return this.lang.get(key);
+    },
     async buyLot(){ 
       this.buttonWaiting = true; 
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());

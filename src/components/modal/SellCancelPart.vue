@@ -2,7 +2,7 @@
   <div class="modal" v-if="render">
     <div class="modal-wrapper">
       <div class="modal-header">
-        <div class="modal-name">Cancel sell</div>
+        <div class="modal-name">{{translatesGet('CANCEL_SELL')}}</div>
         <!-- (Відмінити продаж на маркетплейсі) -->
         <button class="btn-close" @click="this.$store.dispatch('appGlobal/setCancellSellVotingModal',false)">
           <i class="i-close-line"></i>
@@ -24,7 +24,7 @@
           <div class="modal-section-main-data">
             <div class="modal-main-data-container">
               <div class="modal-data-block modal-nft-block">
-                List your NFT to sell on
+                {{translatesGet('LIST_NFT_SELL')}}
                 <div class="nft-block">
                   <div class="icon-nft-block" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></div>
                   <span>{{this.voting.marketplace.name}}</span>
@@ -32,7 +32,7 @@
               </div>
               <div class="modal-data-block modal-data-block-price">
                 <div class="price-block">
-                  <div class="price-block-title">Price of your part</div>
+                  <div class="price-block-title">{{translatesGet('PRICE_PART')}}</div>
                   <div class="price-block-value price-value">
                     <div class="icon-value"></div>
                     <span>{{this.abbrNum(this.toFixedIfNecessary(this.userBidAmount/10**item.currency.decimals,6),1)}} ETH</span>
@@ -46,7 +46,7 @@
           <div class="modal-section-total">
             <div class="total-block">
               <div class="total-block-row">
-                <div class="total-block-name">Total:</div>
+                <div class="total-block-name">{{translatesGet('TOTAL')}}:</div>
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
@@ -58,18 +58,18 @@
             </div>
           </div>
           <div class="total-block-describe">
-            The marketplace charges a fee for each transaction.
-            <a href="#">Terms of Use</a>
+            {{translatesGet('TOTAL_DESCRIBE')}}
+            <a href="#">{{translatesGet('TERMS_OF_USE')}}</a>
           </div>
           
           <!-- v-if="currentPart "  -->
           <div class="modal-desktop-footer">
-            <button disabled class="btn btn-modal-main">Cancel sell</button>
+            <button disabled class="btn btn-modal-main">{{translatesGet('CANCEL_SELL')}}</button>
           </div>
 
           <!-- v-else  -->
           <div class="modal-desktop-footer">
-            <button class="btn btn-modal-main" @click="startVote">Cancel sell</button>
+            <button class="btn btn-modal-main" @click="startVote">{{translatesGet('CANCEL_SELL')}}</button>
             <button class="btn btn-modal-main">
               <svg class="loader" viewBox="0 0 18 18"  xmlns="http://www.w3.org/2000/svg">
                 <path d="M15.364 2.63609L13.95 4.05009C12.8049 2.90489 
@@ -89,12 +89,12 @@
             
       <!-- v-if="currentPart "  -->
       <div  class="modal-mobile-footer">
-        <button disabled class="btn btn-modal-main">Cancel sell</button>
+        <button disabled class="btn btn-modal-main">{{translatesGet('CANCEL_SELL')}}</button>
       </div>
 
       <!-- v-else  -->
       <div   class="modal-mobile-footer">
-        <button   class="btn btn-modal-main" @click="startVote">Cancel sell</button>
+        <button   class="btn btn-modal-main" @click="startVote">{{translatesGet('CANCEL_SELL')}}</button>
         <button class="btn btn-modal-main">
           <svg class="loader" viewBox="0 0 18 18"  xmlns="http://www.w3.org/2000/svg">
             <path d="M15.364 2.63609L13.95 4.05009C12.8049 2.90489 
@@ -115,7 +115,9 @@
 </template>
 
 <script>
-import config from '@/config.json'
+import config from '@/config.json';
+import MultiLang from "@/core/multilang";
+
 export default {
   data() {
     return {
@@ -125,7 +127,8 @@ export default {
       item:null,
       currencyToUsdPrice:1,
       render:false,
-      userBidAmount:null
+      userBidAmount:null,
+      lang: new MultiLang(this),
     };
   },
   async mounted(){
@@ -136,6 +139,9 @@ export default {
     this.render = true;
   },
   methods:{
+    translatesGet(key) {
+      return this.lang.get(key);
+    },
     abbrNum(number, decPlaces) {
       decPlaces = Math.pow(10, decPlaces);
       var abbrev = ["k", "m", "b", "t"];
