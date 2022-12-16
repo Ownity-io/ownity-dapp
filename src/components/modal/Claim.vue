@@ -2,7 +2,7 @@
   <div class="modal" v-if="render">
     <div class="modal-wrapper modal-claim">
       <div class="modal-header">
-        <div class="modal-name">Claim your NFT</div>
+        <div class="modal-name">{{translatesGet('CLAIM_YOUR_NFT')}}</div>
         <button class="btn-close" @click="this.$store.dispatch('appGlobal/setShowClaimNftModal',false)">
           <i class="i-close-line"></i>
         </button>
@@ -35,13 +35,13 @@
             </div>
           </div> -->
           <div class="total-block-describe">
-            The marketplace charges a fee for each transaction.
-            <a href="#">Terms of Use</a>
+            {{translatesGet('TOTAL_DESCRIBE')}}
+            <a href="#">{{translatesGet('TERMS_OF_USE')}}</a>
           </div>
 
           <!-- v-if="currentPart "  -->
           <div class="modal-desktop-footer" v-if="!buttonWaiting">
-            <button class="btn btn-modal-main" @click="claimNft">Claim</button>
+            <button class="btn btn-modal-main" @click="claimNft">{{translatesGet('CLAIM')}}</button>
           </div>
 
           <!-- v-else  -->
@@ -67,7 +67,7 @@
             
       <!-- v-if="currentPart "  -->
       <div  class="modal-mobile-footer" v-if="!buttonWaiting">
-        <button class="btn btn-modal-main" @click="claimNft">Claim</button>
+        <button class="btn btn-modal-main" @click="claimNft">{{translatesGet('CLAIM')}}</button>
       </div>
 
       <!-- v-else  -->
@@ -95,6 +95,7 @@
 import ABI from '@/abi.json';
 import { ethers } from 'ethers';
 import { toRaw } from '@vue/reactivity';
+import MultiLang from "@/core/multilang";
 import config from '@/config';
 export default {
   data() {
@@ -105,7 +106,8 @@ export default {
       provider:null,
       ABI:ABI,
       config:config,
-      buttonWaiting:false
+      buttonWaiting:false,
+      lang: new MultiLang(this),
     };
   },
   async mounted(){
@@ -114,6 +116,9 @@ export default {
     this.render = true;
   },
   methods:{
+    translatesGet(key) {
+      return this.lang.get(key);
+    },
     async claimNft(){ 
       this.buttonWaiting = true; 
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());

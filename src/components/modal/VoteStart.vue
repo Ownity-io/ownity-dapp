@@ -2,7 +2,7 @@
   <div class="modal" v-if="render">
     <div class="modal-wrapper">
       <div class="modal-header">
-        <div class="modal-name">Vote</div>
+        <div class="modal-name">{{translatesGet('VOTE')}}</div>
         <button class="btn-close" @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',false)">
           <i class="i-close-line"></i>
         </button>
@@ -25,7 +25,7 @@
               <div class="modal-data-block">
                 <div class="modal-input container-input">
                   <div class="input-header">
-                    <div>Price</div>
+                    <div>{{translatesGet('PRICE')}}</div>
                     <div class="price-value">
                       <div class="icon-value"></div>
                       <span>ETH</span>
@@ -35,14 +35,14 @@
                     <input type="text" placeholder="Input amount" v-model="amount">
                     <div class="input-equivalent equivalent" v-if="amount>0">≈ $ {{abbrNum(Math.round(amount * currencyToUsdPrice),1)}}</div>
                   </div>
-                  <div class="input-prompt">Item will be on sale until you cancelled</div>
+                  <div class="input-prompt">{{translatesGet('ITEM_UNTIL_CANCELLED')}}</div>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="modal-section-filter">
-            <div class="modal-section-name">Choose marketplace</div>
+            <div class="modal-section-name">{{translatesGet('CHOOSE_MARKETPLACE')}}</div>
             <div class="modal-filter">
               <ul class="filter-ul">
                 <li class="filter-li" v-for="marketplace in this.marketplaces" :key="marketplace">
@@ -62,8 +62,8 @@
 
           <!-- v-if="currentPart "  -->
           <div class="modal-desktop-footer" v-if="!buttonWaiting">
-            <button class="btn btn-modal-main" @click="startVote" v-if="(this.amount>0 & this.checkedMarketplace!=null)">Start vote</button>
-            <button disabled class="btn btn-modal-main" v-else>Start vote</button>
+            <button class="btn btn-modal-main" @click="startVote" v-if="(this.amount>0 & this.checkedMarketplace!=null)">{{translatesGet('START_VOTE')}}</button>
+            <button disabled class="btn btn-modal-main" v-else>{{translatesGet('START_VOTE')}}</button>
           </div>
 
           <!-- v-else  -->
@@ -88,8 +88,8 @@
             
       <!-- v-if="currentPart "  -->
       <div  class="modal-mobile-footer" v-if="!buttonWaiting">
-        <button class="btn btn-modal-main" @click="startVote" v-if="(this.amount>0 & this.checkedMarketplace!=null)">Start vote</button>
-        <button disabled class="btn btn-modal-main" v-else>Start vote</button>
+        <button class="btn btn-modal-main" @click="startVote" v-if="(this.amount>0 & this.checkedMarketplace!=null)">{{translatesGet('START_VOTE')}}</button>
+        <button disabled class="btn btn-modal-main" v-else>{{translatesGet('START_VOTE')}}</button>
       </div>
 
       <!-- v-else  -->
@@ -118,6 +118,8 @@ import config from '@/config.json';
 import ABI from '@/abi.json';
 import { ethers } from 'ethers';
 import { toRaw } from '@vue/reactivity';
+import MultiLang from "@/core/multilang";
+
 export default {
   data() {
     return {
@@ -130,7 +132,8 @@ export default {
       config:config,
       ABI:ABI,
       provider:null,
-      buttonWaiting:false
+      buttonWaiting:false,
+      lang: new MultiLang(this),
     };
   },
   async mounted(){    
@@ -155,6 +158,9 @@ export default {
     this.render = true;
   },
   methods:{
+    translatesGet(key) {
+      return this.lang.get(key);
+    },
     abbrNum(number, decPlaces) {
       decPlaces = Math.pow(10, decPlaces);
       var abbrev = ["k", "m", "b", "t"];

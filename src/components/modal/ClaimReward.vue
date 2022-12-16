@@ -2,7 +2,7 @@
   <div class="modal" v-if="render">
     <div class="modal-wrapper">
       <div class="modal-header">
-        <div class="modal-name">Claim reward</div>
+        <div class="modal-name">{{translatesGet('CLAIM_REWARD')}}</div>
         <button class="btn-close" @click="this.$store.dispatch('appGlobal/setShowClaimRewardModal',false)">
           <i class="i-close-line"></i>
         </button>
@@ -11,7 +11,9 @@
       <div class="modal-content">
         <div class="modal-container">
           <div class="modal-section-amount">
-            <div class="modal-amount-title">Your amount to be credited to the wallet</div>
+            <div class="modal-amount-title">
+              {{translatesGet('AMOUNT_CREDITED')}}
+            </div>
             <div class="token-value">
               <div class="icon-value"></div>
               {{abbrNum(toFixedIfNecessary(convertToEther((item.reward/100)*(userBidAmount/item.price*100)),6),2)}} ETH
@@ -22,7 +24,7 @@
           <div class="modal-section-total">
             <div class="total-block">
               <div class="total-block-row">
-                <div class="total-block-name">Total:</div>
+                <div class="total-block-name">{{translatesGet('TOTAL')}}:</div>
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
@@ -34,13 +36,13 @@
             </div>
           </div>
           <div class="total-block-describe">
-            The marketplace charges a fee for each transaction.
-            <a href="#">Terms of Use</a>
+            {{translatesGet('TOTAL_DESCRIBE')}}
+            <a href="#">{{translatesGet('TERMS_OF_USE')}}</a>
           </div>
 
           <!-- v-if="currentPart "  -->
           <div  class="modal-desktop-footer" v-if="!buttonWaiting">
-            <button class="btn btn-modal-main" @click="claimReward">Claim reward</button>
+            <button class="btn btn-modal-main" @click="claimReward">{{translatesGet('CLAIM_REWARD')}}</button>
           </div>
 
           <!-- v-else  -->
@@ -66,7 +68,7 @@
             
       <!-- v-if="currentPart "  -->
       <div  class="modal-mobile-footer" v-if="!buttonWaiting">
-        <button class="btn btn-modal-main" @click="claimReward">Claim reward</button>
+        <button class="btn btn-modal-main" @click="claimReward">{{translatesGet('CLAIM_REWARD')}}</button>
       </div>
 
       <!-- v-else  -->
@@ -93,6 +95,7 @@
 import ABI from '@/abi.json';
 import { ethers } from 'ethers';
 import { toRaw } from '@vue/reactivity';
+import MultiLang from "@/core/multilang";
 import config from '@/config';
 export default {
   data() {
@@ -105,7 +108,8 @@ export default {
       config:config,
       currencyToUsdPrice:1,
       userBidAmount:0,
-      buttonWaiting:false
+      buttonWaiting:false,
+      lang: new MultiLang(this),
     };
   },
   async mounted(){
@@ -116,6 +120,9 @@ export default {
     this.render = true;
   },
   methods:{
+    translatesGet(key) {
+      return this.lang.get(key);
+    },
     async claimReward(){  
       this.buttonWaiting = true; 
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());

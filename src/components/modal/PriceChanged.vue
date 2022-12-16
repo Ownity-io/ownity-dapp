@@ -2,7 +2,7 @@
   <div class="modal">
     <div class="modal-wrapper">
       <div class="modal-header">
-        <div class="modal-name">The price has changed</div>
+        <div class="modal-name">{{translatesGet('PRICE_CHANGED')}}</div>
         <button class="btn-close">
           <i class="i-close-line"></i>
         </button>
@@ -22,7 +22,7 @@
 
           <div class="modal-section-amount">
             <div class="modal-amount-title">
-              The new price for the NFT you were collecting on
+              {{translatesGet('PRICE_CHANGED_DESCRIBE')}}
             </div>
             <div class="token-value">
               <div class="icon-value"></div>
@@ -33,12 +33,12 @@
 
           <!-- v-if="currentPart "  -->
           <div class="modal-desktop-footer">
-            <button disabled class="btn btn-modal-main">Show</button>
+            <button disabled class="btn btn-modal-main">{{translatesGet('SHOW')}}</button>
           </div>
 
           <!-- v-else  -->
           <div class="modal-desktop-footer">
-            <button class="btn btn-modal-main">Show</button>
+            <button class="btn btn-modal-main">{{translatesGet('SHOW')}}</button>
             <button class="btn btn-modal-main">
               <svg class="loader" viewBox="0 0 18 18"  xmlns="http://www.w3.org/2000/svg">
                 <path d="M15.364 2.63609L13.95 4.05009C12.8049 2.90489 
@@ -58,12 +58,12 @@
             
       <!-- v-if="currentPart "  -->
       <div  class="modal-mobile-footer">
-        <button disabled class="btn btn-modal-main">Show</button>
+        <button disabled class="btn btn-modal-main">{{translatesGet('SHOW')}}</button>
       </div>
 
       <!-- v-else  -->
       <div   class="modal-mobile-footer">
-        <button   class="btn btn-modal-main">Show</button>
+        <button   class="btn btn-modal-main">{{translatesGet('SHOW')}}</button>
         <button class="btn btn-modal-main">
           <svg class="loader" viewBox="0 0 18 18"  xmlns="http://www.w3.org/2000/svg">
             <path d="M15.364 2.63609L13.95 4.05009C12.8049 2.90489 
@@ -84,11 +84,19 @@
 </template>
 
 <script>
+import MultiLang from "@/core/multilang";
+
 export default {
   data() {
     return {
       selectOpen: false,
+      lang: new MultiLang(this),
     };
   },
+  methods:{
+    translatesGet(key) {
+      return this.lang.get(key);
+    },
+  }
 };
 </script>

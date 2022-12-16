@@ -2,7 +2,7 @@
   <div class="modal" v-if="render">
     <div class="modal-wrapper">
       <div class="modal-header">
-        <div class="modal-name">Sell your NFT</div>
+        <div class="modal-name">{{translatesGet('SELL_YOUR_NFT')}}</div>
         <button class="btn-close" @click="this.$store.dispatch('appGlobal/setShowSellPartModal',false)">
           <i class="i-close-line"></i>
         </button>
@@ -35,19 +35,26 @@
                     <input type="text" placeholder="Input amount" v-model="priceForPart">
                     <div class="input-equivalent equivalent" v-if="priceForPart>0">≈ $ {{abbrNum(Math.round(priceForPart * currencyToUsdPrice),1)}}</div>
                   </div>
-                  <div class="input-prompt">Item will be on sale until you cancelled</div>
+                  <div class="input-prompt">{{translatesGet('ITEM_UNTIL_CANCELLED')}}</div>
                 </div>
               </div>
               <div class="modal-data-block modal-select-part">
                 <div class="input-select-block">
-                  <div class="input-select-title">Choose part</div>
+                  <div class="input-select-title">{{translatesGet('CHOOSE_PART')}}</div>
                   <div class="input-wrapper input-percent">
                     <input type="text" v-model="partComputed"
                     placeholder="0%"
                     onkeypress="return (event.charCode >= 48 && event.charCode <=57 && ((this.value<100 && this.value>=1 )|| this.value==''))"
                     > 
                   </div>
-                  <div class="input-select-prompt">Min 1% to Max 100%</div>
+                  <div class="input-select-prompt">
+                    {{translatesGet('INPUT_MIN')}}
+                    1%
+                    {{translatesGet('TO')}}
+                    {{translatesGet('INPUT_MAX')}}
+                    100%
+                    <!-- Min 1% to Max 100% -->
+                  </div>
                 </div>
               </div>
             </div>
@@ -62,17 +69,16 @@
                     <div class="icon-value"></div>
                     <b>{{abbrNum(toFixedIfNecessary(convertToEther((item.price/100)*currentPart),6),2)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(convertToEther((item.price/100)*currentPart)*currencyToUsdPrice,2),2)}}</span>
                   </div>
-                  <div class="total-fees">Fees:<span>3%</span></div>
+                  <div class="total-fees">{{translatesGet('FEES')}}:<span>3%</span></div>
                 </div>
               </div>
             </div>
           </div>
           <div class="total-block-describe">
-            The marketplace charges a fee for each transaction.
-            <a href="#">Terms of Use</a>
+            {{translatesGet('TOTAL_DESCRIBE')}}
+            <a href="#">{{translatesGet('TERMS_OF_USE')}}</a>
           </div>
-          
-
+      
           <!-- v-if="currentPart "  -->
           <div class="modal-desktop-footer" v-if="!buttonWaiting">
             <button disabled class="btn btn-modal-main" v-if="!(currentPart>0 & priceForPart>0)">Sell</button>
@@ -107,7 +113,7 @@
 
       <!-- v-else  -->
       <div   class="modal-mobile-footer" v-if="buttonWaiting">
-        <button   class="btn btn-modal-main">Deposit part</button>
+        <button   class="btn btn-modal-main">{{translatesGet('DEPOSIT_PART')}}</button>
         <button class="btn btn-modal-main">
           <svg class="loader" viewBox="0 0 18 18"  xmlns="http://www.w3.org/2000/svg">
             <path d="M15.364 2.63609L13.95 4.05009C12.8049 2.90489 

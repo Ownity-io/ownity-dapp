@@ -2,16 +2,24 @@
     "en": {
         "---------EVENTS------------": "",
         "CANCEL":"Cancel",
+        "CANCEL_SELL":"Cancel sell",
         "BUY":"Buy",
+        "BUY_PART":"Buy part",
         "CONFIRM":"Confirm",
         "SHOW_MORE":"Show more",
+        "SHOW":"Show",
+
         "CLAIM_REWARD":"Claim reward",
         "DEPOSIT_PART":"Deposit part",
         "BUY_TOGETHER":"Buy together",
         "VOTE":"Vote",
+        "START_VOTE":"Vote",
         "SELL_A_PART":"Sell a part",
-        "":"",
-        "":"",
+        "SUBMIT":"Sumbit",
+        "CLAIM":"Claim",
+        "COMPLETED":"Completed",
+        "DONE":"Done",
+
 
         "NOTHING_FOUND": "Nothing Found",
 
@@ -57,6 +65,8 @@
         "EXPIRED":"Expired",
         "MY_PART":"My part",
         "PROGRESS":"Progress",
+        "TOTAL":"Total",
+        "FEES":"Fees",
 
         "---------MAIN------------": "",
         "MAIN-H1":"Quant",
@@ -118,7 +128,30 @@
 
 
 
-        "---------VOTE------------": "",
+        "---------MODAL------------": "",
+        "TOTAL_DESCRIBE":"The marketplace charges a fee for each transaction.",
+        "AMOUNT_CREDITED":"Your amount to be credited to the wallet",
+        "CLAIM_YOUR_NFT":"Claim your NFT",
+        "CONNECT_WALLET_TITLE":"Connect Your Wallet",
+        "CONNECT_WALLET_SUBTITLE":"Sign in with your wallet or create one to start your Marketplace",
+        "CONNECT_WALLET_P":"We don`t hold private keys of our users and can`t access your funds without your say-so.",
+        "PRICE_PART":"Price of your part",
+        "YOUR_PART":"Your part",
+        "CANCEL_DEPOSIT_PART":"Cancel deposit part",
+        "INPUT_MIN":"Min",
+        "INPUT_MAX":"Max",
+        "TO":"to",
+        "CHOOSE_PART":"Choose part",
+        "PRICE_CHANGED":"The price has changed",
+        "PRICE_CHANGED_DESCRIBE":"The new price for the NFT you were collecting on",
+        "LIST_NFT_SELL":"List your NFT to sell on",
+        "SELL_YOUR_NFT":"Sell your NFT",
+        "ITEM_UNTIL_CANCELLED":"Item will be on sale until you cancelled",
+        "TRANS_SUCCESS":"You have successfully transaction",
+        "VOTE_CONFIRM":"Vote confirm",
+        "CHOOSE_MARKETPLACE":"Choose marketplace",
+        "":"",
+        "":"",
         "":""
     }
 }
