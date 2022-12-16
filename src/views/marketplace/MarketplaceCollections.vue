@@ -2,7 +2,7 @@
   <main v-if="collection">
     <div v-if="filterMobile" class="filter-mobile-wrap">
       <div class="filter-mobile-header">
-        <div>Filters</div>
+        <div>{{translatesGet('FILTERS')}}</div>
         <button class="btn-close" @click="filterMobile=false">
           <i class="i-close-line"></i>
         </button>
@@ -36,7 +36,10 @@
                   <a target="_blank" rel="nofollow" :href="config.etherscanAddressUrlStart+collection.contract_address">{{collection.contract_address.substring(0,6)+'...'+collection.contract_address.substring(38,42)}}</a><i class="i-external-link-line"></i>
                 </div>
                 <div class="collection-data-link">
-                  <a target="_blank" rel="nofollow" :href="collection.web">Official Site</a><i class="i-external-link-line"></i>
+                  <a target="_blank" rel="nofollow" :href="collection.web">
+                    {{translatesGet('OFFICIAL_SITE')}}
+                  </a>
+                  <i class="i-external-link-line"></i>
                 </div>
               </div>
             </div>
@@ -44,40 +47,40 @@
 
           <ul class="collection-statistics">
             <li>
-              <div class="name">Floor price</div>
+              <div class="name">{{translatesGet('FLOOR_PRICE')}}</div>
               <div class="token-value">
                 <div class="icon-value"></div>
                 <span>{{abbrNum(toFixedIfNecessary(collection.floor_price,2),0)}} ETH</span>
               </div>
             </li>
             <li>
-              <div class="name">Volume 24h</div>
+              <div class="name">{{translatesGet('VOLUME_24')}}</div>
               <div class="token-value">
                 <div class="icon-value"></div>
                 <span>{{abbrNum(toFixedIfNecessary(collection.volume_24h,2),0)}} ETH</span>
               </div>
             </li>
             <li>
-              <div class="name">Volume all time</div>
+              <div class="name">{{translatesGet('VOLUME_ALL_TIME')}}</div>
               <div class="token-value">
                 <div class="icon-value"></div>
                 <span>{{abbrNum(toFixedIfNecessary(collection.volume_all,2),0)}} ETH</span>
               </div>
             </li>
             <li>
-              <div class="name">Holders</div>
+              <div class="name">{{translatesGet('HOLDERS')}}</div>
               <div>
                 <span>{{abbrNum(collection.holders,0)}}</span>
               </div>
             </li>
             <li>
-              <div class="name">Supply</div>
+              <div class="name">{{translatesGet('SUPPLY')}}</div>
               <div>
                 <span>{{abbrNum(collection.total_supply,1)}}</span>
               </div>
             </li>
             <li>
-              <div class="name">Royalty</div>
+              <div class="name">{{translatesGet('ROYALTY')}}</div>
               <div>
                 <span>{{collection.royalty}}%</span>
               </div>
@@ -92,14 +95,14 @@
         <ul class="tabs">
           <li>
             <button @click="activeTab = 0" :class="{ 'active-tab': activeTab == 0 }">
-              <span>Items</span>
-              <span>Items</span>
+              <span>{{translatesGet('ITEMS')}}</span>
+              <span>{{translatesGet('ITEMS')}}</span>
             </button>
           </li>
           <li>
             <button @click="activeTab = 1" :class="{ 'active-tab': activeTab == 1 }">
-              <span>Activity</span>
-              <span>Activity</span>
+              <span>{{translatesGet('ACTIVITY')}}</span>
+              <span>{{translatesGet('ACTIVITY')}}</span>
             </button>
           </li>
         </ul>
@@ -111,14 +114,14 @@
           <div class="params-block params-block-filter">
             <div class="param-wrap">
                 <button class="btn-param btn-param-desktop" @click="filter = !filter">
-                <i
-                    :class="{ 'i-arrow-left-s-line': filter, 'i-filter-2-line': !filter }"
-                ></i>
-                <span>Filter</span>
+                  <i
+                      :class="{ 'i-arrow-left-s-line': filter, 'i-filter-2-line': !filter }"
+                  ></i>
+                  <span>{{translatesGet('FILTER')}}</span>
                 </button>
                 <button class="btn-param btn-param-mobile"  @click="filterMobile=true">
                   <i class="i-filter-2-line" ></i>
-                  <span>Filter</span>
+                  <span>{{translatesGet('FILTER')}}</span>
                 </button>
             </div>
           </div>
@@ -128,7 +131,7 @@
           <div class="params-block params-block-sort">
             <div class="param-wrap sort" :class="{ unfolded: testOpenSort }">
               <button class="btn-param btn-sort" @click="testOpenSort = !testOpenSort">
-                <span v-if="this.selectedSort == null">Sort by</span>
+                <span v-if="this.selectedSort == null">{{translatesGet('SORT_BY')}}</span>
                 <span v-else>{{this.selectedSort.name}}</span>
                 <i class="i-arrow-down-s-line"></i>
               </button>
@@ -174,7 +177,7 @@
           <ActivityTable v-if="activeTab == 1" />
           <button v-if="activeTab == 0" class="btn-filter-mobile" @click="filterMobile=true">
               <i class="i-filter-2-line" ></i>
-              <span>Filter</span>
+              <span>{{translatesGet('FILTER')}}</span>
           </button>
         </div>
       </section>
@@ -190,6 +193,8 @@ import ListCards from "@/components/ListCards.vue";
 import ActivityTable from "@/components/ActivityTable.vue";
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
 import SelectedFilters from "@/components/SelectedFilters.vue"; 
+import MultiLang from "@/core/multilang";
+
 export default {
   data() {
     return {
@@ -199,7 +204,8 @@ export default {
       filter: true,
       filterMobile: false,
       collection:null,
-      config:config
+      config:config,
+      lang: new MultiLang(this),
     };
   },
   components: {
@@ -218,6 +224,9 @@ export default {
     await this.getAndSetCollection();
   },
   methods:{
+    translatesGet(key) {
+      return this.lang.get(key);
+    },
     async getAndSetCollection(){
       let requestUrl = `${config.backendApiEntryPoint}nft-collections/?contract_address=${this.$route.params.contract_address}`;
       let request = await fetch(requestUrl);

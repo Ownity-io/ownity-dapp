@@ -61,15 +61,21 @@
                           <ul>
                               <li>
                                   <i class="i-pencil-line"></i>
-                                  <span>Edit</span>
+                                  <span>
+                                    {{translatesGet('EDIT')}}
+                                  </span>
                               </li>
                               <li>
                                   <i class="i-share-line"></i>
-                                  <span>Share</span>
+                                  <span>
+                                    {{translatesGet('SHARE')}}
+                                  </span>
                               </li>
                               <li>
                                   <i class="i-logout-box-line"></i>
-                                  <span>Log Out</span>
+                                  <span>
+                                    {{translatesGet('LOG_OUT')}}
+                                  </span>
                               </li>
                           </ul>
                       </div>
@@ -77,7 +83,7 @@
               </div>
             </div>
             <div class="owned-row">
-              Owned by <a :href="config.etherscanAddressUrlStart+item.owner" target="_blank">{{String(item.owner).substring(0,6)+'...'+String(item.owner).substring(38,42)}}</a> <!-- TODO: href to etherscan-->
+              {{translatesGet('OWNED_BY')}} <a :href="config.etherscanAddressUrlStart+item.owner" target="_blank">{{String(item.owner).substring(0,6)+'...'+String(item.owner).substring(38,42)}}</a> <!-- TODO: href to etherscan-->
             </div>
           </section>
 
@@ -111,10 +117,16 @@
                   v-else-if="this.item.internal_status=='ON SALE'"></a>
                 </div>
                 <div class="deposit-data">
-                  <div class="deposit-listened deposit-listened-link" v-if="this.item.internal_status!='OWNED' & this.item.internal_status!='ON SALE'"><a target="_blank" :href='linkToMarketplacePage' >Available on {{item.marketplace.name}} for </a><i class="i-external-link-line"></i></div>
+                  <div class="deposit-listened deposit-listened-link" v-if="this.item.internal_status!='OWNED' & this.item.internal_status!='ON SALE'"><a target="_blank" :href='linkToMarketplacePage' >
+                    {{translatesGet('AVAILABLE_ON')}} {{item.marketplace.name}}
+                    {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>
                   <div class="deposit-listened deposit-listened-link" v-else-if="this.item.internal_status=='OWNED'" ><a target="_blank" :href='linkToMarketplacePage' 
-                    >Bought on {{item.marketplace.name}} for </a><i class="i-external-link-line"></i></div>
-                  <div class="deposit-listened deposit-listened-link" v-if="this.item.internal_status=='ON SALE'"><a target="_blank" :href='linkToMarketplacePageFromVoting' >Available on {{voting.marketplace.name}} for </a><i class="i-external-link-line"></i></div>                
+                    >
+                    {{translatesGet('BOUGHT_ON')}} {{item.marketplace.name}} 
+                    {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>
+                  <div class="deposit-listened deposit-listened-link" v-if="this.item.internal_status=='ON SALE'"><a target="_blank" :href='linkToMarketplacePageFromVoting' >
+                    {{translatesGet('AVAILABLE_ON')}} {{voting.marketplace.name}} 
+                    {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>                
                   <div class="deposit-value" v-if="(item.marketplace_status=='OPEN' & item.internal_status=='OPEN')||this.item.internal_status=='OWNED'">
                     <div class="icon-token"></div>
                     <span><b>{{priceInCurrency}} ETH</b></span>
@@ -136,55 +148,78 @@
                     <span class="equivalent">(≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
                   </div>
                   <div class="deposit-part" v-if="userBid!=null & item.marketplace_status=='CLOSED' & item.internal_status=='OWNED'">
-                    Your part : <span>{{userBid.fraction}}</span>
+                    {{translatesGet('YOUR_PART')}}: <span>{{userBid.fraction}}</span>
                   </div>
                 </div>
               </div>
               <div class="section-deposit-btns">
                 <button class="btn btn-deposit" v-if="((item.marketplace_status=='OPEN')  & item.internal_status=='OPEN' & userAddress!=null)"
-                @click="this.$store.dispatch('appGlobal/setshowStartCollectingModal',true)">Buy together</button>
+                  @click="this.$store.dispatch('appGlobal/setshowStartCollectingModal',true)">
+                  {{translatesGet('BUY_TOGETHER')}}
+                </button>
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='OPEN' & userAddress==null)"
-                @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)">Buy together</button>
+                  @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)">
+                  {{translatesGet('BUY_TOGETHER')}}
+                </button>
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='GATHER' & userAddress!=null)"
-                @click="this.$store.dispatch('appGlobal/setshowContinueCollectingModal',true)">Deposit part</button>
+                  @click="this.$store.dispatch('appGlobal/setshowContinueCollectingModal',true)">
+                  {{translatesGet('DEPOSIT_PART')}}
+                </button>
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='GATHER' & userAddress==null)"
-                @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)">Deposit part</button>
+                  @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)">
+                  {{translatesGet('DEPOSIT_PART')}}
+                </button>
                 <button class="btn btn-get" v-if="(((item.marketplace_status=='OPEN' ||item.marketplace_status=='CLOSED'))  & item.internal_status=='GATHER' & userAddress!=null & userBidAmount>0)"
-                @click="this.$store.dispatch('appGlobal/setshowDepositCancelModal',true)">Cancel</button>
+                  @click="this.$store.dispatch('appGlobal/setshowDepositCancelModal',true)">
+                  {{translatesGet('CANCEL')}}
+                </button>
                 <button class="btn btn-deposit" v-if="((item.marketplace_status=='CLOSED')) & item.internal_status=='OWNED' & userAddress!=null & this.userBidAmount>0 & !this.userBidBuyedAll"
-                @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">Start voting</button>
+                  @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">
+                  {{translatesGet('START_VOTING')}}
+                </button>
                 <button class="btn btn-deposit" v-if="((item.marketplace_status=='CLOSED')) & item.internal_status=='OWNED' & userAddress!=null & this.userBidBuyedAll"
-                @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">Sell NFT</button>
+                  @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">
+                  {{translatesGet('SELL_NFT')}}
+                </button>
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidBuyedAll)"
-                @click="this.$store.dispatch('appGlobal/setShowClaimNftModal',true)">Claim NFT</button> 
+                  @click="this.$store.dispatch('appGlobal/setShowClaimNftModal',true)">
+                  {{translatesGet('CLAIM_NFT')}}
+                </button> 
                 <button class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount>0)"
-                @click="this.$store.dispatch('appGlobal/setShowSellPartModal',true)">Sell a part</button> 
-                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount==0 & bidsOnSale)"
-                >Buy</button> 
+                  @click="this.$store.dispatch('appGlobal/setShowSellPartModal',true)">
+                  {{translatesGet('SELL_A_PART')}}
+                </button> 
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount==0 & bidsOnSale)">
+                  {{translatesGet('BUY')}}
+                </button> 
                 <a class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='ON SALE' & userAddress!=null & userBidAmount>0 & this.item.votings)"
-                @click="letsCheck2('ListingVote')" href="#votes">Cancel sale</a> 
-                <a class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='ON SALE' & userAddress!=null & userBidAmount>0 & !this.item.votings)"
-                >Cancel sale</a> 
+                @click="letsCheck2('ListingVote')" href="#votes">
+                  {{translatesGet('CANCEL_SELL')}}
+                </a> 
+                <a class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='ON SALE' & userAddress!=null & userBidAmount>0 & !this.item.votings)">
+                  {{translatesGet('CANCEL_SELL')}}
+                </a> 
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='SOLD' & userAddress!=null & userBidAmount>0)"
                 @click="this.$store.dispatch('appGlobal/setShowClaimRewardModal',true)">Claim reward</button> 
               </div>
               <div class="section-deposit-labels" v-if="userBid!=null">
                 <div class="deposit-label" v-if="userBid.status == 'ON SALE'">
                   <i class="i-shopping-bag-line"></i>
-                  On Sale: <span><b>{{abbrNum(toFixedIfNecessary(convertToEther(userBidAmount),6,2))}} ETH</b> ({{userBid.fraction}})</span>
+                  {{translatesGet('ON_SALE')}}:
+                  <span><b>{{abbrNum(toFixedIfNecessary(convertToEther(userBidAmount),6,2))}} ETH</b> ({{userBid.fraction}})</span>
                 </div>
                 <div class="deposit-label" v-if="false">
                   <i class="i-volume-vibrate-line"></i>
-                  Vote:
+                  {{translatesGet('VOTE')}}:
                   <div class="label-col">
                     <div class="icon-label" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></div>
                     <div><b>2 ETH</b></div>
-                    <div>Progress: 20%</div>
+                    <div>{{translatesGet('PROGRESS')}}: 20%</div>
                   </div>
                   <div class="label-col">
                     <div class="icon-label" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></div>
                     <div><b>2.1 ETH</b></div>
-                    <div>Progress: 20%</div>
+                    <div>{{translatesGet('PROGRESS')}}: 20%</div>
                   </div>
                 </div>
               </div>
@@ -196,7 +231,7 @@
               <button class="btn-collapse" @click="collapseMembers = !collapseMembers">
                 <div class="members-row">
                   <i class="i-account-circle-line"></i>
-                  Members: <span>{{this.item.bids.length}}</span>
+                  {{translatesGet('MEMBERS')}}: <span>{{this.item.bids.length}}</span>
                 </div>
                 <i class="i-arrow-down-s-line"></i>
               </button>
@@ -213,8 +248,8 @@
                       :class="{ 'active-tab': activeTab2 === 'ListingInfo2' }"
                       @click="letsCheck2('ListingInfo2')"
                       >
-                      <span>Info</span>
-                      <span>Info</span>
+                      <span>{{translatesGet('INFO')}}</span>
+                      <span>{{translatesGet('INFO')}}</span>
                     </button>
                   </li>
                   <li v-if="(itemWithBidsOnSale)">
@@ -222,8 +257,8 @@
                       :class="{ 'active-tab': activeTab2 === 'ListingFractionMarket' }"
                       @click="letsCheck2('ListingFractionMarket')"
                       >
-                      <span>Fraction market</span>
-                      <span>Fraction market</span>
+                      <span>{{translatesGet('FRACTION_MARKET')}}</span>
+                      <span>{{translatesGet('FRACTION_MARKET')}}</span>
                     </button>
                   </li>
                   <li v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='CLOSED' ) & (item.internal_status=='OWNED'||item.internal_status=='ON SALE') & item.votings!=null">
@@ -232,8 +267,8 @@
                       :class="{ 'active-tab': activeTab2 === 'ListingVote' }"
                       @click="letsCheck2('ListingVote')"
                       >
-                      <span>Vote</span>
-                      <span>Vote</span>
+                      <span>{{translatesGet('VOTE')}}</span>
+                      <span>{{translatesGet('VOTE')}}</span>
                     </button>
                   </li>
                 </ul>
@@ -246,9 +281,9 @@
                   <div class="table-chart-data">
                     <div class="table table-chart">
                       <div class="thead">
-                        <div class="td">Owner</div>
-                        <div class="td">Pct</div>
-                        <div class="td td-price">Price</div>
+                        <div class="td">{{translatesGet('OWNER')}}</div>
+                        <div class="td">{{translatesGet('PCT')}}</div>
+                        <div class="td td-price">{{translatesGet('PRICE')}}</div>
                       </div>
 
                       <div class="tr" v-for="bid in this.item.bids" :key="bid">
@@ -261,7 +296,7 @@
                           >
                             <span>{{bid.address.substring(0,6)+'...'+bid.address.substring(38,42)}}</span>
                           </a>
-                          <span class="label-owner" v-if="bid.address==userAddress">You</span>
+                          <span class="label-owner" v-if="bid.address==userAddress">{{translatesGet('YOU')}}</span>
                         </div>
                         <div class="td">
                           <div class="td-wrap">{{bid.fraction}}</div>
@@ -287,7 +322,7 @@
 
                   <div class="active-votes" id="votes">
                     <div class="votes-wrap-title">
-                      Active
+                      {{translatesGet('ACTIVE')}}
                     </div>
                     <ListingVote v-for="voting in this.item.votings" :item="this.item" :voting="voting"/>
                   </div>
@@ -312,8 +347,8 @@
                   :class="{ 'active-tab': activeTab === 'ListingInfo' }"
                   @click="letsCheck('ListingInfo')"
                 >
-                <span>Info</span>
-                <span>Info</span>
+                  <span>{{translatesGet('INFO')}}</span>
+                  <span>{{translatesGet('INFO')}}</span>
                 </button>
               </li>
 
@@ -322,8 +357,8 @@
                   :class="{ 'active-tab': activeTab === 'ListingProperties' }"
                   @click="letsCheck('ListingProperties')"
                 >
-                <span>Properties</span>
-                <span>Properties</span>
+                  <span>{{translatesGet('PROPERTIES')}}</span>
+                  <span>{{translatesGet('PROPERTIES')}}</span>
                 </button>
               </li>
 
@@ -332,8 +367,8 @@
                   :class="{ 'active-tab': activeTab === 'ListingAbout' }"
                   @click="letsCheck('ListingAbout')"
                 >
-                <span>About Collection</span>
-                <span>About Collection</span>
+                  <span>{{translatesGet('ABOUT_COLLECTION')}}</span>
+                  <span>{{translatesGet('ABOUT_COLLECTION')}}</span>
                 </button>
               </li>
 
@@ -342,8 +377,8 @@
                   :class="{ 'active-tab': activeTab === 'ListingActivities' }"
                   @click="letsCheck('ListingActivities')"
                 >
-                <span>Activities</span>
-                <span>Activities</span>
+                  <span>{{translatesGet('ACTIVITIES')}}</span>
+                  <span>{{translatesGet('ACTIVITIES')}}</span>
                 </button>
               </li>
 
@@ -352,8 +387,8 @@
                   :class="{ 'active-tab': activeTab === 'ListingChat' }"
                   @click="letsCheck('ListingChat')"
                 >
-                <span>Chat</span>
-                <span>Chat</span>
+                  <span>{{translatesGet('CHAT')}}</span>
+                  <span>{{translatesGet('CHAT')}}</span>
                 </button>
               </li>
             </ul>
@@ -386,9 +421,9 @@ import ListingActivities from "@/components/listing/ListingActivities.vue";
 import ListingFractionMarket from "@/components/listing/ListingFractionMarket.vue";
 import ListingVote from "@/components/listing/ListingVote.vue";
 import ListingChat from "@/components/listing/ListingChat.vue";
-
 import Chart from "@/components/listing/chart/Chart.vue";
 
+import MultiLang from "@/core/multilang";
 import { ethers } from "ethers";
 import config from '@/config.json';
 
@@ -416,7 +451,8 @@ export default {
       userBidBuyedAll:false,
       itemWithBidsOnSale:false,
       recommendations:null,
-      voting:null
+      voting:null,
+      lang: new MultiLang(this),
     };
   },
   components: {
@@ -461,6 +497,9 @@ export default {
     }
   },
   methods: {
+    translatesGet(key) {
+      return this.lang.get(key);
+    },
     convertToEther(value){
       try{
         return ethers.utils.formatEther(String(value));

@@ -16,7 +16,7 @@
     </div>
     <section class="section-header">
       <div class="container">
-        <h1 class="section-name-h1">Marketplace NFT</h1>
+        <h1 class="section-name-h1">{{translatesGet('MARKETPLACE')}} NFT</h1>
       </div>
     </section>
     <section class="section-tabs">
@@ -24,14 +24,14 @@
         <ul class="tabs">
           <li>
             <button @click="activeTab = 0" :class="{ 'active-tab': activeTab == 0 }">
-              <span>Items</span>
-              <span>Items</span>
+              <span>{{translatesGet('ITEMS')}}</span>
+              <span>{{translatesGet('ITEMS')}}</span>
             </button>
           </li>
           <li>
             <button @click="activeTab = 1" :class="{ 'active-tab': activeTab == 1 }">
-              <span>Activity</span>
-              <span>Activity</span>
+              <span>{{translatesGet('ACTIVITY')}}</span>
+              <span>{{translatesGet('ACTIVITY')}}</span>
             </button>
           </li>
         </ul>
@@ -46,11 +46,11 @@
                 <i
                     :class="{ 'i-arrow-left-s-line': filter, 'i-filter-2-line': !filter }"
                 ></i>
-                <span>Filter</span>
+              <span>{{translatesGet('FILTER')}}</span>
                 </button>
                 <button class="btn-param btn-param-mobile"  @click="filterMobile=true">
                     <i class="i-filter-2-line" ></i>
-                <span>Filter</span>
+              <span>{{translatesGet('FILTER')}}</span>
               </button>
             </div>
           </div>
@@ -106,7 +106,7 @@
           <ActivityTable v-if="activeTab == 1" />
           <button v-if="activeTab == 0" class="btn-filter-mobile" @click="filterMobile=true">
             <i class="i-filter-2-line" ></i>
-            <span>Filter</span>
+            <span>{{translatesGet('FILTER')}}</span>
           </button>
         </div>
       </section>
@@ -121,6 +121,7 @@ import ListCards from "@/components/ListCards.vue";
 import ActivityTable from "@/components/ActivityTable.vue";
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
 import SelectedFilters from "@/components/SelectedFilters.vue";
+import MultiLang from "@/core/multilang";
 import config from '@/config.json';
 
 export default {
@@ -131,7 +132,8 @@ export default {
       testOpenSort: false,
       filter: true,
       filterMobile: false,
-      config:config
+      config:config,
+      lang: new MultiLang(this),
     };
   },
   components: {
@@ -147,6 +149,9 @@ export default {
     await this.initInfo();
   },
   methods:{
+    translatesGet(key) {
+      return this.lang.get(key);
+    },
     async initInfo(){
       await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
       await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
