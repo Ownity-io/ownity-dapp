@@ -224,14 +224,14 @@ export default {
       }
       else if (this.$route.name == 'Profile'){
         console.log(this.checkedStatus);
-        if (this.onlyFav){
-          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
+        if (this.onlyFav){          
+          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');
         }
         else if(this.vote){
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');
         }
         else{
-          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');
+          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
         }
         
       }

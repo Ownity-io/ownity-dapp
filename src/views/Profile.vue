@@ -9,7 +9,7 @@
                             <i class="i-close-line"></i>
                         </button>
                     </div>
-                    <Filter :onlyFav="activeTab == 'ListCards'" :vote="activeTab == 'Vote'"/>
+                    <Filter :onlyFav="activeTab == 'Favourites'" :vote="activeTab == 'Vote'"/>
                     <div class="filter-mobile-footer">
                         <button class="btn btn-clear">Clear all</button>
                         <button class="btn btn-submit">Apply</button>
@@ -167,7 +167,7 @@
             <div class="container">
                 <section class="section-nft" :class="{ 'with-filter': filter }">
                     <div v-if="filter" class="section-nft-filter" :class="{'filter-mobile':filterMobile}">
-                        <Filter :onlyFav="activeTab == 'ListCards'" :vote="activeTab == 'Vote'"/>
+                        <Filter :onlyFav="activeTab == 'Favourites'" :vote="activeTab == 'Vote'"/>
                     </div>
                     <div class="section-nft-list" :class="{'card-collapse' : switchActive == 1}">
                         <SelectedFilters v-if="filter" />
