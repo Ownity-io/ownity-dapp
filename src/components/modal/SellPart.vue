@@ -138,6 +138,7 @@ import ABI from '@/abi.json';
 import { ethers } from 'ethers';
 import { toRaw } from '@vue/reactivity';
 import config from '@/config';
+import MultiLang from "@/core/multilang";
 export default {
   data() {
     return {
@@ -152,7 +153,8 @@ export default {
       userBidAmount:0,
       config:config,
       ABI:ABI,
-      buttonWaiting:false
+      buttonWaiting:false,
+      lang: new MultiLang(this),
     };
   },
   async mounted(){
@@ -233,6 +235,9 @@ export default {
         this.buttonWaiting = false;
         console.log('Error in contract');
       }
+    },
+    translatesGet(key) {
+            return this.lang.get(key);
     },
   },
   computed:{
