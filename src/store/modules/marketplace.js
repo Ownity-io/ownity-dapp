@@ -195,9 +195,6 @@ export default {
       if (context.getters.getCurrentlyGathering){
         requestUrl+='&internal_status=GATHER';
       }
-      else{
-        requestUrl += `&internal_status=OPEN`;
-      }
       console.log(requestUrl)
       let request = await fetch(requestUrl);
       let requestCode = request.ok;
