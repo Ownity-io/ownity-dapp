@@ -366,7 +366,7 @@ export default {
         requestUrl += `&price_lt=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
       }
       console.log(context.getters.getOnSale);
-      if (context.getters.getCurrentStatus){
+      if (context.getters.getOnSale){
         requestUrl += `&internal_status=ON SALE`;
       }
       if (context.getters.getSelectedSort!=null){
