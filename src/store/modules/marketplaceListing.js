@@ -35,7 +35,6 @@ export default {
       state.likeChecked = _checked;
     },
     setContractConfig(state,_value){
-      console
       state.contractConfig = _value;
     }
   },
@@ -100,7 +99,8 @@ export default {
       }
     },
     async fetchAndSetContractConfig(context){
-      let requestUrl = `${config.backendApiEntryPoint}contract-config/`;
+      let item = context.getters.getItem;
+      let requestUrl = `${config.backendApiEntryPoint}contract-config/?blockchain=${item.collection.blockchain}`;
       let request = await fetch(requestUrl);
       let requestJson = await request.json();
       context.commit('setContractConfig',requestJson);
