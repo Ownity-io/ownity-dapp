@@ -173,7 +173,8 @@ export default {
       allBidsAmount:0,
       buttonWaiting:false,
       lang: new MultiLang(this),
-      contractConfig:null
+      contractConfig:null,
+      buyLotFee:0
     };
   },
   async mounted(){
@@ -183,6 +184,7 @@ export default {
     this.setCurrencyToUsd();
     this.setAllBidsAmount();
     this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
+    this.buyLotFee = (this.contractConfig[0].buy_lot_fee/100)/100*this.item.price;
     this.render = true;
   },
   methods:{
@@ -194,7 +196,7 @@ export default {
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());
       let markeplaceId = ethers.utils.formatBytes32String(this.item.marketplace.id).substring(0, 10);
       let options = {};
-      let valueToBuy = (ethers.BigNumber.from(String(parseInt(((parseInt(this.item.price)+this.contractConfig[0].buy_lot_fee)/100)*this.currentPart)))).toString();
+      let valueToBuy = (ethers.BigNumber.from(String(parseInt(((parseInt(this.item.price)+parseInt(this.buyLotFee))/100)*this.currentPart)))).toString();
       // if (valueToBuy>(parseInt(this.item.price)-this.allBidsAmount)){
       //   console.log('Part is too big');
       //   valueToBuy = parseInt(this.item.price)-this.allBidsAmount;

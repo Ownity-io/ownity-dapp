@@ -87,9 +87,9 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>{{abbrNum(toFixedIfNecessary((((parseInt(this.item.price)+this.contractConfig[0].buy_lot_fee)/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary((((parseInt(this.item.price)+this.contractConfig[0].buy_lot_fee)/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</span>
+                    <b>{{abbrNum(toFixedIfNecessary((((parseInt(this.item.price)+parseInt(this.buyLotFee))/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary((((parseInt(this.item.price)+parseInt(this.buyLotFee))/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</span>
                   </div>
-                  <div class="total-fees">{{translatesGet('FEES')}}:<span>{{toFixedIfNecessary(this.contractConfig[0].buy_lot_fee/parseInt(this.item.price)*100,1)}}%</span></div>
+                  <div class="total-fees">{{translatesGet('FEES')}}:<span>{{toFixedIfNecessary(this.buyLotFee/parseInt(this.item.price)*100,1)}}%</span></div>
                 </div>
               </div>
             </div>
@@ -175,7 +175,8 @@ export default {
       buttonDisabled:false,
       buttonWaiting:false,
       lang: new MultiLang(this),
-      contractConfig:null
+      contractConfig:null,
+      buyLotFee:0
     };
   },
   async mounted(){
@@ -185,6 +186,7 @@ export default {
     this.setCurrencyToUsd();
     this.setAllBidsAmount();
     this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
+    this.buyLotFee = (this.contractConfig[0].buy_lot_fee/100)/100*this.item.price;
     this.render = true;    
   },
   computed:{
@@ -218,7 +220,7 @@ export default {
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());
       let markeplaceId = ethers.utils.formatBytes32String(this.item.marketplace.id).substring(0, 10);
       let options = {};
-      let valueToBuy = (ethers.BigNumber.from(String(((parseInt(this.item.price)+this.contractConfig[0].buy_lot_fee)/100)*this.currentPart))).toString();
+      let valueToBuy = (ethers.BigNumber.from(String(((parseInt(this.item.price)+parseInt(this.buyLotFee))/100)*this.currentPart))).toString();
       if (valueToBuy>(parseInt(this.item.price)-this.allBidsAmount)){
         console.log('Part is too big');
         valueToBuy = parseInt(this.item.price)-this.allBidsAmount;
