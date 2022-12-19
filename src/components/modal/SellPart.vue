@@ -67,7 +67,7 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>{{abbrNum(toFixedIfNecessary(convertToEther((item.price/100)*currentPart),6),2)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(convertToEther((item.price/100)*currentPart)*currencyToUsdPrice,2),2)}}</span>
+                    <b>{{abbrNum(toFixedIfNecessary(convertToEther(noExponents(convertFromEtherToWei(this.priceForPart))),6),2)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(noExponents(convertFromEtherToWei(this.priceForPart)))*currencyToUsdPrice,6),2)}}</span>
                   </div>
                   <div class="total-fees">{{translatesGet('FEES')}}:<span>3%</span></div>
                 </div>
@@ -205,6 +205,24 @@ export default {
       catch{
         console.log('ethers error');
       }
+    },
+    noExponents (value) {
+      var data = String(value).split(/[eE]/);
+      if (data.length == 1) return data[0];
+
+      var z = '',
+        sign = value < 0 ? '-' : '',
+        str = data[0].replace('.', ''),
+        mag = Number(data[1]) + 1;
+
+      if (mag < 0) {
+        z = sign + '0.';
+        while (mag++) z += '0';
+        return z + str.replace(/^\-/, '');
+      }
+      mag -= str.length;
+      while (mag--) z += '0';
+      return str + z;
     },
     convertFromEtherToWei(value){
       return String(value * 10**this.item.currency.decimals);
