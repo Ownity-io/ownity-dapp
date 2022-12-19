@@ -590,13 +590,14 @@ export default {
     this.updateTimeString();
     this.itemWithBidsOnSale = await (await fetch(`${config.backendApiEntryPoint}listing-with-on-sale-bids/${this.item.id}`)).json();
     this.setBidOnSale();
-    await this.checkLike();
+    // await this.checkLike();
     if (localStorage.getItem('userAddress')!=null&localStorage.getItem('userAddress')!="null"){
       this.setMaxVoting();
     }
     console.log(this.voting);
     console.log(this.userVoted);
     this.render=true;
+    await this.checkLike();
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
     }
