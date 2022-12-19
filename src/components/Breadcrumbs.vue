@@ -1,15 +1,17 @@
 <template>
-    <ul class="breadcrumbs" v-if="this.$route.name == 'Marketplace'">
+    <ul class="breadcrumbs" v-if="this.$route.name == 'Marketplace' & item!=null">
         <li><a href="/"><i class="i-arrow-right-s-line"></i><span>Home</span></a></li>
         <li><a href="/marketplace"><i class="i-arrow-right-s-line"></i><span>Marketplace</span></a></li>
     </ul>
-    <ul class="breadcrumbs" v-else-if="this.$route.name == 'Listing'">
+    <ul class="breadcrumbs" v-else-if="this.$route.name == 'Listing' & item!=null">
         <li><a href="/"><i class="i-arrow-right-s-line"></i><span>Home</span></a></li>
         <li><a href="/marketplace"><i class="i-arrow-right-s-line"></i><span>Marketplace</span></a></li>
         <li><a :href="collectionLink" v-if="item"><i class="i-arrow-right-s-line"></i><span>{{this.item.collection.name}}</span></a></li>
-        <li><a href="" v-if="item"><i class="i-arrow-right-s-line"></i><span>{{this.item.name}}</span></a></li>
+        <li v-if="item.name"><a href="" ><i class="i-arrow-right-s-line"></i><span>{{this.item.name}}</span></a></li>
+        <li v-else-if="item.token_id"><a href="" ><i class="i-arrow-right-s-line"></i><span>#{{this.item.token_id}}</span></a></li>
+        
     </ul>
-    <ul class="breadcrumbs" v-else-if="this.$route.name == 'Collection'">
+    <ul class="breadcrumbs" v-else-if="this.$route.name == 'Collection' & collection!=null">
         <li><a href="/"><i class="i-arrow-right-s-line"></i><span>Home</span></a></li>
         <li><a href="/marketplace"><i class="i-arrow-right-s-line"></i><span>Marketplace</span></a></li>
         <li><a href="" v-if="collection"><i class="i-arrow-right-s-line"></i><span>{{this.collection.name}}</span></a></li>    
