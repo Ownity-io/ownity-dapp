@@ -70,9 +70,9 @@
                   <div class="price-block-title">{{translatesGet('PRICE_PART')}}</div>
                   <div class="price-block-value price-value">
                     <div class="icon-value"></div>
-                    <span>{{abbrNum(toFixedIfNecessary(((this.item.price/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</span>
+                    <span>{{abbrNum(toFixedIfNecessary(((parseInt(this.item.price)/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</span>
                   </div>
-                  <div class="price-block-equivalent equivalent">≈ $ {{abbrNum(toFixedIfNecessary(((this.item.price/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</div>
+                  <div class="price-block-equivalent equivalent">≈ $ {{abbrNum(toFixedIfNecessary(((parseInt(this.item.price)/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</div>
                 </div>
               </div>
             </div>
@@ -85,9 +85,9 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>{{abbrNum(toFixedIfNecessary((((this.item.price+this.contractConfig[0].buy_lot_fee)/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary((((this.item.price+this.contractConfig[0].buy_lot_fee)/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</span>
+                    <b>{{abbrNum(toFixedIfNecessary((((parseInt(this.item.price)+this.contractConfig[0].buy_lot_fee)/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary((((parseInt(this.item.price)+this.contractConfig[0].buy_lot_fee)/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</span>
                   </div>
-                  <div class="total-fees">{{translatesGet('FEES')}}:<span>{{toFixedIfNecessary(this.contractConfig[0].buy_lot_fee/this.item.price*100,1)}}%</span></div>
+                  <div class="total-fees">{{translatesGet('FEES')}}:<span>{{toFixedIfNecessary(this.contractConfig[0].buy_lot_fee/parseInt(this.item.price)*100,1)}}%</span></div>
                 </div>
               </div>
             </div>
@@ -194,10 +194,10 @@ export default {
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());
       let markeplaceId = ethers.utils.formatBytes32String(this.item.marketplace.id).substring(0, 10);
       let options = {};
-      let valueToBuy = (ethers.BigNumber.from(String(parseInt(((this.item.price+this.contractConfig[0].buy_lot_fee)/100)*this.currentPart)))).toString();
-      // if (valueToBuy>(this.item.price-this.allBidsAmount)){
+      let valueToBuy = (ethers.BigNumber.from(String(parseInt(((parseInt(this.item.price)+this.contractConfig[0].buy_lot_fee)/100)*this.currentPart)))).toString();
+      // if (valueToBuy>(parseInt(this.item.price)-this.allBidsAmount)){
       //   console.log('Part is too big');
-      //   valueToBuy = this.item.price-this.allBidsAmount;
+      //   valueToBuy = parseInt(this.item.price)-this.allBidsAmount;
       // }
       if (this.item.currency.address == '0x0000000000000000000000000000000000000000'){
         options.value = valueToBuy;
@@ -238,7 +238,7 @@ export default {
       requestJson = await request.json();
       // console.log(requestJson);
       let signature = requestJson.data.signature;
-      // let part = (ethers.BigNumber.from(String((this.item.price/100)*this.currentPart))).toString();
+      // let part = (ethers.BigNumber.from(String((parseInt(this.item.price)/100)*this.currentPart))).toString();
       try{
         console.log('-----------------');
         console.log(`Marketplace ID: ${markeplaceId}`);
@@ -247,7 +247,7 @@ export default {
         console.log('--------LOT_DATA--------');
         console.log(`tokenAddress: ${this.item.currency.address}`);
         console.log(`Decimals: ${this.item.currency.decimals}`);
-        console.log(`price: ${this.item.price}`);
+        console.log(`price: ${parseInt(this.item.price)}`);
         console.log(`tokenContractAddress: ${this.item.collection.contract_address}`);
         console.log(`tokenId: ${this.item.token_id}`);
         console.log(`tokenAmount: ${this.item.amount}`);
@@ -263,7 +263,7 @@ export default {
           {
             tokenAddress: this.item.currency.address,
             decimals: this.item.currency.decimals,
-            price: this.item.price,
+            price: parseInt(this.item.price),
             collected: '0',
             occupancy: '0',
             tokenContractAddress: this.item.collection.contract_address,
