@@ -6,7 +6,8 @@ export default {
     return {
         item:null,
         isLiked:false,
-        likeChecked:false
+        likeChecked:false,
+        contractConfig:null
     };
   },
   getters:{
@@ -18,6 +19,9 @@ export default {
     },
     getChecked(state){
       return state.likeChecked; 
+    },
+    getContractConfig(state){
+      return state.contractConfig;
     }
   },
   mutations:{
@@ -29,6 +33,9 @@ export default {
     },
     setChecked(state, _checked){
       state.likeChecked = _checked;
+    },
+    setContractConfig(state,_value){
+      state.contractConfig = _value;
     }
   },
   actions:{
@@ -90,6 +97,12 @@ export default {
         context.commit('appGlobal/setShowConnectWalletModal',true,{root:true});
         context.commit("setLike", false);
       }
+    },
+    async fetchAndSetContractConfig(context){
+      let requestUrl = `${config.backendApiEntryPoint}contract-config/`;
+      let request = await fetch(requestUrl);
+      let requestJson = await request.json();
+      context.commit('setContractConfig',requestJson);
     }
   }
 };
