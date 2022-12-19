@@ -32,7 +32,7 @@
                     </div>
                   </div>
                   <div class="input-wrapper input-wrapper-amount">
-                    <input type="text" placeholder="Input amount" v-model="priceForPart">
+                    <input type="text" placeholder="Input amount" v-model="priceForPart" @input="setSellFractionFee">
                     <div class="input-equivalent equivalent" v-if="priceForPart>0">≈ $ {{abbrNum(Math.round(priceForPart * currencyToUsdPrice),1)}}</div>
                   </div>
                   <div class="input-prompt">{{translatesGet('ITEM_UNTIL_CANCELLED')}}</div>
@@ -67,9 +67,9 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>{{abbrNum(toFixedIfNecessary(convertToEther(noExponents(convertFromEtherToWei(this.priceForPart))),6),2)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(noExponents(convertFromEtherToWei(this.priceForPart)))*currencyToUsdPrice,6),2)}}</span>
+                    <b>{{abbrNum(toFixedIfNecessary(this.convertToEther(this.noExponents(this.noExponents(this.convertFromEtherToWei(this.priceForPart))-parseInt(this.sellFractionFee))),6),2)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(this.convertToEther(this.noExponents(this.noExponents(this.convertFromEtherToWei(this.priceForPart))-parseInt(this.sellFractionFee)))*currencyToUsdPrice,6),2)}}</span>
                   </div>
-                  <div class="total-fees">{{translatesGet('FEES')}}:<span>3%</span></div>
+                  <div class="total-fees">{{translatesGet('FEES')}}: <span>{{this.contractConfig[0].sell_fraction_fee/100}}%</span></div>
                 </div>
               </div>
             </div>
@@ -155,7 +155,8 @@ export default {
       ABI:ABI,
       buttonWaiting:false,
       lang: new MultiLang(this),
-      contractConfig:null
+      contractConfig:null,
+      sellFractionFee:0
     };
   },
   async mounted(){
@@ -164,6 +165,7 @@ export default {
     this.setCurrencyToUsd();
     this.setUserBidAmount();
     this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
+    this.setSellFractionFee();
     this.render = true;
   },
   methods:{
@@ -199,12 +201,12 @@ export default {
       return +parseFloat(value).toFixed(dp);
     },
     convertToEther(value){
-      try{
+      // try{
         return ethers.utils.formatEther(String(value));
-      }
-      catch{
-        console.log('ethers error');
-      }
+      // }
+      // catch{
+      //   console.log('ethers error');
+      // }
     },
     noExponents (value) {
       var data = String(value).split(/[eE]/);
@@ -259,6 +261,9 @@ export default {
     translatesGet(key) {
             return this.lang.get(key);
     },
+    setSellFractionFee(){
+      this.sellFractionFee = this.noExponents((this.contractConfig[0].sell_fraction_fee/100)/100*this.noExponents(this.convertFromEtherToWei(this.priceForPart)));
+    }
   },
   computed:{
     partComputed:{
