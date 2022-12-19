@@ -35,6 +35,7 @@ export default {
       state.likeChecked = _checked;
     },
     setContractConfig(state,_value){
+      console
       state.contractConfig = _value;
     }
   },

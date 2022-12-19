@@ -85,9 +85,9 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>{{abbrNum(toFixedIfNecessary(((this.item.price/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(((this.item.price/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</span>
+                    <b>{{abbrNum(toFixedIfNecessary(((this.item.price/100)*currentPart +this.contractConfig[0].buy_lot_fee)/(10**item.currency.decimals),6),1)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(((this.item.price/100)*currentPart +this.contractConfig[0].buy_lot_fee)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</span>
                   </div>
-                  <div class="total-fees">{{translatesGet('FEES')}}:<span>3%</span></div>
+                  <div class="total-fees">{{translatesGet('FEES')}}:<span>{{toFixedIfNecessary(this.contractConfig[0].buy_lot_fee/this.item.price*100,1)}}%</span></div>
                 </div>
               </div>
             </div>
@@ -173,6 +173,7 @@ export default {
       allBidsAmount:0,
       buttonWaiting:false,
       lang: new MultiLang(this),
+      contractConfig:null
     };
   },
   async mounted(){
@@ -181,6 +182,7 @@ export default {
     this.signer = await this.$store.getters['walletsAndProvider/getSigner'];
     this.setCurrencyToUsd();
     this.setAllBidsAmount();
+    this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
     this.render = true;
   },
   methods:{
@@ -192,7 +194,7 @@ export default {
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());
       let markeplaceId = ethers.utils.formatBytes32String(this.item.marketplace.id).substring(0, 10);
       let options = {};
-      let valueToBuy = (ethers.BigNumber.from(String(parseInt((this.item.price/100)*this.currentPart)))).toString();
+      let valueToBuy = (ethers.BigNumber.from(String(parseInt((this.item.price/100)*this.currentPart+this.contractConfig[0].buy_lot_fee)))).toString();
       // if (valueToBuy>(this.item.price-this.allBidsAmount)){
       //   console.log('Part is too big');
       //   valueToBuy = this.item.price-this.allBidsAmount;

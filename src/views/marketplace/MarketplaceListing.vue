@@ -483,6 +483,7 @@ export default {
     this.setChartData();
     await this.$store.dispatch('marketplaceListing/checkLike');
     await this.checkLike();
+    this.$store.dispatch('marketplaceListing/fetchAndSetContractConfig');
     this.recommendations = await this.$store.dispatch('marketplaceListing/getRecomendations',this.item.collection.contract_address);
     
     this.render = true;
