@@ -155,6 +155,7 @@ export default {
       ABI:ABI,
       buttonWaiting:false,
       lang: new MultiLang(this),
+      contractConfig:null
     };
   },
   async mounted(){
@@ -162,6 +163,7 @@ export default {
     this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
     this.setCurrencyToUsd();
     this.setUserBidAmount();
+    this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
     this.render = true;
   },
   methods:{
