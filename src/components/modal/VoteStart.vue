@@ -32,7 +32,7 @@
                     </div>
                   </div>
                   <div class="input-wrapper input-wrapper-amount">
-                    <input type="text" placeholder="Input amount" v-model="amount">
+                    <input type="text" placeholder="Input amount" v-model="amount"  @input="setSellLotFee">
                     <div class="input-equivalent equivalent" v-if="amount>0">≈ $ {{abbrNum(Math.round(amount * currencyToUsdPrice),1)}}</div>
                   </div>
                   <div class="input-prompt">{{translatesGet('ITEM_UNTIL_CANCELLED')}}</div>
@@ -57,6 +57,21 @@
                 </li>
               </ul>
               
+            </div>
+          </div>
+
+          <div class="modal-section-total">
+            <div class="total-block">
+              <div class="total-block-row">
+                <div class="total-block-name">Total:</div>
+                <div class="total-block-value">
+                  <div class="total-amount">
+                    <div class="icon-value"></div>
+                    <b>{{abbrNum(toFixedIfNecessary(this.convertToEther(this.noExponents(this.noExponents(this.convertFromEtherToWei(this.amount))-parseInt(this.sellLotFee))),6),2)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(this.convertToEther(this.noExponents(this.noExponents(this.convertFromEtherToWei(this.amount))-parseInt(this.sellLotFee)))*currencyToUsdPrice,6),2)}}</span>
+                  </div>
+                  <div class="total-fees">{{translatesGet('FEES')}}: <span>{{this.contractConfig[0].sell_lot_fee/100}}%</span></div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -134,6 +149,8 @@ export default {
       provider:null,
       buttonWaiting:false,
       lang: new MultiLang(this),
+      contractConfig:null,
+      sellLotFee:0
     };
   },
   async mounted(){    
@@ -142,6 +159,8 @@ export default {
     let request = await fetch(requestUrl);
     let requestJson = await request.json();
     let marketplacesTemp = requestJson;
+    this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
+    this.setSellLotFee();
     console.log(marketplacesTemp);
     let k = 0
     for (let element of marketplacesTemp){
@@ -154,8 +173,8 @@ export default {
     }
     this.marketplaces = marketplacesTemp;
     this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
-    await this.setCurrencyToUsd();
     this.render = true;
+    await this.setCurrencyToUsd();    
   },
   methods:{
     translatesGet(key) {
@@ -331,6 +350,9 @@ export default {
           alert('Error!');
       }
       
+    },
+    setSellLotFee(){
+      this.sellLotFee = this.noExponents((this.contractConfig[0].sell_lot_fee/100)/100*this.noExponents(this.convertFromEtherToWei(this.amount)));
     }
   }
 };
