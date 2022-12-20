@@ -3,7 +3,7 @@
         <div class="input-wrapper search-wrapper">
             <i class="i-search-line"></i>
             <input type="text" v-model="search" placeholder="Search NFT, collections, id" @input="doSearch" v-if="!isHeader">
-            <input type="text" v-model="searchHeader" placeholder="Search NFT, collections, id" @input="doSearch" v-if="isHeader">
+            <input type="text" v-model="searchHeader" placeholder="Search NFT, collections, id" @input="doSearch" v-else>
         </div>
         <div class="search-results" :class="{'unfolded' : search != ''}" v-if="this.searchHeader.length>=2 & this.isHeader">
             <div class="search-results-wrapper" @scroll="handleScroll">
