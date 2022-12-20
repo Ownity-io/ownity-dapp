@@ -595,6 +595,11 @@ ul.tabs {
 }
 
 
+.search-results-wrapper {
+    max-height: min( 275px, calc(100vh - 100px));
+    overflow: hidden auto;
+}
+
 .search-results-wrapper ul,
 .search-results-wrapper ul li,
 .drop-down ul,
