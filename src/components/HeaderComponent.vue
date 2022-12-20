@@ -6,7 +6,7 @@
                 <div v-if="$route.fullPath ==='/'" @click="goToTop()" class="header-logo"></div>
                 <router-link :to="{name: 'Main'}" v-else class="header-logo"></router-link>
                 <div class="header-search">
-                    <Search />
+                    <Search :isHeader="true"/>
                 </div>
                 <div class="header-nav">
                     <nav>
