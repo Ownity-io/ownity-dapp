@@ -2,8 +2,8 @@
     <div class="search">
         <div class="input-wrapper search-wrapper">
             <i class="i-search-line"></i>
-            <input type="text" v-model="searchHeader" placeholder="Search NFT, collections, id" @input="doSearch" v-if="isHeader == true">
-            <input type="text" v-model="search" placeholder="Search NFT, collections, id" @input="doSearch" v-else-if="isHeader != true">            
+            <input type="text" v-model="searchHeader" placeholder="Search NFT, collections, id" v-debounce:500ms="doSearch" v-if="isHeader == true">
+            <input type="text" v-model="search" placeholder="Search NFT, collections, id" v-debounce:500ms="doSearch" v-else-if="isHeader != true">            
         </div>
         <div class="search-results" :class="{'unfolded' : searchHeader != ''}" v-if="this.searchHeader.length>=2 & this.isHeader">
             <div class="search-results-wrapper" @scroll="handleScroll">
@@ -36,6 +36,7 @@
 <script>
 import MultiLang from "@/core/multilang";
 import config from "@/config.json";
+import { vue3Debounce } from 'vue-debounce';
 export default {
     data() {
         return {
@@ -48,7 +49,7 @@ export default {
             showNothingFound:false,
             listingsNextLink:null,
             searchHeader:'',
-            timeToSearch:500
+            timeToSearch:200
         }
     },
     methods:{
@@ -56,14 +57,6 @@ export default {
             return this.lang.get(key);
         },
         async doSearch(){
-            this.timeToSearch = 500;
-            const delay = (delayInms) => {
-            return new Promise(resolve => setTimeout(resolve, delayInms));
-        }
-            while (this.timeToSearch > 0) {
-                await delay(this.timeToSearch);
-                this.timeToSearch-=this.timeToSearch;
-            }
             if (this.searchHeader.length>=2){
                 if (this.isHeader){
                     let collectionsRequestUrl = `${config.backendApiEntryPoint}nft-collections/?limit=10&search=${this.searchHeader}`
@@ -125,7 +118,10 @@ export default {
                 this.$store.dispatch('marketplace/setSearchString', value);
             }
         }
-    }
+    },
+    directives: {
+    debounce: vue3Debounce({ lock: true })
+  }
 }
 </script>
 
