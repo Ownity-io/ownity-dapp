@@ -2,9 +2,10 @@
     <div class="search">
         <div class="input-wrapper search-wrapper">
             <i class="i-search-line"></i>
-            <input type="text" v-model="search" placeholder="Search NFT, collections, id" @input="doSearch">
+            <input type="text" v-model="search" placeholder="Search NFT, collections, id" @input="doSearch" v-if="!isHeader">
+            <input type="text" v-model="searchHeader" placeholder="Search NFT, collections, id" @input="doSearch" v-if="isHeader">
         </div>
-        <div class="search-results" :class="{'unfolded' : search != ''}" v-if="this.search.length>=2">
+        <div class="search-results" :class="{'unfolded' : search != ''}" v-if="this.searchHeader.length>=2 & this.isHeader">
             <div class="search-results-wrapper" @scroll="handleScroll">
                 <ul v-if="collections.length>0">
                     <li v-for="collection in collections">
@@ -40,13 +41,13 @@ export default {
         return {
             testBg: '',
             testOpenSearch: false,
-            search: '',
             lang: new MultiLang(this),
             config:config,
             collections:[],
             listings:[],
             showNothingFound:false,
-            listingsNextLink:null
+            listingsNextLink:null,
+            searchHeader:''
         }
     },
     methods:{
@@ -57,8 +58,8 @@ export default {
             console.log(this.listingsNextLink);
             if (this.search.length>=2){
                 if (this.isHeader){
-                    let collectionsRequestUrl = `${config.backendApiEntryPoint}nft-collections/?limit=10&search=${this.search}`
-                    let listingsRequestUrl = `${config.backendApiEntryPoint}listings/?limit=10&search=${this.search}`;
+                    let collectionsRequestUrl = `${config.backendApiEntryPoint}nft-collections/?limit=10&search=${this.searchHeader}`
+                    let listingsRequestUrl = `${config.backendApiEntryPoint}listings/?limit=10&search=${this.searchHeader}`;
 
                     let collectionsRequest = await fetch(collectionsRequestUrl);
                     let listingsRequest = await fetch(listingsRequestUrl);
@@ -70,23 +71,33 @@ export default {
                     this.listingsNextLink = listingsJson.next;
                 }
                 else if(this.$route.name=='Marketplace'){                    
-                    let listingsRequestUrl = `${config.backendApiEntryPoint}listings/?limit=10&search=${this.search}`;
-                    let listingsRequest = await fetch(listingsRequestUrl);
-                    let listingsJson = await listingsRequest.json();
-                    this.listings = listingsJson.results;
-                    this.listingsNextLink = listingsJson.next;
+                    // this.$store.dispatch('marketplace/setSearchString',this.search);
+                    this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
                 }
                 else if(this.$route.name=='Collection'){                
-                    let listingsRequestUrl = `${config.backendApiEntryPoint}listings/?limit=10&search=${this.search}&collection=${this.$route.params.contract_address}`;
-                    let listingsRequest = await fetch(listingsRequestUrl);
-                    let listingsJson = await listingsRequest.json();
-                    this.listings = listingsJson.results;
-                    this.listingsNextLink = listingsJson.next;
+                    // let listingsRequestUrl = `${config.backendApiEntryPoint}listings/?limit=10&search=${this.search}&collection=${this.$route.params.contract_address}`;
+                    // let listingsRequest = await fetch(listingsRequestUrl);
+                    // let listingsJson = await listingsRequest.json();
+                    // this.listings = listingsJson.results;
+                    // this.listingsNextLink = listingsJson.next;
+                    // this.$store.dispatch('marketplace/setSearchString',this.search);
+                    this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address);
                 }                
             }
             else{
-                this.collections = [];
-                this.listings =[];
+                if (this.isHeader){
+                    this.collections = [];
+                    this.listings = [];                
+                }
+                else if(this.$route.name=='Marketplace'){
+                    // this.$store.dispatch('marketplace/setSearchString', null);
+                    this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
+                }
+                else if(this.$route.name=='Collection'){
+                    // this.$store.dispatch('marketplace/setSearchString', null);
+                    this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address);
+                }
+                
             }            
         },
         async loadNext(){
@@ -105,7 +116,17 @@ export default {
             }
         }
     },
-    props:['isHeader']
+    props:['isHeader'],
+    computed:{
+        search:{
+            get(){
+                return this.$store.getters['marketplace/getSearchString'];
+            },
+            set(value){
+                this.$store.dispatch('marketplace/setSearchString', value);
+            }
+        }
+    }
 }
 </script>
 

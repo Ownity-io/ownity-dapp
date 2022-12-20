@@ -24,7 +24,8 @@ export default {
       currentlyGatehring:false,
       currentBidStatus:null,
       selectedSort:null,
-      onSale:false
+      onSale:false,
+      searchString:''
     };
   },
   getters: {
@@ -109,6 +110,9 @@ export default {
     },
     getOnSale(state){
       return state.onSale;
+    },
+    getSearchString(state){
+      return state.searchString;
     }
   },
   mutations: {
@@ -161,6 +165,9 @@ export default {
     },
     setOnSale(state,value){
       state.onSale = value;
+    },
+    setSearchString(state,value){
+      state.searchString = value;
     }
   },
   actions: {
@@ -194,6 +201,9 @@ export default {
   
       if (context.getters.getCurrentlyGathering){
         requestUrl+='&internal_status=GATHER';
+      }
+      if (context.getters.getSearchString!=''){
+        requestUrl+=`&search=${context.getters.getSearchString}`;
       }
       requestUrl+='&marketplace_status=OPEN';
       console.log(requestUrl)
@@ -259,6 +269,7 @@ export default {
       context.commit("setCurrentlyGathering",false);
       context.commit("setCurrentBidStatus",false);
       context.commit("setOnSale",false);
+      context.commit("setSearchString",'');
     },
     async setCurrentlyGathering(context,value){
       context.commit("setCurrentlyGathering", value);
@@ -395,6 +406,9 @@ export default {
     },
     setOnSale(context,value){
       context.commit('setOnSale',value);
+    },
+    setSearchString(context,value){
+      context.commit('setSearchString',value);
     }
   },
 };
