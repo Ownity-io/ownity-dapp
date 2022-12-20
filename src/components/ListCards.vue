@@ -58,16 +58,13 @@ export default {
         this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address)
       }
       if (this.$route.name == 'Profile'){      
-        console.log  
         if (this.onlyFav) {
-          console.log('fav');
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');
         }
         else if(this.vote){
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');
         }
         else{
-          console.log('no-fav');
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
         }
       }

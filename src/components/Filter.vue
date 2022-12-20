@@ -234,7 +234,6 @@ export default {
         await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
       }
       else if (this.$route.name == 'Collection'){
-        console.log(this.currentlyGathering);
         await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address);
       }
       else if (this.$route.name == 'Profile'){

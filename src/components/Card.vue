@@ -490,7 +490,6 @@ export default {
     async checkLike(context){
       if (localStorage.getItem("token") != null & localStorage.getItem("token") != 'null'){
         if (!this.likeChecked){
-        console.log('check...');
         let requestLink = `${config.backendApiEntryPoint}is-favorite/?lot=${this.item.id}`;
         let requestOptions = {
           method: "GET",
@@ -548,9 +547,6 @@ export default {
         }
 
         for (let element of this.item.votings){
-          console.log('--------');
-          console.log(element.address);
-          console.log(localStorage.getItem('userAddress'));
           if (element.users.address == localStorage.getItem('userAddress')){
             this.userVoted = true;
             return;
@@ -569,7 +565,6 @@ export default {
     setBidOnSale(){
       if (this.itemWithBidsOnSale.bids){
           this.bidOnSale = this.itemWithBidsOnSale.bids[0];          
-          console.log('founded');
           for (let element of this.itemWithBidsOnSale.bids){
             if (element.address == localStorage.getItem('userAddress')){
               this.userBidOnSale = element;
@@ -601,8 +596,7 @@ export default {
         this.showUserBidOnSale=true;
       }
     }
-    console.log(this.voting);
-    console.log(this.userVoted);
+
     this.render=true;
     await this.checkLike();
     const delay = (delayInms) => {

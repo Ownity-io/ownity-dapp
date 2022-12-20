@@ -195,7 +195,6 @@ export default{
   },
   props:['item','voting'],
   async mounted(){
-    // console.log(this.voting);  
     await this.setCurrencyToUsd();
     await this.setUserVotedAndLogged();
     await this.setUserBidAmount();
