@@ -2,72 +2,21 @@
     <!-- <SnackBar /> -->
     <!-- <Cookies /> -->
     <ConnectWallet v-if="this.$store.getters['appGlobal/getShowConnectWalletModal'] & (this.walletConnected==null||this.walletConnected=='null')"/>
-    <DepositPartStart v-if="this.$store.getters['appGlobal/getshowStartCollectingModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
-    <DepositPartContinue v-if="this.$store.getters['appGlobal/getshowContinueCollectingModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
-    <DepositCancel v-if="this.$store.getters['appGlobal/getshowDepositCancelModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
-    <SellPart v-if="this.$store.getters['appGlobal/getShowSellPartModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
-    <SellCancelPart v-if="this.$store.getters['appGlobal/getShowCancelSellVotingModal'] & (this.walletConnected!=null & this.walletConnected!='null')" />
-    <SellCancel v-if="this.$store.getters['appGlobal/getShowCancelSellPartModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
-    <Claim v-if="this.$store.getters['appGlobal/getShowClaimNftModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
-    <ClaimReward v-if="this.$store.getters['appGlobal/getShowClaimRewardModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
-    <!-- <PriceChanged /> -->
-    <VoteConfirm v-if="this.$store.getters['appGlobal/getVoteConfirmModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
-    <VoteStart v-if="this.$store.getters['appGlobal/getShowStartVotingModal'] & (this.walletConnected!=null & this.walletConnected!='null')" />
-    <TransSuccess v-if="this.$store.getters['appGlobal/getShowTransSuccessModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
-    <BuyPart v-if="this.$store.getters['appGlobal/getShowBuyPartModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/> 
 
-    <div class="wrapper-main">
-        <HeaderComponent/>
-        <RouterView />    
-    </div>
-    <FooterComponent/>
+    <RouterView />  
 </template>
 
 <script>
-import HeaderComponent from '@/components/HeaderComponent.vue'
-import FooterComponent from '@/components/FooterComponent.vue'
 
-// -----------MODAL_WINDOWS----------------
 import ConnectWallet from '@/components/modal/ConnectWallet.vue'
-import DepositPartStart from '@/components/modal/DepositPartStart.vue'
-import DepositPartContinue from '@/components/modal/DepositPartContinue.vue'
-import DepositCancel from '@/components/modal/DepositCancel.vue'
-import SellPart from '@/components/modal/SellPart.vue'
-import SellCancelPart from '@/components/modal/SellCancelPart.vue'
-import SellCancel from '@/components/modal/SellCancel.vue'
-import Claim from '@/components/modal/Claim.vue'
-import ClaimReward from '@/components/modal/ClaimReward.vue'
-import PriceChanged from '@/components/modal/PriceChanged.vue'
-import VoteStart from '@/components/modal/VoteStart.vue'
-import VoteConfirm from '@/components/modal/VoteConfirm.vue'
-import BuyPart from '@/components/modal/BuyPart.vue'
-import TransSuccess from '@/components/modal/TransSuccess.vue'
-// ----------------------------------------
 import SnackBar from '@/components/SnackBar.vue'
 import Cookies from '@/components/Cookies.vue'
 
 
 export default {
     components:{
-        HeaderComponent,
-        FooterComponent,
 
-// -----------MODAL_WINDOWS----------------
         ConnectWallet,
-        DepositPartStart,
-        DepositPartContinue,
-        DepositCancel,
-        SellPart,
-        SellCancelPart,
-        SellCancel,
-        Claim,
-        ClaimReward,
-        PriceChanged,
-        VoteStart,
-        VoteConfirm,
-        BuyPart,
-        TransSuccess,
-// ----------------------------------------
         SnackBar,
         Cookies
     },

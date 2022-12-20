@@ -1,11 +1,17 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import Main from '../views/Main.vue'
+import Index from '../views/Index.vue'
 import Marketplace from '../views/Marketplace.vue'
 import Profile from '../views/Profile.vue'
 
 const routes = [
     {
         path: '/',
+        name: 'Index',
+        component: Index,
+        children: [
+    {
+        path: '',
         name: 'Main',
         component: Main,
         // redirect: "/marketplace",
@@ -65,6 +71,14 @@ const routes = [
         name: 'PrivacyPolicy',
         path: '/privacy_policy',
         component: () => import('@/views/services/PrivacyPolicy.vue'),  
+    },
+
+        ]
+    },
+    {
+        name: 'Previous',
+        path: '/previous',
+        component: () => import('@/views/Previous.vue'),  
     }
 ]
 
