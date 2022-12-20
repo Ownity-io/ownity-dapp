@@ -2,10 +2,10 @@
     <div class="search">
         <div class="input-wrapper search-wrapper">
             <i class="i-search-line"></i>
-            <input type="text" v-model="search" placeholder="Search NFT, collections, id" @input="doSearch" v-if="!isHeader">
-            <input type="text" v-model="searchHeader" placeholder="Search NFT, collections, id" @input="doSearch" v-else>
+            <input type="text" v-model="searchHeader" placeholder="Search NFT, collections, id" @input="doSearch" v-if="isHeader == true">
+            <input type="text" v-model="search" placeholder="Search NFT, collections, id" @input="doSearch" v-else-if="isHeader != true">            
         </div>
-        <div class="search-results" :class="{'unfolded' : search != ''}" v-if="this.searchHeader.length>=2 & this.isHeader">
+        <div class="search-results" :class="{'unfolded' : searchHeader != ''}" v-if="this.searchHeader.length>=2 & this.isHeader">
             <div class="search-results-wrapper" @scroll="handleScroll">
                 <ul v-if="collections.length>0">
                     <li v-for="collection in collections">
@@ -47,7 +47,8 @@ export default {
             listings:[],
             showNothingFound:false,
             listingsNextLink:null,
-            searchHeader:''
+            searchHeader:'',
+            timeToSearch:500
         }
     },
     methods:{
@@ -55,8 +56,15 @@ export default {
             return this.lang.get(key);
         },
         async doSearch(){
-            console.log(this.listingsNextLink);
-            if (this.search.length>=2){
+            this.timeToSearch = 500;
+            const delay = (delayInms) => {
+            return new Promise(resolve => setTimeout(resolve, delayInms));
+        }
+            while (this.timeToSearch > 0) {
+                await delay(this.timeToSearch);
+                this.timeToSearch-=this.timeToSearch;
+            }
+            if (this.searchHeader.length>=2){
                 if (this.isHeader){
                     let collectionsRequestUrl = `${config.backendApiEntryPoint}nft-collections/?limit=10&search=${this.searchHeader}`
                     let listingsRequestUrl = `${config.backendApiEntryPoint}listings/?limit=10&search=${this.searchHeader}`;
@@ -71,16 +79,9 @@ export default {
                     this.listingsNextLink = listingsJson.next;
                 }
                 else if(this.$route.name=='Marketplace'){                    
-                    // this.$store.dispatch('marketplace/setSearchString',this.search);
                     this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
                 }
-                else if(this.$route.name=='Collection'){                
-                    // let listingsRequestUrl = `${config.backendApiEntryPoint}listings/?limit=10&search=${this.search}&collection=${this.$route.params.contract_address}`;
-                    // let listingsRequest = await fetch(listingsRequestUrl);
-                    // let listingsJson = await listingsRequest.json();
-                    // this.listings = listingsJson.results;
-                    // this.listingsNextLink = listingsJson.next;
-                    // this.$store.dispatch('marketplace/setSearchString',this.search);
+                else if(this.$route.name=='Collection'){             
                     this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address);
                 }                
             }
@@ -90,11 +91,9 @@ export default {
                     this.listings = [];                
                 }
                 else if(this.$route.name=='Marketplace'){
-                    // this.$store.dispatch('marketplace/setSearchString', null);
                     this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
                 }
                 else if(this.$route.name=='Collection'){
-                    // this.$store.dispatch('marketplace/setSearchString', null);
                     this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address);
                 }
                 
