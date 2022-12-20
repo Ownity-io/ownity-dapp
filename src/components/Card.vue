@@ -294,7 +294,7 @@
         </div>
 
         <!-- ######## 2 ######## -->
-        <div class="container-btn-part" v-if="userBidOnSale & this.item.internal_status!='ON SALE'">
+        <div class="container-btn-part" v-if="showUserBidOnSale">
           <div class="card-col">
             <span class="card-col-name">{{translatesGet('PART')}}</span>
             <span><strong>{{toFixedIfNecessary(userBidOnSale.fraction_amount/this.item.price*100,1)}}%</strong></span>
@@ -393,6 +393,7 @@ export default {
       render:false,
       userBidOnSale:null,
       lang: new MultiLang(this),
+      showUserBidOnSale:false
     };
   },
   props:[
@@ -593,6 +594,12 @@ export default {
     // await this.checkLike();
     if (localStorage.getItem('userAddress')!=null&localStorage.getItem('userAddress')!="null"){
       this.setMaxVoting();
+    }
+    // this.showUserBidOnSale = userBidOnSale & this.item.internal_status!='ON SALE';
+    if (this.userBidOnSale){
+      if (this.item.internal_status!='ON SALE'){
+        this.showUserBidOnSale=true;
+      }
     }
     console.log(this.voting);
     console.log(this.userVoted);
