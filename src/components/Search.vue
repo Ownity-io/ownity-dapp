@@ -5,7 +5,7 @@
             <input type="text" v-model="search" placeholder="Search NFT, collections, id" @input="doSearch">
         </div>
         <div class="search-results" :class="{'unfolded' : search != ''}" v-if="this.search.length>=2">
-            <div class="search-results-wrapper">
+            <div class="search-results-wrapper" @scroll="handleScroll">
                 <ul v-if="collections.length>0">
                     <li v-for="collection in collections">
                         <div class="results-icon" :style="{backgroundImage:`url(${collection.logo})`}"></div>
@@ -45,7 +45,8 @@ export default {
             config:config,
             collections:[],
             listings:[],
-            showNothingFound:false
+            showNothingFound:false,
+            listingsNextLink:null
         }
     },
     methods:{
@@ -53,6 +54,7 @@ export default {
             return this.lang.get(key);
         },
         async doSearch(){
+            console.log(this.listingsNextLink);
             if (this.search.length>=2){
                 if (this.isHeader){
                     let collectionsRequestUrl = `${config.backendApiEntryPoint}nft-collections/?limit=10&search=${this.search}`
@@ -61,24 +63,46 @@ export default {
                     let collectionsRequest = await fetch(collectionsRequestUrl);
                     let listingsRequest = await fetch(listingsRequestUrl);
 
+                    let listingsJson = await listingsRequest.json();
+
                     this.collections = (await collectionsRequest.json()).results;
-                    this.listings = (await listingsRequest.json()).results;
+                    this.listings = listingsJson.results;
+                    this.listingsNextLink = listingsJson.next;
                 }
                 else if(this.$route.name=='Marketplace'){                    
                     let listingsRequestUrl = `${config.backendApiEntryPoint}listings/?limit=10&search=${this.search}`;
                     let listingsRequest = await fetch(listingsRequestUrl);
-                    this.listings = (await listingsRequest.json()).results;
+                    let listingsJson = await listingsRequest.json();
+                    this.listings = listingsJson.results;
+                    this.listingsNextLink = listingsJson.next;
                 }
                 else if(this.$route.name=='Collection'){                
                     let listingsRequestUrl = `${config.backendApiEntryPoint}listings/?limit=10&search=${this.search}&collection=${this.$route.params.contract_address}`;
                     let listingsRequest = await fetch(listingsRequestUrl);
-                    this.listings = (await listingsRequest.json()).results;
+                    let listingsJson = await listingsRequest.json();
+                    this.listings = listingsJson.results;
+                    this.listingsNextLink = listingsJson.next;
                 }                
             }
             else{
                 this.collections = [];
                 this.listings =[];
             }            
+        },
+        async loadNext(){
+            if(this.listingsNextLink){
+                let listingsRequest = await fetch(this.listingsNextLink);
+                let requestJson = await listingsRequest.json();
+                this.listings = this.listings.concat(requestJson.results);
+                this.listingsNextLink = requestJson.next;
+                
+            }
+        },
+        handleScroll: async function (el) {
+            if ((el.srcElement.offsetHeight + el.srcElement.scrollTop) >= el.srcElement.scrollHeight) {
+                await this.loadNext();
+                console.log('bottom');
+            }
         }
     },
     props:['isHeader']
