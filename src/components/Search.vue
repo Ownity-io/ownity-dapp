@@ -8,20 +8,20 @@
             <div class="search-results-wrapper" @scroll="handleScroll">
                 <ul v-if="collections.length>0">
                     <li v-for="collection in collections">
-                        <div class="results-icon" :style="{backgroundImage:`url(${collection.logo})`}"></div>
-                        <div class="results-data">
+                        <a class="results-icon" :style="{backgroundImage:`url(${collection.logo})`}"  :href="'/collection/'+collection.contract_address"></a>
+                        <a class="results-data"  :href="'/collection/'+collection.contract_address">
                             <div class="name">{{collection.name}}</div>
-                        </div>
+                        </a>
                     </li>
                 </ul>
                 <ul v-if="listings.length>0">
                     <li v-for="listing in listings">
-                        <div class="results-icon" :style="{backgroundImage:`url(${listing.media})`}"></div>
-                        <div class="results-data">
+                        <a class="results-icon" :style="{backgroundImage:`url(${listing.media})`}" :href="'/listing/'+listing.collection.contract_address+'/'+listing.token_id+'&'+listing.id"></a>
+                        <a class="results-data" :href="'/listing/'+listing.collection.contract_address+'/'+listing.token_id+'&'+listing.id">
                             <div class="name" v-if="listing.name">{{listing.name}}</div>
                             <div class="name" v-else>#{{listing.token_id}}</div>
                             <div>{{listing.collection.name}}</div>
-                        </div>
+                        </a>
                     </li>
                 </ul>
                 <div class="empty-list" v-if="!(collections.length>0||listings.length>0)">
