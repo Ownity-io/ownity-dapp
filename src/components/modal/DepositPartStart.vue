@@ -221,10 +221,10 @@ export default {
       let markeplaceId = ethers.utils.formatBytes32String(this.item.marketplace.id).substring(0, 10);
       let options = {};
       let valueToBuy = (ethers.BigNumber.from(String((ethers.BigNumber.from(parseInt(this.item.price)+parseInt(this.buyLotFee))/100)*this.currentPart))).toString();
-      if (valueToBuy>(parseInt(this.item.price)-this.allBidsAmount)){
-        console.log('Part is too big');
-        valueToBuy = parseInt(this.item.price)-this.allBidsAmount;
-      }
+      // if (valueToBuy>(parseInt(this.item.price)-this.allBidsAmount)){
+      //   console.log('Part is too big');
+      //   valueToBuy = parseInt(this.item.price)-this.allBidsAmount;
+      // }
       if (this.item.currency.address == '0x0000000000000000000000000000000000000000'){
         options.value = valueToBuy;
       }      
