@@ -196,13 +196,14 @@ export default {
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());
       let markeplaceId = ethers.utils.formatBytes32String(this.item.marketplace.id).substring(0, 10);
       let options = {};
-      let valueToBuy = (ethers.BigNumber.from(String(parseInt(((parseInt(this.item.price)+parseInt(this.buyLotFee))/100)*this.currentPart)))).toString();
+      let valueToBuy = (ethers.BigNumber.from(String((ethers.BigNumber.from(parseInt(this.item.price))/100)*this.currentPart))).toString()
+      let valueToBuyWithComissions = (ethers.BigNumber.from(String((ethers.BigNumber.from(parseInt(this.item.price)+parseInt(this.buyLotFee))/100)*this.currentPart))).toString();
       // if (valueToBuy>(parseInt(this.item.price)-this.allBidsAmount)){
       //   console.log('Part is too big');
       //   valueToBuy = parseInt(this.item.price)-this.allBidsAmount;
       // }
       if (this.item.currency.address == '0x0000000000000000000000000000000000000000'){
-        options.value = valueToBuy;
+        options.value = valueToBuyWithComissions;
       }      
       options.gasLimit ='1000000' ;
       let requestUrl = `${config.backendApiEntryPoint}buy-nft/`;
