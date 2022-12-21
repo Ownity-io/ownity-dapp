@@ -113,9 +113,17 @@ export default {
   mutations: {
     //listings
     setListingsInfo(state, _json) {
-      state.nextListingLink = _json.next;
-      state.prevListingLink = _json.previous;
-      state.listingsResults = _json.results;
+      if (_json!=null){
+        state.nextListingLink = _json.next;
+        state.prevListingLink = _json.previous;
+        state.listingsResults = _json.results;
+      }
+      else{
+        state.nextListingLink = null;
+      state.prevListingLink = null;
+      state.listingsResults = [];
+      }
+      
       state.lastListingsResponse = _json;
     },
     addListingsInfo(state, _json) {
@@ -346,6 +354,10 @@ export default {
       } else {
         context.commit("setListingsInfo", null);
       }
+    },
+    async clearListingsInfo(context){
+      console.log('clear');
+      context.commit("setListingsInfo", null);
     },
     async fetchAndSetListingsStartInfoByUserVote(context) {
       let requestUrl = `${config.backendApiEntryPoint}listings-with-voting-by-user/?limit=${config.listingsPerPage}`;
