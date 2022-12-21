@@ -18,7 +18,6 @@ export default {
       currentMinPrice: null,
       currentMaxPrice: null,
       currentMarketplace: null,
-      currentCollection: null,
       currentlyGatehring:false,
       currentBidStatus:null,
       selectedSort:null,
