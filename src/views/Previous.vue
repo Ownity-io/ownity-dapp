@@ -1,6 +1,6 @@
 <template>
     <div>
-        
+
         <div class="wrapper-main">
             <HeaderPrevious/>
             <div class="page-wrapper">
@@ -22,7 +22,6 @@
 <script>
 
 import '../assets/styles/previous.css'
-import FirstScreen from "@/views/PreviousBlock/FirstScreen.vue";
 import FirstBlock from "@/components/Previous/FirstBlock.vue";
 import HeaderPrevious from '@/components/Previous/HeaderPrevious.vue';
 import FooterComponent from '@/components/FooterComponent.vue'
