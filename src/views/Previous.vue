@@ -2,17 +2,7 @@
     <div>
         
         <div class="wrapper-main">
-            <div>
-                Previous-page mob-menu
-            </div>
-            <header>
-                <div class="container">
-                    <div class="header-wrapper">
-                Previous-page Header
-
-                    </div>
-                </div>
-            </header>
+            <HeaderComponent2/>
             <div class="page-wrapper">
                 <main>
                     <div class="main-bg">
@@ -31,11 +21,14 @@
 <script>
 
 import '../assets/styles/previous.css'
+import FirstScreen from "@/views/PreviousBlock/FirstScreen.vue";
 import FirstBlock from "@/components/Previous/FirstBlock.vue";
+import HeaderComponent2 from '@/components/HeaderComponent2.vue';
 
 export default {
 	components: {
-		FirstBlock
+		FirstBlock,
+        HeaderComponent2
 	},
     data() {
         return{
