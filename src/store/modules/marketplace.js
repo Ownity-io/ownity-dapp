@@ -11,7 +11,6 @@ export default {
       lastListingsResponse: null,
       //forFilters
       marketplaces: null,
-      statuses: ["CLOSED", "OPEN"],
       nftCollections: null,
       //selectedFilters
       currentMarketplaceId: null,
@@ -47,9 +46,6 @@ export default {
     },
     getNftCollections(state) {
       return state.nftCollections;
-    },
-    getStatuses(state) {
-      return state.statuses;
     },
     //selectedFilters
     getCurrentMarketplaceId(state) {
