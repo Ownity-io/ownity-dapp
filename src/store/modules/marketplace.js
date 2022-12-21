@@ -15,7 +15,6 @@ export default {
       nftCollections: null,
       //selectedFilters
       currentMarketplaceId: null,
-      currentStatus: null,
       currentCollectionContractAddress: null,
       currentMinPrice: null,
       currentMaxPrice: null,
@@ -56,9 +55,6 @@ export default {
     getCurrentMarketplaceId(state) {
       return state.currentMarketplaceId;
     },
-    getCurrentStatus(state) {
-      return state.currentStatus;
-    },
     getCurrentCollectionContractAddress(state) {
       return state.currentCollectionContractAddress;
     },
@@ -94,7 +90,6 @@ export default {
       let count = 0;
       if (state.currentMarketplaceId!=null){count++;}
       if (state.currentCollectionContractAddress!=null){count++;}
-      if (state.currentStatus!=null){count++;}
       if (state.currentMinPrice!=null){count++;}
       if (state.currentMaxPrice!=null){count++;}
       return count;
@@ -147,9 +142,6 @@ export default {
     //selectedFilters
     setCurrentMarketplaceId(state, _marketplaceId) {
       state.currentMarketplaceId = _marketplaceId;
-    },
-    setCurrentStatus(state, _status) {
-      state.currentStatus = _status;
     },
     setCurrentCollectionContractAddress(state, _collectionContractAddress) {
       state.currentCollectionContractAddress = _collectionContractAddress;
@@ -248,9 +240,6 @@ export default {
     async getAndSetCurrentMarketplaceId(context, _marketplaceId) {
       context.commit("setCurrentMarketplaceId", _marketplaceId);
     },
-    async getAndSetCurrentStatus(context, _status) {
-      context.commit("setCurrentStatus", _status);
-    },
     async getAndSetCurrentCollectionContractAddress(context,_collectionContractAddress) {
       context.commit("setCurrentCollectionContractAddress",_collectionContractAddress);
     },
@@ -262,7 +251,6 @@ export default {
     },
     async setAllFiltersToNull(context){
       context.commit("setCurrentMarketplaceId", null);
-      context.commit("setCurrentStatus", null);
       context.commit("setCurrentCollectionContractAddress",null);
       context.commit("setCurrentMinPrice", null);
       context.commit("setCurrentMaxPrice", null);
@@ -290,7 +278,6 @@ export default {
         requestUrl += `&price_lt=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
       }
       if (context.getters.getCurrentlyGathering){
-        console.log(context.getters.getCurrentStatus);
         requestUrl += `&internal_status=GATHER`;
       }
     
@@ -336,7 +323,6 @@ export default {
       if (context.getters.getCurrentMaxPrice!=null){
         requestUrl += `&price_lt=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
       }
-      console.log(context.getters.getCurrentStatus);
       if (context.getters.getCurrentlyGathering){
         requestUrl += `&internal_status=GATHER`;
       }

@@ -1,15 +1,6 @@
 <template>
     <div class="selected-filters">
         <ul v-if="this.$store.getters['marketplace/getFiltersCount']>0">
-            <li v-if="this.$store.getters['marketplace/getCurrentStatus']!=null" @click="this.$store.dispatch('marketplace/getAndSetCurrentStatus',null);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')">
-                <button class="btn btn-selected-filter">
-                    <span>
-                        {{(this.$store.getters['marketplace/getCurrentStatus']  === 'CLOSED') 
-                        ? translatesGet('STATUS-CLOSED') : translatesGet('STATUS-OPEN') }}
-                    </span>
-                    <i class="i-close-line"></i>
-                </button>
-            </li>
             <li  v-if="this.$store.getters['marketplace/getCurrentCollectionContractAddress']!=null" @click="this.$store.dispatch('marketplace/getAndSetCurrentCollectionContractAddress',null);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')">
                 <button class="btn btn-selected-filter">
                     <div class="icon-selected-filter"></div>

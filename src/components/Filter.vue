@@ -73,72 +73,6 @@
         </li>
       </ul>
     </div>
-    
-    <!-- <div class="filter-section" :class="{ 'collapse-section': filterSection1 }" v-if="false">
-      <button class="filter-section-name" @click="filterSection1 = !filterSection1">
-        <span>Status</span>
-        <i class="i-arrow-up-s-line"></i>
-      </button>
-      <ul class="filter-ul">
-        <li class="filter-li" v-for="item in this.$store.getters['marketplace/getStatuses']" :key="item">
-          <div class="input-checkbox">
-            <input type="checkbox" :id="item" v-model="checkedStatus" :true-value="item" :false-value="null" @change="fetchAndSetListingsStartInfo"/>
-            <label :for="item">
-              <span>{{(item  === 'CLOSED') ? 'Closed' : 'Open' }}</span>
-              <i class="i-check-line"></i>
-            </label>
-          </div>
-        </li>
-        <li class="filter-li" >
-          <div class="input-checkbox">
-            <input type="checkbox"/>
-            <label :for="item">
-              <div class="i-wrap">
-                <i class="i-shopping-bag-line"></i>
-              </div>
-              <span>Sale</span>
-              <i class="i-check-line"></i>
-            </label>
-          </div>
-        </li>
-        <li class="filter-li" >
-          <div class="input-checkbox">
-            <input type="checkbox"/>
-            <label :for="item">
-              <div class="i-wrap">
-                <i class="i-price-tag-3-line"></i>
-              </div>
-              <span>Listing</span>
-              <i class="i-check-line"></i>
-            </label>
-          </div>
-        </li>
-        <li class="filter-li" >
-          <div class="input-checkbox">
-            <input type="checkbox"/>
-            <label :for="item">
-              <div class="i-wrap">
-                <i class="i-hand-coin-line"></i>
-              </div>
-              <span>Offer</span>
-              <i class="i-check-line"></i>
-            </label>
-          </div>
-        </li>
-        <li class="filter-li" >
-          <div class="input-checkbox">
-            <input type="checkbox"/>
-            <label :for="item">
-              <div class="i-wrap">
-                <i class="i-truck-line"></i>
-              </div>
-              <span>Transfer</span>
-              <i class="i-check-line"></i>
-            </label>
-          </div>
-        </li>
-      </ul>
-    </div>  -->
     <div class="filter-section" :class="{ 'collapse-section': filterSection2 }" v-if="this.$route.name=='Profile' & onlyFav">
       <button class="filter-section-name" @click="filterSection2 = !filterSection2">
         <span>[Bid Status]</span>
@@ -250,14 +184,6 @@ export default {
     },
   },
   computed:{
-    checkedStatus:{
-      get(){
-        return this.$store.getters['marketplace/getCurrentStatus'];
-      },
-      set(value){
-        this.$store.dispatch('marketplace/getAndSetCurrentStatus',value);
-      }
-    },
     checkedMarketplace:{
       get(){
         return this.$store.getters['marketplace/getCurrentMarketplaceId'];

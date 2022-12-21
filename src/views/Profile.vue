@@ -251,7 +251,6 @@ export default {
                 await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo', this.$route.params.contract_address);
             }
             else if (this.$route.name == 'Profile') {
-                console.log(this.checkedStatus);
                 if (this.onlyFav) {
                     await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
                 }
