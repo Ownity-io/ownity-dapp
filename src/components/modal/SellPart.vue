@@ -245,7 +245,7 @@ export default {
     async sellPart(){
       this.buttonWaiting=true;
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());  
-      let sellFraction = await contract.sellFraction(this.item.id, String(this.item.price/100*this.currentPart), String(this.convertFromEtherToWei(this.priceForPart)));
+      let sellFraction = await contract.sellFraction(this.item.id, this.noExponents(this.item.price/100*this.currentPart), this.noExponents(this.convertFromEtherToWei(this.priceForPart)));
       console.log(sellFraction);
       let trx = await (toRaw(this.provider)).waitForTransaction(sellFraction.hash);
       if (trx.status == 1) {
@@ -263,7 +263,7 @@ export default {
     },
     setSellFractionFee(){
       this.sellFractionFee = this.noExponents((this.contractConfig[0].sell_fraction_fee/100)/100*this.noExponents(this.convertFromEtherToWei(this.priceForPart)));
-    }
+    },
   },
   computed:{
     partComputed:{

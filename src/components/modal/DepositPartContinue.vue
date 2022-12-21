@@ -184,7 +184,7 @@ export default {
     this.setCurrencyToUsd();
     this.setAllBidsAmount();
     this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
-    this.buyLotFee = (this.contractConfig[0].buy_lot_fee/100)/100*this.item.price;
+    this.buyLotFee = noExponents((this.contractConfig[0].buy_lot_fee/100)/100*this.item.price);
     this.render = true;
   },
   methods:{
@@ -196,8 +196,8 @@ export default {
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());
       let markeplaceId = ethers.utils.formatBytes32String(this.item.marketplace.id).substring(0, 10);
       let options = {};
-      let valueToBuy = (ethers.BigNumber.from(String((ethers.BigNumber.from(parseInt(this.item.price))/100)*this.currentPart))).toString()
-      let valueToBuyWithComissions = (ethers.BigNumber.from(String((ethers.BigNumber.from(parseInt(this.item.price)+parseInt(this.buyLotFee))/100)*this.currentPart))).toString();
+      let valueToBuy = this.noExponents((ethers.BigNumber.from(this.noExponents(this.item.price))/100)*this.currentPart);
+      let valueToBuyWithComissions = this.noExponents((ethers.BigNumber.from(this.noExponents(parseInt(this.item.price)+parseInt(this.buyLotFee)))/100)*this.currentPart);
       // if (valueToBuy>(parseInt(this.item.price)-this.allBidsAmount)){
       //   console.log('Part is too big');
       //   valueToBuy = parseInt(this.item.price)-this.allBidsAmount;
@@ -266,7 +266,7 @@ export default {
           {
             tokenAddress: this.item.currency.address,
             decimals: this.item.currency.decimals,
-            price: parseInt(this.item.price),
+            price: this.item.price,
             collected: '0',
             occupancy: '0',
             tokenContractAddress: this.item.collection.contract_address,
@@ -335,6 +335,24 @@ export default {
         }
         return;
       }
+    },
+    noExponents (value) {
+      var data = String(value).split(/[eE]/);
+      if (data.length == 1) return data[0];
+
+      var z = '',
+        sign = value < 0 ? '-' : '',
+        str = data[0].replace('.', ''),
+        mag = Number(data[1]) + 1;
+
+      if (mag < 0) {
+        z = sign + '0.';
+        while (mag++) z += '0';
+        return z + str.replace(/^\-/, '');
+      }
+      mag -= str.length;
+      while (mag--) z += '0';
+      return str + z;
     },
   },
   computed:{
