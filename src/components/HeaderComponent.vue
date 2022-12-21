@@ -12,7 +12,7 @@
                     <nav>
                         <ul class="">
                             <li>
-                                <router-link :class="active" :to="{name: 'Marketplace'}">
+                                <router-link :class="active" :to="{name: 'Marketplace'}" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')">
                                     <span>{{translatesGet('MARKETPLACE')}}</span>
                                     <span>{{translatesGet('MARKETPLACE')}}</span>
                                 </router-link>
@@ -43,7 +43,7 @@
                         </button>
                     </div>
                     <div class="btn-container" v-else>
-                        <router-link :to="{name:'Profile'}" class="btn btn-address">
+                        <router-link :to="{name:'Profile'}" class="btn btn-address" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')">
                             <div class="icon-address"></div>
                             <span>{{this.$store.getters['walletsAndProvider/getUserShortAddress']}}</span>
                         </router-link>
