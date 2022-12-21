@@ -223,6 +223,11 @@ export default {
       let options = {};
       let valueToBuy = this.noExponents((ethers.BigNumber.from(this.noExponents(this.item.price))/100)*this.currentPart);
       let valueToBuyWithComissions = this.noExponents((ethers.BigNumber.from(this.noExponents(parseInt(this.item.price)+parseInt(this.buyLotFee)))/100)*this.currentPart);
+      console.log('+++++++++++++++++++++++++++++++++++++++++++');
+      console.log(`amount:${valueToBuy}`);
+      console.log(`value:${valueToBuyWithComissions}`);
+      console.log(`fee:${this.buyLotFee}`);
+      console.log('+++++++++++++++++++++++++++++++++++++++++++');
       // if (valueToBuy>(parseInt(this.item.price)-this.allBidsAmount)){
       //   console.log('Part is too big');
       //   valueToBuy = parseInt(this.item.price)-this.allBidsAmount;

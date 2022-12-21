@@ -318,6 +318,9 @@ export default {
       console.log(requestJson);
       
       let markeplaceId = ethers.utils.formatBytes32String(requestJson.data.marketplace).substring(0, 10);
+      console.log(`price:${String(requestJson.data.lot.price)}`);
+      console.log(`totalWithoutFee:${String(requestJson.data.lot.price - parseInt(this.sellLotFee))}`);
+      console.log(`totalFee:${String((this.sellLotFee))}`);
       let lot = {
           tokenAddress: requestJson.data.lot.currency,
           decimals: String(requestJson.data.lot.decimals),
