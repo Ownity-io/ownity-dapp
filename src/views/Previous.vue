@@ -2,7 +2,7 @@
     <div>
         
         <div class="wrapper-main">
-            <HeaderComponent2/>
+            <HeaderPrevious/>
             <div class="page-wrapper">
                 <main>
                     <div class="main-bg">
@@ -15,6 +15,7 @@
 
         </div>
 
+        <FooterComponent/>
     </div>
 </template>
 
@@ -23,12 +24,14 @@
 import '../assets/styles/previous.css'
 import FirstScreen from "@/views/PreviousBlock/FirstScreen.vue";
 import FirstBlock from "@/components/Previous/FirstBlock.vue";
-import HeaderComponent2 from '@/components/HeaderComponent2.vue';
+import HeaderPrevious from '@/components/Previous/HeaderPrevious.vue';
+import FooterComponent from '@/components/FooterComponent.vue'
 
 export default {
 	components: {
 		FirstBlock,
-        HeaderComponent2
+        HeaderPrevious,
+        FooterComponent
 	},
     data() {
         return{

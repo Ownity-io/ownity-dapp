@@ -15,17 +15,69 @@
                                     <span>Home</span>
                                 </router-link>
                             </li>
-                            <li>
-                                <a>
+
+                            <li class="drop-down-item">
+                                <button>
                                     <span>About</span>
-                                    <i class="arrow-down-s-line"></i>
-                                </a>
-                                <ul>
+                                    <i class="i-arrow-down-s-line"></i>
+                                </button>
+                                <ul class="header-drop-down">
                                     <li>
                                         <a href="">About us</a>
                                     </li>
                                     <li><a href="">FAQ</a></li>
                                     <li><a href="">Team</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="drop-down-item">
+                                <button>
+                                    <span>Community</span>
+                                    <i class="i-arrow-down-s-line"></i>
+                                </button>
+                                <ul class="header-drop-down">
+                                    <li>
+                                        <a >
+                                            <Twitter />
+                                            Twitter
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a >
+                                            <Telegram />
+                                            Telegram
+                                        </a>
+                                    </li>
+                                    <li class="link-disabled">
+                                        <a >
+                                            <Discord />
+                                            Discord
+                                            <span class="soon">soon</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="drop-down-item">
+                                <button>
+                                    <span>Docs</span>
+                                    <i class="i-arrow-down-s-line"></i>
+                                </button>
+                                <ul class="header-drop-down">
+                                    <li>
+                                        <a href="">Whitepaper</a>
+                                    </li>
+                                    <li class="link-disabled">
+                                        <a href="">
+                                            One pager
+                                            <span class="soon">soon</span>
+                                        </a>
+                                    </li>
+                                    <li class="link-disabled">
+                                        <a href="">Tokenomics
+                                            <span class="soon">soon</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -63,6 +115,9 @@
 import MultiLang from "@/core/multilang";
 // import Search from '@/components/Search.vue'
 // import MobileMenu from '@/components/MobileMenu.vue'
+import Telegram from "@/components/icons/Telegram.vue"
+import Twitter from "@/components/icons/Twitter.vue"
+import Discord from "@/components/icons/Discord.vue"
 
 export default {
     data(){
@@ -73,6 +128,9 @@ export default {
         }
     },
     components: {
+        Telegram,
+        Twitter,
+        Discord
     },
     methods:{
         getWalletFromLS() {
