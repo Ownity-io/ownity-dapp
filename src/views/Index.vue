@@ -62,34 +62,37 @@ export default {
         BuyPart,
         TransSuccess,
     },
-    // methods:{
-    //     async checkWalletInLS() {
-    //         let connectedWallet = localStorage.getItem('connectedWallet');
-    //         console.log(connectedWallet);
-    //         switch (connectedWallet) {
-    //             case 'metamask':
-    //                 await this.$store.dispatch('walletsAndProvider/connectToMetamask');
-    //                 break;
-    //             case 'walletconnect':
-    //                 await this.$store.dispatch('walletsAndProvider/connectWithWalletConnect');
-    //                 break;
-    //         };            
-    //     },
-    // },                
-    // async mounted() {
-    //     this.checkWalletInLS();
-    //     this.getWalletFromLS();
-    //     const delay = (delayInms) => {
-    //         return new Promise(resolve => setTimeout(resolve, delayInms));
-    //     }
-    //     while (true) {
-    //         await delay(1000);
-    //         this.getWalletFromLS();
-    //     }
-    // },
+    methods:{
+        async checkWalletInLS() {
+            let connectedWallet = localStorage.getItem('connectedWallet');
+            console.log(connectedWallet);
+            switch (connectedWallet) {
+                case 'metamask':
+                    await this.$store.dispatch('walletsAndProvider/connectToMetamask');
+                    break;
+                case 'walletconnect':
+                    await this.$store.dispatch('walletsAndProvider/connectWithWalletConnect');
+                    break;
+            };            
+        },
+        getWalletFromLS() {
+            this.walletConnected = localStorage.getItem('connectedWallet');
+        }
+    },                
+    async mounted() {
+        this.checkWalletInLS();
+        this.getWalletFromLS();
+        const delay = (delayInms) => {
+            return new Promise(resolve => setTimeout(resolve, delayInms));
+        }
+        while (true) {
+            await delay(1000);
+            this.getWalletFromLS();
+        }
+    },
     data(){
         return{
-            // walletConnected:1
+            walletConnected:1
         }
     }
 }
