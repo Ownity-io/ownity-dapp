@@ -59,6 +59,7 @@ export default {
       if (collections != null) {
         for (let item of collections) {
           if (item.contract_address == address) {
+            console.log(item);
             return item;
           }
         }
@@ -87,6 +88,10 @@ export default {
       if (state.currentCollectionContractAddress!=null){count++;}
       if (state.currentMinPrice!=null){count++;}
       if (state.currentMaxPrice!=null){count++;}
+      if (state.currentlyGatehring!=false){count++;}
+      if (state.currentBidStatus!=null){count++;}
+      if (state.onSale!=false){count++;}
+      if (state.searchString!=''){count++;}
       return count;
     },
     getCurrentlyGathering(state){
@@ -250,7 +255,7 @@ export default {
       context.commit("setCurrentMinPrice", null);
       context.commit("setCurrentMaxPrice", null);
       context.commit("setCurrentlyGathering",false);
-      context.commit("setCurrentBidStatus",false);
+      context.commit("setCurrentBidStatus",null);
       context.commit("setOnSale",false);
       context.commit("setSearchString",'');
     },

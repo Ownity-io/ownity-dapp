@@ -113,13 +113,13 @@
       <div class="container-enter-price">
         <div class="container-input">
           <div class="input-wrapper">
-            <input type="number" placeholder="Min" v-model="minPrice" @input="fetchAndSetListingsStartInfo"/>
+            <input type="number" placeholder="Min" v-model="minPrice" v-debounce:500ms="fetchAndSetListingsStartInfo"/>
           </div>
         </div>
         <span class="between-inputs">to</span>
         <div class="container-input">
           <div class="input-wrapper">
-            <input type="number" placeholder="Max" v-model="maxPrice" @input="fetchAndSetListingsStartInfo"/>
+            <input type="number" placeholder="Max" v-model="maxPrice" v-debounce:500ms="fetchAndSetListingsStartInfo"/>
           </div>
         </div>
       </div>
@@ -129,6 +129,7 @@
 
 <script>
 import config from '@/config.json';
+import { vue3Debounce } from 'vue-debounce';
 export default {
   data() {
     return {
@@ -229,6 +230,9 @@ export default {
       }
     },
   },
-  props:['onlyFav','vote']
+  props:['onlyFav','vote'],
+  directives: {
+    debounce: vue3Debounce({ lock: true })
+  }
 };
 </script>
