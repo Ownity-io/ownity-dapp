@@ -581,8 +581,8 @@ export default {
     await this.setCurrencyToUsd();
     this.setAllBidsAmount();
     this.setUserBidAmount();
-    this.allProgressValue = (this.allBidsAmount/this.item.price)*100;
-    this.userProgressValue = (this.userBidAmount/this.item.price)*100;
+    this.allProgressValue = this.toFixedIfNecessary((this.allBidsAmount/this.item.price)*100,0);
+    this.userProgressValue = this.toFixedIfNecessary((this.userBidAmount/this.item.price)*100,0);
     this.updateTimeString();
     this.itemWithBidsOnSale = await (await fetch(`${config.backendApiEntryPoint}listing-with-on-sale-bids/${this.item.id}`)).json();
     this.setBidOnSale();
