@@ -31,7 +31,6 @@
 <script>
 
 import '../assets/styles/previous.css'
-import FirstScreen from "@/views/PreviousBlock/FirstScreen.vue";
 import FirstBlock from "@/components/Previous/FirstBlock.vue";
 
 export default {
