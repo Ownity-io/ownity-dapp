@@ -21,7 +21,6 @@
 <script>
 
 import '../assets/styles/previous.css'
-
 import FirstScreen from "@/views/PreviousBlock/FirstScreen.vue";
 import FirstBlock from "@/components/Previous/FirstBlock.vue";
 import HeaderComponent2 from '@/components/HeaderComponent2.vue';
