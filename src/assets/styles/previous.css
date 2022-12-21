@@ -5,19 +5,18 @@ body.previous-page {
 }
 
 body.previous-page header {
-
-    /* position: fixed; */
-    /* top: 0;
-    left: 0;
-    width: 100%; */
-    /* background-color: #ffff; */
-    /* z-index: 50; */
-
-
     background: #1A171D;
     border-bottom: 1px solid #383838;
 }
+body.previous-page 
+.header-logo{
+    background-image: url(../images/previous/previous-logo.svg);
+}
 
+
+.header-nav ul li a:hover:after{
+    display: none;
+}
 body.previous-page .footer-block,
 body.previous-page .footer-part {
     color: #ffffff;
