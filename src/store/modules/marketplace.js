@@ -82,11 +82,11 @@ export default {
       return state.currentMaxPrice;
     },
     getFiltersCount(state){
-      let count = 1;
-      // if (state.currentMarketplaceId!=null){count++;}
-      // if (state.currentCollectionContractAddress!=null){count++;}
-      // if (state.currentMinPrice!=null){count++;}
-      // if (state.currentMaxPrice!=null){count++;}
+      let count = 0;
+      if (state.currentMarketplaceId!=null){count++;}
+      if (state.currentCollectionContractAddress!=null){count++;}
+      if (state.currentMinPrice!=null){count++;}
+      if (state.currentMaxPrice!=null){count++;}
       return count;
     },
     getCurrentlyGathering(state){
