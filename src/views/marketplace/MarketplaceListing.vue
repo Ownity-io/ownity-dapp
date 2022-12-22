@@ -104,7 +104,7 @@
             </div>
           </section>
 
-          <section class="section-listing-main">
+          <section class="section-listing-main" v-if="this.item.internal_status!='CLAIMED'">
             <!-- <div class="section-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'"> -->
             <div class="section-deposit">
               <div class="section-deposit-data">
