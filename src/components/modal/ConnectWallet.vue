@@ -15,10 +15,14 @@
             {{translatesGet('CONNECT_WALLET_SUBTITLE')}}
           </div>
           <div class="modal-connect-btns">
-            <button class="btn btn-modal-connect" @click="this.$store.dispatch('walletsAndProvider/connectToMetamask')">
+            <button class="btn btn-modal-connect" @click="this.$store.dispatch('walletsAndProvider/connectToMetamask')" v-if="metamaskInstalled">
               <div class="icon-btn-connect meta-mask"></div>
               <span>MetaMask</span>
             </button>
+            <a href="https://metamask.io/" target="_blank" class="btn btn-modal-connect" v-else>
+              <div class="icon-btn-connect meta-mask"></div>
+              <span>MetaMask</span>
+            </a>
             <button class="btn btn-modal-connect" @click="this.$store.dispatch('walletsAndProvider/connectWithWalletConnect')">
               <div class="icon-btn-connect wallet-connect"></div>
               <span>WalletConnect</span>
@@ -40,12 +44,21 @@ export default {
   data() {
     return {
       lang: new MultiLang(this),
+      metamaskInstalled:false
     };
   },
   methods:{
     translatesGet(key) {
       return this.lang.get(key);
     },
+    checkMetamaskInstalled() {
+      if (typeof window.ethereum !== 'undefined') {
+        this.metamaskInstalled=true;
+      }
+    }
+  },
+  mounted(){
+    this.checkMetamaskInstalled();
   }
 };
 </script>
