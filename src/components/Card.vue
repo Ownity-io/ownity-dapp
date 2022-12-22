@@ -45,8 +45,8 @@
             <span v-if="userProgressValue>=20">{{ userProgressValue }}%</span>
           </div>
           <div class="progress-value" :style="{ width: allProgressValue + '%', 'padding-left' :  userProgressValue + '%' }">
-            <span v-if="allProgressValue>=20 && userProgressValue<80">{{ allProgressValue }}%</span>
-          </div>
+            <span v-if="allProgressValue>=20 && userProgressValue<80">{{ allProgressValue - userProgressValue}}%</span>
+          </div>    
         </div>
         <div class="card-to-buy" v-if="bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0">
           <div class="card-col">
@@ -90,7 +90,7 @@
                       {{abbrNum(toFixedIfNecessary(convertToEther(element.amount),6),2)}}
                     </div>
                     </td>
-                  <td>{{userProgressValue}}%</td>
+                  <td>{{  toFixedIfNecessary(element.amount/this.item.price*100,0) }}%</td>
                 </tr> 
               </tbody>
             </table>
