@@ -37,17 +37,17 @@ export default {
             this.walletConnected = localStorage.getItem('connectedWallet');
         }
     },                
-    async mounted() {
-        this.checkWalletInLS();
-        this.getWalletFromLS();
-        const delay = (delayInms) => {
-            return new Promise(resolve => setTimeout(resolve, delayInms));
-        }
-        while (true) {
-            await delay(1000);
-            this.getWalletFromLS();
-        }
-    },
+    // async mounted() {
+    //     this.checkWalletInLS();
+    //     this.getWalletFromLS();
+    //     const delay = (delayInms) => {
+    //         return new Promise(resolve => setTimeout(resolve, delayInms));
+    //     }
+    //     while (true) {
+    //         await delay(1000);
+    //         this.getWalletFromLS();
+    //     }
+    // },
     data(){
         return{
             walletConnected:1
