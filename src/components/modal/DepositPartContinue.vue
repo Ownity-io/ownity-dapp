@@ -184,7 +184,7 @@ export default {
     this.setCurrencyToUsd();
     this.setAllBidsAmount();
     this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
-    this.buyLotFee = noExponents((this.contractConfig[0].buy_lot_fee/100)/100*this.item.price);
+    this.buyLotFee = this.noExponents((this.contractConfig[0].buy_lot_fee/100)/100*this.item.price);
     this.render = true;
   },
   methods:{
