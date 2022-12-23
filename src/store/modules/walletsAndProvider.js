@@ -92,6 +92,7 @@ export default {
           localStorage.setItem('token', requestJson.data.token);
           localStorage.setItem('tokenEndTimestamp', requestJson.data.expiration_timestamp);
           localStorage.setItem('refreshToken', requestJson.data.refresh);
+          location.reload();
         }else if (Date.parse(localStorage.getItem('tokenEndTimestamp'))<Date.now()){
           //gettoken with refesh-token
           let requestUrl = `${config.backendApiEntryPoint}token-refresh/`;
@@ -111,6 +112,7 @@ export default {
           localStorage.setItem('token', requestJson.access);
           localStorage.setItem('tokenEndTimestamp', (Date.now()/1000)+86400);
           localStorage.setItem('refreshToken', requestJson.refresh);
+
         }
         await provider.send('wallet_switchEthereumChain',[{ chainId: "0x5"}]);
         context.commit('setUserInfo',await provider.getSigner().getAddress());
@@ -179,6 +181,7 @@ export default {
           localStorage.setItem('token', requestJson.data.token);
           localStorage.setItem('tokenEndTimestamp', requestJson.data.expiration_timestamp);
           localStorage.setItem('refreshToken', requestJson.data.refresh);
+          location.reload();
         }else if (Date.parse(localStorage.getItem('tokenEndTimestamp'))<Date.now()){
           //gettoken with refesh-token
           let requestUrl = `${config.backendApiEntryPoint}token-refresh/`;
