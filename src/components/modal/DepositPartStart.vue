@@ -26,10 +26,8 @@
                 <div class="input-select-block">
                   <div class="input-select-title">{{translatesGet('CHOOSE_PART')}}</div>
                   <div class="input-wrapper input-percent">
-                    <input type="text" v-model="partComputed"
-                    placeholder="0%"
-                    onkeypress="return (event.charCode >= 48 && event.charCode <=57 && ((this.value<100 && this.value>=1 )|| this.value==''))"
-                    > 
+                    <input type="text"
+                    placeholder="0%" v-model="this.currentPart" @input="checkCurrentPart"> 
                   </div>
                   <!--  <div class="input-select-wrap" :class="{ 'unfolded': selectOpen }">
                     <input type="text" class="input-selected" v-model="partComputed"
@@ -189,28 +187,6 @@ export default {
     this.buyLotFee = this.noExponents((this.contractConfig[0].buy_lot_fee/100)/100*this.item.price);
     console.log(this.buyLotFee);
     this.render = true;    
-  },
-  computed:{
-    partComputed:{
-      get(){
-        return this.currentPart
-      },
-      set(value){
-        if (parseInt(value)>=100){
-          this.currentPart=100
-        }
-        else if(parseInt(value)<=1){
-          this.currentPart=1
-        }
-        else if(value == ''){
-          this.currentPart=null
-        }
-        else{
-          this.currentPart = value
-        }
-        
-      }
-    }
   },
   methods:{
     translatesGet(key) {
@@ -382,6 +358,23 @@ export default {
           this.allBidsAmount+=parseInt(element.amount);
         }
         return;
+      }
+    },
+    checkCurrentPart(){      
+      if (this.currentPart == '') {
+        this.currentPart = null
+      }
+      else if (this.currentPart < 1) {
+        this.currentPart = 1
+      }
+      else if (this.currentPart > 100) {
+        this.currentPart = 100
+      }
+      else if (isNaN(this.currentPart)){
+          this.currentPart = null    
+      }
+      else if (!Number.isInteger(this.currentPart)){
+        this.currentPart = parseInt(this.currentPart);
       }
     },
   }

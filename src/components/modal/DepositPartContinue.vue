@@ -368,12 +368,7 @@ export default {
         this.currentPart = this.toFixedIfNecessary((this.item.price-this.allBidsAmount)/this.item.price*100,0)
       }
       else if (isNaN(this.currentPart)){
-        try{
-          this.currentPart = parseInt(this.currentPart);
-        }
-        catch{
-          this.currentPart = null
-        }        
+          this.currentPart = null    
       }
       else if (!Number.isInteger(this.currentPart)){
         this.currentPart = parseInt(this.currentPart);
