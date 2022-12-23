@@ -181,7 +181,6 @@ export default {
     this.signer = await this.$store.getters['walletsAndProvider/getSigner'];
     this.setCurrencyToUsd();
     this.setAllBidsAmount();
-    this.setUserBidAmount();
     this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
     this.buyLotFee = this.noExponents((this.contractConfig[0].buy_lot_fee/100)/100*this.item.price);
     this.render = true;
@@ -379,20 +378,6 @@ export default {
       else if (!Number.isInteger(this.currentPart)){
         this.currentPart = parseInt(this.currentPart);
       }
-    },
-    async setUserBidAmount(){
-      let userAddress = localStorage.getItem('userAddress');
-      this.userAddress = userAddress;
-      if (this.item.bids!=null & userAddress!=null & userAddress!='null'){
-        for (let element of this.item.bids){
-          if (element.address == userAddress){
-            this.userBidAmount = parseInt(element.amount);
-            return;
-          }
-        }
-        return
-      }
-      this.userBidAmount=0;      
     },
   },
 };
