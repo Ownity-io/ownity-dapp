@@ -8,7 +8,7 @@
                 <div class="td td-button">{{translatesGet('ACTIVITY_THEAD-5')}}</div>
             </div>
                 
-            <div class="tr tr-mob-collapse" v-for="element in item.bids" :key="element">
+            <div class="tr tr-mob-collapse" v-for="element in this.currentlyVisibleBids" :key="element">
                 <div class="td td-category">
                     <div class="td-wrap td-wrap-category">
                         <i class="i-shopping-bag-line"></i>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="td"> 
-                  {{((element.fraction_amount/item.price)*100)}}%
+                  {{toFixedIfNecessary((element.fraction_amount/item.price)*100,0)}}%
                 </div>
                 <div class="td td-date">
                     <div class="td-button">
@@ -40,7 +40,7 @@
             </div>
             
             <div class="table-btn-row">
-                <button class="btn btn-show-more">
+                <button class="btn btn-show-more" v-if="this.currentChunkyIndex < ((this.allBidsChunky.length)-1)" @click="showMoreBids">
                     {{translatesGet('SHOW_MORE')}} 
                     <i class="i-arrow-down-s-line"></i>
                 </button>
@@ -61,6 +61,11 @@ export default {
             userAddress:false,
             render:false,
             lang: new MultiLang(this),
+            allBids:[],
+            currentlyVisibleBids:[],
+            allBidsChunky:[],
+            currentChunkyIndex:0,
+            chunkSize:4
         }
     },
     props:['item'],
@@ -114,12 +119,23 @@ export default {
         async showBuyModal(element){
             await this.$store.dispatch('appGlobal/setShowBuyPartModal',true); 
             await this.$store.dispatch('appGlobal/setCurrentPartOnMarket',element);
+        },
+        async showMoreBids(){
+            this.currentChunkyIndex+=1;
+            this.currentlyVisibleBids = this.currentlyVisibleBids.concat(this.allBidsChunky[this.currentChunkyIndex]) ;
         }
     },
     async mounted(){
         this.userAddress = localStorage.getItem('userAddress');
         this.render = true;
         await this.setCurrencyToUsd();
+        this.allBids = this.item.bids;
+        for (let i = 0; i < this.allBids.length; i += this.chunkSize) {
+            this.allBidsChunky.push(this.allBids.slice(i, i + this.chunkSize));
+        }
+        this.currentlyVisibleBids = this.currentlyVisibleBids.concat(this.allBidsChunky[this.currentChunkyIndex])  
+        console.log(this.allBidsChunky.length-1);
+        console.log(this.currentChunkyIndex);      
     }
 }
 </script>
