@@ -31,10 +31,8 @@
                 <div class="input-select-block">
                   <div class="input-select-title">{{translatesGet('CHOOSE_PART')}}</div>
                   <div class="input-wrapper input-percent">
-                    <input type="text" v-model="partComputed"
-                    placeholder="0%"
-                    onkeypress="return (event.charCode >= 48 && event.charCode <=57 && ((this.value<100 && this.value>=1 )|| this.value==''))"
-                    > 
+                    <input type="text"
+                    placeholder="0%" v-model="this.currentPart" @input="checkCurrentPart"> 
                   </div>
                   <!--  <div class="input-select-wrap" :class="{ 'unfolded': selectOpen }">
                     <input type="text" class="input-selected" v-model="partComputed"
@@ -173,7 +171,8 @@ export default {
       buttonWaiting:false,
       lang: new MultiLang(this),
       contractConfig:null,
-      buyLotFee:0
+      buyLotFee:0,
+      userBidAmount:0
     };
   },
   async mounted(){
@@ -182,6 +181,7 @@ export default {
     this.signer = await this.$store.getters['walletsAndProvider/getSigner'];
     this.setCurrencyToUsd();
     this.setAllBidsAmount();
+    this.setUserBidAmount();
     this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
     this.buyLotFee = this.noExponents((this.contractConfig[0].buy_lot_fee/100)/100*this.item.price);
     this.render = true;
@@ -358,28 +358,42 @@ export default {
       while (mag--) z += '0';
       return str + z;
     },
-  },
-  computed:{
-    partComputed:{
-      get(){
-        return this.currentPart
-      },
-      set(value){
-        if (parseInt(value)>=100){
-          this.currentPart=100
-        }
-        else if(parseInt(value)<=1){
-          this.currentPart=1
-        }
-        else if(value == ''){
-          this.currentPart=null
-        }
-        else{
-          this.currentPart = value
-        }
-        
+    checkCurrentPart(){      
+      if (this.currentPart == '') {
+        this.currentPart = null
       }
-    }
+      else if (this.currentPart < 1) {
+        this.currentPart = 1
+      }
+      else if (((this.currentPart/100*this.item.price)) > (this.item.price-this.allBidsAmount)) {
+        this.currentPart = this.toFixedIfNecessary((this.item.price-this.allBidsAmount)/this.item.price*100,0)
+      }
+      else if (isNaN(this.currentPart)){
+        try{
+          this.currentPart = parseInt(this.currentPart);
+        }
+        catch{
+          this.currentPart = null
+        }        
+      }
+      else if (!Number.isInteger(this.currentPart)){
+        this.currentPart = parseInt(this.currentPart);
+      }
+    },
+    async setUserBidAmount(){
+      let userAddress = localStorage.getItem('userAddress');
+      this.userAddress = userAddress;
+      if (this.item.bids!=null & userAddress!=null & userAddress!='null'){
+        for (let element of this.item.bids){
+          if (element.address == userAddress){
+            this.userBidAmount = parseInt(element.amount);
+            return;
+          }
+        }
+        return
+      }
+      this.userBidAmount=0;      
+    },
   },
 };
 </script>
