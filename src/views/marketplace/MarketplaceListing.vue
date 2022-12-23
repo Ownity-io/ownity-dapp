@@ -253,11 +253,11 @@
                       <span>{{translatesGet('INFO')}}</span>
                     </button>
                   </li>
-                  <li v-if="(itemWithBidsOnSale)">
+                  <li  v-if="itemWithBidsOnSale.bids!=null">
                     <button
                       :class="{ 'active-tab': activeTab2 === 'ListingFractionMarket' }"
                       @click="letsCheck2('ListingFractionMarket')"
-                      >
+                     >
                       <span>{{translatesGet('FRACTION_MARKET')}}</span>
                       <span>{{translatesGet('FRACTION_MARKET')}}</span>
                     </button>
