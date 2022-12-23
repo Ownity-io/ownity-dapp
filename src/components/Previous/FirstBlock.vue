@@ -1,13 +1,19 @@
 <template>
-  <div ref="intro" class="intros">
-<!--    <canvas id="hero-lightpass"/>-->
-<!--    <video ref="video" src="src/assets/home2 без лого.mp4"></video>-->
-
-  </div>
+  <div ref="intro" class="intros"></div>
+  <lottie-player id="firstLottie"
+                 ref="lottie"
+                 controls
+                 mode="normal"
+                 src="https://assets3.lottiefiles.com/packages/lf20_UJNc2t.json"
+                 style="width: 320px;">
+  </lottie-player>
 </template>
 
 
 <script>
+
+import '@lottiefiles/lottie-player';
+import { create } from '@lottiefiles/lottie-interactivity';
 
 import lottie from 'lottie-web'
 
@@ -18,13 +24,20 @@ export default {
     }
   },
 	mounted() {
-		lottie.loadAnimation({
-      container: this.$refs.intro,
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      path: './src/assets/sun.json'
-    })
+		this.$refs.lottie.addEventListener('load', function() {
+			// 3. configure the interactivity library
+			create({
+				mode: 'scroll',
+				player: '#firstLottie',
+				actions: [
+					{
+						visibility: [0, 1],
+						type: 'seek',
+						frames: [0, 100],
+					},
+				],
+			});
+		})
 	}
 }
 
