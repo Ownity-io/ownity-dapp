@@ -32,7 +32,7 @@
                     </div>
                   </div>
                   <div class="input-wrapper input-wrapper-amount">
-                    <input type="text" placeholder="Input amount" v-model="priceForPart" @input="setSellFractionFee" onkeypress="return (event.charCode >= 48 && event.charCode <=57 || event.charCode == 46 || event.charCode == 44 || this.priceForPart=='')">
+                    <input type="text" placeholder="Input amount" v-model="priceForPart" @input="setSellFractionFee" >
                     <div class="input-equivalent equivalent" v-if="priceForPart>0">≈ $ {{abbrNum(Math.round(priceForPart * currencyToUsdPrice),1)}}</div>
                   </div>
                   <div class="input-prompt">{{translatesGet('ITEM_UNTIL_CANCELLED')}}</div>
@@ -42,10 +42,8 @@
                 <div class="input-select-block">
                   <div class="input-select-title">{{translatesGet('CHOOSE_PART')}}</div>
                   <div class="input-wrapper input-percent">
-                    <input type="text" v-model="partComputed"
-                    placeholder="0%"
-                    onkeypress="return (event.charCode >= 48 && event.charCode <=57 && ((this.value<100 && this.value>=1 )|| this.value==''))"
-                    > 
+                    <input type="text"
+                    placeholder="0%" v-model="this.currentPart" @input="checkCurrentPart"> 
                   </div>
                   <div class="input-select-prompt">
                     {{translatesGet('INPUT_MIN')}}
@@ -266,30 +264,31 @@ export default {
             return this.lang.get(key);
     },
     setSellFractionFee(){
+      if (this.priceForPart == '') {
+        this.priceForPart = null
+      }
+      else if (isNaN(this.priceForPart)){
+          this.priceForPart = null    
+      }
       this.sellFractionFee = this.noExponents((this.contractConfig[0].sell_fraction_fee/100)/100*this.noExponents(this.convertFromEtherToWei(this.priceForPart)));
     },
-  },
-  computed:{
-    partComputed:{
-      get(){
-        return this.currentPart
-      },
-      set(value){
-        if (parseInt(value)>=100){
-          this.currentPart=100
-        }
-        else if(parseInt(value)<=1){
-          this.currentPart=1
-        }
-        else if(value == ''){
-          this.currentPart=null
-        }
-        else{
-          this.currentPart = value
-        }
-        
+    checkCurrentPart(){      
+      if (this.currentPart == '') {
+        this.currentPart = null
       }
-    }
+      else if (this.currentPart < 1) {
+        this.currentPart = 1
+      }
+      else if (this.currentPart > (this.toFixedIfNecessary(this.userBidAmount/this.item.price*100,0))) {
+        this.currentPart = this.toFixedIfNecessary(this.userBidAmount/this.item.price*100,0)
+      }
+      else if (isNaN(this.currentPart)){
+          this.currentPart = null    
+      }
+      else if (!Number.isInteger(this.currentPart)){
+        this.currentPart = parseInt(this.currentPart);
+      }
+    },
   },
 };
 </script>
