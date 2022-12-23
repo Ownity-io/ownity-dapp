@@ -8,3 +8,593 @@
     opacity: 1;
     transform: translateX(0%);
 }
+
+.fractional-title {
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 57px;
+    color: #FFFFFF;
+}
+
+.fractional-subtitle {
+    margin: 24px 0 40px;
+    color: #A4A4A4;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.fractional-options-title {
+    font-weight: 400;
+    font-size: 24px;
+    color: #FFFFFF;
+    margin-bottom: 27px;
+}
+
+.fractional-options div p{
+    font-weight: 400;
+    font-size: 16px;
+    color: #A4A4A4;
+    margin-bottom: 24px;
+}
+
+.fractional-inner div {
+    padding-left: 24px;
+    position: relative;
+}
+
+.fractional-inner div .design{
+    position: absolute;
+    padding: 0;
+    width: 16px;
+    border-radius: 100%;
+    height: 16px;
+    background: linear-gradient(rgba(77, 137, 254, 1), rgba(53, 95, 201, 1));
+    left: 0;
+}
+
+.fractional-inner div .design:before {
+    width: 8px;
+    left: 4px;
+    top: 4px;
+    height: 8px;
+    border-radius: 100%;
+    background-color: #050505;
+    content: '';
+    position: absolute;
+}
+
+
+
+.fractional-options {
+    display: flex;
+}
+
+.fractional-options .fractional-inner:first-child {
+    margin-right: 32px;
+}
+
+.fractional-left {
+    max-width: 586px;
+    width: 100%;
+}
+
+.factional-nft {
+    position: relative;
+    width: 500px;
+    height: 500px;
+}
+
+.factional-nft div{
+    position: absolute;
+}
+
+.factional-nft div:first-child {
+    background-image: url("src/assets/images/previous/factional-nft-1.png");
+    width: 361.44px;
+    height: 402.25px;
+    transform: rotate(6deg);
+    left: -85px;
+    top: -165px;
+}
+.factional-nft div:nth-child(2) {
+    background-image: url("src/assets/images/previous/factional-nft-2.png");
+    width: 391.22px;
+    height: 390.26px;
+    right: -144px;
+    top: -114px;
+
+    transform: rotate(6deg);
+
+}
+
+.factional-nft div:nth-child(3) {
+    background-image: url("src/assets/images/previous/factional-nft-3.png");
+    width: 338.27px;
+    height: 536.09px;
+    right: -72px;
+    bottom: -126px;
+    transform: rotate(6deg);
+}
+.factional-nft div:nth-child(4) {
+    background-image: url("src/assets/images/previous/factional-nft-4.png");
+    width: 586.1px;
+    height: 336.43px;
+    transform: rotate(6deg);
+    bottom: -68px;
+    left: -150px;
+
+}
+.factional-nft div:nth-child(5) {
+    background-image: url("src/assets/images/previous/factional-nft-5.png");
+    width: 435.71px;
+    height: 466.59px;
+    transform: rotate(6.3deg);
+    left: -196px;
+    bottom: -28px;
+}
+
+.fractional {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1440px;
+    padding-right: 32px;
+    padding-left: 32px;
+    width: 100%;
+    overflow-x: clip;
+    height: 700px;
+}
+
+.factional-nft.square-transition .factional-nft-1 {
+    animation: 1s nft-one forwards;
+}
+
+
+.factional-nft.square-transition .factional-nft-2 {
+    animation: 1s nft-two forwards;
+}
+
+.factional-nft.square-transition .factional-nft-3 {
+    animation: 1s nft-there forwards;
+}
+
+.factional-nft.square-transition .factional-nft-4 {
+    animation: 1s nft-four forwards;
+}
+
+.factional-nft.square-transition .factional-nft-5 {
+    animation: 1s nft-five forwards;
+}
+
+@keyframes nft-one {
+    from {
+        transform: rotate(6deg);
+    }
+    to {
+        transform: translate(-12px, -22px) rotate(6deg);
+    }
+}
+@keyframes nft-two {
+    from {
+        transform: rotate(6deg);
+    }
+    to {
+        transform: translate(4px, -22px) rotate(6deg);
+    }
+}
+
+@keyframes nft-there {
+    from {
+        transform: rotate(6deg);
+    }
+    to {
+        transform: translate(18px, -9px) rotate(6deg);
+    }
+}
+
+@keyframes nft-four {
+    from {
+        transform: rotate(6deg);
+    }
+    to {
+        transform: translate(12px, 11px) rotate(6deg);
+    }
+}
+@keyframes nft-five {
+    from {
+        transform: rotate(6deg);
+    }
+    to {
+        transform: translate(-8px, 0px) rotate(6deg);
+    }
+}
+
+
+.factional-nft-1 .nft-procent{
+    top: 205px;
+    left: 37px;
+    transform: rotate(355deg);
+}
+.factional-nft-2 .nft-procent{
+    top: 105px;
+    right: 140px;
+    transform: rotate(355deg);
+}
+.factional-nft-3 .nft-procent{
+    top: 177px;
+    left: 105px;
+    transform: rotate(355deg);
+}
+.factional-nft-4 .nft-procent{
+    top: 195px;
+    right: 155px;
+    transform: rotate(355deg);
+}
+.factional-nft-5 .nft-procent{
+    top: 158px;
+    left: 132px;
+    transform: rotate(355deg);
+}
+
+
+.nft-procent {
+    position: absolute;
+    display: block;
+    padding: 12px;
+    width: fit-content;
+    background: #1D1D22;
+    box-shadow: 0px 0px 20px rgba(73, 129, 239, 0.2);
+    border-radius: 10px;
+}
+
+.nft-procent-title {
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.nft-procent-user {
+    display: flex;
+    align-items: center;
+}
+
+.nft-procent-user-icon {
+    border: 1px solid #111114;
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+    margin-right: 4px;
+}
+
+.nft-procent-user-name {
+    font-weight: 400;
+    font-size: 16px;
+    color: #9A9A9A;
+}
+
+
+
+
+@media (max-width: 1150px) {
+    .factional-nft div:nth-child(2),
+    .factional-nft div:nth-child(3),
+    .factional-nft div:nth-child(4),
+    .factional-nft div:nth-child(5),
+    .factional-nft div:first-child {
+         background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .factional-nft {
+        width: 450px;
+    }
+
+    .factional-nft-3 .nft-procent {
+        top: 163px;
+        left: 95px;
+    }
+    .factional-nft-1 .nft-procent {
+        top: 169px;
+        left: 37px;
+    }
+    .factional-nft-4 .nft-procent {
+        top: 154px;
+        right: 155px;
+    }
+
+    .factional-nft div:first-child {
+        width: 300.44px;
+        height: 350.25px;
+        left: -27px;
+        top: -69px;
+
+    }
+    .factional-nft div:nth-child(2) {
+        width: 324.22px;
+        height: 363.26px;
+        right: -112.3px;
+        top: -29.9px;
+    }
+
+    .factional-nft div:nth-child(3) {
+        width: 287px;
+        height: 449px;
+        right: -62px;
+        bottom: -82px;
+    }
+    .factional-nft div:nth-child(4) {
+        width: 490.1px;
+        height: 336.43px;
+        bottom: -80px;
+        left: -79px;
+        transform: rotate(6.6deg);
+    }
+    .factional-nft div:nth-child(5) {
+        width: 362.71px;
+        height: 465.59px;
+        left: -118px;
+        bottom: -74px;
+        transform: rotate(6.2deg);
+    }
+    .nft-procent {
+        position: absolute;
+        display: block;
+        padding: 12px;
+        width: fit-content;
+        background: #1D1D22;
+        box-shadow: 0px 0px 20px rgba(73, 129, 239, 0.2);
+        border-radius: 10px;
+    }
+
+    .nft-procent-title {
+        font-size: 14px;
+        margin-bottom: 4px;
+    }
+
+    .nft-procent-user {
+        display: flex;
+        align-items: center;
+    }
+
+    .nft-procent-user-icon {
+        border: 1px solid #111114;
+        width: 16px;
+        height: 16px;
+        border-radius: 100%;
+        margin-right: 4px;
+    }
+
+    .nft-procent-user-name {
+        font-weight: 400;
+        font-size: 12px;
+        color: #9A9A9A;
+    }
+}
+
+@media (max-width: 991px) {
+    .fractional-title {
+        font-size: 32px;
+    }
+    .fractional {
+        height: 450px;
+    }
+    .fractional-subtitle {
+        margin-top: 16px;
+        margin-bottom: 24px;
+    }
+    .fractional-options-title {
+        font-size: 18px;
+        margin-bottom: 16px;
+    }
+    .fractional-options div p {
+        font-size: 16px;
+        margin-bottom: 16px;
+    }
+    .fractional-options .fractional-inner:first-child {
+        margin-right: 0;
+    }
+    .fractional-options{
+        padding-right: 10px;
+        justify-content: space-between;
+    }
+    .factional-nft div:nth-child(2) {
+        width: 234.22000000000003px;
+        height: 286.26px;
+        right: -37.4px;
+        top: 34.7px;
+    }
+
+    .factional-nft-1 .nft-procent{
+        top: 94px;
+        left: 0;
+        transform: rotate(355deg);
+    }
+    .factional-nft-2 .nft-procent{
+        top: 58px;
+        right: 55px;
+        transform: rotate(355deg);
+    }
+    .factional-nft-3 .nft-procent{
+        top: 80px;
+        left: 55px;
+        transform: rotate(355deg);
+    }
+    .factional-nft-4 .nft-procent{
+        top: 79px;
+        right: 70px;
+        transform: rotate(355deg);
+    }
+    .factional-nft-5 .nft-procent{
+        top: 90px;
+        left: 67px;
+        transform: rotate(355deg);
+    }
+
+    .fractional-left {
+        max-width: 586px;
+        width: 100%;
+    }
+
+
+    .factional-nft {
+        width: 410px;
+    }
+
+    .factional-nft div:first-child {
+        width: 218px;
+        height: 312.25px;
+        left: 18px;
+        top: 5.3px;
+    }
+    .factional-nft div:nth-child(3) {
+        width: 208px;
+        height: 429px;
+        right: 3px;
+        bottom: -80px;
+    }
+    .factional-nft div:nth-child(4) {
+        width: 346.1px;
+        height: 336.43px;
+        bottom: -70px;
+        left: -14px;
+        transform: rotate(6.5deg);
+    }
+    .factional-nft div:nth-child(5) {
+        width: 264.71px;
+        height: 375.59px;
+        left: -44px;
+        bottom: -10px;
+        transform: rotate(5.2deg);
+    }
+}
+
+@media (max-width: 810px) {
+    .fractional {
+        height: auto;
+        flex-direction: column;
+    }
+    .fractional-left {
+        margin-bottom: -48px;
+    }
+    .fractional-options {
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 460px) {
+    .factional-nft div:first-child {
+        width: 138px;
+        height: 161.25px;
+        left: 54px;
+        top: 44.3px;
+    }
+    .factional-nft-1 .nft-procent {
+        top: 47px;
+        left: -39px;
+    }
+    .factional-nft-2 .nft-procent {
+        top: 25px;
+        right: 8px;
+    }
+    .factional-nft-5 .nft-procent {
+        top: 45px;
+        left: -11px;
+        transform: rotate(355deg);
+    }
+    .factional-nft-4 .nft-procent {
+        top: 69px;
+        right: 34px;
+        transform: rotate(355deg);
+    }
+    .factional-nft-3 .nft-procent {
+        top: 45px;
+        left: 19px;
+        padding: 8px;
+    }
+
+    .fractional-subtitle {
+        font-size: 16px;
+    }
+
+    .fractional-title {
+        font-size: 24px;
+        line-height: normal;
+    }
+
+    .fractional-options {
+        display: block;
+    }
+
+    .factional-nft{
+        width: 344px;
+    }
+    .factional-nft div:nth-child(2) {
+        width: 148.92000000000002px;
+        height: 147.26px;
+        right: 20px;
+        top: 62.1px;
+    }
+    .factional-nft div:nth-child(3) {
+        width: 130px;
+        height: 343px;
+        right: 52px;
+        bottom: 20px;
+    }
+    .factional-nft div:nth-child(4) {
+        width: 223.10000000000002px;
+        height: 309.43px;
+        bottom: 5px;
+        left: 23px;
+        transform: rotate(6.7deg);
+    }
+    .factional-nft div:nth-child(5) {
+        width: 160.70999999999998px;
+        height: 259.59px;
+        left: 13px;
+        bottom: 114px;
+        transform: rotate(6deg);
+    }
+
+    @keyframes nft-one {
+        from {
+            transform: rotate(6deg);
+        }
+        to {
+            transform: translate(-8px, -10px) rotate(6deg);
+        }
+    }
+    @keyframes nft-two {
+        from {
+            transform: rotate(6deg);
+        }
+        to {
+            transform: translate(4px, -14px) rotate(6deg);
+        }
+    }
+
+    @keyframes nft-there {
+        from {
+            transform: rotate(6deg);
+        }
+        to {
+            transform: translate(18px, -9px) rotate(6deg);
+        }
+    }
+
+    @keyframes nft-four {
+        from {
+            transform: rotate(6deg);
+        }
+        to {
+            transform: translate(8px, 3px) rotate(6deg);
+        }
+    }
+    @keyframes nft-five {
+        from {
+            transform: rotate(6deg);
+        }
+        to {
+            transform: translate(-8px, 0px) rotate(6deg);
+        }
+    }
+}
