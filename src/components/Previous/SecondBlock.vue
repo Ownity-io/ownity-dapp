@@ -1,5 +1,5 @@
 <template>
-  <div class="fractional" >
+  <div class="fractional">
     <div class="fractional-left">
       <p class="fractional-title">Fractional Ownership</p>
       <p class="fractional-subtitle">
@@ -82,8 +82,6 @@ export default {
   mounted() {
 	  const square = this.$refs.square;
 	  square.classList.remove('square-transition');
-
-	  console.log(square)
 
 	  const observer = new IntersectionObserver(entries => {
 		  entries.forEach(entry => {

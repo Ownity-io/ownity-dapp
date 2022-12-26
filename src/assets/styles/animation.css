@@ -8,14 +8,17 @@
     opacity: 1;
     transform: translateX(0%);
 }
-
+.aggregator-left-title,
 .fractional-title {
     font-weight: 400;
     font-size: 48px;
     line-height: 57px;
     color: #FFFFFF;
 }
-
+.aggregator {
+    overflow: hidden;
+}
+.aggregator-left-subtitle,
 .fractional-subtitle {
     margin: 24px 0 40px;
     color: #A4A4A4;
@@ -372,12 +375,14 @@
 }
 
 @media (max-width: 991px) {
+    .aggregator-left-title,
     .fractional-title {
         font-size: 32px;
     }
     .fractional {
         height: 450px;
     }
+    .aggregator-left-subtitle,
     .fractional-subtitle {
         margin-top: 16px;
         margin-bottom: 24px;
@@ -511,11 +516,11 @@
         left: 19px;
         padding: 8px;
     }
-
+    .aggregator-left-subtitle,
     .fractional-subtitle {
         font-size: 16px;
     }
-
+    .aggregator-left-title,
     .fractional-title {
         font-size: 24px;
         line-height: normal;
@@ -596,5 +601,218 @@
         to {
             transform: translate(-8px, 0px) rotate(6deg);
         }
+    }
+}
+.coins-marketplaces,
+.coins-eth {
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 24px 45px 16px;
+    text-align: center;
+    max-width: 210px;
+    width: 100%;
+}
+.aggregator-left-coins {
+    display: flex;
+    margin-top: 40px;
+}
+.coins-marketplaces {
+    padding: 24px 9px 19px;
+    margin-left: 40px;
+}
+
+.coins-eth-title{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #FFFFFF;
+}
+
+#secondLottie {
+    height: 700px;
+}
+
+.coins-eth-img{
+    width: 120px;
+    height: 120px;
+    background-image: url("../images/coin/3.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-top: 16px;
+    margin-bottom: 20px;
+}
+
+.coins-eth-subtitle{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;
+    color: #B6B6B6;
+}
+
+.coin-1{
+    background-image: url("../images/openSea.png");
+}
+.coin-2{
+    background-image: url("../images/coin/2.png");
+
+}
+.coin-3{
+    background-image: url("../images/coin/1.png");
+
+}
+
+.coins-marketplaces-coin {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 19px;
+    margin-bottom: 23px;
+}
+
+.coins-marketplaces-soon {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;
+    color: #B6B6B6;
+}
+
+
+.coin-1,
+.coin-2,
+.coin-3{
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 56px;
+    height: 56px;
+}
+
+.aggregator-left {
+    max-width: 615px;
+    width: 100%;
+}
+
+.information-of-nft {
+    display: flex;
+    justify-content: space-between;
+}
+
+.information-wrapper p {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 150%;
+    color: #FFFFFF;
+}
+
+.information-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 24px;
+}
+.aggregator {
+    max-width: 1438px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+.information-wrapper .design {
+    position: absolute;
+    padding: 0;
+    width: 16px;
+    border-radius: 100%;
+    height: 16px;
+    background: linear-gradient(rgba(77, 137, 254, 1), rgba(53, 95, 201, 1));
+    left: 0;
+}
+.information-wrapper .design:before {
+     width: 8px;
+     left: 4px;
+     top: 4px;
+     height: 8px;
+     border-radius: 100%;
+     background-color: #050505;
+     content: '';
+     position: absolute;
+ }
+
+.aggregator-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 1280px) {
+    .information-wrapper p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .information-wrapper:first-child {
+        margin-right: 10px;
+    }
+    .information-of-nft {
+        justify-content: normal;
+    }
+}
+
+@media (max-width: 1070px) {
+    .information-of-nft{
+        display: block;
+    }
+    .information-wrapper:first-child {
+        margin-right: 0;
+        margin-bottom: 12px;
+    }
+}
+
+@media (max-width: 998px) {
+    .aggregator-inner {
+        flex-direction: column;
+    }
+
+    .aggregator-left-coins {
+        justify-content: center;
+        margin-bottom: 60px;
+    }
+    .aggregator {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+@media (max-width: 460px) {
+    .coins-marketplaces{
+        padding: 16px 23px;
+        max-width: 156px;
+        margin-left: 10px;
+        height: 186px;
+    }
+    .aggregator-left-coins {
+        margin-bottom: 30px;
+    }
+    .coins-marketplaces-coin {
+        margin-top: 15px;
+        margin-bottom: 12px;
+    }
+
+    .coin-1, .coin-2, .coin-3{
+        height: 30px;
+        width: 30px;
+    }
+    .coins-eth {
+        padding: 16px 32px;
+        max-width: 156px;
+        height: 186px;
+    }
+
+    .coins-eth-img {
+        width: 72px;
+        height: 72px;
+        margin: 15px auto;
+    }
+    .aggregator-left-coins{
+        justify-content: space-between;
     }
 }
