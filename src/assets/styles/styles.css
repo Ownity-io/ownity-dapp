@@ -1897,6 +1897,7 @@ ul.tabs {
 
 .thead .td,
 .tr .td-light,
+.table-modal.table-modal-trans .tr .td:first-child, 
 .tab-info .data-td.data-td-name {
     color: #9A9A9A;
 }
