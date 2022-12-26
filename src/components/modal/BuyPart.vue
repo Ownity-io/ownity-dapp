@@ -193,8 +193,7 @@ export default {
           await this.$store.dispatch('appGlobal/setLastTransactionHash',buyFraction.hash);
           await this.$store.dispatch('appGlobal/setShowBuyPartModal',false)          
           await this.$store.dispatch('appGlobal/setShowTransSuccessModal',true);
-          this.buttonWaiting = false;
-          alert('Error!')
+          this.buttonWaiting = false;        
         }            
       }
       catch{

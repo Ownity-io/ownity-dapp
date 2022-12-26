@@ -198,7 +198,6 @@ export default {
           await this.$store.dispatch('appGlobal/setShowCancelSellPartModal', false);
           await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
           this.buttonWaiting = false;
-          alert('Error!')
         }          
       }
       catch{

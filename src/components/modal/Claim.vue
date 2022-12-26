@@ -139,8 +139,7 @@ export default {
           await this.$store.dispatch('appGlobal/setLastTransactionHash',claimLot.hash);
           await this.$store.dispatch('appGlobal/setShowClaimNftModal',false)          
           await this.$store.dispatch('appGlobal/setShowTransSuccessModal',true);
-          this.buttonWaiting = false;
-          alert('Error!')
+          this.buttonWaiting = false;          
         }         
       }
       catch{

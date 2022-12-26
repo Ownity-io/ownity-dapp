@@ -212,8 +212,7 @@ export default {
           await this.$store.dispatch('appGlobal/setLastTransactionHash',declineBid.hash);
           await this.$store.dispatch('appGlobal/setshowDepositCancelModal',false);
           await this.$store.dispatch('appGlobal/setShowTransSuccessModal',true);
-          this.buttonWaiting = false;
-          alert('Error!')
+          this.buttonWaiting = false;         
         }          
       }
       catch{

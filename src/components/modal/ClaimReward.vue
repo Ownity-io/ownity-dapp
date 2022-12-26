@@ -143,8 +143,7 @@ export default {
           await this.$store.dispatch('appGlobal/setLastTransactionHash',claimReward.hash);
           await this.$store.dispatch('appGlobal/setShowClaimRewardModal',false)          
           await this.$store.dispatch('appGlobal/setShowTransSuccessModal',true);
-          this.buttonWaiting = false;
-          alert('Error!')
+          this.buttonWaiting = false;          
         }           
       }
       catch{

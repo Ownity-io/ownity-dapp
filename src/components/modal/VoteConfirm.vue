@@ -268,8 +268,7 @@ export default {
         await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);
         await this.$store.dispatch('appGlobal/setShowVoteConfirmModal', false);
         await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
-        this.buttonWaiting=false;
-          alert('Error!');
+        this.buttonWaiting=false;        
       }
       
     }

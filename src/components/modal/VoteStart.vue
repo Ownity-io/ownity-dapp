@@ -354,8 +354,7 @@ export default {
         await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);
         await this.$store.dispatch('appGlobal/setShowStartVotingModal', false);
         await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
-        this.buttonWaiting=false;
-          alert('Error!');
+        this.buttonWaiting=false;        
       }
       
     },
