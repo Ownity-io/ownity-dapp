@@ -6,14 +6,16 @@
                     <div class="footer-block footer-block-logo">
                         <div v-if="$route.fullPath ==='/'" @click="goToTop()" class="footer-logo"></div>
                         <router-link :to="{name: 'Main'}" v-else class="footer-logo"></router-link>
-                    <div class="footer-part footer-social-links">
-                        <ul class="social-links-wrap">
-                            <li><a href=""><i class="i-twitter-fill"></i></a></li>  
-                            <li><a href=""><i class="i-facebook-fill"></i></a></li>  
-                            <li><a href=""><i class="i-telegram-fill"></i></a></li>  
-                            <!-- <li><a href=""><i class="i-discord-line"></i></a></li>   -->
-                        </ul>
-                    </div>
+                        <p>Your Gateway To The Fractionalized World</p>
+                        <div class="footer-part footer-social-links">
+                            <ul class="social-links-wrap">
+                                <li><a href=""><i class="i-twitter-fill"></i></a></li>  
+                                <li><a href=""><i class="i-facebook-fill"></i></a></li>  
+                                <li><a href=""><i class="i-telegram-fill"></i></a></li>  
+                                <!-- <li><a href=""><i class="i-discord-line"></i></a></li>   -->
+                            </ul>
+                        </div>
+                        <p>info@quant.com</p>
                     </div>
                     <div class="footer-block" :class="{'unfolded' : !footerBlock1}">
                         <button class="footer-block-name" @click="footerBlock1 = !footerBlock1">
