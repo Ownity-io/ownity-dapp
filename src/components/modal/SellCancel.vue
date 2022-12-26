@@ -187,11 +187,16 @@ export default {
         );
         let trx = await (toRaw(this.provider)).waitForTransaction(cancelSellFraction.hash);
         if (trx.status==1){
+          await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
           await this.$store.dispatch('appGlobal/setLastTransactionHash', cancelSellFraction.hash);
           await this.$store.dispatch('appGlobal/setShowCancelSellPartModal', false);
           await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
         }
         else{
+          await this.$store.dispatch('appGlobal/setLastTransSuccess',false)
+          await this.$store.dispatch('appGlobal/setLastTransactionHash', cancelSellFraction.hash);
+          await this.$store.dispatch('appGlobal/setShowCancelSellPartModal', false);
+          await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
           this.buttonWaiting = false;
           alert('Error!')
         }          

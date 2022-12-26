@@ -283,6 +283,7 @@ export default {
         );
         let trx = await (toRaw(this.provider)).waitForTransaction(buyLot.hash);
         if (trx.status==1){
+          await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
           await this.$store.dispatch('appGlobal/setLastTransactionHash',buyLot.hash);
           await this.$store.dispatch('appGlobal/setshowContinueCollectingModal',false);
           await this.$store.dispatch('appGlobal/setShowTransSuccessModal',true);
@@ -290,6 +291,10 @@ export default {
           // location.reload();
         }
         else{
+          await this.$store.dispatch('appGlobal/setLastTransSuccess',false)
+          await this.$store.dispatch('appGlobal/setLastTransactionHash',buyLot.hash);
+          await this.$store.dispatch('appGlobal/setshowContinueCollectingModal',false);
+          await this.$store.dispatch('appGlobal/setShowTransSuccessModal',true);
           this.buttonWaiting = false; 
           alert('Error!')
         }          

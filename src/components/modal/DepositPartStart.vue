@@ -286,15 +286,19 @@ export default {
         );
         let trx = await (toRaw(this.provider)).waitForTransaction(buyLot.hash);
         if (trx.status==1){
+          await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
           await this.$store.dispatch('appGlobal/setLastTransactionHash',buyLot.hash);
-          await this.$store.dispatch('appGlobal/setshowStartCollectingModal',false)
+          await this.$store.dispatch('appGlobal/setshowStartCollectingModal',false)          
           await this.$store.dispatch('appGlobal/setShowTransSuccessModal',true);
           // show succesModal and set transactionHash
           // location.reload();
         }
         else{
           this.buttonWaiting = false; 
-          alert('Error!')
+          await this.$store.dispatch('appGlobal/setLastTransSuccess',false)
+          await this.$store.dispatch('appGlobal/setLastTransactionHash',buyLot.hash);
+          await this.$store.dispatch('appGlobal/setshowStartCollectingModal',false)          
+          await this.$store.dispatch('appGlobal/setShowTransSuccessModal',true);
         }          
       }
       catch{

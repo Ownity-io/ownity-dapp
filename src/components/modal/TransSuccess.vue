@@ -8,9 +8,13 @@
         </button>
       </div>
       <div class="modal-header-img">
-        <div class="icon-congrats"> </div>
-        <div class="modal-header-img-name">
+        <div class="icon-congrats"  v-if="transSuccess"> </div>
+        <!-- <div class="icon-congrats" v-else :style="{backgroundImage: `url(${'https://cdn-icons-png.flaticon.com/512/57/57165.png'})`}"> </div> -->
+        <div class="modal-header-img-name" v-if="transSuccess">
           {{translatesGet('TRANS_SUCCESS')}}
+        </div>
+        <div class="modal-header-img-name" v-else>
+          Your transaction was rejected
         </div>
       </div>
       
@@ -25,7 +29,8 @@
               <div class="tr">
                   <div class="td">
                       <div class="td-wrap td-wrap-completed">
-                          <span>{{translatesGet('COMPLETED')}}</span>
+                          <span v-if="transSuccess">{{translatesGet('COMPLETED')}}</span>
+                          <span v-else style="color: red;">Failed</span>
                       </div>
                   </div>
                   <div class="td"> 
@@ -117,8 +122,11 @@ export default{
     return{
       config:config,
       lang: new MultiLang(this),
+      transSuccess:false
     }    
+  },
+  async mounted(){
+    this.transSuccess=await this.$store.getters['appGlobal/getLastTransSuccess'];
   }
-
 }
 </script>

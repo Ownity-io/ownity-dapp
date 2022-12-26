@@ -129,11 +129,16 @@ export default {
         );
         let trx = await (toRaw(this.provider)).waitForTransaction(claimLot.hash);
         if (trx.status==1){
+          await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
           await this.$store.dispatch('appGlobal/setLastTransactionHash', claimLot.hash);
           await this.$store.dispatch('appGlobal/setShowClaimNftModal', false);
           await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
         }
         else{
+          await this.$store.dispatch('appGlobal/setLastTransSuccess',false)
+          await this.$store.dispatch('appGlobal/setLastTransactionHash',claimLot.hash);
+          await this.$store.dispatch('appGlobal/setShowClaimNftModal',false)          
+          await this.$store.dispatch('appGlobal/setShowTransSuccessModal',true);
           this.buttonWaiting = false;
           alert('Error!')
         }         

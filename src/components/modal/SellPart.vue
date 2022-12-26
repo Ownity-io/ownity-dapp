@@ -251,11 +251,16 @@ export default {
       console.log(sellFraction);
       let trx = await (toRaw(this.provider)).waitForTransaction(sellFraction.hash);
       if (trx.status == 1) {
+        await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
         await this.$store.dispatch('appGlobal/setLastTransactionHash', sellFraction.hash);
         await this.$store.dispatch('appGlobal/setShowSellPartModal', false);
         await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
       }
       else{
+        await this.$store.dispatch('appGlobal/setLastTransSuccess',false)
+        await this.$store.dispatch('appGlobal/setLastTransactionHash', sellFraction.hash);
+        await this.$store.dispatch('appGlobal/setShowSellPartModal', false);
+        await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
         this.buttonWaiting = false;
         console.log('Error in contract');
       }

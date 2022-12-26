@@ -17,7 +17,8 @@ export default {
       showClaimNftModal:false,
       showTransSuccessModal:false,
       lastTransactionHash:null,
-      showClaimRewardModal:false
+      showClaimRewardModal:false,
+      lastTransSuccess:false
     };
   },
   getters: {
@@ -68,6 +69,9 @@ export default {
     },
     getShowClaimRewardModal(state){
       return state.showClaimRewardModal;
+    },
+    getLastTransSuccess(state){
+      return state.lastTransSuccess;
     }
   },
   mutations: {
@@ -118,6 +122,9 @@ export default {
     },
     setShowClaimRewardModal(state,value){
       state.showClaimRewardModal = value;
+    },
+    setLastTransSuccess(state,value){
+      state.lastTransSuccess = value;
     }
   },
   actions: {
@@ -169,6 +176,9 @@ export default {
     },
     setShowClaimRewardModal(context,value){
       context.commit("setShowClaimRewardModal", value);
+    },
+    setLastTransSuccess(context,value){
+      context.commit("setLastTransSuccess", value);
     }
   },
 };
