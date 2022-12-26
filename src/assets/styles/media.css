@@ -31,6 +31,82 @@
     }
 }
 
+
+/* ------ CARDS ------- */
+
+@media (max-width: 1245px) {
+
+    .section-nft.with-filter .cards-list-container .card {
+        width: calc(100% / 3 - 16px);
+    }
+
+    .section-nft:not(.with-filter) .cards-list-container .card {
+        width: calc(100% / 4 - 16px);
+    }
+
+}
+
+@media (max-width: 1425px) {
+
+    .screen-animation-container .img.img1,
+    .screen-animation-container .img.img3 {
+        transform: scale(.8);
+    }
+}
+
+@media (max-width: 1200px) {
+    .screen-animation-container .img.img2 {
+        display: none;
+    }
+
+    .screen-animation-container .img.img1,
+    .screen-animation-container .img.img3 {
+        transform: scale(.7);
+    }
+}
+
+@media (max-width: 991px) {
+    .main-screen-container{
+        padding-left: 0;
+        padding-right: 0;
+        gap: 5%;
+    }
+    .section-nft.with-filter .cards-list-container .card {
+        width: calc(100% / 2 - 16px);
+    }
+
+    .recommendations-list li,
+    .section-nft:not(.with-filter) .cards-list-container .card {
+        width: calc(100% / 3 - 16px);
+    }
+
+    .recommendations-list li:not( :nth-child(-n+4)) {
+        display: flex;
+    }
+
+    .screen-animation .screen-animation-container,
+    .content-home-ui div {
+        display: none;
+    }
+
+    .home-page::before {
+        background-image: url(../images/main-screen-bg-mob.png);
+        min-height: 827px;
+    }
+
+    .screen-animation {
+        background-image: url(../images/main-screen-animation-mob.png);
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%;
+        background-position: top center;
+        background-size: 100% auto;
+    }
+
+    /* main-screen-animation-mob.png */
+}
+
+
 @media (max-width: 768px) {
 
     .footer-section {
@@ -634,77 +710,6 @@
         margin-top: 40px;
     }
 }
-
-/* ------ CARDS ------- */
-
-@media (max-width: 1245px) {
-
-    .section-nft.with-filter .cards-list-container .card {
-        width: calc(100% / 3 - 16px);
-    }
-
-    .section-nft:not(.with-filter) .cards-list-container .card {
-        width: calc(100% / 4 - 16px);
-    }
-
-}
-
-@media (max-width: 1425px) {
-
-    .screen-animation-container .img.img1,
-    .screen-animation-container .img.img3 {
-        transform: scale(.8);
-    }
-}
-
-@media (max-width: 1200px) {
-    .screen-animation-container .img.img2 {
-        display: none;
-    }
-
-    .screen-animation-container .img.img1,
-    .screen-animation-container .img.img3 {
-        transform: scale(.7);
-    }
-}
-
-@media (max-width: 991px) {
-
-    .section-nft.with-filter .cards-list-container .card {
-        width: calc(100% / 2 - 16px);
-    }
-
-    .recommendations-list li,
-    .section-nft:not(.with-filter) .cards-list-container .card {
-        width: calc(100% / 3 - 16px);
-    }
-
-    .recommendations-list li:not( :nth-child(-n+4)) {
-        display: flex;
-    }
-
-    .screen-animation .screen-animation-container,
-    .content-home-ui div {
-        display: none;
-    }
-
-    .home-page::before {
-        background-image: url(../images/main-screen-bg-mob.png);
-        min-height: 827px;
-    }
-
-    .screen-animation {
-        background-image: url(../images/main-screen-animation-mob.png);
-        background-repeat: no-repeat;
-        width: 100%;
-        height: 100%;
-        background-position: top center;
-        background-size: 100% auto;
-    }
-
-    /* main-screen-animation-mob.png */
-}
-
 /* ----------------- MODALS ---------------- */
 
 @media (max-width: 768px) {
