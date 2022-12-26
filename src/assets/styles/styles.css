@@ -96,7 +96,7 @@ main>section {
 .header-logo {
     margin-right: var(--grid-pad);
 }
-
+.header-search-mobile-btn,
 .btn-param.btn-param-mobile,
 .btn-filter-mobile,
 .header-mobile {
@@ -285,6 +285,10 @@ main>section {
     margin-left: 16px;
 }
 
+.header-search-mobile-btn i{
+    font-size: 24px;
+    color: #818899;
+}
 input::placeholder,
 textarea::placeholder {
     color: #A8B0C4;

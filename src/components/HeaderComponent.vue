@@ -1,13 +1,18 @@
 <template>
     <MobileMenu :class="{show: (mobileMenu==true)}" :walletConnected="(walletConnected=walletConnected)"/>
-    <header>
+    <header :class="{'mobile-search' :(mobileSearch==true)}">
         <div class="container">
             <div class="header-wrapper">
                 <div v-if="$route.fullPath ==='/'" @click="goToTop()" class="header-logo"></div>
                 <router-link :to="{name: 'Main'}" v-else class="header-logo"></router-link>
                 <div class="header-search">
+                    <button class="header-search-mobile-btn btn-arrow">
+                        <i class="i-arrow-left-s-line "  @click="(mobileSearch=false)"></i>
+                    </button>                    
                     <Search :isHeader="true"/>
-                </div>
+                    <button class="header-search-mobile-btn btn-close">
+                        <i class="i-close-line "  @click="(mobileSearch=false)"></i>
+                    </button>                </div>
                 <div class="header-nav">
                     <nav>
                         <ul class="">
@@ -50,7 +55,7 @@
                     </div>
                 </div>
                 <div class="header-mobile">
-                    <button class="btn-mob-header">
+                    <button @click="(mobileSearch=true)" class="btn-mob-header">
                         <i class="i-search-line"></i>
                     </button>
                     <button @click="(mobileMenu=true)" class="btn-mob-header"  v-if="(mobileMenu==false)">
@@ -76,6 +81,7 @@ export default {
         return{
             walletConnected:1,
             mobileMenu: false,
+            mobileSearch: false,
             lang: new MultiLang(this),
         }
     },

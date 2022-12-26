@@ -109,6 +109,24 @@ a.collection-id:hover span,
     border: 1px solid #DFE2EA;
 }
 
+
+
+
+
+
+.btn.btn-clear:hover,
+.card-members-btn:hover,
+.btn-vote:hover,
+.section-deposit-btns .btn.btn-get:hover,
+.card-data .btn-container .btn:hover,
+.cookies-btns-container .btn-additional:hover,
+.modal-connect-btns .btn:hover,
+.cards-list-empty .btn:hover,
+
+
+
+
+
 .drop-down li:hover,
 .btn-drop-down:hover,
 .btn-selected-filter:hover,
