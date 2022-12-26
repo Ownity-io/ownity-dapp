@@ -19,6 +19,7 @@
         "SUBMIT":"Sumbit",
         "CLAIM":"Claim",
         "COMPLETED":"Completed",
+        "FAILED":"Failed",
         "START_VOTING":"Start voting",
         "DONE":"Done",
         "SELL_NFT":"Sell NFT",

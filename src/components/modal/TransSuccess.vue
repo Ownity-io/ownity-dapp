@@ -28,9 +28,9 @@
                   
               <div class="tr">
                   <div class="td">
-                      <div class="td-wrap td-wrap-completed">
-                          <span v-if="transSuccess">{{translatesGet('COMPLETED')}}</span>
-                          <span v-else style="color: red;">Failed</span>
+                      <div class="td-wrap">
+                          <span v-if="transSuccess" class="td-completed"> {{translatesGet('COMPLETED')}}</span>
+                          <span v-else class="td-failed"  style="color: red;">{{translatesGet('FAILED')}}</span>
                       </div>
                   </div>
                   <div class="td"> 

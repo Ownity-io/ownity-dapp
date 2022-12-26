@@ -8,11 +8,13 @@
     border: none;
 }
 
-.td-wrap-completed,
+.td-completed,
 .card-data .btn-container .btn.btn-card-completed {
     color: #2CC07B;
 }
-
+.td-failed{
+    color: #F32727;
+}
 .deposit-listened.deposit-listened-link:hover,
 .collection-data-link:hover,
 .total-block-describe a:hover {
