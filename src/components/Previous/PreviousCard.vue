@@ -13,7 +13,8 @@
             <a class="card-previous-collection collection-id">
               <img class="card-previous-collection-img" />
               <span>item collection</span>
-              <i class="i-checkbox-circle-fill"></i></a>
+              <i class="i-checkbox-circle-fill"></i
+            ></a>
           </div>
           <!-- <div class="data-td data-td-value">
             <div class="card-value">
@@ -25,8 +26,37 @@
         </div>
 
         <div class="data-tr data-id">
-            <span>MAYC #23378</span>
+          <span>MAYC #23378</span>
         </div>
+
+        <div class="data-tr data-prev-amount">
+          <div class="card-prev-amount">
+            <div>
+              <p>Raised amount:</p>
+            </div>
+            <div class="prev-amount-block">
+              <div class="card-value">
+                <div class="icon-value"></div>
+                <div class="card-col-value">
+                  <strong
+                    >5
+                    ETH</strong>
+                </div>
+              </div>
+              <p>30%</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="data-tr">
+          <div class="prev-card-status green">
+            Sale Live
+          </div>
+          <div class="prev-card-contributors">
+            Contributors: 23
+          </div>
+        </div>
+
       </div>
     </div>
   </a>
