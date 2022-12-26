@@ -617,6 +617,10 @@ ul.tabs {
     align-items: flex-start;
     justify-content: flex-start;
 }
+.collection-data {
+    max-width: 100%;
+    overflow: hidden;
+}
 
 .deposit-data,
 .collection-data,

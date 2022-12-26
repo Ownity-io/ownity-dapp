@@ -950,8 +950,13 @@
     .table-top-collections .tr .td-data {
         display: none;
     }
+    .table-top-collections .tr  .td-wrap-collection .collection-img{
+        margin-left: 0;
+    }
 
-
+    .thead .td-collection span{
+        padding-left: 0;
+    }
     .table-top-collections .thead,
     .table-top-collections .tr {
         grid-template-columns: 2fr 1.5fr 1.5fr;
