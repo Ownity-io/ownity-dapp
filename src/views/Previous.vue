@@ -1,6 +1,4 @@
 <template>
-    <div>
-
         <div class="wrapper-main">
             <HeaderPrevious/>
             <div class="page-wrapper">
@@ -25,6 +23,9 @@
                                 <div class="previous-cards-list">
                                     <div class="cards-container">
                                         <PreviousCard />
+                                        <PreviousCard />
+                                        <PreviousCard />
+                                        <PreviousCard />
                                     </div>
                                     <button class="btn btn-previous">See All Deals</button>
                                 </div>
@@ -37,7 +38,6 @@
         </div>
 
         <FooterPrevious/>
-    </div>
 </template>
 
 <script>
