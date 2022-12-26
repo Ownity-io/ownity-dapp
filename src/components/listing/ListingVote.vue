@@ -49,9 +49,9 @@
             > -->
             <div
               class="progress-value"
-              :style="{width: `${(this.voting.count/this.item.bids.length)*100}%`}"
+              :style="{width: `${allVotedPercentage}%`}"
             >
-              <span>{{toFixedIfNecessary((this.voting.count/this.item.bids.length)*100,1)}}%</span>
+              <span>{{allVotedPercentage}}%</span>
             </div>
             <div class="progress-value" style=" width: 20%, 'padding-left' :  20% ">
               <span>20%</span>
@@ -115,6 +115,7 @@ export default{
       userVoted:false,
       userBidAmount:null,
       lang: new MultiLang(this),
+      allVotedPercentage:0
     }
   },
   methods:{
@@ -169,6 +170,11 @@ export default{
           if (user.address == userAddress){
             this.userVoted=true;
           }
+          for (let element of this.item.bids){
+          if (element.address == user.address){
+            this.allVotedPercentage += parseInt(element.fraction);
+          }
+        }
         }
       }
       else{
@@ -198,15 +204,7 @@ export default{
     await this.setCurrencyToUsd();
     await this.setUserVotedAndLogged();
     await this.setUserBidAmount();
-
-    const delay = (delayInms) => {
-      return new Promise(resolve => setTimeout(resolve, delayInms));
-    }
-    while (true) {
-      await delay(1000);
-      await this.setUserVotedAndLogged();
-      await this.setUserBidAmount();
-    }
+    console.log(this.allVotedPercentage);
   }
 }
 
