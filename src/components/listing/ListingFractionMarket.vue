@@ -5,7 +5,7 @@
                 <div class="td">{{translatesGet('ACTIVITY_THEAD-7')}}</div>
                 <div class="td td-price">{{translatesGet('ACTIVITY_THEAD-3')}}</div>
                 <div class="td">{{translatesGet('ACTIVITY_THEAD-6')}}</div>
-                <div class="td td-button">{{translatesGet('ACTIVITY_THEAD-5')}}</div>
+                <div class="td td-button"></div>
             </div>
                 
             <div class="tr tr-mob-collapse" v-for="element in this.currentlyVisibleBids" :key="element">
@@ -27,11 +27,9 @@
                 <div class="td"> 
                   {{toFixedIfNecessary((element.fraction_amount/item.price)*100,0)}}%
                 </div>
-                <div class="td td-date">
-                    <div class="td-button">
-                       <button class="btn btn-td btn-buy" v-if="userAddress != element.address" @click="showBuyModal(element)">{{translatesGet('BUY')}}</button>
-                       <button class="btn btn-td btn-buy" v-else @click="showCancelModal(element)">{{translatesGet('CANCEL')}}</button>
-                    </div>
+                <div class=" td td-button">
+                    <button class="btn btn-td btn-buy" v-if="userAddress != element.address" @click="showBuyModal(element)">{{translatesGet('BUY')}}</button>
+                    <button class="btn btn-td btn-cancel" v-else @click="showCancelModal(element)">{{translatesGet('CANCEL')}}</button>
                 </div>
                 
                 <button class="btn-mobile-tr-collapse" @click="rowMobileCollapse = !rowMobileCollapse">

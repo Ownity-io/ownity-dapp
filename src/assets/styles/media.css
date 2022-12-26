@@ -66,11 +66,12 @@
 }
 
 @media (max-width: 991px) {
-    .main-screen-container{
+    .main-screen-container {
         padding-left: 0;
         padding-right: 0;
         gap: 5%;
     }
+
     .section-nft.with-filter .cards-list-container .card {
         width: calc(100% / 2 - 16px);
     }
@@ -260,9 +261,7 @@
         top: 0;
     }
 
-    .dx-visibility-change-handler{
-
-    }
+    .dx-visibility-change-handler {}
 
     .chart-wrap {
         overflow: hidden;
@@ -289,6 +288,7 @@
 
     .section-listing-main .section-deposit {
         padding: 0;
+        padding-bottom: 16px;
         flex-direction: column;
     }
 
@@ -710,6 +710,7 @@
         margin-top: 40px;
     }
 }
+
 /* ----------------- MODALS ---------------- */
 
 @media (max-width: 768px) {
@@ -955,13 +956,15 @@
     .table-top-collections .tr .td-data {
         display: none;
     }
-    .table-top-collections .tr  .td-wrap-collection .collection-img{
+
+    .table-top-collections .tr .td-wrap-collection .collection-img {
         margin-left: 0;
     }
 
-    .thead .td-collection span{
+    .thead .td-collection span {
         padding-left: 0;
     }
+
     .table-top-collections .thead,
     .table-top-collections .tr {
         grid-template-columns: 2fr 1.5fr 1.5fr;

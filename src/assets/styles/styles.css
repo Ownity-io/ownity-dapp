@@ -374,9 +374,6 @@ textarea {
 }
 
 .footer-form .btn-subscribe {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 150%;
     min-width: 160px;
     margin: -1px;
 }
@@ -1483,18 +1480,26 @@ ul.tabs {
 
 .card-id,
 .btn-vote,
+.footer-form .btn-subscribe ,
 .modal-connect-btns .btn,
 .modal-wrapper .btn,
 .cards-list-empty .btn,
 .cookies-btns-container .btn,
 .card-data .btn-container .btn,
+.section-deposit-btns .btn ,
+.total-block-value .total-amount b ,
+.td-button .btn,
 .btn.btn-submit {
     font-weight: 700;
     font-size: 16px;
     line-height: 150%;
 }
+.td-button .btn{
+    margin-left: auto;
+}
 
 .modal-connect-btns .btn,
+
 .modal-wrapper .btn,
 .cards-list-empty .btn,
 .cookies-btns-container .btn,
@@ -1957,12 +1962,6 @@ a.td-wrap-link span {
     vertical-align: center;
 }
 
-.total-block-value .total-amount b {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 150%;
-}
-
 .total-block-value .total-amount b+span {
     margin-left: 4px;
     font-weight: 400;
@@ -2385,9 +2384,6 @@ a.td-wrap-link span {
 }
 
 .section-deposit-btns .btn {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 150%;
     min-width: 184px;
     min-height: 48px;
 }
