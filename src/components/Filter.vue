@@ -113,13 +113,13 @@
       <div class="container-enter-price">
         <div class="container-input">
           <div class="input-wrapper">
-            <input type="number" placeholder="Min" v-model="minPrice" v-debounce:500ms="fetchAndSetListingsStartInfo"/>
+            <input placeholder="Min" v-model="this.minPrice" @input="checkMinPrice" v-debounce:500ms="fetchAndSetListingsStartInfoMinPrice"/>
           </div>
         </div>
         <span class="between-inputs">to</span>
         <div class="container-input">
           <div class="input-wrapper">
-            <input type="number" placeholder="Max" v-model="maxPrice" v-debounce:500ms="fetchAndSetListingsStartInfo"/>
+            <input placeholder="Max" v-model="this.maxPrice" @input="checkMaxPrice" v-debounce:500ms="fetchAndSetListingsStartInfoMaxPrice"/>
           </div>
         </div>
       </div>
@@ -129,6 +129,7 @@
 
 <script>
 import config from '@/config.json';
+import { max } from 'bn.js';
 import { vue3Debounce } from 'vue-debounce';
 export default {
   data() {
@@ -138,7 +139,9 @@ export default {
       filterSection2: false,
       filterSection3: false,
       filterSection4: false,
-      config:config
+      config:config,
+      maxPrice:null,
+      minPrice:null
     };
   },
   methods:{
@@ -161,6 +164,74 @@ export default {
         }        
       }      
     },
+    async fetchAndSetListingsStartInfoMaxPrice() {
+      if (this.maxPrice!=null) {
+        if (this.$route.name == 'Marketplace') {
+          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
+        }
+        else if (this.$route.name == 'Collection') {
+          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo', this.$route.params.contract_address);
+        }
+        else if (this.$route.name == 'Profile') {
+          if (this.onlyFav) {
+            await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');
+          }
+          else if (this.vote) {
+            await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');
+          }
+          else {
+            await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
+          }
+        }
+      }      
+    },
+    checkMaxPrice(){     
+      if (this.maxPrice == '') {
+        console.log(1);
+        this.maxPrice = null;
+      }
+      else if (isNaN(this.maxPrice)) {
+        console.log(2);
+        this.maxPrice = null;
+      }     
+      if (this.maxPrice){
+        this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', this.maxPrice); 
+      }           
+    },
+    async fetchAndSetListingsStartInfoMinPrice() {
+      if (this.minPrice != null) {
+        if (this.$route.name == 'Marketplace') {
+          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
+        }
+        else if (this.$route.name == 'Collection') {
+          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo', this.$route.params.contract_address);
+        }
+        else if (this.$route.name == 'Profile') {
+          if (this.onlyFav) {
+            await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');
+          }
+          else if (this.vote) {
+            await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');
+          }
+          else {
+            await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
+          }
+        }
+      }
+    },
+    checkMinPrice() {
+      if (this.minPrice == '') {
+        console.log(1);
+        this.minPrice = null;
+      }
+      else if (isNaN(this.minPrice)) {
+        console.log(2);
+        this.minPrice = null;
+      }
+      if (this.minPrice) {
+        this.$store.dispatch('marketplace/getAndSetCurrentMinPrice', this.minPrice);
+      }
+    }
   },
   computed:{
     checkedMarketplace:{
@@ -177,32 +248,6 @@ export default {
       },
       set(value){
         this.$store.dispatch('marketplace/getAndSetCurrentCollectionContractAddress',value);
-      }
-    },
-    minPrice:{
-      get(){
-        return this.$store.getters['marketplace/getCurrentMinPrice'];
-      },
-      set(value){
-        if (value) {
-          this.$store.dispatch('marketplace/getAndSetCurrentMinPrice', value);
-        }
-        else {
-          this.$store.dispatch('marketplace/getAndSetCurrentMinPrice', null);
-        }
-      }
-    },
-    maxPrice:{
-      get(){
-        return this.$store.getters['marketplace/getCurrentMaxPrice'];
-      },
-      set(value){
-        if (value) {
-          this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', value);
-        }
-        else {
-          this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', null);
-        }
       }
     },
     currentlyGathering:{
