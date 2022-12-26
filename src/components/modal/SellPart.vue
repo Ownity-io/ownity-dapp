@@ -141,7 +141,7 @@ export default {
   data() {
     return {
       selectOpen: false,
-      currentPart:0,
+      currentPart:null,
       priceForPart:0,
       item:null,
       partVariants:[0,1,2,3,4,5,10,15,20,49,50,100],
