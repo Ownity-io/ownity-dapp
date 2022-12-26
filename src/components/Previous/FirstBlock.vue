@@ -1,44 +1,58 @@
 <template>
-  <div ref="intro" class="intros"></div>
-  <lottie-player id="firstLottie"
-                 ref="lottie"
-                 controls
-                 mode="normal"
-                 src="https://assets3.lottiefiles.com/packages/lf20_UJNc2t.json"
-                 style="width: 320px;">
-  </lottie-player>
+  <div id="MyContainerId">
+    <lottie-player id="secondLottie"
+                   ref="lottie"
+                   mode="normal"
+
+                   src="https://lottie.host/e0097477-67a8-41d7-ba73-6d4f400c7d24/37uUd7FUK4.json"
+                   speed="10"
+    >
+    </lottie-player>
+  </div>
+
 </template>
 
 
 <script>
 
-import '@lottiefiles/lottie-player';
+import { Vue3Lottie } from 'vue3-lottie'
+import 'vue3-lottie/dist/style.css'
 import { create } from '@lottiefiles/lottie-interactivity';
 
-import lottie from 'lottie-web'
 
 export default {
 	name: "FirstBlock",
+	components: {
+		Vue3Lottie,
+	},
   data() {
 		return {
     }
   },
-	mounted() {
-		this.$refs.lottie.addEventListener('load', function() {
-			// 3. configure the interactivity library
-			create({
-				mode: 'scroll',
-				player: '#firstLottie',
-				actions: [
-					{
-						visibility: [0, 1],
-						type: 'seek',
-						frames: [0, 100],
-					},
-				],
-			});
-		})
-	}
+  methods:{
+	  play() {
+		  this.$refs['customControl'].play()
+	  },
+	  pause() {
+		  this.$refs['customControl'].pause()
+	  },
+	  stop() {
+		  this.$refs['customControl'].stop()
+	  },
+  },
+  mounted() {
+	  this.$refs.lottie.addEventListener('load', function() {
+		  create({
+			  mode: 'cursor',
+			  player: '#secondLottie',
+			  actions: [
+				  {
+					  type: "toggle"
+				  }
+			  ],
+		  });
+	  });
+  }
 }
 
 </script>

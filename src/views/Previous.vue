@@ -12,6 +12,9 @@
                         <section class="previous-second-screen">
                           <second-block/>
                         </section>
+                        <section class="previous-third-screen">
+                            <third-block/>
+                        </section>
                     </div>
                 </main>
             </div>
@@ -29,9 +32,11 @@ import FirstBlock from "@/components/Previous/FirstBlock.vue";
 import HeaderPrevious from '@/components/Previous/HeaderPrevious.vue';
 import FooterComponent from '@/components/FooterComponent.vue'
 import SecondBlock from "@/components/Previous/SecondBlock.vue";
+import ThirdBlock from "@/components/Previous/ThirdBlock.vue";
 
 export default {
 	components: {
+		ThirdBlock,
 		SecondBlock,
 		FirstBlock,
         HeaderPrevious,
