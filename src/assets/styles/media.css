@@ -31,6 +31,83 @@
     }
 }
 
+
+/* ------ CARDS ------- */
+
+@media (max-width: 1245px) {
+
+    .section-nft.with-filter .cards-list-container .card {
+        width: calc(100% / 3 - 16px);
+    }
+
+    .section-nft:not(.with-filter) .cards-list-container .card {
+        width: calc(100% / 4 - 16px);
+    }
+
+}
+
+@media (max-width: 1425px) {
+
+    .screen-animation-container .img.img1,
+    .screen-animation-container .img.img3 {
+        transform: scale(.8);
+    }
+}
+
+@media (max-width: 1200px) {
+    .screen-animation-container .img.img2 {
+        display: none;
+    }
+
+    .screen-animation-container .img.img1,
+    .screen-animation-container .img.img3 {
+        transform: scale(.7);
+    }
+}
+
+@media (max-width: 991px) {
+    .main-screen-container {
+        padding-left: 0;
+        padding-right: 0;
+        gap: 5%;
+    }
+
+    .section-nft.with-filter .cards-list-container .card {
+        width: calc(100% / 2 - 16px);
+    }
+
+    .recommendations-list li,
+    .section-nft:not(.with-filter) .cards-list-container .card {
+        width: calc(100% / 3 - 16px);
+    }
+
+    .recommendations-list li:not( :nth-child(-n+4)) {
+        display: flex;
+    }
+
+    .screen-animation .screen-animation-container,
+    .content-home-ui div {
+        display: none;
+    }
+
+    .home-page::before {
+        background-image: url(../images/main-screen-bg-mob.png);
+        min-height: 827px;
+    }
+
+    .screen-animation {
+        background-image: url(../images/main-screen-animation-mob.png);
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%;
+        background-position: top center;
+        background-size: 100% auto;
+    }
+
+    /* main-screen-animation-mob.png */
+}
+
+
 @media (max-width: 768px) {
 
     .footer-section {
@@ -184,9 +261,7 @@
         top: 0;
     }
 
-    .dx-visibility-change-handler{
-
-    }
+    .dx-visibility-change-handler {}
 
     .chart-wrap {
         overflow: hidden;
@@ -213,6 +288,7 @@
 
     .section-listing-main .section-deposit {
         padding: 0;
+        padding-bottom: 16px;
         flex-direction: column;
     }
 
@@ -269,6 +345,56 @@
     .btn-filter-mobile,
     .btn-param.btn-param-mobile {
         display: flex;
+    }
+
+    .header-search-mobile-btn {
+        position: absolute;
+        display: flex;
+        z-index: 2;
+        height: 100%;
+        padding: 12px 16px;
+        top: 0;
+    }
+    
+    .header-search-mobile-btn.btn-arrow{
+        left: 0;
+    }
+
+    .header-search-mobile-btn.btn-close{
+        right: 0;
+    }
+
+    .header-search-mobile-btn i {
+        width: 20px;
+        height: 20px;
+        font-size: 20px;
+    }
+
+    .mobile-search .header-mobile,
+    .mobile-search .header-logo {
+        width: 0;
+        overflow: hidden;
+        margin: 0;
+        min-width: 0;
+    }
+
+    .mobile-search .header-wrapper .header-search {
+        display: block;
+        max-width: 100%;
+    }
+
+    .mobile-search .header-search {
+        position: relative;
+    }
+
+    .mobile-search .input-wrapper.search-wrapper i.i-search-line {
+        opacity: 0;
+        display: none;
+    }
+
+    .mobile-search .input-wrapper.search-wrapper input {
+        padding-left: 52px;
+        padding-right: 52px;
     }
 
     .filter-mobile-wrap {
@@ -635,76 +761,6 @@
     }
 }
 
-/* ------ CARDS ------- */
-
-@media (max-width: 1245px) {
-
-    .section-nft.with-filter .cards-list-container .card {
-        width: calc(100% / 3 - 16px);
-    }
-
-    .section-nft:not(.with-filter) .cards-list-container .card {
-        width: calc(100% / 4 - 16px);
-    }
-
-}
-
-@media (max-width: 1425px) {
-
-    .screen-animation-container .img.img1,
-    .screen-animation-container .img.img3 {
-        transform: scale(.8);
-    }
-}
-
-@media (max-width: 1200px) {
-    .screen-animation-container .img.img2 {
-        display: none;
-    }
-
-    .screen-animation-container .img.img1,
-    .screen-animation-container .img.img3 {
-        transform: scale(.7);
-    }
-}
-
-@media (max-width: 991px) {
-
-    .section-nft.with-filter .cards-list-container .card {
-        width: calc(100% / 2 - 16px);
-    }
-
-    .recommendations-list li,
-    .section-nft:not(.with-filter) .cards-list-container .card {
-        width: calc(100% / 3 - 16px);
-    }
-
-    .recommendations-list li:not( :nth-child(-n+4)) {
-        display: flex;
-    }
-
-    .screen-animation .screen-animation-container,
-    .content-home-ui div {
-        display: none;
-    }
-
-    .home-page::before {
-        background-image: url(../images/main-screen-bg-mob.png);
-        min-height: 827px;
-    }
-
-    .screen-animation {
-        background-image: url(../images/main-screen-animation-mob.png);
-        background-repeat: no-repeat;
-        width: 100%;
-        height: 100%;
-        background-position: top center;
-        background-size: 100% auto;
-    }
-
-    /* main-screen-animation-mob.png */
-}
-
 /* ----------------- MODALS ---------------- */
 
 @media (max-width: 768px) {
@@ -950,13 +1006,15 @@
     .table-top-collections .tr .td-data {
         display: none;
     }
-    .table-top-collections .tr  .td-wrap-collection .collection-img{
+
+    .table-top-collections .tr .td-wrap-collection .collection-img {
         margin-left: 0;
     }
 
-    .thead .td-collection span{
+    .thead .td-collection span {
         padding-left: 0;
     }
+
     .table-top-collections .thead,
     .table-top-collections .tr {
         grid-template-columns: 2fr 1.5fr 1.5fr;

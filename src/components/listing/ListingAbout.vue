@@ -1,7 +1,8 @@
 <template>
   <div class="tab-contain tab-about">
     <div class="collection-wrap">
-      <div class="collection-img"></div>
+      <div class="collection-img" :style="{backgroundImage: `url(${item.collection.logo})`}"></div>
+                     
       <div class="collection-data">
         <a target="_blank" rel="nofollow" class="collection-id collection-label">
           <span>{{item.collection.name}}</span>

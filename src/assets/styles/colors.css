@@ -8,11 +8,13 @@
     border: none;
 }
 
-.td-wrap-completed,
+.td-completed,
 .card-data .btn-container .btn.btn-card-completed {
     color: #2CC07B;
 }
-
+.td-failed{
+    color: #F32727;
+}
 .deposit-listened.deposit-listened-link:hover,
 .collection-data-link:hover,
 .total-block-describe a:hover {
@@ -59,6 +61,7 @@ a.collection-id:hover span,
 .btn-modal-main,
 .btn.btn-home,
 .btn.btn-submit,
+.btn.btn-buy,
 .footer-form .btn-subscribe,
 .cookies-btns-container .btn-main,
 .card-data .btn-container .btn:not(.btn-card-completed):hover,
@@ -77,6 +80,7 @@ a.collection-id:hover span,
 .btn-modal-main:hover,
 .btn.btn-home:hover,
 .btn.btn-submit:hover,
+.btn.btn-buy:hover,
 .card-data .btn-container .container-btn-part-vote .btn.btn-vote:hover,
 .footer-form .btn-subscribe:hover,
 .cookies-btns-container .btn-main:hover,
@@ -99,16 +103,37 @@ a.collection-id:hover span,
 .sort.unfolded .drop-down,
 .drop-down-container .drop-down,
 .input-select-wrap.unfolded .drop-down,
+.btn.btn-cancel,
 .btn.btn-address {
     background: #FFFFFF;
     border: 1px solid #DFE2EA;
 }
+
+
+
+
+
+
+.btn.btn-clear:hover,
+.card-members-btn:hover,
+.btn-vote:hover,
+.section-deposit-btns .btn.btn-get:hover,
+.card-data .btn-container .btn:hover,
+.cookies-btns-container .btn-additional:hover,
+.modal-connect-btns .btn:hover,
+.cards-list-empty .btn:hover,
+
+
+
+
 
 .drop-down li:hover,
 .btn-drop-down:hover,
 .btn-selected-filter:hover,
 .input-checkbox label:hover .i-check-line,
 .btn-log-out:hover,
+.btn.btn-cancel:hover,
+
 .table-chart-data .tr:hover,
 .table-activity .tr:hover,
 .profile-container-btns button:hover,
@@ -119,6 +144,8 @@ a.collection-id:hover span,
 .main-home .btn-router-to:hover,
 .cards-carousel .carousel__prev:hover,
 .cards-carousel .carousel__next:hover,
+.faq-block.collapse-block:hover,
+.modal-connect-btns .btn:hover,
 .sort .btn-sort:hover,
 .input-selected:hover,
 .btn-router-to:hover,

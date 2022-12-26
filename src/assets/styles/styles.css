@@ -96,7 +96,7 @@ main>section {
 .header-logo {
     margin-right: var(--grid-pad);
 }
-
+.header-search-mobile-btn,
 .btn-param.btn-param-mobile,
 .btn-filter-mobile,
 .header-mobile {
@@ -285,6 +285,10 @@ main>section {
     margin-left: 16px;
 }
 
+.header-search-mobile-btn i{
+    font-size: 24px;
+    color: #818899;
+}
 input::placeholder,
 textarea::placeholder {
     color: #A8B0C4;
@@ -374,9 +378,6 @@ textarea {
 }
 
 .footer-form .btn-subscribe {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 150%;
     min-width: 160px;
     margin: -1px;
 }
@@ -1483,18 +1484,26 @@ ul.tabs {
 
 .card-id,
 .btn-vote,
+.footer-form .btn-subscribe ,
 .modal-connect-btns .btn,
 .modal-wrapper .btn,
 .cards-list-empty .btn,
 .cookies-btns-container .btn,
 .card-data .btn-container .btn,
+.section-deposit-btns .btn ,
+.total-block-value .total-amount b ,
+.td-button .btn,
 .btn.btn-submit {
     font-weight: 700;
     font-size: 16px;
     line-height: 150%;
 }
+.td-button .btn{
+    margin-left: auto;
+}
 
 .modal-connect-btns .btn,
+
 .modal-wrapper .btn,
 .cards-list-empty .btn,
 .cookies-btns-container .btn,
@@ -1897,6 +1906,7 @@ ul.tabs {
 
 .thead .td,
 .tr .td-light,
+.table-modal.table-modal-trans .tr .td:first-child, 
 .tab-info .data-td.data-td-name {
     color: #9A9A9A;
 }
@@ -1954,12 +1964,6 @@ a.td-wrap-link span {
     padding-left: 26px;
     position: relative;
     vertical-align: center;
-}
-
-.total-block-value .total-amount b {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 150%;
 }
 
 .total-block-value .total-amount b+span {
@@ -2384,9 +2388,6 @@ a.td-wrap-link span {
 }
 
 .section-deposit-btns .btn {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 150%;
     min-width: 184px;
     min-height: 48px;
 }

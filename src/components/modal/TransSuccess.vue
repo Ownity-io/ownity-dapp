@@ -21,18 +21,19 @@
       <div class="modal-content">
         <div class="modal-container">
           <div class="table table-modal table-modal-trans">
-              <div class="thead">
+            
+              <div class="tr">
                   <div class="td">{{translatesGet('ACTIVITY_THEAD-7')}}</div>
-                  <div class="td">{{translatesGet('ACTIVITY_THEAD-4')}}</div>
+                  <div class="td">
+                      <div class="td-wrap">
+                          <span v-if="transSuccess" class="td-completed"> {{translatesGet('COMPLETED')}}</span>
+                          <span v-else class="td-failed"  style="color: red;">{{translatesGet('FAILED')}}</span>
+                      </div>
+                  </div>
               </div>
                   
               <div class="tr">
-                  <div class="td">
-                      <div class="td-wrap td-wrap-completed">
-                          <span v-if="transSuccess">{{translatesGet('COMPLETED')}}</span>
-                          <span v-else style="color: red;">Failed</span>
-                      </div>
-                  </div>
+                  <div class="td">{{translatesGet('ACTIVITY_THEAD-4')}}</div>
                   <div class="td"> 
                       <a class="td-wrap td-wrap-link" :href="config.etherscanTxUrlStart+this.$store.getters['appGlobal/getLastTransactionHash']" target="_blank" rel="nofollow">
                           <!-- <span>a1565...d48d</span> -->
