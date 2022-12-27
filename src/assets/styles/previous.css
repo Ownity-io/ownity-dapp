@@ -189,14 +189,27 @@ body.previous-page .main-bg {
     min-height: 100vh;
 
 }
-#MyContainerId,
-.previous-first-screen {
-    height: 650px;
+#MyContainerId {
+    height: 1px;
+    position: absolute;
+    bottom: 200px;
 }
+
+#secondLottie{
+    width: 1100px;
+    height: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -30px;
+}
+
 .previous-first-screen {
     width: 100%;
+    height: 900px;
     position: relative;
 }
+
+
 
 .previous-first-screen .previous-animation,
 .previous-first-screen .previous-container {
