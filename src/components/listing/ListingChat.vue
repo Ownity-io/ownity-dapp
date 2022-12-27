@@ -99,4 +99,11 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.fastcomments-live-chat{
+    background: #FFFFFF;
+border: 1px solid #DFE2EA;
+border-radius: 8px;
+overflow: hidden;
+}
+</style>

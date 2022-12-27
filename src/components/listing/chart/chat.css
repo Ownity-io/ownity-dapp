@@ -1,15 +1,20 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
+
 * {
     border-radius: 8px !important;
-    box-shadow: none !important
+    box-shadow: none !important;
+    font-family: 'Rubik', sans-serif !important;
 }
 
-#comment-area.dark * {
+/* #comment-area.dark * {
     border-color: #303030 !important;
     color: #9f9f9f !important
-}
+} */
 
 body {
-    background: 0 0 !important
+    background: 0 0 !important;
+    margin: 0 !important;
 }
 
 textarea {
@@ -34,10 +39,10 @@ textarea {
     outline: 0 !important
 }
 
-.dark input,
+/* .dark input,
 .dark textarea {
     border-bottom: none !important
-}
+} */
 
 img {
     width: 28px;
@@ -67,7 +72,7 @@ img {
 }
 
 .comment-input {
-    padding: 7px 8px !important;
+    padding: 12px 24px !important;
     border-radius: 0 !important
 }
 
@@ -84,9 +89,9 @@ img {
     font-size: 14px !important;
     line-height: 20px !important;
     border-radius: 12px !important;
-    height: 32px !important;
+    height: 48px !important;
     flex-grow: 1 !important;
-    max-width: calc(100% - 32px - 8px * 2) !important
+    max-width: calc(100% - 48px - 8px * 2) !important
 }
 
 .user-info-input.auth-input {
@@ -97,11 +102,16 @@ img {
 .comment-reply.root .reply-button-wrapper,
 .single-line-comment-input .comment-reply.root .reply-button-wrapper {
     position: absolute !important;
-    top: 59px !important;
-    right: 8px !important;
-    width: 32px !important;
-    height: 32px !important;
+    top: 12px !important;
+    right: 24px !important;
+    width: 48px !important;
+    height: 48px !important;
     margin: 0 !important
+}
+
+.comment-reply.root .comment-reply-top-bar+.comment-input+.reply-button-wrapper,
+.single-line-comment-input .comment-reply.root .comment-reply-top-bar+.comment-input+.reply-button-wrapper {
+    top: 70px !important;
 }
 
 .user-info-input.auth-input {
@@ -110,9 +120,9 @@ img {
     width: 100% !important
 }
 
-#comment-area.dark .comment-reply.root button .icon {
+/* #comment-area.dark .comment-reply.root button .icon {
     filter: unset !important
-}
+} */
 
 .comment-reply .auth-input .fast-comments-reply {
     margin-top: 0 !important
@@ -143,8 +153,8 @@ img {
 
 .fastcomments-message-wrapper,
 .sso-login-wrapper {
-    min-height: 32px !important;
-    height: 32px !important;
+    min-height: 48px !important;
+    height: 48px !important;
     border: none !important
 }
 
@@ -155,19 +165,19 @@ img {
 
 .comment-reply .auth-input,
 .comment-vote-auth.auth-input {
-    padding: 8px 16px !important;
+    padding: 6px 24px !important;
     max-width: 100% !important
 }
 
 input,
 textarea {
-    height: 32px !important;
-    max-height: 32px !important
+    height: 48px !important;
+    max-height: 48px !important
 }
 
-#comment-area.dark .username {
+/* #comment-area.dark .username {
     color: #fff !important
-}
+} */
 
 .comment-reply .auth-input .fast-comments-reply,
 .footer,
@@ -192,7 +202,7 @@ textarea {
 @media (max-width:540px) {
     .comment>.inner {
         display: flex !important;
-        flex-direction: column !important
+        /* flex-direction: column !important */
     }
 }
 
@@ -253,7 +263,7 @@ textarea {
 
 .comment>.inner {
     display: flex !important;
-    flex-direction: column !important;
+    /* flex-direction: column !important; */
     padding: 8px 16px
 }
 
@@ -290,24 +300,24 @@ textarea {
     padding: 6px !important
 }
 
-#comment-area.dark .card.goes-black {
+/* #comment-area.dark .card.goes-black {
     background: #0f0f0f !important
-}
+} */
 
 .notifications-list .subscribe-info {
     border: none !important
 }
 
-#comment-area:not(.dark) input::placeholder,
-#comment-area:not(.dark) textarea::placeholder {
+#comment-area input::placeholder,
+#comment-area textarea::placeholder {
     color: #111111da !important
 }
 
-#comment-area:not(.dark) input,
-#comment-area:not(.dark) textarea {
+#comment-area input,
+#comment-area textarea {
     color: #111 !important;
-    background: #fff !important;
-    border: 1px solid #c7c7c7 !important
+    background: #F8F9FD !important;
+    border: 1px solid #DFE2EA !important
 }
 
 .comments:empty {
@@ -315,7 +325,7 @@ textarea {
     background: 0 0 !important
 }
 
-#comment-area:not(.dark) .comment-reply.root .reply-button-wrapper button .icon.bubble {
+#comment-area .comment-reply.root .reply-button-wrapper button .icon.bubble {
     /* filter: brightness(8) grayscale(4) !important */
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none'%3e%3cpath fill='url(%23a)' d='M4.455 16 0 19.5V1a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4.455ZM5 7v2h2V7H5Zm4 0v2h2V7H9Zm4 0v2h2V7h-2Z'/%3e%3cdefs%3e%3clinearGradient id='a' x1='-.707' x2='22.042' y1='13' y2='12.767' gradientUnits='userSpaceOnUse'%3e%3cstop stop-color='%23E15595'/%3e%3cstop offset='1' stop-color='%238525AC'/%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e") !important;
     background-position: center !important;
@@ -323,6 +333,7 @@ textarea {
 
 }
 
+/* 
 #comment-area.dark input::placeholder,
 #comment-area.dark textarea::placeholder {
     color: rgba(255, 255, 255, .76) !important
@@ -333,80 +344,102 @@ textarea {
     color: #fff !important;
     background: #1a1a1a !important;
     border: 1px solid #383838 !important
+} */
+
+#comment-area .comment-reply .auth-input input,
+#comment-area .comment-vote-auth.auth-input input {
+    border: 1px solid #DFE2EA !important;
+    margin-top: 0 !important;
 }
 
-#comment-area:not(.dark) .comment-reply .auth-input input,
-#comment-area:not(.dark) .comment-vote-auth.auth-input input {
-    border: 1px solid #c7c7c7 !important
-}
-
-#comment-area.dark .comment-reply .auth-input input,
+/* #comment-area.dark .comment-reply .auth-input input,
 #comment-area.dark .comment-vote-auth.auth-input input {
     border: 1px solid #303030 !important
+} */
+
+#comment-area .comment-input {
+    background: rgba(255, 255, 255, 1) !important;
+    border-top: 1px solid #DFE2EA !important;
 }
 
-#comment-area:not(.dark) .comment-input {
-    background: rgba(240, 240, 240, .72) !important;
-    border-top: 1px solid #c7c7c7 !important
+#comment-area .comment-input input {
+    /* border: 1px solid #e0e0e0 !important;
+    background: #fff !important */
+    background: #F8F9FD !important;
+    border: 1px solid #DFE2EA !important;
+    border-radius: 8px !important;
 }
 
-#comment-area.dark .comment-input {
+
+/* #comment-area.dark .comment-input {
     background: rgba(38, 38, 38, .72) !important;
     border-top: 1px solid #303030 !important
-}
-
-#comment-area:not(.dark) .comment-input input {
-    border: 1px solid #e0e0e0 !important;
-    background: #fff !important
 }
 
 #comment-area.dark .comment-input input {
     border: 1px solid #303030 !important;
     background: #1a1a1a !important
+} */
+
+#comment-area .comment-reply.root button {
+    background: #ffffff !important;
+    border: 1px solid #DFE2EA !important;
 }
 
-#comment-area:not(.dark) .comment-reply.root button {
+/* #comment-area.dark .comment-reply.root button {
     background: #ffffff !important;
     border: 1px solid #DFE2EA!important;
-}
+} */
 
-#comment-area.dark .comment-reply.root button {
-    background: #ffffff !important;
-    border: 1px solid #DFE2EA!important;
-}
-
-#comment-area:not(.dark) .comment .menu:hover .menu-content,
-#comment-area:not(.dark) .comment-reply.root,
-#comment-area:not(.dark) .single-line-comment-input .comment-reply,
-#comment-area:not(.dark) .top-area {
+#comment-area .comment .menu:hover .menu-content,
+#comment-area .comment-reply.root,
+#comment-area .single-line-comment-input .comment-reply,
+#comment-area .top-area {
     background: #fff !important
 }
 
-#comment-area.dark .comment .menu:hover .menu-content,
+/* #comment-area.dark .comment .menu:hover .menu-content,
 #comment-area.dark .comment-reply.root,
 #comment-area.dark .single-line-comment-input .comment-reply,
 #comment-area.dark .top-area {
     background: #1a1a1a !important
+} */
+
+#comment-area .comment>.inner>.comment-bottom,
+#comment-area .select-dir-wrapper {
+    border-bottom: 1px solid #DFE2EA !important
 }
 
-#comment-area:not(.dark) .comment>.inner>.comment-bottom,
-#comment-area:not(.dark) .select-dir-wrapper {
-    border-bottom: 1px solid #c7c7c7 !important
-}
-
-#comment-area.dark .comment>.inner>.comment-bottom,
+/* #comment-area.dark .comment>.inner>.comment-bottom,
 #comment-area.dark .select-dir-wrapper {
     border-bottom: 1px solid #303030 !important
-}
+} */
 
-#comment-area:not(.dark) .activity-icon.offline,
-#comment-area:not(.dark) .notifications-list .subscribe-info,
-#comment-area:not(.dark) .user-info-input.auth-input {
+#comment-area .activity-icon.offline,
+#comment-area .notifications-list .subscribe-info,
+#comment-area .user-info-input.auth-input {
     background: #ffffffd3 !important
 }
 
-#comment-area.dark .activity-icon.offline,
+/* #comment-area.dark .activity-icon.offline,
 #comment-area.dark .notifications-list .subscribe-info,
 #comment-area.dark .user-info-input.auth-input {
     background: rgba(38, 38, 38, .72) !important
+} */
+
+.comment-reply .comment-reply-top-bar .right .menu .items {}
+
+.comment>.inner>.comment-content .commenter-name .username {
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    line-height: 150% !important;
+    color: #9A9A9A !important;
+}
+
+.comment>.inner>.comment-content .comment-text {
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    line-height: 150% !important;
+    color: #333333 !important;
+    padding: 4px 0 0 0 !important;
 }
