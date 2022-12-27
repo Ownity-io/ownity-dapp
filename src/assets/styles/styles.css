@@ -81,7 +81,7 @@ main>section {
     font-size: 24px;
     line-height: 150%;
     cursor: pointer;
-    background-image: url(../images/logo.webp);
+    background-image: url(../images/logo.svg);
     background-position: left center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -410,7 +410,7 @@ footer::after {
     left: 0;
     width: 100%;
     height: 32px;
-    background: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%);
+    background: linear-gradient(89.43deg, #3E80FF -3.17%, #2457D5 109.46%);
     background-size: 100% 100%;
     border-width: 0;
     border: none;
@@ -1092,7 +1092,7 @@ ul.tabs {
     opacity: 0;
 }
 .input-checkbox.input-switcher input[type='checkbox']:checked+label .input-switch {
-    background: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%);
+    background: linear-gradient(89.43deg, #3E80FF -3.17%, #2457D5 109.46%);
 }
 
 
@@ -1131,8 +1131,8 @@ ul.tabs {
 
 .input-checkbox input[type='checkbox']:checked+label .i-check-line {
     color: #ffff;
-    background: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%);
-    border: 0px solid #E15595;
+    background: linear-gradient(89.43deg, #3E80FF -3.17%, #2457D5 109.46%);
+    border: 0px solid #3E80FF;
     font-size: 24px;
 }
 
@@ -1213,10 +1213,10 @@ ul.tabs {
 .cards-list-load .i-wrap {
     width: 48px;
     height: 48px;
-    color: #E15595;
+    color: #3E80FF;
     position: relative;
     font-size: 48px;
-    /* background-image: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%);
+    /* background-image: linear-gradient(89.43deg, #3E80FF -3.17%, #2457D5 109.46%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -2782,7 +2782,7 @@ a.td-wrap-link span {
     border-radius: 8px;
     /* overflow: hidden; */
     background-clip: padding-box;
-    background: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%);
+    background: linear-gradient(89.43deg, #3E80FF -3.17%, #2457D5 109.46%);
     background-size: 100% 100%;
     border-width: 0;
     border: none;
