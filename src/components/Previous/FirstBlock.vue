@@ -1,13 +1,15 @@
 <template>
-  <div id="MyContainerId">
+  <div style="position:relative;">
     <lottie-player id="secondLottie"
                    ref="lottie"
                    mode="normal"
-
-                   src="https://lottie.host/e0097477-67a8-41d7-ba73-6d4f400c7d24/37uUd7FUK4.json"
                    speed="10"
+                   style="height: 800px"
+                   src="https://lottie.host/f5e41c4f-4e1c-40c6-b8f6-809078615fed/PSQtJ63K1P.json"
     >
     </lottie-player>
+    <div id="MyContainerId"></div>
+
   </div>
 
 </template>
@@ -41,14 +43,17 @@ export default {
 	  },
   },
   mounted() {
-	  this.$refs.lottie.addEventListener('load', function() {
+	  this.$refs.lottie.addEventListener('ready', function() {
 		  create({
-			  mode: 'cursor',
+			  mode: 'scroll',
 			  player: '#secondLottie',
+			  container: "#MyContainerId",
 			  actions: [
 				  {
-					  type: "toggle"
-				  }
+					  visibility: [0.25, 0.4],
+					  type: 'seek',
+					  frames: [0, 180],
+				  },
 			  ],
 		  });
 	  });
@@ -56,3 +61,10 @@ export default {
 }
 
 </script>
+
+<style>
+#secondLottie image{
+    width: 700px;
+    height: 700px;
+}
+</style>
