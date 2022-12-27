@@ -176,21 +176,25 @@ body.previous-page .footer-part {
 }
 
 body.previous-page .page-wrapper main {
-    padding-top: 0;
+    padding: 0;
 }
 
 body.previous-page .main-bg {
     background-image: url(../images/previous/main-bg.svg);
     width: 100%;
     background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
     background-position: center top;
     min-height: 100vh;
 
 }
-
+#MyContainerId,
+.previous-first-screen {
+    height: 650px;
+}
 .previous-first-screen {
     width: 100%;
-    height: 700px;
     position: relative;
 }
 
@@ -502,6 +506,8 @@ body.previous-page .footer-section.footer-section-first .footer-block.footer-blo
 body.previous-page .footer-section.footer-section-first .footer-block.footer-block-logo {
     max-width: 50%;
 }
+
+
 
 @media (max-width: 768px) {
 

@@ -147,6 +147,7 @@
     width: 100%;
     overflow-x: clip;
     height: 700px;
+    margin-top: 120px;
 }
 
 .factional-nft.square-transition .factional-nft-1 {
@@ -618,7 +619,7 @@
     margin-top: 40px;
 }
 .coins-marketplaces {
-    padding: 24px 9px 19px;
+    padding: 24px 11.5px 19px 11.5px;
     margin-left: 40px;
 }
 
@@ -627,10 +628,6 @@
     font-size: 16px;
     line-height: 150%;
     color: #FFFFFF;
-}
-
-#secondLottie {
-    height: 700px;
 }
 
 .coins-eth-img{
@@ -815,4 +812,86 @@
     .aggregator-left-coins{
         justify-content: space-between;
     }
+}
+
+.previous-second-screen {
+    padding-bottom: 170px;
+}
+
+.previous-third-screen {
+    padding-top: 180px;
+    max-width: 1441px;
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin: 0 auto;
+}
+
+.top-collection-title{
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 57px;
+    text-align: center;
+    margin-bottom: 24px;
+    color: #FFFFFF;
+}
+
+.top-collection-subtitle{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 150%;
+    color: #A4A4A4;
+    max-width: 598px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.collection-design .btn.btn-previous{
+    margin-top: 97px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.collection-design {
+    width: 100%;
+    height: 287px;
+    background: linear-gradient(360deg, #0D0D0E 17.19%, rgba(0, 0, 0, 0) 100%);
+    backdrop-filter: blur(5px);
+    position: absolute;
+    bottom: -1px;
+}
+
+.collection-wrapper {
+    position: relative;
+}
+
+.faq.prev .faq-block{
+    background: #19191A;
+    border: 1px solid #171819;
+    border-radius: 8px;
+}
+.faq.prev .btn-faq{
+    color: #FFFFFF;
+}
+
+.previous-faq-screen {
+    max-width: 1408px;
+    margin: 0 auto;
+    margin-top: 192px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.faq-title {
+    margin-bottom: 16px;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 57px;
+    color: #FFFFFF;
+    text-align: left;
+}
+
+.previous-faq-screen p {
+    color: #FFFFFF;
 }

@@ -10,9 +10,6 @@
                         <section class="previous-second-screen">
                           <second-block/>
                         </section>
-                        <section class="previous-third-screen">
-                            <third-block/>
-                         </section>
                         <section class="previous-cards-screen">
                             <div class="container">
                                 <div class="previous-screen-header">
@@ -34,6 +31,16 @@
                                 </div>
                             </div>
                         </section>
+                        <section class="previous-third-screen">
+                          <third-block/>
+                        </section>
+                        <section class="previous-third-screen">
+                          <four-block/>
+                        </section>
+                        <section class="previous-faq-screen">
+                          <p class="faq-title">FAQ</p>
+                          <faq-block/>
+                        </section>
                     </div>
                 </main>
             </div>
@@ -52,15 +59,19 @@ import FooterPrevious from '@/components/Previous/FooterPrevious.vue'
 import SecondBlock from "@/components/Previous/SecondBlock.vue";
 import ThirdBlock from "@/components/Previous/ThirdBlock.vue";
 import PreviousCard from "@/components/Previous/PreviousCard.vue";
+import FourBlock from "@/components/Previous/FourBlock.vue";
+import FaqBlock from "@/components/Previous/FaqBlock.vue";
 
 export default {
 	components: {
+		FaqBlock,
+		FourBlock,
 		ThirdBlock,
 		SecondBlock,
 		FirstBlock,
         HeaderPrevious,
         FooterPrevious,
-        PreviousCard
+        PreviousCard,
 	},
     data() {
         return{
