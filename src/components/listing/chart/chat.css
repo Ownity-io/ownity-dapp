@@ -472,4 +472,6 @@ textarea {
 
 .comments{
     padding: 12px 24px !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
 }
