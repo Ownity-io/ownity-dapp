@@ -273,7 +273,7 @@ export default {
         this.priceForPart = null
       }
       else if (isNaN(this.priceForPart)){
-          this.priceForPart = null    
+          this.priceForPart = parseInt(this.priceForPart) 
       }
       this.sellFractionFee = this.noExponents((this.contractConfig[0].sell_fraction_fee/100)/100*this.noExponents(this.convertFromEtherToWei(this.priceForPart)));
     },
@@ -287,10 +287,10 @@ export default {
       else if (this.currentPart > (this.toFixedIfNecessary(this.userBidAmount/this.item.price*100,0))) {
         this.currentPart = this.toFixedIfNecessary(this.userBidAmount/this.item.price*100,0)
       }
-      else if (isNaN(this.currentPart)){
+      else if (isNaN(parseInt(this.currentPart))){
           this.currentPart = null    
       }
-      else if (!Number.isInteger(this.currentPart)){
+      else{
         this.currentPart = parseInt(this.currentPart);
       }
     },

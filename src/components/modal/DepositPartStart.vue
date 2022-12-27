@@ -374,10 +374,10 @@ export default {
       else if (this.currentPart > 100) {
         this.currentPart = 100
       }
-      else if (isNaN(this.currentPart)){
+      else if (isNaN(parseInt(this.currentPart))){
           this.currentPart = null    
       }
-      else if (!Number.isInteger(this.currentPart)){
+      else{
         this.currentPart = parseInt(this.currentPart);
       }
     },

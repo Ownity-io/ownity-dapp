@@ -371,10 +371,10 @@ export default {
       else if (((this.currentPart/100*this.item.price)) > (this.item.price-this.allBidsAmount)) {
         this.currentPart = this.toFixedIfNecessary((this.item.price-this.allBidsAmount)/this.item.price*100,0)
       }
-      else if (isNaN(this.currentPart)){
+      else if (isNaN(parseInt(this.currentPart))){
           this.currentPart = null    
       }
-      else if (!Number.isInteger(this.currentPart)){
+      else{
         this.currentPart = parseInt(this.currentPart);
       }
     },
