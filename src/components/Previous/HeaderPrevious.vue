@@ -1,5 +1,118 @@
 <template>
     <!-- <MobileMenu :class="{show: (mobileMenu==true)}" :walletConnected="(walletConnected=walletConnected)"/> -->
+
+    <div class="mobile-menu" :class="{show: (mobileMenu==true)}">
+        <div class="mobile-menu-content">
+        <div class="mobile-menu-main-btn">
+            <div class="mobile-menu-container container">
+            <div
+                class="btn-container"
+                v-if="walletConnected == null || walletConnected == 'null'"
+            >
+                <button
+                class="btn btn-connect"
+                @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal', true)"
+                >
+                <!-- @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal', true)" -->
+                <span>{{translatesGet('CONNECT_WALLET')}}</span>
+                </button>
+            </div>
+            <div class="btn-container" v-else>
+                <router-link :to="{ name: 'Profile' }" class="btn btn-address">
+                <div class="icon-address"></div>
+                <span>
+                    {{ this.$store.getters["walletsAndProvider/getUserShortAddress"] }}
+                </span>
+                </router-link>
+            </div>
+            </div>
+        </div>
+        <div class="mobile-menu-container container">
+            <nav class="mobile-menu-list">
+            <ul class="">
+                <li class="mobile-menu-item">
+                    <a href=""><span>Home</span></a>
+                </li>
+                <li class="mobile-menu-item drop-down-item" :class="{more :mobItem0}">
+                    <button @click="mobItem0 = !mobItem0" >
+                        <span>About</span>
+                        <i class="i-arrow-down-s-line"></i>
+                    </button>
+                    <ul class="header-drop-down">
+                        <li>
+                            <a href="">About us</a>
+                        </li>
+                        <li><a href="">FAQ</a></li>
+                        <li><a href="">Team</a></li>
+                    </ul>
+                </li>
+                <li class="mobile-menu-item drop-down-item" :class="{more :mobItem1}">
+                    <button @click="mobItem1 = !mobItem1" >
+                        <span>Community</span>
+                        <i class="i-arrow-down-s-line"></i>
+                    </button>
+                    <ul class="header-drop-down">
+                        <li>
+                            <a >
+                                <Twitter />
+                                Twitter
+                            </a>
+                        </li>
+                        <li>
+                            <a >
+                                <Telegram />
+                                Telegram
+                            </a>
+                        </li>
+                        <li class="link-disabled">
+                            <a >
+                                <Discord />
+                                Discord
+                                <span class="soon">soon</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- <li class="mobile-menu-item drop-down-item" :class="{more :mobItem3}">
+                    <button @click="mobItem3 = !mobItem3" >
+                        <span>About</span>
+                        <i class="i-arrow-down-s-line"></i>
+                    </button>
+                    <ul class="header-drop-down">
+                        <li>
+                            <a href="">About us</a>
+                        </li>
+                        <li><a href="">FAQ</a></li>
+                        <li><a href="">Team</a></li>
+                    </ul>
+                </li> -->
+                <li class="mobile-menu-item drop-down-item" :class="{more :mobItem2}">
+                    <button @click="mobItem2 = !mobItem2" >
+                        <span>Docs</span>
+                        <i class="i-arrow-down-s-line"></i>
+                    </button>
+                    <ul class="header-drop-down">
+                        <li>
+                            <a href="">Whitepaper</a>
+                        </li>
+                        <li class="link-disabled">
+                            <a href="">
+                                One pager
+                                <span class="soon">soon</span>
+                            </a>
+                        </li>
+                        <li class="link-disabled">
+                            <a href="">Tokenomics
+                                <span class="soon">soon</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            </nav>
+        </div>
+        </div>
+    </div>
     <header>
         <div class="container">
             <div class="header-wrapper">
@@ -95,9 +208,6 @@
                     </div>
                 </div>
                 <div class="header-mobile">
-                    <button class="btn-mob-header">
-                        <i class="i-search-line"></i>
-                    </button>
                     <button @click="(mobileMenu=true)" class="btn-mob-header"  v-if="(mobileMenu==false)">
                         <i class="i-menu-line"></i>
                     </button>
@@ -124,6 +234,9 @@ export default {
         return{
             walletConnected:1,
             mobileMenu: false,
+            mobItem0:false,
+            mobItem1:false,
+            mobItem2:false,
             lang: new MultiLang(this),
         }
     },
