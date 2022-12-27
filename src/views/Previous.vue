@@ -41,6 +41,9 @@
                           <p class="faq-title">FAQ</p>
                           <faq-block/>
                         </section>
+                        <section class="previous-five-screen">
+                          <fifth-block/>
+                        </section>
                     </div>
                 </main>
             </div>
@@ -61,9 +64,11 @@ import ThirdBlock from "@/components/Previous/ThirdBlock.vue";
 import PreviousCard from "@/components/Previous/PreviousCard.vue";
 import FourBlock from "@/components/Previous/FourBlock.vue";
 import FaqBlock from "@/components/Previous/FaqBlock.vue";
+import FifthBlock from "@/components/Previous/FifthBlock.vue";
 
 export default {
 	components: {
+		FifthBlock,
 		FaqBlock,
 		FourBlock,
 		ThirdBlock,

@@ -556,3 +556,47 @@ body.previous-page .footer-section.footer-section-first .footer-block.footer-blo
         text-decoration: unset !important;
     }
 }
+
+.still-inner-subtitle {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+
+    color: #A4A4A4;
+    margin-top: 43px;
+}
+.still-inner-title {
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 57px;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.previous-five-screen {
+    height: 502px;
+    background-image: url("src/assets/images/still.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding-top: 90px;
+    margin-top: 100px;
+
+}
+
+.still-inner-btn{
+    margin: 0 auto;
+    background: #161619;
+    border-radius: 8px;
+    padding: 12px 16px;
+    border: 2px solid rgba(77, 137, 254, 1);
+    background: linear-gradient(180deg, #4D89FE 0%, #355FC9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    margin-top: 43px;
+    max-width: 186px;
+    width: 100%;
+}
