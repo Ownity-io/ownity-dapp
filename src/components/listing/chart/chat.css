@@ -443,3 +443,33 @@ textarea {
     color: #333333 !important;
     padding: 4px 0 0 0 !important;
 }
+
+.comment > .inner > .comment-content .commenter-name .username{
+    display: flex !important;
+}
+.comment .top-right{
+    right: 24px !important;
+}
+
+.comment .avatar-wrapper{
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    border: none !important;
+    border-radius: 100% !important;
+    overflow: hidden !important;
+
+}
+
+.comment > .inner > .comment-content{
+    margin-left: 16px;
+}
+
+.comment .avatar{
+    aspect-ratio: 1 / 1 !important;
+}
+
+.comments{
+    padding: 12px 24px !important;
+}
