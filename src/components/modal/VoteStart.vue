@@ -163,14 +163,14 @@ export default {
     this.setSellLotFee();
     console.log(marketplacesTemp);
     let k = 0
-    for (let element of marketplacesTemp){
-      console.log(element.id);
-      if (element.id=='LORA'){
-        console.log(element);
-        marketplacesTemp = marketplacesTemp.splice(k+1,2);
-      }
-      k+=1;
-    }
+    // for (let element of marketplacesTemp){
+    //   console.log(element.id);
+    //   if (element.id=='LORA'){
+    //     console.log(element);
+    //     marketplacesTemp = marketplacesTemp.splice(k+1,2);
+    //   }
+    //   k+=1;
+    // }
     this.marketplaces = marketplacesTemp;
     this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
     this.render = true;
