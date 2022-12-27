@@ -77,51 +77,129 @@ export default {
   mutations: {
     setShowConnectWalletModal(state, value) {
       state.showConnectWalletModal = value;
+      if (value == true){
+        document.body.classList.add("fix-content");
+      }
+      else{
+        document.body.classList.remove("fix-content");
+      }
     },
     setShowStartVotingModal(state, value) {
       state.showStartVotingModal = value;
+      if (value == true){
+        document.body.classList.add("fix-content");
+      }
+      else{
+        document.body.classList.remove("fix-content");
+      }
     },
     setShowVoteConfirmModal(state, value) {
       state.showVoteConfirmModal = value;
+      if (value == true){
+        document.body.classList.add("fix-content");
+      }
+      else{
+        document.body.classList.remove("fix-content");
+      }
     },
     setCurrentVoting(state,value){
       state.currentVoting = value;
     },
     setCancellSellVotingModal(state,value){
       state.showCancelSellVotingModal = value;
+      if (value == true){
+        document.body.classList.add("fix-content");
+      }
+      else{
+        document.body.classList.remove("fix-content");
+      }
     },
     setshowStartCollectingModal(state,value){
       state.showStartCollectingModal = value;
+      if (value == true){
+        document.body.classList.add("fix-content");
+      }
+      else{
+        document.body.classList.remove("fix-content");
+      }
     },
     setshowContinueCollectingModal(state,value){
       state.showContinueCollectingModal = value;
+      if (value == true){
+        document.body.classList.add("fix-content");
+      }
+      else{
+        document.body.classList.remove("fix-content");
+      }
     },
     setshowDepositCancelModal(state,value){
       state.showDepositCancelModal = value;
+      if (value == true){
+        document.body.classList.add("fix-content");
+      }
+      else{
+        document.body.classList.remove("fix-content");
+      }
     },
     setShowSellPartModal(state,value){
       state.showSellPartModal = value;
+      if (value == true){
+        document.body.classList.add("fix-content");
+      }
+      else{
+        document.body.classList.remove("fix-content");
+      }
     },
     setShowCancelSellPartModal(state,value){
       state.showCancelSellPartModal = value;
+      if (value == true){
+        document.body.classList.add("fix-content");
+      }
+      else{
+        document.body.classList.remove("fix-content");
+      }
     },
     setCurrentPartOnMarket(state,value){
       state.currentPartOnMarket = value;
     },
     setShowBuyPartModal(state,value){
       state.showBuyPartModal = value;
+      if (value == true){
+        document.body.classList.add("fix-content");
+      }
+      else{
+        document.body.classList.remove("fix-content");
+      }
     },
     setShowClaimNftModal(state,value){
       state.showClaimNftModal = value;
+      if (value == true){
+        document.body.classList.add("fix-content");
+      }
+      else{
+        document.body.classList.remove("fix-content");
+      }
     },
     setShowTransSuccessModal(state,value){
       state.showTransSuccessModal = value;
+      if (value == true){
+        document.body.classList.add("fix-content");
+      }
+      else{
+        document.body.classList.remove("fix-content");
+      }
     },
     setLastTransactionHash(state,value){
       state.lastTransactionHash = value;
     },
     setShowClaimRewardModal(state,value){
       state.showClaimRewardModal = value;
+      if (value == true){
+        document.body.classList.add("fix-content");
+      }
+      else{
+        document.body.classList.remove("fix-content");
+      }
     },
     setLastTransSuccess(state,value){
       state.lastTransSuccess = value;
