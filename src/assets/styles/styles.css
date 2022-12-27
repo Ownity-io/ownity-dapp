@@ -4,7 +4,7 @@ body {
     background-color: #ffff;
 }
 
-body{
+body.fix-content{
     overflow: hidden;
     padding-left: 3px;
 }
