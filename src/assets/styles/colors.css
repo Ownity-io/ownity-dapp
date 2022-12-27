@@ -2,7 +2,7 @@
 .header-nav ul li a:hover:after,
 .tabs .active-tab::after,
 .header-nav ul li button.active:after {
-    background: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%);
+    background: linear-gradient(89.43deg, #3E80FF -3.17%, #2457D5 109.46%);
     background-size: 100% 100%;
     border-width: 0;
     border: none;
@@ -29,7 +29,7 @@
 .data-td a:hover span,
 a.collection-id:hover span,
 .footer-row.footer-row-info .footer-part:not(.footer-social-links) a:hover {
-    background-image: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%);
+    background-image: linear-gradient(89.43deg, #3E80FF -3.17%, #2457D5 109.46%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -68,8 +68,8 @@ a.collection-id:hover span,
 .card-data .btn-container .container-btn-part-vote .btn.btn-vote,
 .section-deposit-btns .btn.btn-deposit,
 .btn.btn-connect {
-    /* background: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 109.46%); */
-    background: linear-gradient(89.43deg, #E15595 -3.17%, #8525AC 49.91%, #E15595 109.46%);
+    /* background: linear-gradient(89.43deg, #3E80FF -3.17%, #2457D5 109.46%); */
+    background: linear-gradient(89.43deg, #3E80FF -3.17%, #2457D5 49.91%, #3E80FF 109.46%);
     color: #FFFFFF;
     background-size: calc((100% + 2px * 2) * 2);
     background-position: 0 center;
