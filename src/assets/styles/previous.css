@@ -556,3 +556,125 @@ body.previous-page .footer-section.footer-section-first .footer-block.footer-blo
         text-decoration: unset !important;
     }
 }
+
+.still-inner-subtitle {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+
+    color: #A4A4A4;
+    margin-top: 43px;
+}
+.still-inner-title {
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 57px;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.previous-five-screen {
+    height: 502px;
+    background-image: url("src/assets/images/still.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding-top: 90px;
+    margin-top: 100px;
+
+}
+
+.still-inner-btn{
+    margin: 0 auto;
+    background: #161619;
+    border-radius: 8px;
+    padding: 12px 16px;
+    border: 2px solid rgba(77, 137, 254, 1);
+    background: linear-gradient(180deg, #4D89FE 0%, #355FC9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    margin-top: 43px;
+    max-width: 186px;
+    width: 100%;
+}
+
+.email-block {
+    display: flex;
+    height: 48px;
+    position: relative;
+    max-width: 630px;
+    width: 100%;
+    margin: 40px auto 8px auto;
+}
+
+.whitelist-inner-title {
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 57px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.whitelist-inner-subtitle {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 24px;
+}
+
+.check-term {
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    max-width: 630px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.email-block input{
+    background: #F8F9FD;
+    border: 1px solid #DFE2EA;
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: #A8B0C4;
+}
+
+.email-block button{
+    background: linear-gradient(180deg, #4D89FE 0%, #355FC9 100%);
+    box-shadow: 0 0 20px rgba(73, 129, 239, 0.5);
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 150%;
+    color: #FFFFFF;
+    position: absolute;
+    right: 0;
+    padding: 12px 16px;
+    max-width: 186px;
+    width: 100%;
+}
+
+.previous-last-screen {
+    background: radial-gradient(50% 50% at 50% 50%, #1B171F 0%, #151517 100%);
+    height: 100vh;
+}
+
+.whitelist-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-image: url("src/assets/images/last-screen.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
