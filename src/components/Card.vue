@@ -275,21 +275,30 @@
         </div>
       </div>
       <div class="btn-container">
-        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'">
+        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & userAddress!=false">
           {{translatesGet('BUY_TOGETHER')}}
         </a>
-        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
+        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'  & userAddress!=false">
           {{translatesGet('DEPOSIT_PART')}}
         </a>
+        <button class="btn" @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & !userAddress">
+          {{translatesGet('BUY_TOGETHER')}}
+        </button>
+        <button class="btn"  @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & !userAddress">
+          {{translatesGet('DEPOSIT_PART')}}
+        </button>
         <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='CLOSED' & (item.internal_status=='CLOSED'||item.internal_status=='GATHER') & userBidAmount>0">
           {{translatesGet('CANCEL')}}
         </a>
         <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="(item.internal_status=='SOLD' & userBidAmount>0)">
           {{translatesGet('CLAIM_REWARD')}}
         </a>
-        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0">
+        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0  & userAddress!=false">
           {{translatesGet('BUY')}}
         </a>
+        <button class="btn"  @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)" v-if="bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0  & !userAddress">
+          {{translatesGet('BUY')}}
+        </button>
         <div v-if="(item.marketplace_status=='CLOSED' & item.internal_status=='OWNED' & this.voting==null) & userBidAmount>0 & !userBidOnSale" class="container-btn-part container-btn-part-vote">
           <a class="btn btn-vote" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" >
             {{translatesGet('VOTE')}}
@@ -413,7 +422,8 @@ export default {
       render:false,
       userBidOnSale:null,
       lang: new MultiLang(this),
-      showUserBidOnSale:false
+      showUserBidOnSale:false,
+      userAddress:false
     };
   },
   props:[
@@ -597,6 +607,10 @@ export default {
     }
   },  
   async mounted(){
+    let userAddress = localStorage.getItem('userAddress');
+    if (userAddress!=null & userAddress!='null'){
+      this.userAddress = userAddress;
+    }
     this.setPriceInCurrency();
     this.setLinkToMarketplacePage();
     await this.setCurrencyToUsd();
