@@ -92,7 +92,7 @@
 }
 
 .factional-nft div:first-child {
-    background-image: url("src/assets/images/previous/factional-nft-1.png");
+    background-image: url("/src/assets/images/previous/factional-nft-1.png");
     width: 361.44px;
     height: 402.25px;
     transform: rotate(6deg);
@@ -100,7 +100,7 @@
     top: -165px;
 }
 .factional-nft div:nth-child(2) {
-    background-image: url("src/assets/images/previous/factional-nft-2.png");
+    background-image: url("/src/assets/images/previous/factional-nft-2.png");
     width: 391.22px;
     height: 390.26px;
     right: -144px;
@@ -111,7 +111,7 @@
 }
 
 .factional-nft div:nth-child(3) {
-    background-image: url("src/assets/images/previous/factional-nft-3.png");
+    background-image: url("/src/assets/images/previous/factional-nft-3.png");
     width: 338.27px;
     height: 536.09px;
     right: -72px;
@@ -119,7 +119,7 @@
     transform: rotate(6deg);
 }
 .factional-nft div:nth-child(4) {
-    background-image: url("src/assets/images/previous/factional-nft-4.png");
+    background-image: url("/src/assets/images/previous/factional-nft-4.png");
     width: 586.1px;
     height: 336.43px;
     transform: rotate(6deg);
@@ -128,7 +128,7 @@
 
 }
 .factional-nft div:nth-child(5) {
-    background-image: url("src/assets/images/previous/factional-nft-5.png");
+    background-image: url("/src/assets/images/previous/factional-nft-5.png");
     width: 435.71px;
     height: 466.59px;
     transform: rotate(6.3deg);
