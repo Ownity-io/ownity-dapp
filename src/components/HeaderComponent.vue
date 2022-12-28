@@ -49,7 +49,8 @@
                     </div>
                     <div class="btn-container" v-else>
                         <router-link :to="{name:'Profile'}" class="btn btn-address" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/clearListingsInfo');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')">
-                            <div class="icon-address"></div>
+                            <jazzicon :address="userAddress" :diameter="32" class="icon-address" v-if="userAddress"/>
+                            <div class="icon-address" v-else></div>
                             <span>{{this.$store.getters['walletsAndProvider/getUserShortAddress']}}</span>
                         </router-link>
                     </div>
@@ -83,6 +84,7 @@ export default {
             mobileMenu: false,
             mobileSearch: false,
             lang: new MultiLang(this),
+            userAddress:null
         }
     },
     components: {
@@ -105,6 +107,7 @@ export default {
     },
     async mounted(){
         this.getWalletFromLS();
+        this.userAddress = localStorage.getItem('userAddress');
         const delay = (delayInms) => {
             return new Promise(resolve => setTimeout(resolve, delayInms));
         }

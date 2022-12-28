@@ -5,11 +5,14 @@ import router from '@/router'
 import store from '@/store'
 import '@/assets/styles/main.css'
 import '@/assets/styles/font.css'
+import Jazzicon from 'vue3-jazzicon/src/components';
+
 
 const app = createApp(App)
 
 app.use(router);
 app.use(store);
+app.component('jazzicon', Jazzicon);
 // app.use(MultiLang);
 
 app.mount('#app')
