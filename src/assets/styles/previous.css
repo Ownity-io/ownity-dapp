@@ -598,6 +598,8 @@ body.previous-page .footer-section.footer-section-first .footer-block.footer-blo
     text-fill-color: transparent;
     margin-top: 43px;
     max-width: 186px;
+    display: block;
+    text-align: center;
     width: 100%;
 }
 

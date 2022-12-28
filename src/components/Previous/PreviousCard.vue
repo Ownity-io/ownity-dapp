@@ -1,9 +1,9 @@
 <template>
-  <a class="card card-previous">
+  <div class="card card-previous">
     <div class="card-main">
-      <a href="" class="card-img">
+      <div href="" class="card-img">
         <img />
-      </a>
+      </div>
     </div>
     <div class="card-data">
       <div class="data-table">
@@ -59,7 +59,7 @@
 
       </div>
     </div>
-  </a>
+  </div>
 </template>
 
 <script>
