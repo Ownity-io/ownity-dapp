@@ -521,6 +521,7 @@
     .fractional-subtitle {
         font-size: 16px;
     }
+    .previous-title,
     .aggregator-left-title,
     .fractional-title {
         font-size: 24px;
@@ -895,3 +896,34 @@
 .previous-faq-screen p {
     color: #FFFFFF;
 }
+
+@media (max-width: 1190px) {
+    .previous-cards-list .cards-container {
+        max-width: 600px;
+        flex-wrap: wrap;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .previous-third-screen {
+        padding-top: 150px;
+    }
+    .previous-second-screen {
+        padding-bottom: 0;
+    }
+}
+
+.card.card-previous:first-child .card-img{
+    background-image: url("src/assets/images/ex1.png");
+}
+.card.card-previous:nth-child(2) .card-img{
+    background-image: url("src/assets/images/ex2.png");
+}
+.card.card-previous:nth-child(3) .card-img{
+    background-image: url("src/assets/images/ex3.png");
+}
+.card.card-previous:nth-child(4) .card-img{
+    background-image: url("src/assets/images/ex4.png");
+}
+
+

@@ -1,9 +1,9 @@
 <template>
-  <a class="card card-previous">
+  <div class="card card-previous">
     <div class="card-main">
-      <a href="" class="card-img">
+      <div href="" class="card-img">
         <img />
-      </a>
+      </div>
     </div>
     <div class="card-data">
       <div class="data-table">
@@ -11,8 +11,8 @@
           <!-- <div class="card-id card-id-full">hjhhuhi</div> -->
           <div class="data-td">
             <a class="card-previous-collection collection-id">
-              <img class="card-previous-collection-img" />
-              <span>item collection</span>
+              <img class="card-previous-collection-img" src="src/assets/images/logos.png"/>
+              <span>Mutant Ape Yacht Club</span>
               <i class="i-checkbox-circle-fill"></i
             ></a>
           </div>
@@ -59,7 +59,7 @@
 
       </div>
     </div>
-  </a>
+  </div>
 </template>
 
 <script>
@@ -97,3 +97,63 @@ export default {
   },
 };
 </script>
+
+<style>
+@media (max-width: 680px) {
+    .data-tr {
+        display: block;
+    }
+
+    .prev-card-status {
+        font-size: 12px;
+        line-height: 150%;
+    }
+
+    .prev-card-status:after {
+        transform: translateY(20%);
+    }
+    .prev-card-contributors {
+        font-size: 12px;
+        margin-top: 4px;
+    }
+    .card-prev-amount {
+        display: block;
+        margin: 0;
+    }
+    .card-prev-amount .card-value {
+        border-right: none;
+    }
+    .card-col-value{
+        font-size: 18px;
+    }
+    .prev-amount-block {
+        justify-content: space-between;
+    }
+    .data-id span {
+        font-size: 14px;
+    }
+    .card-previous-collection-img span {
+        font-size: 12px;
+    }
+    .card-prev-amount {
+        padding: 8px 8px 12px 8px;
+    }
+    .card-previous-collection img.card-previous-collection-img {
+        height: 16px;
+        min-width: 16px;
+        width: 16px;
+        top: 2px;
+    }
+    .card-previous-collection {
+        padding-left: 24px;
+    }
+    .previous-cards-list .cards-container {
+        max-width: 360px;
+        gap: 12px;
+    }
+    .container{
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+}
+</style>

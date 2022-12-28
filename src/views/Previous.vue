@@ -96,3 +96,34 @@ export default {
     },
 }
 </script>
+
+<style>
+@media (max-width: 991px) {
+    .previous-title {
+        text-align: left;
+        font-size: 32px;
+    }
+    .previous-describe{
+        text-align: left;
+        font-size: 18px;
+
+    }
+    .previous-cards-screen .previous-screen-header {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+@media (max-width: 460px){
+    .previous-title{
+        font-size: 24px;
+        margin-bottom: 16px;
+        line-height: normal;
+        text-align: left;
+    }
+    .previous-describe {
+        font-size: 16px;
+        text-align: left;
+    }
+}
+</style>
