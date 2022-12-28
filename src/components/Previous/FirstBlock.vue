@@ -1,14 +1,14 @@
 <template>
   <div style="position:relative;">
-<!--    <lottie-player id="secondLottie"-->
-<!--                   ref="lottie"-->
-<!--                   mode="normal"-->
-<!--                   speed="10"-->
-<!--                   style="height: 800px"-->
-<!--                   src="https://lottie.host/f5e41c4f-4e1c-40c6-b8f6-809078615fed/PSQtJ63K1P.json"-->
-<!--    >-->
-<!--    </lottie-player>-->
-<!--    <div id="MyContainerId"></div>-->
+    <lottie-player id="secondLottie"
+                   ref="lottie"
+                   mode="normal"
+                   speed="10"
+                   style="height: 800px"
+                   src="https://lottie.host/f5e41c4f-4e1c-40c6-b8f6-809078615fed/PSQtJ63K1P.json"
+    >
+    </lottie-player>
+    <div id="MyContainerId"></div>
 <!--    <canvas id="hero-lightpass"/>-->
   </div>
 
@@ -43,20 +43,20 @@ export default {
 	  },
   },
   mounted() {
-	  // this.$refs.lottie.addEventListener('ready', function() {
-		//   create({
-		// 	  mode: 'scroll',
-		// 	  player: '#secondLottie',
-		// 	  container: "#MyContainerId",
-		// 	  actions: [
-		// 		  {
-		// 			  visibility: [0.25, 0.4],
-		// 			  type: 'seek',
-		// 			  frames: [0, 180],
-		// 		  },
-		// 	  ],
-		//   });
-	  // });
+	  this.$refs.lottie.addEventListener('ready', function() {
+		  create({
+			  mode: 'scroll',
+			  player: '#secondLottie',
+			  container: "#MyContainerId",
+			  actions: [
+				  {
+					  visibility: [0.25, 0.4],
+					  type: 'seek',
+					  frames: [0, 180],
+				  },
+			  ],
+		  });
+	  });
 	  // window.addEventListener('scroll', function (){
 	  // 	const html = document.documentElement;
 	  // 	const canvas = document.getElementById("hero-lightpass");
