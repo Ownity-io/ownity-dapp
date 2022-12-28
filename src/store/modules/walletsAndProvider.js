@@ -45,7 +45,8 @@ export default {
       try {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         await provider.send("eth_requestAccounts", []);        
-        context.commit('setGlobalProvider',provider);        
+        context.commit('setGlobalProvider',provider);   
+        await provider.send('wallet_switchEthereumChain',[{ chainId: "0x5"}]);     
         let userAddress = await provider.getSigner().getAddress();
         if (localStorage.getItem('userAddress')!=userAddress){
           localStorage.setItem('userAddress',null);
@@ -92,7 +93,10 @@ export default {
           localStorage.setItem('token', requestJson.data.token);
           localStorage.setItem('tokenEndTimestamp', requestJson.data.expiration_timestamp);
           localStorage.setItem('refreshToken', requestJson.data.refresh);
-          location.reload();
+          let checkStorageWrited = (localStorage.getItem('refreshToken')!=null);
+          if (checkStorageWrited){
+            location.reload();
+          }          
         }else if (Date.parse(localStorage.getItem('tokenEndTimestamp'))<Date.now()){
           //gettoken with refesh-token
           let requestUrl = `${config.backendApiEntryPoint}token-refresh/`;
@@ -114,7 +118,7 @@ export default {
           localStorage.setItem('refreshToken', requestJson.refresh);
 
         }
-        await provider.send('wallet_switchEthereumChain',[{ chainId: "0x5"}]);
+        
         context.commit('setUserInfo',await provider.getSigner().getAddress());
         localStorage.setItem('connectedWallet','metamask');
         localStorage.setItem('userAddress',await provider.getSigner().getAddress());
@@ -135,6 +139,10 @@ export default {
         await provider.enable()
         const web3Provider = new ethers.providers.Web3Provider(provider);
         context.commit('setGlobalProvider',web3Provider);
+        await web3Provider.send(
+          'wallet_switchEthereumChain',
+          [{ chainId: "0x5"}],
+        );
         let userAddress = await web3Provider.getSigner().getAddress();
         if (localStorage.getItem('userAddress')!=userAddress){
           localStorage.setItem('userAddress',null);
@@ -202,10 +210,6 @@ export default {
           localStorage.setItem('tokenEndTimestamp', (Date.now()/1000)+86400);
           localStorage.setItem('refreshToken', requestJson.refresh);
         }
-        await web3Provider.send(
-          'wallet_switchEthereumChain',
-          [{ chainId: "0x5"}],
-        );
         context.commit('setUserInfo',await web3Provider.getSigner().getAddress());
         localStorage.setItem('connectedWallet','walletconnect');
         localStorage.setItem('userAddress',await web3Provider.getSigner().getAddress());

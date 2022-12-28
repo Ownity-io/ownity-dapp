@@ -194,7 +194,20 @@ export default {
     },
     async buyLot(){ 
       this.buttonWaiting = true; 
-      const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());
+      let prov = toRaw(this.provider);
+      let chainSettings = toRaw(this.config.evmChains[this.item.collection.blockchain])
+      try{
+        await prov.send('wallet_switchEthereumChain',[{chainId: chainSettings.chainId}]);
+      }
+      catch{
+        try{
+          await prov.send('wallet_addEthereumChain',[chainSettings]);  
+        }
+        catch{
+          alert('Error!!!!');
+        }
+      }      
+      const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await prov.getSigner());
       let markeplaceId = ethers.utils.formatBytes32String(this.item.marketplace.id).substring(0, 10);
       let options = {};
       let valueToBuy = this.noExponents((ethers.BigNumber.from(this.noExponents(this.item.price))/100)*this.currentPart);
@@ -284,7 +297,7 @@ export default {
           signature,
           options
         );
-        let trx = await (toRaw(this.provider)).waitForTransaction(buyLot.hash);
+        let trx = await prov.waitForTransaction(buyLot.hash);
         if (trx.status==1){
           await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
           await this.$store.dispatch('appGlobal/setLastTransactionHash',buyLot.hash);

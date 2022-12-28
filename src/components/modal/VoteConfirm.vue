@@ -217,7 +217,20 @@ export default {
     },
     async sellLot(_voting_Id) {
       console.log(this.config.contractAddress);
-      const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());      
+      let prov = toRaw(this.provider);
+      let chainSettings = toRaw(this.config.evmChains[this.item.collection.blockchain])
+      try{
+        await prov.send('wallet_switchEthereumChain',[{chainId: chainSettings.chainId}]);
+      }
+      catch{
+        try{
+          await prov.send('wallet_addEthereumChain',[chainSettings]);  
+        }
+        catch{
+          alert('Error!!!!');
+        }
+      }     
+      const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,prov.getSigner());      
       let requestLink = `${config.backendApiEntryPoint}finish-voting/`;
       let requestOptions = {
           method: "POST",
@@ -256,7 +269,7 @@ export default {
       
       );
       console.log(sellLot);
-      let trx = await (toRaw(this.provider)).waitForTransaction(sellLot.hash);
+      let trx = await prov.waitForTransaction(sellLot.hash);
       if (trx.status == 1) {
         await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
         await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);

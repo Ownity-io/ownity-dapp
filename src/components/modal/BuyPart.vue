@@ -175,13 +175,26 @@ export default {
     },
     async buyPart(){ 
       this.buttonWaiting = true;
-      const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());
+      let prov = toRaw(this.provider);
+      let chainSettings = toRaw(this.config.evmChains[this.item.collection.blockchain])
+      try{
+        await prov.send('wallet_switchEthereumChain',[{chainId: chainSettings.chainId}]);
+      }
+      catch{
+        try{
+          await prov.send('wallet_addEthereumChain',[chainSettings]);  
+        }
+        catch{
+          alert('Error!!!!');
+        }
+      }     
+      const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await prov.getSigner());
       try{
         let buyFraction = await contract.buyFraction(
           this.partOnMarket.fraction_lot_id,
           {gasLimit:'1000000',value:this.partOnMarket.price}
         );
-        let trx = await (toRaw(this.provider)).waitForTransaction(buyFraction.hash);
+        let trx = await prov.waitForTransaction(buyFraction.hash);
         if (trx.status==1){
           await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
           await this.$store.dispatch('appGlobal/setLastTransactionHash', buyFraction.hash);

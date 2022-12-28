@@ -121,13 +121,26 @@ export default {
     },
     async claimNft(){ 
       this.buttonWaiting = true; 
-      const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());
+      let prov = toRaw(this.provider);
+      let chainSettings = toRaw(this.config.evmChains[this.item.collection.blockchain])
+      try{
+        await prov.send('wallet_switchEthereumChain',[{chainId: chainSettings.chainId}]);
+      }
+      catch{
+        try{
+          await prov.send('wallet_addEthereumChain',[chainSettings]);  
+        }
+        catch{
+          alert('Error!!!!');
+        }
+      }     
+      const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await prov.getSigner());
       try{
         let claimLot = await contract.claimLot(
           this.item.id,
           {gasLimit:'1000000'}
         );
-        let trx = await (toRaw(this.provider)).waitForTransaction(claimLot.hash);
+        let trx = await prov.waitForTransaction(claimLot.hash);
         if (trx.status==1){
           await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
           await this.$store.dispatch('appGlobal/setLastTransactionHash', claimLot.hash);

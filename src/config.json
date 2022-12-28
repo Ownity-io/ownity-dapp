@@ -46,5 +46,29 @@
             "name":"Newest ",
             "codeName":"-timestamp"
         }
-    ]
+    ],
+    "evmChains":{
+        "Binance" : {
+            "chainId": "0x38",
+            "chainName": "BNB Chain",
+            "nativeCurrency": {
+                "name": "Binance Coin",
+                "symbol": "BNB",
+                "decimals": 18
+            },
+            "rpcUrls": ["https://bsc-dataseed.binance.org/"],
+            "blockExplorerUrls": ["https://bscscan.com"]
+        },
+        "Goerli":{
+            "chainId": "0x5",
+            "chainName": "Goerli",
+            "nativeCurrency": {
+                "name": "Goerli Ether",
+                "symbol": "GETH",
+                "decimals": 18
+            },
+            "rpcUrls": ["https://eth-goerli.public.blastapi.io"],
+            "blockExplorerUrls": ["https://goerli.etherscan.io/"]
+        }
+    }
 }

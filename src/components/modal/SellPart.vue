@@ -242,14 +242,27 @@ export default {
     },
     async sellPart(){
       this.buttonWaiting=true;
-      const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await (toRaw(this.provider)).getSigner());  
+      let prov = toRaw(this.provider);
+      let chainSettings = toRaw(this.config.evmChains[this.item.collection.blockchain])
+      try{
+        await prov.send('wallet_switchEthereumChain',[{chainId: chainSettings.chainId}]);
+      }
+      catch{
+        try{
+          await prov.send('wallet_addEthereumChain',[chainSettings]);  
+        }
+        catch{
+          alert('Error!!!!');
+        }
+      }     
+      const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await prov.getSigner());  
       console.log(`amount:${this.noExponents(this.toFixedIfNecessary(this.item.price/100*this.currentPart,0))}`);
       console.log(`price:${ this.noExponents(this.convertFromEtherToWei(this.priceForPart))}`);
       console.log(`total:${this.noExponents(this.noExponents(this.convertFromEtherToWei(this.priceForPart))-parseInt(this.sellFractionFee))}`);
       let sellFraction = await contract.sellFraction(this.item.id, this.noExponents(this.toFixedIfNecessary(this.item.price/100*this.currentPart,0)), this.noExponents(this.convertFromEtherToWei(this.priceForPart)),
       {gasLimit:'1000000'});
       console.log(sellFraction);
-      let trx = await (toRaw(this.provider)).waitForTransaction(sellFraction.hash);
+      let trx = await prov.waitForTransaction(sellFraction.hash);
       if (trx.status == 1) {
         await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
         await this.$store.dispatch('appGlobal/setLastTransactionHash', sellFraction.hash);
