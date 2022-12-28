@@ -286,8 +286,7 @@
                         <div class="td">{{translatesGet('PCT')}}</div>
                         <div class="td td-price">{{translatesGet('PRICE')}}</div>
                       </div>
-<!--                      якщо як я зрозумів (this.item.bids) довжина > 5 то добавляй клас members (він зараз стоїть просто)-->
-                      <div class="members">
+                      <div :class="{'members' : this.item.bids.length>5}">
                         <div class="tr" v-for="bid in this.item.bids" :key="bid">
                         <div class="td td-owner">
                           <a
