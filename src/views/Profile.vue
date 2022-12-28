@@ -207,6 +207,7 @@ import SelectedFilters from "@/components/SelectedFilters.vue";
 import ListCards from "@/components/ListCards.vue";
 import MultiLang from "@/core/multilang";
 import config from '@/config.json';
+import ActivityTable from "@/components/ActivityTable.vue";
 
 export default {
     data() {
@@ -226,7 +227,8 @@ export default {
         Filter,
         Breadcrumbs,
         SelectedFilters,
-        ListCards
+        ListCards,
+        ActivityTable
     }, 
     async mounted() {
         this.userAddress = localStorage.getItem('userAddress');
