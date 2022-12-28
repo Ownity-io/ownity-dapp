@@ -25,7 +25,8 @@
             <section>
                 <div class="container">
                     <div class="profile-header">
-                        <div class="icon-profile"></div>
+                        <jazzicon :address="userAddress" :diameter="120" class="icon-profile" v-if="userAddress" />
+                        <div class="icon-profile" v-else></div>
                         <div class="drop-down-mobile">                                
                             <div class="drop-down-container" 
                                 :class="{'unfolded' : mobileDropDown }">
@@ -218,6 +219,7 @@ export default {
             mobileDropDown: false,
             config:config,
             lang: new MultiLang(this),
+            userAddress:null
         };
     },
     components:{
@@ -227,6 +229,7 @@ export default {
         ListCards
     }, 
     async mounted() {
+        this.userAddress = localStorage.getItem('userAddress');
         this.activeTab = "ListCards";
         await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
         await this.$store.dispatch('marketplace/fetchAndSetMarketplaces');

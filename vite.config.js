@@ -46,5 +46,6 @@ export default defineConfig({
         }),
       ],
     },
-  }
+    include: ['color','mersenne-twister'],
+  },
 })
