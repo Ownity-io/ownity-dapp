@@ -11,7 +11,7 @@
           <!-- <div class="card-id card-id-full">hjhhuhi</div> -->
           <div class="data-td">
             <a class="card-previous-collection collection-id">
-              <img class="card-previous-collection-img" src="src/assets/images/logos.png"/>
+              <img class="card-previous-collection-img" src="@/assets/images/logos.png"/>
               <span>Mutant Ape Yacht Club</span>
               <i class="i-checkbox-circle-fill"></i
             ></a>
