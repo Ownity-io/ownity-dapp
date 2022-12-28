@@ -652,7 +652,7 @@ export default {
 <style>
   .members {
       max-height: 316px;
-      overflow: scroll;
+      overflow-y: scroll;
   }
 
 </style>
