@@ -664,7 +664,7 @@ body.previous-page .footer-section.footer-section-first .footer-block.footer-blo
 
 .previous-last-screen {
     background: radial-gradient(50% 50% at 50% 50%, #1B171F 0%, #151517 100%);
-    height: 100vh;
+    height: 666px;
 }
 
 .whitelist-wrapper{
@@ -677,4 +677,30 @@ body.previous-page .footer-section.footer-section-first .footer-block.footer-blo
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#footer {
+    background: #161619;
+}
+
+@media (max-width: 998px) {
+    .whitelist-inner-title {
+        font-size: 24px;
+        line-height: 28px;
+    }
+    .whitelist-inner-subtitle {
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 21px;
+    }
+
+    .whitelist-wrapper {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .email-block button {
+        max-width: 96px;
+    }
 }
