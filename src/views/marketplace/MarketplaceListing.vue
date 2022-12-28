@@ -286,8 +286,9 @@
                         <div class="td">{{translatesGet('PCT')}}</div>
                         <div class="td td-price">{{translatesGet('PRICE')}}</div>
                       </div>
-
-                      <div class="tr" v-for="bid in this.item.bids" :key="bid">
+<!--                      якщо як я зрозумів (this.item.bids) довжина > 5 то добавляй клас members (він зараз стоїть просто)-->
+                      <div class="members">
+                        <div class="tr" v-for="bid in this.item.bids" :key="bid">
                         <div class="td td-owner">
                           <a
                             class="td-wrap"
@@ -311,6 +312,7 @@
                             </div>
                           </div>
                         </div>
+                      </div>
                       </div>
                     </div>
                   </div>
@@ -645,3 +647,11 @@ export default {
   },
 };
 </script>
+
+<style>
+  .members {
+      max-height: 316px;
+      overflow: scroll;
+  }
+
+</style>
