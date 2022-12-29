@@ -247,19 +247,6 @@ body.previous-page .main-bg {
     min-height: 100vh;
 
 }
-#MyContainerId {
-    height: 1px;
-    position: absolute;
-    bottom: 200px;
-}
-
-#secondLottie{
-    width: 100%;
-    height: 100vh;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: -30px;
-}
 
 .previous-first-screen {
     width: 100%;
