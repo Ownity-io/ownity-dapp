@@ -732,7 +732,7 @@ body.previous-page .footer-section.footer-section-first .footer-block.footer-blo
     justify-content: center;
     align-items: center;
     height: 100%;
-    background-image: url("src/assets/images/last-screen.png");
+    background-image: url("/src/assets/images/last-screen.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
