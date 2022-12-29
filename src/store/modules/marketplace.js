@@ -437,7 +437,9 @@ export default {
     setSearchString(context,value){
       context.commit('setSearchString',value);
     },
-    async fetchAndSetActivitiesResult(context,_json){
+    async fetchAndSetActivitiesResult(context,params = {}){
+      console.log(params.userAddress);
+      console.log(params.collectionAddress);
       context.commit("setActivitiesResult", null);
       let requestUrl = `${config.backendApiEntryPoint}user-activity/?limit=${config.activitiesPerPage}`;
       console.log(requestUrl)
@@ -450,7 +452,7 @@ export default {
         context.commit("setActivitiesResult", null);
       }
     },
-    async fetchAndSetNextActivitiesResult(context,_json){
+    async fetchAndSetNextActivitiesResult(context){
       let requestUrl = context.getters.getNextActivitiesLink;
       if (requestUrl != null) {
         let request = await fetch(requestUrl);

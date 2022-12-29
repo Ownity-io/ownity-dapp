@@ -172,7 +172,7 @@
           <Filter :activities = "activeTab == 1"/>
         </div>
         <div class="section-nft-list" :class="{ 'card-collapse': switchActive == 1 }">
-          <SelectedFilters v-if="filter" />
+          <SelectedFilters v-if="filter" :activities = "activeTab == 1"/>
           <ListCards v-if="activeTab == 0" />
           <ActivityTable v-if="activeTab == 1" />
           <button v-if="activeTab == 0" class="btn-filter-mobile" @click="filterMobile=true">

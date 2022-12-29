@@ -33,7 +33,13 @@
                     <i class="i-close-line"></i>
                 </button>
             </li>
-            <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')">
+            <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')" v-if="!activities">
+                <button class="btn btn-selected-filter btn-reset">
+                    <span>{{translatesGet('CLEAR_ALL')}}</span>
+                    <i class="i-close-line"></i>
+                </button>
+            </li>
+            <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:null})" v-if="activities">
                 <button class="btn btn-selected-filter btn-reset">
                     <span>{{translatesGet('CLEAR_ALL')}}</span>
                     <i class="i-close-line"></i>
@@ -85,7 +91,13 @@
                     <i class="i-close-line"></i>
                 </button>
             </li>
-            <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')">
+            <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')" v-if="!activities">
+                <button class="btn btn-selected-filter btn-reset">
+                    <span>{{translatesGet('CLEAR_ALL')}}</span>
+                    <i class="i-close-line"></i>
+                </button>
+            </li>
+            <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:this.userAddress,collectionAddress:null})" v-if="activities">
                 <button class="btn btn-selected-filter btn-reset">
                     <span>{{translatesGet('CLEAR_ALL')}}</span>
                     <i class="i-close-line"></i>
@@ -118,7 +130,13 @@
                     <i class="i-close-line"></i>
                 </button>
             </li>
-            <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address)">
+            <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address)" v-if="!activities">
+                <button class="btn btn-selected-filter btn-reset">
+                    <span>{{translatesGet('CLEAR_ALL')}}</span>
+                    <i class="i-close-line"></i>
+                </button>
+            </li>
+            <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:this.$route.params.contract_address})" v-if="activities">
                 <button class="btn btn-selected-filter btn-reset">
                     <span>{{translatesGet('CLEAR_ALL')}}</span>
                     <i class="i-close-line"></i>
@@ -136,12 +154,17 @@ export default {
   data() {
     return {
       lang: new MultiLang(this),
+      userAddress:null
     };
   },
   methods:{
     translatesGet(key) {
       return this.lang.get(key);
     },
+  },
+  props:['activities'],
+  mounted(){
+    this.userAddress = localStorage.getItem('userAddress');
   }
 };
 </script>

@@ -92,6 +92,7 @@ export default {
         return{
             rowMobileCollapse: false,
             lang: new MultiLang(this),
+            userAddress:null
         }
     },
     methods:{
@@ -134,7 +135,17 @@ export default {
         }
     },
     async mounted(){
-        await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult');
+        this.userAddress = localStorage.getItem('userAddress');
+        if (this.$route.name == 'Marketplace'){
+          await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:null});
+      }
+      else if (this.$route.name == 'Collection'){
+          await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:this.$route.params.contract_address});          
+      }
+      else if (this.$route.name == 'Profile'){
+          await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:this.userAddress,collectionAddress:null}); 
+      }      
+        
         const delay = (delayInms) => {
             return new Promise(resolve => setTimeout(resolve, delayInms));
         }

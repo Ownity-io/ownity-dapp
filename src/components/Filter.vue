@@ -141,16 +141,27 @@ export default {
       filterSection4: false,
       config:config,
       maxPrice:null,
-      minPrice:null
+      minPrice:null,
+      userAddress:null
     };
   },
   methods:{
     async fetchAndSetListingsStartInfo() {
       if (this.$route.name == 'Marketplace'){
-        await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
+        if(this.activities){
+          await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:null});
+        }
+        else{
+          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
+        }
       }
       else if (this.$route.name == 'Collection'){
-        await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address);
+        if(this.activities){
+          await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:this.$route.params.contract_address});
+        }
+        else{
+          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address);
+        }        
       }
       else if (this.$route.name == 'Profile'){
         if (this.onlyFav){          
@@ -160,7 +171,7 @@ export default {
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');
         }
         else if(this.activities){
-          await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult');
+          await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:this.userAddress,collectionAddress:null});
         }
         else{
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
@@ -281,6 +292,9 @@ export default {
   props:['onlyFav','vote','activities'],
   directives: {
     debounce: vue3Debounce({ lock: true })
+  },
+  mounted(){
+    this.userAddress = localStorage.getItem('userAddress');
   }
 };
 </script>
