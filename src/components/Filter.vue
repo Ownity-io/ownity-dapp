@@ -275,7 +275,7 @@ export default {
       }
     },
   },
-  props:['onlyFav','vote'],
+  props:['onlyFav','vote','activities'],
   directives: {
     debounce: vue3Debounce({ lock: true })
   }

@@ -9,7 +9,7 @@
                             <i class="i-close-line"></i>
                         </button>
                     </div>
-                    <Filter :onlyFav="activeTab == 'Favourites'" :vote="activeTab == 'Vote'"/>
+                    <Filter :onlyFav="activeTab == 'Favourites'" :vote="activeTab == 'Vote'" :activities = "activeTab == 'ActivityTable'"/>
                     <div class="filter-mobile-footer">
                         <button class="btn btn-clear">{{translatesGet('CLEAR_ALL')}}</button>
                         <button class="btn btn-submit">{{translatesGet('APPLY')}}</button>
@@ -182,7 +182,7 @@
             <div class="container">
                 <section class="section-nft" :class="{ 'with-filter': filter }">
                     <div v-if="filter" class="section-nft-filter" :class="{'filter-mobile':filterMobile}">
-                        <Filter :onlyFav="activeTab == 'Favourites'" :vote="activeTab == 'Vote'"/>
+                        <Filter :onlyFav="activeTab == 'Favourites'" :vote="activeTab == 'Vote'" :activities = "activeTab == 'ActivityTable'"/>
                     </div>
                     <div class="section-nft-list" :class="{'card-collapse' : switchActive == 1}">
                         <SelectedFilters v-if="filter" />

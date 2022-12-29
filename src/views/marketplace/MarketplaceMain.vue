@@ -7,7 +7,7 @@
           <i class="i-close-line"></i>
         </button>
       </div>
-      <Filter />
+      <Filter :activities = "activeTab == 1"/>
     </div>
     <div class="container">
       <section class="section-breadcrumbs">
@@ -98,7 +98,7 @@
     <div class="container">
       <section class="section-nft" :class="{ 'with-filter': filter }">
         <div v-if="filter" class="section-nft-filter" :class="{'filter-mobile':filterMobile}">
-          <Filter />
+          <Filter :activities = "activeTab == 1"/>
         </div>
         <div class="section-nft-list" :class="{'card-collapse' : switchActive == 1}">
           <SelectedFilters v-if="filter" />
