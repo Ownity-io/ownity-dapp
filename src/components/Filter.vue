@@ -1,6 +1,6 @@
 <template>
   <div class="filter">
-    <div class="filter-section" :class="{ 'collapse-section': filterSection0 }" v-if="this.$route.name=='Collection' ||this.$route.name=='Marketplace'">
+    <div class="filter-section" :class="{ 'collapse-section': filterSection0 }" v-if="(this.$route.name=='Collection' ||this.$route.name=='Marketplace') & !activities">
       <button class="filter-section-name" @click="filterSection0 = !filterSection0">
         <span>Status</span>
         <i class="i-arrow-up-s-line"></i>
@@ -17,7 +17,7 @@
         </li>
       </ul>
     </div>
-    <div class="filter-section" :class="{ 'collapse-section': filterSection0 }" v-if="this.$route.name=='Profile' & (this.onlyFav||(!this.onlyFav & !this.vote))">
+    <div class="filter-section" :class="{ 'collapse-section': filterSection0 }" v-if="this.$route.name=='Profile' & (this.onlyFav||(!this.onlyFav & !this.vote & !this.activities))">
       <button class="filter-section-name" @click="filterSection0 = !filterSection0">
         <span>Status</span>
         <i class="i-arrow-up-s-line"></i>
@@ -87,7 +87,7 @@
         </li>
       </ul>
     </div>
-    <div class="filter-section" :class="{ 'collapse-section': filterSection3 }">
+    <div class="filter-section" :class="{ 'collapse-section': filterSection3 }" v-if="!activities">
       <button class="filter-section-name" @click="filterSection3 = !filterSection3">
         <span>Marketplace</span>
         <i class="i-arrow-up-s-line"></i>
@@ -105,7 +105,7 @@
         </li>
       </ul>
     </div>
-    <div class="filter-section" :class="{ 'collapse-section': filterSection4 }">
+    <div class="filter-section" :class="{ 'collapse-section': filterSection4 }" v-if="!activities">
       <button class="filter-section-name" @click="filterSection4 = !filterSection4">
         <span>Price (ETH)</span>
         <i class="i-arrow-up-s-line"></i>
@@ -158,6 +158,9 @@ export default {
         }
         else if(this.vote){
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');
+        }
+        else if(this.activities){
+          await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult');
         }
         else{
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');

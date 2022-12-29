@@ -115,8 +115,8 @@
                         </li>
                         <li>
                             <button
-                            :class="{ 'active-tab': activeTab === 'ActivityTable' }"
-                            @click="letsCheck('ActivityTable')"
+                            :class="{ 'active-tab': activeTab === 'ActivityTable'}"
+                            @click="letsCheck('ActivityTable');this.$store.dispatch('marketplace/setAllFiltersToNull');"
                             >
                                 <span>{{translatesGet('ACTIVITIES')}}</span>
                                 <span>{{translatesGet('ACTIVITIES')}}</span>
