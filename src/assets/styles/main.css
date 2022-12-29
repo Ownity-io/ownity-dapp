@@ -24,7 +24,7 @@ body{
     width: 0;
 }
 ::-webkit-scrollbar {
-    width: 3px;
+    width: 0px;
     background-color: transparent;
 }
 
@@ -43,7 +43,7 @@ body{
     background-color: transparent;
 }
 ::-webkit-scrollbar-thumb {
-    border: 1px solid #DFE2EA;
+    border: 0px solid #DFE2EA;
     background-color: #DFE2EA;
-    border-radius: 20px;
+    border-radius: 0px;
 }

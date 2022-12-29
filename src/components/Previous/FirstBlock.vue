@@ -1,15 +1,14 @@
 <template>
-  <div style="position:relative;">
-    <lottie-player id="secondLottie"
-                   ref="lottie"
-                   mode="normal"
-                   speed="10"
-                   style="height: 800px"
-                   src="https://lottie.host/f5e41c4f-4e1c-40c6-b8f6-809078615fed/PSQtJ63K1P.json"
-    >
-    </lottie-player>
+  <div class="mains">
+    <div class="copy">
+      <h1>scroll down</h1>
+    </div>
+    <div class="scroll-element">
+      <div id="hand"></div>
+    </div>
+    <div class="copy">
+    </div>
   </div>
-
 </template>
 
 
@@ -17,7 +16,9 @@
 
 import { Vue3Lottie } from 'vue3-lottie'
 import 'vue3-lottie/dist/style.css'
-import { create } from '@lottiefiles/lottie-interactivity';
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import lottie from 'lottie-web'
 
 
 export default {
@@ -41,73 +42,63 @@ export default {
 	  },
   },
   mounted() {
-	  this.$refs.lottie.addEventListener('ready', function() {
-		  create({
-			  mode: 'scroll',
-			  player: '#secondLottie',
-			  container: "#MyContainerId",
-			  actions: [
-				  {
-					  visibility: [0.25, 0.4],
-					  type: 'seek',
-					  frames: [0, 180],
-				  },
-			  ],
-		  });
+	  gsap.registerPlugin(ScrollTrigger);
+
+	  LottieScrollTrigger({
+		  target: "#hand",
+		  path: "https://lottie.host/f5e41c4f-4e1c-40c6-b8f6-809078615fed/PSQtJ63K1P.json",
+		  speed: "fast",
+		  pin: ".mains",
+		  start: "top",
+		  scrub: 0.2,
+		  markers: true
 	  });
-	  // window.addEventListener('scroll', function (){
-	  // 	const html = document.documentElement;
-	  // 	const canvas = document.getElementById("hero-lightpass");
-	  // 	const context = canvas.getContext("2d");
-    //
-	  // 	const frameCount = 59;
-	  // 	const currentFrame = index => (
-	  // 		`/src/assets/animationFirst/ezgif-frame-${index.toString().padStart(3, '0')}.png`
-	  // 	)
-    //
-	  // 	const preloadImages = () => {
-	  // 		for (let i = 1; i < frameCount; i++) {
-	  // 			const img = new Image();
-	  // 			img.src = currentFrame(i);
-	  // 		}
-	  // 	};
-    //
-	  // 	const img = new Image()
-	  // 	img.src = currentFrame(1);
-	  // 	canvas.width=1920;
-	  // 	canvas.height=900;
-	  // 	img.onload=function(){
-	  // 		context.drawImage(img, 0, 0);
-	  // 	}
-    //
-	  // 	const updateImage = index => {
-	  // 		img.src = currentFrame(index);
-	  // 		context.drawImage(img, 0, 0);
-	  // 	}
-    //
-	  // 	window.addEventListener('scroll', () => {
-	  // 		const scrollTop = html.scrollTop;
-	  // 		const scrollFraction = scrollTop / 200;
-	  //  		const frameIndex = Math.min(
-	  //  			frameCount - 1,
-	  //  			Math.ceil(scrollFraction * frameCount)
-	  //  		);
-    //
-	  //  		requestAnimationFrame(() => updateImage(frameIndex + 1))
-	  //  	});
-    //
-	  //  	preloadImages()
-	  //  })
+
+
+	  function LottieScrollTrigger(vars) {
+		  let playhead = {frame: 0},
+			  target = gsap.utils.toArray(vars.target)[0],
+			  speeds = {slow: "+=2000", medium: "+=1000", fast: "+=70"},
+			  st = {trigger: target, pin: false, start: "top", end: speeds[vars.speed] || "+=70",},
+			  animation = lottie.loadAnimation({
+				  container: target,
+				  renderer: vars.renderer || "svg",
+				  loop: false,
+				  autoplay: false,
+				  path: vars.path
+			  });
+		  for (let p in vars) { // let users override the ScrollTrigger defaults
+			  st[p] = vars[p];
+		  }
+		  animation.addEventListener("DOMLoaded", function() {
+			  gsap.to(playhead, {
+				  frame: animation.totalFrames - 1,
+				  ease: "none",
+				  onUpdate: () => animation.goToAndStop(playhead.frame, true),
+				  scrollTrigger: st
+			  });
+		  });
+	  }
   }
 }
 
 </script>
 
 <style>
-canvas {
+.mains .scroll-element {
     display: block;
-    max-width: 1920px;
-    max-height: 900px;
+    width: 100%;
+    height: 100vh;
+}
+.mains .scroll-element #hand {
+    display: block;
+    width: 100% !important;
+    height: 900px !important;
     margin: 0 auto;
 }
+
+.mains {
+  top: -30px !important;
+}
+
 </style>
