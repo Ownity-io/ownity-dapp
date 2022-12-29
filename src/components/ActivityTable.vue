@@ -75,7 +75,7 @@
             </div>
         </div>
     </div>
-    <div class="cards-list-load" ref="target" v-if="showCardsLoaderAnimation">
+    <div class="cards-list-load" ref="target" v-if="this.$store.getters['marketplace/getLastActivitiesResponse']!=null & this.$store.getters['marketplace/getActivitiesResult'].length>0">
         <div class="i-wrap">
             <i class="i-loader-4-line"></i>
         </div>
@@ -98,9 +98,50 @@ export default {
         translatesGet(key) {
             return this.lang.get(key);
         },
+        async fetchAndSetListingsNextInfo() {
+            await this.$store.dispatch('marketplace/fetchAndSetListingsNextInfo');
+        },
+        checkVisibility() {
+            const target = ref(this.$refs.target)
+            const targetIsVisible = useElementVisibility(target)
+            return targetIsVisible.value;
+        },
+        async loadIfVisible() {
+            let isVisible = this.checkVisibility();
+            if (isVisible & this.$store.getters['marketplace/getActivitiesResult'].length > 0) {
+                await this.fetchAndSetActivitiesNextInfo();
+            }
+        },
+        async fetchAndSetActivitiesNextInfo() {
+            this.$store.dispatch('marketplace/fetchAndSetNextActivitiesResult');
+            // if (this.$route.name == 'Marketplace') {
+            //     this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
+            // }
+            // if (this.$route.name == 'Collection') {
+            //     this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo', this.$route.params.contract_address)
+            // }
+            // if (this.$route.name == 'Profile') {
+            //     if (this.onlyFav) {
+            //         await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');
+            //     }
+            //     else if (this.vote) {
+            //         await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');
+            //     }
+            //     else {
+            //         await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
+            //     }
+            // }
+        }
     },
     async mounted(){
         await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult');
+        const delay = (delayInms) => {
+            return new Promise(resolve => setTimeout(resolve, delayInms));
+        }
+        while (true) {
+            await delay(1000);
+            this.loadIfVisible();
+        }
     }
 }
 </script>
