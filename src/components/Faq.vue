@@ -29,6 +29,15 @@
         <p v-html="translatesGet('FAQ-H2-3')"></p>
       </div>
     </div>
+    <div class="faq-block" :class="{ 'collapse-block': !faqBlock3 }">
+      <button class="btn-faq" @click="faqBlock3 = !faqBlock3">
+        {{translatesGet('FAQ-H13-3')}}
+        <i class="i-arrow-up-s-line"></i>
+      </button>
+      <div class="content-faq">
+        <p v-html="translatesGet('FAQ-H13-1')"></p>
+      </div>
+    </div>
   </div>
 </template>
 <script>
