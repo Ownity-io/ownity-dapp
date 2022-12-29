@@ -9,12 +9,13 @@
                 <div class="td td-date">{{translatesGet('ACTIVITY_THEAD-5')}}</div>
             </div>
                 
-            <div class="tr" :class="{'tr-mob-collapse' : !rowMobileCollapse}">
+            <div class="tr" :class="{'tr-mob-collapse' : !rowMobileCollapse}" v-for="item in this.$store.getters['marketplace/getActivitiesResult']">
                 <div class="td">
                     <div class="td-wrap td-wrap-collection">
-                        <div class="collection-img"></div>
+                        <div class="collection-img" :style="{backgroundImage: `url(${item.lot.media})`}"></div>
                         <div class="collection-data">
-                            <span class="collection-id">18234</span>
+                            <span class="collection-id" v-if="item.lot.name">{{item.lot.name}}</span>
+                            <span class="collection-id" v-else>#{{item.lot.token_id}}</span>
                             <span class="td-light collection-id">Mutant Ape Yacht Club</span>
                         </div>
                     </div>
@@ -25,7 +26,7 @@
                         <div>{{translatesGet('ACTIVITY_THEAD-1')}}</div>
                         <div class="td-light">{{translatesGet('STATUS-START')}}</div>
                     </div>
-                    <div class="td-wrap td-wrap-category">
+                    <!-- <div class="td-wrap td-wrap-category">
                         <i class="i-coupon-3-line"></i>
                         <div>{{translatesGet('ACTIVITY_THEAD-1')}}</div>
                         <div class="td-light">{{translatesGet('STATUS-CANCEL')}}</div>
@@ -43,7 +44,7 @@
                         <i class="i-volume-vibrate-line"></i>
                         <div>{{translatesGet('STATUS-LISTING')}}</div>
                         <div class="td-light">{{translatesGet('STATUS-START')}}</div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="td td-price">
                     <div class="td-wrap">
@@ -74,12 +75,18 @@
             </div>
         </div>
     </div>
+    <div class="cards-list-load" ref="target" v-if="showCardsLoaderAnimation">
+        <div class="i-wrap">
+            <i class="i-loader-4-line"></i>
+        </div>
+    </div>
 </template>
 
 <script>
 
 import MultiLang from "@/core/multilang";
-
+import { ref } from 'vue';
+import { useElementVisibility } from '@vueuse/core';
 export default {
     data(){
         return{
@@ -91,6 +98,9 @@ export default {
         translatesGet(key) {
             return this.lang.get(key);
         },
+    },
+    async mounted(){
+        await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult');
     }
 }
 </script>

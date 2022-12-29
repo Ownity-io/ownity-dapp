@@ -22,7 +22,10 @@ export default {
       currentBidStatus:null,
       selectedSort:null,
       onSale:false,
-      searchString:''
+      searchString:'',
+      activitiesResults:[],
+      nextActivitiesLink:null,
+      lastActivitiesResponse:null
     };
   },
   getters: {
@@ -108,6 +111,15 @@ export default {
     },
     getSearchString(state){
       return state.searchString;
+    },
+    getActivitiesResult(state){
+      return state.activitiesResults;
+    },
+    getLastActivitiesResponse(state){
+      return state.lastActivitiesResponse;
+    },
+    getNextActivitiesLink(state){
+      return state.nextActivitiesLink;
     }
   },
   mutations: {
@@ -168,6 +180,23 @@ export default {
     },
     setSearchString(state,value){
       state.searchString = value;
+    },
+    setActivitiesResult(state,_json){
+      if (_json != null) {
+        state.nextActivitiesLink = _json.next;
+        state.activitiesResults = _json.results;
+      } else {
+        state.nextActivitiesLink = null;
+        state.activitiesResults = [];
+      }      
+      state.lastActivitiesResponse = _json;
+    },
+    addActivitiesResult(state,_json){
+      if (_json != null) {
+        state.nextActivitiesLink = _json.next;
+        state.activitiesResults = state.activitiesResults.concat(_json.results);
+      }
+      state.lastActivitiesResponse = _json;
     }
   },
   actions: {
@@ -407,6 +436,34 @@ export default {
     },
     setSearchString(context,value){
       context.commit('setSearchString',value);
+    },
+    async fetchAndSetActivitiesResult(context,_json){
+      context.commit("setActivitiesResult", null);
+      let requestUrl = `${config.backendApiEntryPoint}user-activity/?limit=${config.activitiesPerPage}`;
+      console.log(requestUrl)
+      let request = await fetch(requestUrl);
+      let requestCode = request.ok;
+      if (requestCode) {
+        let requestJson = await request.json();
+        context.commit("setActivitiesResult", requestJson);
+      } else {
+        context.commit("setActivitiesResult", null);
+      }
+    },
+    async fetchAndSetNextActivitiesResult(context,_json){
+      let requestUrl = context.getters.getNextActivitiesLink;
+      if (requestUrl != null) {
+        let request = await fetch(requestUrl);
+        let requestCode = request.ok;
+        if (requestCode) {
+          let requestJson = await request.json();
+          context.commit("addActivitiesResult", requestJson);
+        } else {
+          context.commit("addActivitiesResult", null);
+        }
+      } else {
+        context.commit("addActivitiesResult", null);
+      }
     }
   },
 };

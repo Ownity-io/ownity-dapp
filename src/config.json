@@ -2,6 +2,7 @@
     "backendApiEntryPoint":"https://api.jaxscan.com/",
     "listingsPerPage":20,
     "collectionsPerPage":10,
+    "activitiesPerPage":10,
     "messageToSignStart":"Sign the message to continue working with NFT Aggregator: ",
     "etherscanTokenUrlStart":"https://goerli.etherscan.io/token/",
     "etherscanAddressUrlStart":"https://goerli.etherscan.io/address/",
