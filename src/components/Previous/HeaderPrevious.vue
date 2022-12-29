@@ -1,29 +1,14 @@
 <template>
-    <!-- <MobileMenu :class="{show: (mobileMenu==true)}" :walletConnected="(walletConnected=walletConnected)"/> -->
+<!--     <MobileMenu :class="{show: (mobileMenu==true)}" :walletConnected="(walletConnected=walletConnected)" />-->
 
-    <div class="mobile-menu" :class="{show: (mobileMenu==true)}">
+    <div class="mobile-menu previousMob" :class="{show: (mobileMenu==true)}">
         <div class="mobile-menu-content">
         <div class="mobile-menu-main-btn">
             <div class="mobile-menu-container container">
-            <div
-                class="btn-container"
-                v-if="walletConnected == null || walletConnected == 'null'"
-            >
-                <button
-                class="btn btn-connect"
-                @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal', true)"
-                >
-                <!-- @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal', true)" -->
-                <span>{{translatesGet('CONNECT_WALLET')}}</span>
-                </button>
-            </div>
-            <div class="btn-container" v-else>
-                <router-link :to="{ name: 'Profile' }" class="btn btn-address">
-                <div class="icon-address"></div>
-                <span>
-                    {{ this.$store.getters["walletsAndProvider/getUserShortAddress"] }}
-                </span>
-                </router-link>
+            <div class="btn-container">
+              <a class="btn btn-connect">
+                <span>launch app</span>
+              </a>
             </div>
             </div>
         </div>
@@ -195,16 +180,10 @@
                             </li>
                         </ul>
                     </nav>
-                    <div class="btn-container" v-if="walletConnected==null||walletConnected=='null'">
-                        <button class="btn btn-connect" @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true);">
-                            {{translatesGet('CONNECT_WALLET')}}
-                        </button>
-                    </div>
-                    <div class="btn-container" v-else>
-                        <router-link :to="{name:'Profile'}" class="btn btn-address">
-                            <div class="icon-address"></div>
-                            <span>{{this.$store.getters['walletsAndProvider/getUserShortAddress']}}</span>
-                        </router-link>
+                    <div class="btn-container">
+                        <a class="btn btn-connect">
+                          Launch app
+                        </a>
                     </div>
                 </div>
                 <div class="header-mobile">

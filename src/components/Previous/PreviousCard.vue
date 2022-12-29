@@ -148,8 +148,7 @@ export default {
         padding-left: 24px;
     }
     .previous-cards-list .cards-container {
-        max-width: 360px;
-        gap: 12px;
+        gap: 8px;
     }
     .container{
         padding-left: 6px;

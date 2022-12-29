@@ -926,4 +926,11 @@
     background-image: url("/src/assets/images/ex4.png");
 }
 
+.previousMob {
+    background: #1A171D;
+}
+
+.previousMob .mobile-menu-item {
+    color: white;
+}
 
