@@ -51,7 +51,7 @@ export default {
 		  pin: ".mains",
 		  start: "top",
 		  scrub: 0.2,
-		  markers: true
+		  markers: false
 	  });
 
 
