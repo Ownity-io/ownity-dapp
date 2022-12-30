@@ -46,7 +46,7 @@ export default {
 
 	  LottieScrollTrigger({
 		  target: "#hand",
-		  path: "https://lottie.host/f5e41c4f-4e1c-40c6-b8f6-809078615fed/PSQtJ63K1P.json",
+		  path: "https://lottie.host/0e55f70a-bde2-4897-a785-e3d4656d2649/B8r4SXVo0c.json",
 		  speed: "fast",
 		  pin: ".mains",
 		  start: "top",
