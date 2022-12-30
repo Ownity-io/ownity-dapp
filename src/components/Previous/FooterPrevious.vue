@@ -30,18 +30,18 @@
                             <li><a href="">Sold</a></li>
                         </ul>
                     </div>
-                    <div class="footer-block" :class="{'unfolded' : !footerBlock2}">
-                        <button class="footer-block-name" @click="footerBlock2 = !footerBlock2">
-                            <span>{{translatesGet('COLLECTIONS')}}</span>
-                            <i class="i-arrow-up-s-line"></i>
-                        </button>
-                        <ul class="footer-list">
-                            <li><a href="https://jaxscan.com/collection/0xBC51d9f4A816d6Ad60E6A64DEFf0f820307A1e45">sad - sWJozDZPx2</a></li>
-                            <li><a href="https://jaxscan.com/collection/0x1f419B9469D641D333805C4054CA3b65Af54d315">Snakes on a chain</a></li>
-                            <li><a href="https://jaxscan.com/collection/0xd06166878623353947c8715e7F3e9f4D8585726F">Ownable BAYC</a></li>
-                            <li><a href="https://jaxscan.com/collection/0x15987A0417D14cc6f3554166bCB4A590f6891B18">Masa Soul Name (MSN)</a></li>
-                        </ul>
-                    </div>
+<!--                    <div class="footer-block" :class="{'unfolded' : !footerBlock2}">-->
+<!--                        <button class="footer-block-name" @click="footerBlock2 = !footerBlock2">-->
+<!--                            <span>{{translatesGet('COLLECTIONS')}}</span>-->
+<!--                            <i class="i-arrow-up-s-line"></i>-->
+<!--                        </button>-->
+<!--                        <ul class="footer-list">-->
+<!--                            <li><a href="https://jaxscan.com/collection/0xBC51d9f4A816d6Ad60E6A64DEFf0f820307A1e45">sad - sWJozDZPx2</a></li>-->
+<!--                            <li><a href="https://jaxscan.com/collection/0x1f419B9469D641D333805C4054CA3b65Af54d315">Snakes on a chain</a></li>-->
+<!--                            <li><a href="https://jaxscan.com/collection/0xd06166878623353947c8715e7F3e9f4D8585726F">Ownable BAYC</a></li>-->
+<!--                            <li><a href="https://jaxscan.com/collection/0x15987A0417D14cc6f3554166bCB4A590f6891B18">Masa Soul Name (MSN)</a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
                     <div class="footer-block" :class="{'unfolded' : !footerBlock3}">
                         <button class="footer-block-name" @click="footerBlock3 = !footerBlock3">
                             {{translatesGet('RESOURCES')}}

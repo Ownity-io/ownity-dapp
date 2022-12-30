@@ -1,5 +1,5 @@
 <template>
-  <div class="card card-previous">
+  <div class="card card-previous" v-for="card in cards" :key="cards">
     <div class="card-main">
       <div href="" class="card-img">
         <img />
@@ -12,7 +12,7 @@
           <div class="data-td">
             <a class="card-previous-collection collection-id">
               <img class="card-previous-collection-img" src="@/assets/images/logos.png"/>
-              <span>Mutant Ape Yacht Club</span>
+              <span>{{card.collection}}</span>
               <i class="i-checkbox-circle-fill"></i
             ></a>
           </div>
@@ -26,7 +26,7 @@
         </div>
 
         <div class="data-tr data-id">
-          <span>MAYC #23378</span>
+          <span>{{card.name }}</span>
         </div>
 
         <div class="data-tr data-prev-amount">
@@ -38,9 +38,8 @@
               <div class="card-value">
                 <div class="icon-value"></div>
                 <div class="card-col-value">
-                  <strong
-                    >5
-                    ETH</strong>
+                  <span
+                    >{{card.price}}ETH</span>
                 </div>
               </div>
               <p>30%</p>
@@ -50,7 +49,7 @@
 
         <div class="data-tr">
           <div class="prev-card-status green">
-            Sale Live
+            Comming soon
           </div>
           <div class="prev-card-contributors">
             Contributors: 23
@@ -88,6 +87,28 @@ export default {
       userBidOnSale: null,
       lang: new MultiLang(this),
       showUserBidOnSale: false,
+      cards: [
+	      {
+					name: 'MAYC #12625',
+          collection: 'Mutant Ape Yacht Club',
+          price: '29'
+				},
+	      {
+		      name: 'MAYC #25986',
+		      collection: 'Mutant Ape Yacht Club',
+		      price: '17.45'
+	      },
+	      {
+		      name: 'BAYC #5699',
+		      collection: 'Bored Ape Yacht Club',
+		      price: '200'
+	      },
+	      {
+		      name: 'OFO #9429',
+		      collection: 'Otherdeed for Otherside',
+		      price: '69.95'
+	      }
+      ]
     };
   },
   methods: {
@@ -153,6 +174,9 @@ export default {
     .container{
         padding-left: 6px;
         padding-right: 6px;
+    }
+    .card-value .card-col-value strong{
+        font-size: 20px;
     }
 }
 </style>
