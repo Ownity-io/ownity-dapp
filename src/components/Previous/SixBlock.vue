@@ -1,5 +1,5 @@
 <template>
-<div class="whitelist-wrapper">
+<div class="whitelist-wrapper" id="list">
   <div class="whitelist-inner">
     <p class="whitelist-inner-title">Get in the Beta Testing Waitlist</p>
     <p class="whitelist-inner-subtitle">Become one of the first who will test all the functionality, and much more.</p>

@@ -23,9 +23,6 @@
                                 <div class="previous-cards-list">
                                     <div class="cards-container">
                                         <PreviousCard />
-                                        <PreviousCard />
-                                        <PreviousCard />
-                                        <PreviousCard />
                                     </div>
                                     <button class="btn btn-previous">See All Deals</button>
                                 </div>
@@ -90,6 +87,9 @@ export default {
     },
     mounted(){
         document.body.classList.add('previous-page');
+	    window.onload = function(e){
+		    window.scrollBy(1,1);
+	    }
     },
     unmounted(){
         document.body.classList.remove('previous-page');

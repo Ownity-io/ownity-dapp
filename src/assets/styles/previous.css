@@ -390,14 +390,14 @@ body.previous-page a.collection-id:hover span {
 .card-prev-amount .card-value .icon-value {
     width: 20px;
     height: 20px;
-    top: 3px;
+    top: 5px;
 }
 
 .prev-card-status {
     position: relative;
     font-style: normal;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 150%;
     text-transform: uppercase;
     color: #FFFFFF;
@@ -407,7 +407,7 @@ body.previous-page a.collection-id:hover span {
 .prev-card-status:after {
     position: absolute;
     content: '';
-    top: 0;
+    top: -2px;
     left: 0;
     width: 12px;
     height: 12px;
@@ -421,7 +421,7 @@ body.previous-page a.collection-id:hover span {
 
 .prev-card-contributors {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 150%;
 
     color: #FFFFFF;
@@ -561,7 +561,7 @@ body.previous-page .footer-section.footer-section-first .footer-block.footer-blo
 }
 
 body.previous-page .footer-section.footer-section-first .footer-block.footer-block-logo {
-    max-width: 50%;
+    max-width: 70%;
 }
 
 

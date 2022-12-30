@@ -50,7 +50,7 @@ export default {
 		  speed: "fast",
 		  pin: ".mains",
 		  start: "top",
-		  scrub: 0.2,
+		  scrub: 0.1,
 		  markers: false
 	  });
 

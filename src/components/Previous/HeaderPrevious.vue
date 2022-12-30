@@ -6,8 +6,8 @@
         <div class="mobile-menu-main-btn">
             <div class="mobile-menu-container container">
             <div class="btn-container">
-              <a class="btn btn-connect">
-                <span>launch app</span>
+              <a href="#list" class="btn btn-connect">
+                <span>Launch app</span>
               </a>
             </div>
             </div>
@@ -181,7 +181,7 @@
                         </ul>
                     </nav>
                     <div class="btn-container">
-                        <a class="btn btn-connect">
+                        <a href="#list" class="btn btn-connect">
                           Launch app
                         </a>
                     </div>
