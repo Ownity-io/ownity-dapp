@@ -68,17 +68,17 @@
                             {{translatesGet('FOOTER_FORM')}}
                             <!-- <i class="i-arrow-up-s-line"></i> -->
                         </div>
-                        <form action="" class="footer-form">
+                        <div action="" class="footer-form">
                             <div class="input-wrapper">
-                                <input type="text" placeholder="Your email">
-                                <button type="submit" class="btn btn-subscribe">{{translatesGet('SUBSCRIBE')}}</button>
+                                <input placeholder="Your email" v-model="email" >
+                                <button type="submit" class="btn btn-subscribe" @click="validateEmail">{{translatesGet('SUBSCRIBE')}}</button>
                             </div>
                             <p class="agree">{{translatesGet('BY_SUBSCRIBING')}}
                                 <router-link :to="{name: 'TermsOfUse'}">
                                     <span>{{translatesGet('TERMS_OF_USE')}}</span>
                                 </router-link>
                             </p>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -119,6 +119,7 @@ data() {
             footerBlock2: false,
             footerBlock3: false,
             lang: new MultiLang(this),
+            email:null
         }
     },
     methods:{
@@ -128,6 +129,14 @@ data() {
         translatesGet(key) {
             return this.lang.get(key);
         },
+        validateEmail() {
+            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
+                console.log('Nice email!');
+                //sendEmailHere
+            } else {
+                console.log('Wrong email!');
+            }
+        }
     }
 }
 </script>
