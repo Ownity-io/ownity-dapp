@@ -24,7 +24,7 @@
       <div class="factional-nft square-transition" ref="square">
         <div class="factional-nft-1">
           <span class="nft-procent">
-            <p class="nft-procent-title">10% (≈$7.000)</p>
+            <p class="nft-procent-title">25% (≈$25,000)</p>
             <span class="nft-procent-user">
               <span class="nft-procent-user-icon"></span>
               <p class="nft-procent-user-name">Aaron Stuffs</p>
@@ -33,17 +33,17 @@
         </div>
         <div class="factional-nft-2">
           <span class="nft-procent">
-            <p class="nft-procent-title">10% (≈$7.000)</p>
+            <p class="nft-procent-title">23% (≈$23,000)</p>
             <span class="nft-procent-user">
               <span class="nft-procent-user-icon"></span>
-              <p class="nft-procent-user-name">Star Muffin</p>
+              <p class="nft-procent-user-name">Amethyst</p>
             </span>
           </span>
 
         </div>
         <div class="factional-nft-3">
           <span class="nft-procent">
-            <p class="nft-procent-title">10% (≈$7.000)</p>
+            <p class="nft-procent-title">17% (≈$17,000)</p>
             <span class="nft-procent-user">
               <span class="nft-procent-user-icon"></span>
               <p class="nft-procent-user-name">Star Muffin</p>
@@ -53,7 +53,7 @@
         </div>
         <div class="factional-nft-4">
           <span class="nft-procent">
-            <p class="nft-procent-title">15% (≈$13.500)</p>
+            <p class="nft-procent-title">16% (≈$16,000)</p>
             <span class="nft-procent-user">
               <span class="nft-procent-user-icon"></span>
               <p class="nft-procent-user-name">Sammy</p>
@@ -63,10 +63,10 @@
         </div>
         <div class="factional-nft-5">
           <span class="nft-procent">
-            <p class="nft-procent-title">10% (≈$7.000)</p>
+            <p class="nft-procent-title">19% (≈$19,000)</p>
             <span class="nft-procent-user">
               <span class="nft-procent-user-icon"></span>
-              <p class="nft-procent-user-name">Aaron Stuffs</p>
+              <p class="nft-procent-user-name">fractur3.eth</p>
             </span>
           </span>
 
@@ -98,5 +98,34 @@ export default {
 </script>
 
 <style scoped>
-
+.factional-nft-5 .nft-procent-user-icon{
+    background-image: url("src/assets/images/ph1.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.factional-nft-4 .nft-procent-user-icon{
+    background-image: url("src/assets/images/ph1.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.factional-nft-3 .nft-procent-user-icon{
+    background-image: url("src/assets/images/ph2.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.factional-nft-2 .nft-procent-user-icon{
+    background-image: url("src/assets/images/ph2.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.factional-nft-1 .nft-procent-user-icon{
+    background-image: url("src/assets/images/ph1.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
 </style>
