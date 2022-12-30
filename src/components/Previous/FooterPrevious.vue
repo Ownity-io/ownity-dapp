@@ -23,11 +23,11 @@
                             <i class="i-arrow-up-s-line"></i>
                         </button>
                         <ul class="footer-list">
-                            <li><a href="">Active</a></li>
-                            <li><a href="">Canceled</a></li>
-                            <li><a href="">Purchased</a></li>
-                            <li><a href="">On sale</a></li>
-                            <li><a href="">Sold</a></li>
+                            <li><a href="#">Active</a></li>
+                            <li><a href="#">Canceled</a></li>
+                            <li><a href="#">Purchased</a></li>
+                            <li><a href="#">On sale</a></li>
+                            <li><a href="#">Sold</a></li>
                         </ul>
                     </div>
 <!--                    <div class="footer-block" :class="{'unfolded' : !footerBlock2}">-->
@@ -48,7 +48,7 @@
                             <i class="i-arrow-up-s-line"></i>
                         </button>
                         <ul class="footer-list">
-                            <li><a href="">{{translatesGet('HOME')}}</a>
+                            <li><a href="#">{{translatesGet('HOME')}}</a>
                                 <div v-if="$route.fullPath ==='/'" @click="goToTop()"></div>
                                 <router-link :to="{name: 'Main'}" v-else></router-link>
                             </li>
@@ -70,7 +70,7 @@
                                     <span>{{translatesGet('HELP')}}</span>
                                 </router-link>
                             </li>
-                            <li><a href="">{{translatesGet('SITEMAP')}}</a></li>
+                            <li><a href="#">{{translatesGet('SITEMAP')}}</a></li>
                         </ul>
                     </div>
                     <div class="footer-block footer-block-form">
@@ -135,3 +135,10 @@ data() {
     }
 }
 </script>
+
+<style>
+.collection-wrapper a,
+footer a {
+    pointer-events: none;
+}
+</style>
