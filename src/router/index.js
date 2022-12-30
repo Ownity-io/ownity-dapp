@@ -6,35 +6,33 @@ import Profile from '../views/Profile.vue'
 
 const routes = [
     {
-        path: '/',
+        path: '/index',
         name: 'Index',
-        component: Index,
         children: [
     {
         path: '',
         name: 'Main',
-        component: Main,
+        redirect: "/",
         // redirect: "/marketplace",
     },
     {
         path: '/marketplace',
-        component: Marketplace,
-
+        redirect: "/",
         children: [
             {
                 path: '',
                 name: 'Marketplace',
-                component: () => import('@/views/marketplace/MarketplaceMain.vue'),
+                redirect: "/",
             },
             {
                 path: '/listing/:contract_address/:tokenID&:id',
                 name: 'Listing',
-                component: () => import('@/views/marketplace/MarketplaceListing.vue'),
+                redirect: "/",
             },
             {
                 path: '/collection/:contract_address',
                 name: 'Collection',
-                component: () => import('@/views/marketplace/MarketplaceCollections.vue'),
+                redirect: "/",
             },
             // {
             //     path: '',
@@ -54,30 +52,31 @@ const routes = [
     {
         path: '/profile',
         component: Profile,
-        name:'Profile'
+        name:'Profile',
+        redirect: "/",
         
     },
     {
         name: 'Serve',
         path: '/serve',
-        component: () => import('@/views/services/Serve.vue'),     
+        redirect: "/",
     },
     {
         name: 'TermsOfUse',
         path: '/terms_of_use',
-        component: () => import('@/views/services/TermsOfUse.vue'),  
+        redirect: "/",
     },
     {
         name: 'PrivacyPolicy',
         path: '/privacy_policy',
-        component: () => import('@/views/services/PrivacyPolicy.vue'),  
+        redirect: "/",
     },
 
         ]
     },
     {
-        name: 'Previous',
-        path: '/previous',
+        name: 'Ownity',
+        path: '/',
         component: () => import('@/views/Previous.vue'),  
     }
 ]
