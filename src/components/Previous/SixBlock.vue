@@ -41,13 +41,13 @@ export default {
                 let request = await fetch(requestLink, requestOptions);
                 if (request.ok){
                     this.email=null;
-                    await this.$store.dispatch('appGlobal/setSnackText','Your email was succesfully added!')
+                    await this.$store.dispatch('appGlobal/setSnackText','Congrats! Your email was successfully written!')
                     await this.$store.dispatch('appGlobal/setGreenSnack',true)
                     await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
                 }
             } else {
               this.email=null;
-                    await this.$store.dispatch('appGlobal/setSnackText','Wrong email!')
+                    await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
                     await this.$store.dispatch('appGlobal/setGreenSnack',false)
                     await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
             }
