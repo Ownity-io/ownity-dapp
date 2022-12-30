@@ -5,7 +5,7 @@
     <p class="whitelist-inner-subtitle">Become one of the first who will test all the functionality, and much more.</p>
     <div class="email-block">
       <input placeholder="Your email" v-model="email" >
-      <button @click="validateEmail">Join</button>
+      <button @click="validateEmail();">Join</button>
     </div>
     <p class="check-term">By subscribing, you agree to the Terms of Use</p>
   </div>
@@ -32,8 +32,7 @@ export default {
                     method: "POST",
                     headers: {
                         accept: "application/json",
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
                         'email': this.email
@@ -42,11 +41,15 @@ export default {
                 let request = await fetch(requestLink, requestOptions);
                 if (request.ok){
                     this.email=null;
-                    alert('Your email was succesfully added!')
-                    location.reload();
+                    await this.$store.dispatch('appGlobal/setSnackText','Your email was succesfully added!')
+                    await this.$store.dispatch('appGlobal/setGreenSnack',true)
+                    await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
                 }
             } else {
-                console.log('Wrong email!');
+              this.email=null;
+                    await this.$store.dispatch('appGlobal/setSnackText','Wrong email!')
+                    await this.$store.dispatch('appGlobal/setGreenSnack',false)
+                    await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
             }
         }
   }

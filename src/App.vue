@@ -1,5 +1,5 @@
 <template>
-    <!-- <SnackBar /> -->
+    <SnackBar v-if="this.$store.getters['appGlobal/getShowSnackBar']"/>
     <!-- <Cookies /> -->
     <ConnectWallet v-if="this.$store.getters['appGlobal/getShowConnectWalletModal'] & (this.walletConnected==null||this.walletConnected=='null')"/>
 
