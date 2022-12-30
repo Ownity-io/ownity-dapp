@@ -7,7 +7,7 @@
             <div class="mobile-menu-container container">
             <div class="btn-container">
               <a href="#list" class="btn btn-connect">
-                <span>Launch app</span>
+                <span>Beta Whitelist</span>
               </a>
             </div>
             </div>
@@ -182,7 +182,7 @@
                     </nav>
                     <div class="btn-container">
                         <a href="#list" class="btn btn-connect">
-                          Launch app
+                          Beta Whitelist
                         </a>
                     </div>
                 </div>
