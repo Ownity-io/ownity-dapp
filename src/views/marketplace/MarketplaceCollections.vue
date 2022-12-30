@@ -136,7 +136,13 @@
                 <i class="i-arrow-down-s-line"></i>
               </button>
               <div class="drop-down">
-                <ul>
+                <ul v-if="activeTab == 1">
+                  <li v-for="element in config.sortParamsActivities" :key="element"
+                    @click="testOpenSort = !testOpenSort;selectedSort=element;initInfo();">
+                    <span>{{element.name}}</span>
+                  </li>
+                </ul>
+                <ul v-else>
                   <li v-for="element in config.sortParams" :key="element"
                     @click="testOpenSort = !testOpenSort;selectedSort=element;initInfo();">
                     <span>{{element.name}}</span>

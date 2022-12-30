@@ -48,6 +48,16 @@
             "codeName":"-timestamp"
         }
     ],
+    "sortParamsActivities":[
+        {
+            "name":"Oldest",
+            "codeName":"timestamp"
+        },
+        {
+            "name":"Newest ",
+            "codeName":"-timestamp"
+        }
+    ],
     "evmChains":{
         "Binance" : {
             "chainId": "0x38",
