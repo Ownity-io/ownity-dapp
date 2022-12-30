@@ -11,7 +11,7 @@
           <!-- <div class="card-id card-id-full">hjhhuhi</div> -->
           <div class="data-td">
             <a class="card-previous-collection collection-id">
-              <img class="card-previous-collection-img" src="@/assets/images/logos.png"/>
+              <img class="card-previous-collection-img" :src="card.links"/>
               <span>{{card.collection}}</span>
               <i class="i-checkbox-circle-fill"></i
             ></a>
@@ -48,8 +48,8 @@
         </div>
 
         <div class="data-tr">
-          <div class="prev-card-status green">
-            Comming soon
+          <div class="prev-card-status orange">
+            Coming soon
           </div>
           <div class="prev-card-contributors">
             Contributors: 23
@@ -91,22 +91,28 @@ export default {
 	      {
 					name: 'MAYC #12625',
           collection: 'Mutant Ape Yacht Club',
-          price: '29'
+          price: '29',
+          links: './src/assets/images/logos.png'
 				},
 	      {
 		      name: 'MAYC #25986',
 		      collection: 'Mutant Ape Yacht Club',
-		      price: '17.45'
+		      price: '17.45',
+		      links: './src/assets/images/logos.png'
 	      },
 	      {
 		      name: 'BAYC #5699',
 		      collection: 'Bored Ape Yacht Club',
-		      price: '200'
+		      price: '200',
+		      links: './src/assets/images/l2.jpeg'
+
 	      },
 	      {
 		      name: 'OFO #9429',
 		      collection: 'Otherdeed for Otherside',
-		      price: '69.95'
+		      price: '69.95',
+		      links: './src/assets/images/l2.webp'
+
 	      }
       ]
     };
