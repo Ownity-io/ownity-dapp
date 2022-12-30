@@ -2588,6 +2588,7 @@ a.td-wrap-link span {
 .table-chart-data {
     width: calc(100% - 31.7%);
     padding-left: 24px;
+    position: relative;
     display: grid;
     height: fit-content;
 }
