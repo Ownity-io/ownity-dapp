@@ -280,6 +280,7 @@
                     <Chart :chartData='chartData'/>
                   </div>
                   <div class="table-chart-data">
+                    <div class="members-hide"></div>
                     <div class="table table-chart">
                       <div class="thead">
                         <div class="td">{{translatesGet('OWNER')}}</div>
@@ -653,6 +654,17 @@ export default {
   .members {
       max-height: 316px;
       overflow-y: scroll;
+      position: relative;
+  }
+  
+  
+  .members-hide {
+      width: 100%;
+      height: 76px;
+      position: absolute;
+      z-index: 2;
+      bottom: 0;
+      background: linear-gradient(360deg, #FFFFFF 46.88%, rgba(255, 255, 255, 0) 100%);
   }
 
 </style>
