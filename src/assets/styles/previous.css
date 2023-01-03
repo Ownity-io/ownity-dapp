@@ -294,7 +294,9 @@ body.previous-page .footer-block .footer-block-name {
     text-fill-color: transparent;
     -webkit-text-fill-color: transparent;
     transition: background-image 200ms ease;
-    text-decoration: underline !important;
+    text-decoration: underline;
+    text-underline-position: under;
+    text-decoration-color: #3E80FF;
     background-position: center;
 }
 
