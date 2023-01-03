@@ -15,7 +15,7 @@ body{
 
 ::-moz-selection ,
 ::selection {
-    background-color: #9BF00B;
+    background-color: #2b79ffb1;
     color: #0f0f0f;
 }
 ::-webkit-scrollbar-corner,
@@ -30,8 +30,8 @@ body{
 
 ::-webkit-scrollbar-button,
 ::-webkit-resizer,
-::-webkit-scrollbar-button
-{    display: none;
+::-webkit-scrollbar-button{    
+    display: none;
     width: 0;
     height: 0;
     opacity: 0;

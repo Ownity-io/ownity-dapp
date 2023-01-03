@@ -287,7 +287,7 @@
                         <div class="td">{{translatesGet('PCT')}}</div>
                         <div class="td td-price">{{translatesGet('PRICE')}}</div>
                       </div>
-                      <div :class="{'members' : this.item.bids.length>5}">
+                      <div class="tbody" :class="{'members' : this.item.bids.length>5}">
                         <div class="tr" v-for="bid in this.item.bids" :key="bid">
                         <div class="td td-owner">
                           <a

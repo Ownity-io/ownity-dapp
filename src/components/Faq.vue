@@ -29,8 +29,9 @@
         <p v-html="translatesGet('FAQ-H2-3')"></p>
       </div>
     </div>
-    <div class="faq-block" :class="{ 'collapse-block': !faqBlock3 }">
-      <button class="btn-faq" @click="faqBlock3 = !faqBlock3">
+
+    <div class="faq-block" :class="{ 'collapse-block': !faqBlock4 }">
+      <button class="btn-faq" @click="faqBlock4 = !faqBlock4">
         {{translatesGet('FAQ-H13-3')}}
         <i class="i-arrow-up-s-line"></i>
       </button>
@@ -49,6 +50,7 @@ export default {
       faqBlock1: false,
       faqBlock2: false,
       faqBlock3: false,
+      faqBlock4: false,
       lang: new MultiLang(this),
     };
   },

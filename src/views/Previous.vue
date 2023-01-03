@@ -8,7 +8,9 @@
                            <first-block/>
                         </section>
                         <section class="previous-second-screen">
-                          <second-block/>
+                            <div class="container">
+                                <second-block/>
+                            </div>
                         </section>
                         <section class="previous-cards-screen">
                             <div class="container">
@@ -29,20 +31,28 @@
                             </div>
                         </section>
                         <section class="previous-third-screen">
-                          <third-block/>
+                          <div class="container">
+                            <third-block/>
+                          </div>
                         </section>
                         <section class="previous-third-screen">
-                          <four-block/>
+                          <div class="container">
+                            <four-block/>
+                          </div>
                         </section>
                         <section class="previous-faq-screen">
-                          <p class="faq-title">FAQ</p>
-                          <faq-block/>
+                            <div class="container">
+                                <p class="faq-title">FAQ</p>
+                                <faq-block/>
+                            </div>
                         </section>
                         <section class="previous-five-screen">
-                          <fifth-block/>
+                            <div class="container">
+                              <fifth-block/>
+                            </div>
                         </section>
                         <section class="previous-last-screen">
-                          <six-block/>
+                            <six-block/>
                         </section>
                     </div>
                 </main>
