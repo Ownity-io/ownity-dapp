@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="this.$store.getters['marketplace/getActivitiesResult'].length>0">
         <div class="table table-activity">
             <div class="thead">
                 <div class="td td-collection"><span>{{translatesGet('ACTIVITY_THEAD-1')}}</span></div>
@@ -98,6 +98,15 @@
             <i class="i-loader-4-line"></i>
         </div>
     </div>
+    <div class="cards-list-empty" v-if="this.$store.getters['marketplace/getActivitiesResult'].length==0">
+      <div class="title">{{translatesGet('NOTHING_HERE')}}</div>
+      <a href="/marketplace" class="btn" v-if="activitiesIsEmpty">
+        {{translatesGet('BACK_TO_ALL')}}
+      </a>
+      <button class="btn" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.fetchAndSetActivitiesStartInfo()" v-else>
+        {{translatesGet('BACK_TO_ALL')}}
+      </button>
+    </div>
 </template>
 
 <script>
@@ -114,7 +123,8 @@ export default {
             lang: new MultiLang(this),
             userAddress:null,
             currencyToUsdPrice:1,
-            config:config
+            config:config,
+            activitiesIsEmpty:false
         }
     },
     methods: {
@@ -214,20 +224,54 @@ export default {
                 return seconds+'s';
             }
         },
+        async fetchAndSetActivitiesStartInfo(){
+            this.userAddress = localStorage.getItem('userAddress');
+            if (this.$route.name == 'Marketplace') {
+                await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult', { userAddress: null, collectionAddress: null });
+            }
+            else if (this.$route.name == 'Collection') {
+                await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult', { userAddress: null, collectionAddress: this.$route.params.contract_address });
+            }
+            else if (this.$route.name == 'Profile') {
+                await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult', { userAddress: this.userAddress, collectionAddress: null });
+            }     
+        }
     },
-    async mounted(){
-        this.userAddress = localStorage.getItem('userAddress');
-        if (this.$route.name == 'Marketplace'){
-          await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:null});
-      }
-      else if (this.$route.name == 'Collection'){
-          await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:this.$route.params.contract_address});          
-      }
-      else if (this.$route.name == 'Profile'){
-          await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:this.userAddress,collectionAddress:null}); 
-      }     
-      await this.setCurrencyToUsd(); 
-        
+    async mounted(){  
+        await this.fetchAndSetActivitiesStartInfo();      
+        await this.setCurrencyToUsd();   
+        if (this.$route.name == 'Collection') {
+            let requestUrl = `${config.backendApiEntryPoint}user-activity/?limit=${config.listingsPerPage}`;
+            requestUrl += `&collection=${this.$route.params.contract_address}`;
+            let request = await fetch(requestUrl);
+            let requestJson = await request.json();
+            if (requestJson.count <= 0) {
+                this.activitiesIsEmpty = true;
+            }
+        } 
+        if (this.$route.name == 'Profile') {
+            let requestUrl = `${config.backendApiEntryPoint}user-activity/?limit=${config.listingsPerPage}`;
+            let request = await fetch(requestUrl, {
+                method: "GET",
+                headers: {
+                    accept: "application/json",
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                }
+            });
+            let requestJson = await request.json();
+            if (requestJson.count <= 0) {
+                this.activitiesIsEmpty = true;
+            }
+        }        
+        if (this.$route.name == 'Marketplace') {
+            let requestUrl = `${config.backendApiEntryPoint}user-activity/?limit=${config.listingsPerPage}`;
+            let request = await fetch(requestUrl);
+            let requestJson = await request.json();
+            if (requestJson.count <= 0) {
+                this.activitiesIsEmpty = true;
+            }
+        }   
         const delay = (delayInms) => {
             return new Promise(resolve => setTimeout(resolve, delayInms));
         }
