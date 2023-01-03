@@ -449,7 +449,6 @@ body.previous-page a.collection-id:hover span {
     justify-content: center;
     align-items: stretch;
     align-content: stretch;
-    flex-grow: 1;
     width: 100%;
     gap: 24px;
 }

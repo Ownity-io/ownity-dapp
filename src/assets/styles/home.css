@@ -45,8 +45,10 @@
 }
 
 .main-screen-container {
-    padding-left: 64px;
-    padding-right: 64px;
+    /* padding-left: 64px;     */
+    padding-left: 5%;
+    /* padding-right: 64px;     */
+    padding-right: 5%;
 }
 
 .main-screen .btn.btn-home {
