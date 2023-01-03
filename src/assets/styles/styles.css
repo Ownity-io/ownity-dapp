@@ -2572,6 +2572,7 @@ a.td-wrap-link span {
 
 .deposit-value .icon-token {
     width: 24px;
+    min-width: 24px;
     height: 24px;
     margin-right: 4px;
 }
