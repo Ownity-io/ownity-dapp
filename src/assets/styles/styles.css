@@ -85,7 +85,7 @@ main>section {
     background-position: left center;
     background-size: contain;
     background-repeat: no-repeat;
-    min-width: 15.2%;
+    min-width: min( 219px, 15.2%);
     max-width: 219px;
     min-height: 32px;
     /* height: 100%; */
@@ -94,7 +94,7 @@ main>section {
 .footer-logo,
 .footer-row .copyright,
 .header-logo {
-    min-width: 15.2%;
+    min-width: min( 219px, 15.2%);
 
     display: block;
 }

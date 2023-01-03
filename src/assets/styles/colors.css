@@ -15,18 +15,17 @@
 .td-failed{
     color: #F32727;
 }
-.deposit-listened.deposit-listened-link:hover,
-.collection-data-link:hover,
-.total-block-describe a:hover {
-    text-decoration: underline;
-}
 
 /* */
+.deposit-listened.deposit-listened-link:hover,
+.collection-data-link a:hover ,
+.total-block-describe a:hover ,
 .footer-list a:hover,
 .breadcrumbs li a:hover span,
 .footer-form .agree a:hover,
 .total-block-describe a:hover,
 .data-td a:hover span,
+a.collection-data:hover span,
 a.collection-id:hover span,
 a.td-wrap-link:hover span,
 .footer-row.footer-row-info .footer-part:not(.footer-social-links) a:hover {
