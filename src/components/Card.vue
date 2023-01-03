@@ -86,7 +86,7 @@
                   <td>{{element.address.substring(0,6)+'...'+element.address.substring(38,42)}}</td>
                   <td>
                     <div class="td-wrap-price">
-                      <div class="icon-token"></div> 
+                      <div class="icon-token eth"></div> 
                       {{abbrNum(toFixedIfNecessary(convertToEther(element.amount),6),2)}}
                     </div>
                     </td>
@@ -374,13 +374,13 @@
           {{translatesGet('ON_SALE')}}: <div class="marketplace"> <span class="icon-market" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></span> {{this.voting.marketplace.name}}</div>
         </div>
         <div class="deposit-value" v-if="this.item.internal_status=='ON SALE' & this.voting!=null">
-          <div class="icon-token"></div>
+          <div class="icon-token eth"></div>
           <span><b>{{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount),6),2)}} ETH</b></span>
           <span class="equivalent">(≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount)*currencyToUsdPrice,6),2)}})</span>
         </div>
         <!-- ######## 5 ######## -->
         <!-- <div class="deposit-value">
-          <div class="icon-token"></div>
+          <div class="icon-token eth"></div>
           <span><b>2 ETH</b></span>
           <span class="equivalent">(≈ $ 2K)</span>
         </div> -->

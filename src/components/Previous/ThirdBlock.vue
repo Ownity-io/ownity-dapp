@@ -2,20 +2,18 @@
 <div class="aggregator">
   <div class="aggregator-inner">
     <div class="aggregator-left">
-      <p class="aggregator-left-title">NFT Aggregator</p>
+      <p class="aggregator-left-title">{{ translatesGet("AGGREGATOR_LEFT-TITLE") }}</p>
       <p class="aggregator-left-subtitle">
-        The Quant provides users with lightning-fast NFT aggregation
-        and allows you to trade among major marketplaces such as OpenSea,
-        LooksRare and X2Y2, thereby helping you find more listings and better prices.
+        {{ translatesGet("AGGREGATOR_LEFT-SUBTITLE") }}
       </p>
       <div class="information-of-nft">
         <div class="information-wrapper">
           <div class="design"></div>
-          <p>NFT Standarts: ERC-721, ERC-1155</p>
+          <p> {{ translatesGet("INFORMATION_OF_NFT-1") }}</p>
         </div>
         <div class="information-wrapper">
           <div class="design"></div>
-          <p>NFT Standarts: ERC-721, ERC-1155</p>
+          <p> {{ translatesGet("INFORMATION_OF_NFT-2") }}</p>
         </div>
       </div>
       <div class="aggregator-left-coins">
@@ -58,6 +56,8 @@ import 'vue3-lottie/dist/style.css'
 
 import { create } from '@lottiefiles/lottie-interactivity';
 
+import MultiLang from "@/core/multilang";
+
 
 export default {
 	name: "ThirdBlock",
@@ -68,7 +68,8 @@ export default {
 	  return {
 			thereWidth: {
 				'width': '600px'
-      }
+      },
+		  lang: new MultiLang(this),
 	  }
   },
   methods: {
@@ -83,7 +84,10 @@ export default {
 	    if (innerWidth < 480){
 		    this.thereWidth.width = '355px'
 	    }
-    }
+    },
+	  translatesGet(key) {
+		  return this.lang.get(key);
+	  },
   },
 
   mounted() {

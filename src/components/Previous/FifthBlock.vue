@@ -1,7 +1,7 @@
 <template>
   <div class="still-inner">
-    <p class="still-inner-title">Still have questions?</p>
-    <p class="still-inner-subtitle">Read our documentation to find out more</p>
+    <p class="still-inner-title">{{translatesGet("STILL_TITLE")}}</p>
+    <p class="still-inner-subtitle">{{translatesGet("STILL_SUBTITLE")}}</p>
     <a class="still-inner-btn" href="https://docs.google.com/document/d/1FlN7HPegj1-kAIxHrG3DwYsX8LHnY0HwwDQ7bAOZto8/edit?usp=sharing" target="_blank">
       Litepaper
     </a>
@@ -9,7 +9,20 @@
 </template>
 
 <script>
+import MultiLang from "@/core/multilang";
+
+
 export default {
-	name: "FifthBlock"
+	name: "FifthBlock",
+  data(){
+		return{
+			lang: new MultiLang(this),
+    }
+  },
+  methods:{
+	  translatesGet(key) {
+		  return this.lang.get(key);
+	  },
+  }
 }
 </script>

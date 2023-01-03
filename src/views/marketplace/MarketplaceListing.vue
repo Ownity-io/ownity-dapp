@@ -128,22 +128,22 @@
                     {{translatesGet('AVAILABLE_ON')}} {{voting.marketplace.name}} 
                     {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>                
                   <div class="deposit-value" v-if="(item.marketplace_status=='OPEN' & item.internal_status=='OPEN')||this.item.internal_status=='OWNED'">
-                    <div class="icon-token"></div>
+                    <div class="icon-token eth"></div>
                     <span><b>{{priceInCurrency}} ETH</b></span>
                     <span class="equivalent">(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
                   </div>
                   <div class="deposit-value" v-if="(item.internal_status=='ON SALE')">
-                    <div class="icon-token"></div>
+                    <div class="icon-token eth"></div>
                     <span><b>{{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount),6),2)}} ETH</b></span>
                     <span class="equivalent">(≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount) *currencyToUsdPrice,2),2)}})</span>
                   </div>
                   <div class="deposit-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='SOLD'">
-                    <div class="icon-token"></div>
+                    <div class="icon-token eth"></div>
                     <span><b>{{priceInCurrency}} ETH</b></span>
                     <span class="equivalent">(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
                   </div>
                   <div class="deposit-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
-                    <div class="icon-token"></div>
+                    <div class="icon-token eth"></div>
                     <span>{{abbrNum(this.toFixedIfNecessary(convertToEther(allBidsAmount),6),1)}} / <b>{{abbrNum(priceInCurrency,1)}}{{' '}} ETH</b></span>
                     <span class="equivalent">(≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
                   </div>
@@ -245,7 +245,7 @@
               <div class="section-unfolded-content">
                 <ul class="tabs">
                   <li>
-                    <button 
+                    <button
                       :class="{ 'active-tab': activeTab2 === 'ListingInfo2' }"
                       @click="letsCheck2('ListingInfo2')"
                       >
@@ -306,7 +306,7 @@
                         <div class="td td-price">
                           <div class="td-wrap">
                             <div class="td-wrap-price">
-                              <div class="icon-token"></div>
+                              <div class="icon-token eth"></div>
                               <span>{{abbrNum(this.toFixedIfNecessary((bid.amount / (10**this.item.currency.decimals)),6),2)}} ETH</span>
                               <span class="td-light">≈ $ {{this.toFixedIfNecessary(abbrNum((bid.amount / (10**this.item.currency.decimals) * currencyToUsdPrice),1),2)}}</span>
                             </div>

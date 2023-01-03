@@ -107,7 +107,7 @@
                   <div class="td td-price">
                     <div class="td-wrap">
                       <div class="td-wrap-price">
-                        <div class="icon-token"></div>
+                        <div class="icon-token eth"></div>
                         <span>{{abbrNum(toFixedIfNecessary(collection.volume_all,2),2)}} ETH</span>
                       </div>
                       <!-- <span class="td-light">≈ $ 1000</span> -->
@@ -117,7 +117,7 @@
                   <div class="td td-price">
                     <div class="td-wrap">
                       <div class="td-wrap-price">
-                        <div class="icon-token"></div>
+                        <div class="icon-token eth"></div>
                         <span>{{abbrNum(toFixedIfNecessary(collection.floor_price,2),0)}} ETH</span>
                       </div>
                       <!-- <span class="td-light">≈ $ 1000</span> -->
