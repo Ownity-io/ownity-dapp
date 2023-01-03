@@ -1,8 +1,8 @@
 <template>
   <div class="top-collection">
-    <p class="top-collection-title">Top Collections</p>
+    <p class="top-collection-title">{{ translatesGet("PREVIOUS_COLLECTIONS_TITLE")}}</p>
     <p class="top-collection-subtitle">
-      Explore all the top collections from the largest marketplaces and initiate a deal opening by contributing the minimum part.
+      {{ translatesGet("PREVIOUS_COLLECTIONS_SUBTITLE")}}
     </p>
     <div class="collection-wrapper">
       <div class="table table-top-collections">
@@ -82,13 +82,17 @@
 
 <script>
 import config from '@/config.json'
+import MultiLang from "@/core/multilang";
+
+
 export default {
 	name: "FourBlock",
   data() {
 		return {
       collections:null,
       render:false,
-      config:config
+      config:config,
+			lang: new MultiLang(this),
     }
   },
   async mounted(){
@@ -103,6 +107,9 @@ export default {
       let requestJson = await request.json();
       this.collections = requestJson;
     },
+	  translatesGet(key) {
+		  return this.lang.get(key);
+	  },
     toFixedIfNecessary(value, dp) {
       return +parseFloat(value).toFixed(dp);
     },

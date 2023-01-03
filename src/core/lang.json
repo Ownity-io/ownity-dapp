@@ -228,8 +228,29 @@
         "YOUR_MSG": "Your message",
         "AGREEMENT": "By clicking on the button «Submit» you accept our Terms of Use",
         "": "Your name",
-        "": "Your name"
-        
-    
+        "": "Your name",
+
+        "---------Previous Page------------": "",
+
+        "FRACTIONAL_TITLE": "Fractional Ownership",
+        "FRACTIONAL_SUBTITLE": "The mechanics of fractional ownership enable users to purchase an NFT in a group. Each user can contribute the required part and start or maintain the fundraising for the listing purchase.",
+        "FRACTIONAL_OPTIONS_TITLE": "Flexible interaction options",
+        "FRACTIONAL_OPTIONS-1": "Buy 1% to 100% of NFT",
+        "FRACTIONAL_OPTIONS-2": "Make decisions in DAO mode",
+        "FRACTIONAL_OPTIONS-3": "Sell your part at any time",
+        "FRACTIONAL_OPTIONS-4": "Explore profitable listings",
+        "AGGREGATOR_LEFT-TITLE": "NFT Aggregator",
+        "AGGREGATOR_LEFT-SUBTITLE": "The Quant provides users with lightning-fast NFT aggregation and allows you to trade among major marketplaces such as OpenSea, LooksRare and X2Y2, thereby helping you find more listings and better prices.",
+        "INFORMATION_OF_NFT-1": "NFT Standarts: ERC-721, ERC-1155",
+        "INFORMATION_OF_NFT-2": "NFT Standarts: ERC-721, ERC-1155",
+        "PREVIOUS_COLLECTIONS_TITLE": "Top Collections",
+        "PREVIOUS_COLLECTIONS_SUBTITLE": "Explore all the top collections from the largest marketplaces and initiate a deal opening by contributing the minimum part.",
+        "STILL_TITLE": "Still have questions?",
+        "STILL_SUBTITLE": "Read our documentation to find out more",
+
+        "WHITELIST_TITLE": "Get in the Beta Testing Waitlist",
+        "WHITELIST_SUBTITLE": "Become one of the first who will test all the functionality, and much more.",
+        "CHECK_TERM": "By subscribing, you agree to the Terms of Use"
+
     }
 }

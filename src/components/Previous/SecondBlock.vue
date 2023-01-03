@@ -1,22 +1,21 @@
 <template>
   <div class="fractional">
     <div class="fractional-left">
-      <p class="fractional-title">Fractional Ownership</p>
+      <p class="fractional-title">{{translatesGet("FRACTIONAL_TITLE")}}</p>
       <p class="fractional-subtitle">
-        The mechanics of fractional ownership enable users to purchase an NFT in a group.
-        Each user can contribute the required part and start or maintain the fundraising for the listing purchase.
+        {{translatesGet("FRACTIONAL_SUBTITLE")}}
       </p>
       <p class="fractional-options-title" >
-        Flexible interaction options
+        {{translatesGet("FRACTIONAL_OPTIONS_TITLE")}}
       </p>
       <div class="fractional-options">
         <div class="fractional-inner">
-          <div><div class="design"></div><p>Buy 1% to 100% of NFT</p></div>
-          <div ref="fractional"><div class="design"></div><p>Make decisions in DAO mode</p></div>
+          <div><div class="design"></div><p>{{translatesGet("FRACTIONAL_OPTIONS-1")}}</p></div>
+          <div ref="fractional"><div class="design"></div><p>{{translatesGet("FRACTIONAL_OPTIONS-2")}}</p></div>
         </div>
         <div class="fractional-inner">
-          <div><div class="design"></div><p>Sell your part at any time</p></div>
-          <div><div class="design"></div><p>Explore profitable listings</p></div>
+          <div><div class="design"></div><p>{{translatesGet("FRACTIONAL_OPTIONS-3")}}</p></div>
+          <div><div class="design"></div><p>{{translatesGet("FRACTIONAL_OPTIONS-4")}}</p></div>
         </div>
       </div>
     </div>
@@ -77,8 +76,14 @@
 </template>
 
 <script>
+import MultiLang from "@/core/multilang";
 export default {
 	name: "SecondBlock",
+  data(){
+		return {
+			lang: new MultiLang(this),
+    }
+  },
   mounted() {
 	  const square = this.$refs.square;
 	  square.classList.remove('square-transition');
@@ -93,6 +98,11 @@ export default {
 		  });
 	  });
 	  observer.observe(this.$refs.fractional);
+  },
+  methods: {
+	  translatesGet(key) {
+		  return this.lang.get(key);
+	  },
   }
 }
 </script>
