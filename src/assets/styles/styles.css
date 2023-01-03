@@ -1443,7 +1443,10 @@ ul.tabs {
 } */
 
 .icon-token {
-    background-image: url(../images/test-token.png);
+    /* background-image: url(../images/test-token.png); */
+}
+.icon-token.eth {
+    background-image: url(../images/ethereum.svg);
 }
 
 .meta-mask {
@@ -1569,7 +1572,7 @@ ul.tabs {
     width: 0;
     overflow: hidden;
     height: 100%;
-    background: #2CC07B;
+    background: #4275E4;
     border-radius: 12px;
     text-align: center;
     font-weight: 700;
