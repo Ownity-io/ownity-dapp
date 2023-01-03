@@ -31,7 +31,7 @@ export default {
 
 	  LottieScrollTrigger({
 		  target: "#hand",
-		  path: "https://lottie.host/0e55f70a-bde2-4897-a785-e3d4656d2649/B8r4SXVo0c.json",
+		  path: "https://lottie.host/e3daafd8-a5e0-4249-b2fc-93d2e11e1394/7z4PUgAAWj.json",
 		  speed: "fast",
 		  pin: ".mains",
 		  start: 5,
@@ -42,7 +42,7 @@ export default {
 	  function LottieScrollTrigger(vars) {
 		  let innerW = window.innerWidth
 		  if (innerW < 600){
-			  vars.path = 'https://lottie.host/2f2a7471-784d-4bcf-b845-233aa44acb96/iYqPSIIEgb.json'
+			  vars.path = 'https://lottie.host/cb29afc7-7409-4491-a496-52a81c15464b/Un37Omlce4.json'
 		  }
 		  let playhead = {frame: 0},
 			  target = gsap.utils.toArray(vars.target)[0],
