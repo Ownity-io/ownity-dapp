@@ -27,8 +27,7 @@
                         <li>
                             <a href="">About us</a>
                         </li>
-                        <li><a href="">FAQ</a></li>
-                        <li><a href="">Team</a></li>
+                        <li><a href="#faqs">FAQ</a></li>
                     </ul>
                 </li>
                 <li class="mobile-menu-item drop-down-item" :class="{more :mobItem1}">
@@ -124,8 +123,7 @@
                                     <li>
                                         <a href="">About us</a>
                                     </li>
-                                    <li><a href="">FAQ</a></li>
-                                    <li><a href="">Team</a></li>
+                                    <li><a href="#faqs">FAQ</a></li>
                                 </ul>
                             </li>
 
