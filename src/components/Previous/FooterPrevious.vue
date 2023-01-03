@@ -15,7 +15,7 @@
                                 <!-- <li><a href=""><i class="i-discord-line"></i></a></li>   -->
                             </ul>
                         </div>
-                        <p>info@quant.com</p>
+                        <p>info@ownity.io</p>
                     </div>
                     <div class="footer-block" :class="{'unfolded' : !footerBlock1}">
                         <button class="footer-block-name" @click="footerBlock1 = !footerBlock1">
