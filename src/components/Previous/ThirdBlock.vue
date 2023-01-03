@@ -36,12 +36,6 @@
       </div>
     </div>
     <div class="aggregator-right">
-<!--        <Vue3Lottie-->
-<!--            ref="customControl"-->
-<!--            animationLink="https://lottie.host/c929dd5b-0777-49b1-8416-3607eee46781/Xvgu7DK3e4.json"-->
-<!--            :width="600"-->
-<!--            :loop="0"-->
-<!--        />-->
       <div v-bind:style="thereWidth">
         <lottie-player id="firstLottie"
                        ref="lottie"
@@ -78,15 +72,6 @@ export default {
 	  }
   },
   methods: {
-	  play() {
-		  this.$refs['customControl'].play()
-	  },
-	  pause() {
-		  this.$refs['customControl'].pause()
-	  },
-	  stop() {
-		  this.$refs['customControl'].stop()
-	  },
     getWidth(){
 			let innerW = window.innerWidth
       if (innerWidth < 1150){
@@ -102,17 +87,6 @@ export default {
   },
 
   mounted() {
-		// window.addEventListener("load", function (){
-    //   const observe = new IntersectionObserver(entries => {
-		// 			entries.forEach(entry => {
-		// 				if (entry.isIntersecting) {
-		// 					this.play()
-		// 				}
-		// 				this.stop()
-		// 			})
-		// 		})
-		// 		observe.observe(this.$refs.soon);
-    // });
 	  this.$refs.lottie.addEventListener('load', function() {
 		  create({
 			  mode: 'scroll',
@@ -130,7 +104,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

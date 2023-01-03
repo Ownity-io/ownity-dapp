@@ -1,7 +1,6 @@
 <template>
   <div class="mains">
     <div class="copy">
-      <h1>scroll down</h1>
     </div>
     <div class="scroll-element">
       <div id="hand"></div>
@@ -30,17 +29,6 @@ export default {
 		return {
     }
   },
-  methods:{
-	  play() {
-		  this.$refs['customControl'].play()
-	  },
-	  pause() {
-		  this.$refs['customControl'].pause()
-	  },
-	  stop() {
-		  this.$refs['customControl'].stop()
-	  },
-  },
   mounted() {
 	  gsap.registerPlugin(ScrollTrigger);
 
@@ -49,17 +37,16 @@ export default {
 		  path: "https://lottie.host/0e55f70a-bde2-4897-a785-e3d4656d2649/B8r4SXVo0c.json",
 		  speed: "fast",
 		  pin: ".mains",
-		  start: "top",
+		  start: 5,
 		  scrub: 0.1,
-		  markers: false
+		  markers: true
 	  });
-
 
 	  function LottieScrollTrigger(vars) {
 		  let playhead = {frame: 0},
 			  target = gsap.utils.toArray(vars.target)[0],
 			  speeds = {slow: "+=2000", medium: "+=1000", fast: "+=70"},
-			  st = {trigger: target, pin: false, start: "top", end: speeds[vars.speed] || "+=70",},
+			  st = {trigger: target, pin: false, start: 5, end: speeds[vars.speed] || "+=70",},
 			  animation = lottie.loadAnimation({
 				  container: target,
 				  renderer: vars.renderer || "svg",
@@ -90,15 +77,11 @@ export default {
     width: 100%;
     height: 100vh;
 }
+
 .mains .scroll-element #hand {
     display: block;
     width: 100% !important;
     height: 900px !important;
     margin: 0 auto;
 }
-
-.mains {
-  top: -30px !important;
-}
-
 </style>
