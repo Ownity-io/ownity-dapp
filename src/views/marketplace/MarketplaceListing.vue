@@ -245,7 +245,7 @@
               <div class="section-unfolded-content">
                 <ul class="tabs">
                   <li>
-                    <button 
+                    <button
                       :class="{ 'active-tab': activeTab2 === 'ListingInfo2' }"
                       @click="letsCheck2('ListingInfo2')"
                       >

@@ -72,9 +72,9 @@
         </div>
       </div>
       <div class="collection-design">
-        <button class="btn btn-previous">
+        <a class="btn btn-previous" href="#list" style="max-width: 180px;z-index: 2">
           See All Collections
-        </button>
+        </a>
       </div>
     </div>
   </div>
@@ -126,3 +126,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.collection-design a{
+    pointer-events: auto;
+}
+</style>
