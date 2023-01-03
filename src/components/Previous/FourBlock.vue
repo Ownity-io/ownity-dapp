@@ -71,11 +71,11 @@
         
         </div>
       </div>
-      <!-- <div class="collection-design">
+      <div class="collection-design">
         <button class="btn btn-previous">
           See All Collections
         </button>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>

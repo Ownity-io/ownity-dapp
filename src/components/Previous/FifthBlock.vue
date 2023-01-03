@@ -13,7 +13,3 @@ export default {
 	name: "FifthBlock"
 }
 </script>
-
-<style scoped>
-
-</style>
