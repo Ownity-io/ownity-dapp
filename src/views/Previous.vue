@@ -120,6 +120,7 @@ export default {
         margin-bottom: 16px;
         line-height: normal;
         text-align: left;
+        margin-right: auto;
     }
     .previous-describe {
         font-size: 16px;

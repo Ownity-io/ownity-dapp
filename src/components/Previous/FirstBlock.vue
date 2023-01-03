@@ -1,12 +1,10 @@
 <template>
   <div class="mains">
-    <div class="copy">
-    </div>
+    <div class="copy"></div>
     <div class="scroll-element">
       <div id="hand"></div>
     </div>
-    <div class="copy">
-    </div>
+    <div class="copy"></div>
   </div>
 </template>
 
@@ -39,7 +37,7 @@ export default {
 		  pin: ".mains",
 		  start: 5,
 		  scrub: 0.1,
-		  markers: true
+		  markers: false
 	  });
 
 	  function LottieScrollTrigger(vars) {
@@ -68,7 +66,6 @@ export default {
 	  }
   }
 }
-
 </script>
 
 <style>
