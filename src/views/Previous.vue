@@ -40,7 +40,7 @@
                             <four-block/>
                           </div>
                         </section>
-                        <section class="previous-faq-screen">
+                        <section class="previous-faq-screen" id="faqs">
                             <div class="container">
                                 <p class="faq-title">FAQ</p>
                                 <faq-block/>
