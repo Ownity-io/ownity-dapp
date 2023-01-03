@@ -97,6 +97,7 @@ export default {
       if (state.currentBidStatus!=null){count++;}
       if (state.onSale!=false){count++;}
       if (state.searchString!=''){count++;}
+      if (state.currentActivitiesCategory){count++;}
       return count;
     },
     getCurrentlyGathering(state){

@@ -1,7 +1,14 @@
 <template>
     <div class="selected-filters">
         <ul v-if="this.$store.getters['marketplace/getFiltersCount']>0 & this.$route.name=='Marketplace'">
-            <li  v-if="this.$store.getters['marketplace/getCurrentCollectionContractAddress']!=null" @click="this.$store.dispatch('marketplace/getAndSetCurrentCollectionContractAddress',null);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')">
+            <li  v-if="this.$store.getters['marketplace/getCurrentCollectionContractAddress']!=null & activities" @click="this.$store.dispatch('marketplace/getAndSetCurrentCollectionContractAddress',null);this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:null})">
+                <button class="btn btn-selected-filter">
+                    <div class="icon-selected-filter" :style="{backgroundImage: `url(${this.$store.getters['marketplace/getCurrentNftCollection'].logo})`}"></div>
+                    <span>{{this.$store.getters['marketplace/getCurrentNftCollection'].name}}</span>
+                    <i class="i-close-line"></i>
+                </button>
+            </li>
+            <li  v-else-if="this.$store.getters['marketplace/getCurrentCollectionContractAddress']!=null" @click="this.$store.dispatch('marketplace/getAndSetCurrentCollectionContractAddress',null);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')">
                 <button class="btn btn-selected-filter">
                     <div class="icon-selected-filter" :style="{backgroundImage: `url(${this.$store.getters['marketplace/getCurrentNftCollection'].logo})`}"></div>
                     <span>{{this.$store.getters['marketplace/getCurrentNftCollection'].name}}</span>
@@ -30,6 +37,12 @@
             <li v-if="this.$store.getters['marketplace/getCurrentlyGathering']!=false" @click="this.$store.dispatch('marketplace/setCurrentlyGathering',false);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')">
                 <button class="btn btn-selected-filter">
                     <span>Live gather</span>
+                    <i class="i-close-line"></i>
+                </button>
+            </li>
+            <li v-if="this.$store.getters['marketplace/getCurrentActivitiesCategory']!=null" @click="this.$store.dispatch('marketplace/getAndSetCurrentActivitiesCategory',null);this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:null})">
+                <button class="btn btn-selected-filter">
+                    <span>{{this.$store.getters['marketplace/getCurrentActivitiesCategory']}}</span>
                     <i class="i-close-line"></i>
                 </button>
             </li>
@@ -72,7 +85,14 @@
                     <i class="i-close-line"></i>
                 </button>
             </li>    
-            <li  v-if="this.$store.getters['marketplace/getCurrentCollectionContractAddress']!=null" @click="this.$store.dispatch('marketplace/getAndSetCurrentCollectionContractAddress',null);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')">
+            <li  v-if="this.$store.getters['marketplace/getCurrentCollectionContractAddress']!=null & activities" @click="this.$store.dispatch('marketplace/getAndSetCurrentCollectionContractAddress',null);this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:this.userAddress,collectionAddress:null})">
+                <button class="btn btn-selected-filter">
+                    <div class="icon-selected-filter" :style="{backgroundImage: `url(${this.$store.getters['marketplace/getCurrentNftCollection'].logo})`}"></div>
+                    <span>{{this.$store.getters['marketplace/getCurrentNftCollection'].name}}</span>
+                    <i class="i-close-line"></i>
+                </button>
+            </li>
+            <li  v-else-if="this.$store.getters['marketplace/getCurrentCollectionContractAddress']!=null" @click="this.$store.dispatch('marketplace/getAndSetCurrentCollectionContractAddress',null);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')">
                 <button class="btn btn-selected-filter">
                     <div class="icon-selected-filter" :style="{backgroundImage: `url(${this.$store.getters['marketplace/getCurrentNftCollection'].logo})`}"></div>
                     <span>{{this.$store.getters['marketplace/getCurrentNftCollection'].name}}</span>
@@ -88,6 +108,12 @@
             <li v-if="this.$store.getters['marketplace/getCurrentMaxPrice']!=null" @click="this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice',null);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')">
                 <button class="btn btn-selected-filter">
                     <span>{{translatesGet('MAX')}} {{this.$store.getters['marketplace/getCurrentMaxPrice']}} ETH</span>
+                    <i class="i-close-line"></i>
+                </button>
+            </li>
+            <li v-if="this.$store.getters['marketplace/getCurrentActivitiesCategory']!=null" @click="this.$store.dispatch('marketplace/getAndSetCurrentActivitiesCategory',null);this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:this.userAddress,collectionAddress:null})">
+                <button class="btn btn-selected-filter">
+                    <span>{{this.$store.getters['marketplace/getCurrentActivitiesCategory']}}</span>
                     <i class="i-close-line"></i>
                 </button>
             </li>
@@ -127,6 +153,12 @@
             <li v-if="this.$store.getters['marketplace/getCurrentMaxPrice']!=null" @click="this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice',null);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address)">
                 <button class="btn btn-selected-filter">
                     <span>{{translatesGet('MAX')}} {{this.$store.getters['marketplace/getCurrentMaxPrice']}} ETH</span>
+                    <i class="i-close-line"></i>
+                </button>
+            </li>
+            <li v-if="this.$store.getters['marketplace/getCurrentActivitiesCategory']!=null" @click="this.$store.dispatch('marketplace/getAndSetCurrentActivitiesCategory',null);this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:this.$route.params.contract_address})">
+                <button class="btn btn-selected-filter">
+                    <span>{{this.$store.getters['marketplace/getCurrentActivitiesCategory']}}</span>
                     <i class="i-close-line"></i>
                 </button>
             </li>
