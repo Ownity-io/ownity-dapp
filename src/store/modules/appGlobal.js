@@ -18,7 +18,10 @@ export default {
       showTransSuccessModal:false,
       lastTransactionHash:null,
       showClaimRewardModal:false,
-      lastTransSuccess:false
+      lastTransSuccess:false,
+      greenSnack:false,
+      snackText:null,
+      showSnackBar:false
     };
   },
   getters: {
@@ -72,6 +75,15 @@ export default {
     },
     getLastTransSuccess(state){
       return state.lastTransSuccess;
+    },
+    getShowSnackBar(state){
+      return state.showSnackBar;
+    },
+    getGreenSnack(state){
+      return state.greenSnack;
+    },
+    getSnackText(state){
+      return state.snackText;
     }
   },
   mutations: {
@@ -203,6 +215,15 @@ export default {
     },
     setLastTransSuccess(state,value){
       state.lastTransSuccess = value;
+    },
+    setShowSnackBar(state,value){
+      state.showSnackBar = value;
+    },
+    setGreenSnack(state,value){
+      state.greenSnack = value;
+    },
+    setSnackText(state,value){
+      state.snackText = value;
     }
   },
   actions: {
@@ -257,6 +278,23 @@ export default {
     },
     setLastTransSuccess(context,value){
       context.commit("setLastTransSuccess", value);
-    }
+    },
+    async setShowSnackBarWithTimeout(context,timeout){
+      context.commit("setShowSnackBar",true);
+      const delay = (delayInms) => {
+        return new Promise(resolve => setTimeout(resolve, delayInms));
+      }
+      await delay(1000 * timeout);
+      context.commit("setShowSnackBar",false);
+    },
+    setGreenSnack(context,value){
+      context.commit("setGreenSnack",value);
+    },
+    setSnackText(context,value){
+      context.commit("setSnackText",value);
+    },
+    async setShowSnackBar(context,value){
+      context.commit("setShowSnackBar",value);
+    },
   },
 };

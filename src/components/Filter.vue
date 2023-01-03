@@ -105,6 +105,24 @@
         </li>
       </ul>
     </div>
+    <div class="filter-section" :class="{ 'collapse-section': filterSection3 }" v-if="activities">
+      <button class="filter-section-name" @click="filterSection3 = !filterSection3">
+        <span>Category</span>
+        <i class="i-arrow-up-s-line"></i>
+      </button>
+      <ul class="filter-ul">
+        <li class="filter-li" v-for="item in this.config.activitiesPart" :key="item">
+          <div class="input-checkbox">
+            <input type="checkbox" :id="item.codeName" v-model="checkedActivitiesCategory" :true-value="item.codeName" :false-value="null" @change="fetchAndSetListingsStartInfo"/>
+            <label :for="item.codeName">
+              <div class="icon-filter-checkbox" :style="{backgroundImage: `url(${null})`}"></div>
+              <span>{{item.name}}</span>
+              <i class="i-check-line"></i>
+            </label>
+          </div>
+        </li>
+      </ul>
+    </div>
     <div class="filter-section" :class="{ 'collapse-section': filterSection4 }" v-if="!activities">
       <button class="filter-section-name" @click="filterSection4 = !filterSection4">
         <span>Price (ETH)</span>
@@ -254,6 +272,14 @@ export default {
       },
       set(value){
         this.$store.dispatch('marketplace/getAndSetCurrentMarketplaceId',value);
+      }
+    },
+    checkedActivitiesCategory:{
+      get(){
+        return this.$store.getters['marketplace/getCurrentActivitiesCategory'];
+      },
+      set(value){
+        this.$store.dispatch('marketplace/getAndSetCurrentActivitiesCategory',value);
       }
     },
     checkedCollection:{

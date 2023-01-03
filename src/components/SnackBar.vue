@@ -3,8 +3,8 @@
     <div
       class="snackbar"
       :class="{
-        success: snackbarTest === 'success',
-        wrong: snackbarTest === 'wrong',
+        success: snackbarTest,
+        wrong: !snackbarTest,
       }"
     >
       <div class="snackbar-status">
@@ -12,11 +12,9 @@
         <i v-if="snackbarTest === 'wrong'" class="i-error-warning-line"></i>
       </div>
       <div class="snackbar-describe">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum ipsum distinctio
-        nesciunt delectus qui nulla pariatur maiores consequuntur molestiae eos iste
-        suscipit quo error quidem, impedit repudiandae aliquam obcaecati dolores.
+       {{this.snackText}}
       </div>
-      <button class="btn-close">
+      <button class="btn-close" @click="this.$store.dispatch('appGlobal/setShowSnackBar',false)">
         <i class="i-close-line"></i>
       </button>
     </div>
@@ -27,8 +25,13 @@
 export default {
   data() {
     return {
-      snackbarTest: "success",
+      snackbarTest: false,
+      snackText:null
     };
   },
+  mounted(){
+    this.snackbarTest = this.$store.getters['appGlobal/getGreenSnack'];
+    this.snackText = this.$store.getters['appGlobal/getSnackText'];
+  }
 };
 </script>

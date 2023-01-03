@@ -68,17 +68,17 @@
                             {{translatesGet('FOOTER_FORM')}}
                             <!-- <i class="i-arrow-up-s-line"></i> -->
                         </div>
-                        <form action="" class="footer-form">
+                        <div action="" class="footer-form">
                             <div class="input-wrapper">
-                                <input type="text" placeholder="Your email">
-                                <button type="submit" class="btn btn-subscribe">{{translatesGet('SUBSCRIBE')}}</button>
+                                <input placeholder="Your email" v-model="email" >
+                                <button type="submit" class="btn btn-subscribe" @click="validateEmail">{{translatesGet('SUBSCRIBE')}}</button>
                             </div>
                             <p class="agree">{{translatesGet('BY_SUBSCRIBING')}}
                                 <router-link :to="{name: 'TermsOfUse'}">
                                     <span>{{translatesGet('TERMS_OF_USE')}}</span>
                                 </router-link>
                             </p>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -110,15 +110,16 @@
 </template>
 <script>
 import MultiLang from "@/core/multilang";
-
+import config from '@/config.json';
 export default {
-    
 data() {
     return {
             footerBlock1: false,
             footerBlock2: false,
             footerBlock3: false,
             lang: new MultiLang(this),
+            email:null,
+            config:config
         }
     },
     methods:{
@@ -128,6 +129,32 @@ data() {
         translatesGet(key) {
             return this.lang.get(key);
         },
+        async validateEmail() {
+            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
+                console.log('Nice email!');
+                //sendEmailHere
+                let requestLink = `${this.config.backendApiEntryPoint}mailing-list-add/`;
+                let requestOptions = {
+                    method: "POST",
+                    headers: {
+                        accept: "application/json",
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                    body: JSON.stringify({
+                        'email': this.email
+                    }),
+                };
+                let request = await fetch(requestLink, requestOptions);
+                if (request.ok){
+                    this.email=null;
+                    alert('Your email was succesfully added!')
+                    location.reload();
+                }
+            } else {
+                console.log('Wrong email!');
+            }
+        }
     }
 }
 </script>

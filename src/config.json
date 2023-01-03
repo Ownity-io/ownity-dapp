@@ -48,6 +48,16 @@
             "codeName":"-timestamp"
         }
     ],
+    "sortParamsActivities":[
+        {
+            "name":"Oldest",
+            "codeName":"timestamp"
+        },
+        {
+            "name":"Newest ",
+            "codeName":"-timestamp"
+        }
+    ],
     "evmChains":{
         "Binance" : {
             "chainId": "0x38",
@@ -71,5 +81,23 @@
             "rpcUrls": ["https://eth-goerli.public.blastapi.io"],
             "blockExplorerUrls": ["https://goerli.etherscan.io/"]
         }
-    }
+    },
+    "activitiesPart":[
+        {
+            "name":"Claims",
+            "codeName":"Claims"
+        },
+        {
+            "name":"Fractions",
+            "codeName":"Fractions"
+        },
+        {
+            "name":"Purchase",
+            "codeName":"Purchase"
+        },
+        {
+            "name":"Sales",
+            "codeName":"Sales"
+        }
+    ]
 }

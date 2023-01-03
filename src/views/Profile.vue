@@ -149,8 +149,13 @@
                                 <span v-else>{{this.selectedSort.name}}</span>
                                 <i class="i-arrow-down-s-line"></i>
                                 </button>
-                                <div class="drop-down">
-                                <ul>
+                                <div class="drop-down">                                    
+                                <ul v-if="activeTab == 'ActivityTable'">                                    
+                                    <li v-for="element in config.sortParamsActivities" :key="element" @click="testOpenSort = !testOpenSort;selectedSort=element;fetchAndSetListingsStartInfo();">
+                                        <span>{{element.name}}</span>
+                                    </li>                        
+                                </ul>
+                                <ul v-else>                                    
                                     <li v-for="element in config.sortParams" :key="element" @click="testOpenSort = !testOpenSort;selectedSort=element;fetchAndSetListingsStartInfo();">
                                         <span>{{element.name}}</span>
                                     </li>                        

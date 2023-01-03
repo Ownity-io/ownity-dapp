@@ -25,7 +25,8 @@ export default {
       searchString:'',
       activitiesResults:[],
       nextActivitiesLink:null,
-      lastActivitiesResponse:null
+      lastActivitiesResponse:null,
+      currentActivitiesCategory:null
     };
   },
   getters: {
@@ -120,6 +121,9 @@ export default {
     },
     getNextActivitiesLink(state){
       return state.nextActivitiesLink;
+    },
+    getCurrentActivitiesCategory(state){
+      return state.currentActivitiesCategory;
     }
   },
   mutations: {
@@ -197,6 +201,9 @@ export default {
         state.activitiesResults = state.activitiesResults.concat(_json.results);
       }
       state.lastActivitiesResponse = _json;
+    },
+    setCurrentActivitiesCategory(state,value){
+      state.currentActivitiesCategory = value;
     }
   },
   actions: {
@@ -295,6 +302,7 @@ export default {
       context.commit("setCurrentBidStatus",null);
       context.commit("setOnSale",false);
       context.commit("setSearchString",'');
+      context.commit("setCurrentActivitiesCategory",null)
     },
     async setCurrentlyGathering(context,value){
       context.commit("setCurrentlyGathering", value);
@@ -442,6 +450,15 @@ export default {
       console.log(params.collectionAddress);
       context.commit("setActivitiesResult", null);
       let requestUrl = `${config.backendApiEntryPoint}user-activity/?limit=${config.activitiesPerPage}`;
+      if (context.getters.getCurrentActivitiesCategory){
+        requestUrl+=`&part=${context.getters.getCurrentActivitiesCategory}`
+      }
+      if (params.collectionAddress){
+        requestUrl+=`&collection=${params.collectionAddress}`
+      }
+      if (context.getters.getCurrentCollectionContractAddress){
+        requestUrl+=`&collection=${context.getters.getCurrentCollectionContractAddress}`
+      }
       console.log(requestUrl)
       let request = await fetch(requestUrl);
       let requestCode = request.ok;
@@ -466,6 +483,9 @@ export default {
       } else {
         context.commit("addActivitiesResult", null);
       }
+    },
+    async getAndSetCurrentActivitiesCategory(context,value){
+      context.commit("setCurrentActivitiesCategory", value);
     }
   },
 };
