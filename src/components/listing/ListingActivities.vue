@@ -18,7 +18,7 @@
                 <div class="td td-price">
                     <div class="td-wrap">
                         <div class="td-wrap-price">
-                            <div class="icon-token"></div> 
+                            <div class="icon-token eth"></div> 
                             <span>12.90 ETH</span>
                         </div>
                         <span class="td-light">≈ $ 1000</span>

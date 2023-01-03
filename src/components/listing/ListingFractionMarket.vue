@@ -18,7 +18,7 @@
                 <div class="td td-price">
                     <div class="td-wrap">
                         <div class="td-wrap-price">
-                            <div class="icon-token"></div> 
+                            <div class="icon-token eth"></div> 
                             <span>{{abbrNum(toFixedIfNecessary(convertToEther(element.price),6),2)}} ETH</span>
                         </div>
                         <span class="td-light">≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(element.price)*currencyToUsdPrice,6),2)}}</span>
