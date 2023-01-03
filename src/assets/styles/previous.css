@@ -418,6 +418,9 @@ body.previous-page a.collection-id:hover span {
 .prev-card-status.green:after {
     background: #06F46B;
 }
+.prev-card-status.orange:after {
+    background: yellow;
+}
 
 .prev-card-contributors {
     font-weight: 400;
