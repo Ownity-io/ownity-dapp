@@ -26,7 +26,8 @@ export default {
       activitiesResults:[],
       nextActivitiesLink:null,
       lastActivitiesResponse:null,
-      currentActivitiesCategory:null
+      currentActivitiesCategory:null,
+      activitiesByUser:false
     };
   },
   getters: {
@@ -124,6 +125,9 @@ export default {
     },
     getCurrentActivitiesCategory(state){
       return state.currentActivitiesCategory;
+    },
+    getActivitiesByUser(state){
+      return state.activitiesByUser;
     }
   },
   mutations: {
@@ -204,6 +208,9 @@ export default {
     },
     setCurrentActivitiesCategory(state,value){
       state.currentActivitiesCategory = value;
+    },
+    setActivitiesByUser(state,value){
+      state.activitiesByUser = value;
     }
   },
   actions: {
@@ -460,7 +467,23 @@ export default {
         requestUrl+=`&collection=${context.getters.getCurrentCollectionContractAddress}`
       }
       console.log(requestUrl)
-      let request = await fetch(requestUrl);
+      let request = null;
+      if (params.userAddress){
+        context.commit('setActivitiesByUser',true);
+        request = await fetch(requestUrl,
+          {
+            method: "GET",
+          headers: {
+            accept: "application/json",
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          }
+          });
+      }
+      else{
+        context.commit('setActivitiesByUser',false);
+        request = await fetch(requestUrl);
+      }      
       let requestCode = request.ok;
       if (requestCode) {
         let requestJson = await request.json();
@@ -472,7 +495,21 @@ export default {
     async fetchAndSetNextActivitiesResult(context){
       let requestUrl = context.getters.getNextActivitiesLink;
       if (requestUrl != null) {
-        let request = await fetch(requestUrl);
+        let request = null;
+        if (context.getters.getActivitiesByUser){
+          request = await fetch(requestUrl,{
+            method: "GET",
+          headers: {
+            accept: "application/json",
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          }
+          });
+        }
+        else{
+          request = await fetch(requestUrl);
+        }
+        
         let requestCode = request.ok;
         if (requestCode) {
           let requestJson = await request.json();
