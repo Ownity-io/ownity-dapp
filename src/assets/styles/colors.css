@@ -28,6 +28,7 @@
 .total-block-describe a:hover,
 .data-td a:hover span,
 a.collection-id:hover span,
+a.td-wrap-link:hover span,
 .footer-row.footer-row-info .footer-part:not(.footer-social-links) a:hover {
     background-image: linear-gradient(89.43deg, #3E80FF -3.17%, #2457D5 109.46%);
     -webkit-background-clip: text;
@@ -36,7 +37,9 @@ a.collection-id:hover span,
     text-fill-color: transparent;
     -webkit-text-fill-color: transparent;
     transition: background-image 200ms ease;
-    text-decoration: underline !important;
+    text-decoration: underline;
+    text-underline-position: under;
+    text-decoration-color: #3E80FF;
     background-position: center;
 }
 
