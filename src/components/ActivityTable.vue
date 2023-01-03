@@ -16,7 +16,7 @@
                         <div class="collection-data">
                             <span class="collection-id" v-if="item.lot.name">{{item.lot.name}}</span>
                             <span class="collection-id" v-else>#{{item.lot.token_id}}</span>
-                            <span class="td-light collection-id">Mutant Ape Yacht Club</span>
+                            <span class="td-light collection-id">{{item.lot.collection.name}}</span>
                         </div>
                     </div>
                 </div>

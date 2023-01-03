@@ -23,13 +23,13 @@
       <div class="container">
         <ul class="tabs">
           <li>
-            <button @click="activeTab = 0" :class="{ 'active-tab': activeTab == 0 }">
+            <button @click="activeTab = 0;this.$store.dispatch('marketplace/setAllFiltersToNull')" :class="{ 'active-tab': activeTab == 0 }">
               <span>{{translatesGet('ITEMS')}}</span>
               <span>{{translatesGet('ITEMS')}}</span>
             </button>
           </li>
           <li>
-            <button @click="activeTab = 1" :class="{ 'active-tab': activeTab == 1 }">
+            <button @click="activeTab = 1;this.$store.dispatch('marketplace/setAllFiltersToNull')" :class="{ 'active-tab': activeTab == 1 }">
               <span>{{translatesGet('ACTIVITY')}}</span>
               <span>{{translatesGet('ACTIVITY')}}</span>
             </button>

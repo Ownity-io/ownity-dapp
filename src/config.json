@@ -81,5 +81,23 @@
             "rpcUrls": ["https://eth-goerli.public.blastapi.io"],
             "blockExplorerUrls": ["https://goerli.etherscan.io/"]
         }
-    }
+    },
+    "activitiesPart":[
+        {
+            "name":"Claims",
+            "codeName":"Claims"
+        },
+        {
+            "name":"Fractions",
+            "codeName":"Fractions"
+        },
+        {
+            "name":"Purchase",
+            "codeName":"Purchase"
+        },
+        {
+            "name":"Sales",
+            "codeName":"Sales"
+        }
+    ]
 }
