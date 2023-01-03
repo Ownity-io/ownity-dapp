@@ -310,6 +310,7 @@ export default {
       context.commit("setOnSale",false);
       context.commit("setSearchString",'');
       context.commit("setCurrentActivitiesCategory",null)
+      context.commit("setSelectedSort",null)
     },
     async setCurrentlyGathering(context,value){
       context.commit("setCurrentlyGathering", value);
@@ -465,6 +466,9 @@ export default {
       }
       if (context.getters.getCurrentCollectionContractAddress){
         requestUrl+=`&collection=${context.getters.getCurrentCollectionContractAddress}`
+      }
+      if (context.getters.getSelectedSort){
+        requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`
       }
       console.log(requestUrl)
       let request = null;

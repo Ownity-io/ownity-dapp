@@ -23,13 +23,13 @@
       <div class="container">
         <ul class="tabs">
           <li>
-            <button @click="activeTab = 0;this.$store.dispatch('marketplace/setAllFiltersToNull')" :class="{ 'active-tab': activeTab == 0 }">
+            <button @click="activeTab = 0;this.$store.dispatch('marketplace/setAllFiltersToNull');initInfo()" :class="{ 'active-tab': activeTab == 0 }">
               <span>{{translatesGet('ITEMS')}}</span>
               <span>{{translatesGet('ITEMS')}}</span>
             </button>
           </li>
           <li>
-            <button @click="activeTab = 1;this.$store.dispatch('marketplace/setAllFiltersToNull')" :class="{ 'active-tab': activeTab == 1 }">
+            <button @click="activeTab = 1;this.$store.dispatch('marketplace/setAllFiltersToNull');initInfo()" :class="{ 'active-tab': activeTab == 1 }">
               <span>{{translatesGet('ACTIVITY')}}</span>
               <span>{{translatesGet('ACTIVITY')}}</span>
             </button>
@@ -159,9 +159,14 @@ export default {
       return this.lang.get(key);
     },
     async initInfo(){
-      await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
-      await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
-      await this.$store.dispatch('marketplace/fetchAndSetMarketplaces');
+      if (this.activeTab == 1) {
+        await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:null});
+      }
+      else {
+        await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
+        await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
+        await this.$store.dispatch('marketplace/fetchAndSetMarketplaces');
+      }      
     }
   },
   computed:{

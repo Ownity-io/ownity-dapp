@@ -116,7 +116,7 @@
                         <li>
                             <button
                             :class="{ 'active-tab': activeTab === 'ActivityTable'}"
-                            @click="letsCheck('ActivityTable');this.$store.dispatch('marketplace/setAllFiltersToNull');"
+                            @click="letsCheck('ActivityTable');this.$store.dispatch('marketplace/setAllFiltersToNull');this.fetchAndSetListingsStartInfo()"
                             >
                                 <span>{{translatesGet('ACTIVITIES')}}</span>
                                 <span>{{translatesGet('ACTIVITIES')}}</span>
@@ -253,26 +253,18 @@ export default {
             localStorage.clear();
         },
         async fetchAndSetListingsStartInfo() {
-            if (this.$route.name == 'Marketplace') {
-                await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
+            if (this.onlyFav) {
+                await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
             }
-            else if (this.$route.name == 'Collection') {
-                console.log(this.currentlyGathering);
-                await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo', this.$route.params.contract_address);
+            else if (this.vote) {
+                await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');
             }
-            else if (this.$route.name == 'Profile') {
-                if (this.onlyFav) {
-                    await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
-                }
-                else if (this.vote) {
-                    await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');
-                }
-                else {
-                    await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');
-                }
-
+            else if(this.activeTab == 'ActivityTable'){
+                await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:this.userAddress,collectionAddress:null}); 
             }
-
+            else {
+                await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');
+            }
         },
     },
     computed:{
