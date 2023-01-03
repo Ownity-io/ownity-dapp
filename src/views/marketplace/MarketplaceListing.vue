@@ -280,7 +280,7 @@
                     <Chart :chartData='chartData'/>
                   </div>
                   <div class="table-chart-data">
-                    <div class="members-hide"></div>
+                    <div :class="{'members-hide' : this.item.bids.length>5}"></div>
                     <div class="table table-chart">
                       <div class="thead">
                         <div class="td">{{translatesGet('OWNER')}}</div>
