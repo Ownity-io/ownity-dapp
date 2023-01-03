@@ -85,7 +85,8 @@ main>section {
     background-position: left center;
     background-size: contain;
     background-repeat: no-repeat;
-    min-width: 219px;
+    min-width: 15.2%;
+    max-width: 219px;
     min-height: 32px;
     /* height: 100%; */
 }
@@ -93,7 +94,8 @@ main>section {
 .footer-logo,
 .footer-row .copyright,
 .header-logo {
-    min-width: 219px;
+    min-width: 15.2%;
+
     display: block;
 }
 
@@ -342,7 +344,10 @@ textarea {
     max-width: 220px;
     flex-grow: 1;
 }
+.footer-block .footer-logo {
+    min-width: 100%;
 
+}
 .footer-block.footer-block-form {
     max-width: fit-content;
     min-width: fit-content;
@@ -2771,6 +2776,7 @@ a.td-wrap-link span {
     font-size: 16px;
     line-height: 19px;
     color: #000000;
+    text-align: left;
 }
 
 .content-faq {
