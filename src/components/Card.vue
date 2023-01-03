@@ -236,7 +236,7 @@
               @mouseover="showFullName = true"
               @mouseout="showFullName = false"
               ><span>#{{item.token_id}}</span></div>    
-            <div>{{item.collection.name}}</div>
+              <a :href="'/collection/'+item.collection.contract_address"><span>{{item.collection.name}}</span></a>
           </div>
           <div class="data-td data-td-value">
             <div class="card-value">
@@ -256,7 +256,7 @@
               @mouseover="showFullName = true"
               @mouseout="showFullName = false"
               ><span>#{{item.token_id}}</span></div>    
-            <div>{{item.collection.name}}</div>
+            <a :href="'/collection/'+item.collection.contract_address"><span>{{item.collection.name}}</span></a>
           </div>
           <div class="data-td data-td-value">
             <div class="card-value">
