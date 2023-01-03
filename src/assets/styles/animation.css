@@ -664,7 +664,8 @@
     display: flex;
     justify-content: space-between;
     margin-top: 19px;
-    margin-bottom: 23px;
+    gap: 8px;
+    margin-bottom: 24px;
 }
 
 .coins-marketplaces-soon {
@@ -692,6 +693,8 @@
 .information-of-nft {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
 }
 
 .information-wrapper p {
@@ -708,10 +711,10 @@
     padding-left: 24px;
 }
 .aggregator {
-    max-width: 1438px;
+    /* max-width: 1438px; */
     width: 100%;
     margin: 0 auto;
-    padding: 0 32px;
+    /* padding: 0 32px; */
 }
 
 .information-wrapper .design {
@@ -821,10 +824,10 @@
 
 .previous-third-screen {
     padding-top: 180px;
-    max-width: 1441px;
+    /* max-width: 1441px; */
     width: 100%;
-    padding-left: 16px;
-    padding-right: 16px;
+    /* padding-left: 16px;
+    padding-right: 16px; */
     margin: 0 auto;
 }
 

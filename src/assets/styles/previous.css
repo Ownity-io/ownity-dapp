@@ -274,8 +274,12 @@ body.previous-page .main-bg {
 
 .previous-first-screen-content {}
 
+body.previous-page footer{
+    padding-top: 0;
+}
 body.previous-page footer::after {
     background: #111111;
+    display: none;
 }
 
 /* ---------------- BUTTONS ----------------- */
@@ -294,9 +298,9 @@ body.previous-page .footer-block .footer-block-name {
     text-fill-color: transparent;
     -webkit-text-fill-color: transparent;
     transition: background-image 200ms ease;
-    text-decoration: underline;
-    text-underline-position: under;
-    text-decoration-color: #3E80FF;
+    /* text-decoration: underline; */
+    /* text-underline-position: under; */
+    /* text-decoration-color: #3E80FF; */
     background-position: center;
 }
 
@@ -752,5 +756,26 @@ body.previous-page .footer-section.footer-section-first .footer-block.footer-blo
 
     .email-block button {
         max-width: 96px;
+    }
+}
+
+@media (max-width: 1440px) {
+    .aggregator-right > div{
+        transform: scale(.5) translateX(50%);
+        transform-origin: center left;
+    }
+    .aggregator-right{
+        transform: scale(1.5);
+        transform-origin: center;
+    }
+    .fractional-right {
+        transform: scale(.75);
+        transform-origin: right center;
+    }
+    .factional-nft-3 .nft-procent{
+        left: 65px;
+    }
+    .factional-nft-2 .nft-procent{
+        right: 160px;
     }
 }
