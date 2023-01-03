@@ -7,7 +7,7 @@
             <div class="mobile-menu-container container">
             <div class="btn-container">
               <a href="#list" class="btn btn-connect">
-                <span>Beta Whitelist</span>
+                <span>Beta Waitlist</span>
               </a>
             </div>
             </div>
@@ -43,10 +43,11 @@
                                 Twitter
                             </a>
                         </li>
-                        <li>
+                        <li class="link-disabled">
                             <a >
                                 <Telegram />
                                 Telegram
+                                <span class="soon">soon</span>
                             </a>
                         </li>
                         <li class="link-disabled">
@@ -140,10 +141,11 @@
                                             Twitter
                                         </a>
                                     </li>
-                                    <li>
+                                    <li class="link-disabled">
                                         <a >
                                             <Telegram />
                                             Telegram
+                                            <span class="soon">soon</span>
                                         </a>
                                     </li>
                                     <li class="link-disabled">
@@ -182,7 +184,7 @@
                     </nav>
                     <div class="btn-container">
                         <a href="#list" class="btn btn-connect">
-                          Beta Whitelist
+                          Beta Waitlist
                         </a>
                     </div>
                 </div>

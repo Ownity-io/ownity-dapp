@@ -9,9 +9,9 @@
                         <p>Your Gateway To The Fractionalized World</p>
                         <div class="footer-part footer-social-links">
                             <ul class="social-links-wrap">
-                                <li><a href=""><i class="i-twitter-fill"></i></a></li>  
-                                <li><a href=""><i class="i-facebook-fill"></i></a></li>  
-                                <li><a href=""><i class="i-telegram-fill"></i></a></li>  
+                                <li><a href="https://twitter.com/ownity_io" target="_blank"><i class="i-twitter-fill"></i></a></li>
+                                <li><a href=""><i class="i-facebook-fill"></i></a></li>
+                                <li><a href=""><i class="i-telegram-fill"></i></a></li>
                                 <!-- <li><a href=""><i class="i-discord-line"></i></a></li>   -->
                             </ul>
                         </div>
@@ -140,5 +140,8 @@ data() {
 .collection-wrapper a,
 footer a {
     pointer-events: none;
+}
+.social-links-wrap a {
+    pointer-events: auto;
 }
 </style>

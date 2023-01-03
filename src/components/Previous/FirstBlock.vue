@@ -8,7 +8,6 @@
   </div>
 </template>
 
-
 <script>
 
 import { Vue3Lottie } from 'vue3-lottie'
