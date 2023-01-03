@@ -40,10 +40,15 @@ export default {
 	  });
 
 	  function LottieScrollTrigger(vars) {
+		  let innerW = window.innerWidth
+		  if (innerW < 600){
+			  vars.path = 'https://lottie.host/2f2a7471-784d-4bcf-b845-233aa44acb96/iYqPSIIEgb.json'
+		  }
 		  let playhead = {frame: 0},
 			  target = gsap.utils.toArray(vars.target)[0],
 			  speeds = {slow: "+=2000", medium: "+=1000", fast: "+=70"},
 			  st = {trigger: target, pin: false, start: 5, end: speeds[vars.speed] || "+=70",},
+
 			  animation = lottie.loadAnimation({
 				  container: target,
 				  renderer: vars.renderer || "svg",
@@ -54,6 +59,7 @@ export default {
 		  for (let p in vars) { // let users override the ScrollTrigger defaults
 			  st[p] = vars[p];
 		  }
+
 		  animation.addEventListener("DOMLoaded", function() {
 			  gsap.to(playhead, {
 				  frame: animation.totalFrames - 1,
