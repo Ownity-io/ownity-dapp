@@ -117,7 +117,10 @@
                   v-else-if="this.item.internal_status=='ON SALE'"></a>
                 </div>
                 <div class="deposit-data">
-                  <div class="deposit-listened deposit-listened-link" v-if="this.item.internal_status!='OWNED' & this.item.internal_status!='ON SALE'"><a target="_blank" :href='linkToMarketplacePage' >
+                  <div class="deposit-listened deposit-listened-link" v-if="this.item.internal_status=='SOLD'"><a target="_blank" :href='linkToMarketplacePage' >
+                    Solded on {{item.marketplace.name}}
+                    {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>
+                  <div class="deposit-listened deposit-listened-link" v-else-if="this.item.internal_status!='OWNED' & this.item.internal_status!='ON SALE'"><a target="_blank" :href='linkToMarketplacePage' >
                     {{translatesGet('AVAILABLE_ON')}} {{item.marketplace.name}}
                     {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>
                   <div class="deposit-listened deposit-listened-link" v-else-if="this.item.internal_status=='OWNED'" ><a target="_blank" :href='linkToMarketplacePage' 
@@ -137,7 +140,7 @@
                     <span><b>{{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount),6),2)}} ETH</b></span>
                     <span class="equivalent">(≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount) *currencyToUsdPrice,2),2)}})</span>
                   </div>
-                  <div class="deposit-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='SOLD'">
+                  <div class="deposit-value" v-if="item.marketplace_status=='CLOSED' & item.internal_status=='SOLD'">
                     <div class="icon-token eth"></div>
                     <span><b>{{priceInCurrency}} ETH</b></span>
                     <span class="equivalent">(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
