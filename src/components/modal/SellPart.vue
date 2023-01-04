@@ -198,13 +198,8 @@ export default {
     toFixedIfNecessary(value, dp) {
       return +parseFloat(value).toFixed(dp);
     },
-    convertToEther(value){
-      // try{
-        return ethers.utils.formatEther(String(value));
-      // }
-      // catch{
-      //   console.log('ethers error');
-      // }
+    convertToEther(value) {
+      return ethers.utils.formatEther(String(value));
     },
     noExponents (value) {
       var data = String(value).split(/[eE]/);
@@ -287,6 +282,9 @@ export default {
       }
       else if (isNaN(this.priceForPart)){
           this.priceForPart = parseInt(this.priceForPart) 
+          if (isNaN(this.priceForPart)){
+            this.priceForPart = null
+          }
       }
       this.sellFractionFee = this.noExponents((this.contractConfig[0].sell_fraction_fee/100)/100*this.noExponents(this.convertFromEtherToWei(this.priceForPart)));
     },
