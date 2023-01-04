@@ -59,7 +59,7 @@
               <div class="icon-value"></div>
               <div class="card-col-value">
                 <strong>{{abbrNum(toFixedIfNecessary(convertToEther(bidOnSale.price),6),2)}} ETH</strong>
-                <span class="equivalent">≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(bidOnSale.price)*currencyToUsdPrice,2),2)}}</span>
+                <span class="equivalent">≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(bidOnSale.price)*currencyToUsdPrice,4),2)}}</span>
               </div> 
             </div>
 
@@ -376,7 +376,7 @@
         <div class="deposit-value" v-if="this.item.internal_status=='ON SALE' & this.voting!=null">
           <div class="icon-token eth"></div>
           <span><b>{{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount),6),2)}} ETH</b></span>
-          <span class="equivalent">(≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount)*currencyToUsdPrice,2),2)}})</span>
+          <span class="equivalent">(≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount)*currencyToUsdPrice,4),2)}})</span>
         </div>
         <!-- ######## 5 ######## -->
         <!-- <div class="deposit-value">
