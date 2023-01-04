@@ -10,7 +10,7 @@
           <div class="input-checkbox input-switcher">
             <input type="checkbox" id="input-switch" v-model="currentlyGathering" @change="fetchAndSetListingsStartInfo"/>
             <label for="input-switch">
-              <span>Live gather</span>
+              <span>{{translatesGet('LIVE_GATHER')}}</span>
               <div class="input-switch"></div>
             </label>
           </div>
@@ -27,7 +27,7 @@
           <div class="input-checkbox input-switcher">
             <input type="checkbox" id="input-switch" v-model="currentlyGathering" @change="fetchAndSetListingsStartInfo"/>
             <label for="input-switch">
-              <span>Live gather </span>
+              <span>{{translatesGet('LIVE_GATHER')}}</span>
               <div class="input-switch"></div>
             </label>
           </div>
@@ -147,6 +147,7 @@
 
 <script>
 import config from '@/config.json';
+import MultiLang from "@/core/multilang";
 import { max } from 'bn.js';
 import { vue3Debounce } from 'vue-debounce';
 export default {
@@ -160,7 +161,8 @@ export default {
       config:config,
       maxPrice:null,
       minPrice:null,
-      userAddress:null
+      userAddress:null,
+      lang: new MultiLang(this),
     };
   },
   methods:{

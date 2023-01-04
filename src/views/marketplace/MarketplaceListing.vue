@@ -272,8 +272,8 @@
                       :class="{ 'active-tab': activeTab2 === 'ListingVote' }"
                       @click="letsCheck2('ListingVote')"
                       >
-                      <span>{{translatesGet('VOTE')}}</span>
-                      <span>{{translatesGet('VOTE')}}</span>
+                      <span>{{translatesGet('VOTES')}}</span>
+                      <span>{{translatesGet('VOTES')}}</span>
                     </button>
                   </li>
                 </ul>
@@ -328,7 +328,7 @@
 
                   <div class="active-votes" id="votes">
                     <div class="votes-wrap-title">
-                      {{translatesGet('ACTIVE')}}
+                      {{translatesGet('ACTIVE_VOTE')}}
                     </div>
                     <ListingVote v-for="voting in this.item.votings" :item="this.item" :voting="voting"/>
                   </div>
@@ -336,6 +336,7 @@
                   <!-- <div class="inactive-votes">
                     <div class="votes-wrap-title">
                       Inactive
+                      {{translatesGet('ENDED_VOTE')}}
                     </div>
                     <ListingVote v-for="voting in this.item.votings" :item="this.item" :voting="voting"/>
                   </div> -->
