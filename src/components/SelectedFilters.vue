@@ -36,7 +36,7 @@
             </li>
             <li v-if="this.$store.getters['marketplace/getCurrentlyGathering']!=false" @click="this.$store.dispatch('marketplace/setCurrentlyGathering',false);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')">
                 <button class="btn btn-selected-filter">
-                    <span>Live gather</span>
+                    <span>{{translatesGet('LIVE_GATHER')}}</span>
                     <i class="i-close-line"></i>
                 </button>
             </li>
@@ -62,7 +62,7 @@
         <ul v-if="this.$store.getters['marketplace/getFiltersCount']>0 & this.$route.name=='Profile'">   
             <li v-if="this.$store.getters['marketplace/getCurrentlyGathering']!=false" @click="this.$store.dispatch('marketplace/setCurrentlyGathering',false);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')">
                 <button class="btn btn-selected-filter">
-                    <span>Live gather</span>
+                    <span>{{translatesGet('LIVE_GATHER')}}</span>
                     <i class="i-close-line"></i>
                 </button>
             </li> 
@@ -133,7 +133,7 @@
         <ul v-if="this.$store.getters['marketplace/getFiltersCount']>0 & this.$route.name=='Collection'">   
             <li v-if="this.$store.getters['marketplace/getCurrentlyGathering']!=false" @click="this.$store.dispatch('marketplace/setCurrentlyGathering',false);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address)">
                 <button class="btn btn-selected-filter">
-                    <span>Live gather</span>
+                    <span>{{translatesGet('LIVE_GATHER')}}</span>
                     <i class="i-close-line"></i>
                 </button>
             </li> 

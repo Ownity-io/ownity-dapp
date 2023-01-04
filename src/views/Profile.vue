@@ -109,8 +109,8 @@
                         <li>
                             <button :class="{ 'active-tab': activeTab === 'Vote' }"
                             @click="letsCheck('Vote');this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');">
-                                <span>{{translatesGet('VOTE')}}</span>
-                                <span>{{translatesGet('VOTE')}}</span>
+                                <span>{{translatesGet('VOTES')}}</span>
+                                <span>{{translatesGet('VOTES')}}</span>
                             </button>
                         </li>
                         <li>
