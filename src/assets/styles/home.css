@@ -35,8 +35,8 @@
 
 .main-screen h1.section-name-h1 {
     font-weight: 700;
-    font-size: 128px;
-    line-height: 152px;
+    font-size: min(128px, 5vw);
+    line-height: min(152px, 7.2vw);;
     color: #333333;
 }
 

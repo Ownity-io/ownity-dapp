@@ -39,16 +39,25 @@ export default defineComponent({
     breakpoints: {
       // 320px and up
       0: {
-        itemsToShow: 1.94,
+        itemsToShow: 1.96,
         snapAlign: 'center',
       },
       // 700px and up
       768: {
+        // itemsToShow: 1.94,
         itemsToShow: 2.935,
         snapAlign: 'center',
       },
       // 1024 and up
       1024: {
+        // itemsToShow: 4.95,
+        // itemsToShow: 2.8,
+        itemsToShow: 3.93,
+        snapAlign: 'start',
+      },
+      // 1024 and up
+      1425: {
+        // itemsToShow: 2.5,
         itemsToShow: 4.95,
         snapAlign: 'start',
       },
@@ -71,5 +80,65 @@ export default defineComponent({
 .cards-carousel .carousel__prev.carousel__prev--disabled,
 .cards-carousel .carousel__next.carousel__next--disabled{
   display: none;
+}
+
+.cards-carousel .carousel__viewport li.carousel__slide--visible .container-more-info {
+    left:unset;
+    transform: translate(0%, 100%);
+    right: 0;
+}
+
+@media (min-width:768px) {
+
+  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(1n) .container-more-info {
+    transform: translate(0px, 100%);
+    left:12px;
+    right: unset;
+  }
+  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(2n) .container-more-info {
+    transform: translate(-50%, 100%);
+    left:calc(50% + 12px);
+    right: 0;
+  }
+  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(3n) .container-more-info {
+    transform: translate(0px, 100%);
+    left:unset;
+    right: 0;
+  }
+}
+@media (min-width:1024px) {
+  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(1n) .container-more-info,
+  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(2n) .container-more-info  {
+    transform: translate(0px, 100%);
+    left:12px;
+    right: unset;
+  }
+  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(3n) .container-more-info,
+  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(4n) .container-more-info {
+    transform: translate(0px, 100%);
+    left:unset;
+    right: 0;
+  }
+}
+@media (min-width:1425px) {
+
+  /* :nth-child(an+b of s) */
+  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(1n) .container-more-info,
+  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(2n) .container-more-info  {
+    transform: translate(0px, 100%);
+    left:12px;
+    right: unset;
+  }
+  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(3n ) .container-more-info{
+    transform: translate(-50%, 100%);
+    left:calc(50% + 12px);
+    right: 0;
+  }
+  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(4n) .container-more-info,
+  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(5n) .container-more-info {
+    transform: translate(0px, 100%);
+    left:unset;
+    right: 0;
+  }
 }
 </style>
