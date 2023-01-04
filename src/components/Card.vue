@@ -58,8 +58,8 @@
             <div class="card-value">
               <div class="icon-value"></div>
               <div class="card-col-value">
-                <strong>{{abbrNum(toFixedIfNecessary(convertToEther(bidOnSale.price),6),2)}} ETH</strong>
-                <span class="equivalent">≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(bidOnSale.price)*currencyToUsdPrice,4),2)}}</span>
+                <strong>{{abbrNum(toFixedIfNecessary(convertToEther(bidOnSale.price),4),2)}} ETH</strong>
+                <span class="equivalent">≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(bidOnSale.price)*currencyToUsdPrice,2),2)}}</span>
               </div> 
             </div>
 
@@ -87,7 +87,7 @@
                   <td>
                     <div class="td-wrap-price">
                       <div class="icon-token eth"></div> 
-                      {{abbrNum(toFixedIfNecessary(convertToEther(element.amount),6),2)}}
+                      {{abbrNum(toFixedIfNecessary(convertToEther(element.amount),4),2)}}
                     </div>
                     </td>
                   <td>{{  toFixedIfNecessary(element.amount/this.item.price*100,0) }}%</td>
@@ -241,7 +241,7 @@
           <div class="data-td data-td-value">
             <div class="card-value">
               <div class="icon-value"></div>
-              {{abbrNum(toFixedIfNecessary(convertToEther(allBidsAmount),6),1)}}/<span><b>{{abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH</span>              
+              {{abbrNum(toFixedIfNecessary(convertToEther(allBidsAmount),4),1)}}/<span><b>{{abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH</span>              
             </div>
             <div class="equivalent">≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
 
@@ -312,7 +312,7 @@
               {{translatesGet('MY_PART')}}
               <div class="card-value">
                 <div class="icon-value"></div>
-                <span>{{abbrNum(toFixedIfNecessary(convertToEther(userBidAmount),6),2)}} ETH</span> 
+                <span>{{abbrNum(toFixedIfNecessary(convertToEther(userBidAmount),4),2)}} ETH</span> 
               </div>
             </div>
             <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
@@ -333,8 +333,8 @@
             <div class="card-value">
               <div class="icon-value"></div>
               <div class="card-col-value">
-                <strong>{{abbrNum(toFixedIfNecessary(convertToEther(userBidOnSale.fraction_amount),6),1)}} ETH</strong>
-                <span class="equivalent">≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(userBidOnSale.fraction_amount)*currencyToUsdPrice,6),1)}}</span>
+                <strong>{{abbrNum(toFixedIfNecessary(convertToEther(userBidOnSale.fraction_amount),4),1)}} ETH</strong>
+                <span class="equivalent">≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(userBidOnSale.fraction_amount)*currencyToUsdPrice,2),1)}}</span>
               </div> 
             </div>
           </div>
@@ -359,7 +359,7 @@
             <div class="deposit-label">
                   <div class="label-col">
                     <div class="icon-label" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></div>
-                    <b>{{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount),6),1)}} ETH</b>
+                    <b>{{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount),4),1)}} ETH</b>
                     <div>{{translatesGet('PROGRESS')}}: {{toFixedIfNecessary((this.voting.users.length/this.item.bids.length)*100,1)}}%</div>
                   </div>
                 </div>
@@ -375,8 +375,8 @@
         </div>
         <div class="deposit-value" v-if="this.item.internal_status=='ON SALE' & this.voting!=null">
           <div class="icon-token eth"></div>
-          <span><b>{{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount),6),2)}} ETH</b></span>
-          <span class="equivalent">(≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount)*currencyToUsdPrice,4),2)}})</span>
+          <span><b>{{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount),4),2)}} ETH</b></span>
+          <span class="equivalent">(≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount)*currencyToUsdPrice,2),2)}})</span>
         </div>
         <!-- ######## 5 ######## -->
         <!-- <div class="deposit-value">
@@ -434,7 +434,7 @@ export default {
       return this.lang.get(key);
     },
     setPriceInCurrency(){
-      this.priceInCurrency = this.toFixedIfNecessary((this.item.price / (10**this.item.currency.decimals)),6);
+      this.priceInCurrency = this.toFixedIfNecessary((this.item.price / (10**this.item.currency.decimals)),4);
     },
     async setCurrencyToUsd(){
       let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
