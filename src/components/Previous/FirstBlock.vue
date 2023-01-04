@@ -31,18 +31,18 @@ export default {
 
 	  LottieScrollTrigger({
 		  target: "#hand",
-		  path: "https://lottie.host/e3daafd8-a5e0-4249-b2fc-93d2e11e1394/7z4PUgAAWj.json",
+		  path: "https://lottie.host/6978bb15-7fa2-4467-a951-710cd865d6db/tJ3aKAFXb0.json",
 		  speed: "fast",
-		  pin: ".mains",
-		  start: 5,
-		  scrub: 0.1,
+		  pin: ".page-wrapper",
+		  start: 10,
+		  scrub: 1,
 		  markers: false
 	  });
 
 	  function LottieScrollTrigger(vars) {
 		  let innerW = window.innerWidth
 		  if (innerW < 600){
-			  vars.path = 'https://lottie.host/cb29afc7-7409-4491-a496-52a81c15464b/Un37Omlce4.json'
+			  vars.path = 'https://lottie.host/6c34b008-e7bc-4618-bfb8-bf82539ebc73/QBaT0A9gQe.json'
 		  }
 		  let playhead = {frame: 0},
 			  target = gsap.utils.toArray(vars.target)[0],
@@ -77,13 +77,16 @@ export default {
 .mains .scroll-element {
     display: block;
     width: 100%;
-    height: 100vh;
+    height: 90vh;
 }
 
 .mains .scroll-element #hand {
     display: block;
     width: 100% !important;
-    height: 900px !important;
+    height: 90vh !important;
     margin: 0 auto;
+}
+.page-wrapper {
+    padding: 0;
 }
 </style>
