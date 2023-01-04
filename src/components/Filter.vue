@@ -265,7 +265,10 @@ export default {
       if (this.minPrice) {
         this.$store.dispatch('marketplace/getAndSetCurrentMinPrice', this.minPrice);
       }
-    }
+    },
+    translatesGet(key) {
+      return this.lang.get(key);
+    },
   },
   computed:{
     checkedMarketplace:{
