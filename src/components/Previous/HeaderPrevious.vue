@@ -78,7 +78,7 @@
                     </button>
                     <ul class="header-drop-down">
                         <li>
-                            <a target="_blank" href="https://docs.google.com/document/d/1FlN7HPegj1-kAIxHrG3DwYsX8LHnY0HwwDQ7bAOZto8/edit?usp=sharing">Litepaper</a>
+                            <a target="_blank" href="https://ownity.gitbook.io/ownity-documentation/">Litepaper</a>
                         </li>
                         <li class="link-disabled">
                             <a href="">
@@ -163,7 +163,7 @@
                                 </button>
                                 <ul class="header-drop-down">
                                     <li>
-                                        <a target="_blank" href="https://docs.google.com/document/d/1FlN7HPegj1-kAIxHrG3DwYsX8LHnY0HwwDQ7bAOZto8/edit?usp=sharing">Litepaper</a>
+                                        <a target="_blank" href="https://ownity.gitbook.io/ownity-documentation/">Litepaper</a>
                                     </li>
                                     <li class="link-disabled">
                                         <a href="">
