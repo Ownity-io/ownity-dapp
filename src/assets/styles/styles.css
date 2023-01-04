@@ -347,6 +347,9 @@ textarea {
     justify-content: flex-start;
     max-width: 220px;
     flex-grow: 1;
+}
+
+.footer-block:not(.footer-block-form){
     margin-right: auto;
 }
 
