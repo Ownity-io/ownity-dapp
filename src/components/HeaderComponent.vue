@@ -47,7 +47,7 @@
                             {{translatesGet('CONNECT_WALLET')}}
                         </button>
                     </div>
-                    <div class="btn-container" v-else>
+                    <div class="btn-container" v-else-if="this.$store.getters['walletsAndProvider/getUserShortAddress']">
                         <router-link :to="{name:'Profile'}" class="btn btn-address" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/clearListingsInfo');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')">
                             <jazzicon :address="userAddress" :diameter="32" class="icon-address" v-if="userAddress"/>
                             <div class="icon-address" v-else></div>
