@@ -8,8 +8,8 @@
       }"
     >
       <div class="snackbar-status">
-        <i v-if="snackbarTest === 'success'" class="i-check-line"></i>
-        <i v-if="snackbarTest === 'wrong'" class="i-error-warning-line"></i>
+        <i v-if="snackbarTest" class="i-check-line"></i>
+        <i v-if="!snackbarTest" class="i-error-warning-line"></i>
       </div>
       <div class="snackbar-describe">
        {{this.snackText}}
