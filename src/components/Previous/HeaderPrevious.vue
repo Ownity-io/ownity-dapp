@@ -25,7 +25,7 @@
                     </button>
                     <ul class="header-drop-down">
                         <li>
-                            <a href="">About us</a>
+                            <a href="#litepaper">About us</a>
                         </li>
                         <li><a href="#faqs">FAQ</a></li>
                     </ul>
@@ -37,7 +37,7 @@
                     </button>
                     <ul class="header-drop-down">
                         <li>
-                            <a >
+                            <a href="https://twitter.com/ownity_io" target="_blank">
                                 <Twitter />
                                 Twitter
                             </a>
@@ -78,7 +78,7 @@
                     </button>
                     <ul class="header-drop-down">
                         <li>
-                            <a href="">Whitepaper</a>
+                            <a target="_blank" href="https://docs.google.com/document/d/1FlN7HPegj1-kAIxHrG3DwYsX8LHnY0HwwDQ7bAOZto8/edit?usp=sharing">Litepaper</a>
                         </li>
                         <li class="link-disabled">
                             <a href="">
@@ -121,7 +121,7 @@
                                 </button>
                                 <ul class="header-drop-down">
                                     <li>
-                                        <a href="">About us</a>
+                                        <a href="#litepaper">About us</a>
                                     </li>
                                     <li><a href="#faqs">FAQ</a></li>
                                 </ul>
@@ -134,7 +134,7 @@
                                 </button>
                                 <ul class="header-drop-down">
                                     <li>
-                                        <a >
+                                        <a href="https://twitter.com/ownity_io" target="_blank">
                                             <Twitter />
                                             Twitter
                                         </a>
@@ -163,7 +163,7 @@
                                 </button>
                                 <ul class="header-drop-down">
                                     <li>
-                                        <a href="">Whitepaper</a>
+                                        <a target="_blank" href="https://docs.google.com/document/d/1FlN7HPegj1-kAIxHrG3DwYsX8LHnY0HwwDQ7bAOZto8/edit?usp=sharing">Litepaper</a>
                                     </li>
                                     <li class="link-disabled">
                                         <a href="">

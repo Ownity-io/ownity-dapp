@@ -242,7 +242,7 @@
         "AGGREGATOR_LEFT-TITLE": "NFT Aggregator",
         "AGGREGATOR_LEFT-SUBTITLE": "The Ownity provides users with lightning-fast NFT aggregation and allows you to trade among major marketplaces such as OpenSea, LooksRare and X2Y2, thereby helping you find more listings and better prices.",
         "INFORMATION_OF_NFT-1": "NFT Standarts: ERC-721, ERC-1155",
-        "INFORMATION_OF_NFT-2": "NFT Standarts: ERC-721, ERC-1155",
+        "INFORMATION_OF_NFT-2": "Token Standart: ERC-20",
         "PREVIOUS_COLLECTIONS_TITLE": "Top Collections",
         "PREVIOUS_COLLECTIONS_SUBTITLE": "Explore all the top collections from the largest marketplaces and initiate a deal opening by contributing the minimum part.",
         "STILL_TITLE": "Still have questions?",
@@ -251,6 +251,5 @@
         "WHITELIST_TITLE": "Get in the Beta Testing Waitlist",
         "WHITELIST_SUBTITLE": "Become one of the first who will test all the functionality, and much more.",
         "CHECK_TERM": "By subscribing, you agree to the Terms of Use"
-
     }
 }
