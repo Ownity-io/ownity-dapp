@@ -123,7 +123,8 @@
                   <div class="deposit-listened deposit-listened-link" v-else-if="this.item.internal_status!='OWNED' & this.item.internal_status!='ON SALE'"><a target="_blank" :href='linkToMarketplacePage' >
                     {{translatesGet('AVAILABLE_ON')}} {{item.marketplace.name}}
                     {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>
-                  <div class="deposit-listened deposit-listened-link" v-else-if="this.item.internal_status=='OWNED'" ><a target="_blank" :href='linkToMarketplacePage' 
+                  <div class="deposit-listened deposit-listened-link" v-else-if="this.item.internal_status=='OWNED'" >
+                    <a target="_blank" :href='linkToMarketplacePage' 
                     >
                     {{translatesGet('BOUGHT_ON')}} {{item.marketplace.name}} 
                     {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>
@@ -283,14 +284,13 @@
                     <Chart :chartData='chartData'/>
                   </div>
                   <div class="table-chart-data">
-                    <div :class="{'members-hide' : this.item.bids.length>5}"></div>
-                    <div class="table table-chart">
+                    <div class="table table-chart" :class="{'tbody-overflow' : this.item.bids.length>5}">
                       <div class="thead">
                         <div class="td">{{translatesGet('OWNER')}}</div>
                         <div class="td">{{translatesGet('PCT')}}</div>
                         <div class="td td-price">{{translatesGet('PRICE')}}</div>
                       </div>
-                      <div class="tbody" :class="{'members' : this.item.bids.length>5}">
+                      <div class="tbody">
                         <div class="tr" v-for="bid in this.item.bids" :key="bid">
                         <div class="td td-owner">
                           <a
@@ -654,20 +654,5 @@ export default {
 </script>
 
 <style>
-  .members {
-      max-height: 316px;
-      overflow-y: scroll;
-      position: relative;
-  }
-  
-  
-  .members-hide {
-      width: 100%;
-      height: 76px;
-      position: absolute;
-      z-index: 2;
-      bottom: 0;
-      background: linear-gradient(360deg, #FFFFFF 46.88%, rgba(255, 255, 255, 0) 100%);
-  }
 
 </style>
