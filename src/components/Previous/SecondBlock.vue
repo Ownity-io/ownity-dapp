@@ -106,36 +106,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.factional-nft-5 .nft-procent-user-icon{
-    background-image: url("src/assets/images/ph1.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-.factional-nft-4 .nft-procent-user-icon{
-    background-image: url("src/assets/images/ph1.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-.factional-nft-3 .nft-procent-user-icon{
-    background-image: url("src/assets/images/ph2.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-.factional-nft-2 .nft-procent-user-icon{
-    background-image: url("src/assets/images/ph2.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-.factional-nft-1 .nft-procent-user-icon{
-    background-image: url("src/assets/images/ph1.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-</style>

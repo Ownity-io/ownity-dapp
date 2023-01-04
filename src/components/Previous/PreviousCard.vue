@@ -11,10 +11,10 @@
           <!-- <div class="card-id card-id-full">hjhhuhi</div> -->
           <div class="data-td">
             <a class="card-previous-collection collection-id">
-              <img class="card-previous-collection-img" :src="card.links"/>
+              <div class="card-previous-collection-img" :class="card.links"/>
               <span>{{card.collection}}</span>
-              <i class="i-checkbox-circle-fill"></i
-            ></a>
+              <i class="i-checkbox-circle-fill"></i>
+            </a>
           </div>
           <!-- <div class="data-td data-td-value">
             <div class="card-value">
@@ -92,26 +92,26 @@ export default {
 					name: 'MAYC #12625',
           collection: 'Mutant Ape Yacht Club',
           price: '29',
-          links: './src/assets/images/logos.png'
+          links: 'link-1'
 				},
 	      {
 		      name: 'MAYC #25986',
 		      collection: 'Mutant Ape Yacht Club',
 		      price: '17.45',
-		      links: './src/assets/images/logos.png'
+		      links: 'link-2'
 	      },
 	      {
 		      name: 'BAYC #5699',
 		      collection: 'Bored Ape Yacht Club',
 		      price: '200',
-		      links: './src/assets/images/l2.jpeg'
+		      links: 'link-3'
 
 	      },
 	      {
 		      name: 'OFO #9429',
 		      collection: 'Otherdeed for Otherside',
 		      price: '69.95',
-		      links: './src/assets/images/l2.webp'
+		      links: 'link-4'
 
 	      }
       ]
