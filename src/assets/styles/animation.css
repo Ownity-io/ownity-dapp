@@ -1010,44 +1010,44 @@
 }
 
 .link-1{
-    background-image: url('./src/assets/images/logos.png');
+    background-image: url(../images/logos.png);
 }
 .link-2{
-    background-image: url('./src/assets/images/logos.png');
+    background-image: url(../images/logos.png);
 }
 .link-3{
-    background-image: url('./src/assets/images/l2.jpeg');
+    background-image: url(../images/l2.jpeg);
 }
 .link-4{
-   background-image: url('./src/assets/images/l2.webp');
+   background-image: url(../images/l2.webp);
 }
 
 .factional-nft-5 .nft-procent-user-icon{
-    background-image: url("src/assets/images/ph1.png");
+    background-image: url(../images/ph1.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
 }
 .factional-nft-4 .nft-procent-user-icon{
-    background-image: url("src/assets/images/ph1.png");
+    background-image: url(../images/ph1.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
 }
 .factional-nft-3 .nft-procent-user-icon{
-    background-image: url("src/assets/images/ph2.png");
+    background-image: url(../images/ph2.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
 }
 .factional-nft-2 .nft-procent-user-icon{
-    background-image: url("src/assets/images/ph2.png");
+    background-image: url(../images/ph2.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
 }
 .factional-nft-1 .nft-procent-user-icon{
-    background-image: url("src/assets/images/ph1.png");
+    background-image: url(../images/ph1.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
