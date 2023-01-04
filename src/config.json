@@ -32,29 +32,29 @@
     ],
     "sortParams":[
         {
-            "name":"Price low to high",
+            "name":"Price: Low to High",
             "codeName":"price"
         },
         {
-            "name":"Price high to low",
+            "name":"Price: High to Low",
             "codeName":"-price"
         },
         {
-            "name":"Oldest",
+            "name":"Listing: Old to New",
             "codeName":"timestamp"
         },
         {
-            "name":"Newest ",
+            "name":"Listing: New to Old",
             "codeName":"-timestamp"
         }
     ],
     "sortParamsActivities":[
         {
-            "name":"Oldest",
+            "name":"Listing: Old to New",
             "codeName":"timestamp"
         },
         {
-            "name":"Newest ",
+            "name":"Listing: New to Old",
             "codeName":"-timestamp"
         }
     ],

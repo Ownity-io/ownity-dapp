@@ -98,7 +98,9 @@ main>section {
 
     display: block;
 }
-
+.footer-row .copyright{
+    padding-right: var(--grid-pad);
+}
 .header-logo {
     margin-right: var(--grid-pad);
 }
