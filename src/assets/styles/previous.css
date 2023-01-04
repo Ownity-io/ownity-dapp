@@ -508,7 +508,7 @@ margin-right: auto; */
     gap: 8px;
 }
 
-.card-previous-collection img.card-previous-collection-img {
+.card-previous-collection div.card-previous-collection-img {
     position: absolute;
     top: 0;
     left: 0;

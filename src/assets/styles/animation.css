@@ -975,7 +975,7 @@
     .card-prev-amount {
         padding: 8px 8px 12px 8px;
     }
-    .card-previous-collection img.card-previous-collection-img {
+    .card-previous-collection div.card-previous-collection-img {
         height: 16px;
         min-width: 16px;
         width: 16px;
@@ -999,6 +999,58 @@
 .previous-first-screen {
     min-height: 100vh;
     width: 100vw;
+}
+.link-1,
+.link-2,
+.link-3,
+.link-4 {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.link-1{
+    background-image: url('./src/assets/images/logos.png');
+}
+.link-2{
+    background-image: url('./src/assets/images/logos.png');
+}
+.link-3{
+    background-image: url('./src/assets/images/l2.jpeg');
+}
+.link-4{
+   background-image: url('./src/assets/images/l2.webp');
+}
+
+.factional-nft-5 .nft-procent-user-icon{
+    background-image: url("src/assets/images/ph1.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.factional-nft-4 .nft-procent-user-icon{
+    background-image: url("src/assets/images/ph1.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.factional-nft-3 .nft-procent-user-icon{
+    background-image: url("src/assets/images/ph2.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.factional-nft-2 .nft-procent-user-icon{
+    background-image: url("src/assets/images/ph2.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.factional-nft-1 .nft-procent-user-icon{
+    background-image: url("src/assets/images/ph1.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 }
 
 
