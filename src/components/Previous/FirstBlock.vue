@@ -33,7 +33,7 @@ export default {
 		  target: "#hand",
 		  path: "https://lottie.host/6978bb15-7fa2-4467-a951-710cd865d6db/tJ3aKAFXb0.json",
 		  speed: "fast",
-		  pin: ".page-wrapper",
+		  pin: "#app",
 		  start: 10,
 		  scrub: 1,
 		  markers: false
