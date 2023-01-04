@@ -236,6 +236,7 @@ export default {
       this.userBidAmount=0;      
     },
     async sellPart(){
+      try{
       this.buttonWaiting=true;
       let prov = toRaw(this.provider);
       let chainSettings = toRaw(this.config.evmChains[this.item.collection.blockchain])
@@ -247,7 +248,9 @@ export default {
           await prov.send('wallet_addEthereumChain',[chainSettings]);  
         }
         catch{
-          alert('Error!!!!');
+          await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
+          await this.$store.dispatch('appGlobal/setGreenSnack',false)
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
         }
       }     
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await prov.getSigner());  
@@ -270,8 +273,17 @@ export default {
         await this.$store.dispatch('appGlobal/setShowSellPartModal', false);
         await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
         this.buttonWaiting = false;
-        console.log('Error in contract');
+        await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
+        await this.$store.dispatch('appGlobal/setGreenSnack',false)
+        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
       }
+    }
+    catch{
+        await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
+        await this.$store.dispatch('appGlobal/setGreenSnack', false)
+        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)
+        this.buttonWaiting = false;
+    }
     },
     translatesGet(key) {
             return this.lang.get(key);

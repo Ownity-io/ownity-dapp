@@ -215,7 +215,9 @@ export default {
           location.reload();
         }
         else {
-          alert('Error!');
+          await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
+          await this.$store.dispatch('appGlobal/setGreenSnack',false)
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
         }
     },
     async setUserBidAmount(){
