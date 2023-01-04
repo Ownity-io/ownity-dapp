@@ -33,9 +33,9 @@ export default {
 		  target: "#hand",
 		  path: "https://lottie.host/6978bb15-7fa2-4467-a951-710cd865d6db/tJ3aKAFXb0.json",
 		  speed: "fast",
-		  start: 10,
+		  start: -1,
       pin: true,
-		  scrub: 1,
+		  scrub: true,
 		  markers: false
 	  });
 

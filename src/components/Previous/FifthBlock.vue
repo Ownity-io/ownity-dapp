@@ -2,7 +2,7 @@
   <div class="still-inner">
     <p class="still-inner-title">{{translatesGet("STILL_TITLE")}}</p>
     <p class="still-inner-subtitle">{{translatesGet("STILL_SUBTITLE")}}</p>
-    <a class="still-inner-btn" href="https://docs.google.com/document/d/1FlN7HPegj1-kAIxHrG3DwYsX8LHnY0HwwDQ7bAOZto8/edit?usp=sharing" target="_blank">
+    <a class="still-inner-btn" href="https://ownity.gitbook.io/ownity-documentation/" target="_blank">
       Litepaper
     </a>
   </div>
