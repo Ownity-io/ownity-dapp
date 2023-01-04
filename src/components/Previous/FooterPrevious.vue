@@ -12,7 +12,7 @@
                                 <li><a href="https://twitter.com/ownity_io" target="_blank"><i style="color: #1DA1F2" class="i-twitter-fill"></i></a></li>
 <!--                                <li><a href=""><i class="i-facebook-fill"></i></a></li>-->
 <!--                                <li><a href=""><i class="i-telegram-fill"></i></a></li>-->
-                                 <li><a style="cursor: auto"><img src="../assets/images/discord.svg" alt="" class="discord" ></a></li>
+                                 <li><a style="cursor: auto"><img src="@/assets/images/discord.svg" alt="" class="discord" ></a></li>
                             </ul>
                         </div>
                         <p>contact@ownity.io</p>
