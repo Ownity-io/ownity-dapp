@@ -86,6 +86,57 @@ export default {
           this.collectionIsEmpty=true;
         }
     }
+    if (this.$route.name=='Profile'){
+      console.log('kek');
+      if (this.onlyFav) {
+        let requestUrl = `${config.backendApiEntryPoint}favorite-listings-by-user/?limit=${config.listingsPerPage}`;
+        let requestOptions = {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          }
+        };
+        let request = await fetch(requestUrl, requestOptions);
+        let requestJson = await request.json();
+        if (requestJson.count<=0){
+          this.collectionIsEmpty=true;
+        }
+      }
+      else if (this.vote) {
+        let requestUrl = `${config.backendApiEntryPoint}listings-with-voting-by-user/?limit=${config.listingsPerPage}`;
+        let requestOptions = {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          }
+        };
+        let request = await fetch(requestUrl, requestOptions);
+        let requestJson = await request.json();
+        if (requestJson.count<=0){
+          this.collectionIsEmpty=true;
+        }
+      }
+      else {
+        let requestUrl = `${config.backendApiEntryPoint}listings-by-user/?limit=${config.listingsPerPage}`;
+        let requestOptions = {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          }
+        };
+        let request = await fetch(requestUrl, requestOptions);
+        let requestJson = await request.json();
+        if (requestJson.count<=0){
+          this.collectionIsEmpty=true;
+        }
+      }
+    }
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
     }
