@@ -17,7 +17,10 @@
 }
 
 /* */
-.deposit-listened.deposit-listened-link:hover,
+.card .data-td a:hover,
+.owned-row a:hover,
+.td-wrap.td-wrap-collection:hover  .collection-id:not(.td-light),
+.deposit-listened.deposit-listened-link:hover a,
 .collection-data-link a:hover ,
 .total-block-describe a:hover ,
 .footer-list a:hover,
@@ -93,6 +96,7 @@ a.td-wrap-link:hover span,
 }
 .btn-modal-main:disabled{
     background: linear-gradient(89.43deg, #9A9A9A -3.17%, #818387 109.46%);
+    box-shadow: unset;
 }
 .switch,
 .btn-param,
