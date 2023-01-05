@@ -148,7 +148,6 @@
 <script>
 import config from '@/config.json';
 import MultiLang from "@/core/multilang";
-import { max } from 'bn.js';
 import { vue3Debounce } from 'vue-debounce';
 export default {
   data() {
@@ -199,7 +198,6 @@ export default {
       }      
     },
     async fetchAndSetListingsStartInfoMaxPrice() {
-      if (this.maxPrice!=null) {
         if (this.$route.name == 'Marketplace') {
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
         }
@@ -217,23 +215,21 @@ export default {
             await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
           }
         }
-      }      
     },
     checkMaxPrice(){     
       if (this.maxPrice == '') {
-        console.log(1);
         this.maxPrice = null;
       }
       else if (isNaN(this.maxPrice)) {
-        console.log(2);
-        this.maxPrice = null;
+        this.maxPrice = parseInt(this.maxPrice);
+        if (isNaN(this.maxPrice)){
+          this.maxPrice = null;
+        }
       }     
-      if (this.maxPrice){
-        this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', this.maxPrice); 
-      }           
+      this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', this.maxPrice); 
+        
     },
     async fetchAndSetListingsStartInfoMinPrice() {
-      if (this.minPrice != null) {
         if (this.$route.name == 'Marketplace') {
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
         }
@@ -251,20 +247,18 @@ export default {
             await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
           }
         }
-      }
     },
-    checkMinPrice() {
+    async checkMinPrice() {
       if (this.minPrice == '') {
-        console.log(1);
         this.minPrice = null;
       }
       else if (isNaN(this.minPrice)) {
-        console.log(2);
-        this.minPrice = null;
+        this.minPrice = parseInt(this.minPrice);
+        if (isNaN(this.minPrice)){
+          this.minPrice = null;
+        }
       }
-      if (this.minPrice) {
-        this.$store.dispatch('marketplace/getAndSetCurrentMinPrice', this.minPrice);
-      }
+      this.$store.dispatch('marketplace/getAndSetCurrentMinPrice', this.minPrice);
     },
     translatesGet(key) {
       return this.lang.get(key);
