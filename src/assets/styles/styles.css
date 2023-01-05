@@ -1846,9 +1846,9 @@ ul.tabs {
     gap: 16px;
 }
 
-.table-activities .thead,
-.table-activities .tr {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+.table-fraction .thead,
+.table-fraction .tr {
+    grid-template-columns: 1fr 1fr 1fr;
     border-bottom: 1px solid #DFE2EA;
     gap: 16px;
 }

@@ -18,35 +18,32 @@
             </div>
             <div class="modal-table">
 
-            <div class="tab-contain tab-activities">
-                <div class="table table-activities">
+            <div class="tab-contain">
+                <div class="table table-fraction">
                     <div class="thead">
-                        <div class="td">{{translatesGet('ACTIVITY_THEAD-2')}}</div>
-                        <div class="td td-price">{{translatesGet('ACTIVITY_THEAD-3')}}</div>
-                        <div class="td">{{translatesGet('ACTIVITY_THEAD-4')}}</div>
+                        <div class="td">{{translatesGet('ACTIVITY_THEAD-8')}}</div>
+                        <div class="td td-price">{{translatesGet('ACTIVITY_THEAD-6')}}</div>
+                        <div class="td">{{translatesGet('ACTIVITY_THEAD-7')}}</div>
                     </div>
                         
                     <div class="tr">
-                        <div class="td td-category">
-                            <div class="td-wrap td-wrap-category">
-                                <i class="i-shopping-bag-line"></i>
-                                <span>{{translatesGet('STATUS-SALE')}}</span>
+                        <div class="td td-owner">
+                            <div class="td-wrap">
+                                <span>0x4Eb4…53C7</span>
+                                <span class="label-owner">
+                                    {{translatesGet('YOU')}}
+                                </span>
                             </div>
                         </div>
                         <div class="td td-price">
                             <div class="td-wrap">
-                                <div class="td-wrap-price">
-                                    <div class="icon-token eth"></div> 
-                                    <span>12.90 ETH</span>
-                                </div>
-                                <span class="td-light">≈ $ 1000</span>
+                                20%
                             </div>
                         </div>
                         <div class="td"> 
-                            <a class="td-wrap td-wrap-link" href="" target="_blank" rel="nofollow">
-                                <span>a1565...d48d</span>
-                                <i class="i-external-link-line"></i>
-                            </a> 
+                            <div class="td-wrap td-wrap-vote" >
+                                <span>{{translatesGet('NOT_VOTE')}} </span>
+                            </div> 
                         </div>
                     </div>
                     

@@ -12,7 +12,7 @@
     <VoteStart v-if="this.$store.getters['appGlobal/getShowStartVotingModal'] & (this.walletConnected!=null & this.walletConnected!='null')" />
     <TransSuccess v-if="this.$store.getters['appGlobal/getShowTransSuccessModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
     <BuyPart v-if="this.$store.getters['appGlobal/getShowBuyPartModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/> 
-    <FractionActivity />
+    <!-- <FractionActivity /> -->
 
     <div class="wrapper-main">
         <HeaderComponent/>
