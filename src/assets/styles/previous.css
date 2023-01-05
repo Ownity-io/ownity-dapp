@@ -181,14 +181,15 @@ body.previous-page .header-nav ul li button span:nth-child(2) {
 
 .mobile-menu-list ul.header-drop-down a {
     font-weight: 400;
-font-size: 16px;
-line-height: 150%;
+    font-size: 16px;
+    line-height: 150%;
 }
 
 body.previous-page .mobile-menu .mobile-menu-item.drop-down-item {
     border-bottom: 1px solid #DFE2EA
 }
-.mobile-menu-list ul.header-drop-down a{
+
+.mobile-menu-list ul.header-drop-down a {
     border-bottom: unset
 }
 
@@ -273,9 +274,10 @@ body.previous-page .main-bg {
 
 .previous-first-screen-content {}
 
-body.previous-page footer{
+body.previous-page footer {
     padding-top: 0;
 }
+
 body.previous-page footer::after {
     background: #111111;
     display: none;
@@ -423,6 +425,7 @@ body.previous-page a.collection-id:hover span {
 .prev-card-status.green:after {
     background: #06F46B;
 }
+
 .prev-card-status.orange:after {
     background: yellow;
 }
@@ -443,7 +446,7 @@ body.previous-page a.collection-id:hover span {
 
 .previous-cards-screen .previous-screen-header {
     align-items: center;
-    max-width: 589px;
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -454,8 +457,10 @@ body.previous-page a.collection-id:hover span {
     justify-content: center;
     align-items: stretch;
     align-content: stretch;
-    width: 100%;
     gap: 24px;
+    margin-left: -12px;
+    margin-right: -12px;
+    width: calc(100% + 12px * 2);
 }
 
 .btn.btn-previous {
@@ -505,6 +510,13 @@ margin-right: auto; */
     line-height: 150%;
     padding-left: 28px;
     gap: 8px;
+    max-width: 100%;
+}
+
+.card-previous-collection span{
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: calc(100% - 16px);
 }
 
 .card-previous-collection div.card-previous-collection-img {
@@ -617,6 +629,7 @@ body.previous-page .footer-section.footer-section-first .footer-block.footer-blo
     color: #A4A4A4;
     margin-top: 43px;
 }
+
 .still-inner-title {
     font-weight: 400;
     font-size: 48px;
@@ -636,7 +649,7 @@ body.previous-page .footer-section.footer-section-first .footer-block.footer-blo
 
 }
 
-.still-inner-btn{
+.still-inner-btn {
     margin: 0 auto;
     background: #161619;
     border-radius: 8px;
@@ -692,7 +705,7 @@ body.previous-page .footer-section.footer-section-first .footer-block.footer-blo
     width: 100%;
 }
 
-.email-block input{
+.email-block input {
     background: #F8F9FD;
     border: 1px solid #DFE2EA;
     border-radius: 8px;
@@ -700,7 +713,7 @@ body.previous-page .footer-section.footer-section-first .footer-block.footer-blo
     color: #A8B0C4;
 }
 
-.email-block button{
+.email-block button {
     background: linear-gradient(180deg, #4D89FE 0%, #355FC9 100%);
     box-shadow: 0 0 20px rgba(73, 129, 239, 0.5);
     border-radius: 8px;
@@ -720,7 +733,7 @@ body.previous-page .footer-section.footer-section-first .footer-block.footer-blo
     height: 666px;
 }
 
-.whitelist-wrapper{
+.whitelist-wrapper {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -742,6 +755,7 @@ body.previous-page .footer-section.footer-section-first .footer-block.footer-blo
         font-size: 24px;
         line-height: 28px;
     }
+
     .whitelist-inner-subtitle {
         font-weight: 400;
         font-size: 18px;
@@ -759,10 +773,11 @@ body.previous-page .footer-section.footer-section-first .footer-block.footer-blo
 }
 
 @media (max-width: 1440px) {
-    .factional-nft-3 .nft-procent{
+    .factional-nft-3 .nft-procent {
         left: 65px;
     }
-    .factional-nft-2 .nft-procent{
+
+    .factional-nft-2 .nft-procent {
         right: 160px;
     }
 }
@@ -771,13 +786,16 @@ body.previous-page .footer-section.footer-section-first .footer-block.footer-blo
     .still-inner-title {
         font-size: 24px;
     }
-    .factional-nft-2 .nft-procent{
+
+    .factional-nft-2 .nft-procent {
         right: -22px;
     }
+
     .still-inner-subtitle {
         font-size: 18px;
         margin-top: 16px;
     }
+
     .factional-nft-3 .nft-procent {
         left: 13px;
         top: 54px;
@@ -785,5 +803,125 @@ body.previous-page .footer-section.footer-section-first .footer-block.footer-blo
 
     .whitelist-wrapper {
         background-attachment: scroll;
+    }
+}
+
+
+@media (max-width: 1425.5px) {
+
+    body.previous-page .header-nav ul li{
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+
+    .top-collection-title,
+    .previous-title,
+    .aggregator-left-title,
+    .fractional-title {
+        font-size: 32px;
+        line-height: 38px;
+    }
+
+    .top-collection-subtitle,
+    .previous-describe,
+    .aggregator-left-subtitle,
+    .fractional-subtitle {
+        font-size: 16px;
+        margin-bottom: 24px;
+    }
+
+    .top-collection-title {
+        line-height: 27px;
+    }
+
+    .fractional-options-title {
+        font-size: 18px;
+        margin-bottom: 24px;
+    }
+
+    .fractional-left {
+        max-width: 45%;
+    }
+
+    .information-of-nft {
+        gap: 14px;
+        display: block;
+    }
+
+    .aggregator-left-coins {
+        margin-top: 24px;
+    }
+
+    .card-previous-collection {
+        font-size: 12px;
+        line-height: 150%;
+        padding-left: 24px;
+    }
+
+    .card-previous-collection div.card-previous-collection-img {
+        height: 18px;
+        width: 18px;
+        min-width: 18px;
+    }
+
+    .previous-page .card-data {
+        padding: 12px;
+    }
+
+    .previous-page .card-col-value span {
+        font-size: 14px;
+        line-height: 150%;
+    }
+
+    .card-prev-amount {
+        padding: 8px;
+    }
+
+    .card-prev-amount .card-value {
+        margin-right: 4px;
+        padding-right: 4px;
+        font-size: 14px;
+        line-height: 150%;
+    }
+
+    .card-prev-amount .card-value .icon-value {
+        width: 16px;
+        height: 16px;
+        top: 2px;
+    }
+
+    .prev-card-status{
+        padding-left: 16px;
+    }
+
+    .card-prev-amount{
+        margin: 0;
+    }
+}
+
+@media (max-width: 1100px) {
+    .aggregator-inner {
+        flex-direction: column;
+    }
+
+    .information-of-nft {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 920px) {
+    .fractional {
+        height: auto;
+        flex-direction: column;
+    }
+
+    .fractional-left {
+        margin-bottom: -48px;
+        max-width: 600px;
+    }
+
+    .fractional-options {
+        padding-right: 0;
     }
 }
