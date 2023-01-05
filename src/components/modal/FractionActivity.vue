@@ -25,7 +25,7 @@
                         <div class="td td-price">{{translatesGet('ACTIVITY_THEAD-6')}}</div>
                         <div class="td">{{translatesGet('ACTIVITY_THEAD-7')}}</div>
                     </div>
-                        
+                    
                     <div class="tr">
                         <div class="td td-owner">
                             <div class="td-wrap">
@@ -41,9 +41,13 @@
                             </div>
                         </div>
                         <div class="td"> 
-                            <div class="td-wrap td-wrap-vote" >
-                                <span>{{translatesGet('NOT_VOTE')}} </span>
-                            </div> 
+                            <div class="td-wrap td-wrap-vote">
+                                <span >{{translatesGet('NOT_VOTE')}} </span>
+                                <span class="td-completed">
+                                    <i class="i-thumb-up-line "></i> 
+                                    {{translatesGet('VOTE_CONFIRM')}}
+                                </span>
+                            </div>
                         </div>
                     </div>
                     

@@ -91,11 +91,10 @@ export default {
         HeaderPrevious,
         FooterPrevious,
         PreviousCard,
-        lang: new MultiLang(this),
 	},
     data() {
         return{
-
+            lang: new MultiLang(this),
         }
     },
     methods:{
