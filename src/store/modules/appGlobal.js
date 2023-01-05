@@ -21,7 +21,8 @@ export default {
       lastTransSuccess:false,
       greenSnack:false,
       snackText:null,
-      showSnackBar:false
+      showSnackBar:false,
+      showVoteInfoModal:false
     };
   },
   getters: {
@@ -84,6 +85,9 @@ export default {
     },
     getSnackText(state){
       return state.snackText;
+    },
+    getShowVoteInfoModal(state){
+      return state.showVoteInfoModal;
     }
   },
   mutations: {
@@ -224,6 +228,9 @@ export default {
     },
     setSnackText(state,value){
       state.snackText = value;
+    },
+    setShowVoteInfoModal(state,value){
+      state.showVoteInfoModal = value;
     }
   },
   actions: {
@@ -296,5 +303,8 @@ export default {
     async setShowSnackBar(context,value){
       context.commit("setShowSnackBar",value);
     },
+    setShowVoteInfoModal(context,value){
+      context.commit("setShowVoteInfoModal",value);
+    }
   },
 };
