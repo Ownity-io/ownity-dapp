@@ -278,34 +278,34 @@
         <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setshowStartCollectingModal');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & userAddress!=false">
           {{translatesGet('BUY_TOGETHER')}}
         </router-link>
-        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'  & userAddress!=false">
+        <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setshowContinueCollectingModal');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'  & userAddress!=false">
           {{translatesGet('DEPOSIT_PART')}}
-        </a>
+        </router-link>
         <button class="btn" @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & !userAddress">
           {{translatesGet('BUY_TOGETHER')}}
         </button>
         <button class="btn"  @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & !userAddress">
           {{translatesGet('DEPOSIT_PART')}}
         </button>
-        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='CLOSED' & (item.internal_status=='CLOSED'||item.internal_status=='GATHER') & userBidAmount>0">
+        <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setshowDepositCancelModal');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='CLOSED' & (item.internal_status=='CLOSED'||item.internal_status=='GATHER') & userBidAmount>0">
           {{translatesGet('CANCEL')}}
-        </a>
-        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="(item.internal_status=='SOLD' & userBidAmount>0)">
+        </router-link>
+        <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setShowClaimRewardModal');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="(item.internal_status=='SOLD' & userBidAmount>0)">
           {{translatesGet('CLAIM_REWARD')}}
-        </a>
-        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0  & userAddress!=false">
+        </router-link>
+        <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','FractionMarket');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0  & userAddress!=false">
           {{translatesGet('BUY')}}
-        </a>
+        </router-link>
         <button class="btn"  @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)" v-if="bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0  & !userAddress">
           {{translatesGet('BUY')}}
         </button>
         <div v-if="(item.marketplace_status=='CLOSED' & item.internal_status=='OWNED' & this.voting==null) & userBidAmount>0 & !userBidOnSale" class="container-btn-part container-btn-part-vote">
-          <a class="btn btn-vote" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" >
+          <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setShowStartVotingModal');" class="btn btn-vote" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" >
             {{translatesGet('VOTE')}}
-          </a>
-          <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
+          </router-link>
+          <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setShowSellPartModal');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
             {{translatesGet('SELL_A_PART')}}
-          </a>
+          </router-link>
         </div>
         <div class="container-btn-part container-btn-part-row" v-if="(userBidAmount>0 & item.marketplace_status=='GATHER')">
             <div class="part-data">               
@@ -315,11 +315,11 @@
                 <span>{{abbrNum(toFixedIfNecessary(convertToEther(userBidAmount),4),2)}} ETH</span> 
               </div>
             </div>
-            <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
+            <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setshowDepositCancelModal');" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
               <div class="btn">
                 {{translatesGet('CANCEL')}}                
               </div>
-            </a>
+            </router-link>
         </div>
 
         <!-- ######## 2 ######## -->
