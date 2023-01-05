@@ -111,7 +111,8 @@ img {
 
 .comment-reply.root .comment-reply-top-bar+.comment-input+.reply-button-wrapper,
 .single-line-comment-input .comment-reply.root .comment-reply-top-bar+.comment-input+.reply-button-wrapper {
-    top: 70px !important;
+    /* top: 70px !important; */
+    top: 63px !important;
 }
 
 .user-info-input.auth-input {
@@ -187,7 +188,8 @@ textarea {
 }
 
 .live-chat-header {
-    width: 100% !important
+    width: 100% !important;
+    display: none !important;
 }
 
 #comment-area {
@@ -447,8 +449,10 @@ textarea {
 .comment > .inner > .comment-content .commenter-name .username{
     display: flex !important;
 }
+.comment-reply .comment-reply-top-bar .right,
 .comment .top-right{
-    right: 24px !important;
+    right: 24px !important; 
+    display: none !important;
 }
 
 .comment .avatar-wrapper{
