@@ -87,7 +87,7 @@ main>section {
     background-repeat: no-repeat;
     min-width: min(219px, 15.2%);
     max-width: 219px;
-    min-height: 32px;
+    min-height: 47px;
     /* height: 100%; */
 }
 
