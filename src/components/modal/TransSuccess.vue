@@ -26,8 +26,8 @@
                   <div class="td">{{translatesGet('ACTIVITY_THEAD-7')}}</div>
                   <div class="td">
                       <div class="td-wrap">
-                          <span v-if="transSuccess" class="td-completed"> {{translatesGet('COMPLETED')}}</span>
-                          <span v-else class="td-failed"  style="color: red;">{{translatesGet('FAILED')}}</span>
+                          <span v-if="transSuccess" class="td-completed"> {{translatesGet('COMPLETE')}}</span>
+                          <span v-else class="td-failed">{{translatesGet('FAILED')}}</span>
                       </div>
                   </div>
               </div>

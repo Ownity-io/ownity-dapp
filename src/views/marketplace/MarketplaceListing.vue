@@ -123,7 +123,8 @@
                   <div class="deposit-listened deposit-listened-link" v-else-if="this.item.internal_status!='OWNED' & this.item.internal_status!='ON SALE'"><a target="_blank" :href='linkToMarketplacePage' >
                     {{translatesGet('AVAILABLE_ON')}} {{item.marketplace.name}}
                     {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>
-                  <div class="deposit-listened deposit-listened-link" v-else-if="this.item.internal_status=='OWNED'" ><a target="_blank" :href='linkToMarketplacePage' 
+                  <div class="deposit-listened deposit-listened-link" v-else-if="this.item.internal_status=='OWNED'" >
+                    <a target="_blank" :href='linkToMarketplacePage' 
                     >
                     {{translatesGet('BOUGHT_ON')}} {{item.marketplace.name}} 
                     {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>
@@ -271,8 +272,8 @@
                       :class="{ 'active-tab': activeTab2 === 'ListingVote' }"
                       @click="letsCheck2('ListingVote')"
                       >
-                      <span>{{translatesGet('VOTE')}}</span>
-                      <span>{{translatesGet('VOTE')}}</span>
+                      <span>{{translatesGet('VOTES')}}</span>
+                      <span>{{translatesGet('VOTES')}}</span>
                     </button>
                   </li>
                 </ul>
@@ -283,14 +284,13 @@
                     <Chart :chartData='chartData'/>
                   </div>
                   <div class="table-chart-data">
-                    <div :class="{'members-hide' : this.item.bids.length>5}"></div>
-                    <div class="table table-chart">
+                    <div class="table table-chart" :class="{'tbody-overflow' : this.item.bids.length>5}">
                       <div class="thead">
                         <div class="td">{{translatesGet('OWNER')}}</div>
                         <div class="td">{{translatesGet('PCT')}}</div>
                         <div class="td td-price">{{translatesGet('PRICE')}}</div>
                       </div>
-                      <div class="tbody" :class="{'members' : this.item.bids.length>5}">
+                      <div class="tbody">
                         <div class="tr" v-for="bid in this.item.bids" :key="bid">
                         <div class="td td-owner">
                           <a
@@ -328,7 +328,7 @@
 
                   <div class="active-votes" id="votes">
                     <div class="votes-wrap-title">
-                      {{translatesGet('ACTIVE')}}
+                      {{translatesGet('ACTIVE_VOTE')}}
                     </div>
                     <ListingVote v-for="voting in this.item.votings" :item="this.item" :voting="voting"/>
                   </div>
@@ -336,6 +336,7 @@
                   <!-- <div class="inactive-votes">
                     <div class="votes-wrap-title">
                       Inactive
+                      {{translatesGet('ENDED_VOTE')}}
                     </div>
                     <ListingVote v-for="voting in this.item.votings" :item="this.item" :voting="voting"/>
                   </div> -->
@@ -490,7 +491,16 @@ export default {
     await this.checkLike();
     this.$store.dispatch('marketplaceListing/fetchAndSetContractConfig');
     this.recommendations = await this.$store.dispatch('marketplaceListing/getRecomendations',this.item.collection.contract_address);
-    
+    if (await this.$store.getters['marketplaceListing/getModalToShowAtStart']!=null){
+      if ((await this.$store.getters['marketplaceListing/getModalToShowAtStart'])=='FractionMarket'){
+        console.log('kek');
+        this.letsCheck2('ListingFractionMarket')
+      }else{
+        await this.$store.dispatch(await this.$store.getters['marketplaceListing/getModalToShowAtStart'],true);
+        await this.$store.dispatch('marketplaceListing/setModalToShowAtStart',null);
+      }
+      
+    }
     this.render = true;
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
@@ -654,20 +664,5 @@ export default {
 </script>
 
 <style>
-  .members {
-      max-height: 316px;
-      overflow-y: scroll;
-      position: relative;
-  }
-  
-  
-  .members-hide {
-      width: 100%;
-      height: 76px;
-      position: absolute;
-      z-index: 2;
-      bottom: 0;
-      background: linear-gradient(360deg, #FFFFFF 46.88%, rgba(255, 255, 255, 0) 100%);
-  }
 
 </style>

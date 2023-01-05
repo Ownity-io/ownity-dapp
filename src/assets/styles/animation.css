@@ -83,6 +83,7 @@
 
 .factional-nft {
     position: relative;
+    overflow: hidden;
     width: 500px;
     height: 500px;
 }
@@ -141,13 +142,8 @@
     align-items: center;
     justify-content: space-between;
     margin: 0 auto;
-     max-width: 1440px;
-    /* padding-right: 32px;
-    padding-left: 32px; */
+     /* max-width: 1440px; */
     width: 100%;
-    overflow-x: clip;
-    height: 700px;
-    /*margin-top: 120px;*/
 }
 
 .factional-nft.square-transition .factional-nft-1 {
@@ -279,7 +275,7 @@
 
 
 
-@media (max-width: 1150px) {
+@media (max-width: 1441px) {
     .factional-nft div:nth-child(2),
     .factional-nft div:nth-child(3),
     .factional-nft div:nth-child(4),
@@ -288,6 +284,7 @@
          background-size: contain;
         background-repeat: no-repeat;
     }
+
 
     .factional-nft {
         width: 450px;
@@ -474,19 +471,6 @@
     }
 }
 
-@media (max-width: 810px) {
-    .fractional {
-        height: auto;
-        flex-direction: column;
-    }
-    .fractional-left {
-        margin-bottom: -48px;
-    }
-    .fractional-options {
-        padding-right: 0;
-    }
-}
-
 @media (max-width: 460px) {
     .factional-nft div:first-child {
         width: 138px;
@@ -499,6 +483,7 @@
         left: -39px;
     }
     .factional-nft-2 .nft-procent {
+        right: -22px;
         top: 25px;
         right: 8px;
     }
@@ -686,7 +671,7 @@
 }
 
 .aggregator-left {
-    max-width: 615px;
+    max-width: 600px;
     width: 100%;
 }
 
@@ -743,7 +728,7 @@
     align-items: center;
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 1441px) {
     .information-wrapper p {
         font-size: 14px;
     }
@@ -755,16 +740,6 @@
     }
     .information-of-nft {
         justify-content: normal;
-    }
-}
-
-@media (max-width: 1070px) {
-    .information-of-nft{
-        display: block;
-    }
-    .information-wrapper:first-child {
-        margin-right: 0;
-        margin-bottom: 12px;
     }
 }
 
@@ -792,6 +767,10 @@
     }
     .aggregator-left-coins {
         margin-bottom: 30px;
+    }
+    .aggregator {
+        padding-left: 16px;
+        padding-right: 16px;
     }
     .coins-marketplaces-coin {
         margin-top: 15px;
@@ -1051,6 +1030,12 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
+}
+
+
+.discord {
+    height: 24px;
+    min-width: 24px;
 }
 
 

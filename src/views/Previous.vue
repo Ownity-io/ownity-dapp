@@ -7,12 +7,12 @@
                         <section class="previous-first-screen">
                            <first-block/>
                         </section>
-                        <section class="previous-second-screen">
+                        <section class="previous-second-screen" id="fractional">
                             <div class="container">
                                 <second-block/>
                             </div>
                         </section>
-                        <section class="previous-cards-screen">
+                        <section class="previous-cards-screen" >
                             <div class="container">
                                 <div class="previous-screen-header">
                                     <div class="previous-title">Open Fraction Deals</div>
@@ -20,17 +20,17 @@
                                     The best open deals you can take part in right now. 
                                     Join a deal that's already started, contribute your part, and become an official owner.
                                 </div>
-                            <div class="previous-link">Learn more about open deals</div>
+<!--                            <div class="previous-link">Learn more about open deals</div>-->
                                 </div>
                                 <div class="previous-cards-list">
                                     <div class="cards-container">
                                         <PreviousCard />
                                     </div>
-                                    <button class="btn btn-previous">See All Deals</button>
+<!--                                    <button class="btn btn-previous">See All Deals</button>-->
                                 </div>
                             </div>
                         </section>
-                        <section class="previous-third-screen">
+                        <section class="previous-third-screen" id="aggregator">
                           <div class="container">
                             <third-block/>
                           </div>
@@ -40,13 +40,14 @@
                             <four-block/>
                           </div>
                         </section>
-                        <section class="previous-faq-screen" id="faqs">
+                      <div id="faqs" style="margin-bottom: 20px"></div>
+                        <section class="previous-faq-screen">
                             <div class="container">
-                                <p class="faq-title">FAQ</p>
-                                <faq-block/>
+                                <p class="faq-title">{{translatesGet('FAQ_TITLE_SHORT')}}</p>
+                                <faq-block id="litepaper"/>
                             </div>
                         </section>
-                        <section class="previous-five-screen">
+                        <section class="previous-five-screen" >
                             <div class="container">
                               <fifth-block/>
                             </div>
@@ -64,6 +65,7 @@
 </template>
 
 <script>
+import MultiLang from "@/core/multilang";
 
 import '../assets/styles/previous.css'
 import FirstBlock from "@/components/Previous/FirstBlock.vue";
@@ -92,8 +94,13 @@ export default {
 	},
     data() {
         return{
-
+            lang: new MultiLang(this),
         }
+    },
+    methods:{
+        translatesGet(key) {
+        return this.lang.get(key);
+        },
     },
     mounted(){
         document.body.classList.add('previous-page');

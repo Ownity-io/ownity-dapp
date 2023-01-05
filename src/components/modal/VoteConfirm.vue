@@ -203,7 +203,9 @@ export default {
             }
             catch{
               this.buttonWainting = false;
-              alert('Error!');
+              await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
+              await this.$store.dispatch('appGlobal/setGreenSnack', false)
+              await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)
             }
           }
           else{
@@ -212,10 +214,13 @@ export default {
         }
         else {
           this.buttonWainting = false;
-          alert('Error!');
+          await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
+          await this.$store.dispatch('appGlobal/setGreenSnack',false)
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
         }
     },
     async sellLot(_voting_Id) {
+      try{
       console.log(this.config.contractAddress);
       let prov = toRaw(this.provider);
       let chainSettings = toRaw(this.config.evmChains[this.item.collection.blockchain])
@@ -227,7 +232,9 @@ export default {
           await prov.send('wallet_addEthereumChain',[chainSettings]);  
         }
         catch{
-          alert('Error!!!!');
+          await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
+          await this.$store.dispatch('appGlobal/setGreenSnack',false)
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
         }
       }     
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,prov.getSigner());      
@@ -281,9 +288,18 @@ export default {
         await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);
         await this.$store.dispatch('appGlobal/setShowVoteConfirmModal', false);
         await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
-        this.buttonWaiting=false;        
+        this.buttonWaiting=false;    
+        await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
+        await this.$store.dispatch('appGlobal/setGreenSnack', false)
+        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)    
       }
-      
+    }
+    catch{
+        this.buttonWaiting = false;
+        await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
+        await this.$store.dispatch('appGlobal/setGreenSnack', false)
+        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)
+    }
     }
   }
 };

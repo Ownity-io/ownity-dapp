@@ -109,8 +109,8 @@
                         <li>
                             <button :class="{ 'active-tab': activeTab === 'Vote' }"
                             @click="letsCheck('Vote');this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');">
-                                <span>{{translatesGet('VOTE')}}</span>
-                                <span>{{translatesGet('VOTE')}}</span>
+                                <span>{{translatesGet('VOTES')}}</span>
+                                <span>{{translatesGet('VOTES')}}</span>
                             </button>
                         </li>
                         <li>
@@ -253,17 +253,17 @@ export default {
             localStorage.clear();
         },
         async fetchAndSetListingsStartInfo() {
-            if (this.onlyFav) {
-                await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
+            if (this.activeTab == 'Favourites') {
+                await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');
             }
-            else if (this.vote) {
+            else if (this.activeTab == 'Vote') {
                 await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');
             }
             else if(this.activeTab == 'ActivityTable'){
                 await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:this.userAddress,collectionAddress:null}); 
             }
             else {
-                await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');
+                await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
             }
         },
     },

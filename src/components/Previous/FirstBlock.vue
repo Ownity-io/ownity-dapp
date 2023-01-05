@@ -33,8 +33,8 @@ export default {
 		  target: "#hand",
 		  path: "https://lottie.host/6978bb15-7fa2-4467-a951-710cd865d6db/tJ3aKAFXb0.json",
 		  speed: "fast",
-		  start: 10,
-		  scrub: 1,
+		  start: -1,
+		  scrub: true,
 		  markers: false
 	  });
 
@@ -42,7 +42,9 @@ export default {
 		  let innerW = window.innerWidth
 		  if (innerW < 600){
 			  vars.path = 'https://lottie.host/6c34b008-e7bc-4618-bfb8-bf82539ebc73/QBaT0A9gQe.json'
+        vars.scrub = 1
 		  }
+
 		  let playhead = {frame: 0},
 			  target = gsap.utils.toArray(vars.target)[0],
 			  speeds = {slow: "+=2000", medium: "+=1000", fast: "+=70"},

@@ -131,7 +131,9 @@ export default {
           await prov.send('wallet_addEthereumChain',[chainSettings]);  
         }
         catch{
-          alert('Error!!!!');
+          await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
+          await this.$store.dispatch('appGlobal/setGreenSnack',false)
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
         }
       }     
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await prov.getSigner());
@@ -152,12 +154,17 @@ export default {
           await this.$store.dispatch('appGlobal/setLastTransactionHash',claimLot.hash);
           await this.$store.dispatch('appGlobal/setShowClaimNftModal',false)          
           await this.$store.dispatch('appGlobal/setShowTransSuccessModal',true);
-          this.buttonWaiting = false;          
+          this.buttonWaiting = false;
+          await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
+          await this.$store.dispatch('appGlobal/setGreenSnack', false)
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)            
         }         
       }
       catch{
         this.buttonWaiting = false;
-        alert('Error!')
+        await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
+        await this.$store.dispatch('appGlobal/setGreenSnack', false)
+        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)
       }
     },
   }

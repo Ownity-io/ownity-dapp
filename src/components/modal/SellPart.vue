@@ -198,13 +198,8 @@ export default {
     toFixedIfNecessary(value, dp) {
       return +parseFloat(value).toFixed(dp);
     },
-    convertToEther(value){
-      // try{
-        return ethers.utils.formatEther(String(value));
-      // }
-      // catch{
-      //   console.log('ethers error');
-      // }
+    convertToEther(value) {
+      return ethers.utils.formatEther(String(value));
     },
     noExponents (value) {
       var data = String(value).split(/[eE]/);
@@ -241,6 +236,7 @@ export default {
       this.userBidAmount=0;      
     },
     async sellPart(){
+      try{
       this.buttonWaiting=true;
       let prov = toRaw(this.provider);
       let chainSettings = toRaw(this.config.evmChains[this.item.collection.blockchain])
@@ -252,7 +248,9 @@ export default {
           await prov.send('wallet_addEthereumChain',[chainSettings]);  
         }
         catch{
-          alert('Error!!!!');
+          await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
+          await this.$store.dispatch('appGlobal/setGreenSnack',false)
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
         }
       }     
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await prov.getSigner());  
@@ -275,8 +273,17 @@ export default {
         await this.$store.dispatch('appGlobal/setShowSellPartModal', false);
         await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
         this.buttonWaiting = false;
-        console.log('Error in contract');
+        await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
+        await this.$store.dispatch('appGlobal/setGreenSnack',false)
+        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
       }
+    }
+    catch{
+        await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
+        await this.$store.dispatch('appGlobal/setGreenSnack', false)
+        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)
+        this.buttonWaiting = false;
+    }
     },
     translatesGet(key) {
             return this.lang.get(key);
@@ -287,6 +294,9 @@ export default {
       }
       else if (isNaN(this.priceForPart)){
           this.priceForPart = parseInt(this.priceForPart) 
+          if (isNaN(this.priceForPart)){
+            this.priceForPart = null
+          }
       }
       this.sellFractionFee = this.noExponents((this.contractConfig[0].sell_fraction_fee/100)/100*this.noExponents(this.convertFromEtherToWei(this.priceForPart)));
     },

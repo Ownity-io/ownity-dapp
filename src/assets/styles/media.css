@@ -29,6 +29,12 @@
     .card-listing {
         grid-template-columns: 1fr 1fr;
     }
+
+    .header-nav .btn-container .btn.btn-address,
+    .header-nav .btn-container .btn.btn-connect {
+        min-width: 102px;
+    }
+
 }
 
 
@@ -355,12 +361,12 @@
         padding: 12px 16px;
         top: 0;
     }
-    
-    .header-search-mobile-btn.btn-arrow{
+
+    .header-search-mobile-btn.btn-arrow {
         left: 0;
     }
 
-    .header-search-mobile-btn.btn-close{
+    .header-search-mobile-btn.btn-close {
         right: 0;
     }
 

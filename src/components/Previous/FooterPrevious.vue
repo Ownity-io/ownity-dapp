@@ -10,24 +10,24 @@
                         <div class="footer-part footer-social-links">
                             <ul class="social-links-wrap">
                                 <li><a href="https://twitter.com/ownity_io" target="_blank"><i class="i-twitter-fill"></i></a></li>
-                                <li><a href=""><i class="i-facebook-fill"></i></a></li>
-                                <li><a href=""><i class="i-telegram-fill"></i></a></li>
-                                <!-- <li><a href=""><i class="i-discord-line"></i></a></li>   -->
+<!--                                <li><a href=""><i class="i-facebook-fill"></i></a></li>-->
+<!--                                <li><a href=""><i class="i-telegram-fill"></i></a></li>-->
+                                 <li><a style="cursor: auto"><img src="@/assets/images/discord.svg" alt="" class="discord" ></a></li>
                             </ul>
                         </div>
-                        <p>info@ownity.io</p>
+                        <p>contact@ownity.io</p>
                     </div>
                     <div class="footer-block" :class="{'unfolded' : !footerBlock1}">
                         <button class="footer-block-name" @click="footerBlock1 = !footerBlock1">
-                            <span>{{translatesGet('MARKETPLACE')}}</span>
+                            <span>Explore</span>
                             <i class="i-arrow-up-s-line"></i>
                         </button>
                         <ul class="footer-list">
-                            <li><a href="#">Active</a></li>
-                            <li><a href="#">Canceled</a></li>
-                            <li><a href="#">Purchased</a></li>
-                            <li><a href="#">On sale</a></li>
-                            <li><a href="#">Sold</a></li>
+                            <li>
+                              <a @click="goToTop()">{{translatesGet('HOME')}}</a>
+                            </li>
+                            <li><a href="#fractional">Fractional Ownership</a></li>
+                            <li><a href="#aggregator">NFT Aggregator</a></li>
                         </ul>
                     </div>
 <!--                    <div class="footer-block" :class="{'unfolded' : !footerBlock2}">-->
@@ -48,35 +48,32 @@
                             <i class="i-arrow-up-s-line"></i>
                         </button>
                         <ul class="footer-list">
-                            <li><a href="#">{{translatesGet('HOME')}}</a>
-                                <div v-if="$route.fullPath ==='/'" @click="goToTop()"></div>
-                                <router-link :to="{name: 'Main'}" v-else></router-link>
-                            </li>
-                            <li><router-link :to="{ name: 'Marketplace' }">{{translatesGet('MARKETPLACE')}}</router-link></li>
-                            <li
-                            v-if="$route.fullPath ==='/'">
-                                <a href="#screen-collections" >
-                                    <span>{{translatesGet('COLLECTIONS')}}</span>
-                                </a>
-                            </li>
-                            <li
-                            v-else >
-                                <router-link :to="{name: 'Main'}">
-                                    <span>{{translatesGet('COLLECTIONS')}}</span>
-                                </router-link>
+                            <li>
+                              <a href="https://ownity.gitbook.io/ownity-documentation/" target="_blank">
+                                 Documentation
+                              </a>
                             </li>
                             <li>
-                                <router-link :class="active" :to="{name: 'Serve'}">
-                                    <span>{{translatesGet('HELP')}}</span>
-                                </router-link>
+                              <a target="_blank">
+                              {{translatesGet('TERMS_OF_USE2')}}<span class="soon" style="padding-left: 5px; color: #474747"> (soon)</span>
+                              </a>
                             </li>
-                            <li><a href="#">{{translatesGet('SITEMAP')}}</a></li>
+                            <li>
+                              <a>
+                                {{translatesGet('PRIVACY_POLICY')}}<span class="soon" style="padding-left: 5px; color: #474747"> (soon)</span>
+                              </a>
+                            </li>
+                            <li>
+                              <a>
+                                Brand Kit  <span class="soon" style="padding-left: 5px; color: #474747">(soon)</span>
+                              </a>
+                            </li>
                         </ul>
                     </div>
-                    <div class="footer-block footer-block-form">
-                        <button class="btn btn-previous">
+                    <a class="footer-block footer-block-form">
+                        <a target="_blank" href="https://t.me/Ownity" class="btn btn-previous">
                             Contact us
-                        </button>
+                        </a>
                         <!-- <div class="footer-block-name">
                             {{translatesGet('FOOTER_FORM')}}
                         </div>
@@ -91,7 +88,7 @@
                                 </router-link>
                             </p>
                         </form> -->
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -135,13 +132,3 @@ data() {
     }
 }
 </script>
-
-<style>
-.collection-wrapper a,
-footer a {
-    pointer-events: none;
-}
-.social-links-wrap a {
-    pointer-events: auto;
-}
-</style>

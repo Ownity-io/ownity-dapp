@@ -57,7 +57,7 @@
               <span>20%</span>
             </div>
           </div>
-          <button class="btn-vote-more">
+          <button class="btn-vote-more" @click="this.$store.dispatch('appGlobal/setCurrentVoting',this.voting);this.$store.dispatch('appGlobal/setShowVoteInfoModal',true)">
             <i class="i-more-2-line"></i>
           </button>
         </div>

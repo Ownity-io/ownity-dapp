@@ -101,7 +101,7 @@ export default {
   },
   methods:{
     async fetchAndSetNftCollections() {
-      let requestUrl = `${config.backendApiEntryPoint}nft-collections/?limit=${config.collectionsPerPage}`;
+      let requestUrl = `${config.backendApiEntryPoint}nft-collections/?limit=5`;
       console.log(requestUrl);
       let request = await fetch(requestUrl);
       let requestJson = await request.json();
@@ -137,5 +137,12 @@ export default {
 <style>
 .collection-design a{
     pointer-events: auto;
+}
+
+@media (max-width: 480px) {
+    .table.table-top-collections {
+        max-height: 550px;
+        overflow: hidden;
+    }
 }
 </style>
