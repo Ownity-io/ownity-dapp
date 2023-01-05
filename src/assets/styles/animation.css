@@ -279,7 +279,7 @@
 
 
 
-@media (max-width: 1150px) {
+@media (max-width: 1281px) {
     .factional-nft div:nth-child(2),
     .factional-nft div:nth-child(3),
     .factional-nft div:nth-child(4),
@@ -288,6 +288,7 @@
          background-size: contain;
         background-repeat: no-repeat;
     }
+
 
     .factional-nft {
         width: 450px;
@@ -471,19 +472,6 @@
         left: -44px;
         bottom: -10px;
         transform: rotate(5.2deg);
-    }
-}
-
-@media (max-width: 810px) {
-    .fractional {
-        height: auto;
-        flex-direction: column;
-    }
-    .fractional-left {
-        margin-bottom: -48px;
-    }
-    .fractional-options {
-        padding-right: 0;
     }
 }
 
@@ -758,16 +746,6 @@
     }
 }
 
-@media (max-width: 1070px) {
-    .information-of-nft{
-        display: block;
-    }
-    .information-wrapper:first-child {
-        margin-right: 0;
-        margin-bottom: 12px;
-    }
-}
-
 @media (max-width: 998px) {
     .aggregator-inner {
         flex-direction: column;
@@ -792,6 +770,10 @@
     }
     .aggregator-left-coins {
         margin-bottom: 30px;
+    }
+    .aggregator {
+        padding-left: 16px;
+        padding-right: 16px;
     }
     .coins-marketplaces-coin {
         margin-top: 15px;
@@ -1059,4 +1041,60 @@
     min-width: 24px;
 }
 
+@media (max-width: 1280px) {
+
+    .top-collection-title,
+    .aggregator-left-title, .fractional-title {
+        font-size: 32px;
+    }
+    .top-collection-subtitle,
+    .aggregator-left-subtitle, .fractional-subtitle {
+        font-size: 16px;
+        margin-bottom: 24px;
+    }
+    .top-collection-title {
+        line-height: 27px;
+    }
+    .fractional-options-title {
+        font-size: 18px;
+        margin-bottom: 24px;
+    }
+
+    .fractional-left {
+        max-width: 485px;
+    }
+    .information-of-nft {
+        gap: 14px;
+        display: block;
+    }
+
+    .aggregator-left-coins {
+        margin-top: 24px;
+    }
+
+}
+
+@media (max-width: 1100px) {
+    .aggregator-inner {
+        flex-direction: column;
+    }
+    .information-of-nft{
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 920px) {
+    .fractional {
+        height: auto;
+        flex-direction: column;
+    }
+    .fractional-left {
+        margin-bottom: -48px;
+        max-width: 600px;
+    }
+    .fractional-options {
+        padding-right: 0;
+    }
+}
 
