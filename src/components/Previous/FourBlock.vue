@@ -101,7 +101,7 @@ export default {
   },
   methods:{
     async fetchAndSetNftCollections() {
-      let requestUrl = `${config.backendApiEntryPoint}nft-collections/?limit=${config.collectionsPerPage}`;
+      let requestUrl = `${config.backendApiEntryPoint}nft-collections/?limit=5`;
       console.log(requestUrl);
       let request = await fetch(requestUrl);
       let requestJson = await request.json();
