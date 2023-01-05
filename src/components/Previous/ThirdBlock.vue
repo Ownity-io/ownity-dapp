@@ -75,6 +75,9 @@ export default {
   methods: {
     getWidth(){
 			let innerW = window.innerWidth
+	    if (innerWidth < 1441){
+		    this.thereWidth.width = '540px'
+	    }
       if (innerWidth < 1150){
 	      this.thereWidth.width = '530px'
       }

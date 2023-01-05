@@ -771,8 +771,19 @@ body.previous-page .footer-section.footer-section-first .footer-block.footer-blo
     .still-inner-title {
         font-size: 24px;
     }
+    .factional-nft-2 .nft-procent{
+        right: -22px;
+    }
     .still-inner-subtitle {
         font-size: 18px;
         margin-top: 16px;
+    }
+    .factional-nft-3 .nft-procent {
+        left: 13px;
+        top: 54px;
+    }
+
+    .whitelist-wrapper {
+        background-attachment: scroll;
     }
 }

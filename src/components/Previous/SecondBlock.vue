@@ -98,7 +98,9 @@ export default {
 		  });
 	  });
 	  observer.observe(this.$refs.fractional);
+	  console.log(window.innerWidth)
   },
+
   methods: {
 	  translatesGet(key) {
 		  return this.lang.get(key);
