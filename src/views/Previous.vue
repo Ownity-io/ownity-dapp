@@ -30,7 +30,7 @@
                                 </div>
                             </div>
                         </section>
-                        <section class="previous-third-screen" id="aggragator">
+                        <section class="previous-third-screen" id="aggregator">
                           <div class="container">
                             <third-block/>
                           </div>

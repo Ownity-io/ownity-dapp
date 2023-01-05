@@ -138,4 +138,11 @@ export default {
 .collection-design a{
     pointer-events: auto;
 }
+
+@media (max-width: 480px) {
+    .table.table-top-collections {
+        max-height: 550px;
+        overflow: hidden;
+    }
+}
 </style>

@@ -142,12 +142,7 @@
     justify-content: space-between;
     margin: 0 auto;
      max-width: 1440px;
-    /* padding-right: 32px;
-    padding-left: 32px; */
     width: 100%;
-    overflow-x: clip;
-    height: 700px;
-    /*margin-top: 120px;*/
 }
 
 .factional-nft.square-transition .factional-nft-1 {
@@ -279,7 +274,7 @@
 
 
 
-@media (max-width: 1350px) {
+@media (max-width: 1441px) {
     .factional-nft div:nth-child(2),
     .factional-nft div:nth-child(3),
     .factional-nft div:nth-child(4),
@@ -487,6 +482,7 @@
         left: -39px;
     }
     .factional-nft-2 .nft-procent {
+        right: -22px;
         top: 25px;
         right: 8px;
     }
@@ -731,7 +727,7 @@
     align-items: center;
 }
 
-@media (max-width: 1350px) {
+@media (max-width: 1441px) {
     .information-wrapper p {
         font-size: 14px;
     }
@@ -1041,7 +1037,7 @@
     min-width: 24px;
 }
 
-@media (max-width: 1350px) {
+@media (max-width: 1441px) {
 
     .top-collection-title,
     .aggregator-left-title, .fractional-title {
@@ -1097,4 +1093,5 @@
         padding-right: 0;
     }
 }
+
 

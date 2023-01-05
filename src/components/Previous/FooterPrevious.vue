@@ -27,7 +27,7 @@
                               <a @click="goToTop()">{{translatesGet('HOME')}}</a>
                             </li>
                             <li><a href="#fractional">Fractional Ownership</a></li>
-                            <li><a href="#aggragator">NFT Aggregator</a></li>
+                            <li><a href="#aggregator">NFT Aggregator</a></li>
                         </ul>
                     </div>
 <!--                    <div class="footer-block" :class="{'unfolded' : !footerBlock2}">-->
@@ -49,23 +49,23 @@
                         </button>
                         <ul class="footer-list">
                             <li>
-                              <a target="_blank">
+                              <a href="https://ownity.gitbook.io/ownity-documentation/" target="_blank">
                                  Documentation
                               </a>
                             </li>
                             <li>
                               <a target="_blank">
-                              {{translatesGet('TERMS_OF_USE')}}<span class="soon" style="padding-left: 5px"> soon</span>
+                              {{translatesGet('TERMS_OF_USE2')}}<span class="soon" style="padding-left: 5px; color: #474747"> (soon)</span>
                               </a>
                             </li>
                             <li>
                               <a>
-                                {{translatesGet('PRIVACY_POLICY')}}<span class="soon" style="padding-left: 5px"> soon</span>
+                                {{translatesGet('PRIVACY_POLICY')}}<span class="soon" style="padding-left: 5px; color: #474747"> (soon)</span>
                               </a>
                             </li>
                             <li>
                               <a>
-                                Brand Kit  <span class="soon" style="padding-left: 5px"> soon</span>
+                                Brand Kit  <span class="soon" style="padding-left: 5px; color: #474747">(soon)</span>
                               </a>
                             </li>
                         </ul>

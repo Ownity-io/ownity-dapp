@@ -42,7 +42,9 @@ export default {
 		  let innerW = window.innerWidth
 		  if (innerW < 600){
 			  vars.path = 'https://lottie.host/6c34b008-e7bc-4618-bfb8-bf82539ebc73/QBaT0A9gQe.json'
+        vars.scrub = 1
 		  }
+
 		  let playhead = {frame: 0},
 			  target = gsap.utils.toArray(vars.target)[0],
 			  speeds = {slow: "+=2000", medium: "+=1000", fast: "+=70"},

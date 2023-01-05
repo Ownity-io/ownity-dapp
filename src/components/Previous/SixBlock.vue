@@ -7,7 +7,7 @@
       <input placeholder="Your email" v-model="email" >
       <button @click="validateEmail();">Join</button>
     </div>
-    <p class="check-term">By subscribing, you agree to the Terms of Use</p>
+<!--    <p class="check-term">By subscribing, you agree to the Terms of Use</p>-->
   </div>
 </div>
 </template>
