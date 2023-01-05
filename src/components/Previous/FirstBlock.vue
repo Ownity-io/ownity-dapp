@@ -34,7 +34,6 @@ export default {
 		  path: "https://lottie.host/6978bb15-7fa2-4467-a951-710cd865d6db/tJ3aKAFXb0.json",
 		  speed: "fast",
 		  start: -1,
-      pin: true,
 		  scrub: true,
 		  markers: false
 	  });
