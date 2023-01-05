@@ -32,11 +32,31 @@
 
     <div class="faq-block" :class="{ 'collapse-block': !faqBlock4 }">
       <button class="btn-faq" @click="faqBlock4 = !faqBlock4">
-        {{translatesGet('FAQ-H13-3')}}
+        {{translatesGet('FAQ-H1-4')}}
         <i class="i-arrow-up-s-line"></i>
       </button>
       <div class="content-faq">
-        <p v-html="translatesGet('FAQ-H13-1')"></p>
+        <p v-html="translatesGet('FAQ-H2-4')"></p>
+      </div>
+    </div>
+
+    <div class="faq-block" :class="{ 'collapse-block': !faqBlock5 }">
+      <button class="btn-faq" @click="faqBlock5 = !faqBlock5">
+        {{translatesGet('FAQ-H1-5')}}
+        <i class="i-arrow-up-s-line"></i>
+      </button>
+      <div class="content-faq">
+        <p v-html="translatesGet('FAQ-H2-5')"></p>
+      </div>
+    </div>
+
+    <div class="faq-block" :class="{ 'collapse-block': !faqBlock6 }">
+      <button class="btn-faq" @click="faqBlock6 = !faqBlock6">
+        {{translatesGet('FAQ-H1-6')}}
+        <i class="i-arrow-up-s-line"></i>
+      </button>
+      <div class="content-faq">
+        <p v-html="translatesGet('FAQ-H2-6')"></p>
       </div>
     </div>
   </div>

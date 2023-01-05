@@ -102,6 +102,11 @@
         "CHAT":"Chat",
         "FAVOURITES":"Favorites",
 
+        "PRICE_LOW_HIGH":"Price: Low to High",
+        "PRICE_HIGH_LOW":"Price: High to Low",
+        "LISTING_OLD_NEW":"Listing: Old to New",
+        "LISTING_NEW_OLD":"Listing: New to Old",
+
         "---------MAIN------------": "",
         "MAIN-H1":"Co-Own NFTs. Here & Now.",
         "MAIN-H2":"Quant is your one-stop NFT shop enabling fractionalization and co-ownership of any NFT listed for sale on OpenSea, LooksRare, X2Y2, and others.",
@@ -116,14 +121,18 @@
         "MAIN-SCREEN_3-TABLE-COL_5":"Supply",
 
         "---------FAQ------------": "",
-        "FAQ-H1-1":"Can users sell  NFT on several marketplaces at one time?",
-        "FAQ-H2-1":"Yes, we afford the opportunity to sell NFT on several marketplaces at one time, but in v1 we support its selling by one price. poll by selling can consist of several marketplaces at one time, or it could be several separate polls",
-        "FAQ-H1-2":"Do user rights depend on the size of the fraction?",
-        "FAQ-H2-2":"We consider NFT as 100% and every user has its personal amount in ownership, this part will be counted in the poll process and in case of reward splitting.",
-        "FAQ-H1-3":"If the user sold its fraction?",
-        "FAQ-H2-3":"If you sold part of the fractions, you still can have all the rights to the rest. But in case that you don’t have any % in ownership so you are not able to take part in any selling and poll, your previous vote will be distinguished  from total poll count.",
-        "FAQ-H13-3":"Who will initiate the listing purchase?",
-        "FAQ-H13-1":"The end participant of the collective purchase will initiate the transaction of NFT transfer to smart contract within purchase on listing marketplace.",
+        "FAQ-H1-1":"What Is Ownity?",
+        "FAQ-H2-1":"Ownity enables would-be owners to split - fractionalize - NFTs, which otherwise can be too pricey, into a number of smaller parts - fractions - they can invest in as a group and manage as a DAO.",
+        "FAQ-H1-2":"What Is NFT Co-Ownership?",
+        "FAQ-H2-2":"Also known as <b>fractional NFT ownership</b>, it is a new lower-barrier way to own that involves splitting up non-fungible tokens - collectibles, artworks, PFPs, photos & videos, gamified ones, membership passes, memorabilia, domain names, etc. - into smaller pieces to own them together.",
+        "FAQ-H1-3":"What Are Fractionalized NFTs?",
+        "FAQ-H2-3":"Also referred to as <b>fNFTs</b>, they are whole NFTs divvied up into smaller pieces for ownership by a number of people. Fractionalized NFTs are designed to appeal to those wanting to participate in the booming NFT market without breaking the bank, or simply own non-fungible tokens with friends, family, or for business purposes.",
+        "FAQ-H1-4":"Who will initiate the listing purchase?",
+        "FAQ-H2-4":"The end participant of the collective purchase will initiate the transaction of NFT transfer to smart contract within purchase on listing marketplace.",
+        "FAQ-H1-5":"Can I Sell My NFT Fractions?",
+        "FAQ-H2-5":"On Ownity, any fraction is sold as quickly as it is bought. You are free to handle NFT fractions you own with just a couple of clicks anytime.",
+        "FAQ-H1-6":"What Are Benefits of NFT Co-Ownership?",
+        "FAQ-H2-6":"First, co-ownership grants pricier NFTs greater affordability. Second, thanks to making NFTs more accessible, it boosts their liquidity. Third, co-ownership allows for fun cooperation between friends as well as other more formal undertakings based on joint ownership.",
 
 
         "---------RECOMMEND_LIST------------": "",
@@ -233,7 +242,8 @@
 
         "---------SRVE/HELP------------": "",
 
-        "FAQ_TITLE": "Frequently Asked Questions",
+        "FAQ_TITLE_SHORT": "Ownity FAQ",
+        "FAQ_TITLE": "We answered the most FAQs about Ownity here for your convenience. See if there's the one you're after.",
         "YOUR_NAME": "Your Name",
         "CONTACT_US": "Have a specific question? Drop us a line!",
         "YOUR_EMAIL": "Your Email",
