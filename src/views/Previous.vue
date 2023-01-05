@@ -43,7 +43,7 @@
                       <div id="faqs" style="margin-bottom: 20px"></div>
                         <section class="previous-faq-screen">
                             <div class="container">
-                                <p class="faq-title">{{('FAQ_TITLE')}}</p>
+                                <p class="faq-title">{{translatesGet('FAQ_TITLE_SHORT')}}</p>
                                 <faq-block id="litepaper"/>
                             </div>
                         </section>
