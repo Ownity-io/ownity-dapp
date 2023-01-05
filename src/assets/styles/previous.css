@@ -759,22 +759,20 @@ body.previous-page .footer-section.footer-section-first .footer-block.footer-blo
 }
 
 @media (max-width: 1440px) {
-    .aggregator-right > div{
-        transform: scale(.5) translateX(50%);
-        transform-origin: center left;
-    }
-    .aggregator-right{
-        transform: scale(1.5);
-        transform-origin: center;
-    }
-    .fractional-right {
-        transform: scale(.75);
-        transform-origin: right center;
-    }
     .factional-nft-3 .nft-procent{
         left: 65px;
     }
     .factional-nft-2 .nft-procent{
         right: 160px;
+    }
+}
+
+@media (max-width: 460px) {
+    .still-inner-title {
+        font-size: 24px;
+    }
+    .still-inner-subtitle {
+        font-size: 18px;
+        margin-top: 16px;
     }
 }
