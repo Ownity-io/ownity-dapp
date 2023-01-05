@@ -138,6 +138,7 @@
         "ACTIVITY_THEAD-5": "Date",
         "ACTIVITY_THEAD-6": "%",
         "ACTIVITY_THEAD-7": "Status",
+        "ACTIVITY_THEAD-8": "Owner",
 
         "---------COOKIES_TABLE------------": "",
         "COOKIES-TITLE": "We know you're fed up with this, but…",
@@ -192,7 +193,9 @@
         "ITEM_UNTIL_CANCELLED":"NFT is on sale until you cancel its listing or it's sold.",
         "TRANS_SUCCESS":"Transaction Successful",
         "VOTE_CONFIRM":"Approved",
+        "NOT_VOTE":"Didn't Vote",
         "CHOOSE_MARKETPLACE":"Choose Marketplace",
+        "FRACTION_ACTIVITY":"Fraction Activity",
 
         "---------PRIVACY_POLICY------------": "",
 

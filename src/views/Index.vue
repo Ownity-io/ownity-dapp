@@ -12,6 +12,7 @@
     <VoteStart v-if="this.$store.getters['appGlobal/getShowStartVotingModal'] & (this.walletConnected!=null & this.walletConnected!='null')" />
     <TransSuccess v-if="this.$store.getters['appGlobal/getShowTransSuccessModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
     <BuyPart v-if="this.$store.getters['appGlobal/getShowBuyPartModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/> 
+    <!-- <FractionActivity /> -->
 
     <div class="wrapper-main">
         <HeaderComponent/>
@@ -39,6 +40,7 @@ import VoteStart from '@/components/modal/VoteStart.vue'
 import VoteConfirm from '@/components/modal/VoteConfirm.vue'
 import BuyPart from '@/components/modal/BuyPart.vue'
 import TransSuccess from '@/components/modal/TransSuccess.vue'
+import FractionActivity from '@/components/modal/FractionActivity.vue'
 
 
 export default {
@@ -61,6 +63,7 @@ export default {
         VoteConfirm,
         BuyPart,
         TransSuccess,
+        FractionActivity,
     },
     methods:{
         async checkWalletInLS() {

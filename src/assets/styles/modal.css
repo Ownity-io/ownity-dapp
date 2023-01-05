@@ -117,11 +117,13 @@
 }
 
 .cookies-content {
-    padding:0 24px;
+    padding: 0 24px;
 }
-.cookies-content a{
+
+.cookies-content a {
     text-decoration: underline;
 }
+
 .modal-content {
     padding: 0 40px;
 }
@@ -199,6 +201,7 @@
 .modal-connect-btns+.modal-p {
     margin-top: 38px;
 }
+
 .modal-desktop-footer {
     margin-top: 24px;
 }
@@ -331,7 +334,7 @@ input+.input-equivalent {
     color: #9A9A9A;
 }
 
-.input-percent ,
+.input-percent,
 .input-wrapper-amount {
     gap: 16px;
     padding: 12px 16px;
@@ -536,4 +539,26 @@ input+.input-equivalent {
     right: 12px;
     top: 12px;
     font-size: 24px;
+}
+
+.modal-members {
+    position: relative;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #333333;
+    padding-left: calc(20px + 6px);
+}
+
+.modal-members i {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #818899;
+    font-size: 20px;
+    width: 20px;
+}
+
+.modal-members span{
+    margin-left: 4px;
 }
