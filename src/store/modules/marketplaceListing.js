@@ -7,7 +7,8 @@ export default {
         item:null,
         isLiked:false,
         likeChecked:false,
-        contractConfig:null
+        contractConfig:null,
+        modalToShowAtStart:null
     };
   },
   getters:{
@@ -22,6 +23,9 @@ export default {
     },
     getContractConfig(state){
       return state.contractConfig;
+    },
+    getModalToShowAtStart(state){
+      return state.modalToShowAtStart;
     }
   },
   mutations:{
@@ -36,6 +40,9 @@ export default {
     },
     setContractConfig(state,_value){
       state.contractConfig = _value;
+    },
+    setModalToShowAtStart(state,_value){
+      state.modalToShowAtStart = _value;
     }
   },
   actions:{
@@ -104,6 +111,9 @@ export default {
       let request = await fetch(requestUrl);
       let requestJson = await request.json();
       context.commit('setContractConfig',requestJson);
+    },
+    setModalToShowAtStart(context,_value){
+      context.commit('setModalToShowAtStart',_value);
     }
   }
 };

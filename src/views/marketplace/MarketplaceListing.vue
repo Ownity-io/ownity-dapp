@@ -491,7 +491,10 @@ export default {
     await this.checkLike();
     this.$store.dispatch('marketplaceListing/fetchAndSetContractConfig');
     this.recommendations = await this.$store.dispatch('marketplaceListing/getRecomendations',this.item.collection.contract_address);
-    
+    if (await this.$store.getters['marketplaceListing/getModalToShowAtStart']!=null){
+      await this.$store.dispatch(await this.$store.getters['marketplaceListing/getModalToShowAtStart'],true);
+      await this.$store.dispatch('marketplaceListing/setModalToShowAtStart',null);
+    }
     this.render = true;
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));

@@ -275,9 +275,9 @@
         </div>
       </div>
       <div class="btn-container">
-        <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & userAddress!=false">
+        <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setshowStartCollectingModal');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & userAddress!=false">
           {{translatesGet('BUY_TOGETHER')}}
-        </a>
+        </router-link>
         <a class="btn" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'  & userAddress!=false">
           {{translatesGet('DEPOSIT_PART')}}
         </a>
