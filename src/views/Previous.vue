@@ -43,7 +43,7 @@
                       <div id="faqs" style="margin-bottom: 20px"></div>
                         <section class="previous-faq-screen">
                             <div class="container">
-                                <p class="faq-title">FAQ</p>
+                                <p class="faq-title">{{('FAQ_TITLE')}}</p>
                                 <faq-block id="litepaper"/>
                             </div>
                         </section>
@@ -65,6 +65,7 @@
 </template>
 
 <script>
+import MultiLang from "@/core/multilang";
 
 import '../assets/styles/previous.css'
 import FirstBlock from "@/components/Previous/FirstBlock.vue";
@@ -90,11 +91,17 @@ export default {
         HeaderPrevious,
         FooterPrevious,
         PreviousCard,
+        lang: new MultiLang(this),
 	},
     data() {
         return{
 
         }
+    },
+    methods:{
+        translatesGet(key) {
+        return this.lang.get(key);
+        },
     },
     mounted(){
         document.body.classList.add('previous-page');

@@ -1019,6 +1019,9 @@ ul.tabs {
     transition: 0.2s;
 }
 
+.faq-block .content-faq b{
+    font-weight: 600;
+}
 .faq-block.collapse-block .content-faq,
 .filter-section.collapse-section .input-checkbox,
 .filter-section.collapse-section .container-enter-price,

@@ -9,7 +9,7 @@
 
       <section class="section-header">
         <div class="container">
-          <h1 class="section-name-h1">{{translatesGet('FAQ_TITLE')}}</h1>
+          <h1 class="section-name-h1">{{translatesGet('FAQ_TITLE_SHORT')}}</h1>
           <h3 class="section-name-h3">{{translatesGet('FAQ_TITLE')}}</h3>
         </div>
       </section>
