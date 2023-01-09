@@ -83,7 +83,6 @@
 
 .factional-nft {
     position: relative;
-    overflow: hidden;
     width: 500px;
     height: 500px;
 }
@@ -287,6 +286,7 @@
 
 
     .factional-nft {
+        overflow: hidden;
         width: 450px;
     }
 

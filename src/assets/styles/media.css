@@ -26,9 +26,19 @@
         padding: 16px 0;
     }
 
-    .card-listing {
+    /* .card-listing {
         grid-template-columns: 1fr 1fr;
+    } */
+
+
+    .card-listing .section-card-img {
+        max-width: calc(35% - 16px);
     }
+
+    .card-listing .listing-main {
+        max-width: 65%;
+    }
+
 
     .header-nav .btn-container .btn.btn-address,
     .header-nav .btn-container .btn.btn-connect {
@@ -114,6 +124,40 @@
 }
 
 
+@media (max-width: 991px) {
+    .card-listing .section-card-img:not(.section-card-img-mobile) {
+        display: none;
+    }
+
+    .card-listing .section-card-img.section-card-img-mobile {
+        display: flex;
+        position: relative;
+        top: 0;
+        margin-top: 24px;
+        max-width: 328px;
+        margin-left: auto;
+        margin-right: auto;
+        /* margin-bottom: 24px; */
+    }
+
+    .card-listing .section-card-img,
+    .card-listing .listing-main {
+        max-width: 100%;
+    }
+
+    .recommendations-wrap{
+        overflow: hidden;
+        max-width: 100%;
+    }
+
+    .footer-logo, .header-logo{
+        max-width: 156px;
+        flex-grow: 1;
+        width: 100%;
+    }
+
+}
+
 @media (max-width: 768px) {
 
     .footer-section {
@@ -121,7 +165,7 @@
     }
 
     .footer-form .btn-subscribe {
-        min-width: fit-content;
+        min-width: 140px;
         padding: 12px 8px;
     }
 
@@ -151,20 +195,6 @@
         gap: 16px;
     }
 
-    .card-listing .section-card-img:not(.section-card-img-mobile) {
-        display: none;
-    }
-
-    .card-listing .section-card-img.section-card-img-mobile {
-        display: flex;
-        position: relative;
-        top: 0;
-        margin-top: 24px;
-        max-width: 328px;
-        margin-left: auto;
-        margin-right: auto;
-        /* margin-bottom: 24px; */
-    }
 
     .section-deposit-btns,
     .section-deposit-data {

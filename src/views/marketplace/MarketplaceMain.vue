@@ -80,7 +80,7 @@
               </div>
             </div>
           </div>
-          <div class="params-block params-block-switch">
+          <div class="params-block params-block-switch" v-if="activeTab == 0">
             <div class="param-wrap switch">
               <button
                 class="btn btn-param btn-switch"
