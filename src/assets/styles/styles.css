@@ -495,6 +495,18 @@ ul.tabs {
     width: 100%;
 }
 
+.section-listing-tabs .tabs,
+.section-tabs .container .tabs {
+    overflow: auto hidden;
+}
+
+.section-listing-tabs .tabs::-webkit-scrollbar,
+.section-tabs .container .tabs::-webkit-scrollbar {
+    display: none;
+    height: 0;
+    width: 0;
+}
+
 .tabs li button {
     padding: 12px 0;
     min-width: 152px;
@@ -2299,6 +2311,15 @@ a.td-wrap-link span {
 
 .btn-block {
     aspect-ratio: 1 / 1;
+}
+
+.btn-refresh.refreshing i{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0);
+    animation: icon-load .8s ease-out infinite backwards;
+
 }
 
 .listing-additional-options .btn-block {

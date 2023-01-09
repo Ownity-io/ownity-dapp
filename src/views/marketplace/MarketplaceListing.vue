@@ -38,8 +38,10 @@
                   </button>
                 </div>
                 <div class="btn-wrap">
-                  <button class="btn btn-block" :class="{'refreshing' : isRefreshing}" >
-                    <i class="i-refresh-line" @click="this.refreshInfo();"></i>
+                  <button class="btn btn-block btn-refresh" 
+                  @click="this.refreshInfo();" 
+                  :class="{'refreshing' : isRefreshing}" >
+                    <div><i class="i-refresh-line" ></i></div>
                   </button>
                 </div>
                 <div class="btn-wrap btn-share">
