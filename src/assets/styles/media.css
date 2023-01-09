@@ -667,6 +667,12 @@
         line-height: 19px;
     }
 
+.footer-block div.footer-block-name {
+    display: none;
+}
+.footer-block button.footer-block-name {
+    display: flex;
+}
     .footer-block .footer-block-name i.i-arrow-up-s-line {
         display: block;
     }
