@@ -8,7 +8,7 @@
                 <div class="td td-date">{{translatesGet('ACTIVITY_THEAD-5')}}</div>
             </div>
                 
-            <div class="tr" v-for="item in this.$store.getters['marketplace/getActivitiesResult']">
+            <div class="tr" v-for="item in this.currentlyVisibleActivities" :key="item">
                 <div class="td td-category">
                     <div class="td-wrap td-wrap-category">
                         <i class="i-shopping-bag-line"></i>
@@ -45,7 +45,8 @@
             </div>
             
             <div class="table-btn-row">
-                <button class="btn btn-show-more">{{translatesGet('SHOW_MORE')}} 
+                <button class="btn btn-show-more" v-if="this.currentChunkyIndex < ((this.allActivitiesChunky.length)-1)" @click="showMoreActivities">
+                    {{translatesGet('SHOW_MORE')}} 
                     <i class="i-arrow-down-s-line"></i>
                 </button>
             </div>
@@ -60,7 +61,12 @@ export default {
   data() {
     return {
       lang: new MultiLang(this),
-      currencyToUsdPrice:1
+      currencyToUsdPrice:1,
+      allActivities:[],
+      chunkSize:4,
+      currentChunkyIndex:0,
+      currentlyVisibleActivities: [],
+      allActivitiesChunky: [],
     };
   },
   methods:{
@@ -126,11 +132,20 @@ export default {
                 return seconds+'s';
             }
         },
+        async showMoreActivities(){
+            this.currentChunkyIndex+=1;
+            this.currentlyVisibleActivities= this.currentlyVisibleActivities.concat(this.allActivitiesChunky[this.currentChunkyIndex]) ;
+        }
   },
   async mounted(){
-    await this.setCurrencyToUsd();
-    await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult', { userAddress: null, collectionAddress: null, lotId: this.item.id });
-  },
+      await this.setCurrencyToUsd();
+      await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult', { userAddress: null, collectionAddress: null, lotId: this.item.id });
+      this.allActivities = this.$store.getters['marketplace/getActivitiesResult'];
+      for (let i = 0; i < this.allActivities.length; i += this.chunkSize) {
+          this.allActivitiesChunky.push(this.allActivities.slice(i, i + this.chunkSize));
+      }
+      this.currentlyVisibleActivities = this.currentlyVisibleActivities.concat(this.allActivitiesChunky[this.currentChunkyIndex])  
+},
   props:['item']
 };
 </script>
