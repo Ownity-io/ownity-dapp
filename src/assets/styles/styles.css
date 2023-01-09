@@ -2192,19 +2192,30 @@ a.td-wrap-link span {
 }
 
 .card-listing {
-    display: grid;
+    /* display: grid;
     grid-template-columns: .6fr 1fr;
-    grid-template-rows: 1fr;
+    grid-template-rows: 1fr; */
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+
     gap: 16px;
     position: relative;
 }
 
 .card-listing .section-card-img {
-    width: 100%;
+    /* width: 100%; */
+    /* width: calc(100% * .6 + 16px); */
+    max-width: calc(40% - 16px);
     position: sticky;
     top: 100px;
     height: fit-content;
     /* max-width: 586px; */
+}
+
+.card-listing  .listing-main{
+    flex-grow: 1;
+    max-width: 60%;
 }
 
 .card-listing .section-card-img.section-card-img-mobile {
