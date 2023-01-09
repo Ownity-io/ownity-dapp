@@ -332,7 +332,7 @@
         display: none;
     }
 
-    .section-listing-tabs .tabs,
+    /* .section-listing-tabs .tabs,
     .section-tabs .container .tabs {
         overflow: auto hidden;
     }
@@ -342,7 +342,7 @@
         display: none;
         height: 0;
         width: 0;
-    }
+    } */
 
     .tab-blocks-list {
         grid-template-columns: 1fr 1fr;
