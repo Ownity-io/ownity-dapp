@@ -202,6 +202,21 @@ export default {
         );
         let trx = await prov.waitForTransaction(cancelSellFraction.hash);
         if (trx.status==1){
+          let forceReq = await (await fetch(
+            `${config.backendApiEntryPoint}force-scanner/`,
+            {
+              body:JSON.stringify({
+                scanner:'cancelled_on_sale_bids',
+                block:trx.blockNumber,
+                blockchain: this.item.blockchain
+              }),
+              headers: {
+                accept: "application/json",
+                'Content-Type': 'application/json',
+              },
+              method:'POST'
+            })).json();
+          console.log(forceReq);
           await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
           await this.$store.dispatch('appGlobal/setLastTransactionHash', cancelSellFraction.hash);
           await this.$store.dispatch('appGlobal/setShowCancelSellPartModal', false);

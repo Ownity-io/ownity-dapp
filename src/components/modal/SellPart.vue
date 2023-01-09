@@ -262,6 +262,21 @@ export default {
       console.log(sellFraction);
       let trx = await prov.waitForTransaction(sellFraction.hash);
       if (trx.status == 1) {
+        let forceReq = await (await fetch(
+            `${config.backendApiEntryPoint}force-scanner/`,
+            {
+              body:JSON.stringify({
+                scanner:'sell_lot',
+                block:trx.blockNumber,
+                blockchain: this.item.blockchain
+              }),
+              headers: {
+                accept: "application/json",
+                'Content-Type': 'application/json',
+              },
+              method:'POST'
+            })).json();
+          console.log(forceReq);
         await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
         await this.$store.dispatch('appGlobal/setLastTransactionHash', sellFraction.hash);
         await this.$store.dispatch('appGlobal/setShowSellPartModal', false);

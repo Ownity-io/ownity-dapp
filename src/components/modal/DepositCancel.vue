@@ -217,6 +217,21 @@ export default {
         );
         let trx = await prov.waitForTransaction(declineBid.hash);
         if (trx.status==1){
+          let forceReq = await (await fetch(
+            `${config.backendApiEntryPoint}force-scanner/`,
+            {
+              body:JSON.stringify({
+                scanner:'cancelled_bids',
+                block:trx.blockNumber,
+                blockchain: this.item.blockchain
+              }),
+              headers: {
+                accept: "application/json",
+                'Content-Type': 'application/json',
+              },
+              method:'POST'
+            })).json();
+          console.log(forceReq);
           await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
           await this.$store.dispatch('appGlobal/setLastTransactionHash',declineBid.hash);
           await this.$store.dispatch('appGlobal/setshowDepositCancelModal',false);
