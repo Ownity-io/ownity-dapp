@@ -18,7 +18,7 @@
 
 /* */
 .card .data-td a:hover,
-.owned-row a:hover,
+.owned-row a:hover span,
 .td-wrap.td-wrap-collection:hover  .collection-id:not(.td-light),
 .deposit-listened.deposit-listened-link:hover a,
 .collection-data-link a:hover ,
