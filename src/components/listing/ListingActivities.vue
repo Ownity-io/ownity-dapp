@@ -11,7 +11,7 @@
             <div class="tr" v-for="item in this.currentlyVisibleActivities" :key="item">
                 <div class="td td-category">
                     <div class="td-wrap td-wrap-category">
-                        <i class="i-shopping-bag-line"></i>
+                        <!-- <i class="i-shopping-bag-line"></i> -->
                         <!-- <span>{{translatesGet('STATUS-SALE')}}</span> -->
                         <span>{{item.part}}</span>
                     </div>
