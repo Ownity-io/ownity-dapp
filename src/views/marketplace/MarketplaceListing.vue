@@ -383,6 +383,7 @@
                 <button
                   :class="{ 'active-tab': activeTab === 'ListingActivities' }"
                   @click="letsCheck('ListingActivities')"
+                  v-if="!(this.item.internal_status=='OPEN' & this.item.marketplace_status=='OPEN')"
                 >
                   <span>{{translatesGet('ACTIVITIES')}}</span>
                   <span>{{translatesGet('ACTIVITIES')}}</span>
@@ -404,7 +405,7 @@
               <ListingInfo v-if="activeTab === 'ListingInfo'" :item="item"/>
               <ListingProperties v-if="activeTab === 'ListingProperties'" :item="item" />
               <ListingAbout v-if="activeTab === 'ListingAbout'" :item="item" />
-              <ListingActivities v-if="activeTab === 'ListingActivities'" :item="item"/>
+              <ListingActivities v-if="(activeTab === 'ListingActivities')" :item="item"/>
               <ListingChat v-if="activeTab === 'ListingChat'" />
             </div>
           </section>
