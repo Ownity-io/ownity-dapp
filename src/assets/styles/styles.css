@@ -267,6 +267,7 @@ main>section {
 .filter-section-name,
 .btn.btn-connect,
 .header-nav ul li a.active,
+.header-nav ul li a.router-link-exact-active,
 .header-nav ul li a:hover,
 .header-nav ul li button.active {
     font-weight: 700;
@@ -420,6 +421,7 @@ textarea {
 footer {
     padding-top: 32px;
     position: relative;
+    overflow: hidden;
 }
 
 footer::after {
@@ -1736,6 +1738,10 @@ ul.tabs {
 
 .card .data-table .data-tr .data-td a{
     width: fit-content;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
 }
 
 .card .data-table .data-tr .data-td>div {

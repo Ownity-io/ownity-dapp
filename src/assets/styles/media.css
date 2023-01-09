@@ -145,6 +145,16 @@
         max-width: 100%;
     }
 
+    .recommendations-wrap{
+        overflow: hidden;
+        max-width: 100%;
+    }
+
+    .footer-logo, .header-logo{
+        max-width: 156px;
+        flex-grow: 1;
+        width: 100%;
+    }
 
 }
 
@@ -155,7 +165,7 @@
     }
 
     .footer-form .btn-subscribe {
-        min-width: fit-content;
+        min-width: 140px;
         padding: 12px 8px;
     }
 
