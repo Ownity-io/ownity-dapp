@@ -8,6 +8,9 @@
                         <router-link :to="{name: 'Main'}" v-else class="footer-logo"></router-link>
                     </div>
                     <div class="footer-block" :class="{'unfolded' : !footerBlock1}">
+                        <div class="footer-block-name">
+                            <span>{{translatesGet('MARKETPLACE')}}</span>
+                        </div>
                         <button class="footer-block-name" @click="footerBlock1 = !footerBlock1">
                             <span>{{translatesGet('MARKETPLACE')}}</span>
                             <i class="i-arrow-up-s-line"></i>
@@ -21,6 +24,9 @@
                         </ul>
                     </div>
                     <div class="footer-block" :class="{'unfolded' : !footerBlock2}">
+                        <div class="footer-block-name">
+                            <span>{{translatesGet('COLLECTIONS')}}</span>
+                        </div>
                         <button class="footer-block-name" @click="footerBlock2 = !footerBlock2">
                             <span>{{translatesGet('COLLECTIONS')}}</span>
                             <i class="i-arrow-up-s-line"></i>
@@ -33,6 +39,9 @@
                         </ul>
                     </div>
                     <div class="footer-block" :class="{'unfolded' : !footerBlock3}">
+                        <div class="footer-block-name">
+                            <span>{{translatesGet('RESOURCES')}}</span>
+                        </div>
                         <button class="footer-block-name" @click="footerBlock3 = !footerBlock3">
                             {{translatesGet('RESOURCES')}}
                             <i class="i-arrow-up-s-line"></i>

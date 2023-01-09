@@ -372,6 +372,7 @@ textarea {
     font-weight: 700;
 }
 
+.footer-block button.footer-block-name ,
 .footer-block .footer-block-name i.i-arrow-up-s-line {
     display: none;
 }
