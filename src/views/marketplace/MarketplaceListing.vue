@@ -38,8 +38,8 @@
                   </button>
                 </div>
                 <div class="btn-wrap">
-                  <button class="btn btn-block">
-                    <i class="i-refresh-line"></i>
+                  <button class="btn btn-block" :class="{'refreshing' : isRefreshing}" >
+                    <i class="i-refresh-line" @click="this.refreshInfo();"></i>
                   </button>
                 </div>
                 <div class="btn-wrap btn-share">
@@ -461,6 +461,7 @@ export default {
       recommendations:null,
       voting:null,
       lang: new MultiLang(this),
+      isRefreshing:false
     };
   },
   components: {
@@ -660,6 +661,22 @@ export default {
         }
       }
     },
+    async refreshInfo(){
+      this.isRefreshing=true;
+      window.scrollTo(0, 0);
+      try{
+        this.activeTab = "ListingInfo";
+        this.activeTab2 = "ListingInfo2";
+        await this.getAndSetListingInfo();
+        await this.$store.dispatch('appGlobal/setSnackText', 'Listing Data Has Been Successfully Refreshed!')
+        await this.$store.dispatch('appGlobal/setGreenSnack', true)
+        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 5)      
+      }
+      catch{
+
+      }
+      this.isRefreshing=false;
+    }
   },
 };
 </script>
