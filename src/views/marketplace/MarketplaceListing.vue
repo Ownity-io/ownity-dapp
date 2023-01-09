@@ -404,7 +404,7 @@
               <ListingInfo v-if="activeTab === 'ListingInfo'" :item="item"/>
               <ListingProperties v-if="activeTab === 'ListingProperties'" :item="item" />
               <ListingAbout v-if="activeTab === 'ListingAbout'" :item="item" />
-              <ListingActivities v-if="activeTab === 'ListingActivities'" />
+              <ListingActivities v-if="activeTab === 'ListingActivities'" :item="item"/>
               <ListingChat v-if="activeTab === 'ListingChat'" />
             </div>
           </section>

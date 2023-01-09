@@ -192,8 +192,15 @@ export default {
     },
     setActivitiesResult(state,_json){
       if (_json != null) {
-        state.nextActivitiesLink = _json.next;
-        state.activitiesResults = _json.results;
+        if (_json.next) {
+          state.nextActivitiesLink = _json.next;
+        }
+        if (_json.results){
+          state.activitiesResults = _json.results;
+        }
+        else{
+          state.activitiesResults = _json;
+        }        
       } else {
         state.nextActivitiesLink = null;
         state.activitiesResults = [];
@@ -458,13 +465,20 @@ export default {
       console.log(params.userAddress);
       console.log(params.collectionAddress);
       context.commit("setActivitiesResult", null);
-      let requestUrl = `${config.backendApiEntryPoint}user-activity/?limit=${config.activitiesPerPage}`;
+      let requestUrl = null;
+      if (params.lotId){
+        requestUrl=`${config.backendApiEntryPoint}user-activity/?lot=${params.lotId}`;
+      }
+      else{
+        requestUrl = `${config.backendApiEntryPoint}user-activity/?limit=${config.activitiesPerPage}`;
+      }
       if (context.getters.getCurrentActivitiesCategory){
         requestUrl+=`&part=${context.getters.getCurrentActivitiesCategory}`
       }
       if (params.collectionAddress){
         requestUrl+=`&collection=${params.collectionAddress}`
       }
+      
       if (context.getters.getCurrentCollectionContractAddress){
         requestUrl+=`&collection=${context.getters.getCurrentCollectionContractAddress}`
       }
