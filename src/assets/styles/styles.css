@@ -2301,6 +2301,15 @@ a.td-wrap-link span {
     aspect-ratio: 1 / 1;
 }
 
+.btn-refresh.refreshing i{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0);
+    animation: icon-load .8s ease-out infinite backwards;
+
+}
+
 .listing-additional-options .btn-block {
     color: #818899;
     font-size: 24px;
