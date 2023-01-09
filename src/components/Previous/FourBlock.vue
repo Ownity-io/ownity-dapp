@@ -13,10 +13,10 @@
                     </span>
           </div>
           <div class="td td-price">
-            Volume
+            Total Volume
           </div>
           <div class="td td-price">
-            Floor price
+            Floor Price
           </div>
           <div class="td td-data">
             Owners
@@ -73,7 +73,7 @@
       </div>
       <div class="collection-design">
         <a class="btn btn-previous" href="#list" style="max-width: 180px;z-index: 2">
-          See All Collections
+          To All Collections
         </a>
       </div>
     </div>

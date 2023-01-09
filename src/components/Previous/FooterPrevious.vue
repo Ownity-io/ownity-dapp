@@ -55,24 +55,24 @@
                             </li>
                             <li>
                               <a target="_blank">
-                              {{translatesGet('TERMS_OF_USE2')}}<span class="soon" style="padding-left: 5px; color: #474747"> (soon)</span>
+                              {{translatesGet('TERMS_OF_USE2')}}<span class="soon" style="padding-left: 5px; color: #474747"> (Soon)</span>
                               </a>
                             </li>
                             <li>
                               <a>
-                                {{translatesGet('PRIVACY_POLICY')}}<span class="soon" style="padding-left: 5px; color: #474747"> (soon)</span>
+                                {{translatesGet('PRIVACY_POLICY')}}<span class="soon" style="padding-left: 5px; color: #474747"> (Soon)</span>
                               </a>
                             </li>
                             <li>
                               <a>
-                                Brand Kit  <span class="soon" style="padding-left: 5px; color: #474747">(soon)</span>
+                                Brand Kit  <span class="soon" style="padding-left: 5px; color: #474747">(Soon)</span>
                               </a>
                             </li>
                         </ul>
                     </div>
                     <a class="footer-block footer-block-form">
                         <a target="_blank" href="https://t.me/Ownity" class="btn btn-previous">
-                            Contact us
+                          Contact Us
                         </a>
                         <!-- <div class="footer-block-name">
                             {{translatesGet('FOOTER_FORM')}}

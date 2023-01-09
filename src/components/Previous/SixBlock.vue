@@ -1,13 +1,13 @@
 <template>
 <div class="whitelist-wrapper" id="list">
   <div class="whitelist-inner">
-    <p class="whitelist-inner-title">Get in the Beta Testing Waitlist</p>
-    <p class="whitelist-inner-subtitle">Become one of the first who will test all the functionality, and much more.</p>
+    <p class="whitelist-inner-title">Ownity Private Beta Waitlist Is Now Open</p>
+    <p class="whitelist-inner-subtitle">Hop on the list to be among the very first to try out Ownity’s disruptive functionality.</p>
     <div class="email-block">
-      <input placeholder="Your email" v-model="email" >
+      <input placeholder="Your Email" v-model="email" >
       <button @click="validateEmail();">Join</button>
     </div>
-<!--    <p class="check-term">By subscribing, you agree to the Terms of Use</p>-->
+<!--    <p class="check-term">By joining the list, you agree to Ownity Terms of Use.</p>-->
   </div>
 </div>
 </template>

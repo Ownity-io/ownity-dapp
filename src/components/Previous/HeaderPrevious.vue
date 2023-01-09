@@ -25,7 +25,7 @@
                     </button>
                     <ul class="header-drop-down">
                         <li>
-                            <a href="#litepaper">About us</a>
+                            <a href="#litepaper">About Us</a>
                         </li>
                         <li><a href="#faqs">FAQ</a></li>
                     </ul>
@@ -46,14 +46,14 @@
                             <a >
                                 <Telegram />
                                 Telegram
-                                <span class="soon">soon</span>
+                                <span class="soon">Soon</span>
                             </a>
                         </li>
                         <li class="link-disabled">
                             <a >
                                 <Discord />
                                 Discord
-                                <span class="soon">soon</span>
+                                <span class="soon">Soon</span>
                             </a>
                         </li>
                     </ul>
@@ -78,17 +78,17 @@
                     </button>
                     <ul class="header-drop-down">
                         <li>
-                            <a target="_blank" href="https://ownity.gitbook.io/ownity-documentation/">Litepaper</a>
+                            <a target="_blank" href="https://ownity.gitbook.io/ownity-documentation/">White Paper</a>
                         </li>
                         <li class="link-disabled">
                             <a href="">
                                 One pager
-                                <span class="soon">soon</span>
+                                <span class="soon">Soon</span>
                             </a>
                         </li>
                         <li class="link-disabled">
                             <a href="">Tokenomics
-                                <span class="soon">soon</span>
+                                <span class="soon">Soon</span>
                             </a>
                         </li>
                     </ul>
@@ -143,14 +143,14 @@
                                         <a >
                                             <Telegram />
                                             Telegram
-                                            <span class="soon">soon</span>
+                                            <span class="soon">Soon</span>
                                         </a>
                                     </li>
                                     <li class="link-disabled">
                                         <a >
                                             <Discord />
                                             Discord
-                                            <span class="soon">soon</span>
+                                            <span class="soon">Soon</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -163,17 +163,17 @@
                                 </button>
                                 <ul class="header-drop-down">
                                     <li>
-                                        <a target="_blank" href="https://ownity.gitbook.io/ownity-documentation/">Litepaper</a>
+                                        <a target="_blank" href="https://ownity.gitbook.io/ownity-documentation/">White Paper</a>
                                     </li>
                                     <li class="link-disabled">
                                         <a href="">
                                             One pager
-                                            <span class="soon">soon</span>
+                                            <span class="soon">Soon</span>
                                         </a>
                                     </li>
                                     <li class="link-disabled">
                                         <a href="">Tokenomics
-                                            <span class="soon">soon</span>
+                                            <span class="soon">Soon</span>
                                         </a>
                                     </li>
                                 </ul>
