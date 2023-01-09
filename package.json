@@ -49,6 +49,7 @@
     "vue-debounce": "^4.0.0",
     "vue-router": "^4.1.6",
     "vue3-carousel": "^0.2.6",
+    "vue3-click-away": "^1.2.4",
     "vue3-jazzicon": "^0.1.4",
     "vue3-lottie": "^2.4.0",
     "vuex": "^4.0.2",

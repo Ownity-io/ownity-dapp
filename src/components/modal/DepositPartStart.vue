@@ -1,6 +1,6 @@
 <template>
   <div class="modal" v-if="render">
-    <div class="modal-wrapper">
+    <div class="modal-wrapper" v-click-away="onClickAway">
       <div class="modal-header">
         <div class="modal-name">{{translatesGet('DEPOSIT_PART')}}</div>
         <button class="btn-close" @click="this.$store.dispatch('appGlobal/setshowStartCollectingModal',false)">
@@ -416,6 +416,9 @@ export default {
         this.currentPart = parseInt(this.currentPart);
       }
     },
+    async onClickAway(){
+      await this.$store.dispatch('appGlobal/setshowStartCollectingModal',false);
+    }
   }
 };
 </script>
