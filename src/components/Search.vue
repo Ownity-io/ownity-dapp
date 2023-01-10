@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-    <div v-if="this.searchHeader.length>=2 & this.isHeader" class="search-substrate"></div>
+    <!-- <div v-if="this.searchHeader.length>=2 & this.isHeader" class="search-substrate"></div> -->
 </template>
 
 <script>
