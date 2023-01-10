@@ -7,18 +7,18 @@
         <li><a href="/"><i class="i-arrow-right-s-line"></i><span>Home</span></a></li>
         <li><a href="/marketplace"><i class="i-arrow-right-s-line"></i><span>Marketplace</span></a></li>
         <li><a :href="collectionLink" v-if="item"><i class="i-arrow-right-s-line"></i><span>{{this.item.collection.name}}</span></a></li>
-        <li v-if="item.name"><a href="" ><i class="i-arrow-right-s-line"></i><span>{{this.item.name}}</span></a></li>
-        <li v-else-if="item.token_id"><a href="" ><i class="i-arrow-right-s-line"></i><span>#{{this.item.token_id}}</span></a></li>
+        <li v-if="item.name"><div><i class="i-arrow-right-s-line"></i><span>{{this.item.name}}</span></div></li>
+        <li v-else-if="item.token_id"><div><i class="i-arrow-right-s-line"></i><span>#{{this.item.token_id}}</span></div></li>
         
     </ul>
     <ul class="breadcrumbs" v-else-if="this.$route.name == 'Collection' & collection!=null">
         <li><a href="/"><i class="i-arrow-right-s-line"></i><span>Home</span></a></li>
         <li><a href="/marketplace"><i class="i-arrow-right-s-line"></i><span>Marketplace</span></a></li>
-        <li><a href="" v-if="collection"><i class="i-arrow-right-s-line"></i><span>{{this.collection.name}}</span></a></li>    
+        <li><div v-if="collection"><i class="i-arrow-right-s-line"></i><span>{{this.collection.name}}</span></div></li>    
     </ul>
     <ul class="breadcrumbs" v-else>
         <li><a href="/"><i class="i-arrow-right-s-line"></i><span>Home</span></a></li>
-        <li><a href=""><i class="i-arrow-right-s-line"></i><span>{{this.$route.name}}</span></a></li> 
+        <li><div><i class="i-arrow-right-s-line"></i><span>{{this.$route.name}}</span></div></li> 
     </ul>
 </template>
 
