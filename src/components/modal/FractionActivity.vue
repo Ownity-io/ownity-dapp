@@ -1,5 +1,6 @@
 <template>
   <div class="modal" v-if="render">
+    <div class="modal-wrapper-close" @click="this.$store.dispatch('appGlobal/setShowVoteInfoModal',false)"></div>
     <div class="modal-wrapper modal-claim">
       <div class="modal-header">
         <div class="modal-name">
