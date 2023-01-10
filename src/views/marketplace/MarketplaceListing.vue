@@ -670,14 +670,17 @@ export default {
         this.activeTab = "ListingInfo";
         this.activeTab2 = "ListingInfo2";
         await this.getAndSetListingInfo();
+        this.isRefreshing=false;
         await this.$store.dispatch('appGlobal/setSnackText', 'Listing Data Has Been Successfully Refreshed!')
         await this.$store.dispatch('appGlobal/setGreenSnack', true)
         await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 5)      
       }
       catch{
-
-      }
-      this.isRefreshing=false;
+        this.isRefreshing=false;
+        await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
+        await this.$store.dispatch('appGlobal/setGreenSnack', false)
+        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 5)      
+      }      
     }
   },
 };
