@@ -581,13 +581,28 @@ ul.tabs {
     position: relative;
 }
 
+.search.search-active{
+    z-index: 5;
+}
+
+.search-substrate{
+    position: fixed;
+    content: '';
+    background-color: rgba(224, 224, 224, 0.717);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
 .search-results,
 .drop-down {
     position: absolute;
     bottom: 0;
     transform: translateY(100%);
     min-width: 100%;
-    padding-top: 8px;
+    padding-top: 0;
     height: 0;
     opacity: 0;
     overflow: hidden;
@@ -595,6 +610,11 @@ ul.tabs {
     z-index: -5;
 }
 
+.search-results.unfolded,
+.input-select-wrap.unfolded .drop-down,
+.drop-down-container.unfolded .drop-down {
+    padding-top: 8px;
+}
 .drop-down {
     padding-top: 0;
     box-shadow: 4px 4px 20px rgba(129, 136, 153, 0.1);
