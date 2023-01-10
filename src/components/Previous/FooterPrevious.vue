@@ -6,7 +6,7 @@
                     <div class="footer-block footer-block-logo">
                         <div v-if="$route.fullPath ==='/'" @click="goToTop()" class="footer-logo"></div>
                         <router-link :to="{name: 'Main'}" v-else class="footer-logo"></router-link>
-                        <p>Your Gateway To The Fractionalized World</p>
+                        <p>Your Gateway to the Fractionalized NFT World</p>
                         <div class="footer-part footer-social-links">
                             <ul class="social-links-wrap">
                                 <li><a href="https://twitter.com/ownity_io" target="_blank"><i class="i-twitter-fill"></i></a></li>
