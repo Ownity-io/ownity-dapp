@@ -16,7 +16,7 @@
     </div>
     <section class="section-header">
       <div class="container">
-        <h1 class="section-name-h1">{{translatesGet('MARKETPLACE')}} NFT</h1>
+        <h1 class="section-name-h1">{{translatesGet('MARKETPLACE_SECTION_TITLE')}}</h1>
       </div>
     </section>
     <section class="section-tabs">
