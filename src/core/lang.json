@@ -59,7 +59,7 @@
         "STATUS-CLOSED":"Closed",
         "STATUS-OPEN":"Open",
 
-        "NOTHING_HERE":"Oops! Nothing to Quantify here:(",
+        "NOTHING_HERE":"Oops, Nothing here:(",
         "BACK_TO_ALL":"Back to All NFTs",
 
         "PRIVACY_POLICY":"Privacy Policy",
@@ -127,8 +127,8 @@
         "FAQ-H2-2":"Also known as <b>fractional NFT ownership</b>, it is a new lower-barrier way to own that involves splitting up non-fungible tokens - collectibles, artworks, PFPs, photos & videos, gamified ones, membership passes, memorabilia, domain names, etc. - into smaller pieces to own them together.",
         "FAQ-H1-3":"What Are Fractionalized NFTs?",
         "FAQ-H2-3":"Also referred to as <b>fNFTs</b>, they are whole NFTs divvied up into smaller pieces for ownership by a number of people. Fractionalized NFTs are designed to appeal to those wanting to participate in the booming NFT market without breaking the bank, or simply own non-fungible tokens with friends, family, or for business purposes.",
-        "FAQ-H1-4":"Who will initiate the listing purchase?",
-        "FAQ-H2-4":"The end participant of the collective purchase will initiate the transaction of NFT transfer to smart contract within purchase on listing marketplace.",
+        "FAQ-H1-4":"Can I Fractionalize Any NFT with Ownity?",
+        "FAQ-H2-4":"Ownity empowers its users to fractionalize any NFT from the supported collections listed for sale on OpenSea, LooksRare, X2Y2, and other marketplaces into chunks as small as 1% whatever the price. You can also buy the whole (100%) NFT with Ownity.",
         "FAQ-H1-5":"Can I Sell My NFT Fractions?",
         "FAQ-H2-5":"On Ownity, any fraction is sold as quickly as it is bought. You are free to handle NFT fractions you own with just a couple of clicks anytime.",
         "FAQ-H1-6":"What Are Benefits of NFT Co-Ownership?",
@@ -240,7 +240,7 @@
         "TERMS_OF_USE_SECTION-3":"Third-Party Links & Ads. Other Users",
         "TERMS_OF_USE_SECTION-3-1":"Third-Party Links & Ads. The Site may contain links to third-party websites and services, and/or display advertisements for third-parties. Such Third-Party Links & Ads are not under the control of ElephantsLab, and ElephantsLab is not responsible for any Third-Party Links & Ads. ElephantsLab provides access to these Third-Party Links & Ads only as a convenience to you, and does not review, approve, monitor, endorse, warrant, or make any representations with respect to Third-Party Links & Ads.",
 
-        "---------SRVE/HELP------------": "",
+        "---------SERVE/HELP------------": "",
 
         "FAQ_TITLE_SHORT": "Ownity FAQ",
         "FAQ_TITLE": "We answered the most FAQs about Ownity here for your convenience. See if there's the one you're after.",
