@@ -82,39 +82,45 @@ export default defineComponent({
   display: none;
 }
 
-.cards-carousel .carousel__viewport li.carousel__slide--visible .container-more-info {
+/* .cards-carousel .carousel__viewport li.carousel__slide--visible .container-more-info {
     left:unset;
     transform: translate(0%, 100%);
     right: 0;
-}
+} */
 
-@media (min-width:768px) {
-
-  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(1n) .container-more-info {
-    transform: translate(0px, 100%);
-    left:12px;
-    right: unset;
-  }
-  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(2n) .container-more-info {
+@media (min-width:0)  and (max-width:768px) {
+  .cards-carousel li.carousel__slide--visible .container-more-info {
     transform: translate(-50%, 100%);
     left:calc(50% + 12px);
     right: 0;
   }
-  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(3n) .container-more-info {
+}
+@media (min-width:768px) {
+  .cards-carousel li.carousel__slide--active .container-more-info {
+    transform: translate(0px, 100%);
+    left:12px;
+    right: unset;
+  }
+  .cards-carousel li.carousel__slide--active + .carousel__slide--visible  .container-more-info {
+    transform: translate(-50%, 100%);
+    left:calc(50% + 12px);
+    right: 0;
+  }
+  .cards-carousel li.carousel__slide--active + .carousel__slide--visible + .carousel__slide--visible  .container-more-info {
     transform: translate(0px, 100%);
     left:unset;
     right: 0;
   }
 }
-@media (min-width:1024px) {
-  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(1n) .container-more-info,
-  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(2n) .container-more-info  {
+@media (min-width:1024px) and (max-width:1424.5px) {
+  .cards-carousel li.carousel__slide--active .container-more-info,
+  .cards-carousel li.carousel__slide--active + .carousel__slide--visible .container-more-info  {
     transform: translate(0px, 100%);
     left:12px;
     right: unset;
   }
-  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(3n) .container-more-info,
-  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(4n) .container-more-info {
+  .cards-carousel li.carousel__slide--active + .carousel__slide--visible + .carousel__slide--visible  .container-more-info ,
+  .cards-carousel li.carousel__slide--active + .carousel__slide--visible + .carousel__slide--visible + .carousel__slide--visible  .container-more-info  {
     transform: translate(0px, 100%);
     left:unset;
     right: 0;
@@ -122,20 +128,19 @@ export default defineComponent({
 }
 @media (min-width:1425px) {
 
-  /* :nth-child(an+b of s) */
-  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(1n) .container-more-info,
-  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(2n) .container-more-info  {
+  .cards-carousel li.carousel__slide--active .container-more-info,
+  .cards-carousel li.carousel__slide--active + .carousel__slide--visible .container-more-info  {
     transform: translate(0px, 100%);
     left:12px;
     right: unset;
   }
-  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(3n ) .container-more-info{
+  .cards-carousel li.carousel__slide--active + .carousel__slide--visible + .carousel__slide--visible  .container-more-info {
     transform: translate(-50%, 100%);
     left:calc(50% + 12px);
     right: 0;
   }
-  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(4n) .container-more-info,
-  .cards-carousel .carousel__viewport li.carousel__slide--visible:nth-child(5n) .container-more-info {
+  .cards-carousel li.carousel__slide--active + .carousel__slide--visible + .carousel__slide--visible + .carousel__slide--visible  .container-more-info ,
+  .cards-carousel li.carousel__slide--active + .carousel__slide--visible + .carousel__slide--visible + .carousel__slide--visible + .carousel__slide--visible  .container-more-info  {
     transform: translate(0px, 100%);
     left:unset;
     right: 0;
