@@ -71,7 +71,7 @@
                             </div>
                             <div class="btn link-wrapper">
                                 <div class="link">{{this.$store.getters['walletsAndProvider/getUserShortAddress']}}</div>
-                                <button class="btn-copy"><i class="i-checkbox-multiple-blank-line"></i></button>
+                                <button class="btn-copy" @click='copy()'><i class="i-checkbox-multiple-blank-line"></i></button>
                             </div>
                         </div>
                         <div class="profile-container-btns">
@@ -213,6 +213,9 @@ import ListCards from "@/components/ListCards.vue";
 import MultiLang from "@/core/multilang";
 import config from '@/config.json';
 import ActivityTable from "@/components/ActivityTable.vue";
+import { useClipboard } from '@vueuse/core'
+const source = localStorage.getItem('userAddress');
+const { copy } = useClipboard({ source })
 
 export default {
     data() {
@@ -225,7 +228,8 @@ export default {
             mobileDropDown: false,
             config:config,
             lang: new MultiLang(this),
-            userAddress:null
+            userAddress:null,
+            copy:copy
         };
     },
     components:{
