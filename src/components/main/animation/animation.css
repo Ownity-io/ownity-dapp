@@ -10,6 +10,9 @@
 
 .screen-animation-container .img {
     position: absolute;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
 }
 
 .screen-animation-container .img-container {
@@ -42,8 +45,8 @@
     /* opacity: 0; */
 }
 
-.screen-animation-container .img.img2  .img-container{
-    transform:  translate(-50%, -100%);
+.screen-animation-container .img.img2 .img-container {
+    transform: translate(-50%, -100%);
 
 }
 
@@ -124,7 +127,7 @@
     height: 110px;
     width: 133px;
     left: 439px;
-    top: 485px;  
+    top: 485px;
 }
 
 .screen-animation-container .img.img2.active .svg21 {

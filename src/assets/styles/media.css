@@ -158,7 +158,9 @@
 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991px) {
+
+/* @media (max-width: 768px) { */
 
     .footer-section {
         row-gap: 0;
@@ -447,6 +449,9 @@
     .filter-mobile-wrap .filter {
         max-width: 100%;
         padding: 8px 16px;
+        display: block;
+        max-height:calc( 100% - 72px);
+        overflow: hidden auto;
     }
 
     .filter-mobile-container {
@@ -497,6 +502,7 @@
         display: flex;
         justify-content: flex-start;
         padding: 12px 16px;
+        height: 72px;
     }
 
     .filter-mobile-header .btn-close {
@@ -667,7 +673,7 @@
         line-height: 19px;
     }
 
-.footer-block div.footer-block-name {
+.footer-block:not(.footer-block-form) div.footer-block-name {
     display: none;
 }
 .footer-block button.footer-block-name {
@@ -972,7 +978,8 @@
 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991px) {
+    /* @media (max-width: 768px) { */
 
     .recommendations-list li,
     .section-nft.with-filter .cards-list-container .card,
