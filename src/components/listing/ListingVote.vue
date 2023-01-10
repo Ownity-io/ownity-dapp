@@ -2,9 +2,7 @@
     <div class="block-vote">
       <div class="vote-data section-deposit-data">       
         <div class="deposit-img-container">
-          <a href="#" class="deposit-img" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}">
-            
-          </a> 
+          <a target="_blank" href="#" class="deposit-img" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></a> 
           <div class="deposit-img-type">
               <!-- <span v-if="this.voting.type=='CANCEL'">CANCELED</span> -->
               <i class="i-arrow-go-back-line" v-if="this.voting.type=='CANCEL'" 

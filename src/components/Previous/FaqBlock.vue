@@ -45,7 +45,7 @@
       </button>
       <div class="content-faq">
         <p>
-          Ownity empowers its users to fractionalize any NFT listed for sale on OpenSea, LooksRare, X2Y2, and other marketplaces into chunks as small as 1% whatever the price. You can also buy the whole (100%) NFT with Ownity.
+          Ownity empowers its users to fractionalize any NFT from the supported collections listed for sale on OpenSea, LooksRare, X2Y2, and other marketplaces into chunks as small as 1% whatever the price. You can also buy the whole (100%) NFT with Ownity.
         </p>
       </div>
     </div>

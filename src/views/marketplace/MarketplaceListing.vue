@@ -111,11 +111,11 @@
             <div class="section-deposit">
               <div class="section-deposit-data">
                 <div class="deposit-img-container">
-                  <a  :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"
+                  <a target="_blank" :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"
                   v-if="this.item.internal_status!='OWNED' & this.item.internal_status!='ON SALE'"></a>
-                  <a  :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url('../../public/favicon.webp')`}"
+                  <a target="_blank" :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url('../../public/favicon.webp')`}"
                   v-else-if="this.item.internal_status=='OWNED'"></a>
-                  <a  :href='linkToMarketplacePageFromVoting' class="deposit-img" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"
+                  <a target="_blank" :href='linkToMarketplacePageFromVoting' class="deposit-img" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"
                   v-else-if="this.item.internal_status=='ON SALE'"></a>
                 </div>
                 <div class="deposit-data">
