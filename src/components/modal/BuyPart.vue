@@ -1,5 +1,6 @@
 <template>
   <div class="modal" v-if="render">
+    <div class="modal-wrapper-close" @click="this.$store.dispatch('appGlobal/setShowBuyPartModal',false)"></div>
     <div class="modal-wrapper">
       <div class="modal-header">
         <div class="modal-name">{{translatesGet('BUY_PART')}}</div>

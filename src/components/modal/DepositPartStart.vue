@@ -1,6 +1,7 @@
 <template>
   <div class="modal" v-if="render">
     <!-- <div class="modal-wrapper" v-click-away="onClickAway"> -->
+    <div class="modal-wrapper-close" @click="this.$store.dispatch('appGlobal/setshowStartCollectingModal',false)"></div>
     <div class="modal-wrapper">
       <div class="modal-header">
         <div class="modal-name">{{translatesGet('DEPOSIT_PART')}}</div>
