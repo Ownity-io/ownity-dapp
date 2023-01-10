@@ -49,11 +49,10 @@
                                 <span class="soon">Soon</span>
                             </a>
                         </li>
-                        <li class="link-disabled">
-                            <a >
+                        <li>
+                            <a href="https://discord.com/invite/KJVVhxut84">
                                 <Discord />
                                 Discord
-                                <span class="soon">Soon</span>
                             </a>
                         </li>
                     </ul>
@@ -146,11 +145,10 @@
                                             <span class="soon">Soon</span>
                                         </a>
                                     </li>
-                                    <li class="link-disabled">
-                                        <a >
+                                    <li>
+                                        <a href="https://discord.com/invite/KJVVhxut84">
                                             <Discord />
                                             Discord
-                                            <span class="soon">Soon</span>
                                         </a>
                                     </li>
                                 </ul>
