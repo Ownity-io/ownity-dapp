@@ -382,6 +382,7 @@ input+.input-equivalent {
     margin-left: -13px;
     margin-right: -13px;
     flex-wrap: wrap;
+    margin-bottom: 24px;
 }
 
 .modal-filter .filter-ul li {

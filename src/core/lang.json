@@ -12,11 +12,12 @@
         "APPLY":"Apply",
 
         "CLAIM_REWARD":"Collect Funds",
-        "DEPOSIT_PART":"Deposit part",
+        "DEPOSIT_PART":"Buy Fraction",
         "BUY_TOGETHER":"Fractionalize",
         "VOTE":"Vote",
         "VOTES":"Votes",
-        "START_VOTE":"Take Vote",
+        "TAKE_VOTE":"Take Vote",
+        "START_VOTE":"Start",
         "SELL_A_PART":"Sell Fraction",
         "SUBMIT":"Submit",
         "CLAIM":"Claim",
@@ -25,7 +26,7 @@
         "FAILED":"Failed",
         "START_VOTING":"Call Vote",
         "DONE":"Great!",
-        "SELL_NFT":"Sell NFT",
+        "SELL_NFT":"Sell Fraction",
         "CLAIM_NFT":"Claim NFT",
 
         "NOTHING_FOUND": "No NFTs Found. Try Different Keywords!",
@@ -179,6 +180,7 @@
 
         "---------MARKETPLACE------------": "",
 
+        "MARKETPLACE_SECTION_TITLE":"Fractionalization Marketplace",
 
 
         "---------MODAL------------": "",
@@ -200,6 +202,7 @@
         "LIST_NFT_SELL":"List for Sale on",
         "SELL_YOUR_NFT":"Sell your NFT",
         "ITEM_UNTIL_CANCELLED":"NFT is on sale until you cancel its listing or it's sold.",
+        "ITEM_UNTIL_VOTE":"Your NFT will be listed if total owners accounting for at least 50% of its purchase price approve.",
         "TRANS_SUCCESS":"Transaction Successful",
         "VOTE_CONFIRM":"Approved",
         "NOT_VOTE":"Didn't Vote",
