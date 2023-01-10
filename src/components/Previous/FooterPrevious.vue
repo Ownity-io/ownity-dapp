@@ -6,7 +6,7 @@
                     <div class="footer-block footer-block-logo">
                         <div v-if="$route.fullPath ==='/'" @click="goToTop()" class="footer-logo"></div>
                         <router-link :to="{name: 'Main'}" v-else class="footer-logo"></router-link>
-                        <p>Your Gateway To The Fractionalized World</p>
+                        <p>Your Gateway to the Fractionalized NFT World</p>
                         <div class="footer-part footer-social-links">
                             <ul class="social-links-wrap">
                                 <li><a href="https://twitter.com/ownity_io" target="_blank"><i class="i-twitter-fill"></i></a></li>
@@ -55,24 +55,24 @@
                             </li>
                             <li>
                               <a target="_blank">
-                              {{translatesGet('TERMS_OF_USE2')}}<span class="soon" style="padding-left: 5px; color: #474747"> (soon)</span>
+                              {{translatesGet('TERMS_OF_USE2')}}<span class="soon" style="padding-left: 5px; color: #474747"> (Soon)</span>
                               </a>
                             </li>
                             <li>
                               <a>
-                                {{translatesGet('PRIVACY_POLICY')}}<span class="soon" style="padding-left: 5px; color: #474747"> (soon)</span>
+                                {{translatesGet('PRIVACY_POLICY')}}<span class="soon" style="padding-left: 5px; color: #474747"> (Soon)</span>
                               </a>
                             </li>
                             <li>
                               <a>
-                                Brand Kit  <span class="soon" style="padding-left: 5px; color: #474747">(soon)</span>
+                                Brand Kit  <span class="soon" style="padding-left: 5px; color: #474747">(Soon)</span>
                               </a>
                             </li>
                         </ul>
                     </div>
                     <a class="footer-block footer-block-form">
                         <a target="_blank" href="https://t.me/Ownity" class="btn btn-previous">
-                            Contact us
+                          Contact Us
                         </a>
                         <!-- <div class="footer-block-name">
                             {{translatesGet('FOOTER_FORM')}}
