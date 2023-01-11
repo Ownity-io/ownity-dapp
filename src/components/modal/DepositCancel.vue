@@ -214,7 +214,7 @@ export default {
       try{
         let declineBid = await contract.declineBid(
           this.item.id,
-          {gasLimit:'1000000'}
+          {gasLimit:'300000'}
         );
         let trx = await prov.waitForTransaction(declineBid.hash);
         if (trx.status==1){

@@ -361,7 +361,7 @@ export default {
         requestJson.data.lot.id,
         lot,
         requestJson.data.signature,
-        { gasLimit: '1000000' }
+        { gasLimit: '300000' }
       
       );
       console.log(sellLot);

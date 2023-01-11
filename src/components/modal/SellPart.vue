@@ -259,7 +259,7 @@ export default {
       console.log(`price:${ this.noExponents(this.convertFromEtherToWei(this.priceForPart))}`);
       console.log(`total:${this.noExponents(this.noExponents(this.convertFromEtherToWei(this.priceForPart))-parseInt(this.sellFractionFee))}`);
       let sellFraction = await contract.sellFraction(this.item.id, this.noExponents(this.toFixedIfNecessary(this.item.price/100*this.currentPart,0)), this.noExponents(this.convertFromEtherToWei(this.priceForPart)),
-      {gasLimit:'1000000'});
+      {gasLimit:'300000'});
       console.log(sellFraction);
       let trx = await prov.waitForTransaction(sellFraction.hash);
       if (trx.status == 1) {
