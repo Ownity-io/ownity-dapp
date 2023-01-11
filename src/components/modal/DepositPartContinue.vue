@@ -329,7 +329,17 @@ export default {
           this.buttonWaiting = false;
           await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack', false)
-          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)            
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)        
+          let failedTransactionRequest = await (await fetch(
+            `${this.config.backendApiEntryPoint}close-listing/`,
+            {
+              method:'POST',
+              body:JSON.stringify({
+                lot:this.item.id
+              })
+            }
+            )).json();
+            console.log(failedTransactionRequest);    
         }          
       }
       catch{
