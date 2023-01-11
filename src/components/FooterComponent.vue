@@ -3,9 +3,9 @@
         <div class="footer-row footer-row-nav">
             <div class="container">
                 <div class="footer-section footer-section-first">
-                    <div class="footer-block footer-block-logo">
-                        <div v-if="$route.fullPath ==='/'" @click="goToTop()" class="footer-logo"></div>
-                        <router-link :to="{name: 'Main'}" v-else class="footer-logo"></router-link>
+                    <div class="footer-block footer-block-logo" @click="goToTop()">
+                        <div v-if="$route.fullPath ==='/'" class="footer-logo"></div>
+                        <router-link :to="{name: 'Main'}" v-else  class="footer-logo"></router-link>
                     </div>
                     <div class="footer-block" :class="{'unfolded' : !footerBlock1}">
                         <div class="footer-block-name">
