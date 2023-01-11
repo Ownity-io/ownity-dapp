@@ -42,17 +42,17 @@
                                 Twitter
                             </a>
                         </li>
+                      <li>
+                        <a href="https://discord.com/invite/KJVVhxut84">
+                          <Discord />
+                          Discord
+                        </a>
+                      </li>
                         <li class="link-disabled">
                             <a >
                                 <Telegram />
                                 Telegram
                                 <span class="soon">Soon</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://discord.com/invite/KJVVhxut84">
-                                <Discord />
-                                Discord
                             </a>
                         </li>
                     </ul>
@@ -138,17 +138,17 @@
                                             Twitter
                                         </a>
                                     </li>
+                                  <li>
+                                    <a href="https://discord.com/invite/KJVVhxut84">
+                                      <Discord />
+                                      Discord
+                                    </a>
+                                  </li>
                                     <li class="link-disabled">
                                         <a >
                                             <Telegram />
                                             Telegram
                                             <span class="soon">Soon</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://discord.com/invite/KJVVhxut84">
-                                            <Discord />
-                                            Discord
                                         </a>
                                     </li>
                                 </ul>
