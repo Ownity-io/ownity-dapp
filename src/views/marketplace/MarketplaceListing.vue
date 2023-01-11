@@ -110,7 +110,7 @@
             <!-- <div class="section-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'"> -->
             <div class="section-deposit">
               <div class="section-deposit-data">
-                <div class="deposit-img-container">
+                <div class="deposit-img-container" v-if="!bidRewarded">
                   <a target="_blank" :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"
                   v-if="this.item.internal_status!='OWNED' & this.item.internal_status!='ON SALE'"></a>
                   <a target="_blank" :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url('../../public/favicon.webp')`}"
@@ -119,9 +119,11 @@
                   v-else-if="this.item.internal_status=='ON SALE'"></a>
                 </div>
                 <div class="deposit-data">
-                  <div class="deposit-listened deposit-listened-link" v-if="this.item.internal_status=='SOLD'"><a target="_blank" :href='linkToMarketplacePage' >
+                  <div class="deposit-listened deposit-listened-link" v-if="this.item.internal_status=='SOLD' & !bidRewarded"><a target="_blank" :href='linkToMarketplacePage' >
                     Solded on {{item.marketplace.name}}
                     {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>
+                  <div class="deposit-listened deposit-listened-link" v-else-if="this.item.internal_status=='SOLD'"><div>
+                    Your reward</div></div>
                   <div class="deposit-listened deposit-listened-link" v-else-if="this.item.internal_status!='OWNED' & this.item.internal_status!='ON SALE'"><a target="_blank" :href='linkToMarketplacePage' >
                     {{translatesGet('AVAILABLE_ON')}} {{item.marketplace.name}}
                     {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>
@@ -143,10 +145,15 @@
                     <span><b>{{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount),6),2)}} ETH</b></span>
                     <span class="equivalent">(≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount) *currencyToUsdPrice,2),2)}})</span>
                   </div>
-                  <div class="deposit-value" v-if="item.marketplace_status=='CLOSED' & item.internal_status=='SOLD'">
+                  <div class="deposit-value" v-if="item.marketplace_status=='CLOSED' & item.internal_status=='SOLD' & !bidRewarded">
                     <div class="icon-token eth"></div>
-                    <span><b>{{priceInCurrency}} ETH</b></span>
-                    <span class="equivalent">(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
+                    <span><b>{{abbrNum(this.toFixedIfNecessary(( this.item.reward  / (10**this.item.currency.decimals)),6),1)}} ETH</b></span>
+                    <span class="equivalent">(≈ $ {{abbrNum(Math.round(this.toFixedIfNecessary(( this.item.reward / (10**this.item.currency.decimals)),6)  * currencyToUsdPrice),1)}})</span>
+                  </div>
+                  <div class="deposit-value" v-if="item.marketplace_status=='CLOSED' & item.internal_status=='SOLD' & bidRewarded">
+                    <div class="icon-token eth"></div>
+                    <span><b>{{abbrNum(this.toFixedIfNecessary(( this.item.reward * parseInt(this.userBid.fraction)/100 / (10**this.item.currency.decimals)),6),1)}} ETH</b></span>
+                    <span class="equivalent">(≈ $ {{abbrNum(Math.round(this.toFixedIfNecessary(( this.item.reward*parseInt(this.userBid.fraction)/100 / (10**this.item.currency.decimals)),6)  * currencyToUsdPrice),1)}})</span>
                   </div>
                   <div class="deposit-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
                     <div class="icon-token eth"></div>
@@ -206,7 +213,7 @@
                   @click="this.$store.dispatch('appGlobal/setCurrentVoting',this.voting);this.$store.dispatch('appGlobal/setCancellSellVotingModal',true)">
                   {{translatesGet('CANCEL_SELL')}}
                 </button> 
-                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='SOLD' & userAddress!=null & userBidAmount>0)"
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='SOLD' & userAddress!=null & userBidAmount>0 & !bidRewarded)"
                 @click="this.$store.dispatch('appGlobal/setShowClaimRewardModal',true)">Claim reward</button> 
               </div>
               <div class="section-deposit-labels" v-if="userBid!=null">
@@ -463,7 +470,8 @@ export default {
       recommendations:null,
       voting:null,
       lang: new MultiLang(this),
-      isRefreshing:false
+      isRefreshing:false,
+      bidRewarded:false
     };
   },
   components: {
@@ -504,6 +512,11 @@ export default {
         await this.$store.dispatch('marketplaceListing/setModalToShowAtStart',null);
       }
       
+    }
+    if (this.userBid){
+      if (this.userBid.status=='REWARDED'){
+        this.bidRewarded=true;
+      }
     }
     this.render = true;
     const delay = (delayInms) => {
