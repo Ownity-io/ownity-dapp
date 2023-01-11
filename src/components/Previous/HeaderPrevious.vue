@@ -81,7 +81,7 @@
                         </li>
                         <li class="link-disabled">
                             <a href="">
-                                One pager
+                              One Pager
                                 <span class="soon">Soon</span>
                             </a>
                         </li>
@@ -165,7 +165,7 @@
                                     </li>
                                     <li class="link-disabled">
                                         <a href="">
-                                            One pager
+                                          One Pager
                                             <span class="soon">Soon</span>
                                         </a>
                                     </li>

@@ -38,7 +38,7 @@
         <lottie-player id="firstLottie"
                        ref="lottie"
                        mode="normal"
-                       src="https://lottie.host/1fc4eedc-dd4d-4c94-b81d-20b75024ede6/4jS7TgFrwl.json"
+                       src="https://lottie.host/54f43889-8b21-491c-902d-3b94febbda72/G6l9ZnHbZp.json"
                        speed="5"
         >
         </lottie-player>
