@@ -17,8 +17,7 @@
                                 <div class="previous-screen-header">
                                     <div class="previous-title">Hot Fractionalization Listings</div>
                                 <div class="previous-describe">
-                                  Check out the fresh fractionalization
-                                  listings on Ownity to buy an NFT fraction in an ongoing one or kick off a new co-ownership fundraiser.
+                                  Check out what NFTs are fresh on the Ownity fractionalization list to pick up a fraction of one from your fave collection.
                                 </div>
 <!--                            <div class="previous-link">More on Fractionalization Listings</div>-->
                                 </div>

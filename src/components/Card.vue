@@ -1,6 +1,6 @@
 <template>
   <!-- <a class="card card-finished" :class="{'card-inactive' : false}"> -->
-  <a class="card" :class="{'card-inactive' : ((this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN'))||(this.item.internal_status=='CLAIMED')),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER')}">
+  <a class="card" :class="{'card-inactive' : ((this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN'))||(this.item.internal_status=='CLAIMED')||bidRewarded),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER')}">
     <div class="card-main">
       <!-- <a v-if="item.media" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></a>
       <a v-else :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="card-img"  ></a> -->
@@ -35,11 +35,11 @@
         </div>
       </div> -->
       <div class="card-footer" 
-      v-if="(item.marketplace_status=='OPEN' & item.internal_status=='GATHER')
+      v-if="((item.marketplace_status=='OPEN' & item.internal_status=='GATHER')
       ||(item.marketplace_status=='CLOSED' & item.internal_status=='CLOSED')
       ||((item.marketplace_status=='CLOSED') & item.internal_status=='OWNED')
       ||item.internal_status=='SOLD'
-      ||item.internal_status=='ON SALE'">
+      ||item.internal_status=='ON SALE') & !bidRewarded">
         <div class="card-progress progress" v-if="!(bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0)">
           <div v-if="userProgressValue>0" class="progress-value owner" :style="{ width: userProgressValue + '%' }">
             <span v-if="userProgressValue>=20">{{ userProgressValue }}%</span>
@@ -290,7 +290,7 @@
         <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setshowDepositCancelModal');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='CLOSED' & (item.internal_status=='CLOSED'||item.internal_status=='GATHER') & userBidAmount>0">
           {{translatesGet('CANCEL')}}
         </router-link>
-        <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setShowClaimRewardModal');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="(item.internal_status=='SOLD' & userBidAmount>0)">
+        <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setShowClaimRewardModal');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="(item.internal_status=='SOLD' & userBidAmount>0 & !bidRewarded)">
           {{translatesGet('CLAIM_REWARD')}}
         </router-link>
         <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','FractionMarket');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0  & userAddress!=false">
@@ -423,7 +423,8 @@ export default {
       userBidOnSale:null,
       lang: new MultiLang(this),
       showUserBidOnSale:false,
-      userAddress:false
+      userAddress:false,
+      bidRewarded:false
     };
   },
   props:[
@@ -464,6 +465,10 @@ export default {
         for (let element of this.item.bids){
           if (element.address == userAddress){
             this.userBidAmount = parseInt(element.amount);
+            this.userBid = element;
+            if (element.amount == this.item.price){
+              this.userBidBuyedAll = true;
+            }
             return;
           }
         }
@@ -631,7 +636,11 @@ export default {
         this.showUserBidOnSale=true;
       }
     }
-
+    if (this.userBid){
+      if (this.userBid.status=='REWARDED'){
+        this.bidRewarded=true;
+      }
+    }
     this.render=true;
     await this.checkLike();
     const delay = (delayInms) => {
