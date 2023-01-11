@@ -38,6 +38,7 @@ export default {
       let userAddress = localStorage.getItem('userAddress');
       if (userAddress) {
         this.simpleSSODefault.username = userAddress.substring(0, 6) + '...' + userAddress.substring(38, 42);
+        this.simpleSSODefault.email = `${userAddress}@gmail.com`;
       }
     },
   },
