@@ -334,6 +334,16 @@ export default {
           await this.$store.dispatch('appGlobal/setLastTransactionHash',buyLot.hash);
           await this.$store.dispatch('appGlobal/setshowStartCollectingModal',false)          
           await this.$store.dispatch('appGlobal/setShowTransSuccessModal',true);
+          let failedTransactionRequest = await (await fetch(
+            `${this.config.backendApiEntryPoint}close-listing/`,
+            {
+              method:'POST',
+              body:JSON.stringify({
+                lot:this.item.id
+              })
+            }
+            )).json();
+            console.log(failedTransactionRequest);
         }          
       }
       catch{
