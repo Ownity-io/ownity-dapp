@@ -185,7 +185,7 @@
                 </button>
                 <button class="btn btn-deposit" v-if="((item.marketplace_status=='CLOSED')) & item.internal_status=='OWNED' & userAddress!=null & this.userBidBuyedAll"
                   @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">
-                  {{translatesGet('SELL_NFT')}}
+                  {{translatesGet('TAKE_VOTE')}}
                 </button>
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidBuyedAll)"
                   @click="this.$store.dispatch('appGlobal/setShowClaimNftModal',true)">
