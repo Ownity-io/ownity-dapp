@@ -141,7 +141,7 @@ export default {
       try{
         let claimLot = await contract.claimLot(
           this.item.id,
-          {gasLimit:'300000'}
+          {gasLimit:'1000000'}
         );
         let trx = await prov.waitForTransaction(claimLot.hash);
         if (trx.status==1){
