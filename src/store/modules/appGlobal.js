@@ -287,12 +287,16 @@ export default {
       context.commit("setLastTransSuccess", value);
     },
     async setShowSnackBarWithTimeout(context,timeout){
-      context.commit("setShowSnackBar",true);
-      const delay = (delayInms) => {
-        return new Promise(resolve => setTimeout(resolve, delayInms));
+      if (!context.getters.getShowSnackBar){
+        console.log('show!');
+        context.commit("setShowSnackBar",true);
+        const delay = (delayInms) => {
+          return new Promise(resolve => setTimeout(resolve, delayInms));
+        }
+        await delay(1000 * timeout);
+        context.commit("setShowSnackBar",false);
       }
-      await delay(1000 * timeout);
-      context.commit("setShowSnackBar",false);
+     
     },
     setGreenSnack(context,value){
       context.commit("setGreenSnack",value);

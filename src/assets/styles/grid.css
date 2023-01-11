@@ -24,6 +24,12 @@ body {
     }
 }
 
+@media (max-width: 1245px){
+    header .container,
+    footer .container{
+        max-width: 100%;
+    }
+}
 @media (max-width:  768px) {
     .container {
         max-width: 100%;

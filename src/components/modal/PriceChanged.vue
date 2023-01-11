@@ -1,5 +1,6 @@
 <template>
   <div class="modal">
+    <div class="modal-wrapper-close" ></div>
     <div class="modal-wrapper">
       <div class="modal-header">
         <div class="modal-name">{{translatesGet('PRICE_CHANGED')}}</div>

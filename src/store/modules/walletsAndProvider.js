@@ -95,6 +95,10 @@ export default {
           localStorage.setItem('refreshToken', requestJson.data.refresh);
           let checkStorageWrited = (localStorage.getItem('refreshToken')!=null);
           if (checkStorageWrited){
+            const delay = (delayInms) => {
+              return new Promise((resolve) => setTimeout(resolve, delayInms));
+            };
+            await delay(1000);
             location.reload();
           }          
         }else if (Date.parse(localStorage.getItem('tokenEndTimestamp'))<Date.now()){

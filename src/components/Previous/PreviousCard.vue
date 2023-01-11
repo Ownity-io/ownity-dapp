@@ -32,7 +32,7 @@
         <div class="data-tr data-prev-amount">
           <div class="card-prev-amount">
             <div>
-              <p>Raised amount:</p>
+              <p>Total Raised:</p>
             </div>
             <div class="prev-amount-block">
               <div class="card-value">
@@ -48,11 +48,11 @@
         </div>
 
         <div class="data-tr">
-          <div class="prev-card-status orange">
-            Coming soon
+          <div class="prev-card-status green">
+            Live
           </div>
           <div class="prev-card-contributors">
-            Contributors: 23
+            Members: 23
           </div>
         </div>
 

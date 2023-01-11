@@ -3,11 +3,14 @@
         <div class="footer-row footer-row-nav">
             <div class="container">
                 <div class="footer-section footer-section-first">
-                    <div class="footer-block footer-block-logo">
-                        <div v-if="$route.fullPath ==='/'" @click="goToTop()" class="footer-logo"></div>
-                        <router-link :to="{name: 'Main'}" v-else class="footer-logo"></router-link>
+                    <div class="footer-block footer-block-logo" @click="goToTop()">
+                        <div v-if="$route.fullPath ==='/'" class="footer-logo"></div>
+                        <router-link :to="{name: 'Main'}" v-else  class="footer-logo"></router-link>
                     </div>
                     <div class="footer-block" :class="{'unfolded' : !footerBlock1}">
+                        <div class="footer-block-name">
+                            <span>{{translatesGet('MARKETPLACE')}}</span>
+                        </div>
                         <button class="footer-block-name" @click="footerBlock1 = !footerBlock1">
                             <span>{{translatesGet('MARKETPLACE')}}</span>
                             <i class="i-arrow-up-s-line"></i>
@@ -21,31 +24,37 @@
                         </ul>
                     </div>
                     <div class="footer-block" :class="{'unfolded' : !footerBlock2}">
+                        <div class="footer-block-name">
+                            <span>{{translatesGet('COLLECTIONS')}}</span>
+                        </div>
                         <button class="footer-block-name" @click="footerBlock2 = !footerBlock2">
                             <span>{{translatesGet('COLLECTIONS')}}</span>
                             <i class="i-arrow-up-s-line"></i>
                         </button>
                         <ul class="footer-list">
-                            <li><a href="https://jaxscan.com/collection/0xBC51d9f4A816d6Ad60E6A64DEFf0f820307A1e45">sad - sWJozDZPx2</a></li>
-                            <li><a href="https://jaxscan.com/collection/0x1f419B9469D641D333805C4054CA3b65Af54d315">Snakes on a chain</a></li>
-                            <li><a href="https://jaxscan.com/collection/0xd06166878623353947c8715e7F3e9f4D8585726F">Ownable BAYC</a></li>
-                            <li><a href="https://jaxscan.com/collection/0x15987A0417D14cc6f3554166bCB4A590f6891B18">Masa Soul Name (MSN)</a></li>
+                            <li><a target="_blank" href="https://jaxscan.com/collection/0xBC51d9f4A816d6Ad60E6A64DEFf0f820307A1e45">sad - sWJozDZPx2</a></li>
+                            <li><a target="_blank" href="https://jaxscan.com/collection/0x1f419B9469D641D333805C4054CA3b65Af54d315">Snakes on a chain</a></li>
+                            <li><a target="_blank" href="https://jaxscan.com/collection/0xd06166878623353947c8715e7F3e9f4D8585726F">Ownable BAYC</a></li>
+                            <li><a target="_blank" href="https://jaxscan.com/collection/0x15987A0417D14cc6f3554166bCB4A590f6891B18">Masa Soul Name (MSN)</a></li>
                         </ul>
                     </div>
                     <div class="footer-block" :class="{'unfolded' : !footerBlock3}">
+                        <div class="footer-block-name">
+                            <span>{{translatesGet('RESOURCES')}}</span>
+                        </div>
                         <button class="footer-block-name" @click="footerBlock3 = !footerBlock3">
                             {{translatesGet('RESOURCES')}}
                             <i class="i-arrow-up-s-line"></i>
                         </button>
                         <ul class="footer-list">
-                            <li><a href="">{{translatesGet('HOME')}}</a>
+                            <li><a target="_blank" href="">{{translatesGet('HOME')}}</a>
                                 <div v-if="$route.fullPath ==='/'" @click="goToTop()"></div>
                                 <router-link :to="{name: 'Main'}" v-else></router-link>
                             </li>
                             <li><router-link :to="{ name: 'Marketplace' }">{{translatesGet('MARKETPLACE')}}</router-link></li>
                             <li
                             v-if="$route.fullPath ==='/'">
-                                <a href="#screen-collections" >
+                                <a target="_blank" href="#screen-collections" >
                                     <span>{{translatesGet('COLLECTIONS')}}</span>
                                 </a>
                             </li>
@@ -60,7 +69,7 @@
                                     <span>{{translatesGet('HELP')}}</span>
                                 </router-link>
                             </li>
-                            <li><a href="">{{translatesGet('SITEMAP')}}</a></li>
+                            <li><a target="_blank" href="">{{translatesGet('SITEMAP')}}</a></li>
                         </ul>
                     </div>
                     <div class="footer-block footer-block-form">
@@ -97,9 +106,9 @@
                     </div>
                     <div class="footer-part footer-social-links">
                         <ul class="social-links-wrap">
-                            <li><a href=""><i class="i-twitter-fill"></i></a></li>  
-                            <li><a href=""><i class="i-facebook-fill"></i></a></li>  
-                            <li><a href=""><i class="i-telegram-fill"></i></a></li>  
+                            <li><a target="_blank" href=""><i class="i-twitter-fill"></i></a></li>  
+                            <li><a target="_blank" href=""><i class="i-facebook-fill"></i></a></li>  
+                            <li><a target="_blank" href=""><i class="i-telegram-fill"></i></a></li>  
                             <!-- <li><a href=""><i class="i-discord-line"></i></a></li>   -->
                         </ul>
                     </div>

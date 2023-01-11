@@ -15,18 +15,18 @@
                         <section class="previous-cards-screen" >
                             <div class="container">
                                 <div class="previous-screen-header">
-                                    <div class="previous-title">Open Fraction Deals</div>
+                                    <div class="previous-title">Hot Fractionalization Listings</div>
                                 <div class="previous-describe">
-                                    The best open deals you can take part in right now. 
-                                    Join a deal that's already started, contribute your part, and become an official owner.
+                                  Check out the fresh fractionalization
+                                  listings on Ownity to buy an NFT fraction in an ongoing one or kick off a new co-ownership fundraiser.
                                 </div>
-<!--                            <div class="previous-link">Learn more about open deals</div>-->
+<!--                            <div class="previous-link">More on Fractionalization Listings</div>-->
                                 </div>
                                 <div class="previous-cards-list">
                                     <div class="cards-container">
                                         <PreviousCard />
                                     </div>
-<!--                                    <button class="btn btn-previous">See All Deals</button>-->
+<!--                                    <button class="btn btn-previous">To All Listings</button>-->
                                 </div>
                             </div>
                         </section>

@@ -14,6 +14,15 @@
     padding: 40px;
 }
 
+.modal-wrapper-close {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
 .modal-header .btn-close,
 .cookies-header .btn-close {
     color: #818899;
@@ -71,6 +80,21 @@
     width: 100%;
     max-width: 516px;
     height: fit-content;
+    z-index: 2;
+
+    /* animation */
+
+    animation: zoomIn .2s;
+}
+
+@keyframes zoomIn{
+    0% {
+        opacity: 0;
+        transform: scale3d(.3,.3,.3);
+    }
+    50% {
+        opacity: 1;
+    }
 }
 
 .cookies-wrap {
@@ -358,6 +382,7 @@ input+.input-equivalent {
     margin-left: -13px;
     margin-right: -13px;
     flex-wrap: wrap;
+    margin-bottom: 24px;
 }
 
 .modal-filter .filter-ul li {
@@ -559,6 +584,6 @@ input+.input-equivalent {
     width: 20px;
 }
 
-.modal-members span{
+.modal-members span {
     margin-left: 4px;
 }

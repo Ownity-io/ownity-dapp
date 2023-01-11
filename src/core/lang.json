@@ -12,11 +12,12 @@
         "APPLY":"Apply",
 
         "CLAIM_REWARD":"Collect Funds",
-        "DEPOSIT_PART":"Deposit part",
+        "DEPOSIT_PART":"Buy Fraction",
         "BUY_TOGETHER":"Fractionalize",
         "VOTE":"Vote",
         "VOTES":"Votes",
-        "START_VOTE":"Take Vote",
+        "TAKE_VOTE":"Take Vote",
+        "START_VOTE":"Start",
         "SELL_A_PART":"Sell Fraction",
         "SUBMIT":"Submit",
         "CLAIM":"Claim",
@@ -25,7 +26,7 @@
         "FAILED":"Failed",
         "START_VOTING":"Call Vote",
         "DONE":"Great!",
-        "SELL_NFT":"Sell NFT",
+        "SELL_NFT":"Sell Fraction",
         "CLAIM_NFT":"Claim NFT",
 
         "NOTHING_FOUND": "No NFTs Found. Try Different Keywords!",
@@ -59,10 +60,10 @@
         "STATUS-CLOSED":"Closed",
         "STATUS-OPEN":"Open",
 
-        "NOTHING_HERE":"Oops! Nothing to Quantify here:(",
+        "NOTHING_HERE":"Oops, Nothing here:(",
         "BACK_TO_ALL":"Back to All NFTs",
 
-        "PRIVACY_POLICY":"Privacy policy",
+        "PRIVACY_POLICY":"Privacy Policy",
         "TERMS_OF_USE":"Terms",
         "TERMS_OF_USE2":"Terms of Use",
         "BY_SUBSCRIBING":"By subscribing, you agree to Quant ",
@@ -127,8 +128,8 @@
         "FAQ-H2-2":"Also known as <b>fractional NFT ownership</b>, it is a new lower-barrier way to own that involves splitting up non-fungible tokens - collectibles, artworks, PFPs, photos & videos, gamified ones, membership passes, memorabilia, domain names, etc. - into smaller pieces to own them together.",
         "FAQ-H1-3":"What Are Fractionalized NFTs?",
         "FAQ-H2-3":"Also referred to as <b>fNFTs</b>, they are whole NFTs divvied up into smaller pieces for ownership by a number of people. Fractionalized NFTs are designed to appeal to those wanting to participate in the booming NFT market without breaking the bank, or simply own non-fungible tokens with friends, family, or for business purposes.",
-        "FAQ-H1-4":"Who will initiate the listing purchase?",
-        "FAQ-H2-4":"The end participant of the collective purchase will initiate the transaction of NFT transfer to smart contract within purchase on listing marketplace.",
+        "FAQ-H1-4":"Can I Fractionalize Any NFT with Ownity?",
+        "FAQ-H2-4":"Ownity empowers its users to fractionalize any NFT from the supported collections listed for sale on OpenSea, LooksRare, X2Y2, and other marketplaces into chunks as small as 1% whatever the price. You can also buy the whole (100%) NFT with Ownity.",
         "FAQ-H1-5":"Can I Sell My NFT Fractions?",
         "FAQ-H2-5":"On Ownity, any fraction is sold as quickly as it is bought. You are free to handle NFT fractions you own with just a couple of clicks anytime.",
         "FAQ-H1-6":"What Are Benefits of NFT Co-Ownership?",
@@ -179,6 +180,7 @@
 
         "---------MARKETPLACE------------": "",
 
+        "MARKETPLACE_SECTION_TITLE":"Fractionalization Marketplace",
 
 
         "---------MODAL------------": "",
@@ -200,6 +202,7 @@
         "LIST_NFT_SELL":"List for Sale on",
         "SELL_YOUR_NFT":"Sell your NFT",
         "ITEM_UNTIL_CANCELLED":"NFT is on sale until you cancel its listing or it's sold.",
+        "ITEM_UNTIL_VOTE":"Your NFT will be listed if total owners accounting for at least 50% of its purchase price approve.",
         "TRANS_SUCCESS":"Transaction Successful",
         "VOTE_CONFIRM":"Approved",
         "NOT_VOTE":"Didn't Vote",
@@ -240,7 +243,7 @@
         "TERMS_OF_USE_SECTION-3":"Third-Party Links & Ads. Other Users",
         "TERMS_OF_USE_SECTION-3-1":"Third-Party Links & Ads. The Site may contain links to third-party websites and services, and/or display advertisements for third-parties. Such Third-Party Links & Ads are not under the control of ElephantsLab, and ElephantsLab is not responsible for any Third-Party Links & Ads. ElephantsLab provides access to these Third-Party Links & Ads only as a convenience to you, and does not review, approve, monitor, endorse, warrant, or make any representations with respect to Third-Party Links & Ads.",
 
-        "---------SRVE/HELP------------": "",
+        "---------SERVE/HELP------------": "",
 
         "FAQ_TITLE_SHORT": "Ownity FAQ",
         "FAQ_TITLE": "We answered the most FAQs about Ownity here for your convenience. See if there's the one you're after.",
@@ -254,21 +257,21 @@
 
         "---------Previous Page------------": "",
 
-        "FRACTIONAL_TITLE": "Fractional Ownership",
-        "FRACTIONAL_SUBTITLE": "The mechanics of fractional ownership enable users to purchase an NFT in a group. Each user can contribute the required part and start or maintain the fundraising for the listing purchase.",
-        "FRACTIONAL_OPTIONS_TITLE": "Flexible interaction options",
-        "FRACTIONAL_OPTIONS-1": "Buy 1% to 100% of NFT",
-        "FRACTIONAL_OPTIONS-2": "Make decisions in DAO mode",
-        "FRACTIONAL_OPTIONS-3": "Sell your part at any time",
-        "FRACTIONAL_OPTIONS-4": "Explore profitable listings",
+        "FRACTIONAL_TITLE": "Fractionalization Suite",
+        "FRACTIONAL_SUBTITLE": "Split into fractions any NFT listed for sale on the most prominent marketplaces no matter the price to start co-owning, sharing utility-specific rewards, and DAO-managing your non-fungible tokens.",
+        "FRACTIONAL_OPTIONS_TITLE": "NFT Ownership on Your Terms",
+        "FRACTIONAL_OPTIONS-1": "Buy 1% to 100% NFT Fractions",
+        "FRACTIONAL_OPTIONS-2": "Trade Your Fractions Anytime",
+        "FRACTIONAL_OPTIONS-3": "Co-Own Sought-After NFTs",
+        "FRACTIONAL_OPTIONS-4": "DAO-Manage Co-Owned NFTs",
         "AGGREGATOR_LEFT-TITLE": "NFT Aggregator",
-        "AGGREGATOR_LEFT-SUBTITLE": "The Ownity provides users with lightning-fast NFT aggregation and allows you to trade among major marketplaces such as OpenSea, LooksRare and X2Y2, thereby helping you find more listings and better prices.",
-        "INFORMATION_OF_NFT-1": "NFT Standarts: ERC-721, ERC-1155",
-        "INFORMATION_OF_NFT-2": "Token Standart: ERC-20",
-        "PREVIOUS_COLLECTIONS_TITLE": "Top Collections",
-        "PREVIOUS_COLLECTIONS_SUBTITLE": "Explore all the top collections from the largest marketplaces and initiate a deal opening by contributing the minimum part.",
-        "STILL_TITLE": "Still have questions?",
-        "STILL_SUBTITLE": "Read our documentation to find out more",
+        "AGGREGATOR_LEFT-SUBTITLE": "Ownity aggregates NFTs from the world’s major marketplaces such as OpenSea, LooksRare, and X2Y2 for you to instantly access any of your fave collections from one place and get straight to business.",
+        "INFORMATION_OF_NFT-1": "NFT Standards: ERC721 & ERC1155",
+        "INFORMATION_OF_NFT-2": "FT Standard: ERC20",
+        "PREVIOUS_COLLECTIONS_TITLE": "Trending Collections",
+        "PREVIOUS_COLLECTIONS_SUBTITLE": "Explore hot NFT collections across the top marketplaces to find the NFT you’d like to co-own or buy outright.",
+        "STILL_TITLE": "Would Like an In-Depth Look?",
+        "STILL_SUBTITLE": "Then Pop Around Ownity’s",
 
         "WHITELIST_TITLE": "Get in the Beta Testing Waitlist",
         "WHITELIST_SUBTITLE": "Become one of the first who will test all the functionality, and much more.",

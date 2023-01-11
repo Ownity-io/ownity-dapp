@@ -1,4 +1,5 @@
 .header-nav ul li a.active:after,
+.header-nav ul li a.router-link-exact-active:after,
 .header-nav ul li a:hover:after,
 .tabs .active-tab::after,
 .header-nav ul li button.active:after {
@@ -17,8 +18,8 @@
 }
 
 /* */
-.card .data-td a:hover,
-.owned-row a:hover,
+.card .data-td a:hover span,
+.owned-row a:hover span,
 .td-wrap.td-wrap-collection:hover  .collection-id:not(.td-light),
 .deposit-listened.deposit-listened-link:hover a,
 .collection-data-link a:hover ,

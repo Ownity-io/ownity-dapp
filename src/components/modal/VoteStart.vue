@@ -1,8 +1,9 @@
 <template>
   <div class="modal" v-if="render">
+    <div class="modal-wrapper-close" @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',false)"></div>
     <div class="modal-wrapper">
       <div class="modal-header">
-        <div class="modal-name">{{translatesGet('VOTE')}}</div>
+        <div class="modal-name">{{translatesGet('TAKE_VOTE')}}</div>
         <button class="btn-close" @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',false)">
           <i class="i-close-line"></i>
         </button>
@@ -25,7 +26,7 @@
               <div class="modal-data-block">
                 <div class="modal-input container-input">
                   <div class="input-header">
-                    <div>{{translatesGet('PRICE')}}</div>
+                    <div>{{translatesGet('LISTING_PRICE_TO')}}</div>
                     <div class="price-value">
                       <div class="icon-value"></div>
                       <span>ETH</span>
@@ -35,7 +36,7 @@
                     <input type="text" placeholder="Input amount" v-model="amount"  @input="setSellLotFee" onkeypress="return (event.charCode >= 48 && event.charCode <=57 || event.charCode == 46 || event.charCode == 44 || this.amount=='')">
                     <div class="input-equivalent equivalent" v-if="amount>0">≈ $ {{abbrNum(Math.round(amount * currencyToUsdPrice),1)}}</div>
                   </div>
-                  <div class="input-prompt">{{translatesGet('ITEM_UNTIL_CANCELLED')}}</div>
+                  <div class="input-prompt">{{translatesGet('ITEM_UNTIL_VOTE')}}</div>
                 </div>
               </div>
             </div>
@@ -366,6 +367,21 @@ export default {
       console.log(sellLot);
       let trx = await prov.waitForTransaction(sellLot.hash);
       if (trx.status == 1) {
+        let forceReq = await (await fetch(
+            `${config.backendApiEntryPoint}force-scanner/`,
+            {
+              body:JSON.stringify({
+                scanner:'sell_lot',
+                block:trx.blockNumber,
+                blockchain: this.item.blockchain
+              }),
+              headers: {
+                accept: "application/json",
+                'Content-Type': 'application/json',
+              },
+              method:'POST'
+            })).json();
+          console.log(forceReq);
         await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
         await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);
         await this.$store.dispatch('appGlobal/setShowStartVotingModal', false);

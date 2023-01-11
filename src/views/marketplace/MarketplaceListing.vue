@@ -38,8 +38,10 @@
                   </button>
                 </div>
                 <div class="btn-wrap">
-                  <button class="btn btn-block">
-                    <i class="i-refresh-line"></i>
+                  <button class="btn btn-block btn-refresh" 
+                  @click="this.refreshInfo();" 
+                  :class="{'refreshing' : isRefreshing}" >
+                    <div><i class="i-refresh-line" ></i></div>
                   </button>
                 </div>
                 <div class="btn-wrap btn-share">
@@ -109,11 +111,11 @@
             <div class="section-deposit">
               <div class="section-deposit-data">
                 <div class="deposit-img-container">
-                  <a  :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"
+                  <a target="_blank" :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"
                   v-if="this.item.internal_status!='OWNED' & this.item.internal_status!='ON SALE'"></a>
-                  <a  :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url('../../public/favicon.webp')`}"
+                  <a target="_blank" :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url('../../public/favicon.webp')`}"
                   v-else-if="this.item.internal_status=='OWNED'"></a>
-                  <a  :href='linkToMarketplacePageFromVoting' class="deposit-img" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"
+                  <a target="_blank" :href='linkToMarketplacePageFromVoting' class="deposit-img" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"
                   v-else-if="this.item.internal_status=='ON SALE'"></a>
                 </div>
                 <div class="deposit-data">
@@ -383,6 +385,7 @@
                 <button
                   :class="{ 'active-tab': activeTab === 'ListingActivities' }"
                   @click="letsCheck('ListingActivities')"
+                  v-if="!(this.item.internal_status=='OPEN' & this.item.marketplace_status=='OPEN')"
                 >
                   <span>{{translatesGet('ACTIVITIES')}}</span>
                   <span>{{translatesGet('ACTIVITIES')}}</span>
@@ -404,7 +407,7 @@
               <ListingInfo v-if="activeTab === 'ListingInfo'" :item="item"/>
               <ListingProperties v-if="activeTab === 'ListingProperties'" :item="item" />
               <ListingAbout v-if="activeTab === 'ListingAbout'" :item="item" />
-              <ListingActivities v-if="activeTab === 'ListingActivities'" />
+              <ListingActivities v-if="(activeTab === 'ListingActivities')" :item="item"/>
               <ListingChat v-if="activeTab === 'ListingChat'" />
             </div>
           </section>
@@ -460,6 +463,7 @@ export default {
       recommendations:null,
       voting:null,
       lang: new MultiLang(this),
+      isRefreshing:false
     };
   },
   components: {
@@ -659,6 +663,25 @@ export default {
         }
       }
     },
+    async refreshInfo(){
+      this.isRefreshing=true;
+      window.scrollTo(0, 0);
+      try{
+        this.activeTab = "ListingInfo";
+        this.activeTab2 = "ListingInfo2";
+        await this.getAndSetListingInfo();
+        this.isRefreshing=false;
+        await this.$store.dispatch('appGlobal/setSnackText', 'Listing Data Has Been Successfully Refreshed!')
+        await this.$store.dispatch('appGlobal/setGreenSnack', true)
+        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 5)      
+      }
+      catch{
+        this.isRefreshing=false;
+        await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
+        await this.$store.dispatch('appGlobal/setGreenSnack', false)
+        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 5)      
+      }      
+    }
   },
 };
 </script>

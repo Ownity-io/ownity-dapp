@@ -1,5 +1,6 @@
 <template>
   <div class="modal" v-if="render">
+    <div class="modal-wrapper-close" @click="this.$store.dispatch('appGlobal/setShowClaimRewardModal',false)"></div>
     <div class="modal-wrapper">
       <div class="modal-header">
         <div class="modal-name">{{translatesGet('CLAIM_REWARD')}}</div>
@@ -148,6 +149,21 @@ export default {
         );
         let trx = await prov.waitForTransaction(claimReward.hash);
         if (trx.status==1){
+          let forceReq = await (await fetch(
+            `${config.backendApiEntryPoint}force-scanner/`,
+            {
+              body:JSON.stringify({
+                scanner:'claim_reward',
+                block:trx.blockNumber,
+                blockchain: this.item.blockchain
+              }),
+              headers: {
+                accept: "application/json",
+                'Content-Type': 'application/json',
+              },
+              method:'POST'
+            })).json();
+          console.log(forceReq);
           await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
           await this.$store.dispatch('appGlobal/setLastTransactionHash', claimReward.hash);
           await this.$store.dispatch('appGlobal/setShowClaimRewardModal', false);

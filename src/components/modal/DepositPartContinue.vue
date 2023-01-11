@@ -1,5 +1,6 @@
 <template>
   <div class="modal" v-if ='render'>
+    <div class="modal-wrapper-close" @click="this.$store.dispatch('appGlobal/setshowContinueCollectingModal',false)"></div>
     <div class="modal-wrapper">
       <div class="modal-header">
         <div class="modal-name">{{translatesGet('DEPOSIT_PART')}}</div>
@@ -298,6 +299,21 @@ export default {
         );
         let trx = await prov.waitForTransaction(buyLot.hash);
         if (trx.status==1){
+          let forceReq = await (await fetch(
+            `${config.backendApiEntryPoint}force-scanner/`,
+            {
+              body:JSON.stringify({
+                scanner:'bids',
+                block:trx.blockNumber,
+                blockchain: this.item.blockchain
+              }),
+              headers: {
+                accept: "application/json",
+                'Content-Type': 'application/json',
+              },
+              method:'POST'
+            })).json();
+          console.log(forceReq)
           await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
           await this.$store.dispatch('appGlobal/setLastTransactionHash',buyLot.hash);
           await this.$store.dispatch('appGlobal/setshowContinueCollectingModal',false);
