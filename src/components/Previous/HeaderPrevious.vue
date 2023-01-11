@@ -102,15 +102,15 @@
             <div class="header-wrapper">
                 <!-- <div v-if="$route.fullPath ==='/'" @click="goToTop()" class="header-logo"></div> -->
                 <!-- <router-link :to="{name: 'Main'}" v-else class="header-logo"></router-link> -->
-                <router-link :to="{name: 'Main'}" class="header-logo"></router-link>
+                <div @click="goToTop" class="header-logo"></div>
          
                 <div class="header-nav">
                     <nav>
                         <ul class="">
                             <li>
-                                <router-link :to="{name: 'Main'}">
+                                <div @click="goToTop">
                                     <span>Home</span>
-                                </router-link>
+                                </div>
                             </li>
 
                             <li class="drop-down-item">
