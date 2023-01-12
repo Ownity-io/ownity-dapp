@@ -85,7 +85,10 @@
               </div>
             </div>
             <div class="owned-row">
-              {{translatesGet('OWNED_BY')}} <a :href="config.etherscanAddressUrlStart+item.owner" target="_blank">{{String(item.owner).substring(0,6)+'...'+String(item.owner).substring(38,42)}}</a> <!-- TODO: href to etherscan-->
+              {{translatesGet('OWNED_BY')}} 
+              <a :href="config.etherscanAddressUrlStart+item.owner" target="_blank">
+                <span>{{String(item.owner).substring(0,6)+'...'+String(item.owner).substring(38,42)}}</span>
+              </a> <!-- TODO: href to etherscan-->
             </div>
           </section>
 
