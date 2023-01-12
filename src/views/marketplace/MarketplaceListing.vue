@@ -200,7 +200,7 @@
                 </button> 
                 <button class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount>0)"
                   @click="this.$store.dispatch('appGlobal/setShowSellPartModal',true)">
-                  {{translatesGet('SELL_A_PART')}}
+                  {{translatesGet('SELL_NFT')}}
                 </button> 
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount==0 & bidsOnSale)">
                   {{translatesGet('BUY')}}

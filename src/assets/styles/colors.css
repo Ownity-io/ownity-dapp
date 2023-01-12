@@ -13,17 +13,19 @@
 .card-data .btn-container .btn.btn-card-completed {
     color: #2CC07B;
 }
-.td-failed{
+
+.td-failed {
     color: #F32727;
 }
 
 /* */
 .card .data-td a:hover span,
 .owned-row a:hover span,
-.td-wrap.td-wrap-collection:hover  .collection-id:not(.td-light),
+.td-wrap.td-wrap-collection .collection-id:hover,
+.td-wrap-collection .collection-img:hover + .collection-data .collection-id:not(.td-light),
 .deposit-listened.deposit-listened-link:hover a,
-.collection-data-link a:hover ,
-.total-block-describe a:hover ,
+.collection-data-link a:hover,
+.total-block-describe a:hover,
 .footer-list a:hover,
 .breadcrumbs li a:hover span,
 .footer-form .agree a:hover,
@@ -95,10 +97,12 @@ a.td-wrap-link:hover span,
 .btn.btn-connect:hover {
     background-position: -100% center;
 }
-.btn-modal-main:disabled{
+
+.btn-modal-main:disabled {
     background: linear-gradient(89.43deg, #9A9A9A -3.17%, #818387 109.46%);
     box-shadow: unset;
 }
+
 .switch,
 .btn-param,
 .btn-log-out,
