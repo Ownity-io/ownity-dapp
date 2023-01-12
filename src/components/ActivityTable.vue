@@ -11,14 +11,14 @@
                 
             <div class="tr" :class="{'tr-mob-collapse' : !rowMobileCollapse}" v-for="item in this.$store.getters['marketplace/getActivitiesResult']">
                 <div class="td">
-                    <a :href="'/listing/'+item.lot.collection.contract_address+'/'+item.lot.token_id+'&'+item.lot.id" class="td-wrap td-wrap-collection">
-                        <div class="collection-img" :style="{backgroundImage: `url(${item.lot.media})`}"></div>
+                    <div class="td-wrap td-wrap-collection">
+                        <a :href="'/listing/'+item.lot.collection.contract_address+'/'+item.lot.token_id+'&'+item.lot.id" class="collection-img" :style="{backgroundImage: `url(${item.lot.media})`}"></a>
                         <div class="collection-data">
-                            <span class="collection-id" v-if="item.lot.name">{{item.lot.name}}</span>
-                            <span class="collection-id" v-else>#{{item.lot.token_id}}</span>
-                            <span class="td-light collection-id">{{item.lot.collection.name}}</span>
+                            <a :href="'/listing/'+item.lot.collection.contract_address+'/'+item.lot.token_id+'&'+item.lot.id" class="collection-id" v-if="item.lot.name">{{item.lot.name}}</a>
+                            <a :href="'/listing/'+item.lot.collection.contract_address+'/'+item.lot.token_id+'&'+item.lot.id" class="collection-id" v-else>#{{item.lot.token_id}}</a>
+                            <a :href="'/collection/'+item.lot.collection.contract_address" class="td-light collection-id">{{item.lot.collection.name}}</a>
                         </div>
-                    </a>
+                    </div>
                 </div>
                 <div class="td td-category">
                     <div class="td-wrap td-wrap-category">
