@@ -47,6 +47,14 @@
 
 }
 
+@media (max-width: 1245px) {
+
+    .header-nav .btn-container .btn.btn-address,
+    .header-nav .btn-container .btn.btn-connect {
+        margin-left: var(--grid-pad-half);
+    }
+}
+
 
 /* ------ CARDS ------- */
 

@@ -85,7 +85,10 @@
               </div>
             </div>
             <div class="owned-row">
-              {{translatesGet('OWNED_BY')}} <a :href="config.etherscanAddressUrlStart+item.owner" target="_blank">{{String(item.owner).substring(0,6)+'...'+String(item.owner).substring(38,42)}}</a> <!-- TODO: href to etherscan-->
+              {{translatesGet('OWNED_BY')}} 
+              <a :href="config.etherscanAddressUrlStart+item.owner" target="_blank">
+                <span>{{String(item.owner).substring(0,6)+'...'+String(item.owner).substring(38,42)}}</span>
+              </a> <!-- TODO: href to etherscan-->
             </div>
           </section>
 
@@ -200,7 +203,7 @@
                 </button> 
                 <button class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount>0)"
                   @click="this.$store.dispatch('appGlobal/setShowSellPartModal',true)">
-                  {{translatesGet('SELL_A_PART')}}
+                  {{translatesGet('SELL_NFT')}}
                 </button> 
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount==0 & bidsOnSale)">
                   {{translatesGet('BUY')}}
