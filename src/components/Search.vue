@@ -1,11 +1,11 @@
 <template>
-    <div class="search" :class="{'search-active':this.searchHeader.length>=2 & this.isHeader}">
+    <div class="search" :class="{'search-active':this.searchHeader.length>=2 & this.isHeader}" @click="hidenByOutsideClick=false">
         <div class="input-wrapper search-wrapper">
             <i class="i-search-line"></i>
             <input type="text" v-model="searchHeader" :placeholder="translatesGet('SEARCH_PLACEHOLDER')" v-debounce:500ms="doSearch" v-if="isHeader == true">
             <input type="text" v-model="search" :placeholder="translatesGet('SEARCH_PLACEHOLDER')" v-debounce:500ms="doSearch" v-else-if="isHeader != true">            
         </div>
-        <div class="search-results" :class="{'unfolded' : this.searchHeader.length>=2 & this.isHeader}">
+        <div class="search-results" :class="{'unfolded' : this.searchHeader.length>=2 & this.isHeader}" v-if="!hidenByOutsideClick">
         <!-- <div class="search-results" :class="{'unfolded' : searchHeader != ''}" v-if="this.searchHeader.length>=2 & this.isHeader"> -->
             <div class="search-results-wrapper" @scroll="handleScroll">
                 <ul v-if="collections.length>0">
@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-    <!-- <div v-if="this.searchHeader.length>=2 & this.isHeader" class="search-substrate"></div> -->
+    <div v-if="this.searchHeader.length>=2 & this.isHeader & !hidenByOutsideClick" @click="hidenByOutsideClick=true" class="search-substrate"></div>
 </template>
 
 <script>
@@ -49,7 +49,8 @@ export default {
             showNothingFound:false,
             listingsNextLink:null,
             searchHeader:'',
-            timeToSearch:200
+            timeToSearch:200,
+            hidenByOutsideClick:true
         }
     },
     methods:{
