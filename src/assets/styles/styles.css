@@ -590,7 +590,7 @@ ul.tabs {
 .search-substrate{
     position: fixed;
     content: '';
-    background-color: rgba(224, 224, 224, 0.717);
+    /* background-color: rgba(224, 224, 224, 0.717); */
     top: 0;
     left: 0;
     width: 100%;
