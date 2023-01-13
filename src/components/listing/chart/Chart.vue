@@ -56,11 +56,39 @@ export default {
 
 <style>
 #chart{
-  width: 300px;
+  width: 100%;
+  position: relative;
 }
 
+#centralPercentage{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 150%;
+}
+
+text {
+  filter: none;
+    box-shadow: none !important;
+    font-family: 'Rubik', sans-serif !important;
+}
+.vue-apexcharts{
+  transform: scale(1.15);
+}
 /* for customizing label text color */
 .apexcharts-tooltip span {
     color: #ffffff;
+}
+
+@media (max-width: 991px) {
+  
+  .vue-apexcharts{
+      transform: scale(1);
+    }
 }
 </style>
