@@ -2240,6 +2240,10 @@ a.td-wrap-link span {
     line-height: 28px;
 }
 
+.section-home-faq .section-home-name{
+    margin-bottom: 16px;
+}
+
 .header-title-btn .title {
     margin-bottom: 16px;
 }
