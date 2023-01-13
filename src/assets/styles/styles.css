@@ -135,6 +135,7 @@ main>section {
 .header-search {
     flex-grow: 1;
     max-width: 464px;
+    margin-right: var(--grid-pad);
 }
 
 .header-nav,
@@ -1081,18 +1082,33 @@ ul.tabs {
 }
 
 .section-nft {
-    display: grid;
+    /* display: grid; */
+    display: flex;
     width: 100%;
-    grid-template-rows: 1fr;
+    flex-grow: 1;
+    /* grid-template-rows: 1fr; */
 }
 
 .section-nft:not(.with-filter) {
-    grid-template-columns: 1fr;
+    /* grid-template-columns: 1fr; */
+}
+.section-nft:not(.with-filter) .section-nft-filter {
+    flex-grow: 0;
+}
+.section-nft:not(.with-filter) .section-nft-list {
+    flex-grow: 1;
+}
+.section-nft.with-filter .section-nft-filter {
+    flex-grow: auto;
+}
+.section-nft.with-filter .section-nft-list {
+    flex-grow: 4;
 }
 
 .section-nft.with-filter {
-    grid-template-columns: 1fr 4fr;
+    /* grid-template-columns: 1fr 4fr; */
     gap: var(--grid-pad);
+    flex-grow: 1;
 }
 
 .input-checkbox {
@@ -1246,6 +1262,15 @@ ul.tabs {
 
 .selected-filters {
     width: 100%;
+    max-width: 100%;
+}
+.selected-filters ul{
+    max-width: 100%;
+    flex-wrap: wrap;
+    /* overflow: auto; */
+}
+.selected-filters ul li{
+    min-width: fit-content;
 }
 
 .cards-list {
@@ -2114,6 +2139,7 @@ a.td-wrap-link span {
 .collection-wrap {
     display: flex;
     align-items: center;
+    max-width: 100%;
 }
 
 .section-deposit-data {
@@ -2153,6 +2179,7 @@ a.td-wrap-link span {
 .collection-id.collection-label {
     position: relative;
     padding-right: calc(20px + 10px);
+    max-width:100%
 }
 
 .collection .collection-id.collection-label {
@@ -2184,7 +2211,7 @@ a.td-wrap-link span {
     justify-content: flex-start;
     align-items: flex-start;
     gap: 40px;
-
+    flex-wrap: wrap;
 }
 
 /* .recommendations-list {
@@ -2227,17 +2254,23 @@ a.td-wrap-link span {
 .header-title-btn {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.header-title-btn .btn-wrap {
+/* .header-title-btn .btn-wrap {
     margin-left: auto;
-}
+} */
 
 .section-home-name,
 .header-title-btn .title {
     font-weight: 700;
     font-size: 24px;
     line-height: 28px;
+}
+
+.section-home-faq .section-home-name{
+    margin-bottom: 16px;
 }
 
 .header-title-btn .title {

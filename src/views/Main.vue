@@ -146,8 +146,13 @@
             </div>
           </section>
 
-          <section class="section-home">
+          <section class="section-home section-home-faq">
             <div class="container">
+              <div class="section-home-header">
+                <div class="section-home-name">
+                  {{translatesGet('FAQ')}}
+                </div>
+              </div>
               <Faq />
             </div>
           </section>
