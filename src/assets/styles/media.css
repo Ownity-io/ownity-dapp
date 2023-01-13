@@ -22,7 +22,7 @@
 @media (max-width: 1440.5px) {
 
 
-    .header-search{
+    .header-search {
         max-width: 400px;
     }
 
@@ -170,6 +170,55 @@
         width: 100%;
     }
 
+    .collection {
+        padding: 0;
+        border: none;
+        gap: 24px;
+    }
+
+    .section-collection .collection-data {
+        padding-left: 0;
+
+    }
+
+    .collection .collection-id.collection-label {
+        padding-left: calc(80px + 16px);
+        min-height: 80px;
+        margin-bottom: 20px;
+        white-space: inherit;
+        font-size: 24px;
+        line-height: 150%;
+        padding-right: 0;
+        vertical-align: baseline;
+    }
+
+    /* .collection-id.collection-label i.i-checkbox-circle-fill{
+        top: 0;
+    } */
+    .collection .collection-id.collection-label i.i-checkbox-circle-fill {
+        top: 0;
+        position: relative;
+    }
+
+    .section-collection .collection-statistics {
+        gap: 16px;
+        justify-content: flex-start;
+    }
+
+    .section-collection .collection-statistics li {
+        align-items: flex-start;
+    }
+
+    .section-collection .collection-wrap {
+        position: relative;
+    }
+
+    .section-collection .collection-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+    }
 }
 
 @media (max-width: 991px) {
@@ -188,7 +237,9 @@
     .drop-down-mobile {
         display: flex;
     }
-
+    .cards-list-empty{
+        min-height: 300px;
+    }
     /* ----------- LISTING PAGE ----------- */
 
     .listing-main,
@@ -406,7 +457,7 @@
         height: 100%;
         padding: 12px 16px;
         top: 0;
-    } 
+    }
 
     .header-search-mobile-btn.btn-arrow {
         left: 0;
@@ -546,6 +597,8 @@
 
     .params {
         flex-wrap: wrap;
+        width: calc(100% + 8px * 2);
+        margin: calc(8px * -1);
     }
 
     .params-block.params-block-filter {
@@ -576,6 +629,14 @@
     .params-block.params-block-filter,
     .params-block.params-block-sort {
         width: 50%;
+
+    }
+
+    .params-block.params-block-filter,
+    .params-block.params-block-sort,
+    .params-block {
+
+        padding: 8px;
     }
 
     .card .data-table .data-tr .data-td-value {
@@ -1240,5 +1301,21 @@
         width: 40px;
         min-height: 40px;
         min-width: 40px;
+    }
+}
+
+@media (max-width: 640px) {
+    .footer-form .btn-subscribe {
+        min-width: 100px;
+    }
+
+    .btn-filter-mobile,
+    .params-block.params-block-filter .btn-param,
+    .params-block.params-block-sort .btn-param {
+        min-width: 100px;
+    }
+
+    .tabs li button {
+        min-width: 100px;
     }
 }

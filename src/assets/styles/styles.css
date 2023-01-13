@@ -2139,6 +2139,7 @@ a.td-wrap-link span {
 .collection-wrap {
     display: flex;
     align-items: center;
+    max-width: 100%;
 }
 
 .section-deposit-data {
@@ -2178,6 +2179,7 @@ a.td-wrap-link span {
 .collection-id.collection-label {
     position: relative;
     padding-right: calc(20px + 10px);
+    max-width:100%
 }
 
 .collection .collection-id.collection-label {
@@ -2209,7 +2211,7 @@ a.td-wrap-link span {
     justify-content: flex-start;
     align-items: flex-start;
     gap: 40px;
-
+    flex-wrap: wrap;
 }
 
 /* .recommendations-list {

@@ -1,14 +1,21 @@
 <template>
   <main v-if="collection">
-    <div v-if="filterMobile" class="filter-mobile-wrap">
-      <div class="filter-mobile-header">
-        <div>{{translatesGet('FILTERS')}}</div>
-        <button class="btn-close" @click="filterMobile=false">
-          <i class="i-close-line"></i>
-        </button>
+    <FilterMobile v-if="filterMobile" />
+    <!-- <div v-if="filterMobile" class="filter-mobile-wrap">
+      <div class="filter-mobile-container">
+        <div class="filter-mobile-header">
+            <div>{{translatesGet('FILTERS')}}</div>
+            <button class="btn-close" @click="filterMobile=false">
+                <i class="i-close-line"></i>
+            </button>
+        </div>
+        <Filter :activities = "activeTab == 1"/>
+        <div class="filter-mobile-footer">
+            <button class="btn btn-clear">{{translatesGet('CLEAR_ALL')}}</button>
+            <button class="btn btn-submit">{{translatesGet('APPLY')}}</button>
+        </div>
       </div>
-      <Filter :activities = "activeTab == 1"/>
-    </div>
+    </div> -->
     <div class="container">
       <section class="section-breadcrumbs">
         <Breadcrumbs />
@@ -194,7 +201,7 @@
 <script>
 import config from '@/config.json'
 import Search from "@/components/Search.vue";
-import Filter from "@/components/Filter.vue";
+import FilterMobile from "@/components/FilterMobile.vue";
 import ListCards from "@/components/ListCards.vue";
 import ActivityTable from "@/components/ActivityTable.vue";
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
@@ -216,7 +223,7 @@ export default {
   },
   components: {
     Search,
-    Filter,
+    FilterMobile,
     ListCards,
     ActivityTable,
     Breadcrumbs,

@@ -968,8 +968,8 @@
         gap: 8px;
     }
     .container{
-        padding-left: 6px;
-        padding-right: 6px;
+        /* padding-left: 6px; */
+        /* padding-right: 6px; */
     }
     .card-value .card-col-value strong{
         font-size: 20px;

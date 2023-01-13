@@ -1,7 +1,8 @@
 <template>
     <div class="page-wrapper page-profile">
         <main>
-            <div v-if="filterMobile" class="filter-mobile-wrap">
+            <FilterMobile v-if="filterMobile" />
+            <!-- <div  class="filter-mobile-wrap">
                 <div class="filter-mobile-container">
                     <div class="filter-mobile-header">
                         <div>{{translatesGet('FILTERS')}}</div>
@@ -15,7 +16,7 @@
                         <button class="btn btn-submit">{{translatesGet('APPLY')}}</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="container">
                 <section class="section-breadcrumbs">
                     <Breadcrumbs />
@@ -206,7 +207,7 @@
     </div>
 </template>
 <script>
-import Filter from "@/components/Filter.vue";
+import FilterMobile from "@/components/FilterMobile.vue";
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
 import SelectedFilters from "@/components/SelectedFilters.vue";
 import ListCards from "@/components/ListCards.vue";
@@ -233,7 +234,7 @@ export default {
         };
     },
     components:{
-        Filter,
+        FilterMobile,
         Breadcrumbs,
         SelectedFilters,
         ListCards,
