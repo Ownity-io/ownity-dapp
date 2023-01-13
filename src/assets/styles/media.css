@@ -8,7 +8,7 @@
     }
 }
 
-@media (min-width: 1425px) {
+@media (min-width: 1440.5px) {
 
     .table-activity .thead .td.td-price,
     .table-activity .tr .td.td-price,
@@ -19,7 +19,12 @@
 
 }
 
-@media (max-width: 1425px) {
+@media (max-width: 1440.5px) {
+
+
+    .header-search{
+        max-width: 400px;
+    }
 
     .thead .td,
     .tr .td {
@@ -70,7 +75,7 @@
 
 }
 
-@media (max-width: 1425px) {
+@media (max-width: 1440px) {
 
     .screen-animation-container .img.img1,
     .screen-animation-container .img.img3 {

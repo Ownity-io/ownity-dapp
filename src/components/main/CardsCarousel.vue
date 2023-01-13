@@ -57,7 +57,7 @@ export default defineComponent({
         snapAlign: 'start',
       },
       // 1024 and up
-      1425: {
+      1440: {
         // itemsToShow: 2.5,
         itemsToShow: 4.95,
         snapAlign: 'start',
@@ -127,7 +127,7 @@ export default defineComponent({
     right: 0;
   }
 }
-@media (min-width:1425px) {
+@media (min-width:1440px) {
 
   .cards-carousel li.carousel__slide--active .container-more-info,
   .cards-carousel li.carousel__slide--active + .carousel__slide--visible .container-more-info  {
