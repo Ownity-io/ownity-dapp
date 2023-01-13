@@ -2252,11 +2252,13 @@ a.td-wrap-link span {
 .header-title-btn {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.header-title-btn .btn-wrap {
+/* .header-title-btn .btn-wrap {
     margin-left: auto;
-}
+} */
 
 .section-home-name,
 .header-title-btn .title {
