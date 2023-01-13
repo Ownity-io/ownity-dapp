@@ -47,6 +47,7 @@
     "scrollmagic": "^2.0.8",
     "tslib": "^2.4.1",
     "vue": "^3.2.41",
+    "vue-apexcharts": "^1.6.2",
     "vue-copy-to-clipboard": "^1.0.3",
     "vue-debounce": "^4.0.0",
     "vue-router": "^4.1.6",
