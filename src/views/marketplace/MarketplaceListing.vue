@@ -61,23 +61,23 @@
                       </button>
                       <div class="drop-down">
                           <ul>
-                              <li>
-                                  <i class="i-pencil-line"></i>
-                                  <span>
-                                    {{translatesGet('EDIT')}}
-                                  </span>
-                              </li>
-                              <li>
+                              <li @click="mobileDropDown = false" >
                                   <i class="i-share-line"></i>
                                   <span>
                                     {{translatesGet('SHARE')}}
                                   </span>
                               </li>
                               <li>
-                                  <i class="i-logout-box-line"></i>
-                                  <span>
-                                    {{translatesGet('LOG_OUT')}}
-                                  </span>
+                              <button class="btn btn-block btn-refresh" 
+                                @click="this.refreshInfo(); mobileDropDown = false" 
+                                :class="{'refreshing' : isRefreshing}" >
+                                  <div>
+                                    <i class="i-refresh-line" ></i>
+                                    <span>
+                                      {{translatesGet('REFRESH')}}
+                                    </span>
+                                  </div>
+                                </button>
                               </li>
                           </ul>
                       </div>
@@ -99,10 +99,16 @@
               <div class="card-header">
                 <!-- <a  class="icon-card-label " :href="linkToMarketplacePage" :style="{backgroundImage: `url(${item.marketplace.logo})`}">
                 </a> -->
-                <button class="btn-like" :class="{'liked':testLike}" @click="changeLike">
+                <!-- <button class="btn-like" :class="{'liked':testLike}" @click="changeLike">
                   <i class="i-heart-3-fill"></i>
                   <i class="i-heart-3-line"></i>
-                </button>
+                </button> -->
+                <button class="btn btn-block btn-like" 
+                    :class="{'liked':testLike}" 
+                    @click="changeLike">
+                    <i class="i-heart-3-fill"></i>
+                    <i class="i-heart-3-line"></i>
+                  </button>
               </div>
               <img v-if="!item.media" src="@/assets/images/img-not-found.svg" alt="img" />
               <img v-else :src="item.media" alt="img" />
