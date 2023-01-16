@@ -1640,7 +1640,9 @@ ul.tabs {
 .section-nft-list.card-collapse .card-data {
     opacity: 0;
     height: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
+    /* якщо додати стиль overflow, 
+    то обррізаються наведення на діаграму */
     padding-top: 0;
     padding-bottom: 0;
     transition: .25s;
