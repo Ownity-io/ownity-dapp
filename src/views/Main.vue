@@ -2,7 +2,7 @@
   <div class="home-page">
     <div class="page-wrapper">
       <main class="main-home">
-        <Animation />
+        <Animation v-if="readyToShow" />
 
         <section class="section-home main-screen">
           <div class="container">
@@ -186,6 +186,7 @@ export default {
       banners:null,
       showCardsLoaderAnimation:true,
       lang: new MultiLang(this),
+      readyToShow: false
     };
   },
   components: {
@@ -200,6 +201,7 @@ export default {
       return new Promise(resolve => setTimeout(resolve, delayInms));
     }
     this.playText = true;
+    this.readyToShow = true;
     await this.fetchAndSetNftCollections();
     await this.fetchAndSetNfts();
     await this.fetchAndSetBanners();
