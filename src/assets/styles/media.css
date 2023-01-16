@@ -372,6 +372,11 @@
         position: relative;
         max-height: 240px;
     }
+    .chart-wrap #chart{
+        max-width: 240px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
     .section-listing-main .collection-data-link,
     .section-listing-main .deposit-listened {

@@ -639,18 +639,18 @@ export default {
     async setChartData(){
       this.chartData = [];
       if (this.item.bids!=null){
-        let tempArray = [{region:'Your Bid',val:'0'}]
+        let tempArray = [{name:'Your Bid',val:'0'}]
         this.chartData = this.chartData.concat(tempArray);
         for (let element of this.item.bids){
           if (element.address!=localStorage.getItem('userAddress')){
-            tempArray = [{ region: element.address, val: ((element.amount / this.item.price) * 100).toFixed(0) }]
+            tempArray = [{ name: element.address.substring(0,6)+'...'+element.address.substring(38,42), val: ((element.amount / this.item.price) * 100).toFixed(0) }]
             this.chartData = this.chartData.concat(tempArray);
           }
           else{
-            this.chartData[0]={ region: element.address, val: ((element.amount / this.item.price) * 100).toFixed(0) };
+            this.chartData[0]={ name: 'You', val: ((element.amount / this.item.price) * 100).toFixed(0) };
           }
         }
-        tempArray = [{region:'Avaliable to buy',val:((this.item.price - this.allBidsAmount)/this.item.price)*100 }]
+        tempArray = [{name:'Avaliable to buy',val:((this.item.price - this.allBidsAmount)/this.item.price)*100 }]
         this.chartData = this.chartData.concat(tempArray);
         return;
       }
