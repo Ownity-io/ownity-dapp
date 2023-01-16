@@ -1640,7 +1640,9 @@ ul.tabs {
 .section-nft-list.card-collapse .card-data {
     opacity: 0;
     height: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
+    /* якщо додати стиль overflow, 
+    то обррізаються наведення на діаграму */
     padding-top: 0;
     padding-bottom: 0;
     transition: .25s;
@@ -1969,7 +1971,7 @@ ul.tabs {
 /* ---------### END ##### try flex for gris like at binance ----------- */
 
 
-.table-chart-data .tr,
+/* .table-chart-data .tr, */
 .table-activity .tr {
     cursor: pointer;
 }
@@ -2767,7 +2769,7 @@ a.td-wrap-link span {
     width: 4px;
     height: 4px;
     opacity: 1;
-    background-color: #DFE2EA;
+    background-color: #ffffff;
 }
 
 .tbody-overflow {
@@ -2775,12 +2777,14 @@ a.td-wrap-link span {
     padding-right: 14px;
 }
 
+
 .tbody-overflow::after {
     position: absolute;
     content: '';
-    bottom: -13px;
+    bottom: -12px;
+    right: 20px;
     z-index: 1;
-    width: 100%;
+    width: calc(100% - 20px);
     height: 76px;
     background: linear-gradient(360deg, #FFFFFF 46.88%, rgba(255, 255, 255, 0) 100%);
 }
