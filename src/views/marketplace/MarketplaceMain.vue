@@ -64,6 +64,7 @@
           <div class="params-block params-block-search">
             <Search />
           </div>
+          <SortBar :activeTab="activeTab"/>
           <div class="params-block params-block-sort">
             <div class="param-wrap sort" :class="{ unfolded: testOpenSort }">
               <button class="btn-param btn-sort" @click="testOpenSort = !testOpenSort">
@@ -135,6 +136,7 @@ import ListCards from "@/components/ListCards.vue";
 import ActivityTable from "@/components/ActivityTable.vue";
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
 import SelectedFilters from "@/components/SelectedFilters.vue";
+import SortBar from '@/components/SortBar.vue'
 import MultiLang from "@/core/multilang";
 import config from '@/config.json';
 
@@ -158,6 +160,7 @@ export default {
     ActivityTable,
     Breadcrumbs,
     SelectedFilters,
+    SortBar
   },
   async mounted(){
     window.scrollTo(0, 0);

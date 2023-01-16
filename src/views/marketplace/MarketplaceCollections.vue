@@ -135,7 +135,8 @@
           <div class="params-block params-block-search">
             <Search />
           </div>
-          <div class="params-block params-block-sort">
+          <SortBar :activeTab="activeTab"/>
+          <!-- <div class="params-block params-block-sort">
             <div class="param-wrap sort" :class="{ unfolded: testOpenSort }">
               <button class="btn-param btn-sort" @click="testOpenSort = !testOpenSort">
                 <span v-if="this.selectedSort == null">{{translatesGet('SORT_BY')}}</span>
@@ -157,7 +158,7 @@
                 </ul>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="params-block params-block-switch" v-if="activeTab != 1">
             <div class="param-wrap switch">
               <button
@@ -208,6 +209,7 @@ import ActivityTable from "@/components/ActivityTable.vue";
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
 import SelectedFilters from "@/components/SelectedFilters.vue"; 
 import MultiLang from "@/core/multilang";
+import SortBar from '@/components/SortBar.vue';
 
 export default {
   data() {
@@ -230,6 +232,7 @@ export default {
     ActivityTable,
     Breadcrumbs,
     SelectedFilters,
+    SortBar
   },
   async mounted(){
     window.scrollTo(0, 0);
