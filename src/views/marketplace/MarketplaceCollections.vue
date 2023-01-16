@@ -202,6 +202,7 @@
 import config from '@/config.json'
 import Search from "@/components/Search.vue";
 import FilterMobile from "@/components/FilterMobile.vue";
+import Filter from "@/components/Filter.vue";
 import ListCards from "@/components/ListCards.vue";
 import ActivityTable from "@/components/ActivityTable.vue";
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
@@ -223,6 +224,7 @@ export default {
   },
   components: {
     Search,
+    Filter,
     FilterMobile,
     ListCards,
     ActivityTable,

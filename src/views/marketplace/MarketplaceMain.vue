@@ -129,6 +129,7 @@
 
 <script>
 import Search from "@/components/Search.vue";
+import Filter from "@/components/Filter.vue";
 import FilterMobile from "@/components/FilterMobile.vue";
 import ListCards from "@/components/ListCards.vue";
 import ActivityTable from "@/components/ActivityTable.vue";
@@ -151,6 +152,7 @@ export default {
   },
   components: {
     Search,
+    Filter,
     FilterMobile,
     ListCards,
     ActivityTable,

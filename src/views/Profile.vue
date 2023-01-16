@@ -207,7 +207,9 @@
     </div>
 </template>
 <script>
+import Filter from "@/components/Filter.vue";
 import FilterMobile from "@/components/FilterMobile.vue";
+
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
 import SelectedFilters from "@/components/SelectedFilters.vue";
 import ListCards from "@/components/ListCards.vue";
@@ -234,11 +236,12 @@ export default {
         };
     },
     components:{
+        Filter,
         FilterMobile,
         Breadcrumbs,
         SelectedFilters,
         ListCards,
-        ActivityTable
+        ActivityTable,
     }, 
     async mounted() {
         this.userAddress = localStorage.getItem('userAddress');
