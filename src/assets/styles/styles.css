@@ -522,7 +522,7 @@ ul.tabs {
     position: relative;
     border-radius: 8px 8px 0px 0px;
     white-space: nowrap;
-    min-width: fit-content;
+    /* min-width: fit-content; */
 }
 
 .tabs .active-tab::after {
