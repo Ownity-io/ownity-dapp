@@ -1,26 +1,5 @@
 <template>
-    <div class="params-block params-block-sort" v-if="this.$route.name=='Profile'">
-        <div class="param-wrap sort" :class="{ unfolded: testOpenSort }">
-            <button class="btn-param btn-sort" @click="testOpenSort = !testOpenSort">
-            <span v-if="this.selectedSort == null">Sort by</span>
-            <span v-else>{{this.selectedSort.name}}</span>
-            <i class="i-arrow-down-s-line"></i>
-            </button>
-            <div class="drop-down">                                    
-            <ul v-if="activeTab == 'ActivityTable'">                                    
-                <li v-for="element in config.sortParamsActivities" :key="element" @click="testOpenSort = !testOpenSort;selectedSort=element;fetchAndSetListingsStartInfo();">
-                    <span>{{element.name}}</span>
-                </li>                        
-            </ul>
-            <ul v-else>                                    
-                <li v-for="element in config.sortParams" :key="element" @click="testOpenSort = !testOpenSort;selectedSort=element;fetchAndSetListingsStartInfo();">
-                    <span>{{element.name}}</span>
-                </li>                        
-            </ul>
-            </div>
-        </div>
-    </div>
-    <div class="params-block params-block-sort" v-if="this.$route.name=='Collection'">
+    <div class="params-block params-block-sort" >
         <div class="param-wrap sort" :class="{ unfolded: testOpenSort }">
             <button class="btn-param btn-sort" @click="testOpenSort = !testOpenSort">
                 <span v-if="this.selectedSort == null">{{translatesGet('SORT_BY')}}</span>
@@ -28,7 +7,7 @@
                 <i class="i-arrow-down-s-line"></i>
             </button>
             <div class="drop-down">
-                <ul v-if="activeTab == 1">
+                <ul v-if="activeTab == 1 || activeTab == 'ActivityTable'">
                     <li v-for="element in config.sortParamsActivities" :key="element"
                         @click="testOpenSort = !testOpenSort;selectedSort=element;initInfo();">
                         <span>{{element.name}}</span>
@@ -41,29 +20,6 @@
                     </li>
                 </ul>
             </div>
-        </div>
-    </div>
-    <div class="params-block params-block-sort" v-if="this.$route.name=='Marketplace'">
-        <div class="param-wrap sort" :class="{ unfolded: testOpenSort }">
-          <button class="btn-param btn-sort" @click="testOpenSort = !testOpenSort">
-            <span v-if="this.selectedSort == null">Sort by</span>
-            <span v-else>{{this.selectedSort.name}}</span>
-            <i class="i-arrow-down-s-line"></i>
-          </button>
-          <div class="drop-down">
-            <ul v-if="activeTab == 1">
-              <li v-for="element in config.sortParamsActivities" :key="element"
-                @click="testOpenSort = !testOpenSort;selectedSort=element;initInfo();">
-                <span>{{element.name}}</span>
-              </li>
-            </ul>
-            <ul v-else>
-              <li v-for="element in config.sortParams" :key="element"
-                @click="testOpenSort = !testOpenSort;selectedSort=element;initInfo();">
-                <span>{{element.name}}</span>
-              </li>
-            </ul>
-          </div>
         </div>
     </div>
     <div v-if="testOpenSort" class="fullSort" @click="testOpenSort = false"></div>
@@ -97,23 +53,6 @@ export default{
     },
     props:['activeTab'],
     methods:{
-        async fetchAndSetListingsStartInfo() {
-            if (this.$route.name=='Profile') {
-                console.log('yes');
-                if (this.activeTab == 'Favourites') {
-                    await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');
-                }
-                else if (this.activeTab == 'Vote') {
-                    await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');
-                }
-                else if (this.activeTab == 'ActivityTable') {
-                    await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult', { userAddress: this.userAddress, collectionAddress: null });
-                }
-                else {
-                    await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
-                }
-            }
-        },
         async initInfo() {
             if (this.$route.name == 'Collection') {
                 if (this.activeTab == 1) {
@@ -133,6 +72,21 @@ export default{
                     await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
                     await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
                     await this.$store.dispatch('marketplace/fetchAndSetMarketplaces');
+                }
+            }
+            if (this.$route.name=='Profile') {
+                console.log('yes');
+                if (this.activeTab == 'Favourites') {
+                    await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');
+                }
+                else if (this.activeTab == 'Vote') {
+                    await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');
+                }
+                else if (this.activeTab == 'ActivityTable') {
+                    await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult', { userAddress: this.userAddress, collectionAddress: null });
+                }
+                else {
+                    await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
                 }
             }
         },
