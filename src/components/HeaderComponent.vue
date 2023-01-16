@@ -1,5 +1,5 @@
 <template>
-    <MobileMenu :class="{show: (mobileMenu==true)}" :walletConnected="(walletConnected=walletConnected)"/>
+    <MobileMenu :class="{show: (this.$store.getters['appGlobal/getShowMobileBurgerMenu'])}" :walletConnected="(walletConnected=walletConnected)"/>
     <header :class="{'mobile-search' :(mobileSearch==true)}">
         <div class="container">
             <div class="header-wrapper">
@@ -59,10 +59,10 @@
                     <button @click="(mobileSearch=true)" class="btn-mob-header">
                         <i class="i-search-line"></i>
                     </button>
-                    <button @click="(mobileMenu=true)" class="btn-mob-header"  v-if="(mobileMenu==false)">
+                    <button @click="(this.$store.dispatch('appGlobal/setShowMobileBurgerMenu',true))" class="btn-mob-header"  v-if="(!this.$store.getters['appGlobal/getShowMobileBurgerMenu'])">
                         <i class="i-menu-line"></i>
                     </button>
-                    <button @click="(mobileMenu=false)" class="btn-mob-header"  v-if="(mobileMenu==true)">
+                    <button @click="(this.$store.dispatch('appGlobal/setShowMobileBurgerMenu',false))" class="btn-mob-header"  v-if="(this.$store.getters['appGlobal/getShowMobileBurgerMenu'])">
                         <i class="i-close-line"></i>
                     </button>
                 </div>

@@ -22,7 +22,8 @@ export default {
       greenSnack:false,
       snackText:null,
       showSnackBar:false,
-      showVoteInfoModal:false
+      showVoteInfoModal:false,
+      showMobileBurgerMenu:false,
     };
   },
   getters: {
@@ -88,6 +89,9 @@ export default {
     },
     getShowVoteInfoModal(state){
       return state.showVoteInfoModal;
+    },
+    getShowMobileBurgerMenu(state){
+      return state.showMobileBurgerMenu;
     }
   },
   mutations: {
@@ -231,6 +235,9 @@ export default {
     },
     setShowVoteInfoModal(state,value){
       state.showVoteInfoModal = value;
+    },
+    setShowMobileBurgerMenu(state,value){
+      state.showMobileBurgerMenu = value;
     }
   },
   actions: {
@@ -309,6 +316,9 @@ export default {
     },
     setShowVoteInfoModal(context,value){
       context.commit("setShowVoteInfoModal",value);
+    },
+    setShowMobileBurgerMenu(context,value){
+      context.commit("setShowMobileBurgerMenu",value);
     }
   },
 };
