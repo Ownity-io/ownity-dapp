@@ -265,7 +265,9 @@
                 <i class="i-arrow-down-s-line"></i>
               </button> -->
               <div class="section-unfolded-content">
-                <ul class="tabs">
+                
+                <div class="tabs-wrap">
+                  <ul class="tabs">
                   <li>
                     <button
                       :class="{ 'active-tab': activeTab2 === 'ListingInfo2' }"
@@ -295,6 +297,7 @@
                     </button>
                   </li>
                 </ul>
+                </div>
               <div class="section-members-info">
                 <!-- flow 1 -->
                 <div v-if="activeTab2 === 'ListingInfo2'" class="section-table-chart">
