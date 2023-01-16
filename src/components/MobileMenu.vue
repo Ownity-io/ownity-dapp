@@ -17,7 +17,8 @@
           </div>
           <div class="btn-container" v-else @click="(this.$store.dispatch('appGlobal/setShowMobileBurgerMenu',false))" >
             <router-link :to="{ name: 'Profile' }" class="btn btn-address">
-              <div class="icon-address"></div>
+              <jazzicon :address="userAddress" :diameter="32" class="icon-address" v-if="userAddress"/>
+              <div class="icon-address" v-else></div>
               <span>
                 {{ this.$store.getters["walletsAndProvider/getUserShortAddress"] }}
               </span>
@@ -64,13 +65,32 @@ export default {
   props: ["walletConnected"],
   data(){
     return {
+      walletConnected:1,
       lang: new MultiLang(this),
+      userAddress:null
     }
   },
   methods:{
+    getWalletFromLS() {
+      this.walletConnected = localStorage.getItem('connectedWallet');
+    },
+    clearLocalStorage(){
+        localStorage.clear();
+    },
     translatesGet(key) {
       return this.lang.get(key);
     },
+  },
+  async mounted(){
+    this.getWalletFromLS();
+    this.userAddress = localStorage.getItem('userAddress');
+    const delay = (delayInms) => {
+        return new Promise(resolve => setTimeout(resolve, delayInms));
+    }
+    while (true) {
+        await delay(1000);
+        this.getWalletFromLS();
+    }
   }
 };
 </script>

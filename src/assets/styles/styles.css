@@ -98,9 +98,11 @@ main>section {
 
     display: block;
 }
-.footer-row .copyright{
+
+.footer-row .copyright {
     padding-right: var(--grid-pad);
 }
+
 .header-logo {
     margin-right: var(--grid-pad);
 }
@@ -282,7 +284,7 @@ main>section {
     padding: 0 12px;
     min-width: 184px;
 }
-
+.mobile-menu-main-btn .btn-container .btn.btn-address .icon-address,
 .header-nav .btn-container .btn.btn-address .icon-address {
     width: 32px;
     height: 32px;
@@ -352,7 +354,7 @@ textarea {
     flex-grow: 1;
 }
 
-.footer-block:not(.footer-block-form){
+.footer-block:not(.footer-block-form) {
     margin-right: auto;
 }
 
@@ -374,7 +376,7 @@ textarea {
     font-weight: 700;
 }
 
-.footer-block button.footer-block-name ,
+.footer-block button.footer-block-name,
 .footer-block .footer-block-name i.i-arrow-up-s-line {
     display: none;
 }
@@ -584,11 +586,11 @@ ul.tabs {
     position: relative;
 }
 
-.search.search-active{
+.search.search-active {
     z-index: 5;
 }
 
-.search-substrate{
+.search-substrate {
     position: fixed;
     content: '';
     /* background-color: rgba(224, 224, 224, 0.717); */
@@ -618,6 +620,7 @@ ul.tabs {
 .drop-down-container.unfolded .drop-down {
     padding-top: 8px;
 }
+
 .drop-down {
     padding-top: 0;
     box-shadow: 4px 4px 20px rgba(129, 136, 153, 0.1);
@@ -730,6 +733,16 @@ ul.tabs {
     font-size: 24px;
     color: #818899;
     margin-right: 12px;
+}
+
+.drop-down-mobile .drop-down-container.unfolded .drop-down ul li button,
+.drop-down-mobile .drop-down-container.unfolded .drop-down ul li .btn {
+    aspect-ratio: unset;
+    padding: 0;
+}
+
+.drop-down-mobile .drop-down-container .drop-down {
+    padding-top: 0;
 }
 
 .drop-down-container.unfolded .drop-down ul li {
@@ -1059,9 +1072,10 @@ ul.tabs {
     transition: 0.2s;
 }
 
-.faq-block .content-faq b{
+.faq-block .content-faq b {
     font-weight: 600;
 }
+
 .faq-block.collapse-block .content-faq,
 .filter-section.collapse-section .input-checkbox,
 .filter-section.collapse-section .container-enter-price,
@@ -1092,15 +1106,19 @@ ul.tabs {
 .section-nft:not(.with-filter) {
     /* grid-template-columns: 1fr; */
 }
+
 .section-nft:not(.with-filter) .section-nft-filter {
     flex-grow: 0;
 }
+
 .section-nft:not(.with-filter) .section-nft-list {
     flex-grow: 1;
 }
+
 .section-nft.with-filter .section-nft-filter {
     flex-grow: auto;
 }
+
 .section-nft.with-filter .section-nft-list {
     flex-grow: 4;
 }
@@ -1264,12 +1282,14 @@ ul.tabs {
     width: 100%;
     max-width: 100%;
 }
-.selected-filters ul{
+
+.selected-filters ul {
     max-width: 100%;
     flex-wrap: wrap;
     /* overflow: auto; */
 }
-.selected-filters ul li{
+
+.selected-filters ul li {
     min-width: fit-content;
 }
 
@@ -1707,6 +1727,7 @@ ul.tabs {
     max-width: 100%;
     align-items: center;
 }
+
 .tr .td.td-owner div:not(.icon-token) span:not(.label-owner),
 .td-owner span:not(.label-owner) {
     display: block;
@@ -1810,7 +1831,7 @@ ul.tabs {
     flex-grow: 1;
 }
 
-.card .data-table .data-tr .data-td a{
+.card .data-table .data-tr .data-td a {
     width: fit-content;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -2181,7 +2202,7 @@ a.td-wrap-link span {
 .collection-id.collection-label {
     position: relative;
     padding-right: calc(20px + 10px);
-    max-width:100%
+    max-width: 100%
 }
 
 .collection .collection-id.collection-label {
@@ -2191,7 +2212,7 @@ a.td-wrap-link span {
     color: #333333;
 }
 
-.collection-id.collection-label span{
+.collection-id.collection-label span {
     line-height: 150%;
 }
 
@@ -2271,7 +2292,7 @@ a.td-wrap-link span {
     line-height: 28px;
 }
 
-.section-home-faq .section-home-name{
+.section-home-faq .section-home-name {
     margin-bottom: 16px;
 }
 
@@ -2301,7 +2322,7 @@ a.td-wrap-link span {
     /* max-width: 586px; */
 }
 
-.card-listing  .listing-main{
+.card-listing .listing-main {
     flex-grow: 1;
     max-width: 60%;
 }
@@ -2382,7 +2403,7 @@ a.td-wrap-link span {
     aspect-ratio: 1 / 1;
 }
 
-.btn-refresh.refreshing i{
+.btn-refresh.refreshing i {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -2741,12 +2762,13 @@ a.td-wrap-link span {
     width: 31.7%;
     height: fit-content;
 }
-.chart-wrap svg path{
+
+.chart-wrap svg path {
     stroke: none;
 }
 
 .table-chart-data {
-    width: calc(100% - 31.7% );
+    width: calc(100% - 31.7%);
     /* width: calc(100% - 31.7% + 14px); */
     padding-left: 24px;
     position: relative;
@@ -2756,7 +2778,7 @@ a.td-wrap-link span {
     /* margin-right: -14px; */
 }
 
-.table-chart-data .tbody{
+.table-chart-data .tbody {
     padding-right: 14px;
     margin-right: -14px;
     width: calc(100% + 14px);
