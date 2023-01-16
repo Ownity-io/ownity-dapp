@@ -143,27 +143,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="params-block params-block-sort">
-                            <div class="param-wrap sort" :class="{ unfolded: testOpenSort }">
-                                <button class="btn-param btn-sort" @click="testOpenSort = !testOpenSort">
-                                <span v-if="this.selectedSort == null">Sort by</span>
-                                <span v-else>{{this.selectedSort.name}}</span>
-                                <i class="i-arrow-down-s-line"></i>
-                                </button>
-                                <div class="drop-down">                                    
-                                <ul v-if="activeTab == 'ActivityTable'">                                    
-                                    <li v-for="element in config.sortParamsActivities" :key="element" @click="testOpenSort = !testOpenSort;selectedSort=element;fetchAndSetListingsStartInfo();">
-                                        <span>{{element.name}}</span>
-                                    </li>                        
-                                </ul>
-                                <ul v-else>                                    
-                                    <li v-for="element in config.sortParams" :key="element" @click="testOpenSort = !testOpenSort;selectedSort=element;fetchAndSetListingsStartInfo();">
-                                        <span>{{element.name}}</span>
-                                    </li>                        
-                                </ul>
-                                </div>
-                            </div>
-                        </div>
+                        <SortBar :activeTab="activeTab"/>
                         <div class="params-block params-block-switch" v-if="activeTab !== 'ActivityTable'">
                             <div class="param-wrap switch">
                                 <button
@@ -213,6 +193,7 @@ import FilterMobile from "@/components/FilterMobile.vue";
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
 import SelectedFilters from "@/components/SelectedFilters.vue";
 import ListCards from "@/components/ListCards.vue";
+import SortBar from "@/components/SortBar.vue";
 import MultiLang from "@/core/multilang";
 import config from '@/config.json';
 import ActivityTable from "@/components/ActivityTable.vue";
@@ -242,6 +223,7 @@ export default {
         SelectedFilters,
         ListCards,
         ActivityTable,
+        SortBar
     }, 
     async mounted() {
         this.userAddress = localStorage.getItem('userAddress');

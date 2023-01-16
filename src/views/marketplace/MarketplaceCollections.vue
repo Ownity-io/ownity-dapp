@@ -135,29 +135,7 @@
           <div class="params-block params-block-search">
             <Search />
           </div>
-          <div class="params-block params-block-sort">
-            <div class="param-wrap sort" :class="{ unfolded: testOpenSort }">
-              <button class="btn-param btn-sort" @click="testOpenSort = !testOpenSort">
-                <span v-if="this.selectedSort == null">{{translatesGet('SORT_BY')}}</span>
-                <span v-else>{{this.selectedSort.name}}</span>
-                <i class="i-arrow-down-s-line"></i>
-              </button>
-              <div class="drop-down">
-                <ul v-if="activeTab == 1">
-                  <li v-for="element in config.sortParamsActivities" :key="element"
-                    @click="testOpenSort = !testOpenSort;selectedSort=element;initInfo();">
-                    <span>{{element.name}}</span>
-                  </li>
-                </ul>
-                <ul v-else>
-                  <li v-for="element in config.sortParams" :key="element"
-                    @click="testOpenSort = !testOpenSort;selectedSort=element;initInfo();">
-                    <span>{{element.name}}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <SortBar :activeTab="activeTab"/>
           <div class="params-block params-block-switch" v-if="activeTab != 1">
             <div class="param-wrap switch">
               <button
@@ -208,6 +186,7 @@ import ActivityTable from "@/components/ActivityTable.vue";
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
 import SelectedFilters from "@/components/SelectedFilters.vue"; 
 import MultiLang from "@/core/multilang";
+import SortBar from '@/components/SortBar.vue';
 
 export default {
   data() {
@@ -230,6 +209,7 @@ export default {
     ActivityTable,
     Breadcrumbs,
     SelectedFilters,
+    SortBar
   },
   async mounted(){
     window.scrollTo(0, 0);
