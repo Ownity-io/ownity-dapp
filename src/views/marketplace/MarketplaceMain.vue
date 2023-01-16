@@ -65,7 +65,7 @@
             <Search />
           </div>
           <SortBar :activeTab="activeTab"/>
-          <div class="params-block params-block-sort">
+          <!-- <div class="params-block params-block-sort">
             <div class="param-wrap sort" :class="{ unfolded: testOpenSort }">
               <button class="btn-param btn-sort" @click="testOpenSort = !testOpenSort">
                 <span v-if="this.selectedSort == null">Sort by</span>
@@ -87,7 +87,7 @@
                 </ul>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="params-block params-block-switch" v-if="activeTab == 0">
             <div class="param-wrap switch">
               <button
