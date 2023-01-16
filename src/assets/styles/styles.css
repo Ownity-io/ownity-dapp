@@ -488,6 +488,10 @@ footer::after {
     color: #333333;
 }
 
+.tabs-wrap{
+    width: 100%;
+    overflow: hidden;
+}
 ul.tabs {
     display: flex;
     justify-content: flex-start;
@@ -498,12 +502,13 @@ ul.tabs {
     border-bottom: 1px solid #DFE2EA;
     width: 100%;
 }
-
+.tabs-wrap .tabs,
 .section-listing-tabs .tabs,
 .section-tabs .container .tabs {
     overflow: auto hidden;
 }
 
+.tabs-wrap .tabs::-webkit-scrollbar,
 .section-listing-tabs .tabs::-webkit-scrollbar,
 .section-tabs .container .tabs::-webkit-scrollbar {
     display: none;
@@ -516,6 +521,8 @@ ul.tabs {
     min-width: 152px;
     position: relative;
     border-radius: 8px 8px 0px 0px;
+    white-space: nowrap;
+    /* min-width: fit-content; */
 }
 
 .tabs .active-tab::after {
@@ -996,7 +1003,7 @@ ul.tabs {
 }
 
 .filter {
-    max-width: 275px;
+    width: 275px;
 }
 
 .filter,
