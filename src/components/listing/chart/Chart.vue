@@ -48,6 +48,10 @@ export default {
     if (this.series.length>1){
       this.chartOptions.colors[this.series.length-1] = 'rgba(248, 249, 253, 1)';
     }    
+    console.log(tempNames)
+    if (tempNames[0]=='You'){
+      this.chartOptions.colors[0] = 'rgba(66, 117, 228, 1)';
+    }
     console.log(tempNames);
     this.render = true;
   }
