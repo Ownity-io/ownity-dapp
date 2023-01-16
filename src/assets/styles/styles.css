@@ -2544,6 +2544,7 @@ a.td-wrap-link span {
     gap: 16px;
     padding-top: 4px;
     padding-bottom: 4px;
+    flex-wrap: wrap;
 }
 
 .section-deposit-btns .btn {
@@ -2739,6 +2740,9 @@ a.td-wrap-link span {
 .chart-wrap {
     width: 31.7%;
     height: fit-content;
+}
+.chart-wrap svg path{
+    stroke: none;
 }
 
 .table-chart-data {

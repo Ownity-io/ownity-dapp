@@ -80,6 +80,7 @@ text {
   filter: none;
     box-shadow: none !important;
     font-family: 'Rubik', sans-serif !important;
+    font-size: 60%;
 }
 .vue-apexcharts{
   transform: scale(1.15);
