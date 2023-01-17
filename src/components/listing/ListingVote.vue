@@ -1,5 +1,5 @@
 <template>
-    <div class="block-vote">
+    <div class="block-vote" v-if="this.voting.status=='OPEN'||this.voting.status=='ON SALE'">
       <div class="vote-data section-deposit-data">       
         <div class="deposit-img-container">
           <a target="_blank" href="#" class="deposit-img" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></a> 
