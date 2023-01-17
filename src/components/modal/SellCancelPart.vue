@@ -212,39 +212,27 @@ export default {
         };
         let request = await fetch(requestLink, requestOptions);
         let requestJson = await request.json();
+        console.log(requestJson);
+        console.log(requestJson.data[0].voting_id);
         if (requestJson.success) {    
-          requestLink = `${config.backendApiEntryPoint}finish-voting/`;
-          requestOptions = {
-            method: "POST",
-            headers: {
-              accept: "application/json",
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-            body: JSON.stringify({
-              voting_id: requestJson.data[0].voting_id
-            })
-          };
-          request = await fetch(requestLink, requestOptions);
-          requestJson = await request.json();
-          console.log(requestJson);
-          
-          requestLink = `${config.backendApiEntryPoint}finish-voting/`;
-          requestOptions = {
-            method: "POST",
-            headers: {
-              accept: "application/json",
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-            body: JSON.stringify({
-              voting_id: this.voting.id
-            })
-          };
-          request = await fetch(requestLink, requestOptions);
-          requestJson = await request.json();
-          console.log(requestJson);
-          // location.reload();
+          if (parseInt((requestJson.data[0].voting_percentage.replace('%', ''))) >= 51) {
+            requestLink = `${config.backendApiEntryPoint}finish-voting/`;
+            requestOptions = {
+              method: "POST",
+              headers: {
+                accept: "application/json",
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+              body: JSON.stringify({
+                voting_id: requestJson.data[0].voting_id
+              })
+            };
+            request = await fetch(requestLink, requestOptions);
+            requestJson = await request.json();
+            console.log(requestJson);
+          }
+          location.reload();
         }        
         else {
           await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
