@@ -171,7 +171,7 @@ export default {
     async confirmVote() {
       this.buttonWainting = true;
         let signed_message = await this.$store.dispatch('walletsAndProvider/signMessageWithGlobalProvider',
-          `${this.voting.marketplace.id}-${this.item.id}-${this.item.currency.address}-${this.voting.amount}-${this.voting.end_date}`);
+          `${this.item.id}-${this.item.currency.address}-${this.voting.amount}-${this.voting.end_date}`);
         console.log(signed_message);
         let requestLink = `${config.backendApiEntryPoint}voting-confirm/`;
         let requestOptions = {
@@ -182,7 +182,7 @@ export default {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           body: JSON.stringify({
-            "marketplace_id": this.voting.marketplace.id,
+            "marketplace_id": [this.voting.marketplace.id],
             "lot_id": this.item.id,
             "currency": this.item.currency.address,
             "amount":this.voting.amount,

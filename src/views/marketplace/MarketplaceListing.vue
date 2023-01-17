@@ -681,7 +681,7 @@ export default {
     setMaxVoting(){  
       if (this.itemWithBidsOnSale.votings){
         for (let element of this.itemWithBidsOnSale.votings){
-            if (element.status=='FULFILLED') {
+            if (element.status=='ON SALE'||element.status=='FULFILLED') {
               this.voting = element;
               return
             }

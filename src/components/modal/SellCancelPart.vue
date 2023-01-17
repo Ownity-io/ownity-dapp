@@ -189,7 +189,7 @@ export default {
     },
     async startVote() {
         let signed_message = await this.$store.dispatch('walletsAndProvider/signMessageWithGlobalProvider',
-          `${this.voting.marketplace.id}-${this.item.id}-${this.item.currency.address}-${this.noExponents(this.voting.amount)}-${this.item.end_date}`);
+          `${this.item.id}-${this.item.currency.address}-${this.noExponents(this.voting.amount)}-${this.item.end_date}`);
         console.log(signed_message);
         let requestLink = `${config.backendApiEntryPoint}voting-create/`;
         let requestOptions = {
@@ -200,7 +200,7 @@ export default {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           body: JSON.stringify({
-            "marketplace_id": this.voting.marketplace.id,
+            "marketplace_id": [this.voting.marketplace.id],
             "lot_id": this.item.id,
             "currency": this.item.currency.address,
             "amount": this.noExponents(this.voting.amount),
@@ -212,9 +212,40 @@ export default {
         };
         let request = await fetch(requestLink, requestOptions);
         let requestJson = await request.json();
-        if (requestJson.success) {
-          location.reload();
-        }
+        if (requestJson.success) {    
+          requestLink = `${config.backendApiEntryPoint}finish-voting/`;
+          requestOptions = {
+            method: "POST",
+            headers: {
+              accept: "application/json",
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify({
+              voting_id: requestJson.data[0].voting_id
+            })
+          };
+          request = await fetch(requestLink, requestOptions);
+          requestJson = await request.json();
+          console.log(requestJson);
+          
+          requestLink = `${config.backendApiEntryPoint}finish-voting/`;
+          requestOptions = {
+            method: "POST",
+            headers: {
+              accept: "application/json",
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify({
+              voting_id: this.voting.id
+            })
+          };
+          request = await fetch(requestLink, requestOptions);
+          requestJson = await request.json();
+          console.log(requestJson);
+          // location.reload();
+        }        
         else {
           await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack',false)
