@@ -216,7 +216,9 @@ export default {
         console.log(requestJson.data[0].voting_id);
         if (requestJson.success) {    
           if (parseInt((requestJson.data[0].voting_percentage.replace('%', ''))) >= 51) {
+            console.log('ВИКЛИКАЮ finish-voting !!!!!');
             requestLink = `${config.backendApiEntryPoint}finish-voting/`;
+            console.log(requestLink);
             requestOptions = {
               method: "POST",
               headers: {
@@ -228,11 +230,12 @@ export default {
                 voting_id: requestJson.data[0].voting_id
               })
             };
+            console.log(requestOptions);
             request = await fetch(requestLink, requestOptions);
             requestJson = await request.json();
             console.log(requestJson);
           }
-          location.reload();
+          // location.reload();
         }        
         else {
           await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
