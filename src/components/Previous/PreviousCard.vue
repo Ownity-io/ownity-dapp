@@ -50,6 +50,7 @@
         <div class="data-tr">
           <div class="prev-card-status green">
             Live
+            <!-- Live / Scheduled / Сompleted / Canceled -->
           </div>
           <div class="prev-card-contributors">
             Members: 23
