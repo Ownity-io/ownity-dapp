@@ -29,7 +29,7 @@
                                 </a>
                             </li>
                             <li v-else >
-                                <router-link :to="{name: 'Main'}">
+                                <router-link :to="{ name: 'Main', params: { scrollTo: 'collections' } }">
                                     <span>{{translatesGet('COLLECTIONS')}}</span>
                                     <span>{{translatesGet('COLLECTIONS')}}</span>
                                 </router-link>
