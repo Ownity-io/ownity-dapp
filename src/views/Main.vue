@@ -200,6 +200,13 @@ export default {
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
     }
+    // if (this.$route.params.scrollTo === "collections") {
+    //     const collectionsSection = document.querySelector("#screen-collections");
+    //     setTimeout(() => {
+    //         collectionsSection.scrollIntoView({ behavior: "smooth" });
+    //     }, 300);
+    // }
+
     this.playText = true;
     this.readyToShow = true;
     await this.fetchAndSetNftCollections();

@@ -9,6 +9,12 @@ const routes = [
         path: '/',
         name: 'Index',
         component: Index,
+        beforeEnter() {
+            window.scrollTo({
+                top: 0,
+                behavior: "instant",
+            });
+        },
         children: [
     {
         path: '',
@@ -19,7 +25,7 @@ const routes = [
     {
         path: '/marketplace',
         component: Marketplace,
-
+        
         children: [
             {
                 path: '',
@@ -79,6 +85,12 @@ const routes = [
         name: 'Previous',
         path: '/previous',
         component: () => import('@/views/Previous.vue'),  
+        beforeEnter() {
+            window.scrollTo({
+                top: 0,
+                behavior: "instant",
+            });
+        },
     }
 ]
 
