@@ -357,12 +357,12 @@
          <div class="container-btn-part container-btn-part-row" v-if="this.voting & userBidAmount>0">
           <div class="card-col">            
             <div class="deposit-label">
-                  <div class="label-col">
-                    <div class="icon-label" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></div>
-                    <b>{{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount),4),1)}} ETH</b>
-                    <div>{{translatesGet('PROGRESS')}}: {{toFixedIfNecessary((this.voting.users.length/this.item.bids.length)*100,1)}}%</div>
-                  </div>
-                </div>
+              <div class="label-col">
+                <div class="icon-label" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></div>
+                <b>{{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount),4),1)}} ETH</b>
+                <div>{{translatesGet('PROGRESS')}}: {{toFixedIfNecessary((this.voting.users.length/this.item.bids.length)*100,1)}}%</div>
+              </div>
+            </div>
           </div>
           <div class="card-col">
             <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="btn" v-if="userVoted">{{translatesGet('CONFIRM')}}</a>
@@ -370,9 +370,16 @@
         </div> 
 
         <div class="deposit-label" v-if="this.item.internal_status=='ON SALE' & this.voting!=null">
-          <i class="i-shopping-bag-line"></i>
-          {{translatesGet('ON_SALE')}}: <div class="marketplace"> <span class="icon-market" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></span> {{this.voting.marketplace.name}}</div>
+          <div>
+            <i class="i-shopping-bag-line"></i>
+            {{translatesGet('ON_SALE')}}: 
+          </div>
+          <div class="marketplace"> 
+            <span class="icon-market" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></span> 
+            {{this.voting.marketplace.name}}
+          </div>
         </div>
+
         <div class="deposit-value" v-if="this.item.internal_status=='ON SALE' & this.voting!=null">
           <div class="icon-token eth"></div>
           <span><b>{{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount),4),2)}} ETH</b></span>

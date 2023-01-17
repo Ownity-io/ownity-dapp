@@ -28,7 +28,10 @@
         gap: 16px
     }
     .container-btn-part{
-        gap: 12px;
+        column-gap: 10px;
+    }
+    .card-data .btn-container .container-btn-part .btn{
+        padding: 11px;
     }
     .card-main, .card-data{
         padding: 12px;
@@ -37,6 +40,10 @@
         max-width: 400px;
     }
 
+
+    .deposit-value{
+        font-size: 18px;
+    }
     .thead .td,
     .tr .td {
         padding: 16px 0;

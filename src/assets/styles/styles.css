@@ -1606,6 +1606,10 @@ ul.tabs {
     margin-top: auto;
 }
 
+.card-data .btn-container .deposit-value{
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
 .card-id,
 .btn-vote,
 .footer-form .btn-subscribe,
@@ -2566,6 +2570,9 @@ a.td-wrap-link span {
     padding: 24px 0;
 }
 
+.section-members.section-unfolded .tabs-wrap{
+    margin-top: 24px;
+}
 .section-deposit-btns {
     display: flex;
     align-items: center;
@@ -3398,6 +3405,8 @@ a.td-wrap-link span {
     padding: 0;
     background: none;
     min-height: auto;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .marketplace {
@@ -3410,6 +3419,7 @@ a.td-wrap-link span {
     border: 1px solid #DFE2EA;
     border-radius: 100%;
     overflow: hidden;
+    margin: 0;
     margin-right: 4px;
     width: 20px;
     min-width: 20px;
@@ -3418,6 +3428,10 @@ a.td-wrap-link span {
 
 .deposit-label .marketplace {
     margin-left: 8px;
+}
+.card
+.deposit-label .marketplace {
+    margin-left: 0;
 }
 
 .card .deposit-label i,

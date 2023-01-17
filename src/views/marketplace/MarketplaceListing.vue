@@ -254,7 +254,8 @@
               <button class="btn-collapse" @click="collapseMembers = !collapseMembers">
                 <div class="members-row">
                   <i class="i-account-circle-line"></i>
-                  {{translatesGet('MEMBERS')}}: <span>{{this.item.bids.length}}</span>
+                  {{translatesGet('MEMBERS')}}: 
+                  <span>{{this.item.bids.length}}</span>
                 </div>
                 <i class="i-arrow-down-s-line"></i>
               </button>

@@ -96,7 +96,7 @@
             <div class="container">
                 <div class="footer-section">
                     <div class="footer-part footer-service-links">
-                        <span class="copyright">&#169; Quant 2022 - 2023 | All rights reserved.</span>
+                        <span class="copyright">&#169; Ownity 2022 - 2023 | All rights reserved.</span>
                         <router-link :to="{name: 'TermsOfUse'}">
                             <span>{{translatesGet('TERMS_OF_USE')}}</span>
                         </router-link>

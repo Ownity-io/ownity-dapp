@@ -9,7 +9,7 @@
 
       <section class="section-header">
         <div class="container">
-          <h1 class="section-name-h1">{{translatesGet('PRIVACY_POLICY')}}</h1>
+          <h1 class="section-name-h1">{{translatesGet('PRIVACY_POLICY2')}}</h1>
           <!-- <h3 class="section-name-h3">Frequently Asked Question</h3> -->
         </div>
       </section>

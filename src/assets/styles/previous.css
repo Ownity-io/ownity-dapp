@@ -359,7 +359,7 @@ body.previous-page a.collection-id:hover span {
     border: 1px solid #363944;
     box-shadow: 4px 4px 20px rgba(129, 136, 153, 0.1);
     border-radius: 8px;
-    min-width: calc((100% - 24px) / 4);
+    min-width: calc(100% / 4 - 24px);
 }
 
 .card-prev-amount {
