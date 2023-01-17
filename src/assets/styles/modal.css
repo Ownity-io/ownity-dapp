@@ -476,6 +476,10 @@ input+.input-equivalent {
     margin-left: 4px;
 }
 
+.card .deposit-label span.icon-market{
+    margin-left: 0;
+}
+
 .modal-section-amount .token-value {
     font-weight: 700;
     font-size: 24px;
