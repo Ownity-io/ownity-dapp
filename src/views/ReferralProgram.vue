@@ -1,0 +1,129 @@
+<template>
+    <div class="page-wrapper page-referral">
+        <main>
+            <section class="section-referral-main">
+                <div class="container">
+                    <div class="section-breadcrumbs">
+                        <Breadcrumbs />
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="referral-main-container">
+
+                        <div class="referral-main-block">
+                       
+                            <div class="section-header">
+                                    <h1 class="section-name-h1">Invite friends and earn</h1>
+                                    <h3 class="section-name-h3">
+                                        Recommend Ownity to a friend and you will both receive a balance bonus. The more friends you invite, the more bonuses you will receive!
+                                    </h3>
+                                    <a class="section-name-link">
+                                        <span>View referral rules</span>
+                                        <i class="i-arrow-right-s-line"></i>
+                                    </a>
+                            </div>
+
+                        </div>
+
+                        <div class="referral-main-block">
+
+                            <div class="referrals-main-data">
+                                <div class="referrals-main-data-header">
+                                    <div class="title">
+                                        My referrals date
+                                    </div>
+                                    
+                                    <!-- Flow 1  -->
+                                    <div class="main-data-add">
+                                        <a href="">Add your referral code</a>
+                                    </div>
+                                    
+                                    <!-- Flow 2  -->
+                                    <div class="main-data-referral-from">
+                                        <div class="sub-title">You are referral from:</div>
+                                        <a href="">
+                                            <span>0xBC4C…f13D</span>
+                                            <i class="i-external-link-line"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            
+                                <div class="container-input">
+                                    <div class="input-header">
+                                        <div>Referral ID</div>
+                                    </div>
+                                    <div class="input-wrapper input-wrapper-copy">
+                                        <input disabled type="text" 
+                                        value="CPA_00MR6Q9IA5"
+                                        placeholder="Example: Alex">
+                                        <button class="btn-copy">
+                                            <i class="i-checkbox-multiple-blank-line"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="container-input">
+                                    <div class="input-header">
+                                        <div>Referral Link</div>
+                                    </div>
+                                    <div class="input-wrapper input-wrapper-copy">
+                                        <input disabled type="text" 
+                                        value="https://biswap.org/?ref=CPA_00MR6Q9IA5"
+                                        placeholder="Example: Alex">
+                                        <button class="btn-copy">
+                                            <i class="i-checkbox-multiple-blank-line"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="sections-referral-other-wrap">
+                <section class="section-referral-other">
+                    <div class="container">
+                        <div class="section-referral-name">
+                            Dashboard
+                        </div>
+                        <div class="referral-dashboard">
+                            <div class="referral-dashboard-card">
+                                <div class="dashboard-card-wrap">
+                                    <div class="dashboard-card-title">
+                                        All/Active Referrals
+                                    </div>
+                                </div>
+                                <div class="dashboard-card-ui">
+                                    <img src="" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="section-referral-other">
+                    <div class="container">
+                        <div class="section-referral-name">
+                            My referrals
+                        </div>
+
+                    </div>
+
+                </section>
+            </div>
+        </main>
+    </div>
+</template>
+
+<script>
+
+import Breadcrumbs from "@/components/Breadcrumbs.vue";
+
+export default {
+    
+
+    components:{
+        Breadcrumbs,
+    }
+}
+
+</script>

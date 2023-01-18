@@ -57,6 +57,14 @@ header+.page-wrapper {
     padding-bottom: 100px;
 }
 
+.page-wrapper.page-referral main {
+    padding-top: 0;
+}
+
+.page-wrapper.page-referral .section-referral-main {
+    padding-top: 40px;
+}
+
 main>section {
     display: flex;
     flex-direction: column;
@@ -284,6 +292,7 @@ main>section {
     padding: 0 12px;
     min-width: 184px;
 }
+
 .mobile-menu-main-btn .btn-container .btn.btn-address .icon-address,
 .header-nav .btn-container .btn.btn-address .icon-address {
     width: 32px;
@@ -488,10 +497,11 @@ footer::after {
     color: #333333;
 }
 
-.tabs-wrap{
+.tabs-wrap {
     width: 100%;
     overflow: hidden;
 }
+
 ul.tabs {
     display: flex;
     justify-content: flex-start;
@@ -502,6 +512,7 @@ ul.tabs {
     border-bottom: 1px solid #DFE2EA;
     width: 100%;
 }
+
 .tabs-wrap .tabs,
 .section-listing-tabs .tabs,
 .section-tabs .container .tabs {
@@ -1606,10 +1617,11 @@ ul.tabs {
     margin-top: auto;
 }
 
-.card-data .btn-container .deposit-value{
+.card-data .btn-container .deposit-value {
     margin-top: 24px;
     flex-wrap: wrap;
 }
+
 .card-id,
 .btn-vote,
 .footer-form .btn-subscribe,
@@ -1914,6 +1926,10 @@ ul.tabs {
     display: flex;
     flex-grow: 1;
     flex-direction: column;
+}
+
+.container-input+.container-input {
+    margin-top: 24px;
 }
 
 .container-enter-price .container-input {
@@ -2297,6 +2313,7 @@ a.td-wrap-link span {
 } */
 
 .section-home-name,
+.section-referral-name,
 .header-title-btn .title {
     font-weight: 700;
     font-size: 24px;
@@ -2570,9 +2587,10 @@ a.td-wrap-link span {
     padding: 24px 0;
 }
 
-.section-members.section-unfolded .tabs-wrap{
+.section-members.section-unfolded .tabs-wrap {
     margin-top: 24px;
 }
+
 .section-deposit-btns {
     display: flex;
     align-items: center;
@@ -3091,8 +3109,25 @@ a.td-wrap-link span {
 }
 
 .input-wrapper-form input,
+.input-wrapper-copy input,
 .input-wrapper-form textarea {
     padding: 12px 16px;
+}
+
+.input-wrapper-copy .btn-copy {
+    /* padding: 12px 16px 12px 0; */
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #818899;
+}
+
+.input-wrapper-copy {
+    padding-right: calc(24px + 16px);
+    position: relative;
+    background-color: #ffffff;
 }
 
 .container-input-textarea {
@@ -3429,8 +3464,8 @@ a.td-wrap-link span {
 .deposit-label .marketplace {
     margin-left: 8px;
 }
-.card
-.deposit-label .marketplace {
+
+.card .deposit-label .marketplace {
     margin-left: 0;
 }
 
@@ -3441,4 +3476,122 @@ a.td-wrap-link span {
     width: 20px;
     min-width: 20px;
     height: 20px;
+}
+
+.referrals-main-data {
+    background: #FFFFFF;
+    padding: 40px;
+    box-shadow: 4px 4px 20px rgba(129, 136, 153, 0.1);
+    border-radius: 8px;
+}
+
+.referrals-main-data-header {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.referrals-main-data-header .title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.section-name-link span,
+.main-data-add button,
+.main-data-add a {
+    width: fit-content;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    text-decoration-line: underline;
+    color: #333333;
+}
+
+.main-data-add button,
+.main-data-add a {
+    text-align: right;
+}
+
+.section-name-link {
+    padding-right: 24px;
+    position: relative;
+}
+
+.section-name-link i {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #818899;
+}
+
+.referral-main-block .section-name-link {
+    margin-top: 24px;
+}
+
+.section-referral-main {
+    padding-bottom: 104px;
+}
+
+.section-referral-main {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(../images/reff_bg.png);
+
+    gap: 24px;
+}
+
+
+.section-referral-main .section-name-h3{
+    max-width: 600px;
+}
+
+.main-data-referral-from{
+    display: flex;
+    text-align: right;
+    justify-content: flex-start;
+    align-items: flex-end;
+    flex-direction: column;
+}
+.main-data-referral-from i{
+    color: #818899;
+    font-size: 24px;
+
+}
+.main-data-referral-from a{
+    padding-right: calc(24px +  4px);
+    position: relative;
+    text-align: right;
+}
+.main-data-referral-from a i{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #818899;
+}
+
+.main-data-referral-from .sub-title{
+    
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    /* or 21px */
+    
+    display: flex;
+    align-items: center;
+    text-align: right;
+    
+    color: #9A9A9A;
+}
+
+.section-referral-other{
+    padding-top: 150px;
 }
