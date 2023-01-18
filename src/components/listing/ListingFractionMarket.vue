@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="td"> 
-                  {{toFixedIfNecessary((element.fraction_amount/item.price)*100,0)}}%
+                  {{toFixedIfNecessary((element.fraction_amount/10**18))}}%
                 </div>
                 <div class=" td td-button">
                     <button class="btn btn-td btn-buy" v-if="userAddress != element.address" @click="showBuyModal(element)">{{translatesGet('BUY')}}</button>
