@@ -553,6 +553,7 @@
 
     .filter-mobile-wrap .filter {
         max-width: 100%;
+        width: 100%;
         padding: 8px 16px;
         display: block;
         max-height: calc(100% - 72px);
