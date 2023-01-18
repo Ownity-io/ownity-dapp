@@ -16,68 +16,68 @@ const routes = [
             });
         },
         children: [
-    {
-        path: '',
-        name: 'Main',
-        component: Main,
-        // redirect: "/marketplace",
-    },
-    {
-        path: '/marketplace',
-        component: Marketplace,
-        
-        children: [
+
             {
                 path: '',
-                name: 'Marketplace',
-                component: () => import('@/views/marketplace/MarketplaceMain.vue'),
+                name: 'Main',
+                component: Main,
             },
             {
-                path: '/listing/:contract_address/:tokenID&:id',
-                name: 'Listing',
-                component: () => import('@/views/marketplace/MarketplaceListing.vue'),
+                path: '/referral_program',
+                name: 'ReferralProgram',
+                component: () => import('@/views/ReferralProgram.vue'),
             },
             {
-                path: '/collection/:contract_address',
-                name: 'Collection',
-                component: () => import('@/views/marketplace/MarketplaceCollections.vue'),
+                path: '/marketplace',
+                component: Marketplace,
+                
+                children: [
+                    {
+                        path: '',
+                        name: 'Marketplace',
+                        component: () => import('@/views/marketplace/MarketplaceMain.vue'),
+                    },
+                    {
+                        path: '/listing/:contract_address/:tokenID&:id',
+                        name: 'Listing',
+                        component: () => import('@/views/marketplace/MarketplaceListing.vue'),
+                    },
+                    {
+                        path: '/collection/:contract_address',
+                        name: 'Collection',
+                        component: () => import('@/views/marketplace/MarketplaceCollections.vue'),
+                    }
+                ]
+                // component:  () => {
+                    // ('@/views/MarketplaceMain.vue')
+                    // if (localStorage.userInfo) {
+                    //     return import('@/views/Cabinet.vue')
+                    // } else {
+                    //     return import('@/views/error/Error404.vue')
+                    // }
+                // },
             },
-            // {
-            //     path: '',
-            //     name: 'Marketplace',
-            //     component: () => import('@/views/marketplace/MarketplaceMain.vue'),
-            // },
-        ]
-        // component:  () => {
-            // ('@/views/MarketplaceMain.vue')
-            // if (localStorage.userInfo) {
-            //     return import('@/views/Cabinet.vue')
-            // } else {
-            //     return import('@/views/error/Error404.vue')
-            // }
-        // },
-    },
-    {
-        path: '/profile',
-        component: Profile,
-        name:'Profile'
-        
-    },
-    {
-        name: 'Serve',
-        path: '/serve',
-        component: () => import('@/views/services/Serve.vue'),     
-    },
-    {
-        name: 'TermsOfUse',
-        path: '/terms_of_use',
-        component: () => import('@/views/services/TermsOfUse.vue'),  
-    },
-    {
-        name: 'PrivacyPolicy',
-        path: '/privacy_policy',
-        component: () => import('@/views/services/PrivacyPolicy.vue'),  
-    },
+            {
+                path: '/profile',
+                component: Profile,
+                name:'Profile'
+                
+            },
+            {
+                name: 'Serve',
+                path: '/serve',
+                component: () => import('@/views/services/Serve.vue'),     
+            },
+            {
+                name: 'TermsOfUse',
+                path: '/terms_of_use',
+                component: () => import('@/views/services/TermsOfUse.vue'),  
+            },
+            {
+                name: 'PrivacyPolicy',
+                path: '/privacy_policy',
+                component: () => import('@/views/services/PrivacyPolicy.vue'),  
+            },
 
         ]
     },

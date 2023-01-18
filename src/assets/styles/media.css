@@ -443,6 +443,14 @@
         padding-bottom: 16px;
     }
 
+    .page-wrapper.page-referral main{
+        padding-top: 0;
+    }
+    
+    .page-wrapper.page-referral .section-referral-main{
+        padding-top: 16px;
+    }
+
     .breadcrumbs {
         margin-bottom: 24px;
     }
