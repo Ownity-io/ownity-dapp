@@ -87,16 +87,85 @@
                             Dashboard
                         </div>
                         <div class="referral-dashboard">
+
+                            <!-- 1 -->
                             <div class="referral-dashboard-card">
                                 <div class="dashboard-card-wrap">
                                     <div class="dashboard-card-title">
                                         All/Active Referrals
                                     </div>
+                                    <div class="dashboard-card-data-wrap">
+                                        <div class="dashboard-card-data">
+                                            <div class="dashboard-data-title">
+                                                All referral
+                                            </div>
+                                            <div>12 ref</div>
+                                        </div>
+                                        <div class="dashboard-card-data">
+                                            <div class="dashboard-data-title">
+                                                Active referral
+                                            </div>
+                                            <div>5 ref</div>
+                                        </div>
+                                    </div>
+
+                                    <button class="btn btn-dashboard">
+                                        <span>Invite friends</span>
+                                    </button>
                                 </div>
                                 <div class="dashboard-card-ui">
-                                    <img src="" alt="">
+                                    <img src="../assets/images/referral/dashboard-1.png"/>
                                 </div>
                             </div>
+
+                            <!-- 2 -->
+                            <div class="referral-dashboard-card">
+                                <div class="dashboard-card-wrap">
+                                    <div class="dashboard-card-title">
+                                        Points received
+                                    </div>
+                                    <div class="dashboard-card-data-wrap">
+                                        <div class="dashboard-card-data">
+                                            <div class="dashboard-data-title">
+                                                Points
+                                            </div>
+                                            <div>88 pnt</div>
+                                        </div>
+                                    </div>
+
+                                    <button class="btn btn-dashboard">
+                                        <span>Claim</span>
+                                    </button>
+                                </div>
+                                <div class="dashboard-card-ui">
+                                    <img src="../assets/images/referral/dashboard-2.png"/>
+                                </div>
+                            </div>
+
+                            <!-- 3 -->
+                            <div class="referral-dashboard-card">
+                                <div class="dashboard-card-wrap">
+                                    <div class="dashboard-card-title">
+                                        Points claimed
+                                    </div>
+                                    <div class="dashboard-card-data-wrap">
+                                        <div class="dashboard-card-data">
+                                            <div class="dashboard-data-title">
+                                                Points
+                                            </div>
+                                            <div>120 pnt</div>
+                                        </div>
+                                    </div>
+
+                                    <button class="btn btn-dashboard">
+                                        <span>Mint NFT</span>
+                                    </button>
+                                </div>
+                                <div class="dashboard-card-ui">
+                                    <img src="../assets/images/referral/dashboard-3.png"/>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </section>
