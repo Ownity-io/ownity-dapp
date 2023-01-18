@@ -185,7 +185,20 @@
                         </div>
                         <!-- flow if list isn`t empty -->
                         <div class="referrals-list">
-                            
+                            <div class="table table-referrals">
+                                <div class="thead">
+                                    <div class="td td-name"><span>Id/Name</span></div>
+                                    <div class="td td-price">Points</div>
+                                    <div class="td">Status</div>
+                                </div>
+                                    
+                                <div class="tr" >
+                                    <div class="td td-name"><span>0x4Eb4…53C7</span></div>
+                                    <div class="td td-price">15 pnt</div>
+                                    <div class="td">Active</div>
+                                    
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -237,12 +250,22 @@
 <script>
 
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
+import MultiLang from "@/core/multilang";
 
 export default {
     
-
+    data(){
+        return{
+            lang: new MultiLang(this),
+        }
+    },
     components:{
         Breadcrumbs,
+    },
+    methods:{
+        translatesGet(key) {
+        return this.lang.get(key);
+        },
     }
 }
 

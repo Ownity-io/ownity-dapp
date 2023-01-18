@@ -10,6 +10,8 @@
 
 @media (min-width: 1440.5px) {
 
+    .table-referrals .thead .td.td-price,
+    .table-referrals .tr .td.td-price,
     .table-activity .thead .td.td-price,
     .table-activity .tr .td.td-price,
     .table-activities .thead .td.td-price,
@@ -21,32 +23,45 @@
 
 @media (max-width: 1440.5px) {
 
-    .filter{
+    .filter {
         width: 248px;
     }
-    .section-nft.with-filter{
+
+    .section-nft.with-filter {
         gap: 16px
     }
-    .container-btn-part{
+
+    .container-btn-part {
         column-gap: 10px;
     }
-    .card-data .btn-container .container-btn-part .btn{
+
+    .card-data .btn-container .container-btn-part .btn {
         padding: 11px;
     }
-    .card-main, .card-data{
+
+    .card-main,
+    .card-data {
         padding: 12px;
     }
+
     .header-search {
         max-width: 400px;
     }
 
 
-    .deposit-value{
+    .deposit-value {
         font-size: 18px;
     }
+
     .thead .td,
     .tr .td {
         padding: 16px 0;
+    }
+
+
+    .table-referrals .thead .td,
+    .table-referrals .tr .td {
+        padding: 16px;
     }
 
     /* .card-listing {
@@ -256,9 +271,11 @@
     .drop-down-mobile {
         display: flex;
     }
-    .cards-list-empty{
+
+    .cards-list-empty {
         min-height: 300px;
     }
+
     /* ----------- LISTING PAGE ----------- */
 
     .listing-main,
@@ -395,7 +412,8 @@
         position: relative;
         max-height: 240px;
     }
-    .chart-wrap #chart{
+
+    .chart-wrap #chart {
         max-width: 240px;
         margin-left: auto;
         margin-right: auto;
@@ -448,11 +466,11 @@
         padding-bottom: 16px;
     }
 
-    .page-wrapper.page-referral main{
+    .page-wrapper.page-referral main {
         padding-top: 0;
     }
-    
-    .page-wrapper.page-referral .section-referral-main{
+
+    .page-wrapper.page-referral .section-referral-main {
         padding-top: 16px;
     }
 
@@ -924,6 +942,84 @@
         min-width: fit-content;
         width: 100%;
         margin-top: 40px;
+    }
+
+    .referral-main-container{
+        flex-direction: column;
+        gap: 24px;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .referral-main-block{
+        width: 100%;
+    }
+
+    .section-referral-main{
+        padding-bottom: 66px;
+        gap: 0;
+    }
+
+    .section-referral-other{
+        padding-top: 100px;
+    }
+
+    .section-referral-other:first-child{
+        padding-top: 84px;
+    }
+
+    .dashboard-card-wrap{
+        padding: 24px;
+        row-gap: 16px;
+    }
+
+    .referral-dashboard-card{
+        width: 100%;
+    }
+
+    .referrals-main-data{
+        padding: 24px;
+        width: 100%;
+        min-width: fit-content;
+    }
+
+    .referrals-main-data-header{
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .how-work-container{
+        flex-direction: column;
+    }
+
+    .how-work-arrow{
+        transform: rotate(90deg);
+        width: 88px;
+        height: 88px;
+        margin: 0;
+    }
+
+    .table-referrals .thead .td,
+    .table-referrals .tr .td{
+        font-size: 14px;
+    }
+    .table-referrals .tr .td:not(.td-name){
+        font-size: 12px;
+    }
+    .how-work-arrow.arrow-up{
+        transform: rotate(90deg) scaleY(-1);
+    }
+    .dashboard-card-data{
+        min-width: fit-content;
+    }
+    .dashboard-card-ui{
+        display: none;
+    }
+    .referrals-list-empty{
+        padding-top: 36px;
+    }
+    .how-work-container{
+        padding-bottom: 32px;
     }
 }
 
