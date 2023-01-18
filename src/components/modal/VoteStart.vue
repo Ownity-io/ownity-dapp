@@ -33,7 +33,7 @@
                     </div>
                   </div>
                   <div class="input-wrapper input-wrapper-amount">
-                    <input type="text" placeholder="Input amount" v-model="amount"  @input="setSellLotFee" onkeypress="return (event.charCode >= 48 && event.charCode <=57 || event.charCode == 46 || event.charCode == 44 || this.amount=='')">
+                    <input type="text" placeholder="Input amount" v-model="amount"  @input="setSellLotFee" onkeypress="return (event.charCode >= 48 && event.charCode <=57 || event.charCode == 46 || event.charCode == 44 || this.amount=='')" :disabled="blockPrice">
                     <div class="input-equivalent equivalent" v-if="amount>0">≈ $ {{abbrNum(Math.round(amount * currencyToUsdPrice),1)}}</div>
                   </div>
                   <div class="input-prompt">{{translatesGet('ITEM_UNTIL_VOTE')}}</div>
@@ -152,7 +152,9 @@ export default {
       buttonWaiting:false,
       lang: new MultiLang(this),
       contractConfig:null,
-      sellLotFee:0
+      sellLotFee:0,
+      votings:[],
+      blockPrice:false
     };
   },
   async mounted(){    
@@ -175,6 +177,7 @@ export default {
     // }
     this.marketplaces = marketplacesTemp;
     this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
+    this.setMaxVoting();
     this.render = true;
     await this.setCurrencyToUsd();    
   },
@@ -453,7 +456,23 @@ export default {
         console.log(element)
       }
       console.log('##################################');
-    }
+    },
+    setMaxVoting(){ 
+      console.log('e');
+      if (this.item.votings){
+        console.log('d');
+        for (let element of this.item.votings){
+          console.log('v');
+            if (element.status=='ON SALE'||element.status=='FULFILLED') {
+              console.log('r');
+              this.voting = element;
+              this.votings.push(element);
+              this.blockPrice = true;   
+              this.amount =  this.abbrNum(this.toFixedIfNecessary(this.convertToEther(this.voting.amount),6),2);        
+            }
+        }
+      }
+    },
   }
 };
 </script>
