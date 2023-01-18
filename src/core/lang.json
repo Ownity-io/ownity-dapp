@@ -13,7 +13,7 @@
 
         "CLAIM_REWARD":"Collect Funds",
         "DEPOSIT_PART":"Buy Fraction",
-        "BUY_TOGETHER":"Fractionalize",
+        "BUY_TOGETHER":"Buy Together",
         "VOTE":"Vote",
         "VOTES":"Votes",
         "TAKE_VOTE":"Take Vote",
@@ -34,7 +34,7 @@
         "SEARCH_PLACEHOLDER":"Search by NFT, Collection, or ID",
 
         "---------COMMON------------": "",
-        "CONNECT_WALLET":"Log In",
+        "CONNECT_WALLET":"Launch ",
         "MARKETPLACE":"Marketplace",
         "COLLECTIONS":"Collections",
         "RESOURCES":"Resources",

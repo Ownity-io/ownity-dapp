@@ -216,6 +216,7 @@
     .collection .collection-id.collection-label i.i-checkbox-circle-fill {
         top: 0;
         position: relative;
+        transform: unset;
     }
 
     .section-collection .collection-statistics {
@@ -324,6 +325,10 @@
         height: 24px;
         min-width: 24px;
         min-height: 24px;
+    }
+
+    .section-deposit-data .deposit-value span {
+        font-size: 18px;
     }
 
     .deposit-listened,
