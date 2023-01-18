@@ -48,8 +48,7 @@
               <ul class="filter-ul">
                 <li class="filter-li" v-for="marketplace in this.marketplaces" :key="marketplace">
                   <div class="input-checkbox">
-                    <input type="checkbox" :id="marketplace.id" @change="setMarketplace(marketplace.id)"/>
-                    <!-- <input type="checkbox" :id="marketplace.id" v-model="checkedMarketplace" :true-value="marketplace.id" :false-value="null"/> -->
+                    <input type="checkbox" :id="marketplace.id" @change="setMarketplace(marketplace.id)" :disabled="checkMarketplaceInMarketplacesId(marketplace.id)" :checked="checkMarketplaceInMarketplacesId(marketplace.id)">
                     <label :for="marketplace.id">
                       <div class="icon-filter-checkbox" :style="{backgroundImage: `url(${marketplace.logo})`}"></div>
                       <span>{{marketplace.name}}</span>
@@ -153,7 +152,7 @@ export default {
       lang: new MultiLang(this),
       contractConfig:null,
       sellLotFee:0,
-      votings:[],
+      markeplacesId:[],
       blockPrice:false
     };
   },
@@ -466,13 +465,27 @@ export default {
             if (element.status=='ON SALE'||element.status=='FULFILLED') {
               console.log('r');
               this.voting = element;
-              this.votings.push(element);
+              this.markeplacesId.push(element.marketplace.id);
               this.blockPrice = true;   
               this.amount =  this.abbrNum(this.toFixedIfNecessary(this.convertToEther(this.voting.amount),6),2);        
             }
         }
       }
     },
+    checkMarketplaceInMarketplacesId(id){
+      console.log('AAAAAAA');
+      console.log(this.markeplacesId);
+      
+      for (let element of this.markeplacesId){
+        console.log(id);
+        console.log(element);
+        if (id == element){
+          
+          return true;
+        }
+      }
+      return false;
+    }
   }
 };
 </script>
