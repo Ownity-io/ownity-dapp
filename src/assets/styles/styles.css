@@ -3637,7 +3637,8 @@ a.td-wrap-link span {
     row-gap: 24px;
 }
 
-.dashboard-card-wrap .btn-dashboard {
+.dashboard-card-wrap .btn-dashboard,
+.referrals-list-empty .btn-dashboard {
     min-width: 184px;
 }
 
@@ -3672,6 +3673,7 @@ a.td-wrap-link span {
     display: flex;
     justify-content: flex-start;
     gap: 24px;
+    flex-wrap: wrap;
 }
 
 .dashboard-card-data {
@@ -3726,7 +3728,7 @@ a.td-wrap-link span {
     margin-bottom: 20px;
 }
 
-.how-work-arrow.arrow-up{
+.how-work-arrow.arrow-up {
     transform: scaleY(-1);
 }
 
@@ -3739,8 +3741,8 @@ a.td-wrap-link span {
     border: 1px solid #DFE2EA;
     margin-bottom: 16px;
     font-weight: 700;
-font-size: 48px;
-line-height: 150%;
+    font-size: 48px;
+    line-height: 150%;
 }
 
 .how-work-card-number span {
@@ -3758,4 +3760,24 @@ line-height: 150%;
 
 .how-work-card p {
     max-width: 227px;
+}
+
+.referrals-list-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #000000;
+}
+
+.referrals-list-empty i.i-account-circle-line {
+    font-size: 48px;
+    color: #818899;
+}
+.referrals-list-empty p{
+    margin-bottom: 24px;
 }

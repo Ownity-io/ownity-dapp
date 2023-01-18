@@ -175,6 +175,19 @@
                             My referrals
                         </div>
 
+                        <!-- flow if list is empty -->
+                        <div class="referrals-list-empty">
+                            <i class="i-account-circle-line"></i>
+                            <p>No referrals</p>
+                            <button class="btn btn-dashboard">
+                                <span>Invite friends</span>
+                            </button>
+                        </div>
+                        <!-- flow if list isn`t empty -->
+                        <div class="referrals-list">
+                            
+                        </div>
+
                     </div>
 
                 </section>

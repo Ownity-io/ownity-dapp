@@ -88,6 +88,9 @@
     /* gap: 120px; */
     gap: 10.9%;
 }
+.referral-main-container{
+    column-gap: 3%;
+}
 .main-screen-container .section-block {
     flex: 1;
 }
