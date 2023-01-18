@@ -257,7 +257,7 @@ export default {
           console.log(requestJson.length);
           if (requestJson.success) {
             console.log('OK');
-            if (parseInt((requestJson.data[0].voting_percentage.replace('%', ''))) >= 51) {
+            if (parseInt((requestJson.data[0].voting_percentage.replace('%', ''))) >= 51 & this.item.internal_status!='ON SALE') {
               console.log('OK2');
               console.log(requestJson.voting_id);
               try{
