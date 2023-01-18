@@ -48,7 +48,8 @@
               <ul class="filter-ul">
                 <li class="filter-li" v-for="marketplace in this.marketplaces" :key="marketplace">
                   <div class="input-checkbox">
-                    <input type="checkbox" :id="marketplace.id" v-model="checkedMarketplace" :true-value="marketplace.id" :false-value="null"/>
+                    <input type="checkbox" :id="marketplace.id" @change="setMarketplace(marketplace.id)"/>
+                    <!-- <input type="checkbox" :id="marketplace.id" v-model="checkedMarketplace" :true-value="marketplace.id" :false-value="null"/> -->
                     <label :for="marketplace.id">
                       <div class="icon-filter-checkbox" :style="{backgroundImage: `url(${marketplace.logo})`}"></div>
                       <span>{{marketplace.name}}</span>
@@ -78,7 +79,7 @@
 
           <!-- v-if="currentPart "  -->
           <div class="modal-desktop-footer" v-if="!buttonWaiting">
-            <button class="btn btn-modal-main" @click="startVote" v-if="(this.amount>0 & this.checkedMarketplace!=null)">{{translatesGet('START_VOTE')}}</button>
+            <button class="btn btn-modal-main" @click="startVote" v-if="(this.amount>0 & this.checkedMarketplaces.length>0)">{{translatesGet('START_VOTE')}}</button>
             <button disabled class="btn btn-modal-main" v-else>{{translatesGet('START_VOTE')}}</button>
           </div>
 
@@ -104,7 +105,7 @@
             
       <!-- v-if="currentPart "  -->
       <div  class="modal-mobile-footer" v-if="!buttonWaiting">
-        <button class="btn btn-modal-main" @click="startVote" v-if="(this.amount>0 & this.checkedMarketplace!=null)">{{translatesGet('START_VOTE')}}</button>
+        <button class="btn btn-modal-main" @click="startVote" v-if="(this.amount>0 & this.checkedMarketplaces.length>0)">{{translatesGet('START_VOTE')}}</button>
         <button disabled class="btn btn-modal-main" v-else>{{translatesGet('START_VOTE')}}</button>
       </div>
 
@@ -142,7 +143,7 @@ export default {
       item:null,
       marketplaces:null,
       render:false,
-      checkedMarketplace:null,
+      checkedMarketplaces:[],
       amount:null,
       currencyToUsdPrice:1,
       config:config,
@@ -225,7 +226,7 @@ export default {
     },
     async startVote() {
       this.buttonWaiting=true;
-      if (this.amount>0 & this.checkedMarketplace!=null) {
+      if (this.amount>0 & this.checkedMarketplaces.length>0) {
         // try {
           let signed_message = await this.$store.dispatch('walletsAndProvider/signMessageWithGlobalProvider',
             `${this.item.id}-${this.item.currency.address}-${this.noExponents(this.amount * 10 ** this.item.currency.decimals)}-${this.item.end_date}`);
@@ -239,7 +240,7 @@ export default {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
             body: JSON.stringify({
-              "marketplace_id": [this.checkedMarketplace],
+              "marketplace_id": this.checkedMarketplaces,
               "lot_id": this.item.id,
               "currency": this.item.currency.address,
               "amount": this.noExponents(this.amount * 10 ** this.item.currency.decimals),
@@ -249,6 +250,7 @@ export default {
               "blockchain": this.item.collection.blockchain
             })
           };
+          console.log(requestOptions);
           let request = await fetch(requestLink, requestOptions);
           let requestJson = await request.json();
           console.log(requestJson);
@@ -259,7 +261,7 @@ export default {
               console.log('OK2');
               console.log(requestJson.voting_id);
               try{
-                await this.sellLot(requestJson.data[0].voting_id)
+                await this.sellLot(requestJson.data)
               }
               catch{
                 console.log(111)
@@ -309,7 +311,7 @@ export default {
       while (mag--) z += '0';
       return str + z;
     },
-    async sellLot(_voting_Id) {
+    async sellLot(_voting_Ids) {
       try{
       console.log(this.config.contractAddress);
       let prov = toRaw(this.provider);
@@ -328,22 +330,30 @@ export default {
           await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
         }
       }     
-      const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await prov.getSigner());      
-      let requestLink = `${config.backendApiEntryPoint}finish-voting/`;
-      let requestOptions = {
-          method: "POST",
-          headers: {
-            accept: "application/json",
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body:JSON.stringify({
-            voting_id: _voting_Id
-          })
-        };
-      let request = await fetch(requestLink,requestOptions);
-      let requestJson = await request.json();
-      console.log(requestJson);
+      const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await prov.getSigner()); 
+      let requestLink = null;
+      let requestOptions = null;
+      let request =null;
+      let requestJson = null;
+        for (let element of _voting_Ids) {
+          requestLink = `${config.backendApiEntryPoint}finish-voting/`;
+          requestOptions = {
+            method: "POST",
+            headers: {
+              accept: "application/json",
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify({
+              voting_id: element.voting_id
+            })
+          };
+          request = await fetch(requestLink, requestOptions);
+          requestJson = await request.json();
+          console.log('FINISH VOTING');
+          console.log(requestJson);
+
+        }     
       
       let markeplaceId = ethers.utils.formatBytes32String(requestJson.data.marketplace).substring(0, 10);
       console.log(`price:${String(requestJson.data.lot.price)}`);
@@ -415,6 +425,34 @@ export default {
     },
     setSellLotFee(){
       this.sellLotFee = this.noExponents((this.contractConfig[0].sell_lot_fee/100)/100*this.noExponents(this.convertFromEtherToWei(this.amount)));
+    },
+    setMarketplace(markeplaceId){      
+      let existFlag = false;
+      let index = 0;
+      let checkedMarketplacesTemp = this.checkedMarketplaces;
+      for (let element of checkedMarketplacesTemp){
+        if (element == markeplaceId){
+          existFlag = true;
+          checkedMarketplacesTemp.splice(index,1)  
+          console.log('**********');
+          console.log(`-${markeplaceId}-`);  
+          console.log('**********');
+          break
+        }
+        index+=1;
+      }
+      this.checkedMarketplaces = checkedMarketplacesTemp;
+      if (!existFlag){
+        this.checkedMarketplaces.push(markeplaceId);
+        console.log('**********');
+        console.log(`+${markeplaceId}+`);
+        console.log('**********');
+      }
+      console.log('##################################');
+      for (let element of this.checkedMarketplaces){
+        console.log(element)
+      }
+      console.log('##################################');
     }
   }
 };
