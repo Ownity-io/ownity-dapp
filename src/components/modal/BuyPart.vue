@@ -26,7 +26,7 @@
               <div class="modal-data-block">
                 <div class="modal-current-part">
                   <i class="i-coupon-3-line"></i>
-                  {{translatesGet('PART')}}: <span>{{(partOnMarket.fraction_amount/item.price*100)}}%</span>
+                  {{translatesGet('PART')}}: <span>{{(partOnMarket.fraction_amount/10**18)}}%</span>
                 </div>
               </div>
             </div>
