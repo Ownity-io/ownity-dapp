@@ -195,7 +195,8 @@
                   @click="this.$store.dispatch('appGlobal/setshowDepositCancelModal',true)">
                   {{translatesGet('CANCEL')}}
                 </button>
-                <button class="btn btn-deposit" v-if="((item.marketplace_status=='CLOSED')) & item.internal_status=='OWNED' & userAddress!=null & this.userBidAmount>0 & !this.userBidBuyedAll"
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED')) & item.internal_status=='OWNED' & userAddress!=null & this.userBidAmount>0 & !this.userBidBuyedAll)||
+                  (item.internal_status=='ON SALE') & this.onSaleVotingsCount<this.marketplaces.length"
                   @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">
                   {{translatesGet('START_VOTING')}}
                 </button>
@@ -484,7 +485,9 @@ export default {
       voting:null,
       lang: new MultiLang(this),
       isRefreshing:false,
-      bidRewarded:false
+      bidRewarded:false,
+      onSaleVotingsCount:0,
+      marketplaces:null
     };
   },
   components: {
@@ -531,6 +534,10 @@ export default {
         this.bidRewarded=true;
       }
     }
+    let requestUrl = `${config.backendApiEntryPoint}marketplaces/`;
+    let request = await fetch(requestUrl);
+    this.marketplaces = await request.json();
+    console.log(this.marketplaces);
     this.render = true;
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
@@ -684,7 +691,7 @@ export default {
         for (let element of this.itemWithBidsOnSale.votings){
             if (element.status=='ON SALE'||element.status=='FULFILLED') {
               this.voting = element;
-              return
+              this.onSaleVotingsCount+=1;
             }
         }
       }
