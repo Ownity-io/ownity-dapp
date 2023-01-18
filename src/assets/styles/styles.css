@@ -1984,6 +1984,11 @@ ul.tabs {
     border-bottom: 1px solid #DFE2EA;
     gap: 16px;
 }
+.modal-table .table-fraction .thead,
+.modal-table .table-fraction .tr{
+    grid-template-columns: 1.3fr .8fr 1fr;
+    /* gap: 0; */
+}
 
 .table-modal-trans .thead,
 .table-modal-trans .tr {
@@ -2247,6 +2252,8 @@ a.td-wrap-link span {
 .collection-id.collection-label i.i-checkbox-circle-fill {
     position: absolute;
     color: #2F80ED;
+    top: 50%;
+    transform: translateY(-50%);
     right: 0;
     width: 20px;
     height: 20px;
@@ -2629,6 +2636,14 @@ a.td-wrap-link span {
     line-height: 150%;
     color: #9A9A9A;
     margin-bottom: 8px;
+}
+
+.section-deposit-data  .deposit-value span{
+    font-size: 24px;
+}
+
+.section-deposit-data  .deposit-value span.equivalent{
+    font-size: 14px;
 }
 
 .deposit-listened.deposit-listened-link,
@@ -3182,10 +3197,11 @@ a.td-wrap-link span {
     font-size: 16px;
     line-height: 150%;
     color: #9A9A9A;
-    margin-top: 24px;
 }
 
-.votes-wrap-title,
+/* .votes-wrap-title, */
+.active-votes + .inactive-votes,
+.inactive-votes + .active-votes,
 .votes-wrap-title+.block-vote {
     margin-top: 24px;
 }
@@ -3445,6 +3461,10 @@ a.td-wrap-link span {
     gap: 8px;
 }
 
+.btn-container .deposit-label {
+    margin-top: 10px;
+}
+.deposit-label .shopping,
 .marketplace {
     display: flex;
     align-items: center;

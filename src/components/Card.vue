@@ -370,7 +370,7 @@
         </div> 
 
         <div class="deposit-label" v-if="this.item.internal_status=='ON SALE' & this.voting!=null">
-          <div>
+          <div class="shopping">
             <i class="i-shopping-bag-line"></i>
             {{translatesGet('ON_SALE')}}: 
           </div>
