@@ -1133,9 +1133,9 @@ ul.tabs {
     flex-grow: 1;
 }
 
-.section-nft.with-filter .section-nft-filter {
+/* .section-nft.with-filter .section-nft-filter {
     flex-grow: auto;
-}
+} */
 
 .section-nft.with-filter .section-nft-list {
     flex-grow: 4;
@@ -1969,6 +1969,21 @@ ul.tabs {
     grid-template-columns: 1.5fr .75fr 1fr 1fr 1fr;
     border-bottom: 1px solid #DFE2EA;
     gap: 16px;
+}
+.table-referrals .thead,
+.table-referrals .tr {
+    grid-template-columns: 2fr  1fr 1fr;
+    border-bottom: 1px solid #DFE2EA;
+}
+
+.table-referrals .thead td,
+.table-referrals .tr td{
+    padding-left: 16px;
+    padding-right: 16px;
+}
+.table-referrals .thead .td:not(.td-name),
+.table-referrals .tr .td:not(.td-name){
+    text-align: right;
 }
 
 .table-activities .thead,
@@ -3632,6 +3647,7 @@ a.td-wrap-link span {
     justify-content: space-between;
     gap: 24px;
     width: 100%;
+    flex-wrap: wrap;
 }
 
 .referral-dashboard-card {
