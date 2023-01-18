@@ -178,6 +178,44 @@
                     </div>
 
                 </section>
+                <section class="section-referral-other">
+                    <div class="container">
+                        <div class="section-referral-name">
+                            How does the referral program work?
+                        </div>
+
+                        <div class="how-work-container">
+                            <div class="how-work-card">
+                                <div class="how-work-card-number">
+                                    <span>1</span>
+                                </div>
+                                <p>
+                                    A friend registers using your referral link
+                                </p>
+                            </div>
+                            <i class="how-work-arrow arrow-up"></i>
+                            <div class="how-work-card">
+                                <div class="how-work-card-number">
+                                    <span>2</span>
+                                </div>
+                                <p>
+                                    Your friend makes any transaction
+                                </p>
+                            </div>
+                            <i class="how-work-arrow"></i>
+                            <div class="how-work-card">
+                                <div class="how-work-card-number">
+                                    <span>3</span>
+                                </div>
+                                <p>
+                                    You get points for which claiming ours NFT
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </section>
             </div>
         </main>
     </div>
