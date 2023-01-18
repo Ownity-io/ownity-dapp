@@ -59,7 +59,7 @@
                     1%
                     {{translatesGet('TO')}}
                     {{translatesGet('INPUT_MAX')}}
-                    100%
+                    {{this.toFixedIfNecessary((this.item.price-this.allBidsAmount)/this.item.price*100,0)}}%
                     <!-- Min 1% to Max 100% -->
                   </div>
                 </div>
