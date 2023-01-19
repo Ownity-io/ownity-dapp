@@ -3,7 +3,7 @@ import {ethers} from "ethers";
 export default {
     abbrNum(number, decPlaces) {
         decPlaces = Math.pow(10, decPlaces);
-        var abbrev = ["k", "m", "b", "t"];
+        var abbrev = ["k", "M", "b", "t"];
         for (var i = abbrev.length - 1; i >= 0; i--) {
             var size = Math.pow(10, (i + 1) * 3);
             if (size <= number) {

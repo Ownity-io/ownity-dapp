@@ -57,33 +57,33 @@
               <div class="name">{{translatesGet('FLOOR_PRICE')}}</div>
               <div class="token-value">
                 <div class="icon-value"></div>
-                <span>{{abbrNum(toFixedIfNecessary(collection.floor_price,2),0)}} ETH</span>
+                <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(collection.floor_price,2),0)}} ETH</span>
               </div>
             </li>
             <li>
               <div class="name">{{translatesGet('VOLUME_24')}}</div>
               <div class="token-value">
                 <div class="icon-value"></div>
-                <span>{{abbrNum(toFixedIfNecessary(collection.volume_24h,2),0)}} ETH</span>
+                <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(collection.volume_24h,2),0)}} ETH</span>
               </div>
             </li>
             <li>
               <div class="name">{{translatesGet('VOLUME_ALL_TIME')}}</div>
               <div class="token-value">
                 <div class="icon-value"></div>
-                <span>{{abbrNum(toFixedIfNecessary(collection.volume_all,2),0)}} ETH</span>
+                <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(collection.volume_all,2),0)}} ETH</span>
               </div>
             </li>
             <li>
               <div class="name">{{translatesGet('HOLDERS')}}</div>
               <div>
-                <span>{{abbrNum(collection.holders,0)}}</span>
+                <span>{{useHelpers.abbrNum(collection.holders,0)}}</span>
               </div>
             </li>
             <li>
               <div class="name">{{translatesGet('SUPPLY')}}</div>
               <div>
-                <span>{{abbrNum(collection.total_supply,1)}}</span>
+                <span>{{useHelpers.abbrNum(collection.total_supply,1)}}</span>
               </div>
             </li>
             <li>
@@ -187,10 +187,12 @@ import Breadcrumbs from "@/components/Breadcrumbs.vue";
 import SelectedFilters from "@/components/SelectedFilters.vue"; 
 import MultiLang from "@/core/multilang";
 import SortBar from '@/components/SortBar.vue';
+import helpers from "@/helpers/helpers";
 
 export default {
   data() {
     return {
+      useHelpers: helpers,
       switchActive: 0,
       activeTab: 0,
       testOpenSort: false,
@@ -228,23 +230,6 @@ export default {
       let requestJson = await request.json();
       this.collection = requestJson[0];
     },
-    abbrNum(number, decPlaces) {
-      decPlaces = Math.pow(10, decPlaces);
-      var abbrev = ["k", "m", "b", "t"];
-      for (var i = abbrev.length - 1; i >= 0; i--) {
-        var size = Math.pow(10, (i + 1) * 3);
-        if (size <= number) {
-          number = Math.round(number * decPlaces / size) / decPlaces;
-          if ((number == 1000) && (i < abbrev.length - 1)) {
-            number = 1;
-            i++;
-          }
-          number += abbrev[i];
-          break;
-        }
-      }
-      return number;
-    },
     convertToEther(value) {
       try {
         return ethers.utils.formatEther(String(value));
@@ -252,9 +237,6 @@ export default {
       catch {
         console.log('ethers error');
       }
-    },
-    toFixedIfNecessary(value, dp) {
-      return +parseFloat(value).toFixed(dp);
     },
     async initInfo(){
       if (this.activeTab == 1) {
