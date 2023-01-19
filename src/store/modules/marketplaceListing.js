@@ -53,7 +53,7 @@ export default {
         context.commit('setItem',requestJson);
     },
     async getRecomendations(context,_collection_contract_address){
-      let requestUrl = `${config.backendApiEntryPoint}listings/?limit=5&marketplace_status=OPEN&collection=${_collection_contract_address}`;
+      let requestUrl = `${config.backendApiEntryPoint}listings/?limit=5&marketplace_status=OPEN&collection=${_collection_contract_address}&currency=0x0000000000000000000000000000000000000000`;
       let request = await fetch(requestUrl);
       let requestJson = await request.json();
       return requestJson.results;

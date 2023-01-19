@@ -224,7 +224,7 @@ export default {
   actions: {
     //listings
     async fetchAndSetListingsStartInfo(context,_collectionContractAddress = null) {
-      let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.listingsPerPage}`;
+      let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.listingsPerPage}&currency=0x0000000000000000000000000000000000000000`;
       if (_collectionContractAddress==null){
         if (context.getters.getCurrentCollectionContractAddress != null) {
           requestUrl += `&collection=${context.getters.getCurrentCollectionContractAddress}`;
@@ -324,7 +324,7 @@ export default {
       context.commit("setCurrentlyGathering", value);
     },
     async fetchAndSetListingsStartInfoByUser(context) {
-      let requestUrl = `${config.backendApiEntryPoint}listings-by-user/?limit=${config.listingsPerPage}`;
+      let requestUrl = `${config.backendApiEntryPoint}listings-by-user/?limit=${config.listingsPerPage}&currency=0x0000000000000000000000000000000000000000`;
       if (context.getters.getCurrentCollectionContractAddress != null) {
           requestUrl += `&collection=${context.getters.getCurrentCollectionContractAddress}`;
         }
@@ -413,7 +413,7 @@ export default {
       context.commit("setListingsInfo", null);
     },
     async fetchAndSetListingsStartInfoByUserVote(context) {
-      let requestUrl = `${config.backendApiEntryPoint}listings-with-voting-by-user/?limit=${config.listingsPerPage}`;
+      let requestUrl = `${config.backendApiEntryPoint}listings-with-voting-by-user/?limit=${config.listingsPerPage}&currency=0x0000000000000000000000000000000000000000`;
       if (context.getters.getCurrentCollectionContractAddress != null) {
           requestUrl += `&collection=${context.getters.getCurrentCollectionContractAddress}`;
         }

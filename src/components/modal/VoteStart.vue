@@ -274,6 +274,30 @@ export default {
               }
             }
             else {
+              let requestLinkTemp = null;
+              let requestOptionsTemp = null;
+              let requestTemp = null;
+              let requestJsonTemp = null;
+              for (let element of requestJson.data) {
+                requestLinkTemp = `${config.backendApiEntryPoint}finish-voting/`;
+                requestOptionsTemp = {
+                  method: "POST",
+                  headers: {
+                    accept: "application/json",
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  },
+                  body: JSON.stringify({
+                    voting_id: element.voting_id
+                  })
+                };
+                requestTemp = await fetch(requestLinkTemp, requestOptionsTemp);
+                requestJsonTemp = await requestTemp.json();
+                console.log(requestLinkTemp);
+                console.log('FINISH VOTING');
+                console.log(requestJsonTemp);
+
+              }
               location.reload();
             }
           }
@@ -467,18 +491,18 @@ export default {
               this.voting = element;
               this.markeplacesId.push(element.marketplace.id);
               this.blockPrice = true;   
-              this.amount =  this.abbrNum(this.toFixedIfNecessary(this.convertToEther(this.voting.amount),6),2);        
+              this.amount =  (this.toFixedIfNecessary(this.convertToEther(this.voting.amount),6));        
             }
         }
       }
     },
     checkMarketplaceInMarketplacesId(id){
-      console.log('AAAAAAA');
-      console.log(this.markeplacesId);
+      // console.log('AAAAAAA');
+      // console.log(this.markeplacesId);
       
       for (let element of this.markeplacesId){
-        console.log(id);
-        console.log(element);
+        // console.log(id);
+        // console.log(element);
         if (id == element){
           
           return true;

@@ -227,11 +227,11 @@ export default {
       this.collections = requestJson;
     },
     async fetchAndSetNfts() {
-      let requestUrl = `${config.backendApiEntryPoint}listings/?internal_status=GATHER&limit=${this.config.listingsPerPage}&marketplace_status=OPEN&ordering=-timestamp/`;
+      let requestUrl = `${config.backendApiEntryPoint}listings/?internal_status=GATHER&limit=${this.config.listingsPerPage}&currency=0x0000000000000000000000000000000000000000&marketplace_status=OPEN&ordering=-timestamp/`;
       let request = await fetch(requestUrl);
       let requestJson = await request.json();
       if (requestJson.count == 0){
-        requestUrl = `${config.backendApiEntryPoint}listings/?limit=${this.config.listingsPerPage}&marketplace_status=OPEN&ordering=-timestamp/`;
+        requestUrl = `${config.backendApiEntryPoint}listings/?limit=${this.config.listingsPerPage}&currency=0x0000000000000000000000000000000000000000&marketplace_status=OPEN&ordering=-timestamp/`;
         request = await fetch(requestUrl);
         requestJson = await request.json();
       }

@@ -77,7 +77,7 @@ export default {
   },
   async mounted(){
     if (this.$route.name=='Collection'){
-      let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.listingsPerPage}`;
+      let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.listingsPerPage}&currency=0x0000000000000000000000000000000000000000`;
         requestUrl += `&collection=${this.$route.params.contract_address}`;
         requestUrl+='&marketplace_status=OPEN';
         let request = await fetch(requestUrl);
@@ -105,7 +105,7 @@ export default {
         }
       }
       else if (this.vote) {
-        let requestUrl = `${config.backendApiEntryPoint}listings-with-voting-by-user/?limit=${config.listingsPerPage}`;
+        let requestUrl = `${config.backendApiEntryPoint}listings-with-voting-by-user/?limit=${config.listingsPerPage}&currency=0x0000000000000000000000000000000000000000`;
         let requestOptions = {
           method: "GET",
           headers: {
@@ -121,7 +121,7 @@ export default {
         }
       }
       else {
-        let requestUrl = `${config.backendApiEntryPoint}listings-by-user/?limit=${config.listingsPerPage}`;
+        let requestUrl = `${config.backendApiEntryPoint}listings-by-user/?limit=${config.listingsPerPage}&currency=0x0000000000000000000000000000000000000000`;
         let requestOptions = {
           method: "GET",
           headers: {
