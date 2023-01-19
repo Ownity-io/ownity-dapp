@@ -50,9 +50,9 @@
                     <div class="td-wrap">
                         <div class="td-wrap-price">
                             <div class="icon-token eth"></div> 
-                            <span>{{abbrNum(toFixedIfNecessary(convertToEther(item.amount),6),2)}} ETH</span>
+                            <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(item.amount),6),2)}} ETH</span>
                         </div>
-                        <span class="td-light">≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(item.amount)*currencyToUsdPrice,2),2)}}</span>
+                        <span class="td-light">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(item.amount)*currencyToUsdPrice,2),2)}}</span>
                     </div>
                     <!-- <div class="td-wrap">
                         <div class="td-wrap-price">
@@ -109,18 +109,25 @@
 import MultiLang from "@/core/multilang";
 import { ref } from 'vue';
 import { useElementVisibility } from '@vueuse/core';
-import { ethers } from "ethers";
 import config from '@/config.json';
+import helpers from "@/helpers/helpers";
+import {mapGetters} from "vuex";
 export default {
     data(){
         return{
+            useHelpers: helpers,
             rowMobileCollapse: false,
             lang: new MultiLang(this),
             userAddress:null,
-            currencyToUsdPrice:1,
             config:config,
             activitiesIsEmpty:false
         }
+    },
+    computed: {
+      ...mapGetters(['getUsdRate']),
+      currencyToUsdPrice() {
+        return this.getUsdRate[`ETH`] ? this.getUsdRate[`ETH`] : 0
+      }
     },
     methods: {
         translatesGet(key) {
@@ -160,42 +167,7 @@ export default {
             //     }
             // }
         },
-        abbrNum(number, decPlaces) {
-            decPlaces = Math.pow(10, decPlaces);
-            var abbrev = ["k", "m", "b", "t"];
-            for (var i = abbrev.length - 1; i >= 0; i--) {
-                var size = Math.pow(10, (i + 1) * 3);
-                if (size <= number) {
-                    number = Math.round(number * decPlaces / size) / decPlaces;
-                    if ((number == 1000) && (i < abbrev.length - 1)) {
-                        number = 1;
-                        i++;
-                    }
-                    number += abbrev[i];
-                    break;
-                }
-            }
-
-            return number;
-        },
-        async setCurrencyToUsd() {
-            let request = await fetch(`https://api.octogamex.com/rates?symbol=ETH`);
-            let requestJson = await request.json();
-            try {
-                this.currencyToUsdPrice = requestJson.quotes[0].priceUsd;
-            }
-            catch {
-                this.currencyToUsdPrice = 1;
-            }
-        },
-        toFixedIfNecessary(value, dp) {
-            return +parseFloat(value).toFixed(dp);
-        },
-        convertToEther(value) {
-            return ethers.utils.formatEther(String(value));
-        },
         getTimeString(timeStampValue) {
-            console.log(timeStampValue);
             let timeNow = Date.now() / 1000;
             let remTimeInSeconds = timeNow -timeStampValue;
             var sec_num = parseInt(remTimeInSeconds, 10);
@@ -233,8 +205,7 @@ export default {
         }
     },
     async mounted(){  
-        await this.fetchAndSetActivitiesStartInfo();      
-        await this.setCurrencyToUsd();   
+        await this.fetchAndSetActivitiesStartInfo();
         if (this.$route.name == 'Collection') {
             let requestUrl = `${config.backendApiEntryPoint}user-activity/?limit=${config.listingsPerPage}`;
             requestUrl += `&collection=${this.$route.params.contract_address}`;
