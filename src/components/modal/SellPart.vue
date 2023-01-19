@@ -34,7 +34,7 @@
                   </div>
                   <div class="input-wrapper input-wrapper-amount">
                     <input type="text" placeholder="Input amount" v-model="priceForPart" @input="setSellFractionFee" >
-                    <div class="input-equivalent equivalent" v-if="priceForPart>0">≈ $ {{abbrNum(Math.round(priceForPart * currencyToUsdPrice),1)}}</div>
+                    <div class="input-equivalent equivalent" v-if="priceForPart>0">≈ $ {{useHelpers.abbrNum(Math.round(priceForPart * currencyToUsdPrice),1)}}</div>
                   </div>
                   <div class="input-prompt">{{translatesGet('ITEM_UNTIL_CANCELLED')}}</div>
                 </div>
@@ -66,7 +66,7 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>{{abbrNum(toFixedIfNecessary(this.convertToEther(this.noExponents(this.noExponents(this.convertFromEtherToWei(this.priceForPart))-parseInt(this.sellFractionFee))),6),2)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(this.convertToEther(this.noExponents(this.noExponents(this.convertFromEtherToWei(this.priceForPart))-parseInt(this.sellFractionFee)))*currencyToUsdPrice,6),2)}}</span>
+                    <b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.noExponents(this.noExponents(this.convertFromEtherToWei(this.priceForPart))-parseInt(this.sellFractionFee))),6),2)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.noExponents(this.noExponents(this.convertFromEtherToWei(this.priceForPart))-parseInt(this.sellFractionFee)))*currencyToUsdPrice,6),2)}}</span>
                   </div>
                   <div class="total-fees">{{translatesGet('FEES')}}: <span>{{this.contractConfig[0].sell_fraction_fee/100}}%</span></div>
                 </div>
@@ -138,16 +138,18 @@ import { ethers } from 'ethers';
 import { toRaw } from '@vue/reactivity';
 import config from '@/config';
 import MultiLang from "@/core/multilang";
+import {mapGetters} from "vuex";
+import helpers from "@/helpers/helpers";
 export default {
   data() {
     return {
+      useHelpers: helpers,
       selectOpen: false,
       currentPart:null,
       priceForPart:0,
       item:null,
       partVariants:[0,1,2,3,4,5,10,15,20,49,50,100],
       provider:null,
-      currencyToUsdPrice:1,
       render:false,
       userBidAmount:0,
       config:config,
@@ -158,50 +160,13 @@ export default {
       sellFractionFee:0
     };
   },
-  async mounted(){
-    this.item = await this.$store.getters['marketplaceListing/getItem'];
-    this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
-    this.setCurrencyToUsd();
-    this.setUserBidAmount();
-    this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
-    this.setSellFractionFee();
-    this.render = true;
+  computed: {
+    ...mapGetters(['getUsdRate']),
+    currencyToUsdPrice() {
+      return this.getUsdRate[`${this.item.currency.ticker}`] ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
+    }
   },
   methods:{
-    abbrNum(number, decPlaces) {
-      decPlaces = Math.pow(10, decPlaces);
-      var abbrev = ["k", "m", "b", "t"];
-      for (var i = abbrev.length - 1; i >= 0; i--) {
-        var size = Math.pow(10, (i + 1) * 3);
-        if (size <= number) {
-          number = Math.round(number * decPlaces / size) / decPlaces;
-          if ((number == 1000) && (i < abbrev.length - 1)) {
-            number = 1;
-            i++;
-          }
-          number += abbrev[i];
-          break;
-        }
-      }
-
-      return number;
-    },
-    async setCurrencyToUsd(){
-      let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
-      let requestJson = await request.json();
-      try{
-        this.currencyToUsdPrice =  requestJson.quotes[0].priceUsd;
-      }
-      catch{
-        this.currencyToUsdPrice = 1;
-      }
-    },
-    toFixedIfNecessary(value, dp) {
-      return +parseFloat(value).toFixed(dp);
-    },
-    convertToEther(value) {
-      return ethers.utils.formatEther(String(value));
-    },
     noExponents (value) {
       var data = String(value).split(/[eE]/);
       if (data.length == 1) return data[0];
@@ -255,12 +220,12 @@ export default {
         }
       }     
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await prov.getSigner());  
-      console.log(`amount:${this.noExponents(this.toFixedIfNecessary(this.item.price/100*this.currentPart,0))}`);
-      console.log(`price:${ this.noExponents(this.convertFromEtherToWei(this.priceForPart))}`);
-      console.log(`total:${this.noExponents(this.noExponents(this.convertFromEtherToWei(this.priceForPart))-parseInt(this.sellFractionFee))}`);
+      // console.log(`amount:${this.noExponents(this.useHelpers.toFixedIfNecessary(this.item.price/100*this.currentPart,0))}`);
+      // console.log(`price:${ this.noExponents(this.convertFromEtherToWei(this.priceForPart))}`);
+      // console.log(`total:${this.noExponents(this.noExponents(this.convertFromEtherToWei(this.priceForPart))-parseInt(this.sellFractionFee))}`);
       let sellFraction = await contract.sellFraction(this.item.id, this.noExponents(this.currentPart*10**18), this.noExponents(this.convertFromEtherToWei(this.priceForPart)),
       {gasLimit:'1000000'});
-      console.log(sellFraction);
+
       let trx = await prov.waitForTransaction(sellFraction.hash);
       if (trx.status == 1) {
         let forceReq = await (await fetch(
@@ -277,7 +242,6 @@ export default {
               },
               method:'POST'
             })).json();
-          console.log(forceReq);
         await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
         await this.$store.dispatch('appGlobal/setLastTransactionHash', sellFraction.hash);
         await this.$store.dispatch('appGlobal/setShowSellPartModal', false);
@@ -323,8 +287,8 @@ export default {
       else if (this.currentPart < 1) {
         this.currentPart = 1
       }
-      else if (this.currentPart > (this.toFixedIfNecessary(this.userBidAmount/this.item.price*100,0))) {
-        this.currentPart = this.toFixedIfNecessary(this.userBidAmount/this.item.price*100,0)
+      else if (this.currentPart > (this.useHelpers.toFixedIfNecessary(this.userBidAmount/this.item.price*100,0))) {
+        this.currentPart = this.useHelpers.toFixedIfNecessary(this.userBidAmount/this.item.price*100,0)
       }
       else if (isNaN(parseInt(this.currentPart))){
           this.currentPart = null    
@@ -334,5 +298,13 @@ export default {
       }
     },
   },
+  async mounted(){
+    this.item = await this.$store.getters['marketplaceListing/getItem'];
+    this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
+    this.setUserBidAmount();
+    this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
+    this.setSellFractionFee();
+    this.render = true;
+  }
 };
 </script>
