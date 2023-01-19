@@ -404,7 +404,6 @@
 </template>
 
 <script>
-import { ethers } from 'ethers';
 import config from "@/config.json";
 import MultiLang from "@/core/multilang";
 import {mapGetters} from "vuex";
@@ -442,12 +441,7 @@ export default {
   computed: {
     ...mapGetters(['getUsdRate']),
     currencyToUsdPrice() {
-        if(this.getUsdRate &&  this.getUsdRate.length) {
-          const index = this.getUsdRate.findIndex(el => el.symbol === this.item.currency.ticker)
-          return index !== -1 ? this.getUsdRate[index].price : 0
-        } else {
-          return 0
-        }
+      return this.getUsdRate[`${this.item.currency.ticker}`] ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
       }
   },
   methods:{

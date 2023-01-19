@@ -25,6 +25,11 @@ export default {
     },
 
     convertToEther(value){
-        return ethers.utils.formatEther(String(value));
+        try{
+            return ethers.utils.formatEther(String(value));
+        } catch (e) {
+            console.log('error from convertToEther:' + e.message);
+        }
+
     },
 }

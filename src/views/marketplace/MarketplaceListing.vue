@@ -147,27 +147,27 @@
                   <div class="deposit-value" v-if="(item.marketplace_status=='OPEN' & item.internal_status=='OPEN')||this.item.internal_status=='OWNED'">
                     <div class="icon-token eth"></div>
                     <span><b>{{priceInCurrency}} ETH</b></span>
-                    <span class="equivalent">(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
+                    <span class="equivalent">(≈ $ {{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
                   </div>
                   <div class="deposit-value" v-if="(item.internal_status=='ON SALE')">
                     <div class="icon-token eth"></div>
-                    <span><b>{{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount),6),2)}} ETH</b></span>
-                    <span class="equivalent">(≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount) *currencyToUsdPrice,2),2)}})</span>
+                    <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.voting.amount),6),2)}} ETH</b></span>
+                    <span class="equivalent">(≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.voting.amount) *currencyToUsdPrice,2),2)}})</span>
                   </div>
                   <div class="deposit-value" v-if="item.marketplace_status=='CLOSED' & item.internal_status=='SOLD' & !bidRewarded">
                     <div class="icon-token eth"></div>
-                    <span><b>{{abbrNum(this.toFixedIfNecessary(( this.item.reward  / (10**this.item.currency.decimals)),6),1)}} ETH</b></span>
-                    <span class="equivalent">(≈ $ {{abbrNum(Math.round(this.toFixedIfNecessary(( this.item.reward / (10**this.item.currency.decimals)),6)  * currencyToUsdPrice),1)}})</span>
+                    <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(( this.item.reward  / (10**this.item.currency.decimals)),6),1)}} ETH</b></span>
+                    <span class="equivalent">(≈ $ {{useHelpers.abbrNum(Math.round(useHelpers.toFixedIfNecessary(( this.item.reward / (10**this.item.currency.decimals)),6)  * currencyToUsdPrice),1)}})</span>
                   </div>
                   <div class="deposit-value" v-if="item.marketplace_status=='CLOSED' & item.internal_status=='SOLD' & bidRewarded">
                     <div class="icon-token eth"></div>
-                    <span><b>{{abbrNum(this.toFixedIfNecessary(( this.item.reward * parseInt(this.userBid.fraction)/100 / (10**this.item.currency.decimals)),6),1)}} ETH</b></span>
-                    <span class="equivalent">(≈ $ {{abbrNum(Math.round(this.toFixedIfNecessary(( this.item.reward*parseInt(this.userBid.fraction)/100 / (10**this.item.currency.decimals)),6)  * currencyToUsdPrice),1)}})</span>
+                    <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(( this.item.reward * parseInt(this.userBid.fraction)/100 / (10**this.item.currency.decimals)),6),1)}} ETH</b></span>
+                    <span class="equivalent">(≈ $ {{useHelpers.abbrNum(Math.round(useHelpers.toFixedIfNecessary(( this.item.reward*parseInt(this.userBid.fraction)/100 / (10**this.item.currency.decimals)),6)  * currencyToUsdPrice),1)}})</span>
                   </div>
                   <div class="deposit-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
                     <div class="icon-token eth"></div>
-                    <span>{{abbrNum(this.toFixedIfNecessary(convertToEther(allBidsAmount),6),1)}} / <b>{{abbrNum(priceInCurrency,1)}}{{' '}} ETH</b></span>
-                    <span class="equivalent">(≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
+                    <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(allBidsAmount),6),1)}} / <b>{{useHelpers.abbrNum(priceInCurrency,1)}}{{' '}} ETH</b></span>
+                    <span class="equivalent">(≈ $ {{useHelpers.abbrNum((useHelpers.convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
                   </div>
                   <div class="deposit-part" v-if="userBid!=null & item.marketplace_status=='CLOSED' & item.internal_status=='OWNED'">
                     {{translatesGet('YOUR_PART')}}: <span>{{userBid.fraction}}</span>
@@ -230,7 +230,7 @@
                 <div class="deposit-label" v-if="userBid.status == 'ON SALE'">
                   <i class="i-shopping-bag-line"></i>
                   {{translatesGet('ON_SALE')}}:
-                  <span><b>{{abbrNum(toFixedIfNecessary(convertToEther(userBidAmount),6,2))}} ETH</b> ({{userBid.fraction}})</span>
+                  <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidAmount),6,2))}} ETH</b> ({{userBid.fraction}})</span>
                 </div>
                 <div class="deposit-label" v-if="false">
                   <i class="i-volume-vibrate-line"></i>
@@ -277,7 +277,7 @@
                 <div class="deposit-label" v-if="userBid.status == 'ON SALE'">
                   <i class="i-shopping-bag-line"></i>
                   {{translatesGet('ON_SALE')}}:
-                  <span><b>{{abbrNum(toFixedIfNecessary(convertToEther(userBidAmount),6,2))}} ETH</b> ({{userBid.fraction}})</span>
+                  <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidAmount),6,2))}} ETH</b> ({{userBid.fraction}})</span>
                 </div>
                 <div class="deposit-label" v-if="false">
                   <i class="i-volume-vibrate-line"></i>
@@ -306,8 +306,8 @@
                     {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>                
                   <div class="deposit-value" v-if="(item.internal_status=='ON SALE')">
                     <div class="icon-token eth"></div>
-                    <span><b>{{abbrNum(toFixedIfNecessary(convertToEther(voting.amount),6),2)}} ETH</b></span>
-                    <span class="equivalent">(≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(voting.amount) *currencyToUsdPrice,2),2)}})</span>
+                    <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(voting.amount),6),2)}} ETH</b></span>
+                    <span class="equivalent">(≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(voting.amount) *currencyToUsdPrice,2),2)}})</span>
                   </div>      
                 </div>
               </div>
@@ -321,7 +321,7 @@
                 <div class="deposit-label" v-if="userBid.status == 'ON SALE'">
                   <i class="i-shopping-bag-line"></i>
                   {{translatesGet('ON_SALE')}}:
-                  <span><b>{{abbrNum(toFixedIfNecessary(convertToEther(userBidAmount),6,2))}} ETH</b> ({{userBid.fraction}})</span>
+                  <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidAmount),6,2))}} ETH</b> ({{userBid.fraction}})</span>
                 </div>
                 <div class="deposit-label" v-if="false">
                   <i class="i-volume-vibrate-line"></i>
@@ -424,8 +424,8 @@
                           <div class="td-wrap">
                             <div class="td-wrap-price">
                               <div class="icon-token eth"></div>
-                              <span>{{abbrNum(this.toFixedIfNecessary((bid.amount / (10**this.item.currency.decimals)),6),2)}} ETH</span>
-                              <span class="td-light">≈ $ {{this.toFixedIfNecessary(abbrNum((bid.amount / (10**this.item.currency.decimals) * currencyToUsdPrice),1),2)}}</span>
+                              <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary((bid.amount / (10**this.item.currency.decimals)),6),2)}} ETH</span>
+                              <span class="td-light">≈ $ {{useHelpers.toFixedIfNecessary(useHelpers.abbrNum((bid.amount / (10**this.item.currency.decimals) * currencyToUsdPrice),1),2)}}</span>
                             </div>
                           </div>
                         </div>
@@ -548,11 +548,14 @@ import Chart from "@/components/listing/chart/Chart.vue";
 import MultiLang from "@/core/multilang";
 import { ethers } from "ethers";
 import config from '@/config.json';
+import {mapGetters} from "vuex";
+import helpers from "@/helpers/helpers";
 
 
 export default {
   data() {
     return {
+      useHelpers: helpers,
       activeTab: "",
       activeTab2: "",
       srcTest: "",
@@ -561,7 +564,6 @@ export default {
       collapseMembers: false,
       item:null,
       priceInCurrency:1,
-      currencyToUsdPrice:1,
       linkToMarketplacePage:null,
       allBidsAmount:null,
       userBidAmount:0,
@@ -594,65 +596,15 @@ export default {
     ListingChat,
     Chart
   },
-  async mounted() {
-    window.scrollTo(0, 0);
-    this.activeTab = "ListingInfo";
-    this.activeTab2 = "ListingInfo2";
-    await this.getAndSetListingInfo();
-    this.setPriceInCurrency();
-    this.setCurrencyToUsd();
-    this.setLinkToMarketplacePage();
-    await this.setMaxVoting();
-    this.setLinkToMarketplacePageFromVotingOnSale();
-    this.setAllBidsAmount();
-    this.setUserBidAmount();
-    this.setChartData();
-    await this.$store.dispatch('marketplaceListing/checkLike');
-    await this.checkLike();
-    this.$store.dispatch('marketplaceListing/fetchAndSetContractConfig');
-    this.recommendations = await this.$store.dispatch('marketplaceListing/getRecomendations',this.item.collection.contract_address);
-    if (await this.$store.getters['marketplaceListing/getModalToShowAtStart']!=null){
-      if ((await this.$store.getters['marketplaceListing/getModalToShowAtStart'])=='FractionMarket'){
-        console.log('kek');
-        this.letsCheck2('ListingFractionMarket')
-      }else{
-        await this.$store.dispatch(await this.$store.getters['marketplaceListing/getModalToShowAtStart'],true);
-        await this.$store.dispatch('marketplaceListing/setModalToShowAtStart',null);
-      }
-      
-    }
-    if (this.userBid){
-      if (this.userBid.status=='REWARDED'){
-        this.bidRewarded=true;
-      }
-    }
-    let requestUrl = `${config.backendApiEntryPoint}marketplaces/`;
-    let request = await fetch(requestUrl);
-    this.marketplaces = await request.json();
-    console.log(this.marketplaces);
-    this.render = true;
-    const delay = (delayInms) => {
-      return new Promise(resolve => setTimeout(resolve, delayInms));
-    }
-    while (true) {
-      await delay(1000);
-      this.setAllBidsAmount();
-      this.setUserBidAmount();
-      this.setChartData();
-      this.checkLike();
+  computed: {
+    ...mapGetters(['getUsdRate']),
+    currencyToUsdPrice() {
+      return this.getUsdRate[`${this.item.currency.ticker}`] ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
     }
   },
   methods: {
     translatesGet(key) {
       return this.lang.get(key);
-    },
-    convertToEther(value){
-      try{
-        return ethers.utils.formatEther(String(value));
-      }
-      catch{
-        console.log('ethers error');
-      }
     },
     letsCheck(name) {
       this.activeTab = name;
@@ -667,38 +619,7 @@ export default {
       this.itemWithBidsOnSale = await (await fetch(`${config.backendApiEntryPoint}listing-with-on-sale-bids/${this.item.id}`)).json();
     },
     setPriceInCurrency(){
-      this.priceInCurrency = this.toFixedIfNecessary((this.item.price / (10**this.item.currency.decimals)),6);
-    },
-    toFixedIfNecessary(value, dp) {
-      return +parseFloat(value).toFixed(dp);
-    },
-    async setCurrencyToUsd(){
-      let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
-      let requestJson = await request.json();
-      try{
-        this.currencyToUsdPrice =  requestJson.quotes[0].priceUsd;
-      }
-      catch{
-        this.currencyToUsdPrice = 1;
-      }
-    },
-    abbrNum(number, decPlaces) {
-      decPlaces = Math.pow(10, decPlaces);
-      var abbrev = ["k", "m", "b", "t"];
-      for (var i = abbrev.length - 1; i >= 0; i--) {
-        var size = Math.pow(10, (i + 1) * 3);
-        if (size <= number) {
-          number = Math.round(number * decPlaces / size) / decPlaces;
-          if ((number == 1000) && (i < abbrev.length - 1)) {
-            number = 1;
-            i++;
-          }
-          number += abbrev[i];
-          break;
-        }
-      }
-
-      return number;
+      this.priceInCurrency = this.useHelpers.toFixedIfNecessary((this.item.price / (10**this.item.currency.decimals)),6);
     },
     setLinkToMarketplacePage(){
       let exampleStr = this.item.marketplace.listing_link;
@@ -792,7 +713,6 @@ export default {
         for (let element of this.item.votings){
             if ((element.status=='ON SALE'||element.status=='FULFILLED') & element.type=='SELL') {
               this.voting = element;
-              console.log(element)
               votingsOnSaleTemp.push(element);
               this.onSaleVotingsCount+=1;
             }
@@ -818,6 +738,51 @@ export default {
         await this.$store.dispatch('appGlobal/setGreenSnack', false)
         await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 5)      
       }      
+    }
+  },
+  async mounted() {
+    window.scrollTo(0, 0);
+    this.activeTab = "ListingInfo";
+    this.activeTab2 = "ListingInfo2";
+    await this.getAndSetListingInfo();
+    this.setPriceInCurrency();
+    this.setLinkToMarketplacePage();
+    await this.setMaxVoting();
+    this.setLinkToMarketplacePageFromVotingOnSale();
+    this.setAllBidsAmount();
+    this.setUserBidAmount();
+    this.setChartData();
+    await this.$store.dispatch('marketplaceListing/checkLike');
+    await this.checkLike();
+    this.$store.dispatch('marketplaceListing/fetchAndSetContractConfig');
+    this.recommendations = await this.$store.dispatch('marketplaceListing/getRecomendations',this.item.collection.contract_address);
+    if (await this.$store.getters['marketplaceListing/getModalToShowAtStart']!=null){
+      if ((await this.$store.getters['marketplaceListing/getModalToShowAtStart'])=='FractionMarket'){
+        this.letsCheck2('ListingFractionMarket')
+      }else{
+        await this.$store.dispatch(await this.$store.getters['marketplaceListing/getModalToShowAtStart'],true);
+        await this.$store.dispatch('marketplaceListing/setModalToShowAtStart',null);
+      }
+
+    }
+    if (this.userBid){
+      if (this.userBid.status=='REWARDED'){
+        this.bidRewarded=true;
+      }
+    }
+    let requestUrl = `${config.backendApiEntryPoint}marketplaces/`;
+    let request = await fetch(requestUrl);
+    this.marketplaces = await request.json();
+    this.render = true;
+    const delay = (delayInms) => {
+      return new Promise(resolve => setTimeout(resolve, delayInms));
+    }
+    while (true) {
+      await delay(1000);
+      this.setAllBidsAmount();
+      this.setUserBidAmount();
+      this.setChartData();
+      this.checkLike();
     }
   },
 };
