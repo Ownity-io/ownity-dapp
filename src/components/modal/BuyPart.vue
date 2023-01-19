@@ -39,7 +39,7 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>{{abbrNum(toFixedIfNecessary(convertToEther(partOnMarket.price),6),2)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(partOnMarket.price)*currencyToUsdPrice,2),2)}}</span>
+                    <b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(convertToEther(partOnMarket.price),6),2)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(convertToEther(partOnMarket.price)*currencyToUsdPrice,2),2)}}</span>
                   </div>
                   <div class="total-fees">{{translatesGet('FEES')}}:<span>3%</span></div>
                 </div>
@@ -113,63 +113,39 @@ import { ethers } from 'ethers';
 import { toRaw } from '@vue/reactivity';
 import config from '@/config';
 import MultiLang from "@/core/multilang";
+import {mapGetters} from "vuex";
+import helpers from "@/helpers/helpers";
 
 export default {
   data() {
     return {
+      useHelpers: helpers,
       selectOpen: false,
       item:null,
       render:false,
       provider:null,
       partOnMarket:null,
-      currencyToUsdPrice:1,
       ABI:ABI,
       config:config,
       buttonWaiting:false,
       lang: new MultiLang(this),
     };
   },
+  computed: {
+    ...mapGetters(['getUsdRate']),
+    currencyToUsdPrice() {
+      return this.getUsdRate[`${this.item.currency.ticker}`] ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
+    }
+  },
   async mounted(){
     this.item = await this.$store.getters['marketplaceListing/getItem'];
     this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
     this.partOnMarket = await this.$store.getters['appGlobal/getCurrentPartOnMarket'];
-    await this.setCurrencyToUsd();
     this.render = true;
   },
   methods:{
     translatesGet(key) {
       return this.lang.get(key);
-    },
-    abbrNum(number, decPlaces) {
-      decPlaces = Math.pow(10, decPlaces);
-      var abbrev = ["k", "m", "b", "t"];
-      for (var i = abbrev.length - 1; i >= 0; i--) {
-        var size = Math.pow(10, (i + 1) * 3);
-        if (size <= number) {
-          number = Math.round(number * decPlaces / size) / decPlaces;
-          if ((number == 1000) && (i < abbrev.length - 1)) {
-            number = 1;
-            i++;
-          }
-          number += abbrev[i];
-          break;
-        }
-      }
-
-      return number;
-    },
-    async setCurrencyToUsd(){
-      let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
-      let requestJson = await request.json();
-      try{
-        this.currencyToUsdPrice =  requestJson.quotes[0].priceUsd;
-      }
-      catch{
-        this.currencyToUsdPrice = 1;
-      }
-    },
-    toFixedIfNecessary(value, dp) {
-      return +parseFloat(value).toFixed(dp);
     },
     convertToEther(value){
       return ethers.utils.formatEther(String(parseInt(value)));
@@ -213,7 +189,6 @@ export default {
               },
               method:'POST'
             })).json();
-          console.log(forceReq);
           await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
           await this.$store.dispatch('appGlobal/setLastTransactionHash', buyFraction.hash);
           await this.$store.dispatch('appGlobal/setShowBuyPartModal', false);
