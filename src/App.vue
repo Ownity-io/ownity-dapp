@@ -11,16 +11,24 @@
 import ConnectWallet from '@/components/modal/ConnectWallet.vue'
 import SnackBar from '@/components/SnackBar.vue'
 import Cookies from '@/components/Cookies.vue'
+import {mapActions} from "vuex";
 
 
 export default {
+    data(){
+      return{
+        walletConnected: 1,
+      }
+    },
     components:{
-
         ConnectWallet,
         SnackBar,
         Cookies
     },
     methods:{
+        ...mapActions([
+          'fetchUsdRate'
+        ]),
         async checkWalletInLS() {
             let connectedWallet = localStorage.getItem('connectedWallet');
             console.log(connectedWallet);
@@ -36,8 +44,13 @@ export default {
         getWalletFromLS() {
             this.walletConnected = localStorage.getItem('connectedWallet');
         }
-    },                
-    async mounted() {
+    },
+  async mounted() {
+      this.fetchUsdRate({rates: 'ETH%2BWETH'})
+      setInterval(()=>{
+          this.fetchUsdRate({rates: 'ETH%2BWETH'})
+        }, 600000)
+
         // this.checkWalletInLS();
         this.getWalletFromLS();
         const delay = (delayInms) => {
@@ -48,10 +61,5 @@ export default {
             this.getWalletFromLS();
         }
     },
-    data(){
-        return{
-            walletConnected:1
-        }
-    }
 }
 </script>

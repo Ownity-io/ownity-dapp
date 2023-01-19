@@ -51,15 +51,15 @@
         <div class="card-to-buy" v-if="bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0">
           <div class="card-col">
             <span class="card-col-name">{{translatesGet('PART')}}</span>
-            <span><strong>{{toFixedIfNecessary(bidOnSale.fraction_amount/item.price*100,1)}}%</strong></span>
+            <span><strong>{{useHelpers.toFixedIfNecessary(bidOnSale.fraction_amount/item.price*100,1)}}%</strong></span>
           </div>
           <div class="card-col">
             <span class="card-col-name">{{translatesGet('SALE_FOR')}}</span>
             <div class="card-value">
               <div class="icon-value"></div>
               <div class="card-col-value">
-                <strong>{{abbrNum(toFixedIfNecessary(convertToEther(bidOnSale.price),4),2)}} ETH</strong>
-                <span class="equivalent">≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(bidOnSale.price)*currencyToUsdPrice,2),2)}}</span>
+                <strong>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(bidOnSale.price),4),2)}} ETH</strong>
+                <span class="equivalent">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(bidOnSale.price)*currencyToUsdPrice,2),2)}}</span>
               </div> 
             </div>
 
@@ -87,10 +87,10 @@
                   <td>
                     <div class="td-wrap-price">
                       <div class="icon-token eth"></div> 
-                      {{abbrNum(toFixedIfNecessary(convertToEther(element.amount),4),2)}}
+                      {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(element.amount),4),2)}}
                     </div>
                     </td>
-                  <td>{{  toFixedIfNecessary(element.amount/this.item.price*100,0) }}%</td>
+                  <td>{{useHelpers.toFixedIfNecessary(element.amount/this.item.price*100,0) }}%</td>
                 </tr> 
               </tbody>
             </table>
@@ -136,9 +136,9 @@
           <div class="data-td data-td-value">
             <div class="card-value">
               <div class="icon-value"></div>
-              <span><b>{{abbrNum(priceInCurrency,1)}} {{' '}}</b>ETH</span> 
+              <span><b>{{useHelpers.abbrNum(priceInCurrency,1)}} {{' '}}</b>ETH</span>
             </div>
-            <div class="equivalent">≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
+            <div class="equivalent">≈ $ {{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
 
           </div>
         </div>
@@ -156,9 +156,9 @@
           <div class="data-td data-td-value">
             <div class="card-value">
               <div class="icon-value"></div>
-              <span><b>{{abbrNum(priceInCurrency,1)}} {{' '}}</b>ETH</span> 
+              <span><b>{{useHelpers.abbrNum(priceInCurrency,1)}} {{' '}}</b>ETH</span>
             </div>
-            <div class="equivalent">≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
+            <div class="equivalent">≈ $ {{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
 
           </div>
         </div>
@@ -202,9 +202,9 @@
           <div class="data-td data-td-value">
             <div class="card-value">
               <div class="icon-value"></div>
-              <span><b>{{abbrNum(priceInCurrency,1)}} {{' '}}</b>ETH</span> 
+              <span><b>{{useHelpers.abbrNum(priceInCurrency,1)}} {{' '}}</b>ETH</span>
             </div>
-            <div class="equivalent">≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
+            <div class="equivalent">≈ $ {{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
 
           </div>
         </div>
@@ -220,9 +220,9 @@
           <div class="data-td data-td-value">
             <div class="card-value">
               <div class="icon-value"></div>
-              <span><b>{{abbrNum(priceInCurrency,1)}} {{' '}}</b>ETH</span> 
+              <span><b>{{useHelpers.abbrNum(priceInCurrency,1)}} {{' '}}</b>ETH</span>
             </div>
-            <div class="equivalent">≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
+            <div class="equivalent">≈ $ {{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
 
           </div>
         </div>
@@ -241,9 +241,9 @@
           <div class="data-td data-td-value">
             <div class="card-value">
               <div class="icon-value"></div>
-              {{abbrNum(toFixedIfNecessary(convertToEther(allBidsAmount),4),1)}}/<span><b>{{abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH</span>              
+              {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(allBidsAmount),4),1)}}/<span><b>{{useHelpers.abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH</span>
             </div>
-            <div class="equivalent">≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
+            <div class="equivalent">≈ $ {{useHelpers.abbrNum((useHelpers.convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
 
           </div>
         </div>
@@ -261,9 +261,9 @@
           <div class="data-td data-td-value">
             <div class="card-value">
               <div class="icon-value"></div>
-              <span><b>{{abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH</span>              
+              <span><b>{{useHelpers.abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH</span>
             </div>
-            <div class="equivalent">≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
+            <div class="equivalent">≈ $ {{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
 
           </div>
         </div>
@@ -312,7 +312,7 @@
               {{translatesGet('MY_PART')}}
               <div class="card-value">
                 <div class="icon-value"></div>
-                <span>{{abbrNum(toFixedIfNecessary(convertToEther(userBidAmount),4),2)}} ETH</span> 
+                <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidAmount),4),2)}} ETH</span>
               </div>
             </div>
             <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setshowDepositCancelModal');" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id">
@@ -326,15 +326,15 @@
         <div class="container-btn-part" v-if="showUserBidOnSale">
           <div class="card-col">
             <span class="card-col-name">{{translatesGet('PART')}}</span>
-            <span><strong>{{toFixedIfNecessary(userBidOnSale.fraction_amount/this.item.price*100,1)}}%</strong></span>
+            <span><strong>{{useHelpers.toFixedIfNecessary(userBidOnSale.fraction_amount/this.item.price*100,1)}}%</strong></span>
           </div>
           <div class="card-col">
             <span class="card-col-name">{{translatesGet('SALE_FOR')}}</span>
             <div class="card-value">
               <div class="icon-value"></div>
               <div class="card-col-value">
-                <strong>{{abbrNum(toFixedIfNecessary(convertToEther(userBidOnSale.fraction_amount),4),1)}} ETH</strong>
-                <span class="equivalent">≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(userBidOnSale.fraction_amount)*currencyToUsdPrice,2),1)}}</span>
+                <strong>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidOnSale.fraction_amount),4),1)}} ETH</strong>
+                <span class="equivalent">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidOnSale.fraction_amount)*currencyToUsdPrice,2),1)}}</span>
               </div> 
             </div>
           </div>
@@ -359,8 +359,8 @@
             <div class="deposit-label">
               <div class="label-col">
                 <div class="icon-label" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></div>
-                <b>{{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount),4),1)}} ETH</b>
-                <div>{{translatesGet('PROGRESS')}}: {{toFixedIfNecessary((this.voting.users.length/this.item.bids.length)*100,1)}}%</div>
+                <b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.voting.amount),4),1)}} ETH</b>
+                <div>{{translatesGet('PROGRESS')}}: {{useHelpers.toFixedIfNecessary((this.voting.users.length/this.item.bids.length)*100,1)}}%</div>
               </div>
             </div>
           </div>
@@ -382,8 +382,8 @@
 
         <div class="deposit-value" v-if="this.item.internal_status=='ON SALE' & this.voting!=null">
           <div class="icon-token eth"></div>
-          <span><b>{{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount),4),2)}} ETH</b></span>
-          <span class="equivalent">(≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount)*currencyToUsdPrice,2),2)}})</span>
+          <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.voting.amount),4),2)}} ETH</b></span>
+          <span class="equivalent">(≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.voting.amount)*currencyToUsdPrice,2),2)}})</span>
         </div>
         <!-- ######## 5 ######## -->
         <!-- <div class="deposit-value">
@@ -407,13 +407,18 @@
 import { ethers } from 'ethers';
 import config from "@/config.json";
 import MultiLang from "@/core/multilang";
+import {mapGetters} from "vuex";
+import helpers from "@/helpers/helpers";
 export default {
+  props:[
+    'item'
+  ],
   data() {
     return {
+      useHelpers: helpers,
       testLike: false,
       allProgressValue: 0,
       userProgressValue:0,
-      currencyToUsdPrice: 1,
       priceInCurrency: 1,
       showMore: false,
       showFullName:false,
@@ -434,28 +439,23 @@ export default {
       bidRewarded:false
     };
   },
-  props:[
-    'item'
-  ],
+  computed: {
+    ...mapGetters(['getUsdRate']),
+    currencyToUsdPrice() {
+        if(this.getUsdRate &&  this.getUsdRate.length) {
+          const index = this.getUsdRate.findIndex(el => el.symbol === this.item.currency.ticker)
+          return index !== -1 ? this.getUsdRate[index].price : 0
+        } else {
+          return 0
+        }
+      }
+  },
   methods:{
     translatesGet(key) {
       return this.lang.get(key);
     },
     setPriceInCurrency(){
-      this.priceInCurrency = this.toFixedIfNecessary((this.item.price / (10**this.item.currency.decimals)),4);
-    },
-    async setCurrencyToUsd(){
-      let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
-      let requestJson = await request.json();
-      try{
-        this.currencyToUsdPrice =  requestJson.quotes[0].priceUsd;
-      }
-      catch{
-        this.currencyToUsdPrice = 1;
-      }
-    },
-    convertToEther(value){
-      return ethers.utils.formatEther(String(value));
+      this.priceInCurrency = this.useHelpers.toFixedIfNecessary((this.item.price / (10**this.item.currency.decimals)),4);
     },
     setAllBidsAmount(){
       this.allBidsAmount=0;
@@ -483,24 +483,6 @@ export default {
       }
       this.userBidAmount=0;      
     },
-    abbrNum(number, decPlaces) {
-      decPlaces = Math.pow(10, decPlaces);
-      var abbrev = ["k", "m", "b", "t"];
-      for (var i = abbrev.length - 1; i >= 0; i--) {
-        var size = Math.pow(10, (i + 1) * 3);
-        if (size <= number) {
-          number = Math.round(number * decPlaces / size) / decPlaces;
-          if ((number == 1000) && (i < abbrev.length - 1)) {
-            number = 1;
-            i++;
-          }
-          number += abbrev[i];
-          break;
-        }
-      }
-
-      return number;
-    },
     setLinkToMarketplacePage(){
       let exampleStr = this.item.marketplace.listing_link;
       let token_id = this.item.token_id;
@@ -508,9 +490,6 @@ export default {
       exampleStr = exampleStr.replace('${collection_address}',collection_address);
       exampleStr = exampleStr.replace('${token_id}',token_id);
       this.linkToMarketplacePage = exampleStr;
-    },
-    toFixedIfNecessary(value, dp) {
-      return +parseFloat(value).toFixed(dp);
     },
     updateTimeString(){
       let timeNow = Date.now() / 1000;
@@ -617,7 +596,7 @@ export default {
       } 
 
     }
-  },  
+  },
   async mounted(){
     let userAddress = localStorage.getItem('userAddress');
     if (userAddress!=null & userAddress!='null'){
@@ -625,11 +604,10 @@ export default {
     }
     this.setPriceInCurrency();
     this.setLinkToMarketplacePage();
-    await this.setCurrencyToUsd();
     this.setAllBidsAmount();
     this.setUserBidAmount();
-    this.allProgressValue = this.toFixedIfNecessary((this.allBidsAmount/this.item.price)*100,0);
-    this.userProgressValue = this.toFixedIfNecessary((this.userBidAmount/this.item.price)*100,0);
+    this.allProgressValue = this.useHelpers.toFixedIfNecessary((this.allBidsAmount/this.item.price)*100,0);
+    this.userProgressValue = this.useHelpers.toFixedIfNecessary((this.userBidAmount/this.item.price)*100,0);
     this.updateTimeString();
     this.itemWithBidsOnSale = await (await fetch(`${config.backendApiEntryPoint}listing-with-on-sale-bids/${this.item.id}`)).json();
     this.setBidOnSale();
