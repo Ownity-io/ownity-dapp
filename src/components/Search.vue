@@ -61,7 +61,7 @@ export default {
             if (this.searchHeader.length>=2){
                 if (this.isHeader){
                     let collectionsRequestUrl = `${config.backendApiEntryPoint}nft-collections/?limit=10&search=${this.searchHeader}`
-                    let listingsRequestUrl = `${config.backendApiEntryPoint}listings/?limit=10&search=${this.searchHeader}`;
+                    let listingsRequestUrl = `${config.backendApiEntryPoint}listings/?limit=10&search=${this.searchHeader}&currency=0x0000000000000000000000000000000000000000`;
 
                     let collectionsRequest = await fetch(collectionsRequestUrl);
                     let listingsRequest = await fetch(listingsRequestUrl);
