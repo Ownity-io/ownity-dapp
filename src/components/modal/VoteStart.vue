@@ -291,14 +291,14 @@ export default {
                     voting_id: element.voting_id
                   })
                 };
-                requestTemp = await fetch(requestLink, requestOptions);
+                requestTemp = await fetch(requestLinkTemp, requestOptionsTemp);
                 requestJsonTemp = await requestTemp.json();
                 console.log(requestLinkTemp);
                 console.log('FINISH VOTING');
                 console.log(requestJsonTemp);
 
               }
-              // location.reload();
+              location.reload();
             }
           }
           else {

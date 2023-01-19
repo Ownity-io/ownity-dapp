@@ -248,56 +248,20 @@
                 </div>
               </div>
             </div>
-            <div class="section-deposit" v-if="this.item.internal_status == 'ON SALE'">
-              <div class="section-deposit-data" v-for="voting in votingsOnSale">
+            <div class="section-deposit" v-if="this.item.internal_status == 'ON SALE'"  v-for="voting in votingsOnSale">
+              <div class="section-deposit-data">
                 <div class="deposit-img-container">
                   <a target="_blank" :href='getLinkToMarketplacePage(voting.marketplace)' class="deposit-img" :style="{backgroundImage: `url(${voting.marketplace.logo})`}"></a>
                 </div>
                 <div class="deposit-data">
-                  <div class="deposit-listened deposit-listened-link" v-if="this.item.internal_status=='SOLD' & !bidRewarded"><a target="_blank" :href='linkToMarketplacePage' >
-                    Solded on {{item.marketplace.name}}
-                    {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>
-                  <div class="deposit-listened deposit-listened-link" v-else-if="this.item.internal_status=='SOLD'"><div>
-                    Your reward</div></div>
-                  <div class="deposit-listened deposit-listened-link" v-else-if="this.item.internal_status!='OWNED' & this.item.internal_status!='ON SALE'"><a target="_blank" :href='linkToMarketplacePage' >
-                    {{translatesGet('AVAILABLE_ON')}} {{item.marketplace.name}}
-                    {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>
-                  <div class="deposit-listened deposit-listened-link" v-else-if="this.item.internal_status=='OWNED'" >
-                    <a target="_blank" :href='linkToMarketplacePage' 
-                    >
-                    {{translatesGet('BOUGHT_ON')}} {{item.marketplace.name}} 
-                    {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>
-                  <div class="deposit-listened deposit-listened-link" v-if="this.item.internal_status=='ON SALE'"><a target="_blank" :href='linkToMarketplacePageFromVoting' >
+                  <div class="deposit-listened deposit-listened-link"><a target="_blank" :href='getLinkToMarketplacePage(voting.marketplace)' >
                     {{translatesGet('AVAILABLE_ON')}} {{voting.marketplace.name}} 
                     {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>                
-                  <div class="deposit-value" v-if="(item.marketplace_status=='OPEN' & item.internal_status=='OPEN')||this.item.internal_status=='OWNED'">
-                    <div class="icon-token eth"></div>
-                    <span><b>{{priceInCurrency}} ETH</b></span>
-                    <span class="equivalent">(≈ $ {{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
-                  </div>
                   <div class="deposit-value" v-if="(item.internal_status=='ON SALE')">
                     <div class="icon-token eth"></div>
-                    <span><b>{{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount),6),2)}} ETH</b></span>
-                    <span class="equivalent">(≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(this.voting.amount) *currencyToUsdPrice,2),2)}})</span>
-                  </div>
-                  <div class="deposit-value" v-if="item.marketplace_status=='CLOSED' & item.internal_status=='SOLD' & !bidRewarded">
-                    <div class="icon-token eth"></div>
-                    <span><b>{{abbrNum(this.toFixedIfNecessary(( this.item.reward  / (10**this.item.currency.decimals)),6),1)}} ETH</b></span>
-                    <span class="equivalent">(≈ $ {{abbrNum(Math.round(this.toFixedIfNecessary(( this.item.reward / (10**this.item.currency.decimals)),6)  * currencyToUsdPrice),1)}})</span>
-                  </div>
-                  <div class="deposit-value" v-if="item.marketplace_status=='CLOSED' & item.internal_status=='SOLD' & bidRewarded">
-                    <div class="icon-token eth"></div>
-                    <span><b>{{abbrNum(this.toFixedIfNecessary(( this.item.reward * parseInt(this.userBid.fraction)/100 / (10**this.item.currency.decimals)),6),1)}} ETH</b></span>
-                    <span class="equivalent">(≈ $ {{abbrNum(Math.round(this.toFixedIfNecessary(( this.item.reward*parseInt(this.userBid.fraction)/100 / (10**this.item.currency.decimals)),6)  * currencyToUsdPrice),1)}})</span>
-                  </div>
-                  <div class="deposit-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
-                    <div class="icon-token eth"></div>
-                    <span>{{abbrNum(this.toFixedIfNecessary(convertToEther(allBidsAmount),6),1)}} / <b>{{abbrNum(priceInCurrency,1)}}{{' '}} ETH</b></span>
-                    <span class="equivalent">(≈ $ {{abbrNum((convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
-                  </div>
-                  <div class="deposit-part" v-if="userBid!=null & item.marketplace_status=='CLOSED' & item.internal_status=='OWNED'">
-                    {{translatesGet('YOUR_PART')}}: <span>{{userBid.fraction}}</span>
-                  </div>
+                    <span><b>{{abbrNum(toFixedIfNecessary(convertToEther(voting.amount),6),2)}} ETH</b></span>
+                    <span class="equivalent">(≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(voting.amount) *currencyToUsdPrice,2),2)}})</span>
+                  </div>      
                 </div>
               </div>
               <div class="section-deposit-btns">
@@ -305,52 +269,15 @@
                   @click="this.$store.dispatch('appGlobal/setshowStartCollectingModal',true)">
                   {{translatesGet('BUY_TOGETHER')}}
                 </button>
-                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='OPEN' & userAddress==null)"
-                  @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)">
-                  {{translatesGet('BUY_TOGETHER')}}
-                </button>
-                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='GATHER' & userAddress!=null)"
-                  @click="this.$store.dispatch('appGlobal/setshowContinueCollectingModal',true)">
-                  {{translatesGet('DEPOSIT_PART')}}
-                </button>
-                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='OPEN'))  & item.internal_status=='GATHER' & userAddress==null)"
-                  @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)">
-                  {{translatesGet('DEPOSIT_PART')}}
-                </button>
-                <button class="btn btn-get" v-if="(((item.marketplace_status=='OPEN' ||item.marketplace_status=='CLOSED'))  & item.internal_status=='GATHER' & userAddress!=null & userBidAmount>0)"
-                  @click="this.$store.dispatch('appGlobal/setshowDepositCancelModal',true)">
-                  {{translatesGet('CANCEL')}}
-                </button>
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED')) & item.internal_status=='OWNED' & userAddress!=null & this.userBidAmount>0 & !this.userBidBuyedAll)||
                   (item.internal_status=='ON SALE') & this.onSaleVotingsCount<this.marketplaces.length"
                   @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">
                   {{translatesGet('START_VOTING')}}
                 </button>
-                <button class="btn btn-deposit" v-if="((item.marketplace_status=='CLOSED')) & item.internal_status=='OWNED' & userAddress!=null & this.userBidBuyedAll"
-                  @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">
-                  {{translatesGet('TAKE_VOTE')}}
-                </button>
-                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidBuyedAll)"
-                  @click="this.$store.dispatch('appGlobal/setShowClaimNftModal',true)">
-                  {{translatesGet('CLAIM_NFT')}}
-                </button> 
-                <button class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount>0)"
-                  @click="this.$store.dispatch('appGlobal/setShowSellPartModal',true)">
-                  {{translatesGet('SELL_NFT')}}
-                </button> 
-                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount==0 & bidsOnSale)">
-                  {{translatesGet('BUY')}}
-                </button> 
-                <a class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='ON SALE' & userAddress!=null & userBidAmount>0 & this.item.votings)"
+                <a class="btn btn-get" v-if="(userAddress!=null & userBidAmount>0)"
                 @click="letsCheck2('ListingVote')" href="#votes">
                   {{translatesGet('CANCEL_SELL')}}
                 </a> 
-                <button class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='ON SALE' & userAddress!=null & userBidAmount>0 & !this.item.votings)"
-                  @click="this.$store.dispatch('appGlobal/setCurrentVoting',this.voting);this.$store.dispatch('appGlobal/setCancellSellVotingModal',true)">
-                  {{translatesGet('CANCEL_SELL')}}
-                </button> 
-                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='SOLD' & userAddress!=null & userBidAmount>0 & !bidRewarded)"
-                @click="this.$store.dispatch('appGlobal/setShowClaimRewardModal',true)">Claim reward</button> 
               </div>
               <div class="section-deposit-labels" v-if="userBid!=null">
                 <div class="deposit-label" v-if="userBid.status == 'ON SALE'">
