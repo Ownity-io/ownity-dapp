@@ -96,8 +96,8 @@
             "codeName":"Claims"
         },
         {
-            "name":"Rewards",
-            "codeName":"Rewards"
+            "name":"Fractions",
+            "codeName":"Fractions"
         }
     ]
 }
