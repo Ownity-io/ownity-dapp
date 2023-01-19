@@ -36,9 +36,9 @@
                   <div class="price-block-title">{{translatesGet('PRICE_PART')}}</div>
                   <div class="price-block-value price-value">
                     <div class="icon-value"></div>
-                    <span>{{this.abbrNum(this.toFixedIfNecessary(this.userBidAmount/10**item.currency.decimals,6),1)}} ETH</span>
+                    <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(this.userBidAmount/10**item.currency.decimals,6),1)}} ETH</span>
                   </div>
-                  <div class="price-block-equivalent equivalent">≈ $ {{this.toFixedIfNecessary(abbrNum((userBidAmount / (10**this.item.currency.decimals) * currencyToUsdPrice),1),2)}}</div>
+                  <div class="price-block-equivalent equivalent">≈ $ {{useHelpers.toFixedIfNecessary(useHelpers.abbrNum((userBidAmount / (10**this.item.currency.decimals) * currencyToUsdPrice),1),2)}}</div>
                 </div>
               </div>
             </div>
@@ -51,7 +51,7 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>{{this.abbrNum(this.toFixedIfNecessary(this.userBidAmount/10**item.currency.decimals,6),1)}} ETH</b><span>≈ $ {{this.toFixedIfNecessary(abbrNum((userBidAmount / (10**this.item.currency.decimals) * currencyToUsdPrice),1),2)}}</span>
+                    <b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(this.userBidAmount/10**item.currency.decimals,6),1)}} ETH</b><span>≈ $ {{useHelpers.toFixedIfNecessary(useHelpers.abbrNum((userBidAmount / (10**this.item.currency.decimals) * currencyToUsdPrice),1),2)}}</span>
                   </div>
                   <!-- <div class="total-fees">Fees:<span>3%</span></div> -->
                 </div>
@@ -120,69 +120,30 @@
 <script>
 import config from '@/config.json';
 import MultiLang from "@/core/multilang";
+import helpers from "@/helpers/helpers";
+import {mapGetters} from "vuex";
 
 export default {
   data() {
     return {
+      useHelpers: helpers,
       selectOpen: false,
       voting:null,
       render:false,
       item:null,
-      currencyToUsdPrice:1,
-      render:false,
       userBidAmount:null,
       lang: new MultiLang(this),
     };
   },
-  async mounted(){
-    this.item = await this.$store.getters['marketplaceListing/getItem'];
-    this.voting = this.$store.getters['appGlobal/getCurrentVoting'];
-    this.setCurrencyToUsd();
-    this.setUserBidAmount();
-    this.render = true;
+  computed: {
+    ...mapGetters(['getUsdRate']),
+    currencyToUsdPrice() {
+      return this.getUsdRate[`${this.item.currency.ticker}`] ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
+    }
   },
   methods:{
     translatesGet(key) {
       return this.lang.get(key);
-    },
-    abbrNum(number, decPlaces) {
-      decPlaces = Math.pow(10, decPlaces);
-      var abbrev = ["k", "m", "b", "t"];
-      for (var i = abbrev.length - 1; i >= 0; i--) {
-        var size = Math.pow(10, (i + 1) * 3);
-        if (size <= number) {
-          number = Math.round(number * decPlaces / size) / decPlaces;
-          if ((number == 1000) && (i < abbrev.length - 1)) {
-            number = 1;
-            i++;
-          }
-          number += abbrev[i];
-          break;
-        }
-      }
-
-      return number;
-    },
-    async setCurrencyToUsd(){
-      let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
-      let requestJson = await request.json();
-      try{
-        this.currencyToUsdPrice =  requestJson.quotes[0].priceUsd;
-      }
-      catch{
-        this.currencyToUsdPrice = 1;
-      }
-    },
-    toFixedIfNecessary(value, dp) {
-      return +parseFloat(value).toFixed(dp);
-    },
-    convertToEther(value){
-      try{
-        return ethers.utils.formatEther(String(value));
-      }
-      catch{
-        console.log('ethers error');
-      }
     },
     convertFromEtherToWei(value){
       return value * 10**this.item.currency.decimals;
@@ -190,7 +151,6 @@ export default {
     async startVote() {
         let signed_message = await this.$store.dispatch('walletsAndProvider/signMessageWithGlobalProvider',
           `${this.item.id}-${this.item.currency.address}-${this.noExponents(this.voting.amount)}-${this.item.end_date}`);
-        console.log(signed_message);
         let requestLink = `${config.backendApiEntryPoint}voting-create/`;
         let requestOptions = {
           method: "POST",
@@ -212,13 +172,9 @@ export default {
         };
         let request = await fetch(requestLink, requestOptions);
         let requestJson = await request.json();
-        console.log(requestJson);
-        console.log(requestJson.data[0].voting_id);
         if (requestJson.success) {    
           if (parseInt((requestJson.data[0].voting_percentage.replace('%', ''))) >= 51) {
-            console.log('ВИКЛИКАЮ finish-voting !!!!!');
             requestLink = `${config.backendApiEntryPoint}finish-voting/`;
-            console.log(requestLink);
             requestOptions = {
               method: "POST",
               headers: {
@@ -230,10 +186,8 @@ export default {
                 voting_id: requestJson.data[0].voting_id
               })
             };
-            console.log(requestOptions);
             request = await fetch(requestLink, requestOptions);
             requestJson = await request.json();
-            console.log(requestJson);
           }
           // location.reload();
         }        
@@ -275,6 +229,12 @@ export default {
       while (mag--) z += '0';
       return str + z;
     }
-  }
+  },
+  async mounted(){
+    this.item = await this.$store.getters['marketplaceListing/getItem'];
+    this.voting = this.$store.getters['appGlobal/getCurrentVoting'];
+    this.setUserBidAmount();
+    this.render = true;
+  },
 };
 </script>
