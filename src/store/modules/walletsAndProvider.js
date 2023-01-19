@@ -48,6 +48,8 @@ export default {
         context.commit('setGlobalProvider',provider);   
         await provider.send('wallet_switchEthereumChain',[{ chainId: "0x5"}]);     
         let userAddress = await provider.getSigner().getAddress();
+        console.log(userAddress);
+        console.log(localStorage.getItem('userAddress'));
         if (localStorage.getItem('userAddress')!=userAddress){
           localStorage.setItem('userAddress',null);
           localStorage.setItem('token',null);
