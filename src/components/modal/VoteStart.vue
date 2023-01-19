@@ -34,7 +34,7 @@
                   </div>
                   <div class="input-wrapper input-wrapper-amount">
                     <input type="text" placeholder="Input amount" v-model="amount"  @input="setSellLotFee" onkeypress="return (event.charCode >= 48 && event.charCode <=57 || event.charCode == 46 || event.charCode == 44 || this.amount=='')" :disabled="blockPrice">
-                    <div class="input-equivalent equivalent" v-if="amount>0">≈ $ {{abbrNum(Math.round(amount * currencyToUsdPrice),1)}}</div>
+                    <div class="input-equivalent equivalent" v-if="amount>0">≈ $ {{useHelpers.abbrNum(Math.round(amount * currencyToUsdPrice),1)}}</div>
                   </div>
                   <div class="input-prompt">{{translatesGet('ITEM_UNTIL_VOTE')}}</div>
                 </div>
@@ -68,7 +68,7 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>{{abbrNum(toFixedIfNecessary(this.convertToEther(this.noExponents(this.noExponents(this.convertFromEtherToWei(this.amount))-parseInt(this.sellLotFee))),6),2)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(this.convertToEther(this.noExponents(this.noExponents(this.convertFromEtherToWei(this.amount))-parseInt(this.sellLotFee)))*currencyToUsdPrice,6),2)}}</span>
+                    <b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.noExponents(this.noExponents(this.convertFromEtherToWei(this.amount))-parseInt(this.sellLotFee))),6),2)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.noExponents(this.noExponents(this.convertFromEtherToWei(this.amount))-parseInt(this.sellLotFee)))*currencyToUsdPrice,6),2)}}</span>
                   </div>
                   <div class="total-fees">{{translatesGet('FEES')}}: <span>{{this.contractConfig[0].sell_lot_fee/100}}%</span></div>
                 </div>
@@ -135,16 +135,18 @@ import ABI from '@/abi.json';
 import { ethers } from 'ethers';
 import { toRaw } from '@vue/reactivity';
 import MultiLang from "@/core/multilang";
+import {mapGetters} from "vuex";
+import helpers from "@/helpers/helpers";
 
 export default {
   data() {
     return {
+      useHelpers: helpers,
       item:null,
       marketplaces:null,
       render:false,
       checkedMarketplaces:[],
       amount:null,
-      currencyToUsdPrice:1,
       config:config,
       ABI:ABI,
       provider:null,
@@ -156,72 +158,15 @@ export default {
       blockPrice:false
     };
   },
-  async mounted(){    
-    this.item = await this.$store.getters['marketplaceListing/getItem'];
-    let requestUrl = `${config.backendApiEntryPoint}marketplaces/`;
-    let request = await fetch(requestUrl);
-    let requestJson = await request.json();
-    let marketplacesTemp = requestJson;
-    this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
-    this.setSellLotFee();
-    console.log(marketplacesTemp);
-    let k = 0
-    // for (let element of marketplacesTemp){
-    //   console.log(element.id);
-    //   if (element.id=='LORA'){
-    //     console.log(element);
-    //     marketplacesTemp = marketplacesTemp.splice(k+1,2);
-    //   }
-    //   k+=1;
-    // }
-    this.marketplaces = marketplacesTemp;
-    this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
-    this.setMaxVoting();
-    this.render = true;
-    await this.setCurrencyToUsd();    
+  computed: {
+    ...mapGetters(['getUsdRate']),
+    currencyToUsdPrice() {
+      return this.getUsdRate[`${this.item.currency.ticker}`] ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
+    }
   },
   methods:{
     translatesGet(key) {
       return this.lang.get(key);
-    },
-    abbrNum(number, decPlaces) {
-      decPlaces = Math.pow(10, decPlaces);
-      var abbrev = ["k", "m", "b", "t"];
-      for (var i = abbrev.length - 1; i >= 0; i--) {
-        var size = Math.pow(10, (i + 1) * 3);
-        if (size <= number) {
-          number = Math.round(number * decPlaces / size) / decPlaces;
-          if ((number == 1000) && (i < abbrev.length - 1)) {
-            number = 1;
-            i++;
-          }
-          number += abbrev[i];
-          break;
-        }
-      }
-
-      return number;
-    },
-    async setCurrencyToUsd(){
-      let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
-      let requestJson = await request.json();
-      try{
-        this.currencyToUsdPrice =  requestJson.quotes[0].priceUsd;
-      }
-      catch{
-        this.currencyToUsdPrice = 1;
-      }
-    },
-    toFixedIfNecessary(value, dp) {
-      return +parseFloat(value).toFixed(dp);
-    },
-    convertToEther(value){
-      try{
-        return ethers.utils.formatEther(String(value));
-      }
-      catch{
-        console.log('ethers error');
-      }
     },
     convertFromEtherToWei(value){
       return value * 10**this.item.currency.decimals;
@@ -252,21 +197,14 @@ export default {
               "blockchain": this.item.collection.blockchain
             })
           };
-          console.log(requestOptions);
           let request = await fetch(requestLink, requestOptions);
           let requestJson = await request.json();
-          console.log(requestJson);
-          console.log(requestJson.length);
           if (requestJson.success) {
-            console.log('OK');
             if (parseInt((requestJson.data[0].voting_percentage.replace('%', ''))) >= 51 & this.item.internal_status!='ON SALE') {
-              console.log('OK2');
-              console.log(requestJson.voting_id);
               try{
                 await this.sellLot(requestJson.data)
               }
               catch{
-                console.log(111)
                 this.buttonWaiting=false;
                 await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
                 await this.$store.dispatch('appGlobal/setGreenSnack', false)
@@ -293,9 +231,6 @@ export default {
                 };
                 requestTemp = await fetch(requestLinkTemp, requestOptionsTemp);
                 requestJsonTemp = await requestTemp.json();
-                console.log(requestLinkTemp);
-                console.log('FINISH VOTING');
-                console.log(requestJsonTemp);
 
               }
               location.reload();
@@ -303,7 +238,6 @@ export default {
           }
           else {
             this.buttonWaiting = false;
-            console.log(222)
             await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
             await this.$store.dispatch('appGlobal/setGreenSnack', false)
             await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)
@@ -339,7 +273,6 @@ export default {
     },
     async sellLot(_voting_Ids) {
       try{
-      console.log(this.config.contractAddress);
       let prov = toRaw(this.provider);
       let chainSettings = toRaw(this.config.evmChains[this.item.collection.blockchain])
       try{
@@ -376,15 +309,9 @@ export default {
           };
           request = await fetch(requestLink, requestOptions);
           requestJson = await request.json();
-          console.log('FINISH VOTING');
-          console.log(requestJson);
-
         }     
       
       let markeplaceId = ethers.utils.formatBytes32String(requestJson.data.marketplace).substring(0, 10);
-      console.log(`price:${String(requestJson.data.lot.price)}`);
-      console.log(`totalWithoutFee:${String(requestJson.data.lot.price - parseInt(this.sellLotFee))}`);
-      console.log(`totalFee:${String((this.sellLotFee))}`);
       let lot = {
           tokenAddress: requestJson.data.lot.currency,
           decimals: String(requestJson.data.lot.decimals),
@@ -396,7 +323,6 @@ export default {
           tokenAmount: requestJson.data.lot.token_amount,
           status: '0',
         };
-      console.log(lot);
       let sellLot = await contract.sellLot(
         markeplaceId,
         requestJson.data.lot.id,
@@ -405,7 +331,6 @@ export default {
         { gasLimit: '1000000' }
       
       );
-      console.log(sellLot);
       let trx = await prov.waitForTransaction(sellLot.hash);
       if (trx.status == 1) {
         let forceReq = await (await fetch(
@@ -422,14 +347,12 @@ export default {
               },
               method:'POST'
             })).json();
-          console.log(forceReq);
         await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
         await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);
         await this.$store.dispatch('appGlobal/setShowStartVotingModal', false);
         await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
       }
       else{
-        console.log(555)
         await this.$store.dispatch('appGlobal/setLastTransSuccess',false)
         await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);
         await this.$store.dispatch('appGlobal/setShowStartVotingModal', false);
@@ -441,7 +364,6 @@ export default {
       }
     }
     catch{
-      console.log(666)
         this.buttonWaiting = false;
         await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
         await this.$store.dispatch('appGlobal/setGreenSnack', false)
@@ -459,10 +381,7 @@ export default {
       for (let element of checkedMarketplacesTemp){
         if (element == markeplaceId){
           existFlag = true;
-          checkedMarketplacesTemp.splice(index,1)  
-          console.log('**********');
-          console.log(`-${markeplaceId}-`);  
-          console.log('**********');
+          checkedMarketplacesTemp.splice(index,1)
           break
         }
         index+=1;
@@ -470,46 +389,50 @@ export default {
       this.checkedMarketplaces = checkedMarketplacesTemp;
       if (!existFlag){
         this.checkedMarketplaces.push(markeplaceId);
-        console.log('**********');
-        console.log(`+${markeplaceId}+`);
-        console.log('**********');
       }
-      console.log('##################################');
-      for (let element of this.checkedMarketplaces){
-        console.log(element)
-      }
-      console.log('##################################');
     },
-    setMaxVoting(){ 
-      console.log('e');
+    setMaxVoting(){
       if (this.item.votings){
-        console.log('d');
         for (let element of this.item.votings){
-          console.log('v');
             if (element.status=='ON SALE'||element.status=='FULFILLED') {
-              console.log('r');
               this.voting = element;
               this.markeplacesId.push(element.marketplace.id);
               this.blockPrice = true;   
-              this.amount =  (this.toFixedIfNecessary(this.convertToEther(this.voting.amount),6));        
+              this.amount = (this.useHelpers.toFixedIfNecessary(this.useHelpers.convertToEther(this.voting.amount),6));
             }
         }
       }
     },
     checkMarketplaceInMarketplacesId(id){
-      // console.log('AAAAAAA');
-      // console.log(this.markeplacesId);
-      
       for (let element of this.markeplacesId){
-        // console.log(id);
-        // console.log(element);
         if (id == element){
-          
           return true;
         }
       }
       return false;
     }
+  },
+  async mounted(){
+    this.item = await this.$store.getters['marketplaceListing/getItem'];
+    let requestUrl = `${config.backendApiEntryPoint}marketplaces/`;
+    let request = await fetch(requestUrl);
+    let requestJson = await request.json();
+    let marketplacesTemp = requestJson;
+    this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
+    this.setSellLotFee();
+    let k = 0
+    // for (let element of marketplacesTemp){
+    //   console.log(element.id);
+    //   if (element.id=='LORA'){
+    //     console.log(element);
+    //     marketplacesTemp = marketplacesTemp.splice(k+1,2);
+    //   }
+    //   k+=1;
+    // }
+    this.marketplaces = marketplacesTemp;
+    this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
+    this.setMaxVoting();
+    this.render = true;
   }
 };
 </script>
