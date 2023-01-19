@@ -72,9 +72,9 @@
                   </div>
                   <div class="price-block-value price-value">
                     <div class="icon-value"></div>
-                    <span>{{abbrNum(toFixedIfNecessary(((parseInt(this.item.price)/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</span>
+                    <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(((parseInt(this.item.price)/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</span>
                   </div>
-                  <div class="price-block-equivalent equivalent">≈ $ {{abbrNum(toFixedIfNecessary(((parseInt(this.item.price)/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</div>
+                  <div class="price-block-equivalent equivalent">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(((parseInt(this.item.price)/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</div>
                 </div>
               </div>
             </div>
@@ -87,9 +87,9 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>{{abbrNum(toFixedIfNecessary((((parseInt(this.item.price)+parseInt(this.buyLotFee))/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary((((parseInt(this.item.price)+parseInt(this.buyLotFee))/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</span>
+                    <b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary((((parseInt(this.item.price)+parseInt(this.buyLotFee))/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary((((parseInt(this.item.price)+parseInt(this.buyLotFee))/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</span>
                   </div>
-                  <div class="total-fees">{{translatesGet('FEES')}}:<span>{{toFixedIfNecessary(this.buyLotFee/parseInt(this.item.price)*100,1)}}%</span></div>
+                  <div class="total-fees">{{translatesGet('FEES')}}:<span>{{useHelpers.toFixedIfNecessary(this.buyLotFee/parseInt(this.item.price)*100,1)}}%</span></div>
                 </div>
               </div>
             </div>
@@ -158,10 +158,13 @@ import ABI from '@/abi.json';
 import config from '@/config.json';
 import { toRaw } from '@vue/reactivity';
 import MultiLang from "@/core/multilang";
+import helpers from "@/helpers/helpers";
+import {mapGetters} from "vuex";
 
 export default {
   data() {
     return {
+      useHelpers: helpers,
       selectOpen: false,
       item:null,
       ABI:ABI,
@@ -170,7 +173,6 @@ export default {
       provider:null,
       signer:null,
       currentPart:null,
-      currencyToUsdPrice:1,
       allBidsAmount:0,
       buttonDisabled:false,
       buttonWaiting:false,
@@ -179,16 +181,11 @@ export default {
       buyLotFee:0
     };
   },
-  async mounted(){
-    this.item = await this.$store.getters['marketplaceListing/getItem'];
-    this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
-    this.signer = await this.$store.getters['walletsAndProvider/getSigner'];
-    this.setCurrencyToUsd();
-    this.setAllBidsAmount();
-    this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
-    this.buyLotFee = this.noExponents((this.contractConfig[0].buy_lot_fee/100)/100*this.item.price);
-    console.log(this.buyLotFee);
-    this.render = true;    
+  computed: {
+    ...mapGetters(['getUsdRate']),
+    currencyToUsdPrice() {
+      return this.getUsdRate[`${this.item.currency.ticker}`] ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
+    }
   },
   methods:{
     translatesGet(key) {
@@ -216,11 +213,11 @@ export default {
       let options = {};
       let valueToBuy = this.noExponents((ethers.BigNumber.from(this.noExponents(this.item.price))/100)*this.currentPart);
       let valueToBuyWithComissions = this.noExponents((ethers.BigNumber.from(this.noExponents(parseInt(this.item.price)+parseInt(this.buyLotFee)))/100)*this.currentPart);
-      console.log('+++++++++++++++++++++++++++++++++++++++++++');
-      console.log(`amount:${valueToBuy}`);
-      console.log(`value:${valueToBuyWithComissions}`);
-      console.log(`fee:${this.buyLotFee}`);
-      console.log('+++++++++++++++++++++++++++++++++++++++++++');
+      // console.log('+++++++++++++++++++++++++++++++++++++++++++');
+      // console.log(`amount:${valueToBuy}`);
+      // console.log(`value:${valueToBuyWithComissions}`);
+      // console.log(`fee:${this.buyLotFee}`);
+      // console.log('+++++++++++++++++++++++++++++++++++++++++++');
       // if (valueToBuy>(parseInt(this.item.price)-this.allBidsAmount)){
       //   console.log('Part is too big');
       //   valueToBuy = parseInt(this.item.price)-this.allBidsAmount;
@@ -266,22 +263,22 @@ export default {
       let signature = requestJson.data.signature;
       // let part = (ethers.BigNumber.from(String((parseInt(this.item.price)/100)*this.currentPart))).toString();
       try{
-        console.log('-----------------');
-        console.log(`Marketplace ID: ${markeplaceId}`);
-        console.log(`Lot ID: ${this.item.id}`);
-        console.log(`Amount: ${valueToBuy}`);
-        console.log('--------LOT_DATA--------');
-        console.log(`tokenAddress: ${this.item.currency.address}`);
-        console.log(`Decimals: ${this.item.currency.decimals}`);
-        console.log(`price: ${parseInt(this.item.price)}`);
-        console.log(`tokenContractAddress: ${this.item.collection.contract_address}`);
-        console.log(`tokenId: ${this.item.token_id}`);
-        console.log(`tokenAmount: ${this.item.amount}`);
-        console.log('--------LOT_DATA--------');
-        console.log(`Input data: ${inputData}`);
-        console.log(`Signature: ${signature}`);
+        // console.log('-----------------');
+        // console.log(`Marketplace ID: ${markeplaceId}`);
+        // console.log(`Lot ID: ${this.item.id}`);
+        // console.log(`Amount: ${valueToBuy}`);
+        // console.log('--------LOT_DATA--------');
+        // console.log(`tokenAddress: ${this.item.currency.address}`);
+        // console.log(`Decimals: ${this.item.currency.decimals}`);
+        // console.log(`price: ${parseInt(this.item.price)}`);
+        // console.log(`tokenContractAddress: ${this.item.collection.contract_address}`);
+        // console.log(`tokenId: ${this.item.token_id}`);
+        // console.log(`tokenAmount: ${this.item.amount}`);
+        // console.log('--------LOT_DATA--------');
+        // console.log(`Input data: ${inputData}`);
+        // console.log(`Signature: ${signature}`);
         // console.log(`Options: ${options.value}`);
-        console.log('-----------------');
+        // console.log('-----------------');
         let buyLot = await contract.buyLot(
           markeplaceId,
           this.item.id,
@@ -317,7 +314,6 @@ export default {
               },
               method:'POST'
             })).json();
-          console.log(forceReq)
           await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
           await this.$store.dispatch('appGlobal/setLastTransactionHash',buyLot.hash);
           await this.$store.dispatch('appGlobal/setshowStartCollectingModal',false)          
@@ -343,7 +339,6 @@ export default {
               })
             }
             )).json();
-            console.log(failedTransactionRequest);
         }          
       }
       catch{
@@ -352,24 +347,6 @@ export default {
         await this.$store.dispatch('appGlobal/setGreenSnack', false)
         await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)
       }
-    },
-    abbrNum(number, decPlaces) {
-      decPlaces = Math.pow(10, decPlaces);
-      var abbrev = ["k", "m", "b", "t"];
-      for (var i = abbrev.length - 1; i >= 0; i--) {
-        var size = Math.pow(10, (i + 1) * 3);
-        if (size <= number) {
-          number = Math.round(number * decPlaces / size) / decPlaces;
-          if ((number == 1000) && (i < abbrev.length - 1)) {
-            number = 1;
-            i++;
-          }
-          number += abbrev[i];
-          break;
-        }
-      }
-
-      return number;
     },
     noExponents (value) {
       var data = String(value).split(/[eE]/);
@@ -388,19 +365,6 @@ export default {
       mag -= str.length;
       while (mag--) z += '0';
       return str + z;
-    },
-    async setCurrencyToUsd(){
-      let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
-      let requestJson = await request.json();
-      try{
-        this.currencyToUsdPrice =  requestJson.quotes[0].priceUsd;
-      }
-      catch{
-        this.currencyToUsdPrice = 1;
-      }
-    },
-    toFixedIfNecessary(value, dp) {
-      return +parseFloat(value).toFixed(dp);
     },
     setAllBidsAmount(){
       this.allBidsAmount=0;
@@ -431,6 +395,15 @@ export default {
     async onClickAway(){
       await this.$store.dispatch('appGlobal/setshowStartCollectingModal',false);
     }
-  }
+  },
+  async mounted(){
+    this.item = await this.$store.getters['marketplaceListing/getItem'];
+    this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
+    this.signer = await this.$store.getters['walletsAndProvider/getSigner'];
+    this.setAllBidsAmount();
+    this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
+    this.buyLotFee = this.noExponents((this.contractConfig[0].buy_lot_fee/100)/100*this.item.price);
+    this.render = true;
+  },
 };
 </script>
