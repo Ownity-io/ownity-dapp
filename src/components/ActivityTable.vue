@@ -21,35 +21,30 @@
                     </div>
                 </div>
                 <div class="td td-category">
-                    <div class="td-wrap td-wrap-category">
+                    <div class="td-wrap td-wrap-category" v-if="item.division=='Fractions'">
                         <i class="i-coupon-3-line"></i>
-                        <div>{{ item.part }}</div>
-                        <div class="td-light">Empty</div>
+                        <div>{{ 'Fractions' }}</div>
+                        <div class="td-light">  {{item.subdivision}} </div>
                     </div>
-                    <!-- <div class="td-wrap td-wrap-category">
-                        <i class="i-coupon-3-line"></i>
-                        <div>{{translatesGet('ACTIVITY_THEAD-1')}}</div>
-                        <div class="td-light">{{translatesGet('STATUS-START')}}</div>
-                    </div> -->
-                    <!-- <div class="td-wrap td-wrap-category">
-                        <i class="i-coupon-3-line"></i>
-                        <div>{{translatesGet('ACTIVITY_THEAD-1')}}</div>
-                        <div class="td-light">{{translatesGet('STATUS-CANCEL')}}</div>
-                    </div>   
-                    <div class="td-wrap td-wrap-category">
-                        <i class="i-shopping-bag-line"></i>
-                        <div>{{translatesGet('STATUS-SALE')}}</div>
-                    </div>
-                    <div class="td-wrap td-wrap-category">
+                    <div class="td-wrap td-wrap-category" v-else-if="item.division=='Votings'">
                         <i class="i-volume-vibrate-line"></i>
-                        <div>{{translatesGet('STATUS-VOITE')}}</div>
-                        <div class="td-light">{{translatesGet('STATUS-CANCELLATION')}}</div>
+                        <div>{{ 'Vote' }}</div>
+                        <div class="td-light">  {{item.subdivision}} </div>
                     </div>
-                    <div class="td-wrap td-wrap-category">
-                        <i class="i-volume-vibrate-line"></i>
-                        <div>{{translatesGet('STATUS-LISTING')}}</div>
-                        <div class="td-light">{{translatesGet('STATUS-START')}}</div>
-                    </div> -->
+                    <div class="td-wrap td-wrap-category" v-else-if="item.division=='Sale'">
+                        <i class="i-price-tag-3-line"></i>
+                        <div>{{ 'Sale' }}</div>
+                        <div class="td-light">  {{item.subdivision}} </div>
+                    </div>
+                    <div class="td-wrap td-wrap-category" v-else-if="item.division=='Rewards'||item.division=='Claims'||item.division=='Claim'">
+                        <i class="i-wallet-3-line"></i>
+                        <div>{{ 'Claims' }}</div>
+                        <div class="td-light">  {{item.subdivision}} </div>
+                    </div>
+                    <div class="td-wrap td-wrap-category" v-else>
+                        <div>{{ item.division }}</div>
+                        <div class="td-light">  {{item.subdivision}} </div>
+                    </div>
                 </div>
                 <div class="td td-price" v-if="item.amount">
                     <div class="td-wrap">
@@ -67,18 +62,18 @@
                         <span class="td-light">≈ $ 1000</span>
                     </div> -->
                 </div>
-                <div class="td td-tx" v-if="String(item.part_id).length>10"> 
+                <div class="td td-tx" v-if="item.tnx_hash"> 
                     <div class="td-mob-title">Tx</div>
-                    <a class="td-wrap td-wrap-link" :href="config.etherscanTxUrlStart+item.part_id" target="_blank" rel="nofollow">
-                        <span>{{item.part_id.substring(0,6)+'...'+item.part_id.substring(38,42)}}</span>
+                    <a class="td-wrap td-wrap-link" :href="config.etherscanTxUrlStart+item.tnx_hash" target="_blank" rel="nofollow">
+                        <span>{{item.tnx_hash.substring(0,6)+'...'+item.tnx_hash.substring(38,42)}}</span>
                         <i class="i-external-link-line"></i>
                     </a> 
                 </div>
-                <div class="td td-tx" v-else> 
-                    <div class="td-mob-title">Tx</div>
+                <div class="td td-tx" v-else-if="item.part_id"> 
+                    <!-- <div class="td-mob-title">Tx</div>
                     <div class="td-wrap td-wrap-link" href="" target="_blank" rel="nofollow">
                         <span>VoteID: {{item.part_id}}</span>
-                    </div> 
+                    </div>  -->
                 </div>
                 <div class="td td-date">
                     <div class="td-mob-title">{{translatesGet('ACTIVITY_THEAD-5')}}</div>
