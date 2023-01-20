@@ -7,22 +7,22 @@
                         <div v-if="$route.fullPath ==='/'" class="footer-logo"></div>
                         <router-link :to="{name: 'Main'}" v-else  class="footer-logo"></router-link>
                     </div>
-                    <div class="footer-block" :class="{'unfolded' : !footerBlock1}">
-                        <div class="footer-block-name">
-                            <span>{{translatesGet('MARKETPLACE')}}</span>
-                        </div>
-                        <button class="footer-block-name" @click="footerBlock1 = !footerBlock1">
-                            <span>{{translatesGet('MARKETPLACE')}}</span>
-                            <i class="i-arrow-up-s-line"></i>
-                        </button>
-                        <ul class="footer-list">
-                            <li><a href="">Active</a></li>
-                            <li><a href="">Canceled</a></li>
-                            <li><a href="">Purchased</a></li>
-                            <li><a href="">On sale</a></li>
-                            <li><a href="">Sold</a></li>
-                        </ul>
-                    </div>
+<!--                    <div class="footer-block" :class="{'unfolded' : !footerBlock1}">-->
+<!--                        <div class="footer-block-name">-->
+<!--                            <span>{{translatesGet('MARKETPLACE')}}</span>-->
+<!--                        </div>-->
+<!--                        <button class="footer-block-name" @click="footerBlock1 = !footerBlock1">-->
+<!--                            <span>{{translatesGet('MARKETPLACE')}}</span>-->
+<!--                            <i class="i-arrow-up-s-line"></i>-->
+<!--                        </button>-->
+<!--                        <ul class="footer-list">-->
+<!--                            <li><a href="">Active</a></li>-->
+<!--                            <li><a href="">Canceled</a></li>-->
+<!--                            <li><a href="">Purchased</a></li>-->
+<!--                            <li><a href="">On sale</a></li>-->
+<!--                            <li><a href="">Sold</a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
                     <div class="footer-block" :class="{'unfolded' : !footerBlock2}">
                         <div class="footer-block-name">
                             <span>{{translatesGet('COLLECTIONS')}}</span>
