@@ -122,7 +122,7 @@ export default{
   computed: {
     ...mapGetters(['getUsdRate']),
     currencyToUsdPrice() {
-      return this.getUsdRate[`${this.item.currency.ticker}`] ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
+      return this.getUsdRate ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
     }
   },
   methods:{
