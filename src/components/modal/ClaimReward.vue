@@ -18,7 +18,7 @@
             <div class="token-value">
               <div class="icon-value"></div>
               {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther((item.reward/100)*(userBidAmount/item.price*100)),6),2)}} ETH
-              <span class="input-equivalent equivalent">(≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther((item.reward/100)*(userBidAmount/item.price*100))*currencyToUsdPrice,2),2)}})</span>
+              <span class="input-equivalent equivalent">(≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther((item.reward/100)*(userBidAmount/item.price*100))*currencyToUsdPrice,2),2,2)}})</span>
             </div>
           </div>
 
@@ -29,7 +29,7 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b> {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther((item.reward/100)*(userBidAmount/item.price*100)),6),2)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther((item.reward/100)*(userBidAmount/item.price*100))*currencyToUsdPrice,2),2)}}</span>
+                    <b> {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther((item.reward/100)*(userBidAmount/item.price*100)),6),2)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther((item.reward/100)*(userBidAmount/item.price*100))*currencyToUsdPrice,2),2,2)}}</span>
                   </div>
                   <!-- <div class="total-fees">Fees:<span>3%</span></div> -->
                 </div>

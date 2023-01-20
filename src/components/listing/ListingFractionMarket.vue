@@ -21,7 +21,7 @@
                             <div class="icon-token eth"></div> 
                             <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(convertToEther(element.price),6),2)}} ETH</span>
                         </div>
-                        <span class="td-light">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(convertToEther(element.price)*currencyToUsdPrice,6),2)}}</span>
+                        <span class="td-light">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(convertToEther(element.price)*currencyToUsdPrice,6),2,2)}}</span>
                     </div>
                 </div>
                 <div class="td"> 

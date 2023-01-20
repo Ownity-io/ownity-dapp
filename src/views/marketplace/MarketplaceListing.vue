@@ -152,22 +152,22 @@
                   <div class="deposit-value" v-if="(item.internal_status=='ON SALE')">
                     <div class="icon-token eth"></div>
                     <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.voting.amount),6),2)}} ETH</b></span>
-                    <span class="equivalent">(≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.voting.amount) *currencyToUsdPrice,2),2)}})</span>
+                    <span class="equivalent">(≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.voting.amount) *currencyToUsdPrice,2),2,2)}})</span>
                   </div>
                   <div class="deposit-value" v-if="item.marketplace_status=='CLOSED' & item.internal_status=='SOLD' & !bidRewarded">
                     <div class="icon-token eth"></div>
                     <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(( this.item.reward  / (10**this.item.currency.decimals)),6),1)}} ETH</b></span>
-                    <span class="equivalent">(≈ $ {{useHelpers.abbrNum(Math.round(useHelpers.toFixedIfNecessary(( this.item.reward / (10**this.item.currency.decimals)),6)  * currencyToUsdPrice),1)}})</span>
+                    <span class="equivalent">(≈ $ {{useHelpers.abbrNum(Math.round(useHelpers.toFixedIfNecessary(( this.item.reward / (10**this.item.currency.decimals)),6)  * currencyToUsdPrice),1,2)}})</span>
                   </div>
                   <div class="deposit-value" v-if="item.marketplace_status=='CLOSED' & item.internal_status=='SOLD' & bidRewarded">
                     <div class="icon-token eth"></div>
                     <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(( this.item.reward * parseInt(this.userBid.fraction)/100 / (10**this.item.currency.decimals)),6),1)}} ETH</b></span>
-                    <span class="equivalent">(≈ $ {{useHelpers.abbrNum(Math.round(useHelpers.toFixedIfNecessary(( this.item.reward*parseInt(this.userBid.fraction)/100 / (10**this.item.currency.decimals)),6)  * currencyToUsdPrice),1)}})</span>
+                    <span class="equivalent">(≈ $ {{useHelpers.abbrNum(Math.round(useHelpers.toFixedIfNecessary(( this.item.reward*parseInt(this.userBid.fraction)/100 / (10**this.item.currency.decimals)),6)  * currencyToUsdPrice),1,2)}})</span>
                   </div>
                   <div class="deposit-value" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'">
                     <div class="icon-token eth"></div>
                     <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(allBidsAmount),6),1)}} / <b>{{useHelpers.abbrNum(priceInCurrency,1)}}{{' '}} ETH</b></span>
-                    <span class="equivalent">(≈ $ {{useHelpers.abbrNum((useHelpers.convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
+                    <span class="equivalent">(≈ $ {{useHelpers.abbrNum((useHelpers.convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1,2)}})</span>
                   </div>
                   <div class="deposit-part" v-if="userBid!=null & item.marketplace_status=='CLOSED' & item.internal_status=='OWNED'">
                     {{translatesGet('YOUR_PART')}}: <span>{{userBid.fraction}}</span>
@@ -307,7 +307,7 @@
                   <div class="deposit-value" v-if="(item.internal_status=='ON SALE')">
                     <div class="icon-token eth"></div>
                     <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(voting.amount),6),2)}} ETH</b></span>
-                    <span class="equivalent">(≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(voting.amount) *currencyToUsdPrice,2),2)}})</span>
+                    <span class="equivalent">(≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(voting.amount) *currencyToUsdPrice,2),2,2)}})</span>
                   </div>      
                 </div>
               </div>

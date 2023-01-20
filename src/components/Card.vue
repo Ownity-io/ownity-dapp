@@ -59,7 +59,7 @@
               <div class="icon-value"></div>
               <div class="card-col-value">
                 <strong>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(bidOnSale.price),4),2)}} ETH</strong>
-                <span class="equivalent">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(bidOnSale.price)*currencyToUsdPrice,2),2)}}</span>
+                <span class="equivalent">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(bidOnSale.price)*currencyToUsdPrice,2),2,2)}}</span>
               </div> 
             </div>
 
@@ -243,7 +243,7 @@
               <div class="icon-value"></div>
               {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(allBidsAmount),4),1)}}/<span><b>{{useHelpers.abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH</span>
             </div>
-            <div class="equivalent">≈ $ {{useHelpers.abbrNum((useHelpers.convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1)}}/{{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
+            <div class="equivalent">≈ $ {{useHelpers.abbrNum((useHelpers.convertToEther(allBidsAmount)*currencyToUsdPrice).toFixed(2),1,2)}}/{{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1,2)}}</div>
 
           </div>
         </div>
@@ -334,7 +334,7 @@
               <div class="icon-value"></div>
               <div class="card-col-value">
                 <strong>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidOnSale.fraction_amount),4),1)}} ETH</strong>
-                <span class="equivalent">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidOnSale.fraction_amount)*currencyToUsdPrice,2),1)}}</span>
+                <span class="equivalent">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidOnSale.fraction_amount)*currencyToUsdPrice,2),1,2)}}</span>
               </div> 
             </div>
           </div>
@@ -383,7 +383,7 @@
         <div class="deposit-value" v-if="this.item.internal_status=='ON SALE' & this.voting!=null">
           <div class="icon-token eth"></div>
           <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.voting.amount),4),2)}} ETH</b></span>
-          <span class="equivalent">(≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.voting.amount)*currencyToUsdPrice,2),2)}})</span>
+          <span class="equivalent">(≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.voting.amount)*currencyToUsdPrice,2),2,2)}})</span>
         </div>
         <!-- ######## 5 ######## -->
         <!-- <div class="deposit-value">

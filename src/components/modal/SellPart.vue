@@ -66,7 +66,7 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.noExponents(this.noExponents(this.convertFromEtherToWei(this.priceForPart))-parseInt(this.sellFractionFee))),6),2)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.noExponents(this.noExponents(this.convertFromEtherToWei(this.priceForPart))-parseInt(this.sellFractionFee)))*currencyToUsdPrice,6),2)}}</span>
+                    <b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.noExponents(this.noExponents(this.convertFromEtherToWei(this.priceForPart))-parseInt(this.sellFractionFee))),6),2)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.noExponents(this.noExponents(this.convertFromEtherToWei(this.priceForPart))-parseInt(this.sellFractionFee)))*currencyToUsdPrice,6),2,2)}}</span>
                   </div>
                   <div class="total-fees">{{translatesGet('FEES')}}: <span>{{this.contractConfig[0].sell_fraction_fee/100}}%</span></div>
                 </div>

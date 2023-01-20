@@ -37,7 +37,7 @@
                     <div class="icon-value"></div>
                     <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(this.voting.amount/(10**this.item.currency.decimals),6),1)}} ETH</span>
                   </div>
-                  <div class="price-block-equivalent equivalent">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary((this.voting.amount/(10**this.item.currency.decimals)) * currencyToUsdPrice,6),1)}}</div>
+                  <div class="price-block-equivalent equivalent">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary((this.voting.amount/(10**this.item.currency.decimals)) * currencyToUsdPrice,6),1,2)}}</div>
                 </div>
               </div>
             </div>
