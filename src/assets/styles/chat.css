@@ -440,7 +440,7 @@ textarea::-webkit-input-placeholder{
 
 .comment>.inner>.comment-content .commenter-name .username {
     font-weight: 400 !important;
-    font-size: 16px !important;
+    font-size: 26px !important;
     line-height: 150% !important;
     color: #9A9A9A !important;
 }
@@ -485,4 +485,12 @@ textarea::-webkit-input-placeholder{
     padding: 12px 24px !important;
     max-width: 100% !important;
     box-sizing: border-box;
+}
+
+.comment-reply .comment-reply-top-bar .logged-in-info .avatar {
+    pointer-events: none !important;
+}
+
+.comment .avatar-wrapper.anon {
+    pointer-events: none !important;
 }
