@@ -27,9 +27,12 @@
               <div class="modal-data-block modal-select-part">
                 <div class="input-select-block">
                   <div class="input-select-title">{{translatesGet('CHOOSE_PART')}}</div>
-                  <div class="input-wrapper input-percent">
+                  <div class="input-wrapper input-percent wMax">
                     <input type="text"
-                    placeholder="0%" v-model="this.currentPart" @input="checkCurrentPart"> 
+                    placeholder="0%" v-model="this.currentPart" @input="checkCurrentPart">
+                    <button class="btn-max">
+                      Max
+                    </button>
                   </div>
                   <!--  <div class="input-select-wrap" :class="{ 'unfolded': selectOpen }">
                     <input type="text" class="input-selected" v-model="partComputed"
@@ -407,3 +410,29 @@ export default {
   },
 };
 </script>
+
+<style>
+.wMax {
+    position: relative;
+}
+.btn-max {
+    position: absolute;
+    width: 88px;
+    height: 32px;
+    right: 12px;
+    background: #FFFFFF;
+    outline: 2px solid #DFE2EA;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.btn-max:hover {
+    background: linear-gradient(89.43deg, #3E80FF -3.17%, #2457D5 109.46%);
+    border-radius: 8px;
+    color: #FFFFFF;
+    outline: none
+}
+
+</style>

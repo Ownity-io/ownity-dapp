@@ -504,13 +504,16 @@
                 </button>
               </li>
 
-              <li>
+              <li class="chat-last">
                 <button
                   :class="{ 'active-tab': activeTab === 'ListingChat' }"
                   @click="letsCheck('ListingChat')"
                 >
                   <span>{{translatesGet('CHAT')}}</span>
                   <span>{{translatesGet('CHAT')}}</span>
+                  <div class="flag">
+                    New
+                  </div>
                 </button>
               </li>
             </ul>
@@ -789,5 +792,29 @@ export default {
 </script>
 
 <style>
+.chat-last {
+    position: relative;
+}
+.flag {
+    position: absolute;
+    background: #FFE2E2;
+    border: 1px solid #F32727;
+    border-radius: 8px;
+    padding: 4px 6px;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #F32727;
+    left: 105px;
+    height: 20px;
+}
+@media (max-width: 1077px) {
+    .flag {
+        display: none;
+    }
 
+}
 </style>
