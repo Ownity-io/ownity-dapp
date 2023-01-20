@@ -529,7 +529,7 @@ ul.tabs {
 
 .tabs li button {
     padding: 12px 0;
-    min-width: 152px;
+    min-width: 145px;
     position: relative;
     border-radius: 8px 8px 0px 0px;
     white-space: nowrap;
@@ -1966,7 +1966,7 @@ ul.tabs {
 
 .table-activity .thead,
 .table-activity .tr {
-    grid-template-columns: 1.5fr .75fr 1fr 1fr 1fr;
+    grid-template-columns: 1.5fr .75fr 0.9fr 0.7fr 0.55fr;
     border-bottom: 1px solid #DFE2EA;
     gap: 16px;
 }
@@ -2600,7 +2600,6 @@ a.td-wrap-link span {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 24px;
     padding: 24px 0;
     flex-wrap: wrap;
 }
@@ -3816,4 +3815,79 @@ a.td-wrap-link span {
 }
 .referrals-list-empty p{
     margin-bottom: 24px;
+}
+
+/*ошибка для импута*/
+.errorValue {
+    border: 1px solid #F32727;
+}
+
+.errorValue-text {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    color: #F32727;
+    bottom: -8px;
+}
+.section-listing-main .section-deposit:nth-child(3){
+    border-bottom: 1px solid #DFE2EA;
+}
+
+.section-listing-main .section-deposit:nth-child(2) {
+    border-top: 1px solid #DFE2EA;
+    border-bottom: 1px solid #DFE2EA;
+}
+
+.chat-icon {
+    height: 96px;
+    width: 96px;
+    background-image: url("/src/assets/images/chat.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-info {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #333333;
+    margin-top: 18px;
+    max-width: 324px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.email-address {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #333333;
+    margin-left: 6px;
+}
+
+.our-email {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 19px;
+}
+
+.our-email i {
+    color: rgba(62, 128, 255, 1);
+}
+
+.or {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+    color: #9A9A9A;
+    margin-top: 14px;
 }
