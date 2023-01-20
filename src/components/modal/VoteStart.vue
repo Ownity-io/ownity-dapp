@@ -232,41 +232,6 @@ export default {
                 requestTemp = await fetch(requestLinkTemp, requestOptionsTemp);
                 requestJsonTemp = await requestTemp.json();
 
-                try{
-                requestLinkTemp = `${config.backendApiEntryPoint}check-sell-nft/?voting=${element.voting_id}`;
-                requestOptionsTemp = {
-                  method: "GET",
-                  headers: {
-                    accept: "application/json",
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                  }
-                };
-                requestTemp = await fetch(requestLinkTemp, requestOptionsTemp);
-                requestJsonTemp = await requestTemp.json();
-                if (!requestJsonTemp.success) {
-                  requestLinkTemp = `${config.backendApiEntryPoint}check-sell-nft/?voting=${element.voting_id}`;
-                  requestOptionsTemp = {
-                    method: "GET",
-                    headers: {
-                      accept: "application/json",
-                      'Content-Type': 'application/json',
-                      Authorization: `Bearer ${localStorage.getItem("token")}`,
-                    }
-                  };
-                  requestTemp = await fetch(requestLinkTemp, requestOptionsTemp);
-                  requestJsonTemp = await requestTemp.json();
-                  if (!requestJsonTemp.success) {
-                    console.log('ERROR'); //SHOW MODAL HERE
-                    return;
-                  }
-                }
-              }
-              catch (e){
-                console.log('ERROR IN check-sell-nft');
-                console.log(e);
-              }
-
               }
               location.reload();
             }
@@ -344,40 +309,6 @@ export default {
           };
           request = await fetch(requestLink, requestOptions);
           requestJson = await request.json();
-          try{
-          requestLinkTemp = `${config.backendApiEntryPoint}check-sell-nft/?voting=${element.voting_id}`;
-          requestOptionsTemp = {
-            method: "GET",
-            headers: {
-              accept: "application/json",
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            }
-          };
-          requestTemp = await fetch(requestLinkTemp, requestOptionsTemp);
-          requestJsonTemp = await requestTemp.json();
-          if (!requestJsonTemp.success) {
-            requestLinkTemp = `${config.backendApiEntryPoint}check-sell-nft/?voting=${element.voting_id}`;
-            requestOptionsTemp = {
-              method: "GET",
-              headers: {
-                accept: "application/json",
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              }
-            };
-            requestTemp = await fetch(requestLinkTemp, requestOptionsTemp);
-            requestJsonTemp = await requestTemp.json();
-            if (!requestJsonTemp.success) {
-              console.log('ERROR'); //SHOW MODAL HERE
-              return;
-            }
-          }
-        }
-              catch (e){
-                console.log('ERROR IN check-sell-nft');
-                console.log(e);
-              }
         }     
       
       let markeplaceId = ethers.utils.formatBytes32String(requestJson.data.marketplace).substring(0, 10);
