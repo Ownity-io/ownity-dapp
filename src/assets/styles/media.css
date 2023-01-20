@@ -329,6 +329,7 @@
 
     .section-deposit-data {
         position: relative;
+        margin-top: 16px;
     }
 
     .section-deposit-data .deposit-img-container {

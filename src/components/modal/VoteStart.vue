@@ -1,5 +1,5 @@
 <template>
-  <div class="modal" v-if="render">
+  <div class="modal" v-if="true">
     <div class="modal-wrapper-close" @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',false)"></div>
     <div class="modal-wrapper">
       <div class="modal-header">
