@@ -36,7 +36,7 @@
                     <div class="icon-value"></div>
                     <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidAmount),6),2)}} ETH</span>
                   </div>
-                  <div class="price-block-equivalent equivalent">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidAmount)*currencyToUsdPrice,6),2)}}</div>
+                  <div class="price-block-equivalent equivalent">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidAmount)*currencyToUsdPrice,6),2,2)}}</div>
                 </div>
               </div>
             </div>
@@ -49,7 +49,7 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidAmount),6),2)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidAmount)*currencyToUsdPrice,6),2)}}</span>
+                    <b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidAmount),6),2)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidAmount)*currencyToUsdPrice,6),2,2)}}</span>
                   </div>
                   <!-- <div class="total-fees">Fees:<span>3%</span></div> -->
                 </div>
@@ -139,7 +139,7 @@ export default {
   computed: {
     ...mapGetters(['getUsdRate']),
     currencyToUsdPrice() {
-      return this.getUsdRate[`${this.item.currency.ticker}`] ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
+      return this.getUsdRate ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
     }
   },
   methods:{

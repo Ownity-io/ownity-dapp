@@ -1,7 +1,9 @@
 import {ethers} from "ethers";
 
 export default {
-    abbrNum(number, decPlaces) {
+    abbrNum(number, decPlaces, fixAmount) {
+        if(fixAmount) number = +Number(number).toFixed(fixAmount);
+
         decPlaces = Math.pow(10, decPlaces);
         var abbrev = ["k", "M", "b", "t"];
         for (var i = abbrev.length - 1; i >= 0; i--) {

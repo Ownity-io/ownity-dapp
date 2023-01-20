@@ -34,7 +34,7 @@
                   </div>
                   <div class="input-wrapper input-wrapper-amount">
                     <input type="text" placeholder="Input amount" v-model="amount"  @input="setSellLotFee" onkeypress="return (event.charCode >= 48 && event.charCode <=57 || event.charCode == 46 || event.charCode == 44 || this.amount=='')" :disabled="blockPrice">
-                    <div class="input-equivalent equivalent" v-if="amount>0">≈ $ {{useHelpers.abbrNum(Math.round(amount * currencyToUsdPrice),1)}}</div>
+                    <div class="input-equivalent equivalent" v-if="amount>0">≈ $ {{useHelpers.abbrNum(Math.round(amount * currencyToUsdPrice),1,2)}}</div>
                   </div>
                   <div class="input-prompt">{{translatesGet('ITEM_UNTIL_VOTE')}}</div>
                 </div>
@@ -68,7 +68,7 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.noExponents(this.noExponents(this.convertFromEtherToWei(this.amount))-parseInt(this.sellLotFee))),6),2)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.noExponents(this.noExponents(this.convertFromEtherToWei(this.amount))-parseInt(this.sellLotFee)))*currencyToUsdPrice,6),2)}}</span>
+                    <b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.noExponents(this.noExponents(this.convertFromEtherToWei(this.amount))-parseInt(this.sellLotFee))),6),2)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.noExponents(this.noExponents(this.convertFromEtherToWei(this.amount))-parseInt(this.sellLotFee)))*currencyToUsdPrice,6),2,2)}}</span>
                   </div>
                   <div class="total-fees">{{translatesGet('FEES')}}: <span>{{this.contractConfig[0].sell_lot_fee/100}}%</span></div>
                 </div>
@@ -161,7 +161,7 @@ export default {
   computed: {
     ...mapGetters(['getUsdRate']),
     currencyToUsdPrice() {
-      return this.getUsdRate[`${this.item.currency.ticker}`] ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
+      return this.getUsdRate ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
     }
   },
   methods:{

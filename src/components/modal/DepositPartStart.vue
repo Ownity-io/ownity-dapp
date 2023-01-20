@@ -77,7 +77,7 @@
                     <div class="icon-value"></div>
                     <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(((parseInt(this.item.price)/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</span>
                   </div>
-                  <div class="price-block-equivalent equivalent">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(((parseInt(this.item.price)/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</div>
+                  <div class="price-block-equivalent equivalent">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(((parseInt(this.item.price)/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1,2)}}</div>
                 </div>
               </div>
             </div>
@@ -90,7 +90,7 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary((((parseInt(this.item.price)+parseInt(this.buyLotFee))/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary((((parseInt(this.item.price)+parseInt(this.buyLotFee))/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</span>
+                    <b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary((((parseInt(this.item.price)+parseInt(this.buyLotFee))/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary((((parseInt(this.item.price)+parseInt(this.buyLotFee))/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1,2)}}</span>
                   </div>
                   <div class="total-fees">{{translatesGet('FEES')}}:<span>{{useHelpers.toFixedIfNecessary(this.buyLotFee/parseInt(this.item.price)*100,1)}}%</span></div>
                 </div>
@@ -187,7 +187,7 @@ export default {
   computed: {
     ...mapGetters(['getUsdRate']),
     currencyToUsdPrice() {
-      return this.getUsdRate[`${this.item.currency.ticker}`] ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
+      return this.getUsdRate ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
     }
   },
   methods:{

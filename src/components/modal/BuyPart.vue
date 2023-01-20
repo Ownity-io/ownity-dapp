@@ -39,7 +39,7 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(convertToEther(partOnMarket.price),6),2)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(convertToEther(partOnMarket.price)*currencyToUsdPrice,2),2)}}</span>
+                    <b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(convertToEther(partOnMarket.price),6),2)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(convertToEther(partOnMarket.price)*currencyToUsdPrice,2),2,2)}}</span>
                   </div>
                   <div class="total-fees">{{translatesGet('FEES')}}:<span>3%</span></div>
                 </div>
@@ -134,7 +134,7 @@ export default {
   computed: {
     ...mapGetters(['getUsdRate']),
     currencyToUsdPrice() {
-      return this.getUsdRate[`${this.item.currency.ticker}`] ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
+      return this.getUsdRate ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
     }
   },
   async mounted(){
