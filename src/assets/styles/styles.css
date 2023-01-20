@@ -1966,7 +1966,7 @@ ul.tabs {
 
 .table-activity .thead,
 .table-activity .tr {
-    grid-template-columns: 1.5fr .75fr 1fr 1fr 1fr;
+    grid-template-columns: 1.5fr .75fr 0.9fr 0.7fr 0.55fr;
     border-bottom: 1px solid #DFE2EA;
     gap: 16px;
 }
