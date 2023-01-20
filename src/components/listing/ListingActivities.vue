@@ -10,10 +10,29 @@
                 
             <div class="tr" v-for="item in this.currentlyVisibleActivities" :key="item">
                 <div class="td td-category">
-                    <div class="td-wrap td-wrap-category">
-                        <!-- <i class="i-shopping-bag-line"></i> -->
-                        <!-- <span>{{translatesGet('STATUS-SALE')}}</span> -->
-                        <span>{{item.part}}</span>
+                    <div class="td-wrap td-wrap-category" v-if="item.division=='Fractions'">
+                        <i class="i-coupon-3-line"></i>
+                        <div>{{ 'Fractions' }}</div>
+                        <div class="td-light">  {{item.subdivision}} </div>
+                    </div>
+                    <div class="td-wrap td-wrap-category" v-else-if="item.division=='Votings'">
+                        <i class="i-volume-vibrate-line"></i>
+                        <div>{{ 'Vote' }}</div>
+                        <div class="td-light">  {{item.subdivision}} </div>
+                    </div>
+                    <div class="td-wrap td-wrap-category" v-else-if="item.division=='Sale'">
+                        <i class="i-price-tag-3-line"></i>
+                        <div>{{ 'Sale' }}</div>
+                        <div class="td-light">  {{item.subdivision}} </div>
+                    </div>
+                    <div class="td-wrap td-wrap-category" v-else-if="item.division=='Rewards'||item.division=='Claims'||item.division=='Claim'">
+                        <i class="i-wallet-3-line"></i>
+                        <div>{{ 'Claims' }}</div>
+                        <div class="td-light">  {{item.subdivision}} </div>
+                    </div>
+                    <div class="td-wrap td-wrap-category" v-else>
+                        <div>{{ item.division }}</div>
+                        <div class="td-light">  {{item.subdivision}} </div>
                     </div>
                 </div>
                 <div class="td td-price">
@@ -25,17 +44,17 @@
                         <span class="td-light">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(item.amount)*currencyToUsdPrice,2),2)}}</span>
                     </div>
                 </div>
-                <div class="td" v-if="String(item.part_id).length>10"> 
+                <div class="td" v-if="item.tnx_hash"> 
                     <a class="td-wrap td-wrap-link" href="" target="_blank" rel="nofollow">
-                        <span>{{item.part_id.substring(0,6)+'...'+item.part_id.substring(38,42)}}</span>
+                        <span>{{item.tnx_hash.substring(0,6)+'...'+item.tnx_hash.substring(38,42)}}</span>
                         <i class="i-external-link-line"></i>
                     </a> 
                 </div>
                 <div class="td" v-else> 
-                    <a class="td-wrap td-wrap-link" href="" target="_blank" rel="nofollow">
+                    <!-- <a class="td-wrap td-wrap-link" href="" target="_blank" rel="nofollow">
                         <span>VoteID: {{item.part_id}}</span>
                         <i class="i-external-link-line"></i>
-                    </a> 
+                    </a>  -->
                 </div>
                 <div class="td td-date">
                     <div class="td-wrap">
