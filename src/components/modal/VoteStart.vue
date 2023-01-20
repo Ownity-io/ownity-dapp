@@ -394,7 +394,7 @@ export default {
     setMaxVoting(){
       if (this.item.votings){
         for (let element of this.item.votings){
-            if (element.status=='ON SALE'||element.status=='FULFILLED') {
+            if ((element.status=='ON SALE'||element.status=='FULFILLED')&element.type!='CANCEL') {
               this.voting = element;
               this.markeplacesId.push(element.marketplace.id);
               this.blockPrice = true;   

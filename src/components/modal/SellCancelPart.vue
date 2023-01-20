@@ -64,14 +64,14 @@
           </div>
           
           <!-- v-if="currentPart "  -->
-          <div class="modal-desktop-footer">
+          <div class="modal-desktop-footer" v-if="!buttonWaiting">
             <!-- <button disabled class="btn btn-modal-main">{{translatesGet('CANCEL_SELL')}}</button> -->
             <button class="btn btn-modal-main" @click="startVote">{{translatesGet('CANCEL_SELL')}}</button>
           </div>
 
           <!-- v-else  -->
-          <!-- <div class="modal-desktop-footer">
-            <button class="btn btn-modal-main" @click="startVote">{{translatesGet('CANCEL_SELL')}}</button>
+          <div class="modal-desktop-footer" v-if="buttonWaiting">
+            <!-- <button class="btn btn-modal-main" @click="startVote">{{translatesGet('CANCEL_SELL')}}</button> -->
             <button class="btn btn-modal-main">
               <svg class="loader" viewBox="0 0 18 18"  xmlns="http://www.w3.org/2000/svg">
                 <path d="M15.364 2.63609L13.95 4.05009C12.8049 2.90489 
@@ -85,19 +85,19 @@
                 15.9999 10.6196 16 9.00009H18C18 11.0823 17.278 13.1001 15.957 14.7096C14.6361 16.3192 12.7979 17.4209 10.7557 17.8271C8.71355 18.2333 6.5937 17.9188 4.75737 16.9373C2.92104 15.9557 1.48187 14.3678 0.685061 12.4441C-0.111747 10.5204 -0.216886 8.37992 0.387558 6.38739C0.992002 4.39486 2.26863 2.67355 3.99992 1.51675C5.73121 0.359959 7.81004 -0.160747 9.88221 0.0433572C11.9544 0.247462 13.8917 1.16375 15.364 2.63609V2.63609Z" fill="white"/>
               </svg>
             </button>
-          </div>-->
+          </div>
         </div>
       </div> 
               
       <!-- v-if="currentPart "  -->
-      <div  class="modal-mobile-footer">
+      <div  class="modal-mobile-footer" v-if="!buttonWaiting">
         <!-- <button disabled class="btn btn-modal-main">{{translatesGet('CANCEL_SELL')}}</button> -->
         <button class="btn btn-modal-main" @click="startVote">{{translatesGet('CANCEL_SELL')}}</button>
       </div>
 
       <!-- v-else  -->
-      <!-- <div   class="modal-mobile-footer">
-        <button   class="btn btn-modal-main" @click="startVote">{{translatesGet('CANCEL_SELL')}}</button>
+      <div   class="modal-mobile-footer" v-if="buttonWaiting">
+        <!-- <button   class="btn btn-modal-main" @click="startVote">{{translatesGet('CANCEL_SELL')}}</button> -->
         <button class="btn btn-modal-main">
           <svg class="loader" viewBox="0 0 18 18"  xmlns="http://www.w3.org/2000/svg">
             <path d="M15.364 2.63609L13.95 4.05009C12.8049 2.90489 
@@ -111,7 +111,7 @@
             15.9999 10.6196 16 9.00009H18C18 11.0823 17.278 13.1001 15.957 14.7096C14.6361 16.3192 12.7979 17.4209 10.7557 17.8271C8.71355 18.2333 6.5937 17.9188 4.75737 16.9373C2.92104 15.9557 1.48187 14.3678 0.685061 12.4441C-0.111747 10.5204 -0.216886 8.37992 0.387558 6.38739C0.992002 4.39486 2.26863 2.67355 3.99992 1.51675C5.73121 0.359959 7.81004 -0.160747 9.88221 0.0433572C11.9544 0.247462 13.8917 1.16375 15.364 2.63609V2.63609Z" fill="white"/>
           </svg>
         </button>
-      </div> -->
+      </div>
       
     </div>
   </div>
@@ -133,6 +133,7 @@ export default {
       item:null,
       userBidAmount:null,
       lang: new MultiLang(this),
+      buttonWaiting:false
     };
   },
   computed: {
@@ -149,6 +150,8 @@ export default {
       return value * 10**this.item.currency.decimals;
     },
     async startVote() {
+      try{
+      this.buttonWaiting=true;
         let signed_message = await this.$store.dispatch('walletsAndProvider/signMessageWithGlobalProvider',
           `${this.item.id}-${this.item.currency.address}-${this.noExponents(this.voting.amount)}-${this.item.end_date}`);
         let requestLink = `${config.backendApiEntryPoint}voting-create/`;
@@ -189,13 +192,20 @@ export default {
             request = await fetch(requestLink, requestOptions);
             requestJson = await request.json();
           }
-          // location.reload();
+          this.buttonWaiting=true;
+          location.reload();
         }        
         else {
+          this.buttonWaiting=false;
           await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack',false)
           await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
         }
+        this.buttonWaiting=false;
+      }
+      catch{
+        this.buttonWaiting=false;
+      }
     },
     async setUserBidAmount(){
       let userAddress = localStorage.getItem('userAddress');
