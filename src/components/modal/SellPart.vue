@@ -34,7 +34,7 @@
                   </div>
                   <div class="input-wrapper input-wrapper-amount">
                     <input type="text" placeholder="Input amount" v-model="priceForPart" @input="setSellFractionFee" >
-                    <div class="input-equivalent equivalent" v-if="priceForPart>0">≈ $ {{useHelpers.abbrNum(Math.round(priceForPart * currencyToUsdPrice),1)}}</div>
+                    <div class="input-equivalent equivalent" v-if="priceForPart>0">≈ $ {{useHelpers.abbrNum(Math.round(priceForPart * currencyToUsdPrice),1,2)}}</div>
                   </div>
                   <div class="input-prompt">{{translatesGet('ITEM_UNTIL_CANCELLED')}}</div>
                 </div>
@@ -112,7 +112,7 @@
 
       <!-- v-else  -->
       <div   class="modal-mobile-footer" v-if="buttonWaiting">
-        <button   class="btn btn-modal-main">{{translatesGet('DEPOSIT_PART')}}</button>
+        <button   class="btn btn-modal-main">{{translatesGet('DEPOSIT_PART') + 333}}</button>
         <button class="btn btn-modal-main">
           <svg class="loader" viewBox="0 0 18 18"  xmlns="http://www.w3.org/2000/svg">
             <path d="M15.364 2.63609L13.95 4.05009C12.8049 2.90489 

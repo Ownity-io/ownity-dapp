@@ -19,7 +19,7 @@
           <div class="deposit-value">
             <div class="icon-token eth"></div>
             <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.voting.amount),6),2)}} ETH</b></span>
-            <span class="equivalent">(≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.voting.amount)* currencyToUsdPrice,2),2)}})</span>
+            <span class="equivalent">(≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.voting.amount)* currencyToUsdPrice,2),2,2)}})</span>
           </div>
         </div>
       <div class="vote-btn-container">
@@ -164,7 +164,6 @@ export default{
     },
   },
   async mounted(){
-    // await this.setCurrencyToUsd();
     await this.setUserVotedAndLogged();
     await this.setUserBidAmount();
   }

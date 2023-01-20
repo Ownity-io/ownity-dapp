@@ -138,7 +138,7 @@
               <div class="icon-value"></div>
               <span><b>{{useHelpers.abbrNum(priceInCurrency,1)}} {{' '}}</b>ETH</span>
             </div>
-            <div class="equivalent">≈ $ {{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
+            <div class="equivalent">≈ $ {{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1,2)}}</div>
 
           </div>
         </div>
@@ -158,7 +158,7 @@
               <div class="icon-value"></div>
               <span><b>{{useHelpers.abbrNum(priceInCurrency,1)}} {{' '}}</b>ETH</span>
             </div>
-            <div class="equivalent">≈ $ {{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
+            <div class="equivalent">≈ $ {{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1,2)}}</div>
 
           </div>
         </div>
@@ -204,7 +204,7 @@
               <div class="icon-value"></div>
               <span><b>{{useHelpers.abbrNum(priceInCurrency,1)}} {{' '}}</b>ETH</span>
             </div>
-            <div class="equivalent">≈ $ {{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
+            <div class="equivalent">≈ $ {{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1,2)}}</div>
 
           </div>
         </div>
@@ -222,7 +222,7 @@
               <div class="icon-value"></div>
               <span><b>{{useHelpers.abbrNum(priceInCurrency,1)}} {{' '}}</b>ETH</span>
             </div>
-            <div class="equivalent">≈ $ {{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
+            <div class="equivalent">≈ $ {{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1,2)}}</div>
 
           </div>
         </div>
@@ -263,7 +263,7 @@
               <div class="icon-value"></div>
               <span><b>{{useHelpers.abbrNum(priceInCurrency,1)}}{{' '}}</b>ETH</span>
             </div>
-            <div class="equivalent">≈ $ {{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}}</div>
+            <div class="equivalent">≈ $ {{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1,2)}}</div>
 
           </div>
         </div>

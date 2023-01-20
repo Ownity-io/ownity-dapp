@@ -147,7 +147,7 @@
                   <div class="deposit-value" v-if="(item.marketplace_status=='OPEN' & item.internal_status=='OPEN')||this.item.internal_status=='OWNED'">
                     <div class="icon-token eth"></div>
                     <span><b>{{priceInCurrency}} ETH</b></span>
-                    <span class="equivalent">(≈ $ {{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1)}})</span>
+                    <span class="equivalent">(≈ $ {{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1,2)}})</span>
                   </div>
                   <div class="deposit-value" v-if="(item.internal_status=='ON SALE')">
                     <div class="icon-token eth"></div>
