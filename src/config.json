@@ -98,6 +98,10 @@
         {
             "name":"Fractions",
             "codeName":"Fractions"
+        },
+        {
+            "name":"Rewards",
+            "codeName":"Rewards"
         }
     ]
 }

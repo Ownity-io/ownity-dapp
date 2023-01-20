@@ -473,7 +473,7 @@ export default {
         requestUrl = `${config.backendApiEntryPoint}user-activity/?limit=${config.activitiesPerPage}`;
       }
       if (context.getters.getCurrentActivitiesCategory){
-        requestUrl+=`&divisionType=${context.getters.getCurrentActivitiesCategory}`
+        requestUrl+=`&part=${context.getters.getCurrentActivitiesCategory}`
       }
       if (params.collectionAddress){
         requestUrl+=`&collection=${params.collectionAddress}`
