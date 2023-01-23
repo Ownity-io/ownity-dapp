@@ -1,3 +1,5 @@
+import {backendApiEntryPoint} from '@/config.json'
+
 export default {
     state:{
         usdRate: null
@@ -11,14 +13,15 @@ export default {
         async fetchUsdRate({commit}, data){
 
             try {
-                let res = await fetch(`https://api.octogamex.com/rates?symbol=${data.rates}`);
+                let link = `${backendApiEntryPoint}rates/?symbol=${data.rates.join('&symbol=')}`
+
+                let res = await fetch(link);
                 let resJson = await res.json();
                 let rates = {};
-
                 if(res.status === 200 || res.status === 201){
-                    for (let i = 0; i < resJson.quotes.length; i++) {
-                        const rate = resJson.quotes[i];
-                        rates[`${rate.symbol}`] = +Number(rate.priceUsd).toFixed(2);
+                    for (let i = 0; i < resJson.length; i++) {
+                        const rate = resJson[i];
+                        rates[`${rate.rates_json.symbol}`] = +Number(rate.rates_json.priceUsd).toFixed(2);
                     }
 
                     commit('updateUsdRate', {rates});

@@ -46,9 +46,9 @@ export default {
         }
     },
   async mounted() {
-      this.fetchUsdRate({rates: 'ETH%2BWETH'})
+      this.fetchUsdRate({rates: ['eth','weth']})
       setInterval(()=>{
-          this.fetchUsdRate({rates: 'ETH%2BWETH'})
+          this.fetchUsdRate({rates: ['eth','weth']})
         }, 600000)
 
         // this.checkWalletInLS();
