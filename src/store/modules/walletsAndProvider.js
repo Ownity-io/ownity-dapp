@@ -129,6 +129,11 @@ export default {
         context.commit('setUserInfo',await provider.getSigner().getAddress());
         localStorage.setItem('connectedWallet','metamask');
         localStorage.setItem('userAddress',await provider.getSigner().getAddress());
+        
+        ethereum.on('accountsChanged', function () {
+          // localStorage.clear();
+          location.reload();
+        })
       } catch (error){
         console.log(error);
         // localStorage.setItem('connectedWallet',null);
