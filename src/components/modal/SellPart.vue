@@ -112,7 +112,7 @@
 
       <!-- v-else  -->
       <div   class="modal-mobile-footer" v-if="buttonWaiting">
-        <button   class="btn btn-modal-main">{{translatesGet('DEPOSIT_PART') + 333}}</button>
+        <button   class="btn btn-modal-main">{{translatesGet('DEPOSIT_PART')}}</button>
         <button class="btn btn-modal-main">
           <svg class="loader" viewBox="0 0 18 18"  xmlns="http://www.w3.org/2000/svg">
             <path d="M15.364 2.63609L13.95 4.05009C12.8049 2.90489 
@@ -216,7 +216,7 @@ export default {
         catch{
           await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack',false)
-          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',10)
         }
       }     
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await prov.getSigner());  
@@ -255,13 +255,13 @@ export default {
         this.buttonWaiting = false;
         await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
         await this.$store.dispatch('appGlobal/setGreenSnack',false)
-        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
+        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',10)
       }
     }
     catch{
         await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
         await this.$store.dispatch('appGlobal/setGreenSnack', false)
-        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)
+        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
         this.buttonWaiting = false;
     }
     },

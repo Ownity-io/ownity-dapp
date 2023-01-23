@@ -43,13 +43,13 @@ export default {
                     this.email=null;
                     await this.$store.dispatch('appGlobal/setSnackText','Congrats! Your email was successfully written!')
                     await this.$store.dispatch('appGlobal/setGreenSnack',true)
-                    await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
+                    await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',10)
                 }
             } else {
               this.email=null;
                     await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
                     await this.$store.dispatch('appGlobal/setGreenSnack',false)
-                    await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
+                    await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',10)
             }
         }
   }
