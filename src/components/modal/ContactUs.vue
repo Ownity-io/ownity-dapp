@@ -3,7 +3,7 @@
     <div class="modal-wrapper-close"></div>
     <div class="modal-wrapper">
       <div class="modal-header">
-        <button class="btn-close">
+        <button class="btn-close" @click="this.$store.dispatch('appGlobal/setShowContactUsModal',false)">
           <i class="i-close-line"></i>
         </button>
       </div>

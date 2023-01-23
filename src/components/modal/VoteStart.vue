@@ -439,6 +439,7 @@ export default {
             if (requestJson.success == false){
               //show contact us modal
               console.log('show contact us modal');
+              await this.$store.dispatch('appGlobal/setShowContactUsModal',true);
             }
           }
         }
