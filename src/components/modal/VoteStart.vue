@@ -231,7 +231,7 @@ export default {
                 };
                 requestTemp = await fetch(requestLinkTemp, requestOptionsTemp);
                 requestJsonTemp = await requestTemp.json();
-
+                this.checkSell();
               }
               location.reload();
             }
@@ -347,6 +347,7 @@ export default {
               },
               method:'POST'
             })).json();
+        await this.checkSell();
         await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
         await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);
         await this.$store.dispatch('appGlobal/setShowStartVotingModal', false);
@@ -410,6 +411,31 @@ export default {
         }
       }
       return false;
+    },
+    async checkSell() {
+      for (let element of this.item.votings) {
+        if (element.status == 'FULFILLED' & element.type != 'CANCEL') {
+          let requestLink = `${config.backendApiEntryPoint}/check-sell-nft/?voting=${element.id}`;
+          let requestOptions = {
+            method: "GET",
+            headers: {
+              accept: "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          };
+          let request = await fetch(requestLink,requestOptions);
+          let requestJson = await request.json();
+          if (requestJson.success == false){
+            //wait 2 sec
+            request = await fetch(requestLink, requestOptions);
+            requestJson = await request.json();
+            if (requestJson.success == false){
+              //show contact us modal
+              console.log('show contact us modal');
+            }
+          }
+        }
+      }
     }
   },
   async mounted(){
