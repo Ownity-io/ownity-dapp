@@ -204,7 +204,8 @@ export default {
               try{
                 await this.sellLot(requestJson.data)
               }
-              catch{
+              catch (e){
+        console.log(e);
                 this.buttonWaiting=false;
                 await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
                 await this.$store.dispatch('appGlobal/setGreenSnack', false)
@@ -230,9 +231,9 @@ export default {
                   })
                 };
                 requestTemp = await fetch(requestLinkTemp, requestOptionsTemp);
-                requestJsonTemp = await requestTemp.json();
-                this.checkSell();
+                requestJsonTemp = await requestTemp.json();                
               }
+              await this.checkSell();
               location.reload();
             }
           }
@@ -278,11 +279,13 @@ export default {
       try{
         await prov.send('wallet_switchEthereumChain',[{chainId: chainSettings.chainId}]);
       }
-      catch{
+      catch (e){
+        console.log(e);
         try{
           await prov.send('wallet_addEthereumChain',[chainSettings]);  
         }
-        catch{
+        catch (e){
+        console.log(e);
           console.log(444)
           await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack',false)
@@ -364,7 +367,8 @@ export default {
         await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)    
       }
     }
-    catch{
+    catch (e){
+        console.log(e);
         this.buttonWaiting = false;
         await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
         await this.$store.dispatch('appGlobal/setGreenSnack', false)
@@ -413,13 +417,16 @@ export default {
       return false;
     },
     async checkSell() {
-      for (let element of this.item.votings) {
+      await this.$store.dispatch('marketplaceListing/getAndSetItem',this.item.id);
+      let item = this.$store.getters['marketplaceListing/getItem'];
+      for (let element of item.votings) {
         if (element.status == 'FULFILLED' & element.type != 'CANCEL') {
-          let requestLink = `${config.backendApiEntryPoint}/check-sell-nft/?voting=${element.id}`;
+          let requestLink = `${config.backendApiEntryPoint}check-sell-nft/?voting=${element.id}`;
           let requestOptions = {
             method: "GET",
             headers: {
               accept: "application/json",
+              'Content-Type': 'application/json',
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           };
