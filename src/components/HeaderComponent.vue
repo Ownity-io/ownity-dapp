@@ -22,14 +22,14 @@
                                     <span>{{translatesGet('MARKETPLACE')}}</span>
                                 </router-link>
                             </li>
-                            <li v-if="$route.fullPath ==='/'">
-                                <a href="#screen-collections" >
+                            <li v-if="$route.path ==='/'">
+                                <a ref="screenCollections" href="#screen-collections" >
                                     <span>{{translatesGet('COLLECTIONS')}}</span>
                                     <span>{{translatesGet('COLLECTIONS')}}</span>
                                 </a>
                             </li>
-                            <li v-else >
-                                <router-link :to="{ name: 'Main', params: { scrollTo: 'collections' } }">
+                            <li v-else  @click="$refs.screenCollections.click()">
+                                <router-link :to="{ name: 'Main' }">
                                     <span>{{translatesGet('COLLECTIONS')}}</span>
                                     <span>{{translatesGet('COLLECTIONS')}}</span>
                                 </router-link>

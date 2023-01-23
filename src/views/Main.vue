@@ -38,7 +38,8 @@
             </div>
           </div>
           <section class="section-home">
-            <div class="container">
+          <!--! temporarily added a style "style="min-height: 535px" -->
+            <div class="container" style="min-height: 535px">
               <div class="cards-carousel">
                 <div class="header-title-btn">
                   <div class="title">
