@@ -53,13 +53,13 @@
                             </li>
                             <li><router-link :to="{ name: 'Marketplace' }">{{translatesGet('MARKETPLACE')}}</router-link></li>
                             <li
-                            v-if="$route.fullPath ==='/'">
-                                <a target="_blank" href="#screen-collections" >
+                            v-if="$route.path ==='/'">
+                                <a ref="screenCollections" href="#screen-collections" >
                                     <span>{{translatesGet('COLLECTIONS')}}</span>
                                 </a>
                             </li>
                             <li
-                            v-else >
+                            v-else  @click="$refs.screenCollections.click()">
                                 <router-link :to="{name: 'Main'}">
                                     <span>{{translatesGet('COLLECTIONS')}}</span>
                                 </router-link>
