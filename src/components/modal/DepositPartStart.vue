@@ -201,11 +201,13 @@ export default {
       try{
         await prov.send('wallet_switchEthereumChain',[{chainId: chainSettings.chainId}]);
       }
-      catch{
+      catch (e){
+        console.log(e);
         try{
           await prov.send('wallet_addEthereumChain',[chainSettings]);  
         }
-        catch{
+        catch (e){
+        console.log(e);
           await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack',false)
           await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
@@ -214,8 +216,17 @@ export default {
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await prov.getSigner());
       let markeplaceId = ethers.utils.formatBytes32String(this.item.marketplace.id).substring(0, 10);
       let options = {};
-      let valueToBuy = this.noExponents((ethers.BigNumber.from(this.noExponents(this.item.price))/100)*this.currentPart);
-      let valueToBuyWithComissions = this.noExponents((ethers.BigNumber.from(this.noExponents(parseInt(this.item.price)+parseInt(this.buyLotFee)))/100)*this.currentPart);
+      let valueToBuy = this.noExponents((ethers.BigNumber.from(this.noExponents(this.item.price)) / 100) * this.currentPart);
+      let valueToBuyWithComissions = this.noExponents((ethers.BigNumber.from(this.noExponents(parseInt(this.item.price) + parseInt(this.buyLotFee))) / 100) * this.currentPart);
+      if (parseInt(this.currentPart)==100){
+        valueToBuy = this.item.price;
+        valueToBuyWithComissions =this.item.price;
+        if (parseInt(this.buyLotFee)>0){
+          valueToBuyWithComissions+=parseInt(this.item.price) + parseInt(this.buyLotFee);
+        }
+      }   
+      console.log(valueToBuy);  
+      console.log(valueToBuyWithComissions);
       // console.log('+++++++++++++++++++++++++++++++++++++++++++');
       // console.log(`amount:${valueToBuy}`);
       // console.log(`value:${valueToBuyWithComissions}`);
@@ -337,6 +348,8 @@ export default {
             `${this.config.backendApiEntryPoint}close-listing/`,
             {
               method:'POST',
+              accept: "application/json",
+              'Content-Type': 'application/json',
               body:JSON.stringify({
                 lot:this.item.id
               })
@@ -344,7 +357,8 @@ export default {
             )).json();
         }          
       }
-      catch{
+      catch (e){
+        console.log(e);
         this.buttonWaiting = false; 
         await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
         await this.$store.dispatch('appGlobal/setGreenSnack', false)

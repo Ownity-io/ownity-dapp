@@ -331,6 +331,8 @@ export default {
             `${this.config.backendApiEntryPoint}close-listing/`,
             {
               method:'POST',
+              accept: "application/json",
+              'Content-Type': 'application/json',
               body:JSON.stringify({
                 lot:this.item.id
               })

@@ -147,8 +147,7 @@ data() {
                     method: "POST",
                     headers: {
                         accept: "application/json",
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
                         'email': this.email
@@ -157,11 +156,15 @@ data() {
                 let request = await fetch(requestLink, requestOptions);
                 if (request.ok){
                     this.email=null;
-                    alert('Your email was succesfully added!')
-                    location.reload();
+                    await this.$store.dispatch('appGlobal/setSnackText','Congrats! Your email was successfully written!')
+                    await this.$store.dispatch('appGlobal/setGreenSnack',true)
+                    await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
                 }
             } else {
-                console.log('Wrong email!');
+              this.email=null;
+                    await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
+                    await this.$store.dispatch('appGlobal/setGreenSnack',false)
+                    await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
             }
         }
     }
