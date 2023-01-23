@@ -233,8 +233,10 @@ export default {
                 requestTemp = await fetch(requestLinkTemp, requestOptionsTemp);
                 requestJsonTemp = await requestTemp.json();                
               }
-              await this.checkSell();
-              location.reload();
+              let check = await this.checkSell();
+              if (check){
+                location.reload();
+              }              
             }
           }
           else {
@@ -440,8 +442,10 @@ export default {
               //show contact us modal
               console.log('show contact us modal');
               await this.$store.dispatch('appGlobal/setShowContactUsModal',true);
+              return false;
             }
           }
+          return true;
         }
       }
     }

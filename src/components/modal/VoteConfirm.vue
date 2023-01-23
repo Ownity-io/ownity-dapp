@@ -169,8 +169,10 @@ export default {
             }
           }
           else{
-            await this.checkSell();
-            location.reload();  
+            let check = await this.checkSell();
+              if (check){
+                location.reload();
+              }   
           }          
         }
         else {
