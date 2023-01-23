@@ -24,12 +24,12 @@
         </div>
       <div class="vote-btn-container">
         <!-- display if user logged and already votes -->
-        <button class="btn btn-cancel" v-if="userLogged & ((this.voting.count/this.item.bids.length)*100)>50 & userBidAmount>0 & this.voting.type!='CANCEL'"
+        <button class="btn btn-cancel" v-if="userLogged & ((this.voting.count/this.item.bids.length)*100)>=51 & userBidAmount>0 & this.voting.type!='CANCEL'"
           @click="this.$store.dispatch('appGlobal/setCancellSellVotingModal',true);this.$store.dispatch('appGlobal/setCurrentVoting',this.voting);">
             {{translatesGet('CANCEL')}}
         </button>
         <!-- display if user logged and not votes yet -->
-        <button class="btn btn-vote" v-else-if="userLogged & ((this.voting.count/this.item.bids.length)*100)<=50 & !userVoted & userBidAmount>0"
+        <button class="btn btn-vote" v-else-if="userLogged & ((this.voting.count/this.item.bids.length)*100)<51 & !userVoted & userBidAmount>0"
         @click="this.$store.dispatch('appGlobal/setShowVoteConfirmModal',true);this.$store.dispatch('appGlobal/setCurrentVoting',this.voting);">
             <i class="i-thumb-up-line"></i>
             <span>{{translatesGet('CONFIRM')}}</span>
