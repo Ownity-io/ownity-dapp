@@ -571,7 +571,7 @@ export default {
       }      
       else if (this.itemWithBidsOnSale.votings){
         for (let element of this.itemWithBidsOnSale.votings){
-            if (element.status=='FULFILLED') {
+            if (element.status=='ON SALE') {
               this.voting = element;
               return
             }
