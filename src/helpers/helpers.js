@@ -1,4 +1,5 @@
 import {ethers} from "ethers";
+import {isNumber} from "@vueuse/core";
 
 export default {
     abbrNum(number, decPlaces, fixAmount) {
@@ -17,6 +18,11 @@ export default {
                 number += abbrev[i];
                 break;
             }
+        }
+
+        //? if fixAmount  === (false || undefined) - it means function call for 'ETH' not for '$'
+        if(isNumber(number) && number !== 0 && number < 0.0001 && !fixAmount){
+            return `≈ 0.0001`
         }
 
         return number;
