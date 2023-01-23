@@ -93,7 +93,7 @@
                         <li>
                             <button
                             :class="{ 'active-tab': activeTab === 'ListCards' }"
-                            @click="letsCheck('ListCards');this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');"
+                            @click="letsCheck('ListCards')"
                             >
                                 <span>{{translatesGet('ITEMS')}}</span>
                                 <span>{{translatesGet('ITEMS')}}</span>
@@ -102,14 +102,14 @@
                         <li>
                             <button
                             :class="{ 'active-tab': activeTab === 'Favourites' }"
-                            @click="letsCheck('Favourites');this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');">
+                            @click="letsCheck('Favourites')">
                                 <span>{{translatesGet('FAVOURITES')}}</span>
                                 <span>{{translatesGet('FAVOURITES')}}</span>
                             </button>
                         </li>
                         <li>
                             <button :class="{ 'active-tab': activeTab === 'Vote' }"
-                            @click="letsCheck('Vote');this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');">
+                            @click="letsCheck('Vote')">
                                 <span>{{translatesGet('VOTES')}}</span>
                                 <span>{{translatesGet('VOTES')}}</span>
                             </button>
@@ -117,7 +117,7 @@
                         <li>
                             <button
                             :class="{ 'active-tab': activeTab === 'ActivityTable'}"
-                            @click="letsCheck('ActivityTable');this.$store.dispatch('marketplace/setAllFiltersToNull');this.fetchAndSetListingsStartInfo()"
+                            @click="letsCheck('ActivityTable')"
                             >
                                 <span>{{translatesGet('ACTIVITIES')}}</span>
                                 <span>{{translatesGet('ACTIVITIES')}}</span>
@@ -198,76 +198,99 @@ import MultiLang from "@/core/multilang";
 import config from '@/config.json';
 import ActivityTable from "@/components/ActivityTable.vue";
 import { useClipboard } from '@vueuse/core'
+import { mapActions } from "vuex";
 const source = localStorage.getItem('userAddress');
 const { copy } = useClipboard({ source })
 
 export default {
-    data() {
-        return {
-            switchActive: 0,
-            activeTab: '',
-            testOpenSort: false,
-            filter: true,
-            filterMobile: false,
-            mobileDropDown: false,
-            config:config,
-            lang: new MultiLang(this),
-            userAddress:null,
-            copy:copy
-        };
-    },
-    components:{
-        Filter,
-        FilterMobile,
-        Breadcrumbs,
-        SelectedFilters,
-        ListCards,
-        ActivityTable,
-        SortBar
-    }, 
-    async mounted() {
-        this.userAddress = localStorage.getItem('userAddress');
-        this.activeTab = "ListCards";
-        await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
-        await this.$store.dispatch('marketplace/fetchAndSetMarketplaces');
-        await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
-    },
+  data() {
+      return {
+          switchActive: 0,
+          tabList: {
+            all: 'ListCards',
+            favorites: 'Favourites',
+            votes: 'Vote',
+            activity: 'ActivityTable'
+          },
+          activeTab: 'ListCards',
+          testOpenSort: false,
+          filter: true,
+          filterMobile: false,
+          mobileDropDown: false,
+          config:config,
+          lang: new MultiLang(this),
+          userAddress:null,
+          copy:copy
+      };
+  },
+  components:{
+      Filter,
+      FilterMobile,
+      Breadcrumbs,
+      SelectedFilters,
+      ListCards,
+      ActivityTable,
+      SortBar
+  },
+  computed:{
+    selectedSort:{
+      get(){
+        return this.$store.getters['marketplace/getSelectedSort'];
+      },
+      async set(value){
+        this.$store.dispatch('marketplace/setSelectedSort',value);
+        // console.log(await this.$store.getters['marketplace/getSelectedSort']);
+      }
+    }
+  },
     methods: {
+        ...mapActions({
+          setAllFiltersToNull: 'marketplace/setAllFiltersToNull',
+          fetchAndSetListingsStartInfoByUser: 'marketplace/fetchAndSetListingsStartInfoByUser',
+          fetchAndSetListingsStartInfoByUserFav: 'marketplace/fetchAndSetListingsStartInfoByUserFav',
+          fetchAndSetListingsStartInfoByUserVote: 'marketplace/fetchAndSetListingsStartInfoByUserVote',
+          fetchAndSetActivitiesResult: 'marketplace/fetchAndSetActivitiesResult',
+          fetchAndSetMarketplaces: 'marketplace/fetchAndSetMarketplaces',
+          fetchAndSetNftCollections: 'marketplace/fetchAndSetNftCollections'
+        }),
         translatesGet(key) {
         return this.lang.get(key);
         },
         letsCheck(name) {
-          this.activeTab = name;
+          for (const el in this.tabList) {
+            if(this.tabList[el] === name){
+              this.$router.push({path: `/profile/${el}`})
+              this.activeTab = name;
+              break;
+            }
+          }
+          this.setAllFiltersToNull()
+          if(this.activeTab === 'ListCards'){
+            this.fetchAndSetListingsStartInfoByUser()
+          }
+          if(this.activeTab === 'Favourites'){
+            this.fetchAndSetListingsStartInfoByUserFav()
+          }
+          if(this.activeTab === 'Vote'){
+            this.fetchAndSetListingsStartInfoByUserVote()
+          }
+          if(this.activeTab === 'ActivityTable'){
+            this.fetchAndSetActivitiesResult({userAddress: this.userAddress, collectionAddress: null})
+          }
         },
         clearLocalStorage(){
             localStorage.clear();
-        },
-        async fetchAndSetListingsStartInfo() {
-            if (this.activeTab == 'Favourites') {
-                await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');
-            }
-            else if (this.activeTab == 'Vote') {
-                await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');
-            }
-            else if(this.activeTab == 'ActivityTable'){
-                await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:this.userAddress,collectionAddress:null}); 
-            }
-            else {
-                await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
-            }
-        },
-    },
-    computed:{
-        selectedSort:{
-            get(){
-                return this.$store.getters['marketplace/getSelectedSort'];
-            },
-            async set(value){
-                console.log(value);
-                this.$store.dispatch('marketplace/setSelectedSort',value);
-                console.log(await this.$store.getters['marketplace/getSelectedSort']);
-            }
         }
-    }
+    },
+
+  async mounted() {
+    this.userAddress = localStorage.getItem('userAddress');
+
+    this.activeTab = this.$route.params.tab ? this.tabList[`${this.$route.params.tab}`] : this.tabList.all
+    this.letsCheck(this.activeTab)
+
+    await this.fetchAndSetNftCollections()
+    await this.fetchAndSetMarketplaces()
+  },
 }
 </script>
