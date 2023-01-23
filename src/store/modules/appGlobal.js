@@ -24,6 +24,7 @@ export default {
       showSnackBar:false,
       showVoteInfoModal:false,
       showMobileBurgerMenu:false,
+      showContactUsModal:false,
     };
   },
   getters: {
@@ -92,6 +93,9 @@ export default {
     },
     getShowMobileBurgerMenu(state){
       return state.showMobileBurgerMenu;
+    },
+    getShowContactUsModal(state){
+      return state.showContactUsModal;
     }
   },
   mutations: {
@@ -238,6 +242,9 @@ export default {
     },
     setShowMobileBurgerMenu(state,value){
       state.showMobileBurgerMenu = value;
+    },
+    setShowContactUsModal(state,value){
+      state.showContactUsModal = value;
     }
   },
   actions: {
@@ -319,6 +326,9 @@ export default {
     },
     setShowMobileBurgerMenu(context,value){
       context.commit("setShowMobileBurgerMenu",value);
+    },
+    setShowContactUsModal(context,value){
+      context.commit("setShowContactUsModal",value);
     }
   },
 };

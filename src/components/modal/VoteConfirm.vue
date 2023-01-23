@@ -160,7 +160,8 @@ export default {
             try{
               await this.sellLot(requestJson.voting_id)
             }
-            catch{
+            catch (e){
+        console.log(e);
               this.buttonWainting = false;
               await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
               await this.$store.dispatch('appGlobal/setGreenSnack', false)
@@ -168,7 +169,10 @@ export default {
             }
           }
           else{
-            location.reload();  
+            let check = await this.checkSell();
+              if (check){
+                location.reload();
+              }   
           }          
         }
         else {
@@ -185,11 +189,13 @@ export default {
       try{
         await prov.send('wallet_switchEthereumChain',[{chainId: chainSettings.chainId}]);
       }
-      catch{
+      catch (e){
+        console.log(e);
         try{
           await prov.send('wallet_addEthereumChain',[chainSettings]);  
         }
-        catch{
+        catch (e){
+        console.log(e);
           await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack',false)
           await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
@@ -247,6 +253,7 @@ export default {
               },
               method:'POST'
             })).json();
+        await this.checkSell();
         await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
         await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);
         await this.$store.dispatch('appGlobal/setShowVoteConfirmModal', false);
@@ -263,12 +270,42 @@ export default {
         await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)    
       }
     }
-    catch{
+    catch (e){
+        console.log(e);
         this.buttonWaiting = false;
         await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
         await this.$store.dispatch('appGlobal/setGreenSnack', false)
         await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)
     }
+    },
+    async checkSell() {
+      await this.$store.dispatch('marketplaceListing/getAndSetItem',this.item.id);
+      let item = this.$store.getters['marketplaceListing/getItem'];
+      for (let element of item.votings) {
+        if (element.status == 'FULFILLED' & element.type != 'CANCEL') {
+          let requestLink = `${config.backendApiEntryPoint}check-sell-nft/?voting=${element.id}`;
+          let requestOptions = {
+            method: "GET",
+            headers: {
+              accept: "application/json",
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          };
+          let request = await fetch(requestLink,requestOptions);
+          let requestJson = await request.json();
+          if (requestJson.success == false){
+            //wait 2 sec
+            request = await fetch(requestLink, requestOptions);
+            requestJson = await request.json();
+            if (requestJson.success == false){
+              //show contact us modal
+              console.log('show contact us modal');
+              await this.$store.dispatch('appGlobal/setShowContactUsModal',true);
+            }
+          }
+        }
+      }
     }
   },
   async mounted(){
