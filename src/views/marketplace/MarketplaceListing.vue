@@ -714,7 +714,7 @@ export default {
       let votingsOnSaleTemp = [];
       if (this.item.votings){
         for (let element of this.item.votings){
-            if ((element.status=='ON SALE'||element.status=='FULFILLED') & element.type=='SELL') {
+            if ((element.status=='ON SALE') & element.type=='SELL') {
               this.voting = element;
               votingsOnSaleTemp.push(element);
               this.onSaleVotingsCount+=1;

@@ -1,5 +1,5 @@
 <template>
-    <div class="block-vote" v-if="this.voting.status=='OPEN'||this.voting.status=='ON SALE'||this.voting.status=='FULFILLED'">
+    <div class="block-vote" v-if="this.voting.status=='OPEN'||this.voting.status=='ON SALE'">
       <div class="vote-data section-deposit-data">       
         <div class="deposit-img-container">
           <a target="_blank" href="#" class="deposit-img" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></a> 
@@ -24,7 +24,7 @@
         </div>
       <div class="vote-btn-container">
         <!-- display if user logged and already votes -->
-        <button class="btn btn-cancel" v-if="userLogged & this.allVotedPercentage>=51 & userBidAmount>0 & this.voting.type!='CANCEL'"
+        <button class="btn btn-cancel" v-if="userLogged & this.allVotedPercentage>=51 & userBidAmount>0 & this.voting.type!='CANCEL' & this.voting.status!='ON SALE'"
           @click="this.$store.dispatch('appGlobal/setCancellSellVotingModal',true);this.$store.dispatch('appGlobal/setCurrentVoting',this.voting);">
             {{translatesGet('CANCEL')}}
         </button>
