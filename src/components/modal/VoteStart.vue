@@ -212,7 +212,7 @@ export default {
                 await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
               }
             }
-            else {
+            else if(parseInt((requestJson.data[0].voting_percentage.replace('%', ''))) >= 51){
               let requestLinkTemp = null;
               let requestOptionsTemp = null;
               let requestTemp = null;
@@ -237,6 +237,9 @@ export default {
               if (check){
                 location.reload();
               }              
+            }
+            else{
+              location.reload();
             }
           }
           else {
