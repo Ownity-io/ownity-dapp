@@ -2,12 +2,15 @@
   <!-- <a class="card card-finished" :class="{'card-inactive' : false}"> -->
   <a class="card" :class="{'card-inactive' : ((this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN'))||(this.item.internal_status=='CLAIMED')||bidRewarded),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER')}">
     <div class="card-main">
+      <div class="loading"></div> <!--  used when loading-->
+
       <!-- <a v-if="item.media" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></a>
       <a v-else :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="card-img"  ></a> -->
       <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="card-img" v-if="item.media">
         <img :src="item.media">
-      </a>   
-      <div class="card-img" v-else>        
+      </a>
+
+      <div class="card-img" v-else>
       </div>     
       <div class="card-header">
         <a  class="icon-card-label" target="_blank" :href="linkToMarketplacePage" :style="{backgroundImage: `url(${item.marketplace.logo})`}" v-if="this.item.internal_status!='OWNED'">
