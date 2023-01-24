@@ -42,9 +42,10 @@ export default {
       }
     },
   },
-  async mounted() {
+  created() {
     this.simpleSSODefaultInit();
   },
+  async mounted() {},
 };
 </script>
 
