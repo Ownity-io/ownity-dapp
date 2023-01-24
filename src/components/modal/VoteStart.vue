@@ -32,11 +32,14 @@
                       <span>ETH</span>
                     </div>
                   </div>
-                  <div class="input-wrapper input-wrapper-amount">
-                    <input type="text" placeholder="Input amount" v-model="amount"  @input="setSellLotFee" onkeypress="return (event.charCode >= 48 && event.charCode <=57 || event.charCode == 46 || event.charCode == 44 || this.amount=='')" :disabled="blockPrice">
+                  <div class="input-wrapper input-wrapper-amount" :class="{'errorValue':displayLowPriceError}">
+                    <input type="text" placeholder="Input amount" v-model="amount"  @input="setSellLotFee" 
+                    onkeypress="return (event.charCode >= 48 && event.charCode <=57 || event.charCode == 46 || event.charCode == 44 || this.amount=='')"
+                    :disabled="blockPrice">
                     <div class="input-equivalent equivalent" v-if="amount>0">≈ $ {{useHelpers.abbrNum(Math.round(amount * currencyToUsdPrice),1,2)}}</div>
                   </div>
-                  <div class="input-prompt">{{translatesGet('ITEM_UNTIL_VOTE')}}</div>
+                  <div class="input-prompt" v-if="!displayLowPriceError">{{translatesGet('ITEM_UNTIL_VOTE')}}</div>
+                  <div class="input-prompt errorValue-text" v-else> Price is lower then acceptable {{this.useHelpers.convertToEther(this.item.price)}} ETH</div>
                 </div>
               </div>
             </div>
@@ -78,7 +81,7 @@
 
           <!-- v-if="currentPart "  -->
           <div class="modal-desktop-footer" v-if="!buttonWaiting">
-            <button class="btn btn-modal-main" @click="startVote" v-if="(this.amount>0 & this.checkedMarketplaces.length>0)">{{translatesGet('START_VOTE')}}</button>
+            <button class="btn btn-modal-main" @click="startVote" v-if="(this.amount>0 & this.checkedMarketplaces.length>0 & !displayLowPriceError)">{{translatesGet('START_VOTE')}}</button>
             <button disabled class="btn btn-modal-main" v-else>{{translatesGet('START_VOTE')}}</button>
           </div>
 
@@ -104,7 +107,7 @@
             
       <!-- v-if="currentPart "  -->
       <div  class="modal-mobile-footer" v-if="!buttonWaiting">
-        <button class="btn btn-modal-main" @click="startVote" v-if="(this.amount>0 & this.checkedMarketplaces.length>0)">{{translatesGet('START_VOTE')}}</button>
+        <button class="btn btn-modal-main" @click="startVote" v-if="(this.amount>0 & this.checkedMarketplaces.length>0 & !displayLowPriceError)">{{translatesGet('START_VOTE')}}</button>
         <button disabled class="btn btn-modal-main" v-else>{{translatesGet('START_VOTE')}}</button>
       </div>
 
@@ -155,7 +158,8 @@ export default {
       contractConfig:null,
       sellLotFee:0,
       markeplacesId:[],
-      blockPrice:false
+      blockPrice:false,
+      displayLowPriceError:false
     };
   },
   computed: {
@@ -382,6 +386,12 @@ export default {
       
     },
     setSellLotFee(){
+      if (this.convertFromEtherToWei(String(this.amount))<this.item.price & this.amount>0){
+        this.displayLowPriceError=true;
+      }
+      else{
+        this.displayLowPriceError=false;
+      }
       this.sellLotFee = this.noExponents((this.contractConfig[0].sell_lot_fee/100)/100*this.noExponents(this.convertFromEtherToWei(this.amount)));
     },
     setMarketplace(markeplaceId){      

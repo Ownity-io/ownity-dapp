@@ -3823,7 +3823,7 @@ a.td-wrap-link span {
 }
 
 
-.input-prompt .errorValue-text {
+.input-prompt.errorValue-text {
     font-weight: 400;
     font-size: 12px;
     line-height: 14px;
@@ -3832,6 +3832,7 @@ a.td-wrap-link span {
     color: #F32727;
     bottom: -8px;
 }
+
 .section-listing-main .section-deposit:nth-child(3){
     border-bottom: 1px solid #DFE2EA;
 }
