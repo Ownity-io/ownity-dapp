@@ -301,7 +301,7 @@ export default {
   },
   async mounted(){
     this.item = await this.$store.getters['marketplaceListing/getItem'];
-    this.itemWithBidsOnSale = 
+    this.itemWithBidsOnSale = null;
     this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
     this.setUserBidAmount();
     this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
