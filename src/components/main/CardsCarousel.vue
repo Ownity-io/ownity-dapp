@@ -45,21 +45,20 @@ export default defineComponent({
       },
       // 700px and up
       768: {
-        // itemsToShow: 1.94,
-        itemsToShow: 2.935,
+        //! itemsToShow: 2.935,
+        itemsToShow: 3,
         snapAlign: 'center',
       },
       // 1024 and up
       1024: {
-        // itemsToShow: 4.95,
-        // itemsToShow: 2.8,
-        itemsToShow: 3.93,
+        //! itemsToShow: 3.93,
+        itemsToShow: 4,
         snapAlign: 'start',
       },
       // 1024 and up
       1440: {
-        // itemsToShow: 2.5,
-        itemsToShow: 4.95,
+        //! itemsToShow: 4.95,
+        itemsToShow: 5,
         snapAlign: 'start',
       },
     },
