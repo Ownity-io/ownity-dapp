@@ -51,7 +51,7 @@
                     1%
                     {{translatesGet('TO')}}
                     {{translatesGet('INPUT_MAX')}}
-                    100%
+                    {{useHelpers.toFixedIfNecessary(this.userBidAmount/this.item.price*100,0) - this.userBidOnSaleAmount}}%
                     <!-- Min 1% to Max 100% -->
                   </div>
                 </div>
@@ -159,6 +159,7 @@ export default {
       contractConfig:null,
       sellFractionFee:0,
       itemWithBidsOnSale:null,
+      userBidOnSaleAmount:0
     };
   },
   computed: {
@@ -288,6 +289,9 @@ export default {
       else if (this.currentPart < 1) {
         this.currentPart = 1
       }
+      else if (this.currentPart > (this.useHelpers.toFixedIfNecessary(this.userBidAmount/this.item.price*100,0) - this.userBidOnSaleAmount)){
+        this.currentPart = this.useHelpers.toFixedIfNecessary(this.userBidAmount/this.item.price*100,0) - this.userBidOnSaleAmount;
+      }
       else if (this.currentPart > (this.useHelpers.toFixedIfNecessary(this.userBidAmount/this.item.price*100,0))) {
         this.currentPart = this.useHelpers.toFixedIfNecessary(this.userBidAmount/this.item.price*100,0)
       }
@@ -298,10 +302,21 @@ export default {
         this.currentPart = parseInt(this.currentPart);
       }
     },
+    setBidOnSaleAmount(){
+      if (this.itemWithBidsOnSale.bids){      
+          for (let element of this.itemWithBidsOnSale.bids){
+            if (element.address == localStorage.getItem('userAddress')){
+              this.userBidOnSaleAmount += (element.fraction_amount/10**18);
+            }
+          }
+      } 
+
+    }
   },
   async mounted(){
     this.item = await this.$store.getters['marketplaceListing/getItem'];
-    this.itemWithBidsOnSale = null;
+    this.itemWithBidsOnSale = await (await fetch(`${config.backendApiEntryPoint}listing-with-on-sale-bids/${this.item.id}`)).json();
+    this.setBidOnSaleAmount();
     this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
     this.setUserBidAmount();
     this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
