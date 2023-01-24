@@ -3822,7 +3822,8 @@ a.td-wrap-link span {
     border: 1px solid #F32727;
 }
 
-.errorValue-text {
+
+.input-prompt .errorValue-text {
     font-weight: 400;
     font-size: 12px;
     line-height: 14px;
@@ -3890,4 +3891,21 @@ a.td-wrap-link span {
     text-align: center;
     color: #9A9A9A;
     margin-top: 14px;
+}
+
+@media (max-width: 540px) {
+    .container-btn-part {
+        display: block;
+    }
+    .card-col {
+        align-items: flex-start !important;
+    }
+    .card-col-value .equivalent{
+        position: absolute;
+        left: 10px;
+        top: 30px;
+    }
+    .card-value {
+        margin-bottom: 25px;
+    }
 }
