@@ -30,7 +30,7 @@
                   <div class="input-wrapper input-percent wMax">
                     <input type="text"
                     placeholder="0%" v-model="this.currentPart" @input="checkCurrentPart">
-                    <button class="btn-max">
+                    <button class="btn-max" @click="this.currentPart = 100">
                       Max
                     </button>
                   </div>
