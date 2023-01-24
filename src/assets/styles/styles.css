@@ -3822,7 +3822,8 @@ a.td-wrap-link span {
     border: 1px solid #F32727;
 }
 
-.errorValue-text {
+
+.input-prompt .errorValue-text {
     font-weight: 400;
     font-size: 12px;
     line-height: 14px;
