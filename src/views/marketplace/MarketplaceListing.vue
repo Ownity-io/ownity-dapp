@@ -312,10 +312,15 @@
                 </div>
               </div>
               <div class="section-deposit-btns">
-                <a class="btn btn-get" v-if="(userAddress!=null & userBidAmount>0)"
+                <!-- <a class="btn btn-get" v-if="(userAddress!=null & userBidAmount>0)"
                 @click="letsCheck2('ListingVote')" href="#votes">
                   {{translatesGet('CANCEL_SELL')}}
-                </a> 
+                </a>  -->
+                <button class="btn btn-get" v-if="(userAddress!=null & userBidAmount>0)"
+                  @click="this.$store.dispatch('appGlobal/setCurrentVoting',voting);this.$store.dispatch('appGlobal/setCancellSellVotingModal',true)">
+                    {{translatesGet('CANCEL_SELL')}}
+                </button> 
+                
               </div>
               <div class="section-deposit-labels" v-if="userBid!=null">
                 <div class="deposit-label" v-if="userBid.status == 'ON SALE'">
