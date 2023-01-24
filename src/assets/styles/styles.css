@@ -40,7 +40,7 @@ ul li a {
 /* ----------------------------------------- */
 header {
     border-bottom: 1px solid #DFE2EA;
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;
