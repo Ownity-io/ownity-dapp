@@ -357,6 +357,16 @@ input+.input-equivalent {
     margin-top: 8px;
     color: #9A9A9A;
 }
+.errorValue-text,
+.input-prompt .errorValue-text {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    color: #F32727;
+    bottom: -8px;
+}
 
 .input-percent,
 .input-wrapper-amount {
