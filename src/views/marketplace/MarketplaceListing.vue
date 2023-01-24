@@ -207,7 +207,7 @@
                   @click="this.$store.dispatch('appGlobal/setShowClaimNftModal',true)">
                   {{translatesGet('CLAIM_NFT')}}
                 </button> 
-                <button class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount>0)"
+                <button class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount>0 & userCanSoldFraction)"
                   @click="this.$store.dispatch('appGlobal/setShowSellPartModal',true)">
                   {{translatesGet('SELL_NFT')}}
                 </button> 
@@ -311,10 +311,15 @@
                 </div>
               </div>
               <div class="section-deposit-btns">
-                <a class="btn btn-get" v-if="(userAddress!=null & userBidAmount>0)"
+                <!-- <a class="btn btn-get" v-if="(userAddress!=null & userBidAmount>0)"
                 @click="letsCheck2('ListingVote')" href="#votes">
                   {{translatesGet('CANCEL_SELL')}}
-                </a> 
+                </a>  -->
+                <button class="btn btn-get" v-if="(userAddress!=null & userBidAmount>0)"
+                  @click="this.$store.dispatch('appGlobal/setCurrentVoting',voting);this.$store.dispatch('appGlobal/setCancellSellVotingModal',true)">
+                    {{translatesGet('CANCEL_SELL')}}
+                </button> 
+                
               </div>
               <div class="section-deposit-labels" v-if="userBid!=null">
                 <div class="deposit-label" v-if="userBid.status == 'ON SALE'">
@@ -583,7 +588,8 @@ export default {
       bidRewarded:false,
       onSaleVotingsCount:0,
       votingsOnSale:[],
-      marketplaces:null
+      marketplaces:null,
+      userCanSoldFraction:false
     };
   },
   components: {
@@ -741,6 +747,24 @@ export default {
         await this.$store.dispatch('appGlobal/setGreenSnack', false)
         await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 5)      
       }      
+    },
+    setUserCanSoldFraction(){
+      let userBidOnSaleAmount = 0;
+      if (this.itemWithBidsOnSale.bids){      
+          for (let element of this.itemWithBidsOnSale.bids){
+            if (element.address == localStorage.getItem('userAddress')){
+              userBidOnSaleAmount += (element.fraction_amount/10**18);
+            }
+          }
+      } 
+      if (userBidOnSaleAmount<(this.useHelpers.toFixedIfNecessary(this.userBidAmount/this.item.price*100,0))){
+        this.userCanSoldFraction = true;
+      }
+      else
+      {
+        this.userCanSoldFraction = false;
+      }
+
     }
   },
   async mounted() {
@@ -776,6 +800,7 @@ export default {
     let requestUrl = `${config.backendApiEntryPoint}marketplaces/`;
     let request = await fetch(requestUrl);
     this.marketplaces = await request.json();
+    this.setUserCanSoldFraction();
     this.render = true;
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
