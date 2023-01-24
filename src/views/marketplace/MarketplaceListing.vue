@@ -51,8 +51,7 @@
                 </div>
               </div>
             </div>
-            <div class="listing-name">{{item.name}}
-              
+            <div class="listing-name">{{item.name ? item.name : '#' + item.token_id}}
               <div class="drop-down-mobile">                                
                   <div class="drop-down-container" 
                       :class="{'unfolded' : mobileDropDown }">
@@ -619,6 +618,7 @@ export default {
       await this.$store.dispatch('marketplaceListing/getAndSetItem',this.$route.params.id);
 
       this.item = await this.$store.getters['marketplaceListing/getItem'];
+      console.log(  this.item)
       this.itemWithBidsOnSale = await (await fetch(`${config.backendApiEntryPoint}listing-with-on-sale-bids/${this.item.id}`)).json();
     },
     setPriceInCurrency(){
