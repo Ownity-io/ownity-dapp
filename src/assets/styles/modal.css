@@ -272,6 +272,18 @@
     column-gap: 40px;
 }
 
+.resize .modal-main-data-container {
+    column-gap: normal;
+    justify-content: space-between;
+}
+
+.modal-main-input-select .modal-data-block-price+.modal-select-part,
+.resize .modal-main-input-select .modal-data-block-price+.modal-select-part .input-wrapper.input-percent{
+    max-width: 133px;
+}
+
+
+
 .modal-data-block {
     flex-grow: 1;
     margin-bottom: 24px;
@@ -428,9 +440,6 @@ input+.input-equivalent {
     height: 40px;
     margin-right: 8px;
 }
-
-.modal-main-data-container {}
-
 
 .modal-section-amount {
     display: flex;

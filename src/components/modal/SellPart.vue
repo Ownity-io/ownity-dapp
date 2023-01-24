@@ -21,7 +21,7 @@
             </div>
           </div>
 
-          <div class="modal-section-main-data">
+          <div class="modal-section-main-data resize">
             <div class="modal-main-data-container modal-main-input-select">
               <div class="modal-data-block modal-data-block-price">
                 <div class="modal-input container-input">

@@ -3910,3 +3910,7 @@ a.td-wrap-link span {
         margin-bottom: 25px;
     }
 }
+
+.deposit-img-container .deposit-img{
+    background-size: contain;
+}
