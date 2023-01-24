@@ -157,7 +157,8 @@ export default {
       buttonWaiting:false,
       lang: new MultiLang(this),
       contractConfig:null,
-      sellFractionFee:0
+      sellFractionFee:0,
+      itemWithBidsOnSale:null,
     };
   },
   computed: {
@@ -232,7 +233,7 @@ export default {
             `${config.backendApiEntryPoint}force-scanner/`,
             {
               body:JSON.stringify({
-                scanner:'sell_lot',
+                scanner:'on_sale_bids',
                 block:trx.blockNumber,
                 blockchain: this.item.blockchain
               }),
@@ -300,6 +301,7 @@ export default {
   },
   async mounted(){
     this.item = await this.$store.getters['marketplaceListing/getItem'];
+    this.itemWithBidsOnSale = 
     this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
     this.setUserBidAmount();
     this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
