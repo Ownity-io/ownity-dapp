@@ -1,6 +1,6 @@
 <template>
   <!-- <a class="card card-finished" :class="{'card-inactive' : false}"> -->
-  <a class="card" :class="{'card-inactive' : ((this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN'))||(this.item.internal_status=='CLAIMED')||bidRewarded),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER')}">
+  <a class="card" ref="wrpCard" :class="{'card-inactive' : ((this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN'))||(this.item.internal_status=='CLAIMED')||bidRewarded),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER')}">
     <div class="card-main">
       <div class="loading"></div> <!--  used when loading-->
 
@@ -411,6 +411,8 @@ import config from "@/config.json";
 import MultiLang from "@/core/multilang";
 import {mapGetters} from "vuex";
 import helpers from "@/helpers/helpers";
+import {create} from "@lottiefiles/lottie-interactivity";
+import {createElement} from "inferno-create-element";
 export default {
   props:[
     'item'

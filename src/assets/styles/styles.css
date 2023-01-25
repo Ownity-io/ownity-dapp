@@ -1262,6 +1262,7 @@ ul.tabs {
 
 .icon-filter-checkbox {
     border: 1px solid #DFE2EA;
+    background-size: contain;
 }
 
 .i-wrap {
@@ -3913,4 +3914,10 @@ a.td-wrap-link span {
 
 .deposit-img-container .deposit-img{
     background-size: contain;
+}
+
+.btn-wrap.btn-share:hover:after {
+    content: '';
+    position: absolute;
+
 }
