@@ -193,6 +193,7 @@ export default {
             requestJson = await request.json();
           }
           this.buttonWaiting=true;
+          // await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
           location.reload();
         }        
         else {

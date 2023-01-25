@@ -217,8 +217,8 @@ export default {
           }
         }
     },
-    checkMaxPrice(){     
-      if (this.maxPrice == '') {
+    checkMaxPrice(){
+      if (this.maxPrice === '') {
         this.maxPrice = null;
       }
       else if (isNaN(this.maxPrice)) {
@@ -227,7 +227,7 @@ export default {
           this.maxPrice = null;
         }
       }
-      this.isError = this.maxPrice < this.minPrice;
+      this.isError = this.maxPrice < this.minPrice && this.maxPrice && this.minPrice;
       this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', this.maxPrice); 
         
     },
@@ -251,16 +251,17 @@ export default {
         }
     },
     async checkMinPrice() {
-      if (this.minPrice == '') {
+      if (this.minPrice === '') {
         this.minPrice = null;
       }
+
       else if (isNaN(this.minPrice)) {
         this.minPrice = parseInt(this.minPrice);
         if (isNaN(this.minPrice)){
           this.minPrice = null;
         }
       }
-      this.isError = this.maxPrice < this.minPrice;
+      this.isError = this.maxPrice < this.minPrice && this.maxPrice && this.minPrice;
       this.$store.dispatch('marketplace/getAndSetCurrentMinPrice', this.minPrice);
     },
     translatesGet(key) {
