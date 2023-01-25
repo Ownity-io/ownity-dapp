@@ -3923,8 +3923,4 @@ a.td-wrap-link span {
     background-size: contain;
 }
 
-.btn-wrap.btn-share:hover:after {
-    content: '';
-    position: absolute;
 
-}
