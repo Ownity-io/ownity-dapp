@@ -842,4 +842,22 @@ export default {
     }
 
 }
+
+.btn-wrap.btn-share {
+  position: relative;
+}
+.btn-wrap.btn-share:hover:after {
+    content: 'Available soon';
+    position: absolute;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 100%;
+    border: 1px solid #DFE2EA;
+    top: -33px;
+    right: -3px;
+    padding: 4px;
+    min-width: fit-content;
+    width: 100px;
+
+}
 </style>
