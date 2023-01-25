@@ -377,9 +377,9 @@
             <i class="i-shopping-bag-line"></i>
             {{translatesGet('ON_SALE')}}: 
           </div>
-          <div class="marketplace"> 
-            <span class="icon-market" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></span> 
-            {{this.voting.marketplace.name}}
+          <div class="marketplace" v-for="voting in votingsOnSale"> 
+            <span class="icon-market" :style="{backgroundImage: `url(${voting.marketplace.logo})`}"></span> 
+            <!-- {{voting.marketplace.name}} -->
           </div>
         </div>
 
@@ -440,7 +440,8 @@ export default {
       lang: new MultiLang(this),
       showUserBidOnSale:false,
       userAddress:false,
-      bidRewarded:false
+      bidRewarded:false,
+      votingsOnSale:[]
     };
   },
   computed: {
@@ -566,7 +567,6 @@ export default {
             this.voting = element;
           }        
         }
-
         for (let element of this.item.votings){
           if (element.users.address == localStorage.getItem('userAddress')){
             this.userVoted = true;
@@ -575,12 +575,14 @@ export default {
         }
       }      
       else if (this.itemWithBidsOnSale.votings){
+        let tempVotingsOnSale = [];
         for (let element of this.itemWithBidsOnSale.votings){
             if (element.status=='ON SALE') {
+              tempVotingsOnSale.push(element);
               this.voting = element;
-              return
             }
         }
+        this.votingsOnSale = tempVotingsOnSale;
       }
     },
     setBidOnSale(){
