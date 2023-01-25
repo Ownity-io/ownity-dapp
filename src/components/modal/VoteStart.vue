@@ -33,7 +33,7 @@
                     </div>
                   </div>
                   <div class="input-wrapper input-wrapper-amount" :class="{'errorValue':displayLowPriceError}">
-                    <input type="text" placeholder="Input amount" v-model="amount"  @input="setSellLotFee" 
+                    <input maxlength="8" type="text" placeholder="Input amount" v-model="amount"  @input="setSellLotFee"
                     onkeypress="return (event.charCode >= 48 && event.charCode <=57 || event.charCode == 46 || event.charCode == 44 || this.amount=='')"
                     :disabled="blockPrice">
                     <div class="input-equivalent equivalent" v-if="amount>0">≈ $ {{useHelpers.abbrNum(Math.round(amount * currencyToUsdPrice),1,2)}}</div>

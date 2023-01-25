@@ -33,7 +33,7 @@
                     </div>
                   </div>
                   <div class="input-wrapper input-wrapper-amount">
-                    <input type="text" placeholder="Input amount" v-model="priceForPart" @input="setSellFractionFee" >
+                    <input maxlength="8" type="text" placeholder="Input amount" v-model="priceForPart" @input="setSellFractionFee" >
                     <div class="input-equivalent equivalent" v-if="priceForPart>0">≈ $ {{useHelpers.abbrNum(Math.round(priceForPart * currencyToUsdPrice),1,2)}}</div>
                   </div>
                   <div class="input-prompt">{{translatesGet('ITEM_UNTIL_CANCELLED')}}</div>
