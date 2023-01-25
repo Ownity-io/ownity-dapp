@@ -2001,8 +2001,15 @@ ul.tabs {
 }
 .modal-table .table-fraction .thead,
 .modal-table .table-fraction .tr{
-    grid-template-columns: 1.3fr .8fr 1fr;
+    grid-template-columns: 1.4fr .8fr 1fr;
     /* gap: 0; */
+}
+
+@media (max-width: 400px) {
+    .modal-table .table-fraction .thead,
+    .modal-table .table-fraction .tr {
+        grid-template-columns: 1.7fr .8fr 1fr;
+    }
 }
 
 .table-modal-trans .thead,

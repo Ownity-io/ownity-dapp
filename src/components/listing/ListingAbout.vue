@@ -4,7 +4,7 @@
       <div class="collection-img" :style="{backgroundImage: `url(${item.collection.logo})`}"></div>
                      
       <div class="collection-data">
-        <a target="_blank" rel="nofollow" class="collection-id collection-label">
+        <a :href="'/collection/'+item.collection.contract_address" target="_blank" rel="nofollow" class="collection-id collection-label">
           <span>{{item.collection.name}}</span>
           <i class="i-checkbox-circle-fill"></i>
         </a>
