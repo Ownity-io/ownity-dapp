@@ -106,10 +106,10 @@
                     </div>
                     <div class="footer-part footer-social-links">
                         <ul class="social-links-wrap">
-                            <li><a target="_blank" href=""><i class="i-twitter-fill"></i></a></li>  
+                            <li><a target="_blank" href="https://twitter.com/ownity_io"><i class="i-twitter-fill"></i></a></li>
                             <li><a target="_blank" href=""><i class="i-facebook-fill"></i></a></li>  
                             <li><a target="_blank" href=""><i class="i-telegram-fill"></i></a></li>  
-                            <!-- <li><a href=""><i class="i-discord-line"></i></a></li>   -->
+                            <li><a target="_blank" href="https://dsc.gg/ownity"><i class="i-discord-line"></i></a></li>
                         </ul>
                     </div>
                 </div>

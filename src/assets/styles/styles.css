@@ -40,7 +40,7 @@ ul li a {
 /* ----------------------------------------- */
 header {
     border-bottom: 1px solid #DFE2EA;
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;
@@ -1262,6 +1262,7 @@ ul.tabs {
 
 .icon-filter-checkbox {
     border: 1px solid #DFE2EA;
+    background-size: contain;
 }
 
 .i-wrap {
@@ -3916,4 +3917,14 @@ a.td-wrap-link span {
     .card-value {
         margin-bottom: 25px;
     }
+}
+
+.deposit-img-container .deposit-img{
+    background-size: contain;
+}
+
+.btn-wrap.btn-share:hover:after {
+    content: '';
+    position: absolute;
+
 }

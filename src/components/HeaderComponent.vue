@@ -76,6 +76,7 @@
 import MultiLang from "@/core/multilang";
 import Search from '@/components/Search.vue'
 import MobileMenu from '@/components/MobileMenu.vue'
+import AttentionBlock from "@/components/AttentionBlock.vue";
 
 export default {
     data(){
@@ -88,6 +89,7 @@ export default {
         }
     },
     components: {
+	    AttentionBlock,
         Search,
         MobileMenu,
     },
