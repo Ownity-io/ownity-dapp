@@ -12,7 +12,7 @@
       <div class="card-header">
         <a  class="icon-card-label" target="_blank" :href="linkToMarketplacePage" :style="{backgroundImage: `url(${item.marketplace.logo})`}" v-if="this.item.internal_status!='OWNED'">
         </a>
-        <a  class="icon-card-label" :style="{backgroundImage: `url('../../public/favicon.webp')`}" v-else>
+        <a  class="icon-card-label" :style="{backgroundImage: `url('../../public/favicon.png')`}" v-else>
         </a>
         <button class="btn-like" :class="{'liked':testLike}" @click="changeLike">
           <i class="i-heart-3-fill"></i>
