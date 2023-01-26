@@ -3922,5 +3922,27 @@ a.td-wrap-link span {
 .deposit-img-container .deposit-img{
     background-size: contain;
 }
+.btn-copy.profile-copied {
+    position: relative;
+}
+.btn-copy.profile-copied:hover:after {
+    display: block;
+}
 
+.btn-copy.profile-copied:after {
+    content: 'Copy';
+    display: none;
+    position: absolute;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    top: 25px;
+    right: 8px;
+    padding: 6px;
+    min-width: fit-content;
+    width: 50px;
+    border: 1px solid #DFE2EA;
+    box-shadow: 4px 4px 20px rgb(129 136 153 / 10%);
+    border-radius: 8px;
+}
 
