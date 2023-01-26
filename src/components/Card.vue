@@ -1,18 +1,21 @@
 <template>
   <!-- <a class="card card-finished" :class="{'card-inactive' : false}"> -->
-  <a class="card" :class="{'card-inactive' : ((this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN'))||(this.item.internal_status=='CLAIMED')||bidRewarded),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER')}">
+  <a class="card" ref="wrpCard" :class="{'card-inactive' : ((this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN'))||(this.item.internal_status=='CLAIMED')||bidRewarded),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER')}">
     <div class="card-main">
+      <div class="loading"></div> <!--  used when loading-->
+
       <!-- <a v-if="item.media" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></a>
       <a v-else :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="card-img"  ></a> -->
       <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="card-img" v-if="item.media">
         <img :src="item.media">
-      </a>   
-      <div class="card-img" v-else>        
+      </a>
+
+      <div class="card-img" v-else>
       </div>     
       <div class="card-header">
         <a  class="icon-card-label" target="_blank" :href="linkToMarketplacePage" :style="{backgroundImage: `url(${item.marketplace.logo})`}" v-if="this.item.internal_status!='OWNED'">
         </a>
-        <a  class="icon-card-label" :style="{backgroundImage: `url('../../public/favicon.webp')`}" v-else>
+        <a  class="icon-card-label" :style="{backgroundImage: `url('/favicon.png')`}" v-else>
         </a>
         <button class="btn-like" :class="{'liked':testLike}" @click="changeLike">
           <i class="i-heart-3-fill"></i>
@@ -374,9 +377,9 @@
             <i class="i-shopping-bag-line"></i>
             {{translatesGet('ON_SALE')}}: 
           </div>
-          <div class="marketplace"> 
-            <span class="icon-market" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></span> 
-            {{this.voting.marketplace.name}}
+          <div class="marketplace" v-for="voting in votingsOnSale"> 
+            <span class="icon-market" :style="{backgroundImage: `url(${voting.marketplace.logo})`}"></span> 
+            <!-- {{voting.marketplace.name}} -->
           </div>
         </div>
 
@@ -408,6 +411,8 @@ import config from "@/config.json";
 import MultiLang from "@/core/multilang";
 import {mapGetters} from "vuex";
 import helpers from "@/helpers/helpers";
+import {create} from "@lottiefiles/lottie-interactivity";
+import {createElement} from "inferno-create-element";
 export default {
   props:[
     'item'
@@ -435,7 +440,8 @@ export default {
       lang: new MultiLang(this),
       showUserBidOnSale:false,
       userAddress:false,
-      bidRewarded:false
+      bidRewarded:false,
+      votingsOnSale:[]
     };
   },
   computed: {
@@ -561,7 +567,6 @@ export default {
             this.voting = element;
           }        
         }
-
         for (let element of this.item.votings){
           if (element.users.address == localStorage.getItem('userAddress')){
             this.userVoted = true;
@@ -570,12 +575,14 @@ export default {
         }
       }      
       else if (this.itemWithBidsOnSale.votings){
+        let tempVotingsOnSale = [];
         for (let element of this.itemWithBidsOnSale.votings){
             if (element.status=='ON SALE') {
+              tempVotingsOnSale.push(element);
               this.voting = element;
-              return
             }
         }
+        this.votingsOnSale = tempVotingsOnSale;
       }
     },
     setBidOnSale(){

@@ -121,7 +121,7 @@
                 <div class="deposit-img-container" v-if="!bidRewarded">
                   <a target="_blank" :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"
                   v-if="this.item.internal_status!='OWNED' & this.item.internal_status!='ON SALE'"></a>
-                  <a target="_blank" :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url('../../public/favicon.webp')`}"
+                  <a target="_blank" :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url('/favicon.png')`}"
                   v-else-if="this.item.internal_status=='OWNED'"></a>
                   <a target="_blank" :href='linkToMarketplacePageFromVoting' class="deposit-img" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"
                   v-else-if="this.item.internal_status=='ON SALE'"></a>
@@ -840,6 +840,24 @@ export default {
     .flag {
         display: none;
     }
+
+}
+
+.btn-wrap.btn-share {
+  position: relative;
+}
+.btn-wrap.btn-share:hover:after {
+    content: 'Available soon';
+    position: absolute;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 100%;
+    border: 1px solid #DFE2EA;
+    top: -33px;
+    right: -3px;
+    padding: 4px;
+    min-width: fit-content;
+    width: 100px;
 
 }
 </style>

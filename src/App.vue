@@ -63,3 +63,14 @@ export default {
     },
 }
 </script>
+
+<style>
+.loadingTime {
+  position: relative;
+}
+.loadingTime:before {
+    width: inherit;
+    height: inherit;
+    background-color: #2F80ED;
+}
+</style>

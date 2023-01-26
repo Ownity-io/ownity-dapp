@@ -63,7 +63,7 @@
           
           <!-- v-if="currentPart "  -->
           <div class="modal-desktop-footer" v-if="!buttonWaiting">
-            <button class="btn btn-modal-main" @click="declineBid">{{translatesGet('CANCEL')}}</button>
+            <button class="btn btn-modal-main" @click="declineBid">Cancel Sale</button>
           </div>
 
           <!-- v-else  -->
@@ -88,7 +88,7 @@
             
       <!-- v-if="currentPart "  -->
       <div  class="modal-mobile-footer" v-if="!buttonWaiting" >
-        <button class="btn btn-modal-main" @click="declineBid">{{translatesGet('CANCEL')}}</button>
+        <button class="btn btn-modal-main" @click="declineBid">Cancel Sale</button>
       </div>
 
       <!-- v-else  -->

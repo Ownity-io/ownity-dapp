@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="td" v-if="item.tnx_hash"> 
-                    <a class="td-wrap td-wrap-link" href="" target="_blank" rel="nofollow">
+                    <a class="td-wrap td-wrap-link" :href="config.etherscanTxUrlStart+item.tnx_hash" target="_blank" rel="nofollow">
                         <span>{{item.tnx_hash.substring(0,6)+'...'+item.tnx_hash.substring(38,42)}}</span>
                         <i class="i-external-link-line"></i>
                     </a> 
@@ -76,6 +76,7 @@
 import MultiLang from "@/core/multilang";
 import helpers from "@/helpers/helpers";
 import {mapGetters} from "vuex";
+import config from '@/config.json';
 
 export default {
   data() {
@@ -87,6 +88,7 @@ export default {
       currentChunkyIndex:0,
       currentlyVisibleActivities: [],
       allActivitiesChunky: [],
+      config:config
     };
   },
   computed: {
