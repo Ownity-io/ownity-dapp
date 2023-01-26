@@ -229,7 +229,7 @@
                 <div class="deposit-label" v-if="userBid.status == 'ON SALE'">
                   <i class="i-shopping-bag-line"></i>
                   {{translatesGet('ON_SALE')}}:
-                  <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidAmount),6,2))}} ETH</b> ({{userBid.fraction}})</span>
+                  <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(inSaleAmount,6,2))}}  ETH</b> ({{useHelpers.toFixedIfNecessary(inSaleFractionPercent,6,2) + '%'}})</span>
                 </div>
                 <div class="deposit-label" v-if="false">
                   <i class="i-volume-vibrate-line"></i>
@@ -589,7 +589,9 @@ export default {
       onSaleVotingsCount:0,
       votingsOnSale:[],
       marketplaces:null,
-      userCanSoldFraction:false
+      userCanSoldFraction:false,
+      inSaleFractionPercent: 0,
+      inSaleAmount: 0
     };
   },
   components: {
@@ -624,7 +626,6 @@ export default {
       await this.$store.dispatch('marketplaceListing/getAndSetItem',this.$route.params.id);
 
       this.item = await this.$store.getters['marketplaceListing/getItem'];
-      console.log(  this.item)
       this.itemWithBidsOnSale = await (await fetch(`${config.backendApiEntryPoint}listing-with-on-sale-bids/${this.item.id}`)).json();
     },
     setPriceInCurrency(){
@@ -750,13 +751,16 @@ export default {
     },
     setUserCanSoldFraction(){
       let userBidOnSaleAmount = 0;
-      if (this.itemWithBidsOnSale.bids){      
+      if (this.itemWithBidsOnSale.bids){
           for (let element of this.itemWithBidsOnSale.bids){
             if (element.address == localStorage.getItem('userAddress')){
               userBidOnSaleAmount += (element.fraction_amount/10**18);
+              this.inSaleAmount += (element.price/10**18)
             }
           }
-      } 
+      }
+      this.inSaleFractionPercent = userBidOnSaleAmount
+
       if (userBidOnSaleAmount<(this.useHelpers.toFixedIfNecessary(this.userBidAmount/this.item.price*100,0))){
         this.userCanSoldFraction = true;
       }
