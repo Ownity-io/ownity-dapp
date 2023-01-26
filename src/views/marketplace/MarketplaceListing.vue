@@ -382,7 +382,7 @@
                       <span>{{translatesGet('FRACTION_MARKET')}}</span>
                     </button>
                   </li>
-                  <li v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='CLOSED' ) & (item.internal_status=='OWNED'||item.internal_status=='ON SALE') & item.votings!=null">
+                  <li v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='CLOSED' ) & (item.internal_status=='OWNED'||item.internal_status=='ON SALE') & (this.activeVotings.length+this.inactiveVotings.length>0)">
                   <!-- <li v-if="true"> -->
                     <button
                       :class="{ 'active-tab': activeTab2 === 'ListingVote' }"
@@ -443,18 +443,19 @@
                 <div v-if="activeTab2 === 'ListingVote'" 
                   class="section-votes-wrap">
 
-                  <div class="active-votes" id="votes">
+                  <div class="active-votes" id="votes" v-if="this.activeVotings.length>0">
                     <div class="votes-wrap-title">
                       {{translatesGet('ACTIVE_VOTE')}}
                     </div>
-                    <ListingVote v-for="voting in this.activeVotings" :item="this.item" :voting="voting"/>
+                    <ListingVote v-for="voting in this.activeVotings" :item="this.item" :voting="voting" :inactive="false"/>
                   </div>
 
-                  <div class="inactive-votes" id="votes">
+                  <div class="inactive-votes" id="votes" v-if="this.inactiveVotings.length>0">
                     <div class="votes-wrap-title">
-                      {{translatesGet('ACTIVE_VOTE')}}
+                      <!-- {{translatesGet('ACTIVE_VOTE')}} -->
+                      {{ 'Finished' }}
                     </div>
-                    <ListingVote v-for="voting in this.inactiveVotings" :item="this.item" :voting="voting"/>
+                    <ListingVote v-for="voting in this.inactiveVotings" :item="this.item" :voting="voting" :inactive="true"/>
                   </div>
 
                   <!-- <div class="inactive-votes">
@@ -736,11 +737,16 @@ export default {
               votingsOnSaleTemp.push(element);
               this.onSaleVotingsCount+=1;
             }
-            if (element.status == 'ON SALE'){
-
+            if (element.status == 'ON SALE' || element.status == 'CANCELED' ||(element.type == 'CANCEL' & element.status == 'FULFILLED')){
+              inactiveVotingsTemp.push(element);
+            }
+            else{
+              activeVotingsTemp.push(element);
             }
         }
         this.votingsOnSale = votingsOnSaleTemp;
+        this.activeVotings = activeVotingsTemp;
+        this.inactiveVotings = inactiveVotingsTemp;
       }
     },
     async refreshInfo(){
