@@ -203,6 +203,7 @@ export default {
   },
 
   async mounted(){
+    window.scrollTo(0, 0);
     window.addEventListener("scroll", this.handleScroll);
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
