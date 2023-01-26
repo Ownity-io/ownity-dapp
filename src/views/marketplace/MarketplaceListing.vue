@@ -260,7 +260,7 @@
                     </div>
                   </div>
                   <div class="deposit-value" v-if="(item.internal_status=='ON SALE')">
-                    <span>{{'Your part⠀'}}</span>  
+                    <span>{{'Your part'}}</span>                    
                     <span><b>{{parseInt(this.userBid.fraction)}}%</b></span>
                   </div>      
                 </div>
