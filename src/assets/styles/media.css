@@ -257,7 +257,21 @@
 
 @media (max-width: 991px) {
 
-    /* @media (max-width: 768px) { */
+    .your-deposit {
+        margin-bottom: 0;
+        padding: 0;
+        border: none;
+        border-bottom: 1px solid #DFE2EA;
+        border-radius: 0;
+    }
+    .your-deposit .section-deposit {
+        padding: 0;
+        padding-bottom: 26px;
+    }
+
+    .your-deposit .section-deposit-data {
+        margin-bottom: 16px;
+    }
 
     .footer-section {
         row-gap: 0;
@@ -904,8 +918,7 @@
         margin-top: 24px;
     }
 
-    [class^='section-service-'],
-    [class^='section-listing-']:not(.section-listing-header) {
+    [class^='section-service-']{
         margin-top: 24px;
     }
 
@@ -1101,7 +1114,7 @@
     }
 
     .modal-main-data-container.modal-main-input-select {
-        flex-direction: column;
+        flex-direction: column-reverse;
     }
 
     .modal-main-data-container.modal-main-input-select .modal-data-block-price {

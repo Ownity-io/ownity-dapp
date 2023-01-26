@@ -19,6 +19,17 @@
                 <div>{{item.collection.name}}</div>
               </div>
             </div>
+            <!--price buy nft-->
+            <div class="pur-price">
+              <p>
+                Purchase price
+              </p>
+              <div class="pur-price-val">
+                <div class="pur-price-icon"></div>
+                <p>0.2 ETH</p>
+              </div>
+            </div>
+            <!--end price buy nft-->
           </div>
 
           <div class="modal-section-main-data">

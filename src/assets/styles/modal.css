@@ -247,6 +247,7 @@
     justify-content: stretch;
     align-items: flex-start;
     gap: 12px;
+    align-items: center;
 }
 
 .modal-claim .modal-section-nft-data {
@@ -275,6 +276,7 @@
 .resize .modal-main-data-container {
     column-gap: normal;
     justify-content: space-between;
+    flex-direction: row-reverse;
 }
 
 .modal-main-input-select .modal-data-block-price+.modal-select-part,

@@ -19,6 +19,20 @@
                 <div>{{item.collection.name}}</div>
               </div>
             </div>
+            <!--when 1%-->
+
+            <div class="procent">
+              <p>1% = </p>
+              <div class="procent-val">
+                <div class="val-icon"></div>
+                <p>0.2 ETH</p>
+              </div>
+            </div>
+
+            <!--end when 1%-->
+
+
+
           </div>
 
           <div class="modal-section-main-data resize">

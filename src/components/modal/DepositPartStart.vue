@@ -66,11 +66,7 @@
               <div class="modal-data-block modal-data-block-price">
                 <div class="price-block">
                   <div class="price-block-title">
-                    {{translatesGet('INPUT_MIN')}}
-                    1%
-                    {{translatesGet('TO')}}
-                    {{translatesGet('INPUT_MAX')}}
-                    100%
+                    Price of your part
                     <!-- Min 1% to Max 100% -->
                   </div>
                   <div class="price-block-value price-value">
