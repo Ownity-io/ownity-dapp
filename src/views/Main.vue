@@ -65,7 +65,7 @@
             </div>
           </section>
 
-          <section class="section-home" id="screen-collections">
+          <section class="section-home" id="screen-collections" ref="screen_collections">
             <div class="container">
               <div class="section-home-header">
                 <div class="section-home-name">
@@ -176,6 +176,7 @@ import { ref } from 'vue';
 import { useElementVisibility } from '@vueuse/core';
 import MultiLang from "@/core/multilang";
 import helpers from "@/helpers/helpers";
+import {mapMutations} from "vuex";
 
 export default {
   data() {
@@ -189,7 +190,8 @@ export default {
       banners:null,
       showCardsLoaderAnimation:true,
       lang: new MultiLang(this),
-      readyToShow: false
+      readyToShow: false,
+      activeClass: false
     };
   },
   components: {
@@ -199,7 +201,9 @@ export default {
     BannerSlider,
     CardsCarousel,
   },
+
   async mounted(){
+    window.addEventListener("scroll", this.handleScroll);
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
     }
@@ -221,7 +225,23 @@ export default {
       this.loadIfVisible();
     }
   },
+  beforeUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
   methods: {
+    ...mapMutations(['updateActiveCollectionLink']),
+    handleScroll() {
+      const el = this.$refs.screen_collections
+      if (
+          el.getBoundingClientRect().top >= 100 ||
+          (el.getBoundingClientRect().top * -1) >
+          el.getBoundingClientRect().height + 15
+      ) {
+        return  this.updateActiveCollectionLink(false);
+      } else {
+        return this.updateActiveCollectionLink(true);
+      }
+    },
     async fetchAndSetNftCollections() {
       let requestUrl = `${config.backendApiEntryPoint}nft-collections/?limit=${config.collectionsPerPage}`;
       let request = await fetch(requestUrl);

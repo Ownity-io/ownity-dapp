@@ -2,11 +2,15 @@ import {backendApiEntryPoint} from '@/config.json'
 
 export default {
     state:{
-        usdRate: null
+        usdRate: null,
+        activeCollectionLink: false
     },
     mutations:{
         updateUsdRate(state, data) {
             state.usdRate = data.rates
+        },
+        updateActiveCollectionLink(state, data){
+            state.activeCollectionLink = data
         }
     },
     actions:{
@@ -34,6 +38,9 @@ export default {
     getters:{
         getUsdRate(state) {
             return state.usdRate
+        },
+        getActiveCollectionLink(state){
+            return state.activeCollectionLink
         }
     },
 };

@@ -93,7 +93,7 @@
                         <li>
                             <button
                             :class="{ 'active-tab': activeTab === 'ListCards' }"
-                            @click="letsCheck('ListCards')"
+                            @click="letsCheck('ListCards', true)"
                             >
                                 <span>{{translatesGet('ITEMS')}}</span>
                                 <span>{{translatesGet('ITEMS')}}</span>
@@ -102,14 +102,14 @@
                         <li>
                             <button
                             :class="{ 'active-tab': activeTab === 'Favourites' }"
-                            @click="letsCheck('Favourites')">
+                            @click="letsCheck('Favourites', true)">
                                 <span>{{translatesGet('FAVOURITES')}}</span>
                                 <span>{{translatesGet('FAVOURITES')}}</span>
                             </button>
                         </li>
                         <li>
                             <button :class="{ 'active-tab': activeTab === 'Vote' }"
-                            @click="letsCheck('Vote')">
+                            @click="letsCheck('Vote', true)">
                                 <span>{{translatesGet('VOTES')}}</span>
                                 <span>{{translatesGet('VOTES')}}</span>
                             </button>
@@ -117,7 +117,7 @@
                         <li>
                             <button
                             :class="{ 'active-tab': activeTab === 'ActivityTable'}"
-                            @click="letsCheck('ActivityTable')"
+                            @click="letsCheck('ActivityTable', true)"
                             >
                                 <span>{{translatesGet('ACTIVITIES')}}</span>
                                 <span>{{translatesGet('ACTIVITIES')}}</span>
@@ -256,7 +256,7 @@ export default {
         translatesGet(key) {
         return this.lang.get(key);
         },
-        letsCheck(name) {
+        letsCheck(name, isFirst) {
           for (const el in this.tabList) {
             if(this.tabList[el] === name){
               this.$router.push({path: `/profile/${el}`})
@@ -266,16 +266,16 @@ export default {
           }
           this.setAllFiltersToNull()
           if(this.activeTab === 'ListCards'){
-            this.fetchAndSetListingsStartInfoByUser()
+            this.fetchAndSetListingsStartInfoByUser(isFirst)
           }
           if(this.activeTab === 'Favourites'){
-            this.fetchAndSetListingsStartInfoByUserFav()
+            this.fetchAndSetListingsStartInfoByUserFav(isFirst)
           }
           if(this.activeTab === 'Vote'){
-            this.fetchAndSetListingsStartInfoByUserVote()
+            this.fetchAndSetListingsStartInfoByUserVote(isFirst)
           }
           if(this.activeTab === 'ActivityTable'){
-            this.fetchAndSetActivitiesResult({userAddress: this.userAddress, collectionAddress: null})
+            this.fetchAndSetActivitiesResult({userAddress: this.userAddress, collectionAddress: null, isFirst})
           }
         },
         clearLocalStorage(){
@@ -287,7 +287,7 @@ export default {
     this.userAddress = localStorage.getItem('userAddress');
 
     this.activeTab = this.$route.params.tab ? this.tabList[`${this.$route.params.tab}`] : this.tabList.all
-    this.letsCheck(this.activeTab)
+    this.letsCheck(this.activeTab, true)
 
     await this.fetchAndSetNftCollections()
     await this.fetchAndSetMarketplaces()
