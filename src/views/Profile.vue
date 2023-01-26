@@ -72,7 +72,7 @@
                             </div>
                             <div class="btn link-wrapper">
                                 <div class="link">{{this.$store.getters['walletsAndProvider/getUserShortAddress']}}</div>
-                                <button class="btn-copy" @click='copy()'><i class="i-checkbox-multiple-blank-line"></i></button>
+                                <button class="btn-copy profile-copied" @click='copy()'><i class="i-checkbox-multiple-blank-line"></i></button>
                             </div>
                         </div>
                         <div class="profile-container-btns">
