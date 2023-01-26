@@ -98,7 +98,7 @@
       <a href="/marketplace" class="btn" v-if="activitiesIsEmpty">
         {{translatesGet('BACK_TO_ALL')}}
       </a>
-      <button class="btn" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.fetchAndSetActivitiesStartInfo()" v-else>
+      <button class="btn" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.fetchAndSetActivitiesStartInfo(true)" v-else>
         {{translatesGet('BACK_TO_ALL')}}
       </button>
     </div>
@@ -191,7 +191,7 @@ export default {
                 return seconds+'s';
             }
         },
-        async fetchAndSetActivitiesStartInfo(){
+        async fetchAndSetActivitiesStartInfo(isFirst){
             this.userAddress = localStorage.getItem('userAddress');
             if (this.$route.name == 'Marketplace') {
                 await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult', { userAddress: null, collectionAddress: null });
@@ -200,12 +200,12 @@ export default {
                 await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult', { userAddress: null, collectionAddress: this.$route.params.contract_address });
             }
             else if (this.$route.name == 'Profile') {
-                await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult', { userAddress: this.userAddress, collectionAddress: null });
+                await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult', { userAddress: this.userAddress, collectionAddress: null, isFirst });
             }     
         }
     },
     async mounted(){  
-        await this.fetchAndSetActivitiesStartInfo();
+        await this.fetchAndSetActivitiesStartInfo(true);
         if (this.$route.name == 'Collection') {
             let requestUrl = `${config.backendApiEntryPoint}user-activity/?limit=${config.listingsPerPage}`;
             requestUrl += `&collection=${this.$route.params.contract_address}`;
