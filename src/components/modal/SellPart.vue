@@ -33,7 +33,7 @@
                     </div>
                   </div>
                   <div class="input-wrapper input-wrapper-amount">
-                    <input type="text" placeholder="Input amount" v-model="priceForPart" @input="setSellFractionFee" >
+                    <input maxlength="8" type="text" placeholder="Input amount" v-model="priceForPart" @input="setSellFractionFee" >
                     <div class="input-equivalent equivalent" v-if="priceForPart>0">≈ $ {{useHelpers.abbrNum(Math.round(priceForPart * currencyToUsdPrice),1,2)}}</div>
                   </div>
                   <div class="input-prompt">{{translatesGet('ITEM_UNTIL_CANCELLED')}}</div>
@@ -74,8 +74,8 @@
             </div>
           </div>
           <div class="total-block-describe">
-            {{translatesGet('TOTAL_DESCRIBE')}}
-            <a href="#">{{translatesGet('TERMS_OF_USE')}}</a>
+            There’s a small fee Ownity charges for fraction purchases.
+            <a href="#">Learn more.</a>
           </div>
       
           <!-- v-if="currentPart "  -->
