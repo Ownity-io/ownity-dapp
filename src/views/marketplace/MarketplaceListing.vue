@@ -260,8 +260,7 @@
                     </div>
                   </div>
                   <div class="deposit-value" v-if="(item.internal_status=='ON SALE')">
-                    <span>{{'Your part⠀'}}</span>  
-                    <span><b>{{parseInt(this.userBid.fraction)}}%</b></span>
+                    <span>{{'Your part' + ' '}}<b>{{parseInt(this.userBid.fraction)}}%</b></span>
                   </div>      
                 </div>
               </div>
@@ -383,7 +382,7 @@
                       <span>{{translatesGet('FRACTION_MARKET')}}</span>
                     </button>
                   </li>
-                  <li v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='CLOSED' ) & (item.internal_status=='OWNED'||item.internal_status=='ON SALE') & item.votings!=null">
+                  <li v-if="(item.marketplace_status=='OPEN' || item.marketplace_status=='CLOSED' ) & (item.internal_status=='OWNED'||item.internal_status=='ON SALE') & (this.activeVotings.length+this.inactiveVotings.length>0)">
                   <!-- <li v-if="true"> -->
                     <button
                       :class="{ 'active-tab': activeTab2 === 'ListingVote' }"
@@ -444,11 +443,19 @@
                 <div v-if="activeTab2 === 'ListingVote'" 
                   class="section-votes-wrap">
 
-                  <div class="active-votes" id="votes">
+                  <div class="active-votes" id="votes" v-if="this.activeVotings.length>0">
                     <div class="votes-wrap-title">
                       {{translatesGet('ACTIVE_VOTE')}}
                     </div>
-                    <ListingVote v-for="voting in this.item.votings" :item="this.item" :voting="voting"/>
+                    <ListingVote v-for="voting in this.activeVotings" :item="this.item" :voting="voting" :inactive="false"/>
+                  </div>
+
+                  <div class="inactive-votes" id="votes" v-if="this.inactiveVotings.length>0">
+                    <div class="votes-wrap-title">
+                      <!-- {{translatesGet('ACTIVE_VOTE')}} -->
+                      {{ 'Finished' }}
+                    </div>
+                    <ListingVote v-for="voting in this.inactiveVotings" :item="this.item" :voting="voting" :inactive="true"/>
                   </div>
 
                   <!-- <div class="inactive-votes">
@@ -591,7 +598,9 @@ export default {
       marketplaces:null,
       userCanSoldFraction:false,
       inSaleFractionPercent: 0,
-      inSaleAmount: 0
+      inSaleAmount: 0,
+      activeVotings:[],
+      inactiveVotings:[]
     };
   },
   components: {
@@ -719,6 +728,8 @@ export default {
     },
     setMaxVoting(){  
       let votingsOnSaleTemp = [];
+      let activeVotingsTemp = [];
+      let inactiveVotingsTemp = [];
       if (this.item.votings){
         for (let element of this.item.votings){
             if ((element.status=='ON SALE') & element.type=='SELL') {
@@ -726,8 +737,16 @@ export default {
               votingsOnSaleTemp.push(element);
               this.onSaleVotingsCount+=1;
             }
+            if (element.status == 'ON SALE' || element.status == 'CANCELED' ||(element.type == 'CANCEL' & element.status == 'FULFILLED')){
+              inactiveVotingsTemp.push(element);
+            }
+            else{
+              activeVotingsTemp.push(element);
+            }
         }
         this.votingsOnSale = votingsOnSaleTemp;
+        this.activeVotings = activeVotingsTemp;
+        this.inactiveVotings = inactiveVotingsTemp;
       }
     },
     async refreshInfo(){

@@ -1,5 +1,5 @@
 <template>
-    <div class="block-vote" v-if="this.voting.status=='OPEN'||this.voting.status=='ON SALE'">
+    <div class="block-vote">
       <div class="vote-data section-deposit-data">       
         <div class="deposit-img-container">
           <a target="_blank" href="#" class="deposit-img" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"></a> 
@@ -24,12 +24,12 @@
         </div>
       <div class="vote-btn-container">
         <!-- display if user logged and already votes -->
-        <button class="btn btn-cancel" v-if="userLogged & this.allVotedPercentage>=51 & userBidAmount>0 & this.voting.type!='CANCEL' & this.voting.status!='ON SALE'"
+        <button class="btn btn-cancel" v-if="userLogged & this.allVotedPercentage>=51 & userBidAmount>0 & this.voting.type!='CANCEL' & this.voting.status!='ON SALE' & !inactive"
           @click="this.$store.dispatch('appGlobal/setCancellSellVotingModal',true);this.$store.dispatch('appGlobal/setCurrentVoting',this.voting);">
             {{translatesGet('CANCEL')}}
         </button>
         <!-- display if user logged and not votes yet -->
-        <button class="btn btn-vote" v-else-if="userLogged & this.allVotedPercentage<51 & !userVoted & userBidAmount>0"
+        <button class="btn btn-vote" v-else-if="userLogged & this.allVotedPercentage<51 & !userVoted & userBidAmount>0 & !inactive"
         @click="this.$store.dispatch('appGlobal/setShowVoteConfirmModal',true);this.$store.dispatch('appGlobal/setCurrentVoting',this.voting);">
             <i class="i-thumb-up-line"></i>
             <span>{{translatesGet('CONFIRM')}}</span>
@@ -37,8 +37,8 @@
       </div>
       </div>
 
-      <div class="vote-progress-container">
-        <div class="data-counter">{{translatesGet('MEMBERS_VOTED')}}: {{this.voting.count}}/{{this.item.bids.length}}</div>
+      <div class="vote-progress-container"  v-if="!inactive">
+        <div class="data-counter" >{{translatesGet('MEMBERS_VOTED')}}: {{this.voting.count}}/{{this.item.bids.length}}</div>
         <div class="vote-progress-row">
           <div class="card-progress progress">
             <!-- <div
@@ -108,7 +108,7 @@ import helpers from "@/helpers/helpers";
 import {mapGetters} from "vuex";
 
 export default{
-  props:['item','voting'],
+  props:['item','voting','inactive'],
   data(){
     return{
       useHelpers: helpers,
