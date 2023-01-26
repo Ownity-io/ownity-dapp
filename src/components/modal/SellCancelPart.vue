@@ -193,8 +193,10 @@ export default {
             requestJson = await request.json();
           }
           this.buttonWaiting=true;
-          // await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
-          location.reload();
+
+          await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
+          this.$store.dispatch('appGlobal/setCancellSellVotingModal',false)
+          await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
         }        
         else {
           this.buttonWaiting=false;
