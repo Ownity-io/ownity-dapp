@@ -852,12 +852,14 @@ export default {
     font-weight: 400;
     font-size: 13px;
     line-height: 100%;
-    border: 1px solid #DFE2EA;
-    top: -33px;
-    right: -3px;
-    padding: 4px;
+    top: 54px;
+    right: 8px;
+    padding: 12px;
     min-width: fit-content;
-    width: 100px;
+    width: 114px;
+    border: 1px solid #DFE2EA;
+    box-shadow: 4px 4px 20px rgba(129, 136, 153, 0.1);
+    border-radius: 8px;
 
 }
 </style>

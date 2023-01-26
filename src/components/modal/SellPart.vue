@@ -74,8 +74,8 @@
             </div>
           </div>
           <div class="total-block-describe">
-            {{translatesGet('TOTAL_DESCRIBE')}}
-            <a href="#">{{translatesGet('TERMS_OF_USE')}}</a>
+            There’s a small fee Ownity charges for fraction purchases.
+            <a href="#">Learn more.</a>
           </div>
       
           <!-- v-if="currentPart "  -->
