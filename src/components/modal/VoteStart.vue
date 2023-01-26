@@ -178,7 +178,7 @@ export default {
     async startVote() {
       this.buttonWaiting=true;
       if (this.amount>0 & this.checkedMarketplaces.length>0) {
-        // try {
+        try {
           let signed_message = await this.$store.dispatch('walletsAndProvider/signMessageWithGlobalProvider',
             `${this.item.id}-${this.item.currency.address}-${this.noExponents(this.amount * 10 ** this.item.currency.decimals)}-${this.item.end_date}`);
           console.log(signed_message);
@@ -252,14 +252,14 @@ export default {
             await this.$store.dispatch('appGlobal/setGreenSnack', false)
             await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
           }
-        // }
-        // catch{
-        //   this.buttonWaiting=false;
-        //   console.log(333)
-        //   await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
-        //   await this.$store.dispatch('appGlobal/setGreenSnack',false)
-        //   await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',10)
-        // }
+        }
+        catch{
+          this.buttonWaiting=false;
+          console.log(333)
+          await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
+          await this.$store.dispatch('appGlobal/setGreenSnack',false)
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',3)
+        }
         
       }
     },
@@ -282,30 +282,30 @@ export default {
       return str + z;
     },
     async sellLot(_voting_Ids) {
-      try{
-      let prov = toRaw(this.provider);
-      let chainSettings = toRaw(this.config.evmChains[this.item.collection.blockchain])
-      try{
-        await prov.send('wallet_switchEthereumChain',[{chainId: chainSettings.chainId}]);
-      }
-      catch (e){
-        console.log(e);
-        try{
-          await prov.send('wallet_addEthereumChain',[chainSettings]);  
+      try {
+        let prov = toRaw(this.provider);
+        let chainSettings = toRaw(this.config.evmChains[this.item.collection.blockchain])
+        try {
+          await prov.send('wallet_switchEthereumChain', [{ chainId: chainSettings.chainId }]);
         }
-        catch (e){
-        console.log(e);
-          console.log(444)
-          await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
-          await this.$store.dispatch('appGlobal/setGreenSnack',false)
-          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',10)
+        catch (e) {
+          console.log(e);
+          try {
+            await prov.send('wallet_addEthereumChain', [chainSettings]);
+          }
+          catch (e) {
+            console.log(e);
+            console.log(444)
+            await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
+            await this.$store.dispatch('appGlobal/setGreenSnack', false)
+            await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
+          }
         }
-      }     
-      const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await prov.getSigner()); 
-      let requestLink = null;
-      let requestOptions = null;
-      let request =null;
-      let requestJson = null;
+        const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi, await prov.getSigner());
+        let requestLink = null;
+        let requestOptions = null;
+        let request = null;
+        let requestJson = null;
         for (let element of _voting_Ids) {
           requestLink = `${config.backendApiEntryPoint}finish-voting/`;
           requestOptions = {
@@ -321,10 +321,10 @@ export default {
           };
           request = await fetch(requestLink, requestOptions);
           requestJson = await request.json();
-        }     
-      
-      let markeplaceId = ethers.utils.formatBytes32String(requestJson.data.marketplace).substring(0, 10);
-      let lot = {
+        }
+
+        let markeplaceId = ethers.utils.formatBytes32String(requestJson.data.marketplace).substring(0, 10);
+        let lot = {
           tokenAddress: requestJson.data.lot.currency,
           decimals: String(requestJson.data.lot.decimals),
           price: String(requestJson.data.lot.price),
@@ -335,47 +335,56 @@ export default {
           tokenAmount: requestJson.data.lot.token_amount,
           status: '0',
         };
-      let sellLot = await contract.sellLot(
-        markeplaceId,
-        requestJson.data.lot.id,
-        lot,
-        requestJson.data.signature,
-        { gasLimit: '1000000' }
-      
-      );
-      let trx = await prov.waitForTransaction(sellLot.hash);
-      if (trx.status == 1) {
-        let forceReq = await (await fetch(
+        try{
+        let sellLot = await contract.sellLot(
+          markeplaceId,
+          requestJson.data.lot.id,
+          lot,
+          requestJson.data.signature,
+          { gasLimit: '1000000' }
+
+        );
+        }
+        catch (e){
+          console.log(e);
+          this.buttonWaiting = false;
+          await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
+          await this.$store.dispatch('appGlobal/setGreenSnack', false)
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
+        }
+        let trx = await prov.waitForTransaction(sellLot.hash);
+        if (trx.status == 1) {
+          let forceReq = await (await fetch(
             `${config.backendApiEntryPoint}force-scanner/`,
             {
-              body:JSON.stringify({
-                scanner:'sell_lot',
-                block:trx.blockNumber,
+              body: JSON.stringify({
+                scanner: 'sell_lot',
+                block: trx.blockNumber,
                 blockchain: this.item.blockchain
               }),
               headers: {
                 accept: "application/json",
                 'Content-Type': 'application/json',
               },
-              method:'POST'
+              method: 'POST'
             })).json();
-        await this.checkSell();
-        await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
-        await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);
-        await this.$store.dispatch('appGlobal/setShowStartVotingModal', false);
-        await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
+          await this.checkSell();
+          await this.$store.dispatch('appGlobal/setLastTransSuccess', true)
+          await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);
+          await this.$store.dispatch('appGlobal/setShowStartVotingModal', false);
+          await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
+        }
+        else {
+          await this.$store.dispatch('appGlobal/setLastTransSuccess', false)
+          await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);
+          await this.$store.dispatch('appGlobal/setShowStartVotingModal', false);
+          await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
+          this.buttonWaiting = false;
+          await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
+          await this.$store.dispatch('appGlobal/setGreenSnack', false)
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
+        }
       }
-      else{
-        await this.$store.dispatch('appGlobal/setLastTransSuccess',false)
-        await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);
-        await this.$store.dispatch('appGlobal/setShowStartVotingModal', false);
-        await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
-        this.buttonWaiting = false;
-        await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
-        await this.$store.dispatch('appGlobal/setGreenSnack', false)
-        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
-      }
-    }
     catch (e){
         console.log(e);
         this.buttonWaiting = false;
