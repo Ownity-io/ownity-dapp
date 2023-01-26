@@ -65,7 +65,7 @@ export default {
 #chart{
   width: 100%;
   position: relative;
-  z-index: 500;
+  z-index: 1;
 }
 
 #centralPercentage{
