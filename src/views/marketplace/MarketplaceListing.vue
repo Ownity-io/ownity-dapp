@@ -260,7 +260,7 @@
                     </div>
                   </div>
                   <div class="deposit-value" v-if="(item.internal_status=='ON SALE')">
-                    <span>{{'Your part'}}</span>                    
+                    <span>{{'Your part '}}</span>                    
                     <span><b>{{parseInt(this.userBid.fraction)}}%</b></span>
                   </div>      
                 </div>
@@ -448,14 +448,14 @@
                     <div class="votes-wrap-title">
                       {{translatesGet('ACTIVE_VOTE')}}
                     </div>
-                    <ListingVote v-for="voting in this.item.votings" :item="this.item" :voting="voting"/>
+                    <ListingVote v-for="voting in this.activeVotings" :item="this.item" :voting="voting"/>
                   </div>
 
                   <div class="inactive-votes" id="votes">
                     <div class="votes-wrap-title">
                       {{translatesGet('ACTIVE_VOTE')}}
                     </div>
-                    <ListingVote v-for="voting in this.item.votings" :item="this.item" :voting="voting"/>
+                    <ListingVote v-for="voting in this.inactiveVotings" :item="this.item" :voting="voting"/>
                   </div>
 
                   <!-- <div class="inactive-votes">
@@ -598,7 +598,9 @@ export default {
       marketplaces:null,
       userCanSoldFraction:false,
       inSaleFractionPercent: 0,
-      inSaleAmount: 0
+      inSaleAmount: 0,
+      activeVotings:[],
+      inactiveVotings:[]
     };
   },
   components: {
@@ -726,12 +728,17 @@ export default {
     },
     setMaxVoting(){  
       let votingsOnSaleTemp = [];
+      let activeVotingsTemp = [];
+      let inactiveVotingsTemp = [];
       if (this.item.votings){
         for (let element of this.item.votings){
             if ((element.status=='ON SALE') & element.type=='SELL') {
               this.voting = element;
               votingsOnSaleTemp.push(element);
               this.onSaleVotingsCount+=1;
+            }
+            if (element.status == 'ON SALE'){
+
             }
         }
         this.votingsOnSale = votingsOnSaleTemp;
