@@ -23,7 +23,7 @@
                                 </router-link>
                             </li>
                             <li v-if="$route.path ==='/'">
-                                <a ref="screenCollections" href="#screen-collections" >
+                                <a :class="getActiveCollectionLink && 'active'" ref="screenCollections" href="#screen-collections" >
                                     <span>{{translatesGet('COLLECTIONS')}}</span>
                                     <span>{{translatesGet('COLLECTIONS')}}</span>
                                 </a>
@@ -77,6 +77,7 @@ import MultiLang from "@/core/multilang";
 import Search from '@/components/Search.vue'
 import MobileMenu from '@/components/MobileMenu.vue'
 import AttentionBlock from "@/components/AttentionBlock.vue";
+import {mapGetters} from "vuex";
 
 export default {
     data(){
@@ -92,6 +93,9 @@ export default {
 	    AttentionBlock,
         Search,
         MobileMenu,
+    },
+    computed:{
+       ...mapGetters(['getActiveCollectionLink'])
     },
     methods:{
         getWalletFromLS() {
