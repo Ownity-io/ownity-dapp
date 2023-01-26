@@ -19,6 +19,9 @@ export default {
         legend: {
           show: false
         },
+        tooltip:{
+          fillSeriesColor: false
+        },
         plotOptions:{
           pie: {
             startAngle: 90,
@@ -62,6 +65,7 @@ export default {
 #chart{
   width: 100%;
   position: relative;
+  z-index: 500;
 }
 
 #centralPercentage{
