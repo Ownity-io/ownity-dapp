@@ -56,7 +56,7 @@
         <div class="card-to-buy" v-if="bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0">
           <div class="card-col">
             <span class="card-col-name">{{translatesGet('PART')}}</span>
-            <span><strong>{{useHelpers.toFixedIfNecessary(bidOnSale.fraction_amount/item.price*100,1)}}%</strong></span>
+            <span><strong>{{useHelpers.toFixedIfNecessary(bidOnSale.fraction_amount/10**18,1)}}%</strong></span>
           </div>
           <div class="card-col">
             <span class="card-col-name">{{translatesGet('SALE_FOR')}}</span>
@@ -329,7 +329,7 @@
         <div class="container-btn-part" v-if="showUserBidOnSale">
           <div class="card-col">
             <span class="card-col-name">{{translatesGet('PART')}}</span>
-            <span><strong>{{userBidOnSale.fraction_amount/10**18}}%</strong></span>
+            <span><strong>{{useHelpers.toFixedIfNecessary(userBidOnSale.fraction_amount/10**18,1)}}%</strong></span>
           </div>
           <div class="card-col">
             <span class="card-col-name">{{translatesGet('SALE_FOR')}}</span>
