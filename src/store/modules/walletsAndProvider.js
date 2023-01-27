@@ -136,13 +136,9 @@ export default {
         localStorage.setItem('userAddress',await provider.getSigner().getAddress());
         
         ethereum.on('accountsChanged', function () {
-          // localStorage.clear();
-          // localStorage.removeItem();
-          localStorage.removeItem('userAddress');
-          localStorage.removeItem('token');
-          localStorage.removeItem('tokenEndTimestamp');
-          localStorage.removeItem('refreshToken');
-          localStorage.removeItem('nonce');
+          let connectedWallet = localStorage.getItem('connectedWallet');
+          localStorage.clear();
+          localStorage.setItem('connectedWallet',connectedWallet);
           location.reload();
         })
       } catch (error){
