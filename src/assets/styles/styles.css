@@ -4078,3 +4078,25 @@ a.td-wrap-link span {
     margin-left: auto;
 
 }
+.card {
+    position: relative;
+}
+.card.hides .btn-container {
+    height: 40px;
+}
+.card.hides .card-data .btn-container {
+    margin-top: 0;
+}
+
+.card.hides .btn-container div,
+.card.hides .btn-container a{
+    display: none;
+}
+.card.hides:hover .btn-container div,
+.card.hides:hover .btn-container a {
+    display: flex;
+}
+
+.card.hides:hover .data-tr.data-tr-date{
+    display: none;
+}

@@ -1,7 +1,7 @@
 <template>
   <div class="cards-list">
     <div v-if="this.$store.getters['marketplace/getListingsResults'].length>0" class="cards-list-container">
-      <Card v-for="item in this.$store.getters['marketplace/getListingsResults']" :key="item" :item="item" />
+      <Card :class="{ hides: hidesClass }" v-for="item in this.$store.getters['marketplace/getListingsResults']" :key="item" :item="item" />
     </div>
     <div class="cards-list-load" ref="target" v-if="this.$store.getters['marketplace/getLastListingsResponse']!=null & this.$store.getters['marketplace/getListingsResults'].length>0">
         <div class="i-wrap">
@@ -31,13 +31,24 @@ export default {
   data() {
     return {
       lang: new MultiLang(this),
-      collectionIsEmpty:false
+      collectionIsEmpty:false,
+      hidesClass: false
     };
   },
   components: {
     Card,
   },
   methods:{
+		addClasses(){
+			if (this.$route.name == 'Marketplace'){
+        this.hidesClass = !this.hidesClass
+				console.log(this.hidesClass)
+			}
+			if (this.$route.name == 'Profile') {
+				this.hidesClass = false
+				console.log(this.hidesClass)
+      }
+    },
     translatesGet(key) {
         return this.lang.get(key);
     },
@@ -73,9 +84,10 @@ export default {
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
         }
       }
-    }
+    },
   },
   async mounted(){
+		this.addClasses()
     if (this.$route.name=='Collection'){
       let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.listingsPerPage}&currency=0x0000000000000000000000000000000000000000`;
         requestUrl += `&collection=${this.$route.params.contract_address}`;
