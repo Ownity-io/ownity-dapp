@@ -86,7 +86,7 @@ export default {
     };
   },
   mounted(){
-    window.scrollTo(0, 0);
+    window.scrollTo( {top: 0, behavior: 'instant'});
   },
   methods:{
     translatesGet(key) {
