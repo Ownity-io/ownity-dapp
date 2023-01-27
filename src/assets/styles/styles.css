@@ -1930,9 +1930,9 @@ ul.tabs {
     flex-direction: column;
 }
 
-.container-input+.container-input {
-    margin-top: 24px;
-}
+/*.container-input+.container-input {*/
+/*    margin-top: 24px;*/
+/*}*/
 
 .container-enter-price .container-input {
     flex-grow: 1;
