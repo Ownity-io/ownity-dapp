@@ -220,7 +220,7 @@
               <p>Uncompleted transaction</p>
             </div> -->
           </section>
-          <section class="section-listing-main"  :class="{'new-class':(this.item.internal_status == 'ON SALE'||this.item.internal_status == 'OWNED')}" v-if="this.item.internal_status!='CLAIMED'">
+          <section class="section-listing-main"  :class="{'listing-main-on':(this.item.internal_status == 'ON SALE'||this.item.internal_status == 'OWNED')}" v-if="this.item.internal_status!='CLAIMED'">
             <p class="section-listing-main-title" v-if="this.item.internal_status == 'ON SALE'">Sale on marketplaces</p>
             <!-- <div class="section-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'"> -->
               

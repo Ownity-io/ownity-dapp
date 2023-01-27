@@ -4100,3 +4100,8 @@ a.td-wrap-link span {
 .card.hides:hover .data-tr.data-tr-date{
     display: none;
 }
+
+.section-listing-main {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
