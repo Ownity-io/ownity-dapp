@@ -56,7 +56,12 @@ export default {
           // localStorage.setItem('tokenEndTimestamp',null);
           // localStorage.setItem('refreshToken',null);
           // localStorage.setItem('nonce',null);
-          localStorage.clear();
+          // localStorage.clear();
+          localStorage.removeItem('userAddress');
+          localStorage.removeItem('token');
+          localStorage.removeItem('tokenEndTimestamp');
+          localStorage.removeItem('refreshToken');
+          localStorage.removeItem('nonce');
         }
         if (localStorage.getItem('userAddress')==null || localStorage.getItem('userAddress')=='null'){
           //getNonce
@@ -132,6 +137,12 @@ export default {
         
         ethereum.on('accountsChanged', function () {
           // localStorage.clear();
+          // localStorage.removeItem();
+          localStorage.removeItem('userAddress');
+          localStorage.removeItem('token');
+          localStorage.removeItem('tokenEndTimestamp');
+          localStorage.removeItem('refreshToken');
+          localStorage.removeItem('nonce');
           location.reload();
         })
       } catch (error){
@@ -143,6 +154,11 @@ export default {
         // localStorage.setItem('refreshToken', null);
         // localStorage.setItem('nonce', null);
         localStorage.clear();
+        // localStorage.removeItem("userAddress");
+        // localStorage.removeItem("token");
+        // localStorage.removeItem("tokenEndTimestamp");
+        // localStorage.removeItem("refreshToken");
+        // localStorage.removeItem("nonce");
         console.log('Metamask Connection Error');
       }
     },
@@ -163,7 +179,12 @@ export default {
           // localStorage.setItem('tokenEndTimestamp',null);
           // localStorage.setItem('refreshToken',null);
           // localStorage.setItem('nonce',null);
-          localStorage.clear();
+          // localStorage.clear();
+          localStorage.removeItem('userAddress');
+          localStorage.removeItem('token');
+          localStorage.removeItem('tokenEndTimestamp');
+          localStorage.removeItem('refreshToken');
+          localStorage.removeItem('nonce');
         }
         if (localStorage.getItem('userAddress')==null || localStorage.getItem('userAddress')=='null'){
           //getNonce
@@ -230,6 +251,11 @@ export default {
       } catch{
         // localStorage.setItem('connectedWallet',null);
         localStorage.clear();
+        // localStorage.removeItem("userAddress");
+        // localStorage.removeItem("token");
+        // localStorage.removeItem("tokenEndTimestamp");
+        // localStorage.removeItem("refreshToken");
+        // localStorage.removeItem("nonce");
         console.log('WalletConnect Connection Error');
       }
     },

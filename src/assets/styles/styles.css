@@ -2505,8 +2505,7 @@ a.td-wrap-link span {
     margin-top: 100px;
 }
 
-[class^='section-service-'],
-[class^='section-listing-']:not(.section-listing-header) {
+[class^='section-service-']{
     margin-top: 40px;
 }
 
@@ -2606,7 +2605,7 @@ a.td-wrap-link span {
 
 .section-deposit {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     padding: 24px 0;
     flex-wrap: wrap;
@@ -3946,3 +3945,136 @@ a.td-wrap-link span {
     border-radius: 8px;
 }
 
+.section-deposit {
+    padding-top: 16px;
+}
+
+.your-deposit {
+    background: #FFFFFF;
+    border: 1px solid #DFE2EA;
+    padding: 0 24px;
+    border-radius: 8px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+
+.your-deposit .section-deposit {
+    padding: 20px 0;
+}
+.your-deposit .section-deposit-data .deposit-value,
+.your-deposit .section-deposit-data .deposit-value span {
+    font-size: 16px;
+}
+
+.your-deposit .deposit-listened.deposit-listened-link {
+    color: #9A9A9A;
+    margin-bottom: 0;
+}
+
+.section-listing-main-title {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+
+    color: #333333;
+    margin-top: 24px;
+}
+
+.section-listing-main .section-deposit:nth-child(2){
+    border-top: none;
+}
+.your-deposit .deposit-value {
+    position: relative;
+}
+
+.your-deposit .deposit-value b {
+    font-size: 24px;
+    position: absolute;
+    right: -105%;
+    top: -1px;
+}
+.uncompleted {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background: #FFE2E2;
+    border: 1px solid #F32727;
+    border-radius: 8px;
+    max-width: 248px;
+    width: 100%;
+    height: 48px;
+    margin-bottom: 24px;
+
+}
+
+.uncompleted div {
+    display: flex;
+    align-items: center;
+    background: #FFFFFF;
+    border: 1px solid #DFE2EA;
+    border-radius: 60px;
+}
+
+.uncompleted p {
+    margin-left: 8px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    /* identical to box height, or 24px */
+
+    display: flex;
+    align-items: center;
+
+    color: #333333;
+}
+
+.uncompleted i {
+    color: #F32727;
+}
+
+.procent {
+    background: #F8F9FD;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    margin-left: auto;
+}
+
+.procent-val {
+    display: flex;
+    align-items: center;
+}
+
+.val-icon {
+    background-image: url(/src/assets/images/ethereum.svg);
+    height: 16px;
+    width: 16px;
+}
+
+.pur-price {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: auto;
+}
+
+.pur-price-icon {
+    background-image: url(/src/assets/images/ethereum.svg);
+    height: 21px;
+    width: 16px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 3px;
+}
+
+.pur-price-val {
+    display: flex;
+    align-items: center;
+    margin-top: 3px;
+    margin-left: auto;
+
+}
