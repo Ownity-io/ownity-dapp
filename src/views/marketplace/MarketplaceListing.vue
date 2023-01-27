@@ -113,8 +113,62 @@
               <img v-else :src="item.media" alt="img" />
             </div>
           </section>
-
+          <section class="your-deposit">
+            <div class="section-deposit" v-if="this.item.internal_status == 'ON SALE' & (userAddress!=null & userBidAmount>0)">
+              <div class="section-deposit-data">
+                <div class="deposit-img-container">
+                  <!-- <a target="_blank" :href='getLinkToMarketplacePage(voting.marketplace)' class="deposit-img" :style="{backgroundImage: `url(${voting.marketplace.logo})`}"></a> -->
+                  <jazzicon :address="userAddress" :diameter="40" class="deposit-img" v-if="userAddress"/>
+                </div>
+                <div class="deposit-data">
+                  <div class="deposit-listened deposit-listened-link">
+                    <div>
+                      {{this.userAddress.substring(0,6)+'...'+this.userAddress.substring(38,42)}}
+                    </div>
+                  </div>
+                  <div class="deposit-value" v-if="(item.internal_status=='ON SALE')">
+                    <span>{{'Your part' + ' '}}<b>{{parseInt(this.userBid.fraction)}}%</b></span>
+                  </div>
+                </div>
+              </div>
+              <div class="section-deposit-btns">
+                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED')) & item.internal_status=='OWNED' & userAddress!=null & this.userBidAmount>0 & !this.userBidBuyedAll)||
+                  (item.internal_status=='ON SALE') & this.onSaleVotingsCount<this.marketplaces.length"
+                        @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">
+                  {{translatesGet('START_VOTING')}}
+                </button>
+              </div>
+              <div class="section-deposit-labels" v-if="userBid!=null">
+                <div class="deposit-label" v-if="userBid.status == 'ON SALE'">
+                  <i class="i-shopping-bag-line"></i>
+                  {{translatesGet('ON_SALE')}}:
+                  <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidAmount),6,2))}} ETH</b> ({{userBid.fraction}})</span>
+                </div>
+                <div class="deposit-label" v-if="false">
+                  <i class="i-volume-vibrate-line"></i>
+                  {{translatesGet('VOTE')}}:
+                  <div class="label-col">
+                    <div class="icon-label" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></div>
+                    <div><b>2 ETH</b></div>
+                    <div>{{translatesGet('PROGRESS')}}: 20%</div>
+                  </div>
+                  <div class="label-col">
+                    <div class="icon-label" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></div>
+                    <div><b>2.1 ETH</b></div>
+                    <div>{{translatesGet('PROGRESS')}}: 20%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="uncompleted">
+              <div>
+                <i class="i-error-warning-line"></i>
+              </div>
+              <p>Uncompleted transaction</p>
+            </div>
+          </section>
           <section class="section-listing-main" v-if="this.item.internal_status!='CLAIMED'">
+            <p class="section-listing-main-title">Sale on marketplaces</p>
             <!-- <div class="section-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'"> -->
               <div class="section-deposit" v-if="this.item.internal_status == 'OWNED' & (userAddress!=null & userBidAmount>0)">
                 <div class="section-deposit-data">
@@ -181,13 +235,13 @@
                     {{translatesGet('AVAILABLE_ON')}} {{item.marketplace.name}}
                     {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>
                   <div class="deposit-listened deposit-listened-link" v-else-if="this.item.internal_status=='OWNED'" >
-                    <a target="_blank" :href='linkToMarketplacePage' 
+                    <a target="_blank" :href='linkToMarketplacePage'
                     >
-                    {{translatesGet('BOUGHT_ON')}} {{item.marketplace.name}} 
+                    {{translatesGet('BOUGHT_ON')}} {{item.marketplace.name}}
                     {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>
                   <div class="deposit-listened deposit-listened-link" v-if="this.item.internal_status=='ON SALE'"><a target="_blank" :href='linkToMarketplacePageFromVoting' >
-                    {{translatesGet('AVAILABLE_ON')}} {{voting.marketplace.name}} 
-                    {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>                
+                    {{translatesGet('AVAILABLE_ON')}} {{voting.marketplace.name}}
+                    {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>
                   <div class="deposit-value" v-if="(item.marketplace_status=='OPEN' & item.internal_status=='OPEN')||this.item.internal_status=='OWNED'">
                     <div class="icon-token eth"></div>
                     <span><b>{{priceInCurrency}} ETH</b></span>
@@ -251,76 +305,30 @@
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidBuyedAll)"
                   @click="this.$store.dispatch('appGlobal/setShowClaimNftModal',true)">
                   {{translatesGet('CLAIM_NFT')}}
-                </button> 
+                </button>
                 <button class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount>0 & userCanSoldFraction)"
                   @click="this.$store.dispatch('appGlobal/setShowSellPartModal',true)">
                   {{translatesGet('SELL_NFT')}}
-                </button> 
+                </button>
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='OWNED' & userAddress!=null & userBidAmount==0 & bidsOnSale)">
                   {{translatesGet('BUY')}}
-                </button> 
+                </button>
                 <a class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='ON SALE' & userAddress!=null & userBidAmount>0 & this.item.votings)"
                 @click="letsCheck2('ListingVote')" href="#votes">
                   {{translatesGet('CANCEL_SELL')}}
-                </a> 
+                </a>
                 <button class="btn btn-get" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='ON SALE' & userAddress!=null & userBidAmount>0 & !this.item.votings)"
                   @click="this.$store.dispatch('appGlobal/setCurrentVoting',this.voting);this.$store.dispatch('appGlobal/setCancellSellVotingModal',true)">
                   {{translatesGet('CANCEL_SELL')}}
-                </button> 
+                </button>
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='SOLD' & userAddress!=null & userBidAmount>0 & !bidRewarded)"
-                @click="this.$store.dispatch('appGlobal/setShowClaimRewardModal',true)">Claim reward</button> 
+                @click="this.$store.dispatch('appGlobal/setShowClaimRewardModal',true)">Claim reward</button>
               </div>
               <div class="section-deposit-labels" v-if="userBid!=null">
                 <div class="deposit-label" v-if="userBid.status == 'ON SALE'">
                   <i class="i-shopping-bag-line"></i>
                   {{translatesGet('ON_SALE')}}:
                   <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(inSaleAmount,6,2))}}  ETH</b> ({{useHelpers.toFixedIfNecessary(inSaleFractionPercent,6,2) + '%'}})</span>
-                </div>
-                <div class="deposit-label" v-if="false">
-                  <i class="i-volume-vibrate-line"></i>
-                  {{translatesGet('VOTE')}}:
-                  <div class="label-col">
-                    <div class="icon-label" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></div>
-                    <div><b>2 ETH</b></div>
-                    <div>{{translatesGet('PROGRESS')}}: 20%</div>
-                  </div>
-                  <div class="label-col">
-                    <div class="icon-label" :style="{backgroundImage: `url(${item.marketplace.logo})`}"></div>
-                    <div><b>2.1 ETH</b></div>
-                    <div>{{translatesGet('PROGRESS')}}: 20%</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="section-deposit" v-if="this.item.internal_status == 'ON SALE' & (userAddress!=null & userBidAmount>0)">
-              <div class="section-deposit-data">
-                <div class="deposit-img-container">
-                  <!-- <a target="_blank" :href='getLinkToMarketplacePage(voting.marketplace)' class="deposit-img" :style="{backgroundImage: `url(${voting.marketplace.logo})`}"></a> -->
-                  <jazzicon :address="userAddress" :diameter="40" class="deposit-img" v-if="userAddress"/>
-                </div>
-                <div class="deposit-data">
-                  <div class="deposit-listened deposit-listened-link">
-                    <div>
-                      {{this.userAddress.substring(0,6)+'...'+this.userAddress.substring(38,42)}}
-                    </div>
-                  </div>
-                  <div class="deposit-value" v-if="(item.internal_status=='ON SALE')">
-                    <span>{{'Your part' + ' '}}<b>{{parseInt(this.userBid.fraction)}}%</b></span>
-                  </div>      
-                </div>
-              </div>
-              <div class="section-deposit-btns">
-                <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED')) & item.internal_status=='OWNED' & userAddress!=null & this.userBidAmount>0 & !this.userBidBuyedAll)||
-                  (item.internal_status=='ON SALE') & this.onSaleVotingsCount<this.marketplaces.length"
-                  @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">
-                  {{translatesGet('START_VOTING')}}
-                </button>
-              </div>
-              <div class="section-deposit-labels" v-if="userBid!=null">
-                <div class="deposit-label" v-if="userBid.status == 'ON SALE'">
-                  <i class="i-shopping-bag-line"></i>
-                  {{translatesGet('ON_SALE')}}:
-                  <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidAmount),6,2))}} ETH</b> ({{userBid.fraction}})</span>
                 </div>
                 <div class="deposit-label" v-if="false">
                   <i class="i-volume-vibrate-line"></i>
