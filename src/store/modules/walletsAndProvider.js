@@ -153,13 +153,13 @@ export default {
         // localStorage.setItem('tokenEndTimestamp', null);
         // localStorage.setItem('refreshToken', null);
         // localStorage.setItem('nonce', null);
-        // localStorage.clear();
-        localStorage.removeItem("userAddress");
-        localStorage.removeItem("token");
-        localStorage.removeItem("tokenEndTimestamp");
-        localStorage.removeItem("refreshToken");
-        localStorage.removeItem("nonce");
-        localStorage.removeItem('connectedWallet');
+        localStorage.clear();
+        // localStorage.removeItem("userAddress");
+        // localStorage.removeItem("token");
+        // localStorage.removeItem("tokenEndTimestamp");
+        // localStorage.removeItem("refreshToken");
+        // localStorage.removeItem("nonce");
+        // localStorage.removeItem('connectedWallet');
         console.log('Metamask Connection Error');
       }
     },
@@ -251,13 +251,13 @@ export default {
         localStorage.setItem('userAddress',await web3Provider.getSigner().getAddress());
       } catch{
         // localStorage.setItem('connectedWallet',null);
-        // localStorage.clear();
-        localStorage.removeItem('userAddress');
-          localStorage.removeItem('token');
-          localStorage.removeItem('tokenEndTimestamp');
-          localStorage.removeItem('refreshToken');
-          localStorage.removeItem('nonce');
-          localStorage.removeItem('connectedWallet');
+        localStorage.clear();
+        // localStorage.removeItem('userAddress');
+        //   localStorage.removeItem('token');
+        //   localStorage.removeItem('tokenEndTimestamp');
+        //   localStorage.removeItem('refreshToken');
+        //   localStorage.removeItem('nonce');
+        //   localStorage.removeItem('connectedWallet');
         console.log('WalletConnect Connection Error');
       }
     },
