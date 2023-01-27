@@ -890,13 +890,13 @@ export default {
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
     }
-    // while (true) {
-    //   await delay(1000);
-    //   this.setAllBidsAmount();
-    //   this.setUserBidAmount();
-    //   this.setChartData();
-    //   this.checkLike();
-    // }
+    while (true) {
+      await delay(1000);
+      this.setAllBidsAmount();
+      this.setUserBidAmount();
+      this.setChartData();
+      this.checkLike();
+    }
   },
 };
 </script>

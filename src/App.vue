@@ -56,10 +56,10 @@ export default {
         const delay = (delayInms) => {
             return new Promise(resolve => setTimeout(resolve, delayInms));
         }
-        // while (true) {
-        //     await delay(1000);
-        //     this.getWalletFromLS();
-        // }
+        while (true) {
+            await delay(1000);
+            this.getWalletFromLS();
+        }
     },
 }
 </script>
