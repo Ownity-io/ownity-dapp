@@ -113,6 +113,7 @@
               <img v-else :src="item.media" alt="img" />
             </div>
           </section>
+
           <section :class="{'your-deposit':(this.item.internal_status == 'ON SALE'||this.item.internal_status == 'OWNED')}">
             <div class="section-deposit" v-if="this.item.internal_status == 'ON SALE' & (userAddress!=null & userBidAmount>0)">
               <div class="section-deposit-data">
@@ -146,7 +147,7 @@
                 <div class="deposit-label" v-if="userBid.status == 'ON SALE'">
                   <i class="i-shopping-bag-line"></i>
                   {{translatesGet('ON_SALE')}}:
-                  <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidAmount),6,2))}} ETH</b> ({{userBid.fraction}})</span>
+                  <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(inSaleAmount,6,2))}}  ETH</b> ({{useHelpers.toFixedIfNecessary(inSaleFractionPercent,6,2) + '%'}})</span>
                 </div>
                 <div class="deposit-label" v-if="false">
                   <i class="i-volume-vibrate-line"></i>
@@ -164,6 +165,7 @@
                 </div>
               </div>
             </div>
+
             <div class="section-deposit" v-if="this.item.internal_status == 'OWNED' & (userAddress!=null & userBidAmount>0)">
               <div class="section-deposit-data">
                 <div class="deposit-img-container">
@@ -195,7 +197,7 @@
                 <div class="deposit-label" v-if="userBid.status == 'ON SALE'">
                   <i class="i-shopping-bag-line"></i>
                   {{translatesGet('ON_SALE')}}:
-                  <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidAmount),6,2))}} ETH</b> ({{userBid.fraction}})</span>
+                  <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(inSaleAmount,6,2))}}  ETH</b> ({{useHelpers.toFixedIfNecessary(inSaleFractionPercent,6,2) + '%'}})</span>
                 </div>
                 <div class="deposit-label" v-if="false">
                   <i class="i-volume-vibrate-line"></i>
@@ -220,6 +222,7 @@
               <p>Uncompleted transaction</p>
             </div> -->
           </section>
+
           <section class="section-listing-main"  :class="{'new-class':(this.item.internal_status == 'ON SALE'||this.item.internal_status == 'OWNED')}" v-if="this.item.internal_status!='CLAIMED'">
             <p class="section-listing-main-title" v-if="this.item.internal_status == 'ON SALE'">Sale on marketplaces</p>
             <!-- <div class="section-deposit" v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN'"> -->
@@ -333,6 +336,7 @@
                 <button class="btn btn-deposit" v-if="(((item.marketplace_status=='CLOSED'))  & item.internal_status=='SOLD' & userAddress!=null & userBidAmount>0 & !bidRewarded)"
                 @click="this.$store.dispatch('appGlobal/setShowClaimRewardModal',true)">Claim reward</button>
               </div>
+
               <div class="section-deposit-labels" v-if="userBid!=null">
                 <div class="deposit-label" v-if="userBid.status == 'ON SALE'">
                   <i class="i-shopping-bag-line"></i>
@@ -355,6 +359,7 @@
                 </div>
               </div>
             </div>
+
             <div class="section-deposit" v-if="this.item.internal_status == 'ON SALE'"  v-for="voting in votingsOnSale">
               <div class="section-deposit-data">
                 <div class="deposit-img-container">
