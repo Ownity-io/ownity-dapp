@@ -37,7 +37,9 @@
           </button>
         </div>
       </div> -->
-      <div class="card-footer" 
+      <div class="card-footer"
+           @mouseover="showMore = true"
+           @mouseout="showMore = false"
       v-if="((item.marketplace_status=='OPEN' & item.internal_status=='GATHER')
       ||(item.marketplace_status=='CLOSED' & item.internal_status=='CLOSED')
       ||((item.marketplace_status=='CLOSED') & item.internal_status=='OWNED')
@@ -69,9 +71,7 @@
           </div>
         </div>
         <div class="card-members btn-more-info" v-if="!(bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0)">
-          <button class="card-members-btn "
-            @mouseover="showMore = true"
-            @mouseout="showMore = false" v-if="item.bids!=null">
+          <button class="card-members-btn" v-if="item.bids!=null">
             <i class="i-user-fill"></i>  
             {{this.item.bids.length}}
           </button>
