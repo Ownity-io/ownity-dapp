@@ -354,15 +354,7 @@ export default {
           requestJson.data.signature,
           { gasLimit: '1000000' }
 
-        );
-        }
-        catch (e){
-          console.log(e);
-          this.buttonWaiting = false;
-          await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
-          await this.$store.dispatch('appGlobal/setGreenSnack', false)
-          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
-        }
+        );        
         let trx = await prov.waitForTransaction(sellLot.hash);
         if (trx.status == 1) {
           let forceReq = await (await fetch(
@@ -390,6 +382,14 @@ export default {
           await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);
           await this.$store.dispatch('appGlobal/setShowStartVotingModal', false);
           await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
+          this.buttonWaiting = false;
+          await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
+          await this.$store.dispatch('appGlobal/setGreenSnack', false)
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
+        }
+      }
+        catch (e){
+          console.log(e);
           this.buttonWaiting = false;
           await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack', false)
