@@ -1,6 +1,6 @@
 <template>
 <div id="chart" v-if="render">
-  <div id="centralPercentage">{{ this.series[this.series.length-1] }}%</div>
+  <div id="centralPercentage">{{ 100-this.series[this.series.length-1] }}%</div>
   <apexchart type="donut" :options="chartOptions" :series="series">
   </apexchart>
 </div>
