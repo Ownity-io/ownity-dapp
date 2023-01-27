@@ -1,6 +1,6 @@
 <template>
   <!-- <a class="card card-finished" :class="{'card-inactive' : false}"> -->
-  <a class="card" ref="wrpCard" :class="{'card-inactive' : ((this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN'))||(this.item.internal_status=='CLAIMED')||bidRewarded),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER')}">
+  <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  class="card" ref="wrpCard" :class="{'card-inactive' : ((this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN'))||(this.item.internal_status=='CLAIMED')||bidRewarded),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER')}">
     <div class="card-main">
       <div class="loading"></div> <!--  used when loading-->
 
@@ -17,7 +17,7 @@
         </a>
         <a  class="icon-card-label" :style="{backgroundImage: `url('/favicon.png')`}" v-else>
         </a>
-        <button class="btn-like" :class="{'liked':testLike}" @click="changeLike">
+        <button class="btn-like" :class="{'liked':testLike}" @click.prevent="changeLike">
           <i class="i-heart-3-fill"></i>
           <i class="i-heart-3-line"></i>
         </button>
