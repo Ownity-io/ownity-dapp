@@ -160,12 +160,12 @@
                 </div>
               </div>
             </div>
-            <div class="uncompleted">
+            <!-- <div class="uncompleted">
               <div>
                 <i class="i-error-warning-line"></i>
               </div>
               <p>Uncompleted transaction</p>
-            </div>
+            </div> -->
           </section>
           <section class="section-listing-main" v-if="this.item.internal_status!='CLAIMED'">
             <p class="section-listing-main-title">Sale on marketplaces</p>
