@@ -136,10 +136,14 @@ export default {
         localStorage.setItem('userAddress',await provider.getSigner().getAddress());
         
         ethereum.on('accountsChanged', function () {
+          console.log('CHANGE');
           let connectedWallet = localStorage.getItem('connectedWallet');
-          localStorage.clear();
-          localStorage.setItem('connectedWallet',connectedWallet);
-          location.reload();
+          if (connectedWallet == 'metamask'){
+            context.dispatch('connectToMetamask');
+          }
+          else{
+            context.dispatch('connectWithWalletConnect');
+          }
         })
       } catch (error){
         console.log(error);
