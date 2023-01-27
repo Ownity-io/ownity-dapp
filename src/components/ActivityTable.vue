@@ -65,7 +65,7 @@
                 <div class="td td-tx" v-if="item.tnx_hash"> 
                     <div class="td-mob-title">Tx</div>
                     <a class="td-wrap td-wrap-link" :href="config.etherscanTxUrlStart+item.tnx_hash" target="_blank" rel="nofollow">
-                        <span>{{item.tnx_hash.substring(0,6)+'...'+item.tnx_hash.substring(38,42)}}</span>
+                        <span>{{item.tnx_hash.substring(0,6)+'...'+item.tnx_hash.substring(62,66)}}</span>
                         <i class="i-external-link-line"></i>
                     </a> 
                 </div>
