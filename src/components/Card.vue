@@ -329,15 +329,15 @@
         <div class="container-btn-part" v-if="showUserBidOnSale">
           <div class="card-col">
             <span class="card-col-name">{{translatesGet('PART')}}</span>
-            <span><strong>{{useHelpers.toFixedIfNecessary(userBidOnSale.fraction_amount/this.item.price*100,1)}}%</strong></span>
+            <span><strong>{{userBidOnSale.fraction_amount/10**18}}%</strong></span>
           </div>
           <div class="card-col">
             <span class="card-col-name">{{translatesGet('SALE_FOR')}}</span>
             <div class="card-value">
               <div class="icon-value"></div>
               <div class="card-col-value">
-                <strong>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidOnSale.fraction_amount),4),1)}} ETH</strong>
-                <span class="equivalent">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidOnSale.fraction_amount)*currencyToUsdPrice,2),1,2)}}</span>
+                <strong>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidOnSale.price),4),1)}} ETH</strong>
+                <span class="equivalent">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidOnSale.price)*currencyToUsdPrice,2),1,2)}}</span>
               </div> 
             </div>
           </div>
