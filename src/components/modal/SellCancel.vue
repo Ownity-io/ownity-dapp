@@ -3,7 +3,7 @@
     <div class="modal-wrapper-close" @click="this.$store.dispatch('appGlobal/setShowCancelSellPartModal',false)"></div>
     <div class="modal-wrapper">
       <div class="modal-header">
-        <div class="modal-name">{{translatesGet('CANCEL_DEPOSIT_PART')}}</div>
+        <div class="modal-name">Cancel Sale</div>
         <button class="btn-close" @click="this.$store.dispatch('appGlobal/setShowCancelSellPartModal',false)">
           <i class="i-close-line"></i>
         </button>
