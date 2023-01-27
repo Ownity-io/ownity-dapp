@@ -9,8 +9,8 @@
       <div class="card-listing">
         <section class="section-card-img">
           <div class="card-img-wrap">
-            <img v-if="!item.media" src="@/assets/images/img-not-found.svg" alt="img" />
-            <img v-else :src="item.media" alt="img" />
+            <img v-if="item.media" :src="item.media" alt="img">
+            <img v-else src="@/assets/images/img-not-found.svg" alt="img" style="width: 547px">
           </div>
         </section>
         <div class="listing-main">
