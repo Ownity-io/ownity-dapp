@@ -836,7 +836,7 @@ export default {
     }
   },
   async mounted() {
-    window.scrollTo(0, 0);
+    window.scrollTo( {top: 0, behavior: 'instant'});
     this.activeTab = "ListingInfo";
     this.activeTab2 = "ListingInfo2";
     await this.getAndSetListingInfo();

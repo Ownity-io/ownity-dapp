@@ -47,7 +47,8 @@
                             <i class="i-arrow-up-s-line"></i>
                         </button>
                         <ul class="footer-list">
-                            <li><a target="_blank" href="">{{translatesGet('HOME')}}</a>
+                            <li>
+                              <a href="/">{{translatesGet('HOME')}}</a>
                                 <div v-if="$route.fullPath ==='/'" @click="goToTop()"></div>
                                 <router-link :to="{name: 'Main'}" v-else></router-link>
                             </li>
@@ -69,7 +70,7 @@
                                     <span>{{translatesGet('HELP')}}</span>
                                 </router-link>
                             </li>
-                            <li><a target="_blank" href="">{{translatesGet('SITEMAP')}}</a></li>
+                            <li><a href="">{{translatesGet('SITEMAP')}}</a></li>
                         </ul>
                     </div>
                     <div class="footer-block footer-block-form">
