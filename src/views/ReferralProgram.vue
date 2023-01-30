@@ -1,4 +1,5 @@
 <template>
+    <MintNft />
     <div class="page-wrapper page-referral">
         <main>
             <section class="section-referral-main">
@@ -250,6 +251,7 @@
 <script>
 
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
+import MintNft from "@/components/modal/MintNft.vue"
 import MultiLang from "@/core/multilang";
 
 export default {
@@ -261,6 +263,7 @@ export default {
     },
     components:{
         Breadcrumbs,
+        MintNft,
     },
     methods:{
         translatesGet(key) {
