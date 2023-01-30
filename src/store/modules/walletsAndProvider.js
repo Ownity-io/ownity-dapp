@@ -143,8 +143,13 @@ export default {
           // }
           // else{
           //   context.dispatch('connectWithWalletConnect');
-          // }
-          localStorage.clear();
+          // }          
+          //  localStorage.removeItem("connectedWallet", null);
+           localStorage.removeItem("userAddress");
+           localStorage.removeItem("token", null);
+           localStorage.removeItem("tokenEndTimestamp");
+           localStorage.removeItem("refreshToken");
+           localStorage.removeItem("nonce");
           location.reload();
         })
       } catch (error){
