@@ -263,8 +263,10 @@ export default {
       if (requestCode) {
         let requestJson = await request.json();
         context.commit("setListingsInfo", requestJson);
+        return true
       } else {
         context.commit("setListingsInfo", null);
+        return false
       }
     },
     async fetchAndSetListingsNextInfo(context) {
