@@ -43,7 +43,7 @@
                             </a>
                         </li>
                       <li>
-                        <a href="https://discord.com/invite/KJVVhxut84">
+                        <a href="https://discord.com/invite/j2zMN6CJd7">
                           <Discord />
                           Discord
                         </a>
@@ -139,7 +139,7 @@
                                         </a>
                                     </li>
                                   <li>
-                                    <a href="https://discord.com/invite/KJVVhxut84">
+                                    <a href="https://discord.com/invite/j2zMN6CJd7">
                                       <Discord />
                                       Discord
                                     </a>
