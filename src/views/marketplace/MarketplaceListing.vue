@@ -487,7 +487,7 @@
                           <span class="label-owner" v-if="bid.address==userAddress">{{translatesGet('YOU')}}</span>
                         </div>
                         <div class="td">
-                          <div class="td-wrap">{{bid.fraction}}</div>
+                          <div class="td-wrap">{{parseInt(bid.fraction)}}%</div>
                         </div>
                         <div class="td td-price">
                           <div class="td-wrap">
