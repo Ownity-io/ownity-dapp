@@ -229,16 +229,18 @@
             <div class="section-deposit" v-if="!(this.item.internal_status == 'OWNED' & (userAddress!=null & userBidAmount>0)) & this.item.internal_status != 'ON SALE'">
               <div class="section-deposit-data">
                 <div class="deposit-img-container" v-if="!bidRewarded">
+                  <a target="_blank" :href='getLinkToMarketplacePage(this.soldedVoting.marketplace)' class="deposit-img" :style="{backgroundImage: `url(${this.soldedVoting.marketplace.logo})`}"
+                  v-if="this.item.internal_status=='SOLD'"></a>
                   <a target="_blank" :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url(${item.marketplace.logo})`}"
-                  v-if="this.item.internal_status!='OWNED' & this.item.internal_status!='ON SALE'"></a>
+                  v-else-if="this.item.internal_status!='OWNED' & this.item.internal_status!='ON SALE'"></a>
                   <a target="_blank" :href='linkToMarketplacePage' class="deposit-img" :style="{backgroundImage: `url('/favicon.png')`}"
                   v-else-if="this.item.internal_status=='OWNED'"></a>
                   <a target="_blank" :href='linkToMarketplacePageFromVoting' class="deposit-img" :style="{backgroundImage: `url(${this.voting.marketplace.logo})`}"
                   v-else-if="this.item.internal_status=='ON SALE'"></a>
                 </div>
                 <div class="deposit-data">
-                  <div class="deposit-listened deposit-listened-link" v-if="this.item.internal_status=='SOLD' & !bidRewarded"><a target="_blank" :href='linkToMarketplacePage' >
-                    Solded on {{item.marketplace.name}}
+                  <div class="deposit-listened deposit-listened-link" v-if="this.item.internal_status=='SOLD' & !bidRewarded"><a target="_blank" :href='getLinkToMarketplacePage(this.soldedVoting.marketplace)' >
+                    Solded on {{soldedVoting.marketplace.name}}
                     {{translatesGet('FOR')}} </a><i class="i-external-link-line"></i></div>
                   <div class="deposit-listened deposit-listened-link" v-else-if="this.item.internal_status=='SOLD'"><div>
                     Your reward</div></div>
@@ -666,7 +668,8 @@ export default {
       inSaleFractionPercent: 0,
       inSaleAmount: 0,
       activeVotings:[],
-      inactiveVotings:[]
+      inactiveVotings:[],
+      soldedVoting:null
     };
   },
   components: {
@@ -802,6 +805,9 @@ export default {
               this.voting = element;
               votingsOnSaleTemp.push(element);
               this.onSaleVotingsCount+=1;
+            }
+            if (element.status == 'SOLD'){
+              this.soldedVoting = element;
             }
             if (element.status == 'ON SALE' || element.status == 'CANCELED' ||(element.type == 'CANCEL' & element.status == 'FULFILLED')){
               inactiveVotingsTemp.push(element);
