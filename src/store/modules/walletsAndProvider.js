@@ -137,20 +137,15 @@ export default {
         
         ethereum.on('accountsChanged', function () {
           // console.log('CHANGE');
-          // let connectedWallet = localStorage.getItem('connectedWallet');
-          // if (connectedWallet == 'metamask'){
-          //   context.dispatch('connectToMetamask');
-          // }
-          // else{
-          //   context.dispatch('connectWithWalletConnect');
-          // }          
+          let connectedWallet = localStorage.getItem('connectedWallet');
+          if (connectedWallet == 'metamask'){
+            context.dispatch('connectToMetamask');
+          }
+          else{
+            context.dispatch('connectWithWalletConnect');
+          }          
           //  localStorage.removeItem("connectedWallet", null);
-           localStorage.removeItem("userAddress");
-           localStorage.removeItem("token");
-           localStorage.removeItem("tokenEndTimestamp");
-           localStorage.removeItem("refreshToken");
-           localStorage.removeItem("nonce");
-          location.reload();
+          //  context.
         })
       } catch (error){
         console.log(error);
