@@ -8,7 +8,8 @@
             <i class="i-loader-4-line"></i>
         </div>
     </div>
-    <div class="cards-list-empty" v-if="this.$store.getters['marketplace/getListingsResults'].length==0">
+<!--    <SkeletonCard />-->
+    <div class="cards-list-empty" >
       <div class="title">{{translatesGet('NOTHING_HERE')}}</div>
       <a href="/marketplace" class="btn" v-if="collectionIsEmpty">
         {{translatesGet('BACK_TO_ALL')}}
@@ -26,6 +27,7 @@ import { ref } from 'vue';
 import { useElementVisibility } from '@vueuse/core';
 import MultiLang from "@/core/multilang";
 import config from '@/config.json';
+import SkeletonCard from "@/components/Skeleton/SkeletonCard.vue";
 
 export default {
   data() {
@@ -36,12 +38,17 @@ export default {
     };
   },
   components: {
+	  SkeletonCard,
     Card,
   },
   methods:{
 		addClasses(){
 			if (this.$route.name == 'Marketplace'){
         this.hidesClass = !this.hidesClass
+				console.log(this.hidesClass)
+			}
+			if (this.$route.name == 'Collection'){
+				this.hidesClass = !this.hidesClass
 				console.log(this.hidesClass)
 			}
 			if (this.$route.name == 'Profile') {
