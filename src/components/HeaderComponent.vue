@@ -3,7 +3,7 @@
     <header :class="{'mobile-search' :(mobileSearch==true)}">
         <div class="container">
             <div class="header-wrapper">
-                <div v-if="$route.fullPath ==='/'" @click="goToTop()" class="header-logo"></div>
+                <div v-if="$route.path ==='/'" @click="goToTop()" class="header-logo"></div>
                 <router-link :to="{name: 'Main'}" v-else class="header-logo"></router-link>
                 <div class="header-search">
                     <button class="header-search-mobile-btn btn-arrow">
