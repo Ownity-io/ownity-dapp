@@ -136,6 +136,10 @@
     padding-bottom: 40px;
 }
 
+.modal-mint .modal-header{
+    padding-bottom: 0px;
+}
+
 .cookies-header {
     padding: 24px;
 }
@@ -203,10 +207,40 @@
     max-width: 516px;
 }
 
+.modal-mint .modal-wrapper{
+    max-width: 960px;
+}
+
 .modal-connect .modal-container {
     max-width: 436px;
 }
 
+.modal-cards-wrapper{
+    width: calc(100% + 24px * 2);
+    max-width: calc(100% + 24px * 2);
+    gap: 24px;
+    display: flex;
+    justify-content: flex-start;
+    padding: 24px;
+    margin: 0 -24px 16px;
+}
+
+.modal-cards-wrapper .card{
+    flex-grow: 1;
+    max-width: calc(100% / 3 - 24px);
+}
+
+.modal-cards-wrapper .card .data-table {
+    min-height: 64px;
+}
+.modal-cards-wrapper .card .data-table .data-tr.data-tr-main{
+    align-items: flex-start;
+}
+
+.modal-container-cards .btn-more-nft{
+    margin-left: auto;
+    margin-right: auto;
+}
 .modal-describe {
     font-weight: 400;
     font-size: 16px;

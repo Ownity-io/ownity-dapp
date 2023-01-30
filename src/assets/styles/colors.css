@@ -37,6 +37,7 @@
 .data-td a:hover span,
 a.collection-data:hover span,
 a.collection-id:hover span,
+.btn-more-nft:hover,
 a.td-wrap-link:hover span,
 .footer-row.footer-row-info .footer-part:not(.footer-social-links) a:hover {
     background-image: linear-gradient(89.43deg, #3E80FF -3.17%, #2457D5 109.46%);
@@ -77,7 +78,7 @@ a.td-wrap-link:hover span,
 .btn-dashboard,
 .footer-form .btn-subscribe,
 .cookies-btns-container .btn-main,
-.card-data .btn-container .btn:not(.btn-card-completed):hover,
+.card-data .btn-container .btn:not(.btn-card-completed, :disabled):hover,
 .card-data .btn-container .container-btn-part-vote .btn.btn-vote,
 .section-deposit-btns .btn.btn-deposit,
 .btn.btn-connect {
@@ -136,7 +137,7 @@ a.td-wrap-link:hover span,
 .card-members-btn:hover,
 .btn-vote:hover,
 .section-deposit-btns .btn.btn-get:hover,
-.card-data .btn-container .btn:hover,
+.card-data .btn-container .btn:not(:disabled):hover,
 .cookies-btns-container .btn-additional:hover,
 .modal-connect-btns .btn:hover,
 .cards-list-empty .btn:hover,
@@ -179,4 +180,9 @@ a.td-wrap-link:hover span,
         z-index: 5;
         box-shadow: 4px 4px 15px rgba(129, 136, 153, 0.25);
     }
+}
+
+
+.card-data .btn-container .btn:disabled{
+    opacity: 0.5;
 }
