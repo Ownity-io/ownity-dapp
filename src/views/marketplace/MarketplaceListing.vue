@@ -11,9 +11,11 @@
           <div class="card-img-wrap">
             <img v-if="item.media" :src="item.media" alt="img">
             <img v-else src="@/assets/images/img-not-found.svg" alt="img" style="width: 547px">
+<!--            <skeleton-card-listing/>-->
           </div>
         </section>
         <div class="listing-main">
+<!--          <skeleton-card-listing-info/>-->
           <section class="section-listing-header">
             <div class="listing-header">
               <div class="collection-wrap">
@@ -30,16 +32,16 @@
                   <!-- <button class="btn btn-block">
                     <i class="i-heart-3-line"></i>
                   </button> -->
-                  <button class="btn btn-block btn-like" 
-                    :class="{'liked':testLike}" 
+                  <button class="btn btn-block btn-like"
+                    :class="{'liked':testLike}"
                     @click="changeLike">
                     <i class="i-heart-3-fill"></i>
                     <i class="i-heart-3-line"></i>
                   </button>
                 </div>
                 <div class="btn-wrap">
-                  <button class="btn btn-block btn-refresh" 
-                  @click="this.refreshInfo();" 
+                  <button class="btn btn-block btn-refresh"
+                  @click="this.refreshInfo();"
                   :class="{'refreshing' : isRefreshing}" >
                     <div><i class="i-refresh-line" ></i></div>
                   </button>
@@ -52,8 +54,8 @@
               </div>
             </div>
             <div class="listing-name">{{item.name ? item.name : '#' + item.token_id}}
-              <div class="drop-down-mobile">                                
-                  <div class="drop-down-container" 
+              <div class="drop-down-mobile">
+                  <div class="drop-down-container"
                       :class="{'unfolded' : mobileDropDown }">
                       <button class="btn-drop-down" @click="mobileDropDown = !mobileDropDown">
                           <i class="i-more-2-line"></i>
@@ -67,8 +69,8 @@
                                   </span>
                               </li>
                               <li>
-                              <button class="btn btn-block btn-refresh" 
-                                @click="this.refreshInfo(); mobileDropDown = false" 
+                              <button class="btn btn-block btn-refresh"
+                                @click="this.refreshInfo(); mobileDropDown = false"
                                 :class="{'refreshing' : isRefreshing}" >
                                   <div>
                                     <i class="i-refresh-line" ></i>
@@ -84,7 +86,7 @@
               </div>
             </div>
             <div class="owned-row">
-              {{translatesGet('OWNED_BY')}} 
+              {{translatesGet('OWNED_BY')}}
               <a :href="config.etherscanAddressUrlStart+item.owner" target="_blank">
                 <span>{{String(item.owner).substring(0,6)+'...'+String(item.owner).substring(38,42)}}</span>
               </a> <!-- TODO: href to etherscan-->
@@ -632,6 +634,8 @@ import { ethers } from "ethers";
 import config from '@/config.json';
 import {mapGetters} from "vuex";
 import helpers from "@/helpers/helpers";
+import SkeletonCardListing from "@/components/Skeleton/SkeletonCardListing.vue";
+import SkeletonCardListingInfo from "@/components/Skeleton/SkeletonCardListingInfo.vue";
 
 
 export default {
@@ -673,6 +677,8 @@ export default {
     };
   },
   components: {
+	  SkeletonCardListingInfo,
+	  SkeletonCardListing,
     Breadcrumbs,
     RecommendationsList,
     ListingInfo,

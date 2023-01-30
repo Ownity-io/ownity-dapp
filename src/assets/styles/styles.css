@@ -1421,6 +1421,12 @@ ul.tabs {
 
 }
 
+@media (min-width: 1980px) {
+    .section-nft.with-filter .cards-list-container .card {
+        width: calc(100% / 5 - 16px);
+    }
+}
+
 /* .section-nft.with-filter .cards-list-container {
     grid-template-columns: 1fr 1fr 1fr 1fr;
 
