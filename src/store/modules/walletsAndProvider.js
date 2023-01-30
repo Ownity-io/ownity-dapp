@@ -146,7 +146,7 @@ export default {
           // }          
           //  localStorage.removeItem("connectedWallet", null);
            localStorage.removeItem("userAddress");
-           localStorage.removeItem("token", null);
+           localStorage.removeItem("token");
            localStorage.removeItem("tokenEndTimestamp");
            localStorage.removeItem("refreshToken");
            localStorage.removeItem("nonce");
