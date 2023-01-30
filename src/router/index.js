@@ -78,6 +78,10 @@ const routes = [
                 path: '/privacy_policy',
                 component: () => import('@/views/services/PrivacyPolicy.vue'),  
             },
+            {
+                path: '/:pathMatch(.*)*',
+                component: () => import('@/views/404.vue'),
+            },
 
         ]
     },
@@ -97,6 +101,36 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes
+})
+
+router.beforeEach((to, from, next) => {
+    if (to.fullPath.toLowerCase().includes('/index.php')) {
+        next('/')
+    } else if (
+        to.fullPath.toLowerCase().includes('marketplace/index.php') ||
+        to.fullPath.toLowerCase().includes('marketplace/home.php') ||
+        to.fullPath.toLowerCase().includes('marketplace/index.html') ||
+        to.fullPath.toLowerCase().includes('marketplace/home.html')
+    ) {
+        next('404')
+    } else if (to.fullPath.toLowerCase().includes('//')) {
+        let a = to.fullPath.toLowerCase().replaceAll(/\/+/g, '/')
+        if(a[a.length-1] === '/'){
+            a = a.slice(0, -1);
+        }
+        next(a)
+    }else if(to.fullPath[to.fullPath.length-1].includes('/') && to.fullPath !== '/'){
+        let a =  to.fullPath.slice(0, -1);
+        next(a)
+    } else if(to.fullPath.toLowerCase() !== to.fullPath) {
+        let a = to.fullPath.toLowerCase()
+        if(a[a.length-1] === '/'){
+            a = a.slice(0, -1);
+        }
+        next(a)
+    } else {
+        next()
+    }
 })
 
 export default router
