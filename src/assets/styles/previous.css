@@ -309,15 +309,15 @@ body.previous-page .footer-list a:hover {
     background-image: linear-gradient(180deg, #4D89FE 0%, #355FC9 100%);
 }
 
-body.previous-page a.collection-id:hover span {
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
-    -webkit-text-fill-color: transparent;
-    transition: background-image 200ms ease;
-    background-image: linear-gradient(180deg, #4D89FE 0%, #355FC9 100%);
-}
+/*body.previous-page a.collection-id:hover span {*/
+/*    -webkit-background-clip: text;*/
+/*    -webkit-text-fill-color: transparent;*/
+/*    background-clip: text;*/
+/*    text-fill-color: transparent;*/
+/*    -webkit-text-fill-color: transparent;*/
+/*    transition: background-image 200ms ease;*/
+/*    background-image: linear-gradient(180deg, #4D89FE 0%, #355FC9 100%);*/
+/*}*/
 
 .previous-title {
     font-weight: 400;
