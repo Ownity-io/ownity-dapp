@@ -215,7 +215,10 @@ export default {
   },
   async mounted(){
     window.scrollTo(0, 0);
-    await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address);
+    let result = await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address);
+    if(!result) {
+      await this.$router.push('/404')
+    }
     await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
     await this.$store.dispatch('marketplace/fetchAndSetMarketplaces');
     await this.getAndSetCollection();
