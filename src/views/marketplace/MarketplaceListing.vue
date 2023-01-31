@@ -818,7 +818,7 @@ export default {
             if (element.status == 'ON SALE' || element.status == 'CANCELED' ||(element.type == 'CANCEL' & element.status == 'FULFILLED')){
               inactiveVotingsTemp.push(element);
             }
-            else{
+            else if (element.users.length>0){
               activeVotingsTemp.push(element);
             }
         }
