@@ -131,7 +131,7 @@
       <div class="container-enter-price">
         <div class="container-input">
           <div class="input-wrapper" :style="isError && { border: '1px solid red'}">
-            <input placeholder="Min" type="text" v-model="this.minPrice" @input="checkMinPrice($event)" v-on:key-up.enter="fetchAndSetListingsStartInfoMinPrice();" v-debounce:500ms="fetchAndSetListingsStartInfoMinPrice"/>
+            <input placeholder="Min" type="text" v-model="this.minPrice" @input="checkMinPrice($event)" v-on:keydown.enter.prevent='fetchAndSetListingsStartInfoMinPrice'  v-debounce:500ms="fetchAndSetListingsStartInfoMinPrice"/>
           </div>
         </div>
         <span class="between-inputs">to</span>
