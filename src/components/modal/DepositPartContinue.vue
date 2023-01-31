@@ -59,7 +59,7 @@
                     1%
                     {{translatesGet('TO')}}
                     {{translatesGet('INPUT_MAX')}}
-                    {{useHelpers.toFixedIfNecessary((this.item.price-this.allBidsAmount)/this.item.price*100,0)}}%
+                    {{this.toMaxPercentage}}%
                     <!-- Min 1% to Max 100% -->
                   </div>
                 </div>
@@ -175,7 +175,8 @@ export default {
       lang: new MultiLang(this),
       contractConfig:null,
       buyLotFee:0,
-      userBidAmount:0
+      userBidAmount:0,
+      toMaxPercentage:0
     };
   },
   computed: {
@@ -383,6 +384,9 @@ export default {
       }
       else if (((this.currentPart/100*this.item.price)) > (this.item.price-this.allBidsAmount)) {
         this.currentPart = this.useHelpers.toFixedIfNecessary((this.item.price-this.allBidsAmount)/this.item.price*100,0)
+        if (this.currentPart<1){
+          this.currentPart = 1;
+        }
       }
       else if (isNaN(parseInt(this.currentPart))){
           this.currentPart = null    
@@ -399,6 +403,10 @@ export default {
     this.setAllBidsAmount();
     this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
     this.buyLotFee = this.noExponents((this.contractConfig[0].buy_lot_fee/100)/100*this.item.price);
+    this.toMaxPercentage = this.useHelpers.toFixedIfNecessary((this.item.price-this.allBidsAmount)/this.item.price*100,0);
+    if (this.toMaxPercentage<1){
+      this.toMaxPercentage = 1;
+    }
     this.render = true;
   },
 };
