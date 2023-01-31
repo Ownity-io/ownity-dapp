@@ -9,7 +9,7 @@
         </div>
     </div>
 <!--    <SkeletonCard />-->
-    <div class="cards-list-empty" >
+    <div class="cards-list-empty" v-if="this.$store.getters['marketplace/getListingsResults'].length==0">
       <div class="title">{{translatesGet('NOTHING_HERE')}}</div>
       <a href="/marketplace" class="btn" v-if="collectionIsEmpty">
         {{translatesGet('BACK_TO_ALL')}}
