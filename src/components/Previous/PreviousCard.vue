@@ -53,7 +53,7 @@
             <!-- Live / Scheduled / Сompleted / Canceled -->
           </div>
           <div class="prev-card-contributors">
-            Members: 23
+            Members: {{ card.members }}
           </div>
         </div>
 
@@ -92,31 +92,35 @@ export default {
 	      {
 					name: 'MAYC #12625',
           collection: 'Mutant Ape Yacht Club',
-          price: '29',
+          price: '7.8 / 29',
           links: 'link-1',
-          procent: '27'
+          procent: '27',
+          members: 11
 				},
 	      {
 		      name: 'MAYC #25986',
 		      collection: 'Mutant Ape Yacht Club',
-		      price: '17.45',
+		      price: '6.6 / 17.45',
 		      links: 'link-2',
-		      procent: '38'
+		      procent: '38',
+          members: 4
 	      },
 	      {
 		      name: 'BAYC #5699',
 		      collection: 'Bored Ape Yacht Club',
-		      price: '200',
+		      price: '81 / 200',
 		      links: 'link-3',
-		      procent: '41'
+		      procent: '41',
+          members: 23
 
 	      },
 	      {
 		      name: 'OFO #9429',
 		      collection: 'Otherdeed for Otherside',
-		      price: '69.95',
+		      price: '22.3 / 69.95',
 		      links: 'link-4',
-		      procent: '32'
+		      procent: '32',
+          members: 6
 
 	      }
       ]
