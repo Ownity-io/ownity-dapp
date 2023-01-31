@@ -34,7 +34,7 @@ export default {
 
     convertToEther(value){
         try{
-            return ethers.utils.formatEther(String(value));
+            return ethers.utils.formatEther(String(parseInt(value)));
         } catch (e) {
             console.log('error from convertToEther:' + e.message);
         }
