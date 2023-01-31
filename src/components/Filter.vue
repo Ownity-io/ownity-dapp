@@ -131,7 +131,7 @@
       <div class="container-enter-price">
         <div class="container-input">
           <div class="input-wrapper" :style="isError && { border: '1px solid red'}">
-            <input placeholder="Min" type="text" v-model="this.minPrice" @input="checkMinPrice($event)" v-on:keydown.enter.prevent='fetchAndSetListingsStartInfoMinPrice'  v-debounce:500ms="fetchAndSetListingsStartInfoMinPrice"/>
+            <input placeholder="Min" ref="input"  type="text" v-model="this.minPrice" @input="checkMinPrice($event)" v-on:keydown.enter.prevent='deleteFocus'  v-debounce:500ms="fetchAndSetListingsStartInfoMinPrice"/>
           </div>
         </div>
         <span class="between-inputs">to</span>
@@ -166,6 +166,10 @@ export default {
     };
   },
   methods:{
+		deleteFocus(){
+      this.$refs.input.blur()
+    },
+
     async fetchAndSetListingsStartInfo() {
       if (this.$route.name == 'Marketplace'){
         if(this.activities){
