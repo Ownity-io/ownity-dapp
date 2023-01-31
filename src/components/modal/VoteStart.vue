@@ -378,6 +378,24 @@ export default {
           await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
         }
         else {
+          for (let element of _voting_Ids) {
+            let requestUrl = `${config.backendApiEntryPoint}revert-vote/`;
+            let requestOptions = {
+              method: "POST",
+              headers: {
+                accept: "application/json",
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+              body: JSON.stringify({
+                'voting_id': element.voting_id
+              }),
+            };
+            let request = await fetch(requestUrl,requestOptions);
+            let requestJson = await request.json();
+            console.log(requestJson);
+          }
+          
           await this.$store.dispatch('appGlobal/setLastTransSuccess', false)
           await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);
           await this.$store.dispatch('appGlobal/setShowStartVotingModal', false);

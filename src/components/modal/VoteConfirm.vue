@@ -259,7 +259,22 @@ export default {
         await this.$store.dispatch('appGlobal/setShowVoteConfirmModal', false);
         await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
       }
-      else{
+      else{       
+        let requestUrl = `${config.backendApiEntryPoint}revert-vote/`;
+        let requestOptions = {
+          method: "POST",
+          headers: {
+            accept: "application/json",
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            'voting_id': _voting_Id
+          }),
+        };
+        let request = await fetch(requestUrl, requestOptions);
+        let requestJson = await request.json();
+        console.log(requestJson);          
         await this.$store.dispatch('appGlobal/setLastTransSuccess',false)
         await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);
         await this.$store.dispatch('appGlobal/setShowVoteConfirmModal', false);
