@@ -131,13 +131,13 @@
       <div class="container-enter-price">
         <div class="container-input">
           <div class="input-wrapper" :style="isError && { border: '1px solid red'}">
-            <input placeholder="Min" ref="input"  type="text" v-model="this.minPrice" @input="checkMinPrice($event)" v-on:keydown.enter.prevent='deleteFocus'  v-debounce:500ms="fetchAndSetListingsStartInfoMinPrice"/>
+            <input placeholder="Min" ref="input1"  type="text" v-model="this.minPrice" @input="checkMinPrice($event)" v-on:keydown.enter.prevent='deleteFocus'  v-on:keydown.enter='fetchAndSetListingsStartInfoMinPrice'  v-debounce:500ms="fetchAndSetListingsStartInfoMinPrice"/>
           </div>
         </div>
         <span class="between-inputs">to</span>
         <div class="container-input">
           <div class="input-wrapper" :style="isError && { border: '1px solid red'}">
-            <input placeholder="Max" type="text" v-model="this.maxPrice" @input="checkMaxPrice" v-debounce:500ms="fetchAndSetListingsStartInfoMaxPrice"/>
+            <input placeholder="Max" ref="input2" type="text" v-model="this.maxPrice" @input="checkMaxPrice" v-on:keydown.enter.prevent='deleteFocus'  v-on:keydown.enter='fetchAndSetListingsStartInfoMinPrice'  v-debounce:500ms="fetchAndSetListingsStartInfoMaxPrice"/>
           </div>
         </div>
       </div>
@@ -167,7 +167,8 @@ export default {
   },
   methods:{
 		deleteFocus(){
-      this.$refs.input.blur()
+      this.$refs.input1.blur()
+      this.$refs.input2.blur()
     },
 
     async fetchAndSetListingsStartInfo() {
