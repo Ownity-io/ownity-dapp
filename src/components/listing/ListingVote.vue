@@ -18,18 +18,18 @@
           </div>
           <div class="deposit-value">
             <div class="icon-token eth"></div>
-            <span><b>{{this.abbrNum(this.toFixedIfNecessary(this.convertToEther(this.voting.amount),6),2)}} ETH</b></span>
-            <span class="equivalent">(≈ $ {{(this.toFixedIfNecessary(this.abbrNum(this.convertToEther(this.voting.amount)*this.currencyToUsdPrice),2),2)}})</span>
+            <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.voting.amount),6),2)}} ETH</b></span>
+            <span class="equivalent">(≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.voting.amount)* currencyToUsdPrice,2),2,2)}})</span>
           </div>
         </div>
       <div class="vote-btn-container">
         <!-- display if user logged and already votes -->
-        <button class="btn btn-cancel" v-if="userLogged & ((this.voting.count/this.item.bids.length)*100)>50 & userBidAmount>0 & this.voting.type!='CANCEL'"
+        <button class="btn btn-cancel" v-if="userLogged & this.allVotedPercentage>=51 & userBidAmount>0 & this.voting.type!='CANCEL' & this.voting.status!='ON SALE' & !inactive"
           @click="this.$store.dispatch('appGlobal/setCancellSellVotingModal',true);this.$store.dispatch('appGlobal/setCurrentVoting',this.voting);">
             {{translatesGet('CANCEL')}}
         </button>
         <!-- display if user logged and not votes yet -->
-        <button class="btn btn-vote" v-else-if="userLogged & ((this.voting.count/this.item.bids.length)*100)<=50 & !userVoted & userBidAmount>0"
+        <button class="btn btn-vote" v-else-if="userLogged & this.allVotedPercentage<51 & !userVoted & userBidAmount>0 & !inactive"
         @click="this.$store.dispatch('appGlobal/setShowVoteConfirmModal',true);this.$store.dispatch('appGlobal/setCurrentVoting',this.voting);">
             <i class="i-thumb-up-line"></i>
             <span>{{translatesGet('CONFIRM')}}</span>
@@ -37,8 +37,8 @@
       </div>
       </div>
 
-      <div class="vote-progress-container">
-        <div class="data-counter">{{translatesGet('MEMBERS_VOTED')}}: {{this.voting.count}}/{{this.item.bids.length}}</div>
+      <div class="vote-progress-container"  v-if="!inactive">
+        <div class="data-counter" >{{translatesGet('MEMBERS_VOTED')}}: {{this.voting.count}}/{{this.item.bids.length}}</div>
         <div class="vote-progress-row">
           <div class="card-progress progress">
             <!-- <div
@@ -104,11 +104,14 @@
 <script>
 import MultiLang from "@/core/multilang";
 import { ethers } from 'ethers';
+import helpers from "@/helpers/helpers";
+import {mapGetters} from "vuex";
 
 export default{
+  props:['item','voting','inactive'],
   data(){
     return{
-      currencyToUsdPrice:1,
+      useHelpers: helpers,
       userLogged:false,
       userVoted:false,
       userBidAmount:null,
@@ -116,50 +119,13 @@ export default{
       allVotedPercentage:0
     }
   },
+  computed: {
+    ...mapGetters(['getUsdRate']),
+    currencyToUsdPrice() {
+      return this.getUsdRate ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
+    }
+  },
   methods:{
-    abbrNum(number, decPlaces) {
-      decPlaces = Math.pow(10, decPlaces);
-      var abbrev = ["k", "m", "b", "t"];
-      for (var i = abbrev.length - 1; i >= 0; i--) {
-        var size = Math.pow(10, (i + 1) * 3);
-        if (size <= number) {
-          number = Math.round(number * decPlaces / size) / decPlaces;
-          if ((number == 1000) && (i < abbrev.length - 1)) {
-            number = 1;
-            i++;
-          }
-          number += abbrev[i];
-          break;
-        }
-      }
-      return number;
-    },
-    convertToEther(value){
-      return ethers.utils.formatEther(value);
-    },
-    async setCurrencyToUsd(){
-      let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
-      let requestJson = await request.json();
-      try{
-        this.currencyToUsdPrice =  requestJson.quotes[0].priceUsd;
-      }
-      catch{
-        this.currencyToUsdPrice = 1;
-      }
-    },
-    toFixedIfNecessary(value, dp) {
-      return +parseFloat(value).toFixed(dp);
-    },
-    async setCurrencyToUsd(){
-      let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
-      let requestJson = await request.json();
-      try{
-        this.currencyToUsdPrice =  requestJson.quotes[0].priceUsd;
-      }
-      catch{
-        this.currencyToUsdPrice = 1;
-      }
-    },
     async setUserVotedAndLogged(){
       let userAddress = localStorage.getItem('userAddress');
       if (userAddress!=null & userAddress!='null'){
@@ -197,12 +163,9 @@ export default{
         return this.lang.get(key);
     },
   },
-  props:['item','voting'],
   async mounted(){
-    await this.setCurrencyToUsd();
     await this.setUserVotedAndLogged();
     await this.setUserBidAmount();
-    console.log(this.allVotedPercentage);
   }
 }
 

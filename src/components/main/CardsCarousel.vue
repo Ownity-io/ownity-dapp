@@ -39,26 +39,26 @@ export default defineComponent({
     breakpoints: {
       // 320px and up
       0: {
-        itemsToShow: 1.96,
+        // itemsToShow: 1.96,
+        itemsToShow: 1.3,
         snapAlign: 'center',
       },
       // 700px and up
       768: {
-        // itemsToShow: 1.94,
-        itemsToShow: 2.935,
+        //! itemsToShow: 2.935,
+        itemsToShow: 3,
         snapAlign: 'center',
       },
       // 1024 and up
       1024: {
-        // itemsToShow: 4.95,
-        // itemsToShow: 2.8,
-        itemsToShow: 3.93,
+        //! itemsToShow: 3.93,
+        itemsToShow: 4,
         snapAlign: 'start',
       },
       // 1024 and up
-      1425: {
-        // itemsToShow: 2.5,
-        itemsToShow: 4.95,
+      1440: {
+        //! itemsToShow: 4.95,
+        itemsToShow: 5,
         snapAlign: 'start',
       },
     },
@@ -126,7 +126,7 @@ export default defineComponent({
     right: 0;
   }
 }
-@media (min-width:1425px) {
+@media (min-width:1440px) {
 
   .cards-carousel li.carousel__slide--active .container-more-info,
   .cards-carousel li.carousel__slide--active + .carousel__slide--visible .container-more-info  {

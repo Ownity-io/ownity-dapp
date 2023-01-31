@@ -130,14 +130,14 @@
       </button>
       <div class="container-enter-price">
         <div class="container-input">
-          <div class="input-wrapper">
-            <input placeholder="Min" v-model="this.minPrice" @input="checkMinPrice" v-debounce:500ms="fetchAndSetListingsStartInfoMinPrice"/>
+          <div class="input-wrapper" :style="isError && { border: '1px solid red'}">
+            <input placeholder="Min" type="text" v-model="this.minPrice" @input="checkMinPrice($event)" v-on:key-up.enter="fetchAndSetListingsStartInfoMinPrice();" v-debounce:500ms="fetchAndSetListingsStartInfoMinPrice"/>
           </div>
         </div>
         <span class="between-inputs">to</span>
         <div class="container-input">
-          <div class="input-wrapper">
-            <input placeholder="Max" v-model="this.maxPrice" @input="checkMaxPrice" v-debounce:500ms="fetchAndSetListingsStartInfoMaxPrice"/>
+          <div class="input-wrapper" :style="isError && { border: '1px solid red'}">
+            <input placeholder="Max" type="text" v-model="this.maxPrice" @input="checkMaxPrice" v-debounce:500ms="fetchAndSetListingsStartInfoMaxPrice"/>
           </div>
         </div>
       </div>
@@ -162,6 +162,7 @@ export default {
       minPrice:null,
       userAddress:null,
       lang: new MultiLang(this),
+      isError: false
     };
   },
   methods:{
@@ -198,6 +199,9 @@ export default {
       }      
     },
     async fetchAndSetListingsStartInfoMaxPrice() {
+      await this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', this.maxPrice);
+      await this.$store.dispatch('marketplace/getAndSetCurrentMinPrice', this.minPrice);
+      if (this.maxPrice!=null){
         if (this.$route.name == 'Marketplace') {
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
         }
@@ -215,9 +219,10 @@ export default {
             await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
           }
         }
+      }
     },
-    checkMaxPrice(){     
-      if (this.maxPrice == '') {
+    checkMaxPrice(){
+      if (this.maxPrice === '') {
         this.maxPrice = null;
       }
       else if (isNaN(this.maxPrice)) {
@@ -225,11 +230,15 @@ export default {
         if (isNaN(this.maxPrice)){
           this.maxPrice = null;
         }
-      }     
+      }
+      this.isError = this.maxPrice < this.minPrice && this.maxPrice && this.minPrice;
       this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', this.maxPrice); 
         
     },
     async fetchAndSetListingsStartInfoMinPrice() {
+      await this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', this.maxPrice);
+      await this.$store.dispatch('marketplace/getAndSetCurrentMinPrice', this.minPrice);
+      if (this.minPrice!=null){
         if (this.$route.name == 'Marketplace') {
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
         }
@@ -247,17 +256,20 @@ export default {
             await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
           }
         }
+      }
     },
-    async checkMinPrice() {
-      if (this.minPrice == '') {
+    async checkMinPrice(e) {
+      if (this.minPrice === '') {
         this.minPrice = null;
       }
+
       else if (isNaN(this.minPrice)) {
         this.minPrice = parseInt(this.minPrice);
         if (isNaN(this.minPrice)){
           this.minPrice = null;
         }
       }
+      this.isError = this.maxPrice < this.minPrice && this.maxPrice && this.minPrice;
       this.$store.dispatch('marketplace/getAndSetCurrentMinPrice', this.minPrice);
     },
     translatesGet(key) {

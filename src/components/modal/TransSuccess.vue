@@ -33,7 +33,7 @@
                   </div>
               </div>
                   
-              <div class="tr">
+              <div class="tr"  v-if="this.$store.getters['appGlobal/getLastTransactionHash']">
                   <div class="td">{{translatesGet('ACTIVITY_THEAD-4')}}</div>
                   <div class="td"> 
                       <a class="td-wrap td-wrap-link" :href="config.etherscanTxUrlStart+this.$store.getters['appGlobal/getLastTransactionHash']" target="_blank" rel="nofollow">

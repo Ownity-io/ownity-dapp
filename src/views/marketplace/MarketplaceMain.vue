@@ -1,13 +1,20 @@
 <template>
   <main>
     <div v-if="filterMobile" class="filter-mobile-wrap">
-      <div class="filter-mobile-header">
-        <span>{{translatesGet('FILTERS')}}</span>
-        <button class="btn-close" @click="filterMobile=false">
-          <i class="i-close-line"></i>
-        </button>
-      </div>
-      <Filter :activities = "activeTab == 1"/>
+      <FilterMobile v-if="filterMobile" />
+      <!-- <div class="filter-mobile-container">
+        <div class="filter-mobile-header">
+            <div>{{translatesGet('FILTERS')}}</div>
+            <button class="btn-close" @click="filterMobile=false">
+                <i class="i-close-line"></i>
+            </button>
+        </div>
+        <Filter :activities = "activeTab == 1"/>
+        <div class="filter-mobile-footer">
+            <button class="btn btn-clear">{{translatesGet('CLEAR_ALL')}}</button>
+            <button class="btn btn-submit">{{translatesGet('APPLY')}}</button>
+        </div>
+      </div> -->
     </div>
     <div class="container">
       <section class="section-breadcrumbs">
@@ -57,29 +64,7 @@
           <div class="params-block params-block-search">
             <Search />
           </div>
-          <div class="params-block params-block-sort">
-            <div class="param-wrap sort" :class="{ unfolded: testOpenSort }">
-              <button class="btn-param btn-sort" @click="testOpenSort = !testOpenSort">
-                <span v-if="this.selectedSort == null">Sort by</span>
-                <span v-else>{{this.selectedSort.name}}</span>
-                <i class="i-arrow-down-s-line"></i>
-              </button>
-              <div class="drop-down">
-                <ul v-if="activeTab == 1">
-                  <li v-for="element in config.sortParamsActivities" :key="element"
-                    @click="testOpenSort = !testOpenSort;selectedSort=element;initInfo();">
-                    <span>{{element.name}}</span>
-                  </li>
-                </ul>
-                <ul v-else>
-                  <li v-for="element in config.sortParams" :key="element"
-                    @click="testOpenSort = !testOpenSort;selectedSort=element;initInfo();">
-                    <span>{{element.name}}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <SortBar :activeTab="activeTab"/>
           <div class="params-block params-block-switch" v-if="activeTab == 0">
             <div class="param-wrap switch">
               <button
@@ -123,10 +108,12 @@
 <script>
 import Search from "@/components/Search.vue";
 import Filter from "@/components/Filter.vue";
+import FilterMobile from "@/components/FilterMobile.vue";
 import ListCards from "@/components/ListCards.vue";
 import ActivityTable from "@/components/ActivityTable.vue";
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
 import SelectedFilters from "@/components/SelectedFilters.vue";
+import SortBar from '@/components/SortBar.vue'
 import MultiLang from "@/core/multilang";
 import config from '@/config.json';
 
@@ -145,10 +132,12 @@ export default {
   components: {
     Search,
     Filter,
+    FilterMobile,
     ListCards,
     ActivityTable,
     Breadcrumbs,
     SelectedFilters,
+    SortBar
   },
   async mounted(){
     window.scrollTo(0, 0);

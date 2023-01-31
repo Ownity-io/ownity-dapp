@@ -34,9 +34,9 @@
                   <div class="price-block-title">{{translatesGet('PRICE_PART')}}</div>
                   <div class="price-block-value price-value">
                     <div class="icon-value"></div>
-                    <span>{{abbrNum(toFixedIfNecessary(convertToEther(String(userBidAmount)),6),2)}} ETH</span>
+                    <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidAmount),6),2)}} ETH</span>
                   </div>
-                  <div class="price-block-equivalent equivalent">≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(String(userBidAmount))*currencyToUsdPrice,6),2)}}</div>
+                  <div class="price-block-equivalent equivalent">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidAmount)*currencyToUsdPrice,6),2,2)}}</div>
                 </div>
               </div>
             </div>
@@ -49,7 +49,7 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>{{abbrNum(toFixedIfNecessary(convertToEther(String(userBidAmount)),6),2)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(String(userBidAmount))*currencyToUsdPrice,6),2)}}</span>
+                    <b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidAmount),6),2)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(userBidAmount)*currencyToUsdPrice,6),2,2)}}</span>
                   </div>
                   <!-- <div class="total-fees">Fees:<span>3%</span></div> -->
                 </div>
@@ -63,7 +63,7 @@
           
           <!-- v-if="currentPart "  -->
           <div class="modal-desktop-footer" v-if="!buttonWaiting">
-            <button class="btn btn-modal-main" @click="declineBid">{{translatesGet('CANCEL')}}</button>
+            <button class="btn btn-modal-main" @click="declineBid">Cancel Sale</button>
           </div>
 
           <!-- v-else  -->
@@ -88,7 +88,7 @@
             
       <!-- v-if="currentPart "  -->
       <div  class="modal-mobile-footer" v-if="!buttonWaiting" >
-        <button class="btn btn-modal-main" @click="declineBid">{{translatesGet('CANCEL')}}</button>
+        <button class="btn btn-modal-main" @click="declineBid">Cancel Sale</button>
       </div>
 
       <!-- v-else  -->
@@ -118,64 +118,33 @@ import ABI from '@/abi.json';
 import config from '@/config.json';
 import { toRaw } from '@vue/reactivity';
 import MultiLang from "@/core/multilang";
+import helpers from "@/helpers/helpers";
+import {mapGetters} from "vuex";
 
 export default {
   data() {
     return {
+      useHelpers: helpers,
       item:null,
       ABI:ABI,
       render:false,
       config:config,
       provider:null,
       signer:null,
-      currencyToUsdPrice:1,
       userBidAmount:null,
       buttonWaiting:false,
       lang: new MultiLang(this),
     };
   },
-  async mounted(){
-    this.item = await this.$store.getters['marketplaceListing/getItem'];
-    this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
-    this.signer = await this.$store.getters['walletsAndProvider/getSigner'];
-    this.setCurrencyToUsd();
-    this.setUserBidAmount();
-    this.render = true;
+  computed: {
+    ...mapGetters(['getUsdRate']),
+    currencyToUsdPrice() {
+      return this.getUsdRate ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
+    }
   },
   methods:{
     translatesGet(key) {
       return this.lang.get(key);
-    },
-    abbrNum(number, decPlaces) {
-      decPlaces = Math.pow(10, decPlaces);
-      var abbrev = ["k", "m", "b", "t"];
-      for (var i = abbrev.length - 1; i >= 0; i--) {
-        var size = Math.pow(10, (i + 1) * 3);
-        if (size <= number) {
-          number = Math.round(number * decPlaces / size) / decPlaces;
-          if ((number == 1000) && (i < abbrev.length - 1)) {
-            number = 1;
-            i++;
-          }
-          number += abbrev[i];
-          break;
-        }
-      }
-
-      return number;
-    },
-    async setCurrencyToUsd(){
-      let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
-      let requestJson = await request.json();
-      try{
-        this.currencyToUsdPrice =  requestJson.quotes[0].priceUsd;
-      }
-      catch{
-        this.currencyToUsdPrice = 1;
-      }
-    },
-    toFixedIfNecessary(value, dp) {
-      return +parseFloat(value).toFixed(dp);
     },
     setUserBidAmount(){
       let userAddress = localStorage.getItem('userAddress');
@@ -189,9 +158,6 @@ export default {
         return
       }
       this.userBidAmount=0;      
-    },
-    convertToEther(value){
-      return ethers.utils.formatEther(value);
     },
     async declineBid(){  
       this.buttonWaiting = true;
@@ -207,7 +173,7 @@ export default {
         catch{
           await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack',false)
-          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',10)
         }
       }     
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await prov.getSigner());
@@ -232,7 +198,6 @@ export default {
               },
               method:'POST'
             })).json();
-          console.log(forceReq);
           await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
           await this.$store.dispatch('appGlobal/setLastTransactionHash',declineBid.hash);
           await this.$store.dispatch('appGlobal/setshowDepositCancelModal',false);
@@ -246,16 +211,23 @@ export default {
           this.buttonWaiting = false;
           await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack', false)
-          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)         
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
         }          
       }
       catch{
         this.buttonWaiting = false;
         await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
         await this.$store.dispatch('appGlobal/setGreenSnack', false)
-        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)
+        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
       }
     },
-  }
+  },
+  async mounted(){
+    this.item = await this.$store.getters['marketplaceListing/getItem'];
+    this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
+    this.signer = await this.$store.getters['walletsAndProvider/getSigner'];
+    this.setUserBidAmount();
+    this.render = true;
+  },
 };
 </script>

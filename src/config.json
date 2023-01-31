@@ -84,6 +84,14 @@
     },
     "activitiesPart":[
         {
+            "name":"Votings",
+            "codeName":"Votings"
+        },
+        {
+            "name":"Sale",
+            "codeName":"Sale"
+        },
+        {
             "name":"Claims",
             "codeName":"Claims"
         },
@@ -92,12 +100,8 @@
             "codeName":"Fractions"
         },
         {
-            "name":"Purchase",
-            "codeName":"Purchase"
-        },
-        {
-            "name":"Sales",
-            "codeName":"Sales"
+            "name":"Rewards",
+            "codeName":"Rewards"
         }
     ]
 }

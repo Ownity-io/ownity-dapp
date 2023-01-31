@@ -7,22 +7,22 @@
                         <div v-if="$route.fullPath ==='/'" class="footer-logo"></div>
                         <router-link :to="{name: 'Main'}" v-else  class="footer-logo"></router-link>
                     </div>
-                    <div class="footer-block" :class="{'unfolded' : !footerBlock1}">
-                        <div class="footer-block-name">
-                            <span>{{translatesGet('MARKETPLACE')}}</span>
-                        </div>
-                        <button class="footer-block-name" @click="footerBlock1 = !footerBlock1">
-                            <span>{{translatesGet('MARKETPLACE')}}</span>
-                            <i class="i-arrow-up-s-line"></i>
-                        </button>
-                        <ul class="footer-list">
-                            <li><a href="">Active</a></li>
-                            <li><a href="">Canceled</a></li>
-                            <li><a href="">Purchased</a></li>
-                            <li><a href="">On sale</a></li>
-                            <li><a href="">Sold</a></li>
-                        </ul>
-                    </div>
+<!--                    <div class="footer-block" :class="{'unfolded' : !footerBlock1}">-->
+<!--                        <div class="footer-block-name">-->
+<!--                            <span>{{translatesGet('MARKETPLACE')}}</span>-->
+<!--                        </div>-->
+<!--                        <button class="footer-block-name" @click="footerBlock1 = !footerBlock1">-->
+<!--                            <span>{{translatesGet('MARKETPLACE')}}</span>-->
+<!--                            <i class="i-arrow-up-s-line"></i>-->
+<!--                        </button>-->
+<!--                        <ul class="footer-list">-->
+<!--                            <li><a href="">Active</a></li>-->
+<!--                            <li><a href="">Canceled</a></li>-->
+<!--                            <li><a href="">Purchased</a></li>-->
+<!--                            <li><a href="">On sale</a></li>-->
+<!--                            <li><a href="">Sold</a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
                     <div class="footer-block" :class="{'unfolded' : !footerBlock2}">
                         <div class="footer-block-name">
                             <span>{{translatesGet('COLLECTIONS')}}</span>
@@ -32,10 +32,10 @@
                             <i class="i-arrow-up-s-line"></i>
                         </button>
                         <ul class="footer-list">
-                            <li><a target="_blank" href="https://jaxscan.com/collection/0xBC51d9f4A816d6Ad60E6A64DEFf0f820307A1e45">sad - sWJozDZPx2</a></li>
-                            <li><a target="_blank" href="https://jaxscan.com/collection/0x1f419B9469D641D333805C4054CA3b65Af54d315">Snakes on a chain</a></li>
-                            <li><a target="_blank" href="https://jaxscan.com/collection/0xd06166878623353947c8715e7F3e9f4D8585726F">Ownable BAYC</a></li>
-                            <li><a target="_blank" href="https://jaxscan.com/collection/0x15987A0417D14cc6f3554166bCB4A590f6891B18">Masa Soul Name (MSN)</a></li>
+                            <li><a href="https://jaxscan.com/collection/0xBC51d9f4A816d6Ad60E6A64DEFf0f820307A1e45">sad - sWJozDZPx2</a></li>
+                            <li><a href="https://jaxscan.com/collection/0x1f419B9469D641D333805C4054CA3b65Af54d315">Snakes on a chain</a></li>
+                            <li><a href="https://jaxscan.com/collection/0xd06166878623353947c8715e7F3e9f4D8585726F">Ownable BAYC</a></li>
+                            <li><a href="https://jaxscan.com/collection/0x15987A0417D14cc6f3554166bCB4A590f6891B18">Masa Soul Name (MSN)</a></li>
                         </ul>
                     </div>
                     <div class="footer-block" :class="{'unfolded' : !footerBlock3}">
@@ -47,19 +47,20 @@
                             <i class="i-arrow-up-s-line"></i>
                         </button>
                         <ul class="footer-list">
-                            <li><a target="_blank" href="">{{translatesGet('HOME')}}</a>
+                            <li>
+                              <a href="/">{{translatesGet('HOME')}}</a>
                                 <div v-if="$route.fullPath ==='/'" @click="goToTop()"></div>
                                 <router-link :to="{name: 'Main'}" v-else></router-link>
                             </li>
                             <li><router-link :to="{ name: 'Marketplace' }">{{translatesGet('MARKETPLACE')}}</router-link></li>
                             <li
-                            v-if="$route.fullPath ==='/'">
-                                <a target="_blank" href="#screen-collections" >
+                            v-if="$route.path ==='/'">
+                                <a ref="screenCollections" href="#screen-collections" >
                                     <span>{{translatesGet('COLLECTIONS')}}</span>
                                 </a>
                             </li>
                             <li
-                            v-else >
+                            v-else  @click="$refs.screenCollections.click()">
                                 <router-link :to="{name: 'Main'}">
                                     <span>{{translatesGet('COLLECTIONS')}}</span>
                                 </router-link>
@@ -69,7 +70,7 @@
                                     <span>{{translatesGet('HELP')}}</span>
                                 </router-link>
                             </li>
-                            <li><a target="_blank" href="">{{translatesGet('SITEMAP')}}</a></li>
+                            <li><a href="">{{translatesGet('SITEMAP')}}</a></li>
                         </ul>
                     </div>
                     <div class="footer-block footer-block-form">
@@ -96,7 +97,7 @@
             <div class="container">
                 <div class="footer-section">
                     <div class="footer-part footer-service-links">
-                        <span class="copyright">&#169; Quant 2022 - 2023 | All rights reserved.</span>
+                        <span class="copyright">&#169; Ownity 2022 - 2023 | All rights reserved.</span>
                         <router-link :to="{name: 'TermsOfUse'}">
                             <span>{{translatesGet('TERMS_OF_USE')}}</span>
                         </router-link>
@@ -106,10 +107,10 @@
                     </div>
                     <div class="footer-part footer-social-links">
                         <ul class="social-links-wrap">
-                            <li><a target="_blank" href=""><i class="i-twitter-fill"></i></a></li>  
-                            <li><a target="_blank" href=""><i class="i-facebook-fill"></i></a></li>  
-                            <li><a target="_blank" href=""><i class="i-telegram-fill"></i></a></li>  
-                            <!-- <li><a href=""><i class="i-discord-line"></i></a></li>   -->
+                            <li><a target="_blank" href="https://twitter.com/ownity_io"><i class="i-twitter-fill"></i></a></li>
+<!--                            <li><a target="_blank" href=""><i class="i-facebook-fill"></i></a></li>  -->
+<!--                            <li><a target="_blank" href=""><i class="i-telegram-fill"></i></a></li>  -->
+                            <li><a target="_blank" href="https://discord.com/invite/j2zMN6CJd7"><i class="i-discord-line"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -147,8 +148,7 @@ data() {
                     method: "POST",
                     headers: {
                         accept: "application/json",
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
                         'email': this.email
@@ -157,11 +157,15 @@ data() {
                 let request = await fetch(requestLink, requestOptions);
                 if (request.ok){
                     this.email=null;
-                    alert('Your email was succesfully added!')
-                    location.reload();
+                    await this.$store.dispatch('appGlobal/setSnackText','Congrats! Your email was successfully written!')
+                    await this.$store.dispatch('appGlobal/setGreenSnack',true)
+                    await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
                 }
             } else {
-                console.log('Wrong email!');
+              this.email=null;
+                    await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
+                    await this.$store.dispatch('appGlobal/setGreenSnack',false)
+                    await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
             }
         }
     }

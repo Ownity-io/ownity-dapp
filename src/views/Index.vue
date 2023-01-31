@@ -13,7 +13,8 @@
     <TransSuccess v-if="this.$store.getters['appGlobal/getShowTransSuccessModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
     <BuyPart v-if="this.$store.getters['appGlobal/getShowBuyPartModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/> 
     <FractionActivity v-if="this.$store.getters['appGlobal/getShowVoteInfoModal'] & (this.walletConnected!=null & this.walletConnected!='null')" />
-
+    <contact-us v-if="this.$store.getters['appGlobal/getShowContactUsModal']" />
+    <attention-block/>
     <div class="wrapper-main">
         <HeaderComponent/>
         <RouterView />    
@@ -41,10 +42,14 @@ import VoteConfirm from '@/components/modal/VoteConfirm.vue'
 import BuyPart from '@/components/modal/BuyPart.vue'
 import TransSuccess from '@/components/modal/TransSuccess.vue'
 import FractionActivity from '@/components/modal/FractionActivity.vue'
+import ContactUs from "@/components/modal/ContactUs.vue";
+import AttentionBlock from "@/components/AttentionBlock.vue";
 
 
 export default {
     components:{
+	    AttentionBlock,
+	    ContactUs,
         HeaderComponent,
         FooterComponent,
 

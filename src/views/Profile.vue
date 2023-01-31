@@ -1,7 +1,8 @@
 <template>
     <div class="page-wrapper page-profile">
         <main>
-            <div v-if="filterMobile" class="filter-mobile-wrap">
+            <FilterMobile v-if="filterMobile" />
+            <!-- <div  class="filter-mobile-wrap">
                 <div class="filter-mobile-container">
                     <div class="filter-mobile-header">
                         <div>{{translatesGet('FILTERS')}}</div>
@@ -15,7 +16,7 @@
                         <button class="btn btn-submit">{{translatesGet('APPLY')}}</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="container">
                 <section class="section-breadcrumbs">
                     <Breadcrumbs />
@@ -71,7 +72,7 @@
                             </div>
                             <div class="btn link-wrapper">
                                 <div class="link">{{this.$store.getters['walletsAndProvider/getUserShortAddress']}}</div>
-                                <button class="btn-copy" @click='copy()'><i class="i-checkbox-multiple-blank-line"></i></button>
+                                <button class="btn-copy profile-copied" @click='copy()'><i class="i-checkbox-multiple-blank-line"></i></button>
                             </div>
                         </div>
                         <div class="profile-container-btns">
@@ -92,7 +93,7 @@
                         <li>
                             <button
                             :class="{ 'active-tab': activeTab === 'ListCards' }"
-                            @click="letsCheck('ListCards');this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');"
+                            @click="letsCheck('ListCards', true)"
                             >
                                 <span>{{translatesGet('ITEMS')}}</span>
                                 <span>{{translatesGet('ITEMS')}}</span>
@@ -101,14 +102,14 @@
                         <li>
                             <button
                             :class="{ 'active-tab': activeTab === 'Favourites' }"
-                            @click="letsCheck('Favourites');this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');">
+                            @click="letsCheck('Favourites', true)">
                                 <span>{{translatesGet('FAVOURITES')}}</span>
                                 <span>{{translatesGet('FAVOURITES')}}</span>
                             </button>
                         </li>
                         <li>
                             <button :class="{ 'active-tab': activeTab === 'Vote' }"
-                            @click="letsCheck('Vote');this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');">
+                            @click="letsCheck('Vote', true)">
                                 <span>{{translatesGet('VOTES')}}</span>
                                 <span>{{translatesGet('VOTES')}}</span>
                             </button>
@@ -116,7 +117,7 @@
                         <li>
                             <button
                             :class="{ 'active-tab': activeTab === 'ActivityTable'}"
-                            @click="letsCheck('ActivityTable');this.$store.dispatch('marketplace/setAllFiltersToNull');this.fetchAndSetListingsStartInfo()"
+                            @click="letsCheck('ActivityTable', true)"
                             >
                                 <span>{{translatesGet('ACTIVITIES')}}</span>
                                 <span>{{translatesGet('ACTIVITIES')}}</span>
@@ -142,27 +143,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="params-block params-block-sort">
-                            <div class="param-wrap sort" :class="{ unfolded: testOpenSort }">
-                                <button class="btn-param btn-sort" @click="testOpenSort = !testOpenSort">
-                                <span v-if="this.selectedSort == null">Sort by</span>
-                                <span v-else>{{this.selectedSort.name}}</span>
-                                <i class="i-arrow-down-s-line"></i>
-                                </button>
-                                <div class="drop-down">                                    
-                                <ul v-if="activeTab == 'ActivityTable'">                                    
-                                    <li v-for="element in config.sortParamsActivities" :key="element" @click="testOpenSort = !testOpenSort;selectedSort=element;fetchAndSetListingsStartInfo();">
-                                        <span>{{element.name}}</span>
-                                    </li>                        
-                                </ul>
-                                <ul v-else>                                    
-                                    <li v-for="element in config.sortParams" :key="element" @click="testOpenSort = !testOpenSort;selectedSort=element;fetchAndSetListingsStartInfo();">
-                                        <span>{{element.name}}</span>
-                                    </li>                        
-                                </ul>
-                                </div>
-                            </div>
-                        </div>
+                        <SortBar :activeTab="activeTab"/>
                         <div class="params-block params-block-switch" v-if="activeTab !== 'ActivityTable'">
                             <div class="param-wrap switch">
                                 <button
@@ -207,81 +188,109 @@
 </template>
 <script>
 import Filter from "@/components/Filter.vue";
+import FilterMobile from "@/components/FilterMobile.vue";
+
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
 import SelectedFilters from "@/components/SelectedFilters.vue";
 import ListCards from "@/components/ListCards.vue";
+import SortBar from "@/components/SortBar.vue";
 import MultiLang from "@/core/multilang";
 import config from '@/config.json';
 import ActivityTable from "@/components/ActivityTable.vue";
 import { useClipboard } from '@vueuse/core'
+import { mapActions } from "vuex";
 const source = localStorage.getItem('userAddress');
 const { copy } = useClipboard({ source })
 
 export default {
-    data() {
-        return {
-            switchActive: 0,
-            activeTab: '',
-            testOpenSort: false,
-            filter: true,
-            filterMobile: false,
-            mobileDropDown: false,
-            config:config,
-            lang: new MultiLang(this),
-            userAddress:null,
-            copy:copy
-        };
-    },
-    components:{
-        Filter,
-        Breadcrumbs,
-        SelectedFilters,
-        ListCards,
-        ActivityTable
-    }, 
-    async mounted() {
-        this.userAddress = localStorage.getItem('userAddress');
-        this.activeTab = "ListCards";
-        await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
-        await this.$store.dispatch('marketplace/fetchAndSetMarketplaces');
-        await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
-    },
+  data() {
+      return {
+          switchActive: 0,
+          tabList: {
+            all: 'ListCards',
+            favorites: 'Favourites',
+            votes: 'Vote',
+            activity: 'ActivityTable'
+          },
+          activeTab: 'ListCards',
+          testOpenSort: false,
+          filter: true,
+          filterMobile: false,
+          mobileDropDown: false,
+          config:config,
+          lang: new MultiLang(this),
+          userAddress:null,
+          copy:copy
+      };
+  },
+  components:{
+      Filter,
+      FilterMobile,
+      Breadcrumbs,
+      SelectedFilters,
+      ListCards,
+      ActivityTable,
+      SortBar
+  },
+  computed:{
+    selectedSort:{
+      get(){
+        return this.$store.getters['marketplace/getSelectedSort'];
+      },
+      async set(value){
+        this.$store.dispatch('marketplace/setSelectedSort',value);
+        // console.log(await this.$store.getters['marketplace/getSelectedSort']);
+      }
+    }
+  },
     methods: {
+        ...mapActions({
+          setAllFiltersToNull: 'marketplace/setAllFiltersToNull',
+          fetchAndSetListingsStartInfoByUser: 'marketplace/fetchAndSetListingsStartInfoByUser',
+          fetchAndSetListingsStartInfoByUserFav: 'marketplace/fetchAndSetListingsStartInfoByUserFav',
+          fetchAndSetListingsStartInfoByUserVote: 'marketplace/fetchAndSetListingsStartInfoByUserVote',
+          fetchAndSetActivitiesResult: 'marketplace/fetchAndSetActivitiesResult',
+          fetchAndSetMarketplaces: 'marketplace/fetchAndSetMarketplaces',
+          fetchAndSetNftCollections: 'marketplace/fetchAndSetNftCollections'
+        }),
         translatesGet(key) {
         return this.lang.get(key);
         },
-        letsCheck(name) {
-          this.activeTab = name;
+        letsCheck(name, isFirst) {
+          for (const el in this.tabList) {
+            if(this.tabList[el] === name){
+              this.$router.push({path: `/profile/${el}`})
+              this.activeTab = name;
+              break;
+            }
+          }
+          this.setAllFiltersToNull()
+          if(this.activeTab === 'ListCards'){
+            this.fetchAndSetListingsStartInfoByUser(isFirst)
+          }
+          if(this.activeTab === 'Favourites'){
+            this.fetchAndSetListingsStartInfoByUserFav(isFirst)
+          }
+          if(this.activeTab === 'Vote'){
+            this.fetchAndSetListingsStartInfoByUserVote(isFirst)
+          }
+          if(this.activeTab === 'ActivityTable'){
+            this.fetchAndSetActivitiesResult({userAddress: this.userAddress, collectionAddress: null, isFirst})
+          }
         },
         clearLocalStorage(){
             localStorage.clear();
-        },
-        async fetchAndSetListingsStartInfo() {
-            if (this.activeTab == 'Favourites') {
-                await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav');
-            }
-            else if (this.activeTab == 'Vote') {
-                await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote');
-            }
-            else if(this.activeTab == 'ActivityTable'){
-                await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:this.userAddress,collectionAddress:null}); 
-            }
-            else {
-                await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
-            }
-        },
-    },
-    computed:{
-        selectedSort:{
-            get(){
-                return this.$store.getters['marketplace/getSelectedSort'];
-            },
-            async set(value){
-                console.log(value);
-                this.$store.dispatch('marketplace/setSelectedSort',value);
-                console.log(await this.$store.getters['marketplace/getSelectedSort']);
-            }
         }
-    }
+    },
+
+  async mounted() {
+    this.userAddress = localStorage.getItem('userAddress');
+
+    this.activeTab = this.$route.params.tab ? this.tabList[`${this.$route.params.tab}`] : this.tabList.all
+    this.letsCheck(this.activeTab, true)
+
+    await this.fetchAndSetNftCollections()
+    await this.fetchAndSetMarketplaces()
+  },
 }
 </script>

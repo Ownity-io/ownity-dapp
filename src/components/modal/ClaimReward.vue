@@ -17,8 +17,8 @@
             </div>
             <div class="token-value">
               <div class="icon-value"></div>
-              {{abbrNum(toFixedIfNecessary(convertToEther((item.reward/100)*(userBidAmount/item.price*100)),6),2)}} ETH
-              <span class="input-equivalent equivalent">(≈ $ {{abbrNum(toFixedIfNecessary(convertToEther((item.reward/100)*(userBidAmount/item.price*100))*currencyToUsdPrice,2),2)}})</span>
+              {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther((item.reward/100)*(userBidAmount/item.price*100)),6),2)}} ETH
+              <span class="input-equivalent equivalent">(≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther((item.reward/100)*(userBidAmount/item.price*100))*currencyToUsdPrice,2),2,2)}})</span>
             </div>
           </div>
 
@@ -29,7 +29,7 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b> {{abbrNum(toFixedIfNecessary(convertToEther((item.reward/100)*(userBidAmount/item.price*100)),6),2)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary(convertToEther((item.reward/100)*(userBidAmount/item.price*100))*currencyToUsdPrice,2),2)}}</span>
+                    <b> {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther((item.reward/100)*(userBidAmount/item.price*100)),6),2)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther((item.reward/100)*(userBidAmount/item.price*100))*currencyToUsdPrice,2),2,2)}}</span>
                   </div>
                   <!-- <div class="total-fees">Fees:<span>3%</span></div> -->
                 </div>
@@ -98,27 +98,29 @@ import { ethers } from 'ethers';
 import { toRaw } from '@vue/reactivity';
 import MultiLang from "@/core/multilang";
 import config from '@/config';
+import helpers from "@/helpers/helpers";
+import {mapGetters} from "vuex";
+
 export default {
   data() {
     return {
+      useHelpers: helpers,
       selectOpen: false,
       item:null,
       render:false,
       provider:null,
       ABI:ABI,
       config:config,
-      currencyToUsdPrice:1,
       userBidAmount:0,
       buttonWaiting:false,
       lang: new MultiLang(this),
     };
   },
-  async mounted(){
-    this.item = await this.$store.getters['marketplaceListing/getItem'];
-    this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
-    await this.setCurrencyToUsd();
-    this.setUserBidAmount();
-    this.render = true;
+  computed: {
+    ...mapGetters(['getUsdRate']),
+    currencyToUsdPrice() {
+      return this.getUsdRate ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
+    }
   },
   methods:{
     translatesGet(key) {
@@ -138,7 +140,7 @@ export default {
         catch{
           await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack',false)
-          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',10)
         }
       }     
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await prov.getSigner());
@@ -177,49 +179,15 @@ export default {
           this.buttonWaiting = false;
           await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack', false)
-          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)           
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
         }           
       }
       catch{
         this.buttonWaiting = false;
         await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
         await this.$store.dispatch('appGlobal/setGreenSnack', false)
-        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)
+        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
       }
-    },
-    abbrNum(number, decPlaces) {
-      decPlaces = Math.pow(10, decPlaces);
-      var abbrev = ["k", "m", "b", "t"];
-      for (var i = abbrev.length - 1; i >= 0; i--) {
-        var size = Math.pow(10, (i + 1) * 3);
-        if (size <= number) {
-          number = Math.round(number * decPlaces / size) / decPlaces;
-          if ((number == 1000) && (i < abbrev.length - 1)) {
-            number = 1;
-            i++;
-          }
-          number += abbrev[i];
-          break;
-        }
-      }
-
-      return number;
-    },
-    async setCurrencyToUsd(){
-      let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
-      let requestJson = await request.json();
-      try{
-        this.currencyToUsdPrice =  requestJson.quotes[0].priceUsd;
-      }
-      catch{
-        this.currencyToUsdPrice = 1;
-      }
-    },
-    toFixedIfNecessary(value, dp) {
-      return +parseFloat(value).toFixed(dp);
-    },
-    convertToEther(value){
-      return ethers.utils.formatEther(String(value));
     },
     setUserBidAmount(){
       let userAddress = localStorage.getItem('userAddress');
@@ -234,6 +202,12 @@ export default {
       }
       this.userBidAmount=0;      
     },
-  }
+  },
+  async mounted(){
+    this.item = await this.$store.getters['marketplaceListing/getItem'];
+    this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
+    this.setUserBidAmount();
+    this.render = true;
+  },
 };
 </script>

@@ -36,9 +36,9 @@
                   <div class="price-block-title">{{translatesGet('PRICE_PART')}}</div>
                   <div class="price-block-value price-value">
                     <div class="icon-value"></div>
-                    <span>{{this.abbrNum(this.toFixedIfNecessary(this.userBidAmount/10**item.currency.decimals,6),1)}} ETH</span>
+                    <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(this.userBidAmount/10**item.currency.decimals,6),1)}} ETH</span>
                   </div>
-                  <div class="price-block-equivalent equivalent">≈ $ {{this.toFixedIfNecessary(abbrNum((userBidAmount / (10**this.item.currency.decimals) * currencyToUsdPrice),1),2)}}</div>
+                  <div class="price-block-equivalent equivalent">≈ $ {{useHelpers.toFixedIfNecessary(useHelpers.abbrNum((userBidAmount / (10**this.item.currency.decimals) * currencyToUsdPrice),1),2)}}</div>
                 </div>
               </div>
             </div>
@@ -51,7 +51,7 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>{{this.abbrNum(this.toFixedIfNecessary(this.userBidAmount/10**item.currency.decimals,6),1)}} ETH</b><span>≈ $ {{this.toFixedIfNecessary(abbrNum((userBidAmount / (10**this.item.currency.decimals) * currencyToUsdPrice),1),2)}}</span>
+                    <b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(this.userBidAmount/10**item.currency.decimals,6),1)}} ETH</b><span>≈ $ {{useHelpers.toFixedIfNecessary(useHelpers.abbrNum((userBidAmount / (10**this.item.currency.decimals) * currencyToUsdPrice),1),2)}}</span>
                   </div>
                   <!-- <div class="total-fees">Fees:<span>3%</span></div> -->
                 </div>
@@ -64,14 +64,14 @@
           </div>
           
           <!-- v-if="currentPart "  -->
-          <div class="modal-desktop-footer">
+          <div class="modal-desktop-footer" v-if="!buttonWaiting">
             <!-- <button disabled class="btn btn-modal-main">{{translatesGet('CANCEL_SELL')}}</button> -->
             <button class="btn btn-modal-main" @click="startVote">{{translatesGet('CANCEL_SELL')}}</button>
           </div>
 
           <!-- v-else  -->
-          <!-- <div class="modal-desktop-footer">
-            <button class="btn btn-modal-main" @click="startVote">{{translatesGet('CANCEL_SELL')}}</button>
+          <div class="modal-desktop-footer" v-if="buttonWaiting">
+            <!-- <button class="btn btn-modal-main" @click="startVote">{{translatesGet('CANCEL_SELL')}}</button> -->
             <button class="btn btn-modal-main">
               <svg class="loader" viewBox="0 0 18 18"  xmlns="http://www.w3.org/2000/svg">
                 <path d="M15.364 2.63609L13.95 4.05009C12.8049 2.90489 
@@ -85,19 +85,19 @@
                 15.9999 10.6196 16 9.00009H18C18 11.0823 17.278 13.1001 15.957 14.7096C14.6361 16.3192 12.7979 17.4209 10.7557 17.8271C8.71355 18.2333 6.5937 17.9188 4.75737 16.9373C2.92104 15.9557 1.48187 14.3678 0.685061 12.4441C-0.111747 10.5204 -0.216886 8.37992 0.387558 6.38739C0.992002 4.39486 2.26863 2.67355 3.99992 1.51675C5.73121 0.359959 7.81004 -0.160747 9.88221 0.0433572C11.9544 0.247462 13.8917 1.16375 15.364 2.63609V2.63609Z" fill="white"/>
               </svg>
             </button>
-          </div>-->
+          </div>
         </div>
       </div> 
               
       <!-- v-if="currentPart "  -->
-      <div  class="modal-mobile-footer">
+      <div  class="modal-mobile-footer" v-if="!buttonWaiting">
         <!-- <button disabled class="btn btn-modal-main">{{translatesGet('CANCEL_SELL')}}</button> -->
         <button class="btn btn-modal-main" @click="startVote">{{translatesGet('CANCEL_SELL')}}</button>
       </div>
 
       <!-- v-else  -->
-      <!-- <div   class="modal-mobile-footer">
-        <button   class="btn btn-modal-main" @click="startVote">{{translatesGet('CANCEL_SELL')}}</button>
+      <div   class="modal-mobile-footer" v-if="buttonWaiting">
+        <!-- <button   class="btn btn-modal-main" @click="startVote">{{translatesGet('CANCEL_SELL')}}</button> -->
         <button class="btn btn-modal-main">
           <svg class="loader" viewBox="0 0 18 18"  xmlns="http://www.w3.org/2000/svg">
             <path d="M15.364 2.63609L13.95 4.05009C12.8049 2.90489 
@@ -111,7 +111,7 @@
             15.9999 10.6196 16 9.00009H18C18 11.0823 17.278 13.1001 15.957 14.7096C14.6361 16.3192 12.7979 17.4209 10.7557 17.8271C8.71355 18.2333 6.5937 17.9188 4.75737 16.9373C2.92104 15.9557 1.48187 14.3678 0.685061 12.4441C-0.111747 10.5204 -0.216886 8.37992 0.387558 6.38739C0.992002 4.39486 2.26863 2.67355 3.99992 1.51675C5.73121 0.359959 7.81004 -0.160747 9.88221 0.0433572C11.9544 0.247462 13.8917 1.16375 15.364 2.63609V2.63609Z" fill="white"/>
           </svg>
         </button>
-      </div> -->
+      </div>
       
     </div>
   </div>
@@ -120,77 +120,40 @@
 <script>
 import config from '@/config.json';
 import MultiLang from "@/core/multilang";
+import helpers from "@/helpers/helpers";
+import {mapGetters} from "vuex";
 
 export default {
   data() {
     return {
+      useHelpers: helpers,
       selectOpen: false,
       voting:null,
       render:false,
       item:null,
-      currencyToUsdPrice:1,
-      render:false,
       userBidAmount:null,
       lang: new MultiLang(this),
+      buttonWaiting:false
     };
   },
-  async mounted(){
-    this.item = await this.$store.getters['marketplaceListing/getItem'];
-    this.voting = this.$store.getters['appGlobal/getCurrentVoting'];
-    this.setCurrencyToUsd();
-    this.setUserBidAmount();
-    this.render = true;
+  computed: {
+    ...mapGetters(['getUsdRate']),
+    currencyToUsdPrice() {
+      return this.getUsdRate ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
+    }
   },
   methods:{
     translatesGet(key) {
       return this.lang.get(key);
     },
-    abbrNum(number, decPlaces) {
-      decPlaces = Math.pow(10, decPlaces);
-      var abbrev = ["k", "m", "b", "t"];
-      for (var i = abbrev.length - 1; i >= 0; i--) {
-        var size = Math.pow(10, (i + 1) * 3);
-        if (size <= number) {
-          number = Math.round(number * decPlaces / size) / decPlaces;
-          if ((number == 1000) && (i < abbrev.length - 1)) {
-            number = 1;
-            i++;
-          }
-          number += abbrev[i];
-          break;
-        }
-      }
-
-      return number;
-    },
-    async setCurrencyToUsd(){
-      let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
-      let requestJson = await request.json();
-      try{
-        this.currencyToUsdPrice =  requestJson.quotes[0].priceUsd;
-      }
-      catch{
-        this.currencyToUsdPrice = 1;
-      }
-    },
-    toFixedIfNecessary(value, dp) {
-      return +parseFloat(value).toFixed(dp);
-    },
-    convertToEther(value){
-      try{
-        return ethers.utils.formatEther(String(value));
-      }
-      catch{
-        console.log('ethers error');
-      }
-    },
     convertFromEtherToWei(value){
       return value * 10**this.item.currency.decimals;
     },
     async startVote() {
+      try{
+      this.buttonWaiting=true;
         let signed_message = await this.$store.dispatch('walletsAndProvider/signMessageWithGlobalProvider',
-          `${this.voting.marketplace.id}-${this.item.id}-${this.item.currency.address}-${this.noExponents(this.voting.amount)}-${this.item.end_date}`);
-        console.log(signed_message);
+          `${this.item.id}-${this.item.currency.address}-${this.noExponents(this.voting.amount)}-${this.item.end_date}`);
         let requestLink = `${config.backendApiEntryPoint}voting-create/`;
         let requestOptions = {
           method: "POST",
@@ -200,7 +163,7 @@ export default {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           body: JSON.stringify({
-            "marketplace_id": this.voting.marketplace.id,
+            "marketplace_id": [this.voting.marketplace.id],
             "lot_id": this.item.id,
             "currency": this.item.currency.address,
             "amount": this.noExponents(this.voting.amount),
@@ -212,14 +175,40 @@ export default {
         };
         let request = await fetch(requestLink, requestOptions);
         let requestJson = await request.json();
-        if (requestJson.success) {
-          location.reload();
-        }
+        if (requestJson.success) {    
+          if (parseInt((requestJson.data[0].voting_percentage.replace('%', ''))) >= 51) {
+            requestLink = `${config.backendApiEntryPoint}finish-voting/`;
+            requestOptions = {
+              method: "POST",
+              headers: {
+                accept: "application/json",
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+              body: JSON.stringify({
+                voting_id: requestJson.data[0].voting_id
+              })
+            };
+            request = await fetch(requestLink, requestOptions);
+            requestJson = await request.json();
+          }
+          this.buttonWaiting=true;
+
+          await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
+          this.$store.dispatch('appGlobal/setCancellSellVotingModal',false)
+          await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
+        }        
         else {
+          this.buttonWaiting=false;
           await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack',false)
-          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',10)
         }
+        this.buttonWaiting=false;
+      }
+      catch{
+        this.buttonWaiting=false;
+      }
     },
     async setUserBidAmount(){
       let userAddress = localStorage.getItem('userAddress');
@@ -253,6 +242,12 @@ export default {
       while (mag--) z += '0';
       return str + z;
     }
-  }
+  },
+  async mounted(){
+    this.item = await this.$store.getters['marketplaceListing/getItem'];
+    this.voting = this.$store.getters['appGlobal/getCurrentVoting'];
+    this.setUserBidAmount();
+    this.render = true;
+  },
 };
 </script>

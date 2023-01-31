@@ -27,9 +27,12 @@
               <div class="modal-data-block modal-select-part">
                 <div class="input-select-block">
                   <div class="input-select-title">{{translatesGet('CHOOSE_PART')}}</div>
-                  <div class="input-wrapper input-percent">
+                  <div class="input-wrapper input-percent wMax">
                     <input type="text"
-                    placeholder="0%" v-model="this.currentPart" @input="checkCurrentPart"> 
+                    placeholder="0%" v-model="this.currentPart" @input="checkCurrentPart">
+                    <button class="btn-max" @click="this.currentPart = 100">
+                      Max
+                    </button>
                   </div>
                   <!--  <div class="input-select-wrap" :class="{ 'unfolded': selectOpen }">
                     <input type="text" class="input-selected" v-model="partComputed"
@@ -63,18 +66,14 @@
               <div class="modal-data-block modal-data-block-price">
                 <div class="price-block">
                   <div class="price-block-title">
-                    {{translatesGet('INPUT_MIN')}}
-                    1%
-                    {{translatesGet('TO')}}
-                    {{translatesGet('INPUT_MAX')}}
-                    100%
+                    Price of your part
                     <!-- Min 1% to Max 100% -->
                   </div>
                   <div class="price-block-value price-value">
                     <div class="icon-value"></div>
-                    <span>{{abbrNum(toFixedIfNecessary(((parseInt(this.item.price)/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</span>
+                    <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(((parseInt(this.item.price)/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</span>
                   </div>
-                  <div class="price-block-equivalent equivalent">≈ $ {{abbrNum(toFixedIfNecessary(((parseInt(this.item.price)/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</div>
+                  <div class="price-block-equivalent equivalent">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(((parseInt(this.item.price)/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1,2)}}</div>
                 </div>
               </div>
             </div>
@@ -87,16 +86,16 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b>{{abbrNum(toFixedIfNecessary((((parseInt(this.item.price)+parseInt(this.buyLotFee))/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</b><span>≈ $ {{abbrNum(toFixedIfNecessary((((parseInt(this.item.price)+parseInt(this.buyLotFee))/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1)}}</span>
+                    <b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary((((parseInt(this.item.price)+parseInt(this.buyLotFee))/100)*currentPart)/(10**item.currency.decimals),6),1)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary((((parseInt(this.item.price)+parseInt(this.buyLotFee))/100)*currentPart)/(10**item.currency.decimals)*currencyToUsdPrice,6),1,2)}}</span>
                   </div>
-                  <div class="total-fees">{{translatesGet('FEES')}}:<span>{{toFixedIfNecessary(this.buyLotFee/parseInt(this.item.price)*100,1)}}%</span></div>
+                  <div class="total-fees">{{translatesGet('FEES')}}:<span>{{useHelpers.toFixedIfNecessary(this.buyLotFee/parseInt(this.item.price)*100,1)}}%</span></div>
                 </div>
               </div>
             </div>
           </div>
           <div class="total-block-describe">
-            {{translatesGet('TOTAL_DESCRIBE')}}
-            <a href="#">{{translatesGet('TERMS_OF_USE')}}</a>
+            There’s a small fee Ownity charges for fraction purchases.
+            <a href="#">Learn more.</a>
           </div>
 
           <!-- v-if="currentPart "  -->
@@ -158,10 +157,13 @@ import ABI from '@/abi.json';
 import config from '@/config.json';
 import { toRaw } from '@vue/reactivity';
 import MultiLang from "@/core/multilang";
+import helpers from "@/helpers/helpers";
+import {mapGetters} from "vuex";
 
 export default {
   data() {
     return {
+      useHelpers: helpers,
       selectOpen: false,
       item:null,
       ABI:ABI,
@@ -170,7 +172,6 @@ export default {
       provider:null,
       signer:null,
       currentPart:null,
-      currencyToUsdPrice:1,
       allBidsAmount:0,
       buttonDisabled:false,
       buttonWaiting:false,
@@ -179,16 +180,11 @@ export default {
       buyLotFee:0
     };
   },
-  async mounted(){
-    this.item = await this.$store.getters['marketplaceListing/getItem'];
-    this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
-    this.signer = await this.$store.getters['walletsAndProvider/getSigner'];
-    this.setCurrencyToUsd();
-    this.setAllBidsAmount();
-    this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
-    this.buyLotFee = this.noExponents((this.contractConfig[0].buy_lot_fee/100)/100*this.item.price);
-    console.log(this.buyLotFee);
-    this.render = true;    
+  computed: {
+    ...mapGetters(['getUsdRate']),
+    currencyToUsdPrice() {
+      return this.getUsdRate ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
+    }
   },
   methods:{
     translatesGet(key) {
@@ -201,26 +197,37 @@ export default {
       try{
         await prov.send('wallet_switchEthereumChain',[{chainId: chainSettings.chainId}]);
       }
-      catch{
+      catch (e){
+        console.log(e);
         try{
           await prov.send('wallet_addEthereumChain',[chainSettings]);  
         }
-        catch{
+        catch (e){
+        console.log(e);
           await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack',false)
-          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
         }
       }      
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await prov.getSigner());
       let markeplaceId = ethers.utils.formatBytes32String(this.item.marketplace.id).substring(0, 10);
       let options = {};
-      let valueToBuy = this.noExponents((ethers.BigNumber.from(this.noExponents(this.item.price))/100)*this.currentPart);
-      let valueToBuyWithComissions = this.noExponents((ethers.BigNumber.from(this.noExponents(parseInt(this.item.price)+parseInt(this.buyLotFee)))/100)*this.currentPart);
-      console.log('+++++++++++++++++++++++++++++++++++++++++++');
-      console.log(`amount:${valueToBuy}`);
-      console.log(`value:${valueToBuyWithComissions}`);
-      console.log(`fee:${this.buyLotFee}`);
-      console.log('+++++++++++++++++++++++++++++++++++++++++++');
+      let valueToBuy = this.noExponents((ethers.BigNumber.from(this.noExponents(this.item.price)) / 100) * this.currentPart);
+      let valueToBuyWithComissions = this.noExponents((ethers.BigNumber.from(this.noExponents(parseInt(this.item.price) + parseInt(this.buyLotFee))) / 100) * this.currentPart);
+      if (parseInt(this.currentPart)==100){
+        valueToBuy = this.item.price;
+        valueToBuyWithComissions =this.item.price;
+        if (parseInt(this.buyLotFee)>0){
+          valueToBuyWithComissions+=parseInt(this.item.price) + parseInt(this.buyLotFee);
+        }
+      }   
+      console.log(valueToBuy);  
+      console.log(valueToBuyWithComissions);
+      // console.log('+++++++++++++++++++++++++++++++++++++++++++');
+      // console.log(`amount:${valueToBuy}`);
+      // console.log(`value:${valueToBuyWithComissions}`);
+      // console.log(`fee:${this.buyLotFee}`);
+      // console.log('+++++++++++++++++++++++++++++++++++++++++++');
       // if (valueToBuy>(parseInt(this.item.price)-this.allBidsAmount)){
       //   console.log('Part is too big');
       //   valueToBuy = parseInt(this.item.price)-this.allBidsAmount;
@@ -266,22 +273,22 @@ export default {
       let signature = requestJson.data.signature;
       // let part = (ethers.BigNumber.from(String((parseInt(this.item.price)/100)*this.currentPart))).toString();
       try{
-        console.log('-----------------');
-        console.log(`Marketplace ID: ${markeplaceId}`);
-        console.log(`Lot ID: ${this.item.id}`);
-        console.log(`Amount: ${valueToBuy}`);
-        console.log('--------LOT_DATA--------');
-        console.log(`tokenAddress: ${this.item.currency.address}`);
-        console.log(`Decimals: ${this.item.currency.decimals}`);
-        console.log(`price: ${parseInt(this.item.price)}`);
-        console.log(`tokenContractAddress: ${this.item.collection.contract_address}`);
-        console.log(`tokenId: ${this.item.token_id}`);
-        console.log(`tokenAmount: ${this.item.amount}`);
-        console.log('--------LOT_DATA--------');
-        console.log(`Input data: ${inputData}`);
-        console.log(`Signature: ${signature}`);
+        // console.log('-----------------');
+        // console.log(`Marketplace ID: ${markeplaceId}`);
+        // console.log(`Lot ID: ${this.item.id}`);
+        // console.log(`Amount: ${valueToBuy}`);
+        // console.log('--------LOT_DATA--------');
+        // console.log(`tokenAddress: ${this.item.currency.address}`);
+        // console.log(`Decimals: ${this.item.currency.decimals}`);
+        // console.log(`price: ${parseInt(this.item.price)}`);
+        // console.log(`tokenContractAddress: ${this.item.collection.contract_address}`);
+        // console.log(`tokenId: ${this.item.token_id}`);
+        // console.log(`tokenAmount: ${this.item.amount}`);
+        // console.log('--------LOT_DATA--------');
+        // console.log(`Input data: ${inputData}`);
+        // console.log(`Signature: ${signature}`);
         // console.log(`Options: ${options.value}`);
-        console.log('-----------------');
+        // console.log('-----------------');
         let buyLot = await contract.buyLot(
           markeplaceId,
           this.item.id,
@@ -317,7 +324,6 @@ export default {
               },
               method:'POST'
             })).json();
-          console.log(forceReq)
           await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
           await this.$store.dispatch('appGlobal/setLastTransactionHash',buyLot.hash);
           await this.$store.dispatch('appGlobal/setshowStartCollectingModal',false)          
@@ -329,7 +335,7 @@ export default {
           this.buttonWaiting = false;
           await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack', false)
-          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)   
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
           await this.$store.dispatch('appGlobal/setLastTransSuccess',false)
           await this.$store.dispatch('appGlobal/setLastTransactionHash',buyLot.hash);
           await this.$store.dispatch('appGlobal/setshowStartCollectingModal',false)          
@@ -338,38 +344,22 @@ export default {
             `${this.config.backendApiEntryPoint}close-listing/`,
             {
               method:'POST',
+              accept: "application/json",
+              'Content-Type': 'application/json',
               body:JSON.stringify({
                 lot:this.item.id
               })
             }
             )).json();
-            console.log(failedTransactionRequest);
         }          
       }
-      catch{
+      catch (e){
+        console.log(e);
         this.buttonWaiting = false; 
         await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
         await this.$store.dispatch('appGlobal/setGreenSnack', false)
-        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)
+        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 50)
       }
-    },
-    abbrNum(number, decPlaces) {
-      decPlaces = Math.pow(10, decPlaces);
-      var abbrev = ["k", "m", "b", "t"];
-      for (var i = abbrev.length - 1; i >= 0; i--) {
-        var size = Math.pow(10, (i + 1) * 3);
-        if (size <= number) {
-          number = Math.round(number * decPlaces / size) / decPlaces;
-          if ((number == 1000) && (i < abbrev.length - 1)) {
-            number = 1;
-            i++;
-          }
-          number += abbrev[i];
-          break;
-        }
-      }
-
-      return number;
     },
     noExponents (value) {
       var data = String(value).split(/[eE]/);
@@ -388,19 +378,6 @@ export default {
       mag -= str.length;
       while (mag--) z += '0';
       return str + z;
-    },
-    async setCurrencyToUsd(){
-      let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
-      let requestJson = await request.json();
-      try{
-        this.currencyToUsdPrice =  requestJson.quotes[0].priceUsd;
-      }
-      catch{
-        this.currencyToUsdPrice = 1;
-      }
-    },
-    toFixedIfNecessary(value, dp) {
-      return +parseFloat(value).toFixed(dp);
     },
     setAllBidsAmount(){
       this.allBidsAmount=0;
@@ -431,6 +408,41 @@ export default {
     async onClickAway(){
       await this.$store.dispatch('appGlobal/setshowStartCollectingModal',false);
     }
-  }
+  },
+  async mounted(){
+    this.item = await this.$store.getters['marketplaceListing/getItem'];
+    this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
+    this.signer = await this.$store.getters['walletsAndProvider/getSigner'];
+    this.setAllBidsAmount();
+    this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
+    this.buyLotFee = this.noExponents((this.contractConfig[0].buy_lot_fee/100)/100*this.item.price);
+    this.render = true;
+  },
 };
 </script>
+
+<style>
+.wMax {
+    position: relative;
+}
+.btn-max {
+    position: absolute;
+    width: 88px;
+    height: 32px;
+    right: 12px;
+    background: #FFFFFF;
+    outline: 2px solid #DFE2EA;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.btn-max:hover {
+    background: linear-gradient(89.43deg, #3E80FF -3.17%, #2457D5 109.46%);
+    border-radius: 8px;
+    color: #FFFFFF;
+    outline: none
+}
+
+</style>

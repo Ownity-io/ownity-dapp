@@ -224,7 +224,7 @@ export default {
   actions: {
     //listings
     async fetchAndSetListingsStartInfo(context,_collectionContractAddress = null) {
-      let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.listingsPerPage}`;
+      let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.listingsPerPage}&currency=0x0000000000000000000000000000000000000000`;
       if (_collectionContractAddress==null){
         if (context.getters.getCurrentCollectionContractAddress != null) {
           requestUrl += `&collection=${context.getters.getCurrentCollectionContractAddress}`;
@@ -263,8 +263,10 @@ export default {
       if (requestCode) {
         let requestJson = await request.json();
         context.commit("setListingsInfo", requestJson);
+        return true
       } else {
         context.commit("setListingsInfo", null);
+        return false
       }
     },
     async fetchAndSetListingsNextInfo(context) {
@@ -323,8 +325,8 @@ export default {
     async setCurrentlyGathering(context,value){
       context.commit("setCurrentlyGathering", value);
     },
-    async fetchAndSetListingsStartInfoByUser(context) {
-      let requestUrl = `${config.backendApiEntryPoint}listings-by-user/?limit=${config.listingsPerPage}`;
+    async fetchAndSetListingsStartInfoByUser(context, isFirst) {
+      let requestUrl = `${config.backendApiEntryPoint}listings-by-user/?limit=${config.listingsPerPage}&currency=0x0000000000000000000000000000000000000000`;
       if (context.getters.getCurrentCollectionContractAddress != null) {
           requestUrl += `&collection=${context.getters.getCurrentCollectionContractAddress}`;
         }
@@ -348,7 +350,11 @@ export default {
       if (context.getters.getSelectedSort!=null){
         requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;
       }
-      console.log(requestUrl)
+
+      if(isFirst && !requestUrl.includes('&ordering')){
+        requestUrl+='&ordering=-timestamp'
+      }
+
       let requestOptions = {
         method: "GET",
         headers: {
@@ -369,7 +375,7 @@ export default {
     setCurrentBidStatus(context,value){
       context.commit("setCurrentBidStatus", value);
     },
-    async fetchAndSetListingsStartInfoByUserFav(context) {
+    async fetchAndSetListingsStartInfoByUserFav(context, isFirst) {
       let requestUrl = `${config.backendApiEntryPoint}favorite-listings-by-user/?limit=${config.listingsPerPage}`;
       if (context.getters.getCurrentCollectionContractAddress != null) {
           requestUrl += `&collection=${context.getters.getCurrentCollectionContractAddress}`;
@@ -390,6 +396,11 @@ export default {
       if (context.getters.getSelectedSort!=null){
         requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;
       }
+
+      if(isFirst && !requestUrl.includes('&ordering')){
+        requestUrl+='&ordering=-timestamp'
+      }
+
       console.log(requestUrl)
       let requestOptions = {
         method: "GET",
@@ -412,8 +423,8 @@ export default {
       console.log('clear');
       context.commit("setListingsInfo", null);
     },
-    async fetchAndSetListingsStartInfoByUserVote(context) {
-      let requestUrl = `${config.backendApiEntryPoint}listings-with-voting-by-user/?limit=${config.listingsPerPage}`;
+    async fetchAndSetListingsStartInfoByUserVote(context, isFirst) {
+      let requestUrl = `${config.backendApiEntryPoint}listings-with-voting-by-user/?limit=${config.listingsPerPage}&currency=0x0000000000000000000000000000000000000000`;
       if (context.getters.getCurrentCollectionContractAddress != null) {
           requestUrl += `&collection=${context.getters.getCurrentCollectionContractAddress}`;
         }
@@ -434,6 +445,11 @@ export default {
       if (context.getters.getSelectedSort!=null){
         requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;
       }
+
+      if(isFirst && !requestUrl.includes('&ordering')){
+        requestUrl+='&ordering=-timestamp'
+      }
+
       console.log(requestUrl)
       let requestOptions = {
         method: "GET",
@@ -461,7 +477,7 @@ export default {
     setSearchString(context,value){
       context.commit('setSearchString',value);
     },
-    async fetchAndSetActivitiesResult(context,params = {}){
+    async fetchAndSetActivitiesResult(context, params = {}){
       console.log(params.userAddress);
       console.log(params.collectionAddress);
       context.commit("setActivitiesResult", null);
@@ -484,6 +500,10 @@ export default {
       }
       if (context.getters.getSelectedSort){
         requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`
+      }
+
+      if(params.isFirst && !requestUrl.includes('&ordering')){
+        requestUrl+='&ordering=-timestamp'
       }
       console.log(requestUrl)
       let request = null;

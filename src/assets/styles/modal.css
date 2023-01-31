@@ -136,6 +136,10 @@
     padding-bottom: 40px;
 }
 
+.modal-mint .modal-header{
+    padding-bottom: 0px;
+}
+
 .cookies-header {
     padding: 24px;
 }
@@ -203,10 +207,40 @@
     max-width: 516px;
 }
 
+.modal-mint .modal-wrapper{
+    max-width: 960px;
+}
+
 .modal-connect .modal-container {
     max-width: 436px;
 }
 
+.modal-cards-wrapper{
+    width: calc(100% + 24px * 2);
+    max-width: calc(100% + 24px * 2);
+    gap: 24px;
+    display: flex;
+    justify-content: flex-start;
+    padding: 24px;
+    margin: 0 -24px 16px;
+}
+
+.modal-cards-wrapper .card{
+    flex-grow: 1;
+    max-width: calc(100% / 3 - 24px);
+}
+
+.modal-cards-wrapper .card .data-table {
+    min-height: 64px;
+}
+.modal-cards-wrapper .card .data-table .data-tr.data-tr-main{
+    align-items: flex-start;
+}
+
+.modal-container-cards .btn-more-nft{
+    margin-left: auto;
+    margin-right: auto;
+}
 .modal-describe {
     font-weight: 400;
     font-size: 16px;
@@ -247,6 +281,7 @@
     justify-content: stretch;
     align-items: flex-start;
     gap: 12px;
+    align-items: center;
 }
 
 .modal-claim .modal-section-nft-data {
@@ -271,6 +306,19 @@
     align-items: flex-start;
     column-gap: 40px;
 }
+
+.resize .modal-main-data-container {
+    column-gap: normal;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+
+.modal-main-input-select .modal-data-block-price+.modal-select-part,
+.resize .modal-main-input-select .modal-data-block-price+.modal-select-part .input-wrapper.input-percent{
+    max-width: 133px;
+}
+
+
 
 .modal-data-block {
     flex-grow: 1;
@@ -357,6 +405,16 @@ input+.input-equivalent {
     margin-top: 8px;
     color: #9A9A9A;
 }
+.errorValue-text,
+.input-prompt .errorValue-text {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    color: #F32727;
+    bottom: -8px;
+}
 
 .input-percent,
 .input-wrapper-amount {
@@ -417,10 +475,8 @@ input+.input-equivalent {
     width: 40px;
     height: 40px;
     margin-right: 8px;
+    background-size: contain;
 }
-
-.modal-main-data-container {}
-
 
 .modal-section-amount {
     display: flex;
@@ -474,6 +530,10 @@ input+.input-equivalent {
 .deposit-label span,
 .modal-current-part span {
     margin-left: 4px;
+}
+
+.card .deposit-label span.icon-market{
+    margin-left: 0;
 }
 
 .modal-section-amount .token-value {
@@ -586,4 +646,37 @@ input+.input-equivalent {
 
 .modal-members span {
     margin-left: 4px;
+}
+.timeReload {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.loading {
+    background: #EEEFF3;
+    display: none;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.timeReload .loading {
+    display: block;
+}
+
+.reloadAnything{
+    position: relative;
+}
+
+.reloadAnything:before{
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #EEEFF3;
 }

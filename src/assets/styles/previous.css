@@ -309,15 +309,15 @@ body.previous-page .footer-list a:hover {
     background-image: linear-gradient(180deg, #4D89FE 0%, #355FC9 100%);
 }
 
-body.previous-page a.collection-id:hover span {
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
-    -webkit-text-fill-color: transparent;
-    transition: background-image 200ms ease;
-    background-image: linear-gradient(180deg, #4D89FE 0%, #355FC9 100%);
-}
+/*body.previous-page a.collection-id:hover span {*/
+/*    -webkit-background-clip: text;*/
+/*    -webkit-text-fill-color: transparent;*/
+/*    background-clip: text;*/
+/*    text-fill-color: transparent;*/
+/*    -webkit-text-fill-color: transparent;*/
+/*    transition: background-image 200ms ease;*/
+/*    background-image: linear-gradient(180deg, #4D89FE 0%, #355FC9 100%);*/
+/*}*/
 
 .previous-title {
     font-weight: 400;
@@ -359,7 +359,7 @@ body.previous-page a.collection-id:hover span {
     border: 1px solid #363944;
     box-shadow: 4px 4px 20px rgba(129, 136, 153, 0.1);
     border-radius: 8px;
-    min-width: calc((100% - 24px) / 4);
+    min-width: calc(100% / 4 - 24px);
 }
 
 .card-prev-amount {
@@ -807,7 +807,7 @@ body.previous-page .footer-section.footer-section-first .footer-block.footer-blo
 }
 
 
-@media (max-width: 1425.5px) {
+@media (max-width: 1440.5px) {
 
     body.previous-page .header-nav ul li{
         margin-left: 8px;

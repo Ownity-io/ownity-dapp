@@ -8,8 +8,10 @@
     }
 }
 
-@media (min-width: 1425px) {
+@media (min-width: 1440.5px) {
 
+    .table-referrals .thead .td.td-price,
+    .table-referrals .tr .td.td-price,
     .table-activity .thead .td.td-price,
     .table-activity .tr .td.td-price,
     .table-activities .thead .td.td-price,
@@ -19,11 +21,47 @@
 
 }
 
-@media (max-width: 1425px) {
+@media (max-width: 1440.5px) {
+
+    .filter {
+        width: 248px;
+    }
+
+    .section-nft.with-filter {
+        gap: 16px
+    }
+
+    .container-btn-part {
+        column-gap: 10px;
+    }
+
+    .card-data .btn-container .container-btn-part .btn {
+        padding: 11px;
+    }
+
+    .card-main,
+    .card-data {
+        padding: 12px;
+    }
+
+    .header-search {
+        max-width: 400px;
+    }
+
+
+    .deposit-value {
+        font-size: 18px;
+    }
 
     .thead .td,
     .tr .td {
         padding: 16px 0;
+    }
+
+
+    .table-referrals .thead .td,
+    .table-referrals .tr .td {
+        padding: 16px;
     }
 
     /* .card-listing {
@@ -47,6 +85,14 @@
 
 }
 
+@media (max-width: 1245px) {
+
+    .header-nav .btn-container .btn.btn-address,
+    .header-nav .btn-container .btn.btn-connect {
+        margin-left: var(--grid-pad-half);
+    }
+}
+
 
 /* ------ CARDS ------- */
 
@@ -62,7 +108,7 @@
 
 }
 
-@media (max-width: 1425px) {
+@media (max-width: 1440px) {
 
     .screen-animation-container .img.img1,
     .screen-animation-container .img.img3 {
@@ -157,11 +203,75 @@
         width: 100%;
     }
 
+    .collection {
+        padding: 0;
+        border: none;
+        gap: 24px;
+    }
+
+    .section-collection .collection-data {
+        padding-left: 0;
+
+    }
+
+    .collection .collection-id.collection-label {
+        padding-left: calc(80px + 16px);
+        min-height: 80px;
+        margin-bottom: 20px;
+        white-space: inherit;
+        font-size: 24px;
+        line-height: 150%;
+        padding-right: 0;
+        vertical-align: baseline;
+    }
+
+    /* .collection-id.collection-label i.i-checkbox-circle-fill{
+        top: 0;
+    } */
+    .collection .collection-id.collection-label i.i-checkbox-circle-fill {
+        top: 0;
+        position: relative;
+        transform: unset;
+    }
+
+    .section-collection .collection-statistics {
+        gap: 16px;
+        justify-content: flex-start;
+    }
+
+    .section-collection .collection-statistics li {
+        align-items: flex-start;
+    }
+
+    .section-collection .collection-wrap {
+        position: relative;
+    }
+
+    .section-collection .collection-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+    }
 }
 
 @media (max-width: 991px) {
 
-    /* @media (max-width: 768px) { */
+    .your-deposit {
+        margin-bottom: 0;
+        padding: 0;
+        border: none;
+        border-bottom: 1px solid #DFE2EA;
+        border-radius: 0;
+    }
+    .your-deposit .section-deposit {
+        padding: 0;
+        padding-bottom: 26px;
+    }
+
+    .your-deposit .section-deposit-data {
+        margin-bottom: 16px;
+    }
 
     .footer-section {
         row-gap: 0;
@@ -174,6 +284,10 @@
 
     .drop-down-mobile {
         display: flex;
+    }
+
+    .cards-list-empty {
+        min-height: 300px;
     }
 
     /* ----------- LISTING PAGE ----------- */
@@ -229,6 +343,7 @@
 
     .section-deposit-data {
         position: relative;
+        margin-top: 16px;
     }
 
     .section-deposit-data .deposit-img-container {
@@ -242,6 +357,10 @@
         height: 24px;
         min-width: 24px;
         min-height: 24px;
+    }
+
+    .section-deposit-data .deposit-value span {
+        font-size: 18px;
     }
 
     .deposit-listened,
@@ -309,6 +428,12 @@
         max-height: 240px;
     }
 
+    .chart-wrap #chart {
+        max-width: 240px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     .section-listing-main .collection-data-link,
     .section-listing-main .deposit-listened {
         margin-bottom: 0;
@@ -356,6 +481,14 @@
         padding-bottom: 16px;
     }
 
+    .page-wrapper.page-referral main {
+        padding-top: 0;
+    }
+
+    .page-wrapper.page-referral .section-referral-main {
+        padding-top: 16px;
+    }
+
     .breadcrumbs {
         margin-bottom: 24px;
     }
@@ -389,7 +522,7 @@
     .header-search-mobile-btn {
         position: absolute;
         display: flex;
-        z-index: 2;
+        z-index: 10;
         height: 100%;
         padding: 12px 16px;
         top: 0;
@@ -415,6 +548,7 @@
         overflow: hidden;
         margin: 0;
         min-width: 0;
+        max-width: 0;
     }
 
     .mobile-search .header-wrapper .header-search {
@@ -452,6 +586,7 @@
 
     .filter-mobile-wrap .filter {
         max-width: 100%;
+        width: 100%;
         padding: 8px 16px;
         display: block;
         max-height: calc(100% - 72px);
@@ -532,6 +667,8 @@
 
     .params {
         flex-wrap: wrap;
+        width: calc(100% + 8px * 2);
+        margin: calc(8px * -1);
     }
 
     .params-block.params-block-filter {
@@ -562,6 +699,14 @@
     .params-block.params-block-filter,
     .params-block.params-block-sort {
         width: 50%;
+
+    }
+
+    .params-block.params-block-filter,
+    .params-block.params-block-sort,
+    .params-block {
+
+        padding: 8px;
     }
 
     .card .data-table .data-tr .data-td-value {
@@ -773,8 +918,7 @@
         margin-top: 24px;
     }
 
-    [class^='section-service-'],
-    [class^='section-listing-']:not(.section-listing-header) {
+    [class^='section-service-']{
         margin-top: 24px;
     }
 
@@ -813,6 +957,84 @@
         width: 100%;
         margin-top: 40px;
     }
+
+    .referral-main-container{
+        flex-direction: column;
+        gap: 24px;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .referral-main-block{
+        width: 100%;
+    }
+
+    .section-referral-main{
+        padding-bottom: 66px;
+        gap: 0;
+    }
+
+    .section-referral-other{
+        padding-top: 100px;
+    }
+
+    .section-referral-other:first-child{
+        padding-top: 84px;
+    }
+
+    .dashboard-card-wrap{
+        padding: 24px;
+        row-gap: 16px;
+    }
+
+    .referral-dashboard-card{
+        width: 100%;
+    }
+
+    .referrals-main-data{
+        padding: 24px;
+        width: 100%;
+        min-width: fit-content;
+    }
+
+    .referrals-main-data-header{
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .how-work-container{
+        flex-direction: column;
+    }
+
+    .how-work-arrow{
+        transform: rotate(90deg);
+        width: 88px;
+        height: 88px;
+        margin: 0;
+    }
+
+    .table-referrals .thead .td,
+    .table-referrals .tr .td{
+        font-size: 14px;
+    }
+    .table-referrals .tr .td:not(.td-name){
+        font-size: 12px;
+    }
+    .how-work-arrow.arrow-up{
+        transform: rotate(90deg) scaleY(-1);
+    }
+    .dashboard-card-data{
+        min-width: fit-content;
+    }
+    .dashboard-card-ui{
+        display: none;
+    }
+    .referrals-list-empty{
+        padding-top: 36px;
+    }
+    .how-work-container{
+        padding-bottom: 32px;
+    }
 }
 
 /* ----------------- MODALS ---------------- */
@@ -823,6 +1045,22 @@
         border-bottom: 1px solid #DFE2EA;
     }
 
+    .modal-cards-wrapper{
+        width: calc(100% + 16px * 2);
+        max-width: calc(100% + 16px * 2);
+        gap: 16px;
+        padding: 0 16px;
+        margin: 0 -16px 16px;
+    }
+
+.modal-cards-wrapper .card{
+    max-width: calc(100% / 2 - 16px);
+}
+
+    .modal-mint .modal-header{
+        padding-bottom: 16px;
+    }
+
     .modal-wrapper {
         width: 100%;
         max-width: 100%;
@@ -830,6 +1068,7 @@
         height: 100%;
     }
 
+    .modal-mint .modal-wrapper,
     .modal-connect .modal-wrapper {
         max-width: 100%;
     }
@@ -892,7 +1131,7 @@
     }
 
     .modal-main-data-container.modal-main-input-select {
-        flex-direction: column;
+        flex-direction: column-reverse;
     }
 
     .modal-main-data-container.modal-main-input-select .modal-data-block-price {
@@ -1226,5 +1465,21 @@
         width: 40px;
         min-height: 40px;
         min-width: 40px;
+    }
+}
+
+@media (max-width: 640px) {
+    .footer-form .btn-subscribe {
+        min-width: 100px;
+    }
+
+    .btn-filter-mobile,
+    .params-block.params-block-filter .btn-param,
+    .params-block.params-block-sort .btn-param {
+        min-width: 100px;
+    }
+
+    .tabs li button {
+        min-width: 100px;
     }
 }

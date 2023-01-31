@@ -1,9 +1,9 @@
 <template>
-    <MobileMenu :class="{show: (mobileMenu==true)}" :walletConnected="(walletConnected=walletConnected)"/>
+    <MobileMenu :class="{show: (this.$store.getters['appGlobal/getShowMobileBurgerMenu'])}" :walletConnected="(walletConnected=walletConnected)"/>
     <header :class="{'mobile-search' :(mobileSearch==true)}">
         <div class="container">
             <div class="header-wrapper">
-                <div v-if="$route.fullPath ==='/'" @click="goToTop()" class="header-logo"></div>
+                <div v-if="$route.path ==='/'" @click="goToTop()" class="header-logo"></div>
                 <router-link :to="{name: 'Main'}" v-else class="header-logo"></router-link>
                 <div class="header-search">
                     <button class="header-search-mobile-btn btn-arrow">
@@ -22,14 +22,14 @@
                                     <span>{{translatesGet('MARKETPLACE')}}</span>
                                 </router-link>
                             </li>
-                            <li v-if="$route.fullPath ==='/'">
-                                <a href="#screen-collections" >
+                            <li v-if="$route.path ==='/'">
+                                <a :class="getActiveCollectionLink && 'active'" ref="screenCollections" href="#screen-collections" >
                                     <span>{{translatesGet('COLLECTIONS')}}</span>
                                     <span>{{translatesGet('COLLECTIONS')}}</span>
                                 </a>
                             </li>
-                            <li v-else >
-                                <router-link :to="{name: 'Main'}">
+                            <li v-else  @click="$refs.screenCollections.click()">
+                                <router-link :to="{ name: 'Main' }">
                                     <span>{{translatesGet('COLLECTIONS')}}</span>
                                     <span>{{translatesGet('COLLECTIONS')}}</span>
                                 </router-link>
@@ -48,7 +48,7 @@
                         </button>
                     </div>
                     <div class="btn-container" v-else-if="this.$store.getters['walletsAndProvider/getUserShortAddress']">
-                        <router-link :to="{name:'Profile'}" class="btn btn-address" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/clearListingsInfo');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')">
+                        <router-link :to="{path: '/profile/all'}" class="btn btn-address" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/clearListingsInfo');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')">
                             <jazzicon :address="userAddress" :diameter="32" class="icon-address" v-if="userAddress"/>
                             <div class="icon-address" v-else></div>
                             <span>{{this.$store.getters['walletsAndProvider/getUserShortAddress']}}</span>
@@ -59,10 +59,10 @@
                     <button @click="(mobileSearch=true)" class="btn-mob-header">
                         <i class="i-search-line"></i>
                     </button>
-                    <button @click="(mobileMenu=true)" class="btn-mob-header"  v-if="(mobileMenu==false)">
+                    <button @click="(this.$store.dispatch('appGlobal/setShowMobileBurgerMenu',true))" class="btn-mob-header"  v-if="(!this.$store.getters['appGlobal/getShowMobileBurgerMenu'])">
                         <i class="i-menu-line"></i>
                     </button>
-                    <button @click="(mobileMenu=false)" class="btn-mob-header"  v-if="(mobileMenu==true)">
+                    <button @click="(this.$store.dispatch('appGlobal/setShowMobileBurgerMenu',false))" class="btn-mob-header"  v-if="(this.$store.getters['appGlobal/getShowMobileBurgerMenu'])">
                         <i class="i-close-line"></i>
                     </button>
                 </div>
@@ -76,6 +76,8 @@
 import MultiLang from "@/core/multilang";
 import Search from '@/components/Search.vue'
 import MobileMenu from '@/components/MobileMenu.vue'
+import AttentionBlock from "@/components/AttentionBlock.vue";
+import {mapGetters} from "vuex";
 
 export default {
     data(){
@@ -88,12 +90,16 @@ export default {
         }
     },
     components: {
+	    AttentionBlock,
         Search,
         MobileMenu,
     },
+    computed:{
+       ...mapGetters(['getActiveCollectionLink'])
+    },
     methods:{
         getWalletFromLS() {
-            this.walletConnected = localStorage.getItem('connectedWallet');
+            this.walletConnected = localStorage.getItem('token');
         },
         clearLocalStorage(){
             localStorage.clear();

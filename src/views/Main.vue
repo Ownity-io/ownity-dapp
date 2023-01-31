@@ -2,7 +2,7 @@
   <div class="home-page">
     <div class="page-wrapper">
       <main class="main-home">
-        <Animation />
+        <Animation v-if="readyToShow" />
 
         <section class="section-home main-screen">
           <div class="container">
@@ -38,7 +38,8 @@
             </div>
           </div>
           <section class="section-home">
-            <div class="container">
+          <!--! temporarily added a style "style="min-height: 535px" -->
+            <div class="container" style="min-height: 535px">
               <div class="cards-carousel">
                 <div class="header-title-btn">
                   <div class="title">
@@ -64,7 +65,7 @@
             </div>
           </section>
 
-          <section class="section-home" id="screen-collections">
+          <section class="section-home" id="screen-collections" ref="screen_collections">
             <div class="container">
               <div class="section-home-header">
                 <div class="section-home-name">
@@ -108,7 +109,7 @@
                     <div class="td-wrap">
                       <div class="td-wrap-price">
                         <div class="icon-token eth"></div>
-                        <span>{{abbrNum(toFixedIfNecessary(collection.volume_all,2),2)}} ETH</span>
+                        <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(collection.volume_all,2),2)}} ETH</span>
                       </div>
                       <!-- <span class="td-light">≈ $ 1000</span> -->
                     </div>
@@ -118,7 +119,7 @@
                     <div class="td-wrap">
                       <div class="td-wrap-price">
                         <div class="icon-token eth"></div>
-                        <span>{{abbrNum(toFixedIfNecessary(collection.floor_price,2),0)}} ETH</span>
+                        <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(collection.floor_price,2),0)}} ETH</span>
                       </div>
                       <!-- <span class="td-light">≈ $ 1000</span> -->
                     </div>
@@ -126,13 +127,13 @@
 
                   <div class="td td-data">
                     <div class="td-wrap">
-                      {{abbrNum(collection.holders,1)}}
+                      {{useHelpers.abbrNum(collection.holders,1)}}
                     </div>
                   </div>
 
                   <div class="td td-data">
                     <div class="td-wrap">
-                      {{abbrNum(collection.total_supply,1)}}
+                      {{useHelpers.abbrNum(collection.total_supply,1)}}
                     </div>
                   </div>
 
@@ -146,8 +147,13 @@
             </div>
           </section>
 
-          <section class="section-home">
+          <section class="section-home section-home-faq">
             <div class="container">
+              <div class="section-home-header">
+                <div class="section-home-name">
+                  {{translatesGet('FAQ')}}
+                </div>
+              </div>
               <Faq />
             </div>
           </section>
@@ -169,10 +175,13 @@ import config from '@/config.json'
 import { ref } from 'vue';
 import { useElementVisibility } from '@vueuse/core';
 import MultiLang from "@/core/multilang";
+import helpers from "@/helpers/helpers";
+import {mapMutations} from "vuex";
 
 export default {
   data() {
     return {
+      useHelpers: helpers,
       playText: false,
       collections:null,
       render:false,
@@ -181,6 +190,8 @@ export default {
       banners:null,
       showCardsLoaderAnimation:true,
       lang: new MultiLang(this),
+      readyToShow: false,
+      activeClass: false
     };
   },
   components: {
@@ -190,11 +201,22 @@ export default {
     BannerSlider,
     CardsCarousel,
   },
+
   async mounted(){
+    window.scrollTo( {top: 0, behavior: 'instant'});
+    window.addEventListener("scroll", this.handleScroll);
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
     }
+    // if (this.$route.params.scrollTo === "collections") {
+    //     const collectionsSection = document.querySelector("#screen-collections");
+    //     setTimeout(() => {
+    //         collectionsSection.scrollIntoView({ behavior: "smooth" });
+    //     }, 300);
+    // }
+
     this.playText = true;
+    this.readyToShow = true;
     await this.fetchAndSetNftCollections();
     await this.fetchAndSetNfts();
     await this.fetchAndSetBanners();
@@ -204,20 +226,35 @@ export default {
       this.loadIfVisible();
     }
   },
+  beforeUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
   methods: {
+    ...mapMutations(['updateActiveCollectionLink']),
+    handleScroll() {
+      const el = this.$refs.screen_collections
+      if (
+          el.getBoundingClientRect().top >= 100 ||
+          (el.getBoundingClientRect().top * -1) >
+          el.getBoundingClientRect().height + 15
+      ) {
+        return  this.updateActiveCollectionLink(false);
+      } else {
+        return this.updateActiveCollectionLink(true);
+      }
+    },
     async fetchAndSetNftCollections() {
       let requestUrl = `${config.backendApiEntryPoint}nft-collections/?limit=${config.collectionsPerPage}`;
-      console.log(requestUrl);
       let request = await fetch(requestUrl);
       let requestJson = await request.json();
       this.collections = requestJson;
     },
     async fetchAndSetNfts() {
-      let requestUrl = `${config.backendApiEntryPoint}listings/?internal_status=GATHER&limit=${this.config.listingsPerPage}&marketplace_status=OPEN&ordering=-timestamp/`;
+      let requestUrl = `${config.backendApiEntryPoint}listings/?internal_status=GATHER&limit=${this.config.listingsPerPage}&currency=0x0000000000000000000000000000000000000000&marketplace_status=OPEN&ordering=-timestamp/`;
       let request = await fetch(requestUrl);
       let requestJson = await request.json();
       if (requestJson.count == 0){
-        requestUrl = `${config.backendApiEntryPoint}listings/?limit=${this.config.listingsPerPage}&marketplace_status=OPEN&ordering=-timestamp/`;
+        requestUrl = `${config.backendApiEntryPoint}listings/?limit=${this.config.listingsPerPage}&currency=0x0000000000000000000000000000000000000000&marketplace_status=OPEN&ordering=-timestamp/`;
         request = await fetch(requestUrl);
         requestJson = await request.json();
       }
@@ -228,26 +265,6 @@ export default {
       let request = await fetch(requestUrl);
       let requestJson = await request.json();
       this.banners = requestJson;
-    },
-    toFixedIfNecessary(value, dp) {
-      return +parseFloat(value).toFixed(dp);
-    },
-    abbrNum(number, decPlaces) {
-      decPlaces = Math.pow(10, decPlaces);
-      var abbrev = ["k", "m", "b", "t"];
-      for (var i = abbrev.length - 1; i >= 0; i--) {
-        var size = Math.pow(10, (i + 1) * 3);
-        if (size <= number) {
-          number = Math.round(number * decPlaces / size) / decPlaces;
-          if ((number == 1000) && (i < abbrev.length - 1)) {
-            number = 1;
-            i++;
-          }
-          number += abbrev[i];
-          break;
-        }
-      }
-      return number;
     },
     checkVisibility(){
       const target = ref(this.$refs.target)

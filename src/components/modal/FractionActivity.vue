@@ -29,9 +29,9 @@
                     
                     <div class="tr" v-for="user in users">
                         <div class="td td-owner">
-                            <div class="td-wrap">
-                                <span>{{user.address}}</span>
-                                <span class="label-owner" v-if="user.address==this.userAddress">
+                            <div class="td-wrap" style="min-width: 100%;">
+                                <span>{{user.address.substring(0,3)+'...'+ user.address.substring(38,42)}}</span>
+                                <span class="label-owner" v-if="user.address === userAddress">
                                     {{translatesGet('YOU')}}
                                 </span>
                             </div>
@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <div class="td"> 
-                            <div class="td-wrap td-wrap-vote">
+                            <div class="td-wrap td-wrap-vote" style="min-width: 100%;">
                                 <span v-if="!user.voted">{{translatesGet('NOT_VOTE')}} </span>
                                 <span class="td-completed" v-else>
                                     <i class="i-thumb-up-line "></i> 
@@ -118,3 +118,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+  .label-owner {
+    margin-left: 6px;
+  }
+</style>

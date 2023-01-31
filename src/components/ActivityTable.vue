@@ -11,53 +11,48 @@
                 
             <div class="tr" :class="{'tr-mob-collapse' : !rowMobileCollapse}" v-for="item in this.$store.getters['marketplace/getActivitiesResult']">
                 <div class="td">
-                    <a :href="'/listing/'+item.lot.collection.contract_address+'/'+item.lot.token_id+'&'+item.lot.id" class="td-wrap td-wrap-collection">
-                        <div class="collection-img" :style="{backgroundImage: `url(${item.lot.media})`}"></div>
+                    <div class="td-wrap td-wrap-collection">
+                        <a :href="'/listing/'+item.lot.collection.contract_address+'/'+item.lot.token_id+'&'+item.lot.id" class="collection-img" :style="{backgroundImage: `url(${item.lot.media})`}"></a>
                         <div class="collection-data">
-                            <span class="collection-id" v-if="item.lot.name">{{item.lot.name}}</span>
-                            <span class="collection-id" v-else>#{{item.lot.token_id}}</span>
-                            <span class="td-light collection-id">{{item.lot.collection.name}}</span>
+                            <a :href="'/listing/'+item.lot.collection.contract_address+'/'+item.lot.token_id+'&'+item.lot.id" class="collection-id" v-if="item.lot.name">{{item.lot.name}}</a>
+                            <a :href="'/listing/'+item.lot.collection.contract_address+'/'+item.lot.token_id+'&'+item.lot.id" class="collection-id" v-else>#{{item.lot.token_id}}</a>
+                            <a :href="'/collection/'+item.lot.collection.contract_address" class="td-light collection-id">{{item.lot.collection.name}}</a>
                         </div>
-                    </a>
+                    </div>
                 </div>
                 <div class="td td-category">
-                    <div class="td-wrap td-wrap-category">
+                    <div class="td-wrap td-wrap-category" v-if="item.division=='Fractions'">
                         <i class="i-coupon-3-line"></i>
-                        <div>{{ item.part }}</div>
-                        <div class="td-light">Empty</div>
+                        <div>{{ 'Fractions' }}</div>
+                        <div class="td-light">  {{item.subdivision}} </div>
                     </div>
-                    <!-- <div class="td-wrap td-wrap-category">
-                        <i class="i-coupon-3-line"></i>
-                        <div>{{translatesGet('ACTIVITY_THEAD-1')}}</div>
-                        <div class="td-light">{{translatesGet('STATUS-START')}}</div>
-                    </div> -->
-                    <!-- <div class="td-wrap td-wrap-category">
-                        <i class="i-coupon-3-line"></i>
-                        <div>{{translatesGet('ACTIVITY_THEAD-1')}}</div>
-                        <div class="td-light">{{translatesGet('STATUS-CANCEL')}}</div>
-                    </div>   
-                    <div class="td-wrap td-wrap-category">
-                        <i class="i-shopping-bag-line"></i>
-                        <div>{{translatesGet('STATUS-SALE')}}</div>
-                    </div>
-                    <div class="td-wrap td-wrap-category">
+                    <div class="td-wrap td-wrap-category" v-else-if="item.division=='Votings'">
                         <i class="i-volume-vibrate-line"></i>
-                        <div>{{translatesGet('STATUS-VOITE')}}</div>
-                        <div class="td-light">{{translatesGet('STATUS-CANCELLATION')}}</div>
+                        <div>{{ 'Vote' }}</div>
+                        <div class="td-light">  {{item.subdivision}} </div>
                     </div>
-                    <div class="td-wrap td-wrap-category">
-                        <i class="i-volume-vibrate-line"></i>
-                        <div>{{translatesGet('STATUS-LISTING')}}</div>
-                        <div class="td-light">{{translatesGet('STATUS-START')}}</div>
-                    </div> -->
+                    <div class="td-wrap td-wrap-category" v-else-if="item.division=='Sale'">
+                        <i class="i-price-tag-3-line"></i>
+                        <div>{{ 'Sale' }}</div>
+                        <div class="td-light">  {{item.subdivision}} </div>
+                    </div>
+                    <div class="td-wrap td-wrap-category" v-else-if="item.division=='Rewards'||item.division=='Claims'||item.division=='Claim'">
+                        <i class="i-wallet-3-line"></i>
+                        <div>{{ 'Claims' }}</div>
+                        <div class="td-light">  {{item.subdivision}} </div>
+                    </div>
+                    <div class="td-wrap td-wrap-category" v-else>
+                        <div>{{ item.division }}</div>
+                        <div class="td-light">  {{item.subdivision}} </div>
+                    </div>
                 </div>
                 <div class="td td-price" v-if="item.amount">
                     <div class="td-wrap">
                         <div class="td-wrap-price">
                             <div class="icon-token eth"></div> 
-                            <span>{{abbrNum(toFixedIfNecessary(convertToEther(item.amount),6),2)}} ETH</span>
+                            <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(item.amount),6),2)}} ETH</span>
                         </div>
-                        <span class="td-light">≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(item.amount)*currencyToUsdPrice,2),2)}}</span>
+                        <span class="td-light">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(item.amount)*currencyToUsdPrice,2),2,2)}}</span>
                     </div>
                     <!-- <div class="td-wrap">
                         <div class="td-wrap-price">
@@ -67,18 +62,18 @@
                         <span class="td-light">≈ $ 1000</span>
                     </div> -->
                 </div>
-                <div class="td td-tx" v-if="String(item.part_id).length>10"> 
+                <div class="td td-tx" v-if="item.tnx_hash"> 
                     <div class="td-mob-title">Tx</div>
-                    <a class="td-wrap td-wrap-link" :href="config.etherscanTxUrlStart+item.part_id" target="_blank" rel="nofollow">
-                        <span>{{item.part_id.substring(0,6)+'...'+item.part_id.substring(38,42)}}</span>
+                    <a class="td-wrap td-wrap-link" :href="config.etherscanTxUrlStart+item.tnx_hash" target="_blank" rel="nofollow">
+                        <span>{{item.tnx_hash.substring(0,6)+'...'+item.tnx_hash.substring(62,66)}}</span>
                         <i class="i-external-link-line"></i>
                     </a> 
                 </div>
-                <div class="td td-tx" v-else> 
-                    <div class="td-mob-title">Tx</div>
+                <div class="td td-tx" v-else-if="item.part_id"> 
+                    <!-- <div class="td-mob-title">Tx</div>
                     <div class="td-wrap td-wrap-link" href="" target="_blank" rel="nofollow">
                         <span>VoteID: {{item.part_id}}</span>
-                    </div> 
+                    </div>  -->
                 </div>
                 <div class="td td-date">
                     <div class="td-mob-title">{{translatesGet('ACTIVITY_THEAD-5')}}</div>
@@ -103,7 +98,7 @@
       <a href="/marketplace" class="btn" v-if="activitiesIsEmpty">
         {{translatesGet('BACK_TO_ALL')}}
       </a>
-      <button class="btn" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.fetchAndSetActivitiesStartInfo()" v-else>
+      <button class="btn" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.fetchAndSetActivitiesStartInfo(true)" v-else>
         {{translatesGet('BACK_TO_ALL')}}
       </button>
     </div>
@@ -114,18 +109,25 @@
 import MultiLang from "@/core/multilang";
 import { ref } from 'vue';
 import { useElementVisibility } from '@vueuse/core';
-import { ethers } from "ethers";
 import config from '@/config.json';
+import helpers from "@/helpers/helpers";
+import {mapGetters} from "vuex";
 export default {
     data(){
         return{
+            useHelpers: helpers,
             rowMobileCollapse: false,
             lang: new MultiLang(this),
             userAddress:null,
-            currencyToUsdPrice:1,
             config:config,
             activitiesIsEmpty:false
         }
+    },
+    computed: {
+      ...mapGetters(['getUsdRate']),
+      currencyToUsdPrice() {
+        return this.getUsdRate[`ETH`] ? this.getUsdRate[`ETH`] : 0
+      }
     },
     methods: {
         translatesGet(key) {
@@ -165,42 +167,7 @@ export default {
             //     }
             // }
         },
-        abbrNum(number, decPlaces) {
-            decPlaces = Math.pow(10, decPlaces);
-            var abbrev = ["k", "m", "b", "t"];
-            for (var i = abbrev.length - 1; i >= 0; i--) {
-                var size = Math.pow(10, (i + 1) * 3);
-                if (size <= number) {
-                    number = Math.round(number * decPlaces / size) / decPlaces;
-                    if ((number == 1000) && (i < abbrev.length - 1)) {
-                        number = 1;
-                        i++;
-                    }
-                    number += abbrev[i];
-                    break;
-                }
-            }
-
-            return number;
-        },
-        async setCurrencyToUsd() {
-            let request = await fetch(`https://api.octogamex.com/rates?symbol=ETH`);
-            let requestJson = await request.json();
-            try {
-                this.currencyToUsdPrice = requestJson.quotes[0].priceUsd;
-            }
-            catch {
-                this.currencyToUsdPrice = 1;
-            }
-        },
-        toFixedIfNecessary(value, dp) {
-            return +parseFloat(value).toFixed(dp);
-        },
-        convertToEther(value) {
-            return ethers.utils.formatEther(String(value));
-        },
         getTimeString(timeStampValue) {
-            console.log(timeStampValue);
             let timeNow = Date.now() / 1000;
             let remTimeInSeconds = timeNow -timeStampValue;
             var sec_num = parseInt(remTimeInSeconds, 10);
@@ -224,7 +191,7 @@ export default {
                 return seconds+'s';
             }
         },
-        async fetchAndSetActivitiesStartInfo(){
+        async fetchAndSetActivitiesStartInfo(isFirst){
             this.userAddress = localStorage.getItem('userAddress');
             if (this.$route.name == 'Marketplace') {
                 await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult', { userAddress: null, collectionAddress: null });
@@ -233,13 +200,12 @@ export default {
                 await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult', { userAddress: null, collectionAddress: this.$route.params.contract_address });
             }
             else if (this.$route.name == 'Profile') {
-                await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult', { userAddress: this.userAddress, collectionAddress: null });
+                await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult', { userAddress: this.userAddress, collectionAddress: null, isFirst });
             }     
         }
     },
     async mounted(){  
-        await this.fetchAndSetActivitiesStartInfo();      
-        await this.setCurrencyToUsd();   
+        await this.fetchAndSetActivitiesStartInfo(true);
         if (this.$route.name == 'Collection') {
             let requestUrl = `${config.backendApiEntryPoint}user-activity/?limit=${config.listingsPerPage}`;
             requestUrl += `&collection=${this.$route.params.contract_address}`;

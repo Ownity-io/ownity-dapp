@@ -43,7 +43,7 @@
                             </a>
                         </li>
                       <li>
-                        <a href="https://discord.com/invite/KJVVhxut84">
+                        <a href="https://discord.com/invite/j2zMN6CJd7">
                           <Discord />
                           Discord
                         </a>
@@ -64,7 +64,7 @@
                     </button>
                     <ul class="header-drop-down">
                         <li>
-                            <a href="">About us</a>
+                            <a href="">About Us</a>
                         </li>
                         <li><a href="">FAQ</a></li>
                         <li><a href="">Team</a></li>
@@ -120,7 +120,7 @@
                                 </button>
                                 <ul class="header-drop-down">
                                     <li>
-                                        <a href="#litepaper">About us</a>
+                                        <a href="#litepaper">About Us</a>
                                     </li>
                                     <li><a href="#faqs">FAQ</a></li>
                                 </ul>
@@ -139,7 +139,7 @@
                                         </a>
                                     </li>
                                   <li>
-                                    <a href="https://discord.com/invite/KJVVhxut84">
+                                    <a href="https://discord.com/invite/j2zMN6CJd7">
                                       <Discord />
                                       Discord
                                     </a>

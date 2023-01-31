@@ -19,13 +19,13 @@
                     <div class="td-wrap">
                         <div class="td-wrap-price">
                             <div class="icon-token eth"></div> 
-                            <span>{{abbrNum(toFixedIfNecessary(convertToEther(element.price),6),2)}} ETH</span>
+                            <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(convertToEther(element.price),6),2)}} ETH</span>
                         </div>
-                        <span class="td-light">≈ $ {{abbrNum(toFixedIfNecessary(convertToEther(element.price)*currencyToUsdPrice,6),2)}}</span>
+                        <span class="td-light">≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(convertToEther(element.price)*currencyToUsdPrice,6),2,2)}}</span>
                     </div>
                 </div>
                 <div class="td"> 
-                  {{toFixedIfNecessary((element.fraction_amount/item.price)*100,0)}}%
+                  {{useHelpers.toFixedIfNecessary((element.fraction_amount/10**18))}}%
                 </div>
                 <div class=" td td-button">
                     <button class="btn btn-td btn-buy" v-if="userAddress != element.address" @click="showBuyModal(element)">{{translatesGet('BUY')}}</button>
@@ -50,12 +50,15 @@
 <script>
 import MultiLang from "@/core/multilang";
 import { ethers } from 'ethers';
+import helpers from "@/helpers/helpers";
+import {mapGetters} from "vuex";
 
 export default {
+    props:['item'],
     data(){
         return{
+            useHelpers: helpers,
             rowMobileCollapse: false,
-            currencyToUsdPrice:1,
             userAddress:false,
             render:false,
             lang: new MultiLang(this),
@@ -66,31 +69,15 @@ export default {
             chunkSize:4
         }
     },
-    props:['item'],
+    computed: {
+      ...mapGetters(['getUsdRate']),
+      currencyToUsdPrice() {
+        return this.getUsdRate ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
+      }
+    },
     methods:{
         translatesGet(key) {
             return this.lang.get(key);
-        },
-        toFixedIfNecessary(value, dp) {
-            return +parseFloat(value).toFixed(dp);
-        },
-        abbrNum(number, decPlaces) {
-            decPlaces = Math.pow(10, decPlaces);
-            var abbrev = ["k", "m", "b", "t"];
-            for (var i = abbrev.length - 1; i >= 0; i--) {
-                var size = Math.pow(10, (i + 1) * 3);
-                if (size <= number) {
-                    number = Math.round(number * decPlaces / size) / decPlaces;
-                    if ((number == 1000) && (i < abbrev.length - 1)) {
-                        number = 1;
-                        i++;
-                    }
-                    number += abbrev[i];
-                    break;
-                }
-            }
-
-            return number;
         },
         convertToEther(value) {
             try {
@@ -98,16 +85,6 @@ export default {
             }
             catch {
                 console.log('ethers error');
-            }
-        },
-        async setCurrencyToUsd() {
-            let request = await fetch(`https://api.octogamex.com/rates?symbol=${this.item.currency.ticker}`);
-            let requestJson = await request.json();
-            try {
-                this.currencyToUsdPrice = requestJson.quotes[0].priceUsd;
-            }
-            catch {
-                this.currencyToUsdPrice = 1;
             }
         },
         async showCancelModal(element){
@@ -126,14 +103,11 @@ export default {
     async mounted(){
         this.userAddress = localStorage.getItem('userAddress');
         this.render = true;
-        await this.setCurrencyToUsd();
         this.allBids = this.item.bids;
         for (let i = 0; i < this.allBids.length; i += this.chunkSize) {
             this.allBidsChunky.push(this.allBids.slice(i, i + this.chunkSize));
         }
-        this.currentlyVisibleBids = this.currentlyVisibleBids.concat(this.allBidsChunky[this.currentChunkyIndex])  
-        console.log(this.allBidsChunky.length-1);
-        console.log(this.currentChunkyIndex);      
+        this.currentlyVisibleBids = this.currentlyVisibleBids.concat(this.allBidsChunky[this.currentChunkyIndex])
     }
 }
 </script>

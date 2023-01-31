@@ -5,6 +5,8 @@ import walletsAndProvider from "./modules/walletsAndProvider";
 import marketplaceListing from "./modules/marketplaceListing";
 import site from "./modules/site";
 import user from './modules/user'
+import helpers from './modules/helpers'
+
 const store = createStore({
   modules: {
     marketplace,
@@ -12,7 +14,8 @@ const store = createStore({
     walletsAndProvider,
     marketplaceListing,
     user,
-    site
+    site,
+    helpers
   },
 });
 

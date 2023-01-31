@@ -1,14 +1,21 @@
 <template>
   <main v-if="collection">
-    <div v-if="filterMobile" class="filter-mobile-wrap">
-      <div class="filter-mobile-header">
-        <div>{{translatesGet('FILTERS')}}</div>
-        <button class="btn-close" @click="filterMobile=false">
-          <i class="i-close-line"></i>
-        </button>
+    <FilterMobile v-if="filterMobile" />
+    <!-- <div v-if="filterMobile" class="filter-mobile-wrap">
+      <div class="filter-mobile-container">
+        <div class="filter-mobile-header">
+            <div>{{translatesGet('FILTERS')}}</div>
+            <button class="btn-close" @click="filterMobile=false">
+                <i class="i-close-line"></i>
+            </button>
+        </div>
+        <Filter :activities = "activeTab == 1"/>
+        <div class="filter-mobile-footer">
+            <button class="btn btn-clear">{{translatesGet('CLEAR_ALL')}}</button>
+            <button class="btn btn-submit">{{translatesGet('APPLY')}}</button>
+        </div>
       </div>
-      <Filter :activities = "activeTab == 1"/>
-    </div>
+    </div> -->
     <div class="container">
       <section class="section-breadcrumbs">
         <Breadcrumbs />
@@ -50,33 +57,33 @@
               <div class="name">{{translatesGet('FLOOR_PRICE')}}</div>
               <div class="token-value">
                 <div class="icon-value"></div>
-                <span>{{abbrNum(toFixedIfNecessary(collection.floor_price,2),0)}} ETH</span>
+                <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(collection.floor_price,2),0)}} ETH</span>
               </div>
             </li>
             <li>
               <div class="name">{{translatesGet('VOLUME_24')}}</div>
               <div class="token-value">
                 <div class="icon-value"></div>
-                <span>{{abbrNum(toFixedIfNecessary(collection.volume_24h,2),0)}} ETH</span>
+                <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(collection.volume_24h,2),0)}} ETH</span>
               </div>
             </li>
             <li>
               <div class="name">{{translatesGet('VOLUME_ALL_TIME')}}</div>
               <div class="token-value">
                 <div class="icon-value"></div>
-                <span>{{abbrNum(toFixedIfNecessary(collection.volume_all,2),0)}} ETH</span>
+                <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(collection.volume_all,2),0)}} ETH</span>
               </div>
             </li>
             <li>
               <div class="name">{{translatesGet('HOLDERS')}}</div>
               <div>
-                <span>{{abbrNum(collection.holders,0)}}</span>
+                <span>{{useHelpers.abbrNum(collection.holders,0)}}</span>
               </div>
             </li>
             <li>
               <div class="name">{{translatesGet('SUPPLY')}}</div>
               <div>
-                <span>{{abbrNum(collection.total_supply,1)}}</span>
+                <span>{{useHelpers.abbrNum(collection.total_supply,1)}}</span>
               </div>
             </li>
             <li>
@@ -128,29 +135,7 @@
           <div class="params-block params-block-search">
             <Search />
           </div>
-          <div class="params-block params-block-sort">
-            <div class="param-wrap sort" :class="{ unfolded: testOpenSort }">
-              <button class="btn-param btn-sort" @click="testOpenSort = !testOpenSort">
-                <span v-if="this.selectedSort == null">{{translatesGet('SORT_BY')}}</span>
-                <span v-else>{{this.selectedSort.name}}</span>
-                <i class="i-arrow-down-s-line"></i>
-              </button>
-              <div class="drop-down">
-                <ul v-if="activeTab == 1">
-                  <li v-for="element in config.sortParamsActivities" :key="element"
-                    @click="testOpenSort = !testOpenSort;selectedSort=element;initInfo();">
-                    <span>{{element.name}}</span>
-                  </li>
-                </ul>
-                <ul v-else>
-                  <li v-for="element in config.sortParams" :key="element"
-                    @click="testOpenSort = !testOpenSort;selectedSort=element;initInfo();">
-                    <span>{{element.name}}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <SortBar :activeTab="activeTab"/>
           <div class="params-block params-block-switch" v-if="activeTab != 1">
             <div class="param-wrap switch">
               <button
@@ -194,16 +179,20 @@
 <script>
 import config from '@/config.json'
 import Search from "@/components/Search.vue";
+import FilterMobile from "@/components/FilterMobile.vue";
 import Filter from "@/components/Filter.vue";
 import ListCards from "@/components/ListCards.vue";
 import ActivityTable from "@/components/ActivityTable.vue";
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
 import SelectedFilters from "@/components/SelectedFilters.vue"; 
 import MultiLang from "@/core/multilang";
+import SortBar from '@/components/SortBar.vue';
+import helpers from "@/helpers/helpers";
 
 export default {
   data() {
     return {
+      useHelpers: helpers,
       switchActive: 0,
       activeTab: 0,
       testOpenSort: false,
@@ -217,14 +206,19 @@ export default {
   components: {
     Search,
     Filter,
+    FilterMobile,
     ListCards,
     ActivityTable,
     Breadcrumbs,
     SelectedFilters,
+    SortBar
   },
   async mounted(){
     window.scrollTo(0, 0);
-    await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address);
+    let result = await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address);
+    if(!result) {
+      await this.$router.push('/404')
+    }
     await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
     await this.$store.dispatch('marketplace/fetchAndSetMarketplaces');
     await this.getAndSetCollection();
@@ -239,23 +233,6 @@ export default {
       let requestJson = await request.json();
       this.collection = requestJson[0];
     },
-    abbrNum(number, decPlaces) {
-      decPlaces = Math.pow(10, decPlaces);
-      var abbrev = ["k", "m", "b", "t"];
-      for (var i = abbrev.length - 1; i >= 0; i--) {
-        var size = Math.pow(10, (i + 1) * 3);
-        if (size <= number) {
-          number = Math.round(number * decPlaces / size) / decPlaces;
-          if ((number == 1000) && (i < abbrev.length - 1)) {
-            number = 1;
-            i++;
-          }
-          number += abbrev[i];
-          break;
-        }
-      }
-      return number;
-    },
     convertToEther(value) {
       try {
         return ethers.utils.formatEther(String(value));
@@ -263,9 +240,6 @@ export default {
       catch {
         console.log('ethers error');
       }
-    },
-    toFixedIfNecessary(value, dp) {
-      return +parseFloat(value).toFixed(dp);
     },
     async initInfo(){
       if (this.activeTab == 1) {

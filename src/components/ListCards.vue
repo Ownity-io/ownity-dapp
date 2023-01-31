@@ -1,13 +1,14 @@
 <template>
   <div class="cards-list">
     <div v-if="this.$store.getters['marketplace/getListingsResults'].length>0" class="cards-list-container">
-      <Card v-for="item in this.$store.getters['marketplace/getListingsResults']" :key="item" :item="item" />
+      <Card :class="{ hides: hidesClass }" v-for="item in this.$store.getters['marketplace/getListingsResults']" :key="item" :item="item" />
     </div>
     <div class="cards-list-load" ref="target" v-if="this.$store.getters['marketplace/getLastListingsResponse']!=null & this.$store.getters['marketplace/getListingsResults'].length>0">
         <div class="i-wrap">
             <i class="i-loader-4-line"></i>
         </div>
     </div>
+<!--    <SkeletonCard />-->
     <div class="cards-list-empty" v-if="this.$store.getters['marketplace/getListingsResults'].length==0">
       <div class="title">{{translatesGet('NOTHING_HERE')}}</div>
       <a href="/marketplace" class="btn" v-if="collectionIsEmpty">
@@ -26,18 +27,35 @@ import { ref } from 'vue';
 import { useElementVisibility } from '@vueuse/core';
 import MultiLang from "@/core/multilang";
 import config from '@/config.json';
+import SkeletonCard from "@/components/Skeleton/SkeletonCard.vue";
 
 export default {
   data() {
     return {
       lang: new MultiLang(this),
-      collectionIsEmpty:false
+      collectionIsEmpty:false,
+      hidesClass: false
     };
   },
   components: {
+	  SkeletonCard,
     Card,
   },
   methods:{
+		addClasses(){
+			if (this.$route.name == 'Marketplace'){
+        this.hidesClass = !this.hidesClass
+				console.log(this.hidesClass)
+			}
+			if (this.$route.name == 'Collection'){
+				this.hidesClass = !this.hidesClass
+				console.log(this.hidesClass)
+			}
+			if (this.$route.name == 'Profile') {
+				this.hidesClass = false
+				console.log(this.hidesClass)
+      }
+    },
     translatesGet(key) {
         return this.lang.get(key);
     },
@@ -73,11 +91,12 @@ export default {
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
         }
       }
-    }
+    },
   },
   async mounted(){
+		this.addClasses()
     if (this.$route.name=='Collection'){
-      let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.listingsPerPage}`;
+      let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.listingsPerPage}&currency=0x0000000000000000000000000000000000000000`;
         requestUrl += `&collection=${this.$route.params.contract_address}`;
         requestUrl+='&marketplace_status=OPEN';
         let request = await fetch(requestUrl);
@@ -105,7 +124,7 @@ export default {
         }
       }
       else if (this.vote) {
-        let requestUrl = `${config.backendApiEntryPoint}listings-with-voting-by-user/?limit=${config.listingsPerPage}`;
+        let requestUrl = `${config.backendApiEntryPoint}listings-with-voting-by-user/?limit=${config.listingsPerPage}&currency=0x0000000000000000000000000000000000000000`;
         let requestOptions = {
           method: "GET",
           headers: {
@@ -121,7 +140,7 @@ export default {
         }
       }
       else {
-        let requestUrl = `${config.backendApiEntryPoint}listings-by-user/?limit=${config.listingsPerPage}`;
+        let requestUrl = `${config.backendApiEntryPoint}listings-by-user/?limit=${config.listingsPerPage}&currency=0x0000000000000000000000000000000000000000`;
         let requestOptions = {
           method: "GET",
           headers: {
