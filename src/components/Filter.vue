@@ -131,7 +131,7 @@
       <div class="container-enter-price">
         <div class="container-input">
           <div class="input-wrapper" :style="isError && { border: '1px solid red'}">
-            <input placeholder="Min" type="text" v-model="this.minPrice" @input="checkMinPrice($event)" v-debounce:500ms="fetchAndSetListingsStartInfoMinPrice"/>
+            <input placeholder="Min" type="text" v-model="this.minPrice" @input="checkMinPrice($event)" v-on:key-up.enter="fetchAndSetListingsStartInfoMinPrice();" v-debounce:500ms="fetchAndSetListingsStartInfoMinPrice"/>
           </div>
         </div>
         <span class="between-inputs">to</span>
@@ -199,6 +199,8 @@ export default {
       }      
     },
     async fetchAndSetListingsStartInfoMaxPrice() {
+      await this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', this.maxPrice);
+      await this.$store.dispatch('marketplace/getAndSetCurrentMinPrice', this.minPrice);
       if (this.maxPrice!=null){
         if (this.$route.name == 'Marketplace') {
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
@@ -234,6 +236,8 @@ export default {
         
     },
     async fetchAndSetListingsStartInfoMinPrice() {
+      await this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', this.maxPrice);
+      await this.$store.dispatch('marketplace/getAndSetCurrentMinPrice', this.minPrice);
       if (this.minPrice!=null){
         if (this.$route.name == 'Marketplace') {
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
