@@ -654,8 +654,8 @@ export default {
       this.updateTimeString();
       this.setAllBidsAmount();
       this.setUserBidAmount();
-      this.allProgressValue = (this.allBidsAmount / this.item.price) * 100;
-      this.userProgressValue = (this.userBidAmount / this.item.price) * 100;
+      this.allProgressValue = this.useHelpers.toFixedIfNecessary((this.allBidsAmount / this.item.price) * 100, 0);
+      this.userProgressValue = this.useHelpers.toFixedIfNecessary((this.userBidAmount / this.item.price) * 100, 0);
       await this.checkLike();
     }
   }
