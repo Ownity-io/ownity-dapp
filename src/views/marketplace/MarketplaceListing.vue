@@ -471,7 +471,7 @@
                 <!-- flow 1 -->
                 <div v-if="activeTab2 === 'ListingInfo2'" class="section-table-chart">
                   <div class="chart-wrap">
-                    <Chart :chartData='chartData'/>
+                    <Chart :chartData='chartData' v-if="!isRefreshing"/>
                   </div>
                   <div class="table-chart-data">
                     <div class="table table-chart" :class="{'tbody-overflow' : this.item.bids.length>5}">
@@ -677,7 +677,7 @@ export default {
       activeVotings:[],
       inactiveVotings:[],
       soldedVoting:null,
-      isLoaded:false
+      isLoaded:false,
     };
   },
   components: {
@@ -832,23 +832,25 @@ export default {
       }
     },
     async refreshInfo(){
+      this.$forceUpdate();       
       this.isRefreshing=true;
       window.scrollTo(0, 0);
       try{
         this.activeTab = "ListingInfo";
         this.activeTab2 = "ListingInfo2";
         await this.getAndSetListingInfo();
-        this.isRefreshing=false;
+        await this.setChartData();
+        this.isRefreshing=false;        
         await this.$store.dispatch('appGlobal/setSnackText', 'Listing Data Has Been Successfully Refreshed!')
         await this.$store.dispatch('appGlobal/setGreenSnack', true)
-        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 5)      
+        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 5)             
       }
       catch{
-        this.isRefreshing=false;
-        await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
+        this.isRefreshing=false;        await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
         await this.$store.dispatch('appGlobal/setGreenSnack', false)
         await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 5)      
       }      
+      
     },
     setUserCanSoldFraction(){
       let userBidOnSaleAmount = 0;
