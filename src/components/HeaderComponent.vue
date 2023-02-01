@@ -82,7 +82,7 @@ import {mapGetters} from "vuex";
 export default {
     data(){
         return{
-            walletConnected:1,
+            walletConnected:null,
             mobileMenu: false,
             mobileSearch: false,
             lang: new MultiLang(this),
