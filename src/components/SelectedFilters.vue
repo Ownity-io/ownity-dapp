@@ -117,12 +117,24 @@
                     <i class="i-close-line"></i>
                 </button>
             </li>
-            <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')" v-if="!activities">
+            <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')" v-if="!activities && !onlyFav && !vote">
                 <button class="btn btn-selected-filter btn-reset">
                     <span>{{translatesGet('CLEAR_ALL')}}</span>
                     <i class="i-close-line"></i>
                 </button>
             </li>
+          <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav', true)" v-if="!activities && !vote && onlyFav">
+            <button class="btn btn-selected-filter btn-reset">
+              <span>{{translatesGet('CLEAR_ALL')}}</span>
+              <i class="i-close-line"></i>
+            </button>
+          </li>
+          <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote', true)" v-if="!activities && !onlyFav && vote">
+            <button class="btn btn-selected-filter btn-reset">
+              <span>{{translatesGet('CLEAR_ALL')}}</span>
+              <i class="i-close-line"></i>
+            </button>
+          </li>
             <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:this.userAddress,collectionAddress:null})" v-if="activities">
                 <button class="btn btn-selected-filter btn-reset">
                     <span>{{translatesGet('CLEAR_ALL')}}</span>
@@ -130,6 +142,7 @@
                 </button>
             </li>
         </ul>
+
         <ul v-if="this.$store.getters['marketplace/getFiltersCount']>0 & this.$route.name=='Collection'">   
             <li v-if="this.$store.getters['marketplace/getCurrentlyGathering']!=false" @click="this.$store.dispatch('marketplace/setCurrentlyGathering',false);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address)">
                 <button class="btn btn-selected-filter">
@@ -194,7 +207,7 @@ export default {
       return this.lang.get(key);
     },
   },
-  props:['activities'],
+  props:['activities', 'onlyFav', 'vote'],
   mounted(){
     this.userAddress = localStorage.getItem('userAddress');
   }
