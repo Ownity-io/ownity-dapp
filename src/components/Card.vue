@@ -1,6 +1,7 @@
 <template>
   <!-- <a class="card card-finished" :class="{'card-inactive' : false}"> -->
-  <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  class="card" ref="wrpCard" :class="{'card-inactive' : ((this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN'))||(this.item.internal_status=='CLAIMED')||bidRewarded),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER')}">
+  <img :src="item.media" alt="forLoadCheck" @load="onImgLoad" style="display: none;">
+  <a v-if="isLoaded" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  class="card" ref="wrpCard" :class="{'card-inactive' : ((this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN'))||(this.item.internal_status=='CLAIMED')||bidRewarded),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER')}">
     <div class="card-main">
       <div class="loading"></div> <!--  used when loading-->
 
@@ -404,6 +405,7 @@
       </div>
     </div>
   </a>
+  <SkeletonCard v-else/>
 </template>
 
 <script>
@@ -411,8 +413,7 @@ import config from "@/config.json";
 import MultiLang from "@/core/multilang";
 import {mapGetters} from "vuex";
 import helpers from "@/helpers/helpers";
-import {create} from "@lottiefiles/lottie-interactivity";
-import {createElement} from "inferno-create-element";
+import SkeletonCard from "./Skeleton/SkeletonCard.vue";
 export default {
   props:[
     'item'
@@ -441,7 +442,8 @@ export default {
       showUserBidOnSale:false,
       userAddress:false,
       bidRewarded:false,
-      votingsOnSale:[]
+      votingsOnSale:[],
+      isLoaded:false
     };
   },
   computed: {
@@ -449,6 +451,9 @@ export default {
     currencyToUsdPrice() {
       return this.getUsdRate ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
       }
+  },
+  components:{
+    SkeletonCard
   },
   methods:{
     translatesGet(key) {
@@ -596,6 +601,18 @@ export default {
           }
       } 
 
+    },
+    async onImgLoad(){
+      const delay = (delayInms) => {
+      return new Promise(resolve => setTimeout(resolve, delayInms));
+    }
+    while(true){
+      await delay(1000);
+      if(this.render){
+        break;
+      }
+    }
+      this.isLoaded=true;
     }
   },
   async mounted(){
