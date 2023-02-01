@@ -142,7 +142,8 @@
                   {{translatesGet('START_VOTING')}}
                 </button>
                 <button class="btn btn-get"
-                  @click="this.$store.dispatch('appGlobal/setShowSellPartModal',true)">
+                  @click="this.$store.dispatch('appGlobal/setShowSellPartModal',true)"
+                  v-if="userCanSoldFraction">
                   {{translatesGet('SELL_NFT')}}
                 </button>
               </div>
@@ -192,7 +193,8 @@
                   {{translatesGet('START_VOTING')}}
                 </button>
                 <button class="btn btn-get"
-                  @click="this.$store.dispatch('appGlobal/setShowSellPartModal',true)">
+                  @click="this.$store.dispatch('appGlobal/setShowSellPartModal',true)"
+                  v-if="userCanSoldFraction">
                   {{translatesGet('SELL_NFT')}}
                 </button>
               </div>

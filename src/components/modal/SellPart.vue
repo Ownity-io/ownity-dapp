@@ -302,6 +302,10 @@ export default {
       }
       else if (this.currentPart < 1) {
         this.currentPart = 1
+        if (this.currentPart > (this.useHelpers.toFixedIfNecessary(this.userBidAmount/this.item.price*100,0) - this.userBidOnSaleAmount)){
+          this.currentPart = 0;
+        }
+
       }
       else if (this.currentPart > (this.useHelpers.toFixedIfNecessary(this.userBidAmount/this.item.price*100,0) - this.userBidOnSaleAmount)){
         this.currentPart = this.useHelpers.toFixedIfNecessary(this.userBidAmount/this.item.price*100,0) - this.userBidOnSaleAmount;
