@@ -14,7 +14,7 @@
             <SkeletonCardListing v-else />           
           </div>
         </section>
-        <SkeletonCardListingInfo class="listing-main" v-if="!render & !this.isLoaded" />
+        <SkeletonCardListingInfo class="listing-main" v-if="!render" />
         <div class="listing-main" v-else>
           
           <section class="section-listing-header">
