@@ -1,5 +1,6 @@
-<template>
-  <main v-if="render">
+<template>  
+  <main v-if="item!=null">
+    <img :src="item.media" alt="forLoadCheck" @load="onImgLoad" style="display: none;">
     <div class="container">
       <section class="section-breadcrumbs">
         <Breadcrumbs />
@@ -9,13 +10,13 @@
       <div class="card-listing">
         <section class="section-card-img">
           <div class="card-img-wrap">
-            <img v-if="item.media" :src="item.media" alt="img">
-            <img v-else src="@/assets/images/img-not-found.svg" alt="img" style="width: 547px">
-<!--            <skeleton-card-listing/>-->
+            <img v-if="render & item.media!=null & this.isLoaded" :src="item.media">
+            <SkeletonCardListing v-else />           
           </div>
         </section>
-        <div class="listing-main">
-<!--          <skeleton-card-listing-info/>-->
+        <SkeletonCardListingInfo class="listing-main" v-if="!render & !this.isLoaded" />
+        <div class="listing-main" v-else>
+          
           <section class="section-listing-header">
             <div class="listing-header">
               <div class="collection-wrap">
@@ -673,7 +674,8 @@ export default {
       inSaleAmount: 0,
       activeVotings:[],
       inactiveVotings:[],
-      soldedVoting:null
+      soldedVoting:null,
+      isLoaded:false
     };
   },
   components: {
@@ -866,6 +868,18 @@ export default {
         this.userCanSoldFraction = false;
       }
 
+    },
+    async onImgLoad(){
+      const delay = (delayInms) => {
+      return new Promise(resolve => setTimeout(resolve, delayInms));
+    }
+    while(true){
+      await delay(1000);
+      if(this.render){
+        break;
+      }
+    }
+      this.isLoaded=true;
     }
   },
   async mounted() {
