@@ -26,7 +26,7 @@
               </p>
               <div class="pur-price-val">
                 <div class="pur-price-icon"></div>
-                <p>0.2 ETH</p>
+                <p>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.item.price),6),2)}} ETH</p>
               </div>
             </div>
             <!--end price buy nft-->

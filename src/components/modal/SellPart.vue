@@ -25,7 +25,7 @@
               <p>1% = </p>
               <div class="procent-val">
                 <div class="val-icon"></div>
-                <p>0.2 ETH</p>
+                <p>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.item.price/100),6),2)}} ETH</p>
               </div>
             </div>
 
