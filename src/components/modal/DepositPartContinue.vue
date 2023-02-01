@@ -31,9 +31,12 @@
               <div class="modal-data-block modal-select-part">
                 <div class="input-select-block">
                   <div class="input-select-title">{{translatesGet('CHOOSE_PART')}}</div>
-                  <div class="input-wrapper input-percent">
+                  <div class="input-wrapper input-percent wMax">
                     <input type="text"
-                    placeholder="0%" v-model="this.currentPart" @input="checkCurrentPart"> 
+                    placeholder="0%" v-model="this.currentPart" @input="checkCurrentPart">
+                    <button class="btn-max" @click=" this.currentPart = this.useHelpers.toFixedIfNecessary((this.item.price-this.allBidsAmount)/this.item.price*100,0)">
+                      Max
+                    </button>
                   </div>
                   <!--  <div class="input-select-wrap" :class="{ 'unfolded': selectOpen }">
                     <input type="text" class="input-selected" v-model="partComputed"
