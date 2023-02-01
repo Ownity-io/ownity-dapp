@@ -17,8 +17,8 @@
             </div>
             <div class="token-value">
               <div class="icon-value"></div>
-              {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther((item.reward/100)*(userBidAmount/item.price*100)),6),2)}} ETH
-              <span class="input-equivalent equivalent">(≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther((item.reward/100)*(userBidAmount/item.price*100))*currencyToUsdPrice,2),2,2)}})</span>
+              {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(calculateReward),6),2)}} ETH
+              <span class="input-equivalent equivalent">(≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(calculateReward) * currencyToUsdPrice,2),2,2)}})</span>
             </div>
           </div>
 
@@ -29,7 +29,7 @@
                 <div class="total-block-value">
                   <div class="total-amount">
                     <div class="icon-value"></div>
-                    <b> {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther((item.reward/100)*(userBidAmount/item.price*100)),6),2)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther((item.reward/100)*(userBidAmount/item.price*100))*currencyToUsdPrice,2),2,2)}}</span>
+                    <b> {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(calculateReward),6),2)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(calculateReward)*currencyToUsdPrice,2),2,2)}}</span>
                   </div>
                   <!-- <div class="total-fees">Fees:<span>3%</span></div> -->
                 </div>
@@ -112,14 +112,25 @@ export default {
       ABI:ABI,
       config:config,
       userBidAmount:0,
+      userReward: 0,
       buttonWaiting:false,
       lang: new MultiLang(this),
+      contractConfig: null
     };
   },
   computed: {
     ...mapGetters(['getUsdRate']),
     currencyToUsdPrice() {
       return this.getUsdRate ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
+    },
+    calculateReward(){
+      if(this.contractConfig &&  this.contractConfig.length) {
+         let  percent = this.contractConfig[0].sell_lot_fee / 100
+
+        return this.userReward - (this.userReward * percent / 100)
+      } else {
+        return 0
+      }
     }
   },
   methods:{
@@ -195,6 +206,7 @@ export default {
         for (let element of this.item.bids){
           if (element.address == userAddress){
             this.userBidAmount = parseInt(element.amount);
+            this.userReward = element.reward_amount ? parseInt(element.reward_amount) : 0
             return;
           }
         }
@@ -205,6 +217,7 @@ export default {
   },
   async mounted(){
     this.item = await this.$store.getters['marketplaceListing/getItem'];
+    this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
     this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
     this.setUserBidAmount();
     this.render = true;
