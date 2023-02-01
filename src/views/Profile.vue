@@ -171,7 +171,7 @@
                         <Filter :onlyFav="activeTab == 'Favourites'" :vote="activeTab == 'Vote'" :activities = "activeTab == 'ActivityTable'"/>
                     </div>
                     <div class="section-nft-list" :class="{'card-collapse' : switchActive == 1}">
-                        <SelectedFilters v-if="filter" :activities = "activeTab == 'ActivityTable'"/>
+                        <SelectedFilters v-if="filter" :activities = "activeTab == 'ActivityTable'" :onlyFav="activeTab == 'Favourites'" :vote="activeTab == 'Vote'"/>
                         <ListCards v-if="activeTab === 'ListCards'" :onlyFav="false" :vote="false"/>
                         <ListCards v-if="activeTab === 'Favourites'" :onlyFav="true" :vote="false"/>
                         <ListCards v-if="activeTab === 'Vote'" :onlyFav="false" :vote="true"/>
