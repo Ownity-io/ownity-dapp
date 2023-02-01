@@ -3,7 +3,7 @@
         <div class="filter-mobile-container">
             <div class="filter-mobile-header">
                 <div>{{translatesGet('FILTERS')}}</div>
-                <button class="btn-close" @click="filterMobile=false">
+                <button class="btn-close" @click="updateFilterMobile(false)">
                     <i class="i-close-line"></i>
                 </button>
             </div>
@@ -19,6 +19,7 @@
 
 import Filter from "@/components/Filter.vue";
 import MultiLang from "@/core/multilang";
+import {mapMutations} from "vuex";
 
 export default {
     data() {
@@ -30,6 +31,7 @@ export default {
         Filter,
     },
     methods: {
+      ...mapMutations(['updateFilterMobile']),
         translatesGet(key) {
             return this.lang.get(key);
         },
