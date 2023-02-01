@@ -41,7 +41,7 @@
                     <div class="icon-value"></div>
                     <b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(convertToEther(partOnMarket.price),6),2)}} ETH</b><span>≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(convertToEther(partOnMarket.price)*currencyToUsdPrice,2),2,2)}}</span>
                   </div>
-                  <div class="total-fees">{{translatesGet('FEES')}}:<span>3%</span></div>
+                  <!-- <div class="total-fees">{{translatesGet('FEES')}}:<span>3%</span></div> -->
                 </div>
               </div>
             </div>
