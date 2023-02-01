@@ -7,7 +7,7 @@
                     <i class="i-close-line"></i>
                 </button>
             </div>
-            <Filter :onlyFav="activeTab == 'Favourites'" :vote="activeTab == 'Vote'" :activities = "activeTab == 'ActivityTable'"/>
+            <Filter :onlyFav="onlyFav" :vote="vote" :activities = "activities"/>
             <div class="filter-mobile-footer">
                 <button class="btn btn-clear">{{translatesGet('CLEAR_ALL')}}</button>
                 <button class="btn btn-submit">{{translatesGet('APPLY')}}</button>
@@ -22,6 +22,7 @@ import MultiLang from "@/core/multilang";
 import {mapMutations} from "vuex";
 
 export default {
+   props:['onlyFav','vote','activities'],
     data() {
         return{
             lang: new MultiLang(this),

@@ -1,7 +1,7 @@
 <template>
   <main>
     <div v-if="getFilterMobile" class="filter-mobile-wrap">
-      <FilterMobile v-if="getFilterMobile" />
+      <FilterMobile v-if="getFilterMobile" :activities = "activeTab == 1" />
       <!-- <div class="filter-mobile-container">
         <div class="filter-mobile-header">
             <div>{{translatesGet('FILTERS')}}</div>

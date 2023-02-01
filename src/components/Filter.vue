@@ -150,6 +150,8 @@ import config from '@/config.json';
 import MultiLang from "@/core/multilang";
 import { vue3Debounce } from 'vue-debounce';
 export default {
+  props:['onlyFav','vote','activities'],
+
   data() {
     return {
       filterSection0: false,
@@ -331,7 +333,6 @@ export default {
       }
     },
   },
-  props:['onlyFav','vote','activities'],
   directives: {
     debounce: vue3Debounce({ lock: true })
   },
