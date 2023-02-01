@@ -9,7 +9,7 @@
                 <div class="td td-date">{{translatesGet('ACTIVITY_THEAD-5')}}</div>
             </div>
                 
-            <div class="tr" :class="{'tr-mob-collapse' : !rowMobileCollapse}" v-for="item in this.$store.getters['marketplace/getActivitiesResult']">
+            <a :href="'/listing/'+item.lot.collection.contract_address+'/'+item.lot.token_id+'&'+item.lot.id" class="tr" :class="{'tr-mob-collapse' : !rowMobileCollapse}" v-for="item in this.$store.getters['marketplace/getActivitiesResult']">
                 <div class="td">
                     <div class="td-wrap td-wrap-collection">
                         <a :href="'/listing/'+item.lot.collection.contract_address+'/'+item.lot.token_id+'&'+item.lot.id" class="collection-img" :style="{backgroundImage: `url(${item.lot.media})`}"></a>
@@ -85,7 +85,7 @@
                     @click="rowMobileCollapse = !rowMobileCollapse">
                     <i class="i-arrow-down-s-line"></i>
                 </button>
-            </div>
+            </a>
         </div>
     </div>
     <div class="cards-list-load" ref="target" v-if="this.$store.getters['marketplace/getLastActivitiesResponse']!=null & this.$store.getters['marketplace/getActivitiesResult'].length>0">
