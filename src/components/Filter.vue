@@ -179,7 +179,7 @@ export default {
           await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:null});
         }
         else{
-          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
+          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',null,true);
         }
       }
       else if (this.$route.name == 'Collection'){
@@ -187,7 +187,7 @@ export default {
           await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:this.$route.params.contract_address});
         }
         else{
-          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address);
+          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address,true);
         }        
       }
       else if (this.$route.name == 'Profile'){

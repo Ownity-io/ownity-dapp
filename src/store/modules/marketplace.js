@@ -223,7 +223,7 @@ export default {
   },
   actions: {
     //listings
-    async fetchAndSetListingsStartInfo(context,_collectionContractAddress = null) {
+    async fetchAndSetListingsStartInfo(context,_collectionContractAddress = null,isFirst) {
       let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.listingsPerPage}&currency=0x0000000000000000000000000000000000000000`;
       if (_collectionContractAddress==null){
         if (context.getters.getCurrentCollectionContractAddress != null) {
@@ -246,8 +246,8 @@ export default {
       if (context.getters.getSelectedSort!=null){
         requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;
       }
-      if (context.getters.getSelectedSort!=null){
-        requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;
+      if(isFirst && !requestUrl.includes('&ordering')){
+        requestUrl+='&ordering=-timestamp'
       }
   
       if (context.getters.getCurrentlyGathering){
