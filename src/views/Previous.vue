@@ -77,6 +77,7 @@ import FourBlock from "@/components/Previous/FourBlock.vue";
 import FaqBlock from "@/components/Previous/FaqBlock.vue";
 import FifthBlock from "@/components/Previous/FifthBlock.vue";
 import SixBlock from "@/components/Previous/SixBlock.vue";
+import { assignMetas } from "../metas";
 
 export default {
 	components: {
@@ -102,13 +103,17 @@ export default {
         },
     },
     mounted(){
+
+        assignMetas(this.$route.name); //? assigning the title and description to the <header> tag
+
         document.body.classList.add('previous-page');
-	    window.onload = function(e){
+	      window.onload = function(e){
 		    window.scrollBy(1,1);
 	    }
     },
     unmounted(){
         document.body.classList.remove('previous-page');
+        assignMetas('') //? //? temporary resetting the title and description to the <header> tag
     },
 }
 </script>
