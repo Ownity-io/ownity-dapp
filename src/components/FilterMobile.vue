@@ -9,7 +9,7 @@
             </div>
             <Filter :onlyFav="onlyFav" :vote="vote" :activities = "activities"/>
             <div class="filter-mobile-footer">
-                <button class="btn btn-clear" @click="cleatAll">{{translatesGet('CLEAR_ALL')}}</button>
+                <button class="btn btn-clear" @click="cleatAll" v-if="this.$store.getters['marketplace/getFiltersCount']>0">{{translatesGet('CLEAR_ALL')}}</button>
                 <button class="btn btn-submit" @click="updateFilterMobile(false)">{{translatesGet('APPLY')}}</button>
             </div>
         </div>
