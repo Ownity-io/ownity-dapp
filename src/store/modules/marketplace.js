@@ -279,7 +279,13 @@ export default {
         },
       };
       if (requestUrl != null) {
-        let request = await fetch(requestUrl,requestOptions);
+        let request = null;
+        if (localStorage.getItem('token')!=null&localStorage.getItem('token')!='null'){
+          request = await fetch(requestUrl,requestOptions);
+        }
+        else{
+          request = await fetch(requestUrl);
+        }
         let requestCode = request.ok;
         if (requestCode) {
           let requestJson = await request.json();
