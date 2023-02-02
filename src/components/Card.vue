@@ -1,7 +1,7 @@
 <template>
   <!-- <a class="card card-finished" :class="{'card-inactive' : false}"> -->
   <img :src="item.media" alt="forLoadCheck" @load="onImgLoad" style="display: none;">
-  <a v-if="render" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  class="card" ref="wrpCard" :class="{'card-inactive' : ((this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN'))||(this.item.internal_status=='CLAIMED')||bidRewarded),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER')}">
+  <div v-if="render" class="card" ref="wrpCard" :class="{'card-inactive' : ((this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN'))||(this.item.internal_status=='CLAIMED')||bidRewarded),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER')}">
     <div class="card-main">
       <div class="loading"></div> <!--  used when loading-->
 
@@ -407,7 +407,7 @@
 
       </div>
     </div>
-  </a>
+  </div>
   <SkeletonCard v-else/>
 </template>
 
