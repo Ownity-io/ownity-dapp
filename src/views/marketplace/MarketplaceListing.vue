@@ -615,7 +615,7 @@
     </div>
     <section class="section-recommendation" v-if="recommendations">
       <div class="container">
-        <RecommendationsList :items="recommendations"/>
+        <RecommendationsList :items="recommendations" :collectionAddress="item.collection.contract_address"/>
       </div>
     </section>
   </main>
