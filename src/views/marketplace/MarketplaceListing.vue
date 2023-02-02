@@ -141,11 +141,15 @@
                         @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">
                   {{translatesGet('START_VOTING')}}
                 </button>
+                <button class="btn btn-deposit" v-if="(userAddress!=null & userBidBuyedAll)"
+                  @click="this.$store.dispatch('appGlobal/setShowClaimNftModal',true)">
+                  {{translatesGet('CLAIM_NFT')}}
+                </button>
                 <button class="btn btn-get"
                   @click="this.$store.dispatch('appGlobal/setShowSellPartModal',true)"
                   v-if="userCanSoldFraction">
                   {{translatesGet('SELL_NFT')}}
-                </button>
+                </button>                
               </div>
               <div class="section-deposit-labels" v-if="userBid!=null">
                 <div class="deposit-label" v-if="userBid.status == 'ON SALE'">
