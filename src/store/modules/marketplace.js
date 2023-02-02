@@ -271,8 +271,15 @@ export default {
     },
     async fetchAndSetListingsNextInfo(context) {
       let requestUrl = context.getters.getNextListingLink;
+      let requestOptions = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      };
       if (requestUrl != null) {
-        let request = await fetch(requestUrl);
+        let request = await fetch(requestUrl,requestOptions);
         let requestCode = request.ok;
         if (requestCode) {
           let requestJson = await request.json();
