@@ -72,7 +72,7 @@
                             </div>
                             <div class="btn link-wrapper">
                                 <div class="link">{{this.$store.getters['walletsAndProvider/getUserShortAddress']}}</div>
-                                <button class="btn-copy profile-copied" @click='copy()'><i class="i-checkbox-multiple-blank-line"></i></button>
+                                <button class="btn-copy profile-copied" @click='copy();showCopyMessage();'><i class="i-checkbox-multiple-blank-line"></i></button>
                             </div>
                         </div>
                         <div class="profile-container-btns">
@@ -281,6 +281,11 @@ export default {
         },
         clearLocalStorage(){
             localStorage.clear();
+        },
+        async showCopyMessage(){
+            await this.$store.dispatch('appGlobal/setSnackText', 'Copied!')
+            await this.$store.dispatch('appGlobal/setGreenSnack', true)
+            await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)
         }
     },
 
