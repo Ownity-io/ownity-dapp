@@ -9,7 +9,7 @@
                 <div class="td td-date">{{translatesGet('ACTIVITY_THEAD-5')}}</div>
             </div>
                 
-            <a :href="'/listing/'+item.lot.collection.contract_address+'/'+item.lot.token_id+'&'+item.lot.id" class="tr" :class="{'tr-mob-collapse' : !rowMobileCollapse}" v-for="item in this.$store.getters['marketplace/getActivitiesResult']">
+            <a :href="'/listing/'+item.lot.collection.contract_address+'/'+item.lot.token_id+'&'+item.lot.id" class="tr" v-for="(item, index) in this.$store.getters['marketplace/getActivitiesResult']" :class="{'tr-mob-collapse' : !activeList.includes(index)}">
                 <div class="td">
                     <div class="td-wrap td-wrap-collection">
                         <a :href="'/listing/'+item.lot.collection.contract_address+'/'+item.lot.token_id+'&'+item.lot.id" class="collection-img" :style="{backgroundImage: `url(${item.lot.media})`}"></a>
@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <button class="btn-mobile-tr-collapse" 
-                    @click="rowMobileCollapse = !rowMobileCollapse">
+                    @click.prevent="openDropDown(index)">
                     <i class="i-arrow-down-s-line"></i>
                 </button>
             </a>
@@ -116,7 +116,7 @@ export default {
     data(){
         return{
             useHelpers: helpers,
-            rowMobileCollapse: false,
+            activeList: [],
             lang: new MultiLang(this),
             userAddress:null,
             config:config,
@@ -130,6 +130,15 @@ export default {
       }
     },
     methods: {
+        openDropDown(idx){
+          if(!this.activeList.includes(idx)){
+            this.activeList.push(idx)
+          } else {
+            this.activeList = this.activeList.filter(el => {
+              return el !== idx
+            })
+          }
+        },
         translatesGet(key) {
             return this.lang.get(key);
         },
