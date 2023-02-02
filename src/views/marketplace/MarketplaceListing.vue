@@ -484,7 +484,7 @@
                         <div class="tr" v-for="bid in this.item.bids" :key="bid">
                         <div class="td td-owner">
                           <a
-                            class="td-wrap"
+                            class="td-wrap own"
                             :href="`${config.etherscanAddressUrlStart+bid.address}`"
                             target="_blank"
                             rel="nofollow"

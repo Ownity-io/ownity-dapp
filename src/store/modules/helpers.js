@@ -4,7 +4,7 @@ export default {
     state:{
         usdRate: null,
         activeCollectionLink: false,
-
+        
         filterMobile: false
     },
     mutations:{

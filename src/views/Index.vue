@@ -15,7 +15,7 @@
     <FractionActivity v-if="this.$store.getters['appGlobal/getShowVoteInfoModal'] & (this.walletConnected!=null & this.walletConnected!='null')" />
     <contact-us v-if="this.$store.getters['appGlobal/getShowContactUsModal']" />
     <attention-block/>
-    <div class="wrapper-main">
+    <div class="wrapper-main" :class="{fix: (this.$store.getters['appGlobal/getShowMobileBurgerMenu'])}">
         <HeaderComponent/>
         <RouterView />    
     </div>
