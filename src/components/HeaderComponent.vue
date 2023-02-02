@@ -48,7 +48,7 @@
                         </button>
                     </div>
                     <div class="btn-container" v-else-if="this.$store.getters['walletsAndProvider/getUserShortAddress']">
-                        <router-link :to="{path: '/profile/all'}" class="btn btn-address" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/clearListingsInfo');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')">
+                        <router-link :to="{path: '/profile/all'}" class="btn btn-address" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/clearListingsInfo');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser',true)">
                             <jazzicon :address="userAddress" :diameter="32" class="icon-address" v-if="userAddress"/>
                             <div class="icon-address" v-else></div>
                             <span>{{this.$store.getters['walletsAndProvider/getUserShortAddress']}}</span>
