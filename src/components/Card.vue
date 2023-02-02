@@ -1,7 +1,7 @@
 <template>
   <!-- <a class="card card-finished" :class="{'card-inactive' : false}"> -->
   <img :src="item.media" alt="forLoadCheck" @load="onImgLoad" style="display: none;">
-  <div v-if="render" class="card" ref="wrpCard" :class="{'card-inactive' : ((this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN'))||(this.item.internal_status=='CLAIMED')||bidRewarded),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER')}">
+  <div v-if="render" class="card"  ref="wrpCard" :class="{'card-inactive' : ((this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN'))||(this.item.internal_status=='CLAIMED')||bidRewarded),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER'), 'hides': hidesClass}">
     <div class="card-main">
       <div class="loading"></div> <!--  used when loading-->
 
@@ -446,7 +446,8 @@ export default {
       userAddress:false,
       bidRewarded:false,
       votingsOnSale:[],
-      isLoaded:false
+      isLoaded:false,
+      hidesClass:false
     };
   },
   computed: {
@@ -619,6 +620,10 @@ export default {
     }
   },
   async mounted(){
+    if (this.$route.name == 'Marketplace'){
+        this.hidesClass = !this.hidesClass
+				console.log(this.hidesClass)
+			}
     let userAddress = localStorage.getItem('userAddress');
     if (userAddress!=null & userAddress!='null'){
       this.userAddress = userAddress;
