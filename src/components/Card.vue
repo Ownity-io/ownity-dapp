@@ -330,7 +330,7 @@
         </div>
 
         <!-- ######## 2 ######## -->
-        <div class="container-btn-part" v-if="showUserBidOnSale">
+        <div class="container-btn-part" v-if="showUserBidOnSale & (item.internal_status=='SOLD' & userBidAmount>0 & !bidRewarded)">
           <div class="card-col">
             <span class="card-col-name">{{translatesGet('PART')}}</span>
             <span><strong>{{useHelpers.toFixedIfNecessary(userBidOnSale.fraction_amount/10**18,1)}}%</strong></span>
