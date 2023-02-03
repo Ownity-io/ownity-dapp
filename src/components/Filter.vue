@@ -208,7 +208,7 @@ export default {
     async fetchAndSetListingsStartInfoMaxPrice() {
       await this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', this.maxPrice);
       await this.$store.dispatch('marketplace/getAndSetCurrentMinPrice', this.minPrice);
-      if (this.maxPrice!=null){
+      // if (this.maxPrice!=null){
         if (this.$route.name == 'Marketplace') {
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
         }
@@ -226,7 +226,7 @@ export default {
             await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
           }
         }
-      }
+      // }
     },
     checkMaxPrice(){
       if (this.maxPrice === '') {
@@ -245,7 +245,7 @@ export default {
     async fetchAndSetListingsStartInfoMinPrice() {
       await this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', this.maxPrice);
       await this.$store.dispatch('marketplace/getAndSetCurrentMinPrice', this.minPrice);
-      if (this.minPrice!=null){
+      // if (this.minPrice!=null){
         if (this.$route.name == 'Marketplace') {
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
         }
@@ -263,7 +263,7 @@ export default {
             await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
           }
         }
-      }
+      // }
     },
     async checkMinPrice(e) {
       if (this.minPrice === '') {
