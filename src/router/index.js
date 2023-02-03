@@ -33,7 +33,7 @@ const routes = [
                 
                 children: [
                     {
-                        path: '',
+                        path: ':tab?',
                         name: 'Marketplace',
                         component: () => import('@/views/marketplace/MarketplaceMain.vue'),
                     },

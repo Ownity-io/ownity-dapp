@@ -30,19 +30,19 @@
       <div class="container">
         <ul class="tabs">
           <li>
-            <button @click="activeTab = 0; this.$store.dispatch('marketplace/setAllFiltersToNull');initInfo()" :class="{ 'active-tab': activeTab == 0 }">
+            <button @click="letsSwitchActiveTab(0, 'all')" :class="{ 'active-tab': activeTab == 0 }">
               <span>{{translatesGet('ITEMS')}}</span>
               <span>{{translatesGet('ITEMS')}}</span>
             </button>
           </li>
           <li>
-            <button @click="activeTab = 2; this.$store.dispatch('marketplace/setAllFiltersToNull');initInfo()" :class="{ 'active-tab': activeTab == 2 }">
+            <button @click="letsSwitchActiveTab(2, 'shares')" :class="{ 'active-tab': activeTab == 2 }">
               <span>{{translatesGet('SHARES_SALE')}}</span>
               <span>{{translatesGet('SHARES_SALE')}}</span>
             </button>
           </li>
           <li>
-            <button @click="activeTab = 1; this.$store.dispatch('marketplace/setAllFiltersToNull');initInfo()" :class="{ 'active-tab': activeTab == 1 }">
+            <button @click="letsSwitchActiveTab(1, 'activity')" :class="{ 'active-tab': activeTab == 1 }">
               <span>{{translatesGet('ACTIVITY')}}</span>
               <span>{{translatesGet('ACTIVITY')}}</span>
             </button>
@@ -130,6 +130,11 @@ import {mapGetters, mapMutations} from "vuex";
 export default {
   data() {
     return {
+      tabList: {
+        all: 0,
+        shares: 2,
+        activity: 1
+      },
       switchActive: 0,
       activeTab: 0,
       testOpenSort: false,
@@ -151,12 +156,23 @@ export default {
   },
   async mounted(){
     window.scrollTo(0, 0);
+    if( this.$route.params.tab) {
+      this.activeTab = this.tabList[`${this.$route.params.tab}`]
+    } else {
+      this.activeTab = this.tabList.all
+    }
     await this.initInfo();
   },
   methods:{
     ...mapMutations(['updateFilterMobile']),
     translatesGet(key) {
       return this.lang.get(key);
+    },
+    letsSwitchActiveTab(x, tab){
+      this.activeTab = x;
+      this.$router.push(`/marketplace/${tab}`)
+      this.$store.dispatch('marketplace/setAllFiltersToNull');
+      this.initInfo()
     },
     async initInfo(){
       if (this.activeTab == 1) {
