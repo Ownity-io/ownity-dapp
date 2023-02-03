@@ -1,5 +1,5 @@
 <template>
-    <div class="page-wrapper page-profile">
+    <div class="page-wrapper page-profile" v-if="render">
         <main>
             <FilterMobile v-if="getFilterMobile" :onlyFav="activeTab == 'Favourites'" :vote="activeTab == 'Vote'" :activities = "activeTab == 'ActivityTable'" />
             <!-- <div  class="filter-mobile-wrap">
@@ -219,7 +219,8 @@ export default {
           config:config,
           lang: new MultiLang(this),
           userAddress:null,
-          copy:copy
+          copy:copy,
+          render:false
       };
   },
   components:{
@@ -291,12 +292,18 @@ export default {
 
   async mounted() {
     this.userAddress = localStorage.getItem('userAddress');
+    if(this.userAddress!='null' & this.userAddress!=null){
+        this.activeTab = this.$route.params.tab ? this.tabList[`${this.$route.params.tab}`] : this.tabList.all
+        this.letsCheck(this.activeTab, true)
+        await this.fetchAndSetNftCollections()
+        await this.fetchAndSetMarketplaces()
+        this.render=true;
+    }
+    else{
+    this.$router.push({name:'404'})    
+    }
 
-    this.activeTab = this.$route.params.tab ? this.tabList[`${this.$route.params.tab}`] : this.tabList.all
-    this.letsCheck(this.activeTab, true)
-
-    await this.fetchAndSetNftCollections()
-    await this.fetchAndSetMarketplaces()
+    
   },
 }
 </script>

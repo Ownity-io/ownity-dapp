@@ -79,6 +79,7 @@ const routes = [
                 component: () => import('@/views/services/PrivacyPolicy.vue'),  
             },
             {
+                name: '404',
                 path: '/:pathMatch(.*)*',
                 component: () => import('@/views/404.vue'),
             },
