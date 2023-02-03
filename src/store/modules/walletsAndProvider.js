@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import config from "@/config.json";
+const {ethereum} = window;
 export default {
   namespaced: true,
   state() {
@@ -43,7 +44,7 @@ export default {
   actions: {
     async connectToMetamask(context) {
       try {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const provider = new ethers.providers.Web3Provider(ethereum);
         await provider.send("eth_requestAccounts", []);        
         context.commit('setGlobalProvider',provider);   
         await provider.send('wallet_switchEthereumChain',[{ chainId: "0x5"}]);     
@@ -107,7 +108,7 @@ export default {
               return new Promise((resolve) => setTimeout(resolve, delayInms));
             };
             await delay(1000);
-            location.reload();
+            //! location.reload();
           }          
         }else if (Date.parse(localStorage.getItem('tokenEndTimestamp'))<Date.now()){
           //gettoken with refesh-token
@@ -123,7 +124,7 @@ export default {
               body: JSON.stringify({refresh: localStorage.getItem('refreshToken')})
             }
           );
-          requestJson = await request.json();
+          let requestJson = await request.json();
           //write info to localStorage
           localStorage.setItem('token', requestJson.access);
           localStorage.setItem('tokenEndTimestamp', (Date.now()/1000)+86400);
@@ -135,15 +136,16 @@ export default {
         localStorage.setItem('connectedWallet','metamask');
         localStorage.setItem('userAddress',await provider.getSigner().getAddress());
         
-        ethereum.on('accountsChanged', function () {
+        ethereum.on('accountsChanged', async () => {
           // console.log('CHANGE');
           let connectedWallet = localStorage.getItem('connectedWallet');
           if (connectedWallet == 'metamask'){
-            context.dispatch('connectToMetamask');
+            await context.dispatch('connectToMetamask');
           }
           else{
-            context.dispatch('connectWithWalletConnect');
-          }          
+            await context.dispatch('connectWithWalletConnect');
+          }
+          location.reload()
           //  localStorage.removeItem("connectedWallet", null);
           //  context.
         })
@@ -171,10 +173,12 @@ export default {
         await provider.enable()
         const web3Provider = new ethers.providers.Web3Provider(provider);
         context.commit('setGlobalProvider',web3Provider);
-        await web3Provider.send(
-          'wallet_switchEthereumChain',
-          [{ chainId: "0x5"}],
-        );
+
+        // await web3Provider.send(    // ?
+        //   'wallet_switchEthereumChain',
+        //   [{ chainId: "0x5"}],
+        // );
+
         let userAddress = await web3Provider.getSigner().getAddress();
         if (localStorage.getItem('userAddress')!=userAddress){
           // localStorage.setItem('userAddress',null);
@@ -242,7 +246,7 @@ export default {
               body: JSON.stringify({refresh: localStorage.getItem('refreshToken')})
             }
           );
-          requestJson = await request.json();
+          let requestJson = await request.json();
           //write info to localStorage
           localStorage.setItem('token', requestJson.access);
           localStorage.setItem('tokenEndTimestamp', (Date.now()/1000)+86400);
