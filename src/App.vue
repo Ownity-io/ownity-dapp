@@ -1,7 +1,7 @@
 <template>
     <SnackBar v-if="this.$store.getters['appGlobal/getShowSnackBar']"/>
     <!-- <Cookies /> -->
-    <ConnectWallet v-if="this.$store.getters['appGlobal/getShowConnectWalletModal'] & (this.walletConnected==null||this.walletConnected=='null')"/>
+    <ConnectWallet v-if="this.$store.getters['appGlobal/getShowConnectWalletModal'] && (!this.walletConnected || this.walletConnected === 'null')"/>
 
     <RouterView />  
 </template>
