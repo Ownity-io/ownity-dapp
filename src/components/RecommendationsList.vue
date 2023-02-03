@@ -13,7 +13,7 @@
         </div>
         <ul class="recommendations-list">
           <li v-for="item in cards" :key="item">
-            <Card :item="item"/>
+            <Card :item="item" @updateListingPage="updateListingPage" />
           </li>
         </ul>
         <div class="btn-mobile-wrap">
@@ -57,6 +57,9 @@ export default {
     translatesGet(key) {
       return this.lang.get(key);
     },
+    updateListingPage(){
+      this.$emit('updateListingPage');
+    }
   }
 }
 

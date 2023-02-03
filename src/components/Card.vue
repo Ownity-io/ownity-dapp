@@ -279,9 +279,9 @@
         </div>
       </div>
       <div class="btn-container">
-        <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="btn" v-if="this.$route.name=='Listing'">
+        <button class="btn" v-if="this.$route.name=='Listing'" @click="pushToNewListing">
           {{translatesGet('BUY_TOGETHER')}}
-        </a>
+        </button>
         <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setshowStartCollectingModal');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & userAddress!=false & this.$route.name!='Listing'">
           {{translatesGet('BUY_TOGETHER')}}
         </router-link>
@@ -617,6 +617,12 @@ export default {
       }
     }
       this.isLoaded=true;
+    },
+    async pushToNewListing(){
+      await this.$store.dispatch('marketplaceListing/getAndSetItem',this.item.id);
+      this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setshowStartCollectingModal');
+      this.$router.push(`/listing/${this.item.collection.contract_address}/${this.item.token_id}&${this.item.id}`);
+      this.$emit('updateListingPage');
     }
   },
   async mounted(){

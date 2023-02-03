@@ -623,7 +623,7 @@
     </div>
     <section class="section-recommendation" v-if="recommendations">
       <div class="container">
-        <RecommendationsList :items="recommendations" :collectionAddress="item.collection.contract_address"/>
+        <RecommendationsList :items="recommendations" :collectionAddress="item.collection.contract_address" @updateListingPage="refreshInfoFromRecommendationListCard"/>
       </div>
     </section>
   </main>
@@ -857,8 +857,55 @@ export default {
         this.isRefreshing=false;        await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
         await this.$store.dispatch('appGlobal/setGreenSnack', false)
         await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 5)      
+      }            
+    },
+    async refreshInfoFromRecommendationListCard(){
+      this.$forceUpdate();       
+      this.isRefreshing=true;
+      window.scrollTo(0, 0);
+      try{
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        this.activeTab = "ListingInfo";
+        this.activeTab2 = "ListingInfo2";
+        this.item = await this.$store.getters['marketplaceListing/getItem'];
+        this.itemWithBidsOnSale = await (await fetch(`${config.backendApiEntryPoint}listing-with-on-sale-bids/${this.item.id}`)).json();
+        this.setPriceInCurrency();
+        this.setLinkToMarketplacePage();
+        await this.setMaxVoting();
+        this.setLinkToMarketplacePageFromVotingOnSale();
+        this.setAllBidsAmount();
+        this.setUserBidAmount();
+        this.setChartData();
+        await this.$store.dispatch('marketplaceListing/checkLike');
+        await this.checkLike();
+        this.$store.dispatch('marketplaceListing/fetchAndSetContractConfig');
+        this.recommendations = await this.$store.dispatch('marketplaceListing/getRecomendations', this.item.collection.contract_address);
+        if (await this.$store.getters['marketplaceListing/getModalToShowAtStart'] != null) {
+          if ((await this.$store.getters['marketplaceListing/getModalToShowAtStart']) == 'FractionMarket') {
+            this.letsCheck2('ListingFractionMarket')
+          } else {
+            await this.$store.dispatch(await this.$store.getters['marketplaceListing/getModalToShowAtStart'], true);
+            await this.$store.dispatch('marketplaceListing/setModalToShowAtStart', null);
+          }
+
+        }
+        if (this.userBid) {
+          if (this.userBid.status == 'REWARDED') {
+            this.bidRewarded = true;
+          }
+        }
+        let requestUrl = `${config.backendApiEntryPoint}marketplaces/`;
+        let request = await fetch(requestUrl);
+        this.marketplaces = await request.json();
+        this.setUserCanSoldFraction();
+        this.render = true;
+        
+
+        
+      }
+      catch {
+        this.isRefreshing = false;
       }      
-      
     },
     setUserCanSoldFraction(){
       let userBidOnSaleAmount = 0;
