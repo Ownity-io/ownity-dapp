@@ -48,12 +48,12 @@
                                                 {{translatesGet('SHARE')}}
                                             </span>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <i class="i-logout-box-line"></i>
                                             <span>
                                                 {{translatesGet('LOG_OUT')}}
                                             </span>
-                                        </li>
+                                        </li> -->
                                         <li>
                                             <router-link :to="{name:'Main'}" @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',false);clearLocalStorage()">
                                                 <i class="i-logout-box-line"></i>
