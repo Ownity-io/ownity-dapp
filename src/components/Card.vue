@@ -652,8 +652,9 @@ export default {
         this.bidRewarded=true;
       }
     }
-    this.render=true;
     await this.checkLike();
+    this.render=true;
+    
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
     }
