@@ -46,18 +46,24 @@
                     <i class="i-close-line"></i>
                 </button>
             </li>
-            <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')" v-if="!activities">
+            <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')" v-if="!activities && !newActivities">
                 <button class="btn btn-selected-filter btn-reset">
                     <span>{{translatesGet('CLEAR_ALL')}}</span>
                     <i class="i-close-line"></i>
                 </button>
             </li>
-            <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:null})" v-if="activities">
+            <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:null})" v-if="activities && (!newActivities || newActivities === 1)">
                 <button class="btn btn-selected-filter btn-reset">
                     <span>{{translatesGet('CLEAR_ALL')}}</span>
                     <i class="i-close-line"></i>
                 </button>
             </li>
+          <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchSharesSale')" v-if="!activities && newActivities === 2">
+            <button class="btn btn-selected-filter btn-reset">
+              <span>{{translatesGet('CLEAR_ALL')}}</span>
+              <i class="i-close-line"></i>
+            </button>
+          </li>
         </ul>
         <ul v-if="this.$store.getters['marketplace/getFiltersCount']>0 & this.$route.name=='Profile'">   
             <li v-if="this.$store.getters['marketplace/getCurrentlyGathering']!=false" @click="this.$store.dispatch('marketplace/setCurrentlyGathering',false);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')">
@@ -207,7 +213,7 @@ export default {
       return this.lang.get(key);
     },
   },
-  props:['activities', 'onlyFav', 'vote'],
+  props:['activities', 'onlyFav', 'vote', 'newActivities'],
   mounted(){
     this.userAddress = localStorage.getItem('userAddress');
   }
