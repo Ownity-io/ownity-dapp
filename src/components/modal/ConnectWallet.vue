@@ -60,6 +60,9 @@ export default {
   },
   mounted(){
     this.checkMetamaskInstalled();
+  },
+  unmounted() {
+    document.body.classList.remove("fix-content");
   }
 };
 </script>
