@@ -1,7 +1,7 @@
 <template>
   <main>
     <div v-if="getFilterMobile" class="filter-mobile-wrap">
-      <FilterMobile v-if="getFilterMobile" :activities = "activeTab == 1" />
+      <FilterMobile v-if="getFilterMobile" :activities = "activeTab == 1" :newActivities = "activeTab" />
       <!-- <div class="filter-mobile-container">
         <div class="filter-mobile-header">
             <div>{{translatesGet('FILTERS')}}</div>
@@ -30,13 +30,19 @@
       <div class="container">
         <ul class="tabs">
           <li>
-            <button @click="activeTab = 0;this.$store.dispatch('marketplace/setAllFiltersToNull');initInfo()" :class="{ 'active-tab': activeTab == 0 }">
+            <button @click="activeTab = 0; this.$store.dispatch('marketplace/setAllFiltersToNull');initInfo()" :class="{ 'active-tab': activeTab == 0 }">
               <span>{{translatesGet('ITEMS')}}</span>
               <span>{{translatesGet('ITEMS')}}</span>
             </button>
           </li>
           <li>
-            <button @click="activeTab = 1;this.$store.dispatch('marketplace/setAllFiltersToNull');initInfo()" :class="{ 'active-tab': activeTab == 1 }">
+            <button @click="activeTab = 2; this.$store.dispatch('marketplace/setAllFiltersToNull');initInfo()" :class="{ 'active-tab': activeTab == 2 }">
+              <span>{{translatesGet('SHARES_SALE')}}</span>
+              <span>{{translatesGet('SHARES_SALE')}}</span>
+            </button>
+          </li>
+          <li>
+            <button @click="activeTab = 1; this.$store.dispatch('marketplace/setAllFiltersToNull');initInfo()" :class="{ 'active-tab': activeTab == 1 }">
               <span>{{translatesGet('ACTIVITY')}}</span>
               <span>{{translatesGet('ACTIVITY')}}</span>
             </button>
@@ -69,8 +75,8 @@
             <div class="param-wrap switch">
               <button
                 class="btn btn-param btn-switch"
-                @click="switchActive = 0"
-                :class="{ 'switch-active': switchActive == 0 }"
+                @click="switchActive = 2"
+                :class="{ 'switch-active': switchActive == 2 }"
               >
                 <i class="i-layout-grid-line"></i>
               </button>
@@ -89,12 +95,14 @@
     <div class="container">
       <section class="section-nft" :class="{ 'with-filter': filter }">
         <div v-if="filter" class="section-nft-filter" :class="{'filter-mobile': getFilterMobile}">
-          <Filter :activities = "activeTab == 1"/>
+          <Filter :activities = "activeTab == 1" :newActivities = "activeTab"/>
         </div>
         <div class="section-nft-list" :class="{'card-collapse' : switchActive == 1}">
-          <SelectedFilters v-if="filter" :activities = "activeTab == 1"/>
+          <SelectedFilters v-if="filter" :activities = "activeTab == 1" :newActivities = "activeTab"/>
           <ListCards v-if="activeTab == 0" />
+          <SharesSaleTable v-if="activeTab === 2" />
           <ActivityTable v-if="activeTab == 1" />
+
           <button v-if="activeTab == 0" class="btn-filter-mobile" @click="updateFilterMobile(true)">
             <i class="i-filter-2-line" ></i>
             <span>{{translatesGet('FILTER')}}</span>
@@ -111,6 +119,7 @@ import Filter from "@/components/Filter.vue";
 import FilterMobile from "@/components/FilterMobile.vue";
 import ListCards from "@/components/ListCards.vue";
 import ActivityTable from "@/components/ActivityTable.vue";
+import SharesSaleTable from "@/components/SharesSaleTable.vue";
 import Breadcrumbs from "@/components/Breadcrumbs.vue";
 import SelectedFilters from "@/components/SelectedFilters.vue";
 import SortBar from '@/components/SortBar.vue'
@@ -135,6 +144,7 @@ export default {
     FilterMobile,
     ListCards,
     ActivityTable,
+    SharesSaleTable,
     Breadcrumbs,
     SelectedFilters,
     SortBar
@@ -152,7 +162,9 @@ export default {
       if (this.activeTab == 1) {
         await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:null});
       }
-      else {
+      if(this.activeTab == 2){
+        await this.$store.dispatch('marketplace/fetchSharesSale');
+      } else {
         await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
         await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
         await this.$store.dispatch('marketplace/fetchAndSetMarketplaces');

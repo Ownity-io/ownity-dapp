@@ -4,6 +4,10 @@ export default {
   namespaced: true,
   state() {
     return {
+      nextSharesLink: null,
+      prevSharesLink: null,
+      sharesResults: [],
+      lastSharesResponse: null,
       //listings
       nextListingLink: null,
       prevListingLink: null,
@@ -31,6 +35,18 @@ export default {
     };
   },
   getters: {
+    getNextSharesLink(state) {
+      return state.nextSharesLink;
+    },
+    getPrevSharesLink(state) {
+      return state.prevSharesLink;
+    },
+    getSharesResults(state) {
+      return state.sharesResults;
+    },
+    getLastSharesResponse(state) {
+      return state.lastSharesResponse;
+    },
     //listings
     getNextListingLink(state) {
       return state.nextListingLink;
@@ -132,6 +148,20 @@ export default {
     }
   },
   mutations: {
+    setSharesSale(state, _json){
+      if (_json!=null){
+        state.nextSharesLink = _json.next;
+        state.prevSharesLink = _json.previous;
+        state.sharesResults = _json.results;
+      }
+      else{
+        state.nextSharesLink = null;
+        state.prevSharesLink = null;
+        state.sharesResults = [];
+      }
+
+      state.lastSharesResponse = _json;
+    },
     //listings
     setListingsInfo(state, _json) {
       if (_json!=null){
@@ -146,6 +176,14 @@ export default {
       }
       
       state.lastListingsResponse = _json;
+    },
+    addSharesInfo(state, _json) {
+      if (_json != null) {
+        state.nextSharesLink = _json.next;
+        state.prevSharesLink = _json.previous;
+        state.sharesResults = state.sharesResults.concat(_json.results);
+      }
+      state.lastSharesResponse = _json;
     },
     addListingsInfo(state, _json) {
       if (_json != null) {
@@ -222,6 +260,55 @@ export default {
     }
   },
   actions: {
+    async fetchSharesSale(context, _collectionContractAddress = null, isFirst){
+      try {
+        let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.activitiesPerPage}&bid_status=ON%20SALE`
+
+        if (_collectionContractAddress==null){
+          if (context.getters.getCurrentCollectionContractAddress != null) {
+            requestUrl += `&collection=${context.getters.getCurrentCollectionContractAddress}`;
+          }
+        }
+        else{
+          requestUrl += `&collection=${_collectionContractAddress}`;
+        }
+
+        if (context.getters.getCurrentMarketplaceId != null) {
+          requestUrl += `&marketplace=${context.getters.getCurrentMarketplaceId}`;
+        }
+        if (context.getters.getCurrentMinPrice!=null){
+          requestUrl += `&price_gt=${ethers.utils.parseEther(String(context.getters.getCurrentMinPrice)).toString()}`;
+        }
+        if (context.getters.getCurrentMaxPrice!=null){
+          requestUrl += `&price_lt=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
+        }
+        if (context.getters.getSelectedSort!=null){
+          requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;
+        }
+        if(isFirst && !requestUrl.includes('&ordering')){
+          requestUrl+='&ordering=-timestamp'
+        }
+
+        if (context.getters.getCurrentlyGathering){
+          requestUrl+='&internal_status=GATHER';
+        }
+        if (context.getters.getSearchString!=''){
+          requestUrl+=`&search=${context.getters.getSearchString}`;
+        }
+        // requestUrl+='&marketplace_status=OPEN';
+
+        let request = await fetch(requestUrl);
+        let requestCode = request.ok;
+        if (requestCode) {
+          let requestJson = await request.json();
+          context.commit("setSharesSale", requestJson);
+        } else {
+          context.commit("setSharesSale", null);
+        }
+      } catch (e){
+        console.log(e.message)
+      }
+    },
     //listings
     async fetchAndSetListingsStartInfo(context,_collectionContractAddress = null,isFirst) {
       let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.listingsPerPage}&currency=0x0000000000000000000000000000000000000000`;
@@ -267,6 +354,22 @@ export default {
       } else {
         context.commit("setListingsInfo", null);
         return false
+      }
+    },
+    async fetchAndSetSharesNextInfo(context) {
+      let requestUrl = context.getters.getNextSharesLink;
+      if (requestUrl !== null) {
+        let request = await fetch(requestUrl);
+
+        let requestCode = request.ok;
+        if (requestCode) {
+          let requestJson = await request.json();
+          context.commit("addSharesInfo", requestJson);
+        } else {
+          context.commit("addSharesInfo", null);
+        }
+      } else {
+        context.commit("addSharesInfo", null);
       }
     },
     async fetchAndSetListingsNextInfo(context) {

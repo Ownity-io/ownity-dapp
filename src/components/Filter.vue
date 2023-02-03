@@ -150,7 +150,7 @@ import config from '@/config.json';
 import MultiLang from "@/core/multilang";
 import { vue3Debounce } from 'vue-debounce';
 export default {
-  props:['onlyFav','vote','activities'],
+  props:['onlyFav','vote','activities', 'newActivities'],
 
   data() {
     return {
@@ -176,10 +176,15 @@ export default {
     async fetchAndSetListingsStartInfo() {
       if (this.$route.name == 'Marketplace'){
         if(this.activities){
-          await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:null});
-        }
-        else{
-          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',null,true);
+          if(this.newActivities === 1) {
+            await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:null});
+          }
+
+          if(this.newActivities === 2) {
+            await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo', null, true);
+          }
+        } else{
+          await this.$store.dispatch('marketplace/fetchSharesSale');
         }
       }
       else if (this.$route.name == 'Collection'){

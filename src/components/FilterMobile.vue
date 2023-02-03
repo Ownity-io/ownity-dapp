@@ -22,7 +22,7 @@ import MultiLang from "@/core/multilang";
 import {mapMutations} from "vuex";
 
 export default {
-   props:['onlyFav','vote','activities'],
+   props:['onlyFav','vote','activities', 'newActivities'],
     data() {
         return{
             lang: new MultiLang(this),
