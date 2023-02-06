@@ -306,7 +306,7 @@
         <button class="btn"  @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)" v-if="bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0  & !userAddress">
           {{translatesGet('BUY')}}
         </button>
-        <div v-if="(item.marketplace_status=='CLOSED' & item.internal_status=='OWNED' & this.voting==null) & userBidAmount>0 & !userBidOnSale" class="container-btn-part container-btn-part-vote">
+        <div v-if="((item.marketplace_status=='CLOSED'||item.marketplace_status=='OPEN') & item.internal_status=='OWNED' & this.voting==null) & userBidAmount>0 & !userBidOnSale" class="container-btn-part container-btn-part-vote">
           <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setShowStartVotingModal');" class="btn btn-vote" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" >
             {{translatesGet('VOTE')}}
           </router-link>
@@ -330,7 +330,7 @@
         </div>
 
         <!-- ######## 2 ######## -->
-        <div class="container-btn-part" v-if="userBidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0">
+        <div class="container-btn-part" v-if="userBidOnSale!=null & item.internal_status=='OWNED'">
           <div class="card-col">
             <span class="card-col-name">{{translatesGet('PART')}}</span>
             <span><strong>{{useHelpers.toFixedIfNecessary(userBidOnSale.fraction_amount/10**18,1)}}%</strong></span>
@@ -628,8 +628,11 @@ export default {
   async mounted(){
     if (this.$route.name == 'Marketplace'){
         this.hidesClass = !this.hidesClass
-				console.log(this.hidesClass)
 			}
+
+    if(this.$route.path === '/marketplace/shares'){
+      this.hidesClass = false
+    }
     let userAddress = localStorage.getItem('userAddress');
     if (userAddress!=null & userAddress!='null'){
       this.userAddress = userAddress;

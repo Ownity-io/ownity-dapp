@@ -71,7 +71,7 @@
             <Search />
           </div>
           <SortBar :activeTab="activeTab"/>
-          <div class="params-block params-block-switch" v-if="activeTab == 0">
+          <div class="params-block params-block-switch" v-if="activeTab == 0 || activeTab == 2">
             <div class="param-wrap switch">
               <button
                 class="btn btn-param btn-switch"
@@ -157,7 +157,11 @@ export default {
   async mounted(){
     window.scrollTo(0, 0);
     if( this.$route.params.tab) {
-      this.activeTab = this.tabList[`${this.$route.params.tab}`]
+      if(this.tabList[`${this.$route.params.tab}`]){
+        this.activeTab = this.tabList[`${this.$route.params.tab}`]
+      } else {
+        this.$router.push('/404')
+      }
     } else {
       this.activeTab = this.tabList.all
     }
@@ -180,6 +184,8 @@ export default {
       }
       if(this.activeTab == 2){
         await this.$store.dispatch('marketplace/fetchSharesSale');
+        await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
+        await this.$store.dispatch('marketplace/fetchAndSetMarketplaces');
       } else {
         await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
         await this.$store.dispatch('marketplace/fetchAndSetNftCollections');

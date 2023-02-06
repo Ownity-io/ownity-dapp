@@ -205,7 +205,7 @@ export default {
               "marketplace_id": this.checkedMarketplaces,
               "lot_id": this.item.id,
               "currency": this.item.currency.address,
-              "amount": this.noExponents(this.amount * 10 ** this.item.currency.decimals),
+              "amount": this.noExponents(parseInt(this.amount * 10 ** this.item.currency.decimals)),
               "end_date": this.item.end_date,
               "signed_message": signed_message,
               "type": "SELL",
