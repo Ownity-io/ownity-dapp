@@ -1,13 +1,13 @@
 {
-    "backendApiEntryPoint":"https://api.jaxscan.com/",
+    "backendApiEntryPoint":"https://api.quantnft.net/",
     "listingsPerPage":20,
     "collectionsPerPage":10,
     "activitiesPerPage":10,
     "messageToSignStart":"Sign the message to continue working with NFT Aggregator: ",
-    "etherscanTokenUrlStart":"https://goerli.etherscan.io/token/",
-    "etherscanAddressUrlStart":"https://goerli.etherscan.io/address/",
-    "etherscanTxUrlStart":"https://goerli.etherscan.io/tx/",
-    "contractAddress":"0xeA6EC71b9D571513B8dd6C027a7DB7ab097DC4Ee",
+    "etherscanTokenUrlStart":"https://etherscan.io/token/",
+    "etherscanAddressUrlStart":"https://etherscan.io/address/",
+    "etherscanTxUrlStart":"https://etherscan.io/tx/",
+    "contractAddress":"0x879dD17E9849858b4b2c3c2fde022Fd32e267aaF",
     "profilePageBidsStatuses":[
         {
             "name":"On sale",
@@ -78,8 +78,19 @@
                 "symbol": "GETH",
                 "decimals": 18
             },
-            "rpcUrls": ["https://eth-goerli.public.blastapi.io"],
+            "rpcUrls": ["https://eth-public.blastapi.io"],
             "blockExplorerUrls": ["https://goerli.etherscan.io/"]
+        },
+        "Ethereum":{
+            "chainId": "0x0",
+            "chainName": "Ethereum",
+            "nativeCurrency": {
+                "name": "Ethereum",
+                "symbol": "ETH",
+                "decimals": 18
+            },
+            "rpcUrls": ["https://eth.llamarpc.com"],
+            "blockExplorerUrls": ["https://etherscan.io/"]
         }
     },
     "activitiesPart":[
