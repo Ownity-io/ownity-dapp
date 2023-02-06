@@ -71,7 +71,7 @@
             <Search />
           </div>
           <SortBar :activeTab="activeTab"/>
-          <div class="params-block params-block-switch" v-if="activeTab == 0">
+          <div class="params-block params-block-switch" v-if="activeTab == 0 || activeTab == 2">
             <div class="param-wrap switch">
               <button
                 class="btn btn-param btn-switch"

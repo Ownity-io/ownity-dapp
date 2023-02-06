@@ -628,8 +628,11 @@ export default {
   async mounted(){
     if (this.$route.name == 'Marketplace'){
         this.hidesClass = !this.hidesClass
-				console.log(this.hidesClass)
 			}
+
+    if(this.$route.path === '/marketplace/shares'){
+      this.hidesClass = false
+    }
     let userAddress = localStorage.getItem('userAddress');
     if (userAddress!=null & userAddress!='null'){
       this.userAddress = userAddress;

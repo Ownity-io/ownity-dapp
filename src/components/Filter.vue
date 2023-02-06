@@ -179,6 +179,9 @@ export default {
           await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:null});
         }
         else{
+          if(this.$route.path === '/marketplace/shares') {
+            await this.$store.dispatch('marketplace/fetchSharesSale');
+          }
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',null,true);
         }
       }
@@ -246,7 +249,9 @@ export default {
       await this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', this.maxPrice);
       await this.$store.dispatch('marketplace/getAndSetCurrentMinPrice', this.minPrice);
       // if (this.minPrice!=null){
+
         if (this.$route.name == 'Marketplace') {
+          //todo price filer for SharesSale
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
         }
         else if (this.$route.name == 'Collection') {
