@@ -1249,6 +1249,9 @@
 
 @media (max-width: 991px) {
     /* @media (max-width: 768px) { */
+    .deposit-value {
+        margin-left: 30px;
+    }
 
     .recommendations-list li,
     .section-nft.with-filter .cards-list-container .card,

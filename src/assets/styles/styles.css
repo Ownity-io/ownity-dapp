@@ -4106,10 +4106,12 @@ a.td-wrap-link span {
     margin-top: 0;
 }
 
+.card.hides .btn-container button,
 .card.hides .btn-container div,
 .card.hides .btn-container a{
     display: none;
 }
+.card.hides:hover .btn-container button,
 .card.hides:hover .btn-container div,
 .card.hides:hover .btn-container a {
     display: flex;
