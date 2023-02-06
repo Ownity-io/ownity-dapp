@@ -827,7 +827,7 @@ export default {
             if (element.status == 'SOLD'){
               this.soldedVoting = element;
             }
-            if (element.status == 'ON SALE' || element.status == 'CANCELED' ||(element.type == 'CANCEL' & element.status == 'FULFILLED')){
+            if (element.status == 'ON SALE' || element.status == 'CANCELED' ||(element.type == 'CANCEL' & element.status == 'FULFILLED')||element.status == 'CLOSED'){
               inactiveVotingsTemp.push(element);
             }
             else if (element.users.length>0){
