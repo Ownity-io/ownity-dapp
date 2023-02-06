@@ -180,6 +180,8 @@ export default {
       }
       if(this.activeTab == 2){
         await this.$store.dispatch('marketplace/fetchSharesSale');
+        await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
+        await this.$store.dispatch('marketplace/fetchAndSetMarketplaces');
       } else {
         await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
         await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
