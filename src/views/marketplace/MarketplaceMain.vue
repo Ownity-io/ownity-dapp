@@ -157,7 +157,11 @@ export default {
   async mounted(){
     window.scrollTo(0, 0);
     if( this.$route.params.tab) {
-      this.activeTab = this.tabList[`${this.$route.params.tab}`]
+      if(this.tabList[`${this.$route.params.tab}`]){
+        this.activeTab = this.tabList[`${this.$route.params.tab}`]
+      } else {
+        this.$router.push('/404')
+      }
     } else {
       this.activeTab = this.tabList.all
     }
