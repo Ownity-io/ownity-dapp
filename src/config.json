@@ -82,7 +82,7 @@
             "blockExplorerUrls": ["https://goerli.etherscan.io/"]
         },
         "Ethereum":{
-            "chainId": "0x0",
+            "chainId": "0x1",
             "chainName": "Ethereum",
             "nativeCurrency": {
                 "name": "Ethereum",

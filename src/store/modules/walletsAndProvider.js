@@ -47,7 +47,7 @@ export default {
         const provider = new ethers.providers.Web3Provider(ethereum);
         await provider.send("eth_requestAccounts", []);        
         context.commit('setGlobalProvider',provider);   
-        await provider.send('wallet_switchEthereumChain',[{ chainId: "0x0"}]);     
+        await provider.send('wallet_switchEthereumChain',[{ chainId: "0x1"}]);     
         let userAddress = await provider.getSigner().getAddress();
         console.log(userAddress);
         console.log(localStorage.getItem('userAddress'));
