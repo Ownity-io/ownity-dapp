@@ -26,10 +26,10 @@
             </div>
 
             <div class="procent">
-              <p>1% = </p>
-              <div class="procent-val">
+              <p>1% ≈ </p>
+              <div class="procent-val">                
+                <p>{{String(useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.item.price/100),6),2)).replace('≈','')}} ETH</p>
                 <div class="val-icon"></div>
-                <p>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.item.price/100),6),2)}} ETH</p>
               </div>
             </div>
           </div>
