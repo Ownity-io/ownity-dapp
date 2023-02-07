@@ -17,10 +17,10 @@
                     <nav>
                         <ul class="">
                             <li>
-                                <router-link :class="active" :to="{name: 'Marketplace'}" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/clearListingsInfo');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')">
+                                <a :class="active" href="/marketplace" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/clearListingsInfo');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')">
                                     <span>{{translatesGet('MARKETPLACE')}}</span>
                                     <span>{{translatesGet('MARKETPLACE')}}</span>
-                                </router-link>
+                                </a>
                             </li>
                             <li v-if="$route.path ==='/'">
                                 <a :class="getActiveCollectionLink && 'active'" ref="screenCollections" href="#screen-collections" >
