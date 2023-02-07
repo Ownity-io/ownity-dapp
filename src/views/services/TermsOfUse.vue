@@ -592,7 +592,7 @@ b {
 }
 ul li,
 ul {
-    display: list-item
+
 }
 
 ol li {
