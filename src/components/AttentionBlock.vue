@@ -2,7 +2,7 @@
   <div class="attention" v-if="closed">
     <div class="container">
       <div class="attention-contaner">
-        <p>The site is in test mode, initiating transactions is at your discretion</p>
+        <p>This is Ownity’s beta release. Use at your own risk.</p>
         <i class="i-close-line" @click="closed = !closed"></i>
       </div>
     </div>
