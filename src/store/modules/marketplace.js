@@ -342,7 +342,10 @@ export default {
       }
       if (context.getters.getSearchString!=''){
         requestUrl+=`&search=${context.getters.getSearchString}`;
-        requestUrl+="&internal_statuses=GATHER&ON%20SALE&OPEN&OWNED";
+        requestUrl+="&internal_statuses=GATHER";
+        requestUrl+="&internal_statuses=ON%20SALE";
+        requestUrl+="&internal_statuses=OPEN";
+        requestUrl+="&internal_statuses=OWNED";
       }
       requestUrl+='&marketplace_status=OPEN';
       console.log(requestUrl)
