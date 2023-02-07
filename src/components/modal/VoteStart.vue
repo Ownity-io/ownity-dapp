@@ -216,7 +216,7 @@ export default {
           let request = await fetch(requestLink, requestOptions);
           let requestJson = await request.json();
           if (requestJson.success) {
-            if (parseInt((requestJson.data[0].voting_percentage.replace('%', ''))) >= 51 & this.item.internal_status!='ON SALE') {
+            if (parseInt((requestJson.data[0].voting_percentage)) >= 51 & this.item.internal_status!='ON SALE') {
               console.log('SHO');
               try{
                 await this.sellLot(requestJson.data)
