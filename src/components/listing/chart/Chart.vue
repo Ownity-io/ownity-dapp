@@ -53,7 +53,7 @@ export default {
     }    
     console.log(tempNames)
     if (tempNames[0]=='You'){
-      this.chartOptions.colors[0] = 'rgba(66, 117, 228, 1)';
+      this.chartOptions.colors[0] = '#993CFC';
     }
     console.log(tempNames);
     this.render = true;
