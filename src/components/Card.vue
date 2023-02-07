@@ -465,7 +465,7 @@ export default {
       return this.lang.get(key);
     },
     setPriceInCurrency(){
-      this.priceInCurrency = this.useHelpers.toFixedIfNecessary((this.item.price / (10**this.item.currency.decimals)),2);
+      this.priceInCurrency = this.useHelpers.toFixedIfNecessary((this.item.price / (10**this.item.currency.decimals)),4);
       if (this.priceInCurrency<=0.0001){
         this.priceInCurrency = '0.0001'
       }
