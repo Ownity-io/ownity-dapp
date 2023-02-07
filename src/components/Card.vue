@@ -288,7 +288,7 @@
         <button class="btn" @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & !userAddress & this.$route.name!='Listing'">
           {{translatesGet('BUY_TOGETHER')}}
         </button>
-        <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setshowContinueCollectingModal');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'  & userAddress!=false">
+        <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setshowContinueCollectingModal');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'  & userAddress!=false & this.$route.name!='Listing'">
           {{translatesGet('DEPOSIT_PART')}}
         </router-link>        
         <button class="btn"  @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & !userAddress">
@@ -306,7 +306,8 @@
         <button class="btn"  @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)" v-if="bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0  & !userAddress">
           {{translatesGet('BUY')}}
         </button>
-        <div v-if="((item.marketplace_status=='CLOSED'||item.marketplace_status=='OPEN') & item.internal_status=='OWNED' & this.voting==null) & userBidAmount>0 & !userBidOnSale" class="container-btn-part container-btn-part-vote">
+        <!-- <div v-if="((item.marketplace_status=='CLOSED'||item.marketplace_status=='OPEN') & item.internal_status=='OWNED' & this.voting==null) & userBidAmount>0 & !userBidOnSale" class="container-btn-part container-btn-part-vote"> -->
+          <div v-if="((item.marketplace_status=='CLOSED'||item.marketplace_status=='OPEN') & item.internal_status=='OWNED') & userBidAmount>0 & !userBidOnSale" class="container-btn-part container-btn-part-vote">
           <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setShowStartVotingModal');" class="btn btn-vote" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" >
             {{translatesGet('VOTE')}}
           </router-link>

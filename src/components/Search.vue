@@ -1,5 +1,5 @@
 <template>
-    <div class="search" :class="{'search-active':this.searchHeader.length>=2 & this.isHeader}" :style="this.style" @click="hidenByOutsideClick=false">
+    <div class="search" :class="{'search-active':this.searchHeader.length>=2 & this.isHeader}" v-bind:style= "[this.disabledSearch&!this.isHeader ? {opacity:'0.5'} : {opacity:'1'}]" @click="hidenByOutsideClick=false">
         <div class="input-wrapper search-wrapper">
             <i class="i-search-line"></i>
             <input type="text" v-model="searchHeader" :placeholder="translatesGet('SEARCH_PLACEHOLDER')" v-debounce:500ms="doSearch" v-if="isHeader == true">
@@ -51,8 +51,7 @@ export default {
             searchHeader:'',
             timeToSearch:200,
             hidenByOutsideClick:true,
-            disabledSearch:false,
-            style:'{}'
+            disabledSearch:false
         }
     },
     methods:{
@@ -114,11 +113,9 @@ export default {
             if(this.$route.name=='Marketplace'){
                 if ((this.$route.params.tab=='shares'||this.$route.params.tab=='activity')){
                     this.disabledSearch = true;
-                    // this.style = '{opacity: 0.5;}';
                 }
                 else{
                     this.disabledSearch = false;
-                    // this.style = '{opacity: 1.0;}'
                 }
             }
         }
