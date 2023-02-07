@@ -1,5 +1,5 @@
 {
-    "backendApiEntryPoint":"https://api.quantnft.net/",
+    "backendApiEntryPoint":"https://api.ownity.io/",
     "listingsPerPage":20,
     "collectionsPerPage":10,
     "activitiesPerPage":10,
