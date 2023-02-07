@@ -17,6 +17,7 @@
         </li>
       </ul>
     </div>
+
     <div class="filter-section" :class="{ 'collapse-section': filterSection0 }" v-if="this.$route.name=='Profile' & (this.onlyFav||(!this.onlyFav & !this.vote & !this.activities))">
       <button class="filter-section-name" @click="filterSection0 = !filterSection0">
         <span>Status</span>
@@ -34,6 +35,26 @@
         </li>
       </ul>
     </div>
+
+    <div class="filter-section" :class="{ 'collapse-section': filterSection5 }" v-if="$route.path === '/profile/favorites' || $route.path === '/profile/all'">
+      <button class="filter-section-name" @click="filterSection5 = !filterSection5">
+        <span>Sale Status</span>
+        <i class="i-arrow-up-s-line"></i>
+      </button>
+      <ul class="filter-ul">
+        <li class="filter-li" v-for="status in statuses" :key="status.name">
+          <div class="input-checkbox">
+            <input type="checkbox" :id="status.value" :checked="$store.getters['marketplace/getSaleStatusFilter']  && $store.getters['marketplace/getSaleStatusFilter'].name === status.name" :value="status.value"  @click="setSaleStatus(status)"/>
+            <label :for="status.value">
+              <div class="icon-filter-checkbox"></div>
+              <span>{{status.name}}</span>
+              <i class="i-check-line"></i>
+            </label>
+          </div>
+        </li>
+      </ul>
+    </div>
+
     <div class="filter-section" :class="{ 'collapse-section': filterSection0 }" v-if="this.vote">
       <button class="filter-section-name" @click="filterSection0 = !filterSection0">
         <span>Status</span>
@@ -51,6 +72,7 @@
         </li>
       </ul>
     </div>
+
     <div class="filter-section" :class="{ 'collapse-section': filterSection2 }" v-if="this.$route.name=='Profile' & onlyFav">
       <button class="filter-section-name" @click="filterSection2 = !filterSection2">
         <span>Bid Status</span>
@@ -159,15 +181,31 @@ export default {
       filterSection2: false,
       filterSection3: false,
       filterSection4: false,
+      filterSection5: false,
       config:config,
       maxPrice:null,
       minPrice:null,
       userAddress:null,
       lang: new MultiLang(this),
-      isError: false
+      isError: false,
+      statuses: [
+        {name: 'Listing Sale', value: '&internal_status=ON%20SALE'},
+        {name: 'Share Sale', value: '&bid_status=ON%20SALE'},
+        {name: 'Reward', value: '&bid_status=REWARDED'},
+        {name: 'History', value: '&internal_statuses=SOLD&CLOSED'},
+      ]
     };
   },
   methods:{
+    setSaleStatus(x) {
+      if(this.$store.getters['marketplace/getSaleStatusFilter'] && this.$store.getters['marketplace/getSaleStatusFilter'].name === x.name){
+        this.$store.commit('marketplace/setSaleStatusFilter', { data: null })
+        this.fetchAndSetListingsStartInfo()
+      } else {
+        this.$store.commit('marketplace/setSaleStatusFilter', { data: x })
+        this.fetchAndSetListingsStartInfo()
+      }
+    },
 		deleteFocus(){
       this.$refs.input1.blur()
       this.$refs.input2.blur()

@@ -31,10 +31,15 @@ export default {
       nextActivitiesLink:null,
       lastActivitiesResponse:null,
       currentActivitiesCategory:null,
-      activitiesByUser:false
+      activitiesByUser:false,
+
+      saleStatusFilter: null
     };
   },
   getters: {
+    getSaleStatusFilter(state) {
+      return state.saleStatusFilter
+    },
     getNextSharesLink(state) {
       return state.nextSharesLink;
     },
@@ -114,6 +119,7 @@ export default {
       if (state.onSale!=false){count++;}
       if (state.searchString!=''){count++;}
       if (state.currentActivitiesCategory){count++;}
+      if (state.saleStatusFilter){count++;}
       return count;
     },
     getCurrentlyGathering(state){
@@ -148,6 +154,9 @@ export default {
     }
   },
   mutations: {
+    setSaleStatusFilter(state, data ){
+      state.saleStatusFilter = data.data
+    },
     setSharesSale(state, _json){
       if (_json!=null){
         state.nextSharesLink = _json.next;
@@ -437,6 +446,7 @@ export default {
       context.commit("setSearchString",'');
       context.commit("setCurrentActivitiesCategory",null)
       context.commit("setSelectedSort",null)
+      context.commit("setSaleStatusFilter", {data: null})
     },
     async setCurrentlyGathering(context,value){
       context.commit("setCurrentlyGathering", value);
@@ -469,6 +479,11 @@ export default {
 
       if(isFirst && !requestUrl.includes('&ordering')){
         requestUrl+='&ordering=-timestamp'
+      }
+
+      //? saleStatus
+      if (context.getters.getSaleStatusFilter){
+        requestUrl+=`${context.getters.getSaleStatusFilter.value}`;
       }
 
       let requestOptions = {
@@ -516,6 +531,12 @@ export default {
       if(isFirst && !requestUrl.includes('&ordering')){
         requestUrl+='&ordering=-timestamp'
       }
+
+      //? saleStatus
+      if (context.getters.getSaleStatusFilter){
+        requestUrl+=`${context.getters.getSaleStatusFilter.value}`;
+      }
+
 
       console.log(requestUrl)
       let requestOptions = {
