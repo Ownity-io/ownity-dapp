@@ -140,7 +140,7 @@
           <div class="data-td data-td-value">
             <div class="card-value">
               <div class="icon-value"></div>
-              <span><b>{{useHelpers.abbrNum(priceInCurrency,1)}} {{' '}}</b>ETH</span>
+              <span><b>{{useHelpers.abbrNum(priceInCurrency,2)}} {{' '}}</b>ETH</span>
             </div>
             <div class="equivalent">≈ $ {{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1,2)}}</div>
 
@@ -465,7 +465,10 @@ export default {
       return this.lang.get(key);
     },
     setPriceInCurrency(){
-      this.priceInCurrency = this.useHelpers.toFixedIfNecessary((this.item.price / (10**this.item.currency.decimals)),4);
+      this.priceInCurrency = this.useHelpers.toFixedIfNecessary((this.item.price / (10**this.item.currency.decimals)),2);
+      if (this.priceInCurrency<=0.0001){
+        this.priceInCurrency = '≈ 0.0001'
+      }
     },
     setAllBidsAmount(){
       this.allBidsAmount=0;
@@ -624,6 +627,24 @@ export default {
       this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setshowStartCollectingModal');
       this.$router.push(`/listing/${this.item.collection.contract_address}/${this.item.token_id}&${this.item.id}`);
       this.$emit('updateListingPage');
+    },
+    noExponents (value) {
+      var data = String(value).split(/[eE]/);
+      if (data.length == 1) return data[0];
+
+      var z = '',
+        sign = value < 0 ? '-' : '',
+        str = data[0].replace('.', ''),
+        mag = Number(data[1]) + 1;
+
+      if (mag < 0) {
+        z = sign + '0.';
+        while (mag++) z += '0';
+        return z + str.replace(/^\-/, '');
+      }
+      mag -= str.length;
+      while (mag--) z += '0';
+      return str + z;
     }
   },
   async mounted(){
