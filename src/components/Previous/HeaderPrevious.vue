@@ -6,7 +6,7 @@
         <div class="mobile-menu-main-btn">
             <div class="mobile-menu-container container">
             <div class="btn-container">
-              <a href="/marketplace" class="btn btn-connect">
+              <a href="/main" class="btn btn-connect">
                 <span>Launch App</span>
               </a>
             </div>
@@ -179,7 +179,7 @@
                         </ul>
                     </nav>
                     <div class="btn-container">
-                        <a href="/marketplace" class="btn btn-connect">
+                        <a href="/main" class="btn btn-connect">
                             Launch App
                         </a>
                     </div>
