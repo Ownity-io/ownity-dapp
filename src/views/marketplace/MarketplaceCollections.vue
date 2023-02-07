@@ -1,11 +1,11 @@
 <template>
   <main v-if="collection">
-    <FilterMobile v-if="filterMobile" />
-    <!-- <div v-if="filterMobile" class="filter-mobile-wrap">
+    <FilterMobile v-if="getFilterMobile" :activities = "activeTab == 1" />
+    <!-- <div v-if="getFilterMobile" class="filter-mobile-wrap">
       <div class="filter-mobile-container">
         <div class="filter-mobile-header">
             <div>{{translatesGet('FILTERS')}}</div>
-            <button class="btn-close" @click="filterMobile=false">
+            <button class="btn-close" @click="getFilterMobile=false">
                 <i class="i-close-line"></i>
             </button>
         </div>
@@ -126,7 +126,7 @@
                   ></i>
                   <span>{{translatesGet('FILTER')}}</span>
                 </button>
-                <button class="btn-param btn-param-mobile"  @click="filterMobile=true">
+                <button class="btn-param btn-param-mobile"  @click="updateFilterMobile(true)">
                   <i class="i-filter-2-line" ></i>
                   <span>{{translatesGet('FILTER')}}</span>
                 </button>
@@ -159,14 +159,14 @@
     </section>
     <div class="container">
       <section class="section-nft" :class="{ 'with-filter': filter }">
-        <div v-if="filter" class="section-nft-filter" :class="{'filter-mobile':filterMobile}">
+        <div v-if="filter" class="section-nft-filter" :class="{'filter-mobile':getFilterMobile}">
           <Filter :activities = "activeTab == 1"/>
         </div>
         <div class="section-nft-list" :class="{ 'card-collapse': switchActive == 1 }">
           <SelectedFilters v-if="filter" :activities = "activeTab == 1"/>
           <ListCards v-if="activeTab == 0" />
           <ActivityTable v-if="activeTab == 1" />
-          <button v-if="activeTab == 0" class="btn-filter-mobile" @click="filterMobile=true">
+          <button v-if="activeTab == 0" class="btn-filter-mobile" @click="updateFilterMobile(true)">
               <i class="i-filter-2-line" ></i>
               <span>{{translatesGet('FILTER')}}</span>
           </button>
@@ -188,6 +188,7 @@ import SelectedFilters from "@/components/SelectedFilters.vue";
 import MultiLang from "@/core/multilang";
 import SortBar from '@/components/SortBar.vue';
 import helpers from "@/helpers/helpers";
+import {mapGetters, mapMutations} from "vuex";
 
 export default {
   data() {
@@ -197,7 +198,6 @@ export default {
       activeTab: 0,
       testOpenSort: false,
       filter: true,
-      filterMobile: false,
       collection:null,
       config:config,
       lang: new MultiLang(this),
@@ -224,6 +224,7 @@ export default {
     await this.getAndSetCollection();
   },
   methods:{
+    ...mapMutations(['updateFilterMobile']),
     translatesGet(key) {
       return this.lang.get(key);
     },
@@ -253,6 +254,7 @@ export default {
     }
   },
   computed:{
+        ...mapGetters(['getFilterMobile']),
         selectedSort:{
             get(){
                 return this.$store.getters['marketplace/getSelectedSort'];

@@ -5,7 +5,7 @@
             <span>{{translatesGet('RECOMMEND_TITLE')}}</span>
           </div>
           <div class="btn-wrap">
-            <router-link :to="{name: 'Marketplace' }" class="btn btn-router-to">
+            <router-link :to="collectionPath" class="btn btn-router-to">
               <span>{{translatesGet('RECOMMEND_BTN')}}</span>
               <i class="i-arrow-right-s-line"></i>
             </router-link>
@@ -13,7 +13,7 @@
         </div>
         <ul class="recommendations-list">
           <li v-for="item in cards" :key="item">
-            <Card :item="item"/>
+            <Card :item="item" @updateListingPage="updateListingPage" />
           </li>
         </ul>
         <div class="btn-mobile-wrap">
@@ -40,14 +40,26 @@ export default {
   components: {
     Card,
   },
-  props:['items'],
+  props:['items', 'collectionAddress'],
   async mounted(){
     this.cards = await this.items;
+  },
+  computed: {
+    collectionPath(){
+      if(this.collectionAddress){
+        return '/collection/'+ this.collectionAddress
+      } else {
+        return '/marketplace'
+      }
+    }
   },
   methods:{
     translatesGet(key) {
       return this.lang.get(key);
     },
+    updateListingPage(){
+      this.$emit('updateListingPage');
+    }
   }
 }
 

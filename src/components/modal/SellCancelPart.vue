@@ -166,7 +166,7 @@ export default {
             "marketplace_id": [this.voting.marketplace.id],
             "lot_id": this.item.id,
             "currency": this.item.currency.address,
-            "amount": this.noExponents(this.voting.amount),
+            "amount": this.noExponents(parseInt(this.voting.amount)),
             "end_date": this.item.end_date,
             "signed_message": signed_message,
             "type": "CANCEL",

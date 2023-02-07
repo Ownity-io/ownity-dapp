@@ -68,7 +68,9 @@ export default{
                 if (this.activeTab == 1) {
                     await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult', { userAddress: null, collectionAddress: null });
                 }
-                else {
+                if(this.activeTab == 2) {
+                  await this.$store.dispatch('marketplace/fetchSharesSale');
+                } else {
                     await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
                     await this.$store.dispatch('marketplace/fetchAndSetNftCollections');
                     await this.$store.dispatch('marketplace/fetchAndSetMarketplaces');

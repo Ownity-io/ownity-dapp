@@ -573,6 +573,13 @@ input+.input-equivalent {
     z-index: 501;
 }
 
+@media (max-width: 450px) {
+    .snackbar-wrap {
+        right: 20px;
+        left: 20px;
+    }
+}
+
 .snackbar {
     display: flex;
     align-items: stretch;

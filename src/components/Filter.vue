@@ -53,7 +53,7 @@
     </div>
     <div class="filter-section" :class="{ 'collapse-section': filterSection2 }" v-if="this.$route.name=='Profile' & onlyFav">
       <button class="filter-section-name" @click="filterSection2 = !filterSection2">
-        <span>[Bid Status]</span>
+        <span>Bid Status</span>
         <i class="i-arrow-up-s-line"></i>
       </button>
       <ul class="filter-ul">
@@ -131,13 +131,13 @@
       <div class="container-enter-price">
         <div class="container-input">
           <div class="input-wrapper" :style="isError && { border: '1px solid red'}">
-            <input placeholder="Min" type="text" v-model="this.minPrice" @input="checkMinPrice($event)" v-on:key-up.enter="fetchAndSetListingsStartInfoMinPrice();" v-debounce:500ms="fetchAndSetListingsStartInfoMinPrice"/>
+            <input placeholder="Min" ref="input1"  type="text" v-model="this.minPrice" @input="checkMinPrice($event)" v-on:keydown.enter.prevent='deleteFocus'  v-on:keydown.enter='fetchAndSetListingsStartInfoMinPrice'  v-debounce:500ms="fetchAndSetListingsStartInfoMinPrice"/>
           </div>
         </div>
         <span class="between-inputs">to</span>
         <div class="container-input">
           <div class="input-wrapper" :style="isError && { border: '1px solid red'}">
-            <input placeholder="Max" type="text" v-model="this.maxPrice" @input="checkMaxPrice" v-debounce:500ms="fetchAndSetListingsStartInfoMaxPrice"/>
+            <input placeholder="Max" ref="input2" type="text" v-model="this.maxPrice" @input="checkMaxPrice" v-on:keydown.enter.prevent='deleteFocus'  v-on:keydown.enter='fetchAndSetListingsStartInfoMinPrice'  v-debounce:500ms="fetchAndSetListingsStartInfoMaxPrice"/>
           </div>
         </div>
       </div>
@@ -150,6 +150,8 @@ import config from '@/config.json';
 import MultiLang from "@/core/multilang";
 import { vue3Debounce } from 'vue-debounce';
 export default {
+  props:['onlyFav','vote','activities'],
+
   data() {
     return {
       filterSection0: false,
@@ -166,13 +168,21 @@ export default {
     };
   },
   methods:{
+		deleteFocus(){
+      this.$refs.input1.blur()
+      this.$refs.input2.blur()
+    },
+
     async fetchAndSetListingsStartInfo() {
       if (this.$route.name == 'Marketplace'){
         if(this.activities){
           await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:null});
         }
         else{
-          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
+          if(this.$route.path === '/marketplace/shares') {
+            await this.$store.dispatch('marketplace/fetchSharesSale');
+          }
+          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',null,true);
         }
       }
       else if (this.$route.name == 'Collection'){
@@ -180,7 +190,7 @@ export default {
           await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:this.$route.params.contract_address});
         }
         else{
-          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address);
+          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address,true);
         }        
       }
       else if (this.$route.name == 'Profile'){
@@ -201,7 +211,7 @@ export default {
     async fetchAndSetListingsStartInfoMaxPrice() {
       await this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', this.maxPrice);
       await this.$store.dispatch('marketplace/getAndSetCurrentMinPrice', this.minPrice);
-      if (this.maxPrice!=null){
+      // if (this.maxPrice!=null){
         if (this.$route.name == 'Marketplace') {
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
         }
@@ -219,7 +229,7 @@ export default {
             await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
           }
         }
-      }
+      // }
     },
     checkMaxPrice(){
       if (this.maxPrice === '') {
@@ -238,8 +248,10 @@ export default {
     async fetchAndSetListingsStartInfoMinPrice() {
       await this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', this.maxPrice);
       await this.$store.dispatch('marketplace/getAndSetCurrentMinPrice', this.minPrice);
-      if (this.minPrice!=null){
+      // if (this.minPrice!=null){
+
         if (this.$route.name == 'Marketplace') {
+          //todo price filer for SharesSale
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
         }
         else if (this.$route.name == 'Collection') {
@@ -256,7 +268,7 @@ export default {
             await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
           }
         }
-      }
+      // }
     },
     async checkMinPrice(e) {
       if (this.minPrice === '') {
@@ -326,7 +338,6 @@ export default {
       }
     },
   },
-  props:['onlyFav','vote','activities'],
   directives: {
     debounce: vue3Debounce({ lock: true })
   },

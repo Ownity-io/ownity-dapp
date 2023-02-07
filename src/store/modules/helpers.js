@@ -3,7 +3,9 @@ import {backendApiEntryPoint} from '@/config.json'
 export default {
     state:{
         usdRate: null,
-        activeCollectionLink: false
+        activeCollectionLink: false,
+        
+        filterMobile: false
     },
     mutations:{
         updateUsdRate(state, data) {
@@ -11,6 +13,10 @@ export default {
         },
         updateActiveCollectionLink(state, data){
             state.activeCollectionLink = data
+        },
+        updateFilterMobile(state, data){
+            state.filterMobile = data
+            data ? document.body.classList.add("fix-content") : document.body.classList.remove("fix-content")
         }
     },
     actions:{
@@ -41,6 +47,9 @@ export default {
         },
         getActiveCollectionLink(state){
             return state.activeCollectionLink
+        },
+        getFilterMobile(state) {
+            return state.filterMobile
         }
     },
 };

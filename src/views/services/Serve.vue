@@ -25,7 +25,7 @@
           <div class="form-contact">
             <div class="container-form">
               <div class="section-form-title">{{translatesGet('CONTACT_US')}}</div>
-              <form action="" class="form">
+              <!-- <form action="" class="form">
 
                 <div class="container-input">
                   <div class="input-header">
@@ -57,9 +57,9 @@
                   </p>
                 </div>
 
-              </form>
+              </form> -->
 
-              <button class="btn btn-submit">{{translatesGet('SUBMIT')}}</button>
+              <a href="https://forms.gle/8Wq1bSEaRKY8m5YC9" target="_blank" class="btn btn-submit">{{translatesGet('SUBMIT')}}</a>
             </div>
           </div>
         </div>

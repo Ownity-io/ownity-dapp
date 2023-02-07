@@ -19,7 +19,7 @@
                     <span>{{translatesGet('TOKEN_ID')}}</span>
                 </div>
                 <div class="data-td data-td-value">
-                    <a class="td-wrap td-wrap-link" :href="config.etherscanTokenUrlStart+item.collection.contract_address+'?a='+item.token_id+'#inventory'" target="_blank" rel="nofollow">
+                    <a class="td-wrap td-wrap-link" :href="config.etherscanTokenUrlStart+item.collection.contract_address+'?a='+item.token_id" target="_blank" rel="nofollow">
                         <span>{{item.token_id}}</span>
                         <i class="i-external-link-line"></i>
                     </a> 

@@ -6,76 +6,81 @@ import Profile from '../views/Profile.vue'
 
 const routes = [
     {
-        path: '/index',
+        path: '/main',
         name: 'Index',
         children: [
-    {
-        path: '',
-        name: 'Main',
-        redirect: "/",
-        // redirect: "/marketplace",
-    },
-    {
-        path: '/marketplace',
-        redirect: "/",
-        children: [
+
             {
                 path: '',
-                name: 'Marketplace',
-                redirect: "/",
+                name: 'Main',
+                component: Main,
             },
             {
-                path: '/listing/:contract_address/:tokenID&:id',
-                name: 'Listing',
-                redirect: "/",
+                path: '/referral_program',
+                name: 'ReferralProgram',
+                component: () => import('@/views/ReferralProgram.vue'),
             },
             {
-                path: '/collection/:contract_address',
-                name: 'Collection',
-                redirect: "/",
+                path: '/marketplace',
+                component: Marketplace,
+                
+                children: [
+                    {
+                        path: ':tab?',
+                        name: 'Marketplace',
+                        component: () => import('@/views/marketplace/MarketplaceMain.vue'),
+                    },
+                    {
+                        path: '/listing/:contract_address/:tokenID&:id',
+                        name: 'Listing',
+                        component: () => import('@/views/marketplace/MarketplaceListing.vue'),
+                    },
+                    {
+                        path: '/collection/:contract_address',
+                        name: 'Collection',
+                        component: () => import('@/views/marketplace/MarketplaceCollections.vue'),
+                    }
+                ]
+                // component:  () => {
+                    // ('@/views/MarketplaceMain.vue')
+                    // if (localStorage.userInfo) {
+                    //     return import('@/views/Cabinet.vue')
+                    // } else {
+                    //     return import('@/views/error/Error404.vue')
+                    // }
+                // },
             },
-            // {
-            //     path: '',
-            //     name: 'Marketplace',
-            //     component: () => import('@/views/marketplace/MarketplaceMain.vue'),
-            // },
-        ]
-        // component:  () => {
-            // ('@/views/MarketplaceMain.vue')
-            // if (localStorage.userInfo) {
-            //     return import('@/views/Cabinet.vue')
-            // } else {
-            //     return import('@/views/error/Error404.vue')
-            // }
-        // },
-    },
-    {
-        path: '/profile',
-        component: Profile,
-        name:'Profile',
-        redirect: "/",
-        
-    },
-    {
-        name: 'Serve',
-        path: '/serve',
-        redirect: "/",
-    },
-    {
-        name: 'TermsOfUse',
-        path: '/terms_of_use',
-        redirect: "/",
-    },
-    {
-        name: 'PrivacyPolicy',
-        path: '/privacy_policy',
-        redirect: "/",
-    },
+            {
+                path: '/profile/:tab?',
+                component: Profile,
+                name:'Profile',
+                
+            },
+            {
+                name: 'Serve',
+                path: '/serve',
+                component: () => import('@/views/services/Serve.vue'),     
+            },
+            {
+                name: 'TermsOfUse',
+                path: '/terms_of_use',
+                component: () => import('@/views/services/TermsOfUse.vue'),  
+            },
+            {
+                name: 'PrivacyPolicy',
+                path: '/privacy_policy',
+                component: () => import('@/views/services/PrivacyPolicy.vue'),  
+            },
+            {
+                name: '404',
+                path: '/:pathMatch(.*)*',
+                component: () => import('@/views/404.vue'),
+            },
 
         ]
     },
     {
-        name: 'Ownity',
+        name: 'Previous',
         path: '/',
         component: () => import('@/views/Previous.vue'),  
     }

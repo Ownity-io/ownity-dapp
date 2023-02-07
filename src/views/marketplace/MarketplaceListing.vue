@@ -1,5 +1,6 @@
-<template>
-  <main v-if="render">
+<template>  
+  <main v-if="item!=null">
+    <img :src="item.media" alt="forLoadCheck" @load="onImgLoad" style="display: none;">
     <div class="container">
       <section class="section-breadcrumbs">
         <Breadcrumbs />
@@ -9,19 +10,19 @@
       <div class="card-listing">
         <section class="section-card-img">
           <div class="card-img-wrap">
-            <img v-if="item.media" :src="item.media" alt="img">
-            <img v-else src="@/assets/images/img-not-found.svg" alt="img" style="width: 547px">
-<!--            <skeleton-card-listing/>-->
+            <img v-if="render & item.media!=null & this.isLoaded" :src="item.media">
+            <SkeletonCardListing v-else />           
           </div>
         </section>
-        <div class="listing-main">
-<!--          <skeleton-card-listing-info/>-->
+        <SkeletonCardListingInfo class="listing-main" v-if="!render" />
+        <div class="listing-main" v-else>
+          
           <section class="section-listing-header">
             <div class="listing-header">
               <div class="collection-wrap">
                 <a class="collection-img" :href="'/collection/'+item.collection.contract_address" :style="{backgroundImage:`url(${item.collection.logo})`}"></a>
                 <div class="collection-data">
-                  <a target="_blank" rel="nofollow" class="collection-id collection-label" :href="'/collection/'+item.collection.contract_address">
+                  <a target="" rel="nofollow" class="collection-id collection-label" :href="'/collection/'+item.collection.contract_address">
                     <span>{{item.collection.name}}</span>
                     <i class="i-checkbox-circle-fill"></i>
                   </a>
@@ -140,10 +141,15 @@
                         @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">
                   {{translatesGet('START_VOTING')}}
                 </button>
-                <button class="btn btn-get"
-                  @click="this.$store.dispatch('appGlobal/setShowSellPartModal',true)">
-                  {{translatesGet('SELL_NFT')}}
+                <button class="btn btn-deposit" v-if="(userAddress!=null & userBidBuyedAll)"
+                  @click="this.$store.dispatch('appGlobal/setShowClaimNftModal',true)">
+                  {{translatesGet('CLAIM_NFT')}}
                 </button>
+                <button class="btn btn-get"
+                  @click="this.$store.dispatch('appGlobal/setShowSellPartModal',true)"
+                  v-if="userCanSoldFraction">
+                  {{translatesGet('SELL_NFT')}}
+                </button>                
               </div>
               <div class="section-deposit-labels" v-if="userBid!=null">
                 <div class="deposit-label" v-if="userBid.status == 'ON SALE'">
@@ -190,8 +196,13 @@
                   @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',true)">
                   {{translatesGet('START_VOTING')}}
                 </button>
+                <button class="btn btn-deposit" v-if="(userAddress!=null & userBidBuyedAll)"
+                  @click="this.$store.dispatch('appGlobal/setShowClaimNftModal',true)">
+                  {{translatesGet('CLAIM_NFT')}}
+                </button>
                 <button class="btn btn-get"
-                  @click="this.$store.dispatch('appGlobal/setShowSellPartModal',true)">
+                  @click="this.$store.dispatch('appGlobal/setShowSellPartModal',true)"
+                  v-if="userCanSoldFraction">
                   {{translatesGet('SELL_NFT')}}
                 </button>
               </div>
@@ -443,7 +454,7 @@
                       <span>{{translatesGet('INFO')}}</span>
                     </button>
                   </li>
-                  <li  v-if="itemWithBidsOnSale.bids!=null">
+                  <li  v-if="itemWithBidsOnSale.bids!=null & (item.internal_status=='OWNED' || item.internal_status=='ON SALE') " >
                     <button
                       :class="{ 'active-tab': activeTab2 === 'ListingFractionMarket' }"
                       @click="letsCheck2('ListingFractionMarket')"
@@ -468,7 +479,7 @@
                 <!-- flow 1 -->
                 <div v-if="activeTab2 === 'ListingInfo2'" class="section-table-chart">
                   <div class="chart-wrap">
-                    <Chart :chartData='chartData'/>
+                    <Chart :chartData='chartData' v-if="!isRefreshing"/>
                   </div>
                   <div class="table-chart-data">
                     <div class="table table-chart" :class="{'tbody-overflow' : this.item.bids.length>5}">
@@ -481,7 +492,7 @@
                         <div class="tr" v-for="bid in this.item.bids" :key="bid">
                         <div class="td td-owner">
                           <a
-                            class="td-wrap"
+                            class="td-wrap own"
                             :href="`${config.etherscanAddressUrlStart+bid.address}`"
                             target="_blank"
                             rel="nofollow"
@@ -612,7 +623,7 @@
     </div>
     <section class="section-recommendation" v-if="recommendations">
       <div class="container">
-        <RecommendationsList :items="recommendations"/>
+        <RecommendationsList :items="recommendations" :collectionAddress="item.collection.contract_address" @updateListingPage="refreshInfoFromRecommendationListCard"/>
       </div>
     </section>
   </main>
@@ -673,7 +684,8 @@ export default {
       inSaleAmount: 0,
       activeVotings:[],
       inactiveVotings:[],
-      soldedVoting:null
+      soldedVoting:null,
+      isLoaded:false,
     };
   },
   components: {
@@ -815,7 +827,7 @@ export default {
             if (element.status == 'SOLD'){
               this.soldedVoting = element;
             }
-            if (element.status == 'ON SALE' || element.status == 'CANCELED' ||(element.type == 'CANCEL' & element.status == 'FULFILLED')){
+            if (element.status == 'ON SALE' || element.status == 'CANCELED' ||(element.type == 'CANCEL' & element.status == 'FULFILLED')||element.status == 'CLOSED'){
               inactiveVotingsTemp.push(element);
             }
             else if (element.users.length>0){
@@ -828,22 +840,71 @@ export default {
       }
     },
     async refreshInfo(){
+      this.$forceUpdate();       
       this.isRefreshing=true;
       window.scrollTo(0, 0);
       try{
         this.activeTab = "ListingInfo";
         this.activeTab2 = "ListingInfo2";
         await this.getAndSetListingInfo();
-        this.isRefreshing=false;
+        await this.setChartData();
+        this.isRefreshing=false;        
         await this.$store.dispatch('appGlobal/setSnackText', 'Listing Data Has Been Successfully Refreshed!')
         await this.$store.dispatch('appGlobal/setGreenSnack', true)
-        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 5)      
+        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 5)             
       }
       catch{
-        this.isRefreshing=false;
-        await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
+        this.isRefreshing=false;        await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
         await this.$store.dispatch('appGlobal/setGreenSnack', false)
         await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 5)      
+      }            
+    },
+    async refreshInfoFromRecommendationListCard(){
+      this.$forceUpdate();       
+      this.isRefreshing=true;
+      window.scrollTo(0, 0);
+      try{
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        this.activeTab = "ListingInfo";
+        this.activeTab2 = "ListingInfo2";
+        this.item = await this.$store.getters['marketplaceListing/getItem'];
+        this.itemWithBidsOnSale = await (await fetch(`${config.backendApiEntryPoint}listing-with-on-sale-bids/${this.item.id}`)).json();
+        this.setPriceInCurrency();
+        this.setLinkToMarketplacePage();
+        await this.setMaxVoting();
+        this.setLinkToMarketplacePageFromVotingOnSale();
+        this.setAllBidsAmount();
+        this.setUserBidAmount();
+        this.setChartData();
+        await this.$store.dispatch('marketplaceListing/checkLike');
+        await this.checkLike();
+        this.$store.dispatch('marketplaceListing/fetchAndSetContractConfig');
+        this.recommendations = await this.$store.dispatch('marketplaceListing/getRecomendations', this.item.collection.contract_address);
+        if (await this.$store.getters['marketplaceListing/getModalToShowAtStart'] != null) {
+          if ((await this.$store.getters['marketplaceListing/getModalToShowAtStart']) == 'FractionMarket') {
+            this.letsCheck2('ListingFractionMarket')
+          } else {
+            await this.$store.dispatch(await this.$store.getters['marketplaceListing/getModalToShowAtStart'], true);
+            await this.$store.dispatch('marketplaceListing/setModalToShowAtStart', null);
+          }
+
+        }
+        if (this.userBid) {
+          if (this.userBid.status == 'REWARDED') {
+            this.bidRewarded = true;
+          }
+        }
+        let requestUrl = `${config.backendApiEntryPoint}marketplaces/`;
+        let request = await fetch(requestUrl);
+        this.marketplaces = await request.json();
+        this.setUserCanSoldFraction();
+        this.render = true;
+        
+
+        
+      }
+      catch {
+        this.isRefreshing = false;
       }      
     },
     setUserCanSoldFraction(){
@@ -866,6 +927,18 @@ export default {
         this.userCanSoldFraction = false;
       }
 
+    },
+    async onImgLoad(){
+      const delay = (delayInms) => {
+      return new Promise(resolve => setTimeout(resolve, delayInms));
+    }
+    while(true){
+      await delay(1000);
+      if(this.render){
+        break;
+      }
+    }
+      this.isLoaded=true;
     }
   },
   async mounted() {

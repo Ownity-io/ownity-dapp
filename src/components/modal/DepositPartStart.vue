@@ -9,6 +9,7 @@
           <i class="i-close-line"></i>
         </button>
       </div>
+      
 
       <div class="modal-content">
         <div class="modal-container">
@@ -20,7 +21,15 @@
                 <div>{{item.collection.name}}</div>
               </div>
             </div>
+            <div class="procent">
+              <p>1% ≈ </p>
+              <div class="procent-val">                
+                <p>{{String(useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.item.price/100),6),2)).replace('≈','')}} ETH</p>
+                <div class="val-icon"></div>
+              </div>
+            </div>
           </div>
+          
 
           <div class="modal-section-main-data">
             <div class="modal-main-data-container">

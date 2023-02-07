@@ -1,6 +1,7 @@
 <template>
   <!-- <a class="card card-finished" :class="{'card-inactive' : false}"> -->
-  <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  class="card" ref="wrpCard" :class="{'card-inactive' : ((this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN'))||(this.item.internal_status=='CLAIMED')||bidRewarded),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER')}">
+  <img :src="item.media" alt="forLoadCheck" @load="onImgLoad" style="display: none;">
+  <div v-if="render" class="card"  ref="wrpCard" :class="{'card-inactive' : ((this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN'))||(this.item.internal_status=='CLAIMED')||bidRewarded),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER'), 'hides': hidesClass}">
     <div class="card-main">
       <div class="loading"></div> <!--  used when loading-->
 
@@ -139,9 +140,9 @@
           <div class="data-td data-td-value">
             <div class="card-value">
               <div class="icon-value"></div>
-              <span><b>{{useHelpers.abbrNum(priceInCurrency,1)}} {{' '}}</b>ETH</span>
+              <span><b>{{useHelpers.abbrNum(priceInCurrency,2)}} {{' '}}</b>ETH</span>
             </div>
-            <div class="equivalent">≈ $ {{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1,2)}}</div>
+            <div class="equivalent">≈ $ {{useHelpers.abbrNum(priceInCurrency * currencyToUsdPrice,2,2)}}</div>
 
           </div>
         </div>
@@ -278,15 +279,18 @@
         </div>
       </div>
       <div class="btn-container">
-        <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setshowStartCollectingModal');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & userAddress!=false">
-          {{translatesGet('BUY_TOGETHER')}}
-        </router-link>
-        <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setshowContinueCollectingModal');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'  & userAddress!=false">
-          {{translatesGet('DEPOSIT_PART')}}
-        </router-link>
-        <button class="btn" @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & !userAddress">
+        <button class="btn" v-if="this.$route.name=='Listing'" @click="pushToNewListing">
           {{translatesGet('BUY_TOGETHER')}}
         </button>
+        <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setshowStartCollectingModal');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & userAddress!=false & this.$route.name!='Listing'">
+          {{translatesGet('BUY_TOGETHER')}}
+        </router-link>
+        <button class="btn" @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & !userAddress & this.$route.name!='Listing'">
+          {{translatesGet('BUY_TOGETHER')}}
+        </button>
+        <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setshowContinueCollectingModal');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER'  & userAddress!=false & this.$route.name!='Listing'">
+          {{translatesGet('DEPOSIT_PART')}}
+        </router-link>        
         <button class="btn"  @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)" v-if="item.marketplace_status=='OPEN' & item.internal_status=='GATHER' & !userAddress">
           {{translatesGet('DEPOSIT_PART')}}
         </button>
@@ -302,7 +306,8 @@
         <button class="btn"  @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)" v-if="bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0  & !userAddress">
           {{translatesGet('BUY')}}
         </button>
-        <div v-if="(item.marketplace_status=='CLOSED' & item.internal_status=='OWNED' & this.voting==null) & userBidAmount>0 & !userBidOnSale" class="container-btn-part container-btn-part-vote">
+        <!-- <div v-if="((item.marketplace_status=='CLOSED'||item.marketplace_status=='OPEN') & item.internal_status=='OWNED' & this.voting==null) & userBidAmount>0 & !userBidOnSale" class="container-btn-part container-btn-part-vote"> -->
+          <div v-if="((item.marketplace_status=='CLOSED'||item.marketplace_status=='OPEN') & item.internal_status=='OWNED') & userBidAmount>0 & !userBidOnSale" class="container-btn-part container-btn-part-vote">
           <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setShowStartVotingModal');" class="btn btn-vote" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" >
             {{translatesGet('VOTE')}}
           </router-link>
@@ -326,7 +331,7 @@
         </div>
 
         <!-- ######## 2 ######## -->
-        <div class="container-btn-part" v-if="showUserBidOnSale">
+        <div class="container-btn-part" v-if="userBidOnSale!=null & item.internal_status=='OWNED'">
           <div class="card-col">
             <span class="card-col-name">{{translatesGet('PART')}}</span>
             <span><strong>{{useHelpers.toFixedIfNecessary(userBidOnSale.fraction_amount/10**18,1)}}%</strong></span>
@@ -403,7 +408,8 @@
 
       </div>
     </div>
-  </a>
+  </div>
+  <SkeletonCard v-else/>
 </template>
 
 <script>
@@ -411,8 +417,7 @@ import config from "@/config.json";
 import MultiLang from "@/core/multilang";
 import {mapGetters} from "vuex";
 import helpers from "@/helpers/helpers";
-import {create} from "@lottiefiles/lottie-interactivity";
-import {createElement} from "inferno-create-element";
+import SkeletonCard from "./Skeleton/SkeletonCard.vue";
 export default {
   props:[
     'item'
@@ -441,7 +446,9 @@ export default {
       showUserBidOnSale:false,
       userAddress:false,
       bidRewarded:false,
-      votingsOnSale:[]
+      votingsOnSale:[],
+      isLoaded:false,
+      hidesClass:false
     };
   },
   computed: {
@@ -450,12 +457,18 @@ export default {
       return this.getUsdRate ? this.getUsdRate[`${this.item.currency.ticker}`] : 0
       }
   },
+  components:{
+    SkeletonCard
+  },
   methods:{
     translatesGet(key) {
       return this.lang.get(key);
     },
     setPriceInCurrency(){
       this.priceInCurrency = this.useHelpers.toFixedIfNecessary((this.item.price / (10**this.item.currency.decimals)),4);
+      if (this.priceInCurrency<=0.0001){
+        this.priceInCurrency = '0.0001'
+      }
     },
     setAllBidsAmount(){
       this.allBidsAmount=0;
@@ -596,9 +609,52 @@ export default {
           }
       } 
 
+    },
+    async onImgLoad(){
+      const delay = (delayInms) => {
+      return new Promise(resolve => setTimeout(resolve, delayInms));
+    }
+    while(true){
+      await delay(1000);
+      if(this.render){
+        break;
+      }
+    }
+      this.isLoaded=true;
+    },
+    async pushToNewListing(){
+      await this.$store.dispatch('marketplaceListing/getAndSetItem',this.item.id);
+      this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setshowStartCollectingModal');
+      this.$router.push(`/listing/${this.item.collection.contract_address}/${this.item.token_id}&${this.item.id}`);
+      this.$emit('updateListingPage');
+    },
+    noExponents (value) {
+      var data = String(value).split(/[eE]/);
+      if (data.length == 1) return data[0];
+
+      var z = '',
+        sign = value < 0 ? '-' : '',
+        str = data[0].replace('.', ''),
+        mag = Number(data[1]) + 1;
+
+      if (mag < 0) {
+        z = sign + '0.';
+        while (mag++) z += '0';
+        return z + str.replace(/^\-/, '');
+      }
+      mag -= str.length;
+      while (mag--) z += '0';
+      return str + z;
     }
   },
   async mounted(){
+    if (this.$route.name == 'Marketplace'){
+        this.hidesClass = !this.hidesClass
+			}
+
+    if(this.$route.path === '/marketplace/shares'){
+      this.hidesClass = false
+    }
     let userAddress = localStorage.getItem('userAddress');
     if (userAddress!=null & userAddress!='null'){
       this.userAddress = userAddress;
@@ -627,8 +683,9 @@ export default {
         this.bidRewarded=true;
       }
     }
-    this.render=true;
     await this.checkLike();
+    this.render=true;
+    
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
     }
@@ -637,8 +694,8 @@ export default {
       this.updateTimeString();
       this.setAllBidsAmount();
       this.setUserBidAmount();
-      this.allProgressValue = (this.allBidsAmount / this.item.price) * 100;
-      this.userProgressValue = (this.userBidAmount / this.item.price) * 100;
+      this.allProgressValue = this.useHelpers.toFixedIfNecessary((this.allBidsAmount / this.item.price) * 100, 0);
+      this.userProgressValue = this.useHelpers.toFixedIfNecessary((this.userBidAmount / this.item.price) * 100, 0);
       await this.checkLike();
     }
   }

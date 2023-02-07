@@ -30,6 +30,7 @@ import config from '@/config.json';
 import SkeletonCard from "@/components/Skeleton/SkeletonCard.vue";
 
 export default {
+  props:['onlyFav','vote'],
   data() {
     return {
       lang: new MultiLang(this),
@@ -59,6 +60,7 @@ export default {
     translatesGet(key) {
         return this.lang.get(key);
     },
+
     async fetchAndSetListingsNextInfo() {
       await this.$store.dispatch('marketplace/fetchAndSetListingsNextInfo');
     },
@@ -164,6 +166,5 @@ export default {
       this.loadIfVisible();
     }
   },
-  props:['onlyFav','vote']
 };
 </script>

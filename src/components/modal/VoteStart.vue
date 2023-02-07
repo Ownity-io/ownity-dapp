@@ -26,7 +26,7 @@
               </p>
               <div class="pur-price-val">
                 <div class="pur-price-icon"></div>
-                <p>0.2 ETH</p>
+                <p>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.item.price),6),2)}} ETH</p>
               </div>
             </div>
             <!--end price buy nft-->
@@ -190,8 +190,9 @@ export default {
       this.buttonWaiting=true;
       if (this.amount>0 & this.checkedMarketplaces.length>0) {
         try {
+          console.log(this.useHelpers.toFixedIfNecessary(this.noExponents(this.amount * 10 ** this.item.currency.decimals),0));
           let signed_message = await this.$store.dispatch('walletsAndProvider/signMessageWithGlobalProvider',
-            `${this.item.id}-${this.item.currency.address}-${this.noExponents(this.amount * 10 ** this.item.currency.decimals)}-${this.item.end_date}`);
+            `${this.item.id}-${this.item.currency.address}-${this.noExponents(this.useHelpers.toFixedIfNecessary(this.noExponents(this.amount * 10 ** this.item.currency.decimals),0))}-${this.item.end_date}`);
           console.log(signed_message);
           let requestLink = `${config.backendApiEntryPoint}voting-create/`;
           let requestOptions = {
@@ -205,7 +206,7 @@ export default {
               "marketplace_id": this.checkedMarketplaces,
               "lot_id": this.item.id,
               "currency": this.item.currency.address,
-              "amount": this.noExponents(this.amount * 10 ** this.item.currency.decimals),
+              "amount": this.noExponents(parseInt(this.amount * 10 ** this.item.currency.decimals)),
               "end_date": this.item.end_date,
               "signed_message": signed_message,
               "type": "SELL",
@@ -215,7 +216,8 @@ export default {
           let request = await fetch(requestLink, requestOptions);
           let requestJson = await request.json();
           if (requestJson.success) {
-            if (parseInt((requestJson.data[0].voting_percentage.replace('%', ''))) >= 51 & this.item.internal_status!='ON SALE') {
+            if (parseInt((requestJson.data[0].voting_percentage)) >= 51 & this.item.internal_status!='ON SALE') {
+              console.log('SHO');
               try{
                 await this.sellLot(requestJson.data)
               }
@@ -227,7 +229,7 @@ export default {
                 await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
               }
             }
-            else if(parseInt((requestJson.data[0].voting_percentage.replace('%', ''))) >= 51){
+            else if(parseInt((requestJson.data[0].voting_percentage)) >= 51){
               let requestLinkTemp = null;
               let requestOptionsTemp = null;
               let requestTemp = null;
@@ -250,10 +252,12 @@ export default {
               }
               let check = await this.checkSell();
               if (check){
+                console.log('SHO3');
                 location.reload();
               }              
             }
             else{
+              console.log('SHo2');
               location.reload();
             }
           }
@@ -267,9 +271,10 @@ export default {
         catch{
           this.buttonWaiting=false;
           console.log(333)
+          location.reload();
           await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack',false)
-          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',3)
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',3)          
         }
         
       }

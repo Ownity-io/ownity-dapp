@@ -1,6 +1,6 @@
 <template>
-  <section class="s-card-loader">
-    <div class="s-card">
+  <!-- <section class="s-card-loader"> -->
+    <div class="s-card card">
       <div class="s-card-img">
 
       </div>
@@ -15,7 +15,7 @@
         </button>
       </div>
     </div>
-  </section>
+  <!-- </section> -->
 </template>
 
 <script>

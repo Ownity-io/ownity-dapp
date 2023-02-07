@@ -16,7 +16,7 @@
     .table-activity .tr .td.td-price,
     .table-activities .thead .td.td-price,
     .table-activities .tr .td.td-price {
-        margin-right: 50px;
+        margin-right: 30px;
     }
 
 }
@@ -1249,6 +1249,9 @@
 
 @media (max-width: 991px) {
     /* @media (max-width: 768px) { */
+    .deposit-value {
+        margin-left: 30px;
+    }
 
     .recommendations-list li,
     .section-nft.with-filter .cards-list-container .card,

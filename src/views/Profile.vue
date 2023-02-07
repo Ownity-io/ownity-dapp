@@ -1,12 +1,12 @@
 <template>
-    <div class="page-wrapper page-profile">
+    <div class="page-wrapper page-profile" v-if="render">
         <main>
-            <FilterMobile v-if="filterMobile" />
+            <FilterMobile v-if="getFilterMobile" :onlyFav="activeTab == 'Favourites'" :vote="activeTab == 'Vote'" :activities = "activeTab == 'ActivityTable'" />
             <!-- <div  class="filter-mobile-wrap">
                 <div class="filter-mobile-container">
                     <div class="filter-mobile-header">
                         <div>{{translatesGet('FILTERS')}}</div>
-                        <button class="btn-close" @click="filterMobile=false">
+                        <button class="btn-close" @click="updateFilterMobile(false)">
                             <i class="i-close-line"></i>
                         </button>
                     </div>
@@ -48,12 +48,12 @@
                                                 {{translatesGet('SHARE')}}
                                             </span>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <i class="i-logout-box-line"></i>
                                             <span>
                                                 {{translatesGet('LOG_OUT')}}
                                             </span>
-                                        </li>
+                                        </li> -->
                                         <li>
                                             <router-link :to="{name:'Main'}" @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',false);clearLocalStorage()">
                                                 <i class="i-logout-box-line"></i>
@@ -72,7 +72,7 @@
                             </div>
                             <div class="btn link-wrapper">
                                 <div class="link">{{this.$store.getters['walletsAndProvider/getUserShortAddress']}}</div>
-                                <button class="btn-copy profile-copied" @click='copy()'><i class="i-checkbox-multiple-blank-line"></i></button>
+                                <button class="btn-copy profile-copied" @click='copy();showCopyMessage();'><i class="i-checkbox-multiple-blank-line"></i></button>
                             </div>
                         </div>
                         <div class="profile-container-btns">
@@ -137,7 +137,7 @@
                                     ></i>
                                     <span>{{translatesGet('FILTER')}}</span>
                                 </button>
-                                <button class="btn-param btn-param-mobile"  @click="filterMobile=true">
+                                <button class="btn-param btn-param-mobile"  @click="updateFilterMobile(true)">
                                     <i class="i-filter-2-line" ></i>
                                     <span>{{translatesGet('FILTER')}}</span>
                                 </button>
@@ -167,16 +167,16 @@
             </section>
             <div class="container">
                 <section class="section-nft" :class="{ 'with-filter': filter }">
-                    <div v-if="filter" class="section-nft-filter" :class="{'filter-mobile':filterMobile}">
+                    <div v-if="filter" class="section-nft-filter" :class="{'filter-mobile': getFilterMobile}">
                         <Filter :onlyFav="activeTab == 'Favourites'" :vote="activeTab == 'Vote'" :activities = "activeTab == 'ActivityTable'"/>
                     </div>
                     <div class="section-nft-list" :class="{'card-collapse' : switchActive == 1}">
-                        <SelectedFilters v-if="filter" :activities = "activeTab == 'ActivityTable'"/>
+                        <SelectedFilters v-if="filter" :activities = "activeTab == 'ActivityTable'" :onlyFav="activeTab == 'Favourites'" :vote="activeTab == 'Vote'"/>
                         <ListCards v-if="activeTab === 'ListCards'" :onlyFav="false" :vote="false"/>
                         <ListCards v-if="activeTab === 'Favourites'" :onlyFav="true" :vote="false"/>
                         <ListCards v-if="activeTab === 'Vote'" :onlyFav="false" :vote="true"/>
                         <ActivityTable v-if="activeTab === 'ActivityTable'" />
-                        <button v-if="activeTab == 0" class="btn-filter-mobile"  @click="filterMobile=true">
+                        <button v-if="activeTab == 0" class="btn-filter-mobile"  @click="updateFilterMobile(true)">
                             <i class="i-filter-2-line" ></i>
                             <span>{{translatesGet('FILTER')}}</span>
                         </button>
@@ -198,7 +198,7 @@ import MultiLang from "@/core/multilang";
 import config from '@/config.json';
 import ActivityTable from "@/components/ActivityTable.vue";
 import { useClipboard } from '@vueuse/core'
-import { mapActions } from "vuex";
+import {mapActions, mapGetters, mapMutations} from "vuex";
 const source = localStorage.getItem('userAddress');
 const { copy } = useClipboard({ source })
 
@@ -215,12 +215,12 @@ export default {
           activeTab: 'ListCards',
           testOpenSort: false,
           filter: true,
-          filterMobile: false,
           mobileDropDown: false,
           config:config,
           lang: new MultiLang(this),
           userAddress:null,
-          copy:copy
+          copy:copy,
+          render:false
       };
   },
   components:{
@@ -233,6 +233,7 @@ export default {
       SortBar
   },
   computed:{
+    ...mapGetters(['getFilterMobile']),
     selectedSort:{
       get(){
         return this.$store.getters['marketplace/getSelectedSort'];
@@ -244,6 +245,7 @@ export default {
     }
   },
     methods: {
+        ...mapMutations(['updateFilterMobile']),
         ...mapActions({
           setAllFiltersToNull: 'marketplace/setAllFiltersToNull',
           fetchAndSetListingsStartInfoByUser: 'marketplace/fetchAndSetListingsStartInfoByUser',
@@ -280,17 +282,28 @@ export default {
         },
         clearLocalStorage(){
             localStorage.clear();
+        },
+        async showCopyMessage(){
+            await this.$store.dispatch('appGlobal/setSnackText', 'Copied!')
+            await this.$store.dispatch('appGlobal/setGreenSnack', true)
+            await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 2)
         }
     },
 
   async mounted() {
     this.userAddress = localStorage.getItem('userAddress');
+    if(this.userAddress!='null' & this.userAddress!=null){
+        this.activeTab = this.$route.params.tab ? this.tabList[`${this.$route.params.tab}`] : this.tabList.all
+        this.letsCheck(this.activeTab, true)
+        await this.fetchAndSetNftCollections()
+        await this.fetchAndSetMarketplaces()
+        this.render=true;
+    }
+    else{
+    this.$router.push({name:'404'})    
+    }
 
-    this.activeTab = this.$route.params.tab ? this.tabList[`${this.$route.params.tab}`] : this.tabList.all
-    this.letsCheck(this.activeTab, true)
-
-    await this.fetchAndSetNftCollections()
-    await this.fetchAndSetMarketplaces()
+    
   },
 }
 </script>

@@ -17,10 +17,10 @@
                     <nav>
                         <ul class="">
                             <li>
-                                <router-link :class="active" :to="{name: 'Marketplace'}" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/clearListingsInfo');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')">
+                                <a :class="active" href="/marketplace" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/clearListingsInfo');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')">
                                     <span>{{translatesGet('MARKETPLACE')}}</span>
                                     <span>{{translatesGet('MARKETPLACE')}}</span>
-                                </router-link>
+                                </a>
                             </li>
                             <li v-if="$route.path ==='/'">
                                 <a :class="getActiveCollectionLink && 'active'" ref="screenCollections" href="#screen-collections" >
@@ -42,17 +42,22 @@
                             </li>
                         </ul>
                     </nav>
-                    <div class="btn-container" v-if="walletConnected==null||walletConnected=='null'">
+                    <div class="btn-container" v-if="(walletConnected==null||walletConnected=='null')">
                         <button class="btn btn-connect" @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true);">
                             {{translatesGet('CONNECT_WALLET')}}
                         </button>
                     </div>
                     <div class="btn-container" v-else-if="this.$store.getters['walletsAndProvider/getUserShortAddress']">
-                        <router-link :to="{path: '/profile/all'}" class="btn btn-address" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/clearListingsInfo');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')">
+                        <router-link :to="{path: '/profile/all'}" class="btn btn-address" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/clearListingsInfo');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser',true)">
                             <jazzicon :address="userAddress" :diameter="32" class="icon-address" v-if="userAddress"/>
                             <div class="icon-address" v-else></div>
                             <span>{{this.$store.getters['walletsAndProvider/getUserShortAddress']}}</span>
                         </router-link>
+                    </div>
+                    <div class="btn-container" v-else>
+                        <button class="btn btn-connect" @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true);">
+                            {{translatesGet('CONNECT_WALLET')}}
+                        </button>
                     </div>
                 </div>
                 <div class="header-mobile">
@@ -82,11 +87,12 @@ import {mapGetters} from "vuex";
 export default {
     data(){
         return{
-            walletConnected:1,
+            walletConnected:null,
             mobileMenu: false,
             mobileSearch: false,
             lang: new MultiLang(this),
-            userAddress:null
+            userAddress:null,
+            renderButton:false
         }
     },
     components: {
@@ -114,6 +120,7 @@ export default {
     async mounted(){
         this.getWalletFromLS();
         this.userAddress = localStorage.getItem('userAddress');
+        this.renderButton=true;
         const delay = (delayInms) => {
             return new Promise(resolve => setTimeout(resolve, delayInms));
         }

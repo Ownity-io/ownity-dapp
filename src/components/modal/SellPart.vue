@@ -22,10 +22,10 @@
             <!--when 1%-->
 
             <div class="procent">
-              <p>1% = </p>
-              <div class="procent-val">
-                <div class="val-icon"></div>
-                <p>0.2 ETH</p>
+              <p>1% ≈ </p>
+              <div class="procent-val">                            
+                <p>{{String(useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.item.price/100),6),2)).replace('≈','')}} ETH </p>
+                <div class="val-icon"></div>    
               </div>
             </div>
 
@@ -302,6 +302,10 @@ export default {
       }
       else if (this.currentPart < 1) {
         this.currentPart = 1
+        if (this.currentPart > (this.useHelpers.toFixedIfNecessary(this.userBidAmount/this.item.price*100,0) - this.userBidOnSaleAmount)){
+          this.currentPart = 0;
+        }
+
       }
       else if (this.currentPart > (this.useHelpers.toFixedIfNecessary(this.userBidAmount/this.item.price*100,0) - this.userBidOnSaleAmount)){
         this.currentPart = this.useHelpers.toFixedIfNecessary(this.userBidAmount/this.item.price*100,0) - this.userBidOnSaleAmount;

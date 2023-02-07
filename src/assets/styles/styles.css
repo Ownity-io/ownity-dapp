@@ -52,6 +52,12 @@ header+.page-wrapper {
     padding-top: 72px;
 }
 
+@media (max-width: 600px) {
+    header+.page-wrapper {
+        padding-top: 20px;
+    }
+}
+
 .page-wrapper main {
     padding-top: 40px;
     padding-bottom: 100px;
@@ -999,6 +1005,12 @@ ul.tabs {
 .input-selected,
 .btn-sort {
     justify-content: space-between;
+}
+
+.btn-sort span{
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    overflow: hidden;
 }
 
 .input-select-wrap.unfolded .input-selected,
@@ -3908,6 +3920,11 @@ a.td-wrap-link span {
     margin-top: 14px;
 }
 
+.container.carousel-f {
+    padding-right: 0;
+}
+
+
 @media (max-width: 540px) {
     .container-btn-part {
         display: block;
@@ -4095,10 +4112,12 @@ a.td-wrap-link span {
     margin-top: 0;
 }
 
+.card.hides .btn-container button,
 .card.hides .btn-container div,
 .card.hides .btn-container a{
     display: none;
 }
+.card.hides:hover .btn-container button,
 .card.hides:hover .btn-container div,
 .card.hides:hover .btn-container a {
     display: flex;
@@ -4112,3 +4131,24 @@ a.td-wrap-link span {
     margin-top: 16px;
     margin-bottom: 16px;
 }
+
+.td-wrap.own:hover {
+    background-image: linear-gradient(89.43deg, #3E80FF -3.17%, #2457D5 109.46%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;
+    transition: background-image 200ms ease;
+    text-decoration: underline;
+    text-underline-position: under;
+    text-decoration-color: #3E80FF;
+    background-position: center;
+}
+
+.fix {
+    position: fixed;
+    z-index: 1000;
+}
+
+

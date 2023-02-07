@@ -1,9 +1,9 @@
 <template>
-    <div class="search" :class="{'search-active':this.searchHeader.length>=2 & this.isHeader}" @click="hidenByOutsideClick=false">
+    <div class="search" :class="{'search-active':this.searchHeader.length>=2 & this.isHeader}" v-bind:style= "[this.disabledSearch&!this.isHeader ? {opacity:'0.5'} : {opacity:'1'}]" @click="hidenByOutsideClick=false">
         <div class="input-wrapper search-wrapper">
             <i class="i-search-line"></i>
             <input type="text" v-model="searchHeader" :placeholder="translatesGet('SEARCH_PLACEHOLDER')" v-debounce:500ms="doSearch" v-if="isHeader == true">
-            <input type="text" v-model="search" :placeholder="translatesGet('SEARCH_PLACEHOLDER')" v-debounce:500ms="doSearch" v-else-if="isHeader != true">            
+            <input type="text" v-model="search" :placeholder="translatesGet('SEARCH_PLACEHOLDER')" v-debounce:500ms="doSearch" v-else-if="isHeader != true" :disabled="disabledSearch">            
         </div>
         <div class="search-results" :class="{'unfolded' : this.searchHeader.length>=2 & this.isHeader}" v-if="!hidenByOutsideClick">
         <!-- <div class="search-results" :class="{'unfolded' : searchHeader != ''}" v-if="this.searchHeader.length>=2 & this.isHeader"> -->
@@ -50,7 +50,8 @@ export default {
             listingsNextLink:null,
             searchHeader:'',
             timeToSearch:200,
-            hidenByOutsideClick:true
+            hidenByOutsideClick:true,
+            disabledSearch:false
         }
     },
     methods:{
@@ -107,6 +108,16 @@ export default {
                 await this.loadNext();
                 console.log('bottom');
             }
+        },
+        checkIfInputIsDisabled(){
+            if(this.$route.name=='Marketplace'){
+                if ((this.$route.params.tab=='shares'||this.$route.params.tab=='activity')){
+                    this.disabledSearch = true;
+                }
+                else{
+                    this.disabledSearch = false;
+                }
+            }
         }
     },
     props:['isHeader'],
@@ -122,7 +133,16 @@ export default {
     },
     directives: {
     debounce: vue3Debounce({ lock: true })
-  }
+  },
+    async mounted(){
+        const delay = (delayInms) => {
+            return new Promise(resolve => setTimeout(resolve, delayInms));
+        }
+        while (true) {
+            await delay(500);
+            this.checkIfInputIsDisabled();
+        }
+    }
 }
 </script>
 

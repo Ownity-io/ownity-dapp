@@ -37,10 +37,12 @@ export default{
       if (this.item){
         this.collectionLink = `/collection/${this.item.collection.contract_address}`;
       }
-      let requestUrl = `${config.backendApiEntryPoint}nft-collections/?contract_address=${this.$route.params.contract_address}`;
-      let request = await fetch(requestUrl);
-      let requestJson = await request.json();
-      this.collection = requestJson[0];
+        if (this.$route.params.contract_address) {
+            let requestUrl = `${config.backendApiEntryPoint}nft-collections/?contract_address=${this.$route.params.contract_address}`;
+            let request = await fetch(requestUrl);
+            let requestJson = await request.json();
+            this.collection = requestJson[0];
+        }      
     }
 }
 </script>
