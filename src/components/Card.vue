@@ -142,7 +142,7 @@
               <div class="icon-value"></div>
               <span><b>{{useHelpers.abbrNum(priceInCurrency,2)}} {{' '}}</b>ETH</span>
             </div>
-            <div class="equivalent">≈ $ {{useHelpers.abbrNum(Math.round(priceInCurrency * currencyToUsdPrice),1,2)}}</div>
+            <div class="equivalent">≈ $ {{useHelpers.abbrNum(priceInCurrency * currencyToUsdPrice,2,2)}}</div>
 
           </div>
         </div>
@@ -467,7 +467,7 @@ export default {
     setPriceInCurrency(){
       this.priceInCurrency = this.useHelpers.toFixedIfNecessary((this.item.price / (10**this.item.currency.decimals)),2);
       if (this.priceInCurrency<=0.0001){
-        this.priceInCurrency = '≈ 0.0001'
+        this.priceInCurrency = '0.0001'
       }
     },
     setAllBidsAmount(){
