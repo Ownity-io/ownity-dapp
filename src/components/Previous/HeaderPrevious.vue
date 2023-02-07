@@ -6,8 +6,8 @@
         <div class="mobile-menu-main-btn">
             <div class="mobile-menu-container container">
             <div class="btn-container">
-              <a href="#list" class="btn btn-connect">
-                <span>Beta Waitlist</span>
+              <a href="/marketplace" class="btn btn-connect">
+                <span>Launch App</span>
               </a>
             </div>
             </div>
@@ -179,8 +179,8 @@
                         </ul>
                     </nav>
                     <div class="btn-container">
-                        <a href="#list" class="btn btn-connect">
-                          Beta Waitlist
+                        <a href="/marketplace" class="btn btn-connect">
+                            Launch App
                         </a>
                     </div>
                 </div>
