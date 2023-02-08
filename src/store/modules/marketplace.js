@@ -24,6 +24,7 @@ export default {
       currentMarketplace: null,
       currentlyGatehring:false,
       currentBidStatus:null,
+      currentStatus:null,
       selectedSort:null,
       onSale:false,
       searchString:'',
@@ -116,6 +117,7 @@ export default {
       if (state.currentMaxPrice!=null){count++;}
       if (state.currentlyGatehring!=false){count++;}
       if (state.currentBidStatus!=null){count++;}
+      if (state.currentStatus!=null){count++;}
       if (state.onSale!=false){count++;}
       if (state.searchString!=''){count++;}
       if (state.currentActivitiesCategory){count++;}
@@ -127,6 +129,9 @@ export default {
     },
     getCurrentBidStatus(state){
       return state.currentBidStatus;
+    },
+    getCurrentStatus(state){
+      return state.currentStatus;
     },
     getSelectedSort(state){
       return state.selectedSort;
@@ -227,6 +232,9 @@ export default {
     },
     setCurrentBidStatus(state,value){
       state.currentBidStatus = value;
+    },
+    setCurrentStatus(state,value){
+      state.currentStatus = value;
     },
     setSelectedSort(state,value){
       state.selectedSort = value;
@@ -446,6 +454,7 @@ export default {
       context.commit("setCurrentMaxPrice", null);
       context.commit("setCurrentlyGathering",false);
       context.commit("setCurrentBidStatus",null);
+      context.commit("setCurrentStatus",null);
       context.commit("setOnSale",false);
       context.commit("setSearchString",'');
       context.commit("setCurrentActivitiesCategory",null)
@@ -509,6 +518,9 @@ export default {
     },
     setCurrentBidStatus(context,value){
       context.commit("setCurrentBidStatus", value);
+    },
+    setCurrentStatus(context,value){
+      context.commit("setCurrentStatus", value);
     },
     async fetchAndSetListingsStartInfoByUserFav(context, isFirst) {
       let requestUrl = `${config.backendApiEntryPoint}favorite-listings-by-user/?limit=${config.listingsPerPage}`;
