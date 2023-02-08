@@ -102,13 +102,14 @@ export default {
           localStorage.setItem('token', requestJson.data.token);
           localStorage.setItem('tokenEndTimestamp', requestJson.data.expiration_timestamp);
           localStorage.setItem('refreshToken', requestJson.data.refresh);
+          localStorage.setItem('userAddress', userAddress);
           let checkStorageWrited = (localStorage.getItem('refreshToken')!=null);
           if (checkStorageWrited){
             const delay = (delayInms) => {
               return new Promise((resolve) => setTimeout(resolve, delayInms));
             };
             await delay(1000);
-            //! location.reload();
+            location.reload();
           }          
         }else if (Date.parse(localStorage.getItem('tokenEndTimestamp'))<Date.now()){
           //gettoken with refesh-token
