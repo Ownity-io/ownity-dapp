@@ -24,10 +24,10 @@
                         </button>
                         <ul class="footer-list">
                             <li>
-                              <a @click="goToTop()">{{translatesGet('HOME')}}</a>
+                              <a href="https://ownity.io/main">{{translatesGet('HOME')}}</a>
                             </li>
                             <li><a href="#fractional">Fractional Ownership</a></li>
-                            <li><a href="#aggregator">NFT Aggregator</a></li>
+                            <li><a href="https://ownity.io/marketplace">NFT Aggregator</a></li>
                         </ul>
                     </div>
 <!--                    <div class="footer-block" :class="{'unfolded' : !footerBlock2}">-->

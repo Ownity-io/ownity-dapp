@@ -4,8 +4,8 @@
     <p class="whitelist-inner-title">Ownity Private Beta Waitlist Is Now Open</p>
     <p class="whitelist-inner-subtitle">Hop on the list to be among the very first to try out Ownity’s disruptive functionality.</p>
     <div class="email-block">
-      <input placeholder="Your Email" v-model="email" >
-      <button @click="validateEmail();">Join</button>
+<!--      <input placeholder="Your Email" v-model="email" >-->
+      <a href="https://tally.so/r/wbZQDe" target="_blank">Join</a>
     </div>
 <!--    <p class="check-term">By joining the list, you agree to Ownity Terms of Use.</p>-->
   </div>
