@@ -286,10 +286,10 @@ export default {
           requestUrl += `&marketplace=${context.getters.getCurrentMarketplaceId}`;
         }
         if (context.getters.getCurrentMinPrice!=null){
-          requestUrl += `&price_gt=${ethers.utils.parseEther(String(context.getters.getCurrentMinPrice)).toString()}`;
+          requestUrl += `&min_share_price=${ethers.utils.parseEther(String(context.getters.getCurrentMinPrice)).toString()}`;
         }
         if (context.getters.getCurrentMaxPrice!=null){
-          requestUrl += `&price_lt=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
+          requestUrl += `&max_share_price=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
         }
         if (context.getters.getSelectedSort!=null){
           requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;

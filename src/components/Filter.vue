@@ -1,16 +1,32 @@
 <template>
   <div class="filter">
-    <div class="filter-section" :class="{ 'collapse-section': filterSection0 }" v-if="(this.$route.name=='Collection' ||this.$route.name=='Marketplace') & !activities">
-      <button class="filter-section-name" @click="filterSection0 = !filterSection0">
+    <div
+      class="filter-section"
+      :class="{ 'collapse-section': filterSection0 }"
+      v-if="
+        (this.$route.name == 'Collection' ||
+          this.$route.name == 'Marketplace') && !activities &&
+          this.$route.path !== '/marketplace/shares'
+      "
+    >
+      <button
+        class="filter-section-name"
+        @click="filterSection0 = !filterSection0"
+      >
         <span>Status</span>
         <i class="i-arrow-up-s-line"></i>
       </button>
       <ul class="filter-ul">
-        <li class="filter-li" >
+        <li class="filter-li">
           <div class="input-checkbox input-switcher">
-            <input type="checkbox" id="input-switch" v-model="currentlyGathering" @change="fetchAndSetListingsStartInfo"/>
+            <input
+              type="checkbox"
+              id="input-switch"
+              v-model="currentlyGathering"
+              @change="fetchAndSetListingsStartInfo"
+            />
             <label for="input-switch">
-              <span>{{translatesGet('LIVE_GATHER')}}</span>
+              <span>{{ translatesGet("LIVE_GATHER") }}</span>
               <div class="input-switch"></div>
             </label>
           </div>
@@ -18,17 +34,32 @@
       </ul>
     </div>
 
-    <div class="filter-section" :class="{ 'collapse-section': filterSection0 }" v-if="this.$route.name=='Profile' & (this.onlyFav||(!this.onlyFav & !this.vote & !this.activities))">
-      <button class="filter-section-name" @click="filterSection0 = !filterSection0">
+    <div
+      class="filter-section"
+      :class="{ 'collapse-section': filterSection0 }"
+      v-if="
+        (this.$route.name == 'Profile') &
+        (this.onlyFav || !this.onlyFav & !this.vote & !this.activities)
+      "
+    >
+      <button
+        class="filter-section-name"
+        @click="filterSection0 = !filterSection0"
+      >
         <span>Status</span>
         <i class="i-arrow-up-s-line"></i>
       </button>
       <ul class="filter-ul">
-        <li class="filter-li" >
+        <li class="filter-li">
           <div class="input-checkbox input-switcher">
-            <input type="checkbox" id="input-switch" v-model="currentlyGathering" @change="fetchAndSetListingsStartInfo"/>
+            <input
+              type="checkbox"
+              id="input-switch"
+              v-model="currentlyGathering"
+              @change="fetchAndSetListingsStartInfo"
+            />
             <label for="input-switch">
-              <span>{{translatesGet('LIVE_GATHER')}}</span>
+              <span>{{ translatesGet("LIVE_GATHER") }}</span>
               <div class="input-switch"></div>
             </label>
           </div>
@@ -36,18 +67,37 @@
       </ul>
     </div>
 
-    <div class="filter-section" :class="{ 'collapse-section': filterSection5 }" v-if="$route.path === '/profile/favorites' || $route.path === '/profile/all'">
-      <button class="filter-section-name" @click="filterSection5 = !filterSection5">
+    <div
+      class="filter-section"
+      :class="{ 'collapse-section': filterSection5 }"
+      v-if="
+        $route.path === '/profile/favorites' || $route.path === '/profile/all'
+      "
+    >
+      <button
+        class="filter-section-name"
+        @click="filterSection5 = !filterSection5"
+      >
         <span>Sale Status</span>
         <i class="i-arrow-up-s-line"></i>
       </button>
       <ul class="filter-ul">
         <li class="filter-li" v-for="status in statuses" :key="status.name">
           <div class="input-checkbox">
-            <input type="checkbox" :id="status.value" :checked="$store.getters['marketplace/getSaleStatusFilter']  && $store.getters['marketplace/getSaleStatusFilter'].name === status.name" :value="status.value"  @click="setSaleStatus(status)"/>
+            <input
+              type="checkbox"
+              :id="status.value"
+              :checked="
+                $store.getters['marketplace/getSaleStatusFilter'] &&
+                $store.getters['marketplace/getSaleStatusFilter'].name ===
+                  status.name
+              "
+              :value="status.value"
+              @click="setSaleStatus(status)"
+            />
             <label :for="status.value">
               <div class="icon-filter-checkbox"></div>
-              <span>{{status.name}}</span>
+              <span>{{ status.name }}</span>
               <i class="i-check-line"></i>
             </label>
           </div>
@@ -55,15 +105,27 @@
       </ul>
     </div>
 
-    <div class="filter-section" :class="{ 'collapse-section': filterSection0 }" v-if="this.vote">
-      <button class="filter-section-name" @click="filterSection0 = !filterSection0">
+    <div
+      class="filter-section"
+      :class="{ 'collapse-section': filterSection0 }"
+      v-if="this.vote"
+    >
+      <button
+        class="filter-section-name"
+        @click="filterSection0 = !filterSection0"
+      >
         <span>Status</span>
         <i class="i-arrow-up-s-line"></i>
       </button>
       <ul class="filter-ul">
-        <li class="filter-li" >
+        <li class="filter-li">
           <div class="input-checkbox input-switcher">
-            <input type="checkbox" id="input-switch" v-model="onSale" @change="fetchAndSetListingsStartInfo"/>
+            <input
+              type="checkbox"
+              id="input-switch"
+              v-model="onSale"
+              @change="fetchAndSetListingsStartInfo"
+            />
             <label for="input-switch">
               <span>On Sale</span>
               <div class="input-switch"></div>
@@ -73,93 +135,205 @@
       </ul>
     </div>
 
-    <div class="filter-section" :class="{ 'collapse-section': filterSection2 }" v-if="this.$route.name=='Profile' & onlyFav">
-      <button class="filter-section-name" @click="filterSection2 = !filterSection2">
+    <div
+      class="filter-section"
+      :class="{ 'collapse-section': filterSection2 }"
+      v-if="(this.$route.name == 'Profile') & onlyFav"
+    >
+      <button
+        class="filter-section-name"
+        @click="filterSection2 = !filterSection2"
+      >
         <span>Bid Status</span>
         <i class="i-arrow-up-s-line"></i>
       </button>
       <ul class="filter-ul">
-        <li class="filter-li" v-for="item in this.config.profilePageBidsStatuses" :key="item">
+        <li
+          class="filter-li"
+          v-for="item in this.config.profilePageBidsStatuses"
+          :key="item"
+        >
           <div class="input-checkbox">
-            <input type="checkbox" :id="item.codeName" v-model="checkedBidStatus" :true-value="item.codeName" :false-value="null" @change="fetchAndSetListingsStartInfo"/>
+            <input
+              type="checkbox"
+              :id="item.codeName"
+              v-model="checkedBidStatus"
+              :true-value="item.codeName"
+              :false-value="null"
+              @change="fetchAndSetListingsStartInfo"
+            />
             <label :for="item.codeName">
               <div class="icon-filter-checkbox"></div>
-              <span>{{item.name}}</span>
+              <span>{{ item.name }}</span>
               <i class="i-check-line"></i>
             </label>
           </div>
         </li>
       </ul>
     </div>
-    <div class="filter-section" :class="{ 'collapse-section': filterSection2 }" v-if="this.$route.name=='Marketplace'||this.$route.name=='Profile'">
-      <button class="filter-section-name" @click="filterSection2 = !filterSection2">
+    <div
+      class="filter-section"
+      :class="{ 'collapse-section': filterSection2 }"
+      v-if="this.$route.name == 'Marketplace' || this.$route.name == 'Profile'"
+    >
+      <button
+        class="filter-section-name"
+        @click="filterSection2 = !filterSection2"
+      >
         <span>Collection</span>
         <i class="i-arrow-up-s-line"></i>
       </button>
       <ul class="filter-ul">
-        <li class="filter-li" v-for="item in this.$store.getters['marketplace/getNftCollections']" :key="item">
+        <li
+          class="filter-li"
+          v-for="item in this.$store.getters['marketplace/getNftCollections']"
+          :key="item"
+        >
           <div class="input-checkbox">
-            <input type="checkbox" :id="item.contract_address" v-model="checkedCollection" :true-value="item.contract_address" :false-value="null" @change="fetchAndSetListingsStartInfo"/>
+            <input
+              type="checkbox"
+              :id="item.contract_address"
+              v-model="checkedCollection"
+              :true-value="item.contract_address"
+              :false-value="null"
+              @change="fetchAndSetListingsStartInfo"
+            />
             <label :for="item.contract_address">
-              <div class="icon-filter-checkbox" :style="{backgroundImage: `url(${item.logo})`}"></div>
-              <span>{{item.name}}</span>
+              <div
+                class="icon-filter-checkbox"
+                :style="{ backgroundImage: `url(${item.logo})` }"
+              ></div>
+              <span>{{ item.name }}</span>
               <i class="i-check-line"></i>
             </label>
           </div>
         </li>
       </ul>
     </div>
-    <div class="filter-section" :class="{ 'collapse-section': filterSection3 }" v-if="!activities">
-      <button class="filter-section-name" @click="filterSection3 = !filterSection3">
+    <div
+      class="filter-section"
+      :class="{ 'collapse-section': filterSection3 }"
+      v-if="!activities"
+    >
+      <button
+        class="filter-section-name"
+        @click="filterSection3 = !filterSection3"
+      >
         <span>Marketplace</span>
         <i class="i-arrow-up-s-line"></i>
       </button>
       <ul class="filter-ul">
-        <li class="filter-li" v-for="item in this.$store.getters['marketplace/getMarketplaces']" :key="item">
+        <li
+          class="filter-li"
+          v-for="item in this.$store.getters['marketplace/getMarketplaces']"
+          :key="item"
+        >
           <div class="input-checkbox">
-            <input type="checkbox" :id="item.id" v-model="checkedMarketplace" :true-value="item.id" :false-value="null" @change="fetchAndSetListingsStartInfo"/>
+            <input
+              type="checkbox"
+              :id="item.id"
+              v-model="checkedMarketplace"
+              :true-value="item.id"
+              :false-value="null"
+              @change="fetchAndSetListingsStartInfo"
+            />
             <label :for="item.id">
-              <div class="icon-filter-checkbox" :style="{backgroundImage: `url(${item.logo})`}"></div>
-              <span>{{item.name}}</span>
+              <div
+                class="icon-filter-checkbox"
+                :style="{ backgroundImage: `url(${item.logo})` }"
+              ></div>
+              <span>{{ item.name }}</span>
               <i class="i-check-line"></i>
             </label>
           </div>
         </li>
       </ul>
     </div>
-    <div class="filter-section" :class="{ 'collapse-section': filterSection3 }" v-if="activities">
-      <button class="filter-section-name" @click="filterSection3 = !filterSection3">
+    <div
+      class="filter-section"
+      :class="{ 'collapse-section': filterSection3 }"
+      v-if="activities"
+    >
+      <button
+        class="filter-section-name"
+        @click="filterSection3 = !filterSection3"
+      >
         <span>Category</span>
         <i class="i-arrow-up-s-line"></i>
       </button>
       <ul class="filter-ul">
-        <li class="filter-li" v-for="item in this.config.activitiesPart" :key="item">
+        <li
+          class="filter-li"
+          v-for="item in this.config.activitiesPart"
+          :key="item"
+        >
           <div class="input-checkbox">
-            <input type="checkbox" :id="item.codeName" v-model="checkedActivitiesCategory" :true-value="item.codeName" :false-value="null" @change="fetchAndSetListingsStartInfo"/>
+            <input
+              type="checkbox"
+              :id="item.codeName"
+              v-model="checkedActivitiesCategory"
+              :true-value="item.codeName"
+              :false-value="null"
+              @change="fetchAndSetListingsStartInfo"
+            />
             <label :for="item.codeName">
-              <div class="icon-filter-checkbox" :style="{backgroundImage: `url(${null})`}"></div>
-              <span>{{item.name}}</span>
+              <div
+                class="icon-filter-checkbox"
+                :style="{ backgroundImage: `url(${null})` }"
+              ></div>
+              <span>{{ item.name }}</span>
               <i class="i-check-line"></i>
             </label>
           </div>
         </li>
       </ul>
     </div>
-    <div class="filter-section" :class="{ 'collapse-section': filterSection4 }" v-if="!activities">
-      <button class="filter-section-name" @click="filterSection4 = !filterSection4">
+    <div
+      class="filter-section"
+      :class="{ 'collapse-section': filterSection4 }"
+      v-if="!activities"
+    >
+      <button
+        class="filter-section-name"
+        @click="filterSection4 = !filterSection4"
+      >
         <span>Price (ETH)</span>
         <i class="i-arrow-up-s-line"></i>
       </button>
       <div class="container-enter-price">
         <div class="container-input">
-          <div class="input-wrapper" :style="isError && { border: '1px solid red'}">
-            <input placeholder="Min" ref="input1"  type="text" v-model="this.minPrice" @input="checkMinPrice($event)" v-on:keydown.enter.prevent='deleteFocus'  v-on:keydown.enter='fetchAndSetListingsStartInfoMinPrice'  v-debounce:500ms="fetchAndSetListingsStartInfoMinPrice"/>
+          <div
+            class="input-wrapper"
+            :style="isError && { border: '1px solid red' }"
+          >
+            <input
+              placeholder="Min"
+              ref="input1"
+              type="text"
+              v-model="this.minPrice"
+              @input="checkMinPrice($event)"
+              v-on:keydown.enter.prevent="deleteFocus"
+              v-on:keydown.enter="fetchAndSetListingsStartInfoMinPrice"
+              v-debounce:500ms="fetchAndSetListingsStartInfoMinPrice"
+            />
           </div>
         </div>
         <span class="between-inputs">to</span>
         <div class="container-input">
-          <div class="input-wrapper" :style="isError && { border: '1px solid red'}">
-            <input placeholder="Max" ref="input2" type="text" v-model="this.maxPrice" @input="checkMaxPrice" v-on:keydown.enter.prevent='deleteFocus'  v-on:keydown.enter='fetchAndSetListingsStartInfoMinPrice'  v-debounce:500ms="fetchAndSetListingsStartInfoMaxPrice"/>
+          <div
+            class="input-wrapper"
+            :style="isError && { border: '1px solid red' }"
+          >
+            <input
+              placeholder="Max"
+              ref="input2"
+              type="text"
+              v-model="this.maxPrice"
+              @input="checkMaxPrice"
+              v-on:keydown.enter.prevent="deleteFocus"
+              v-on:keydown.enter="fetchAndSetListingsStartInfoMinPrice"
+              v-debounce:500ms="fetchAndSetListingsStartInfoMaxPrice"
+            />
           </div>
         </div>
       </div>
@@ -196,6 +370,14 @@ export default {
       ]
     };
   },
+  watch: {
+      '$route'(){
+        if(this.maxPrice || this.minPrice) {
+          this.maxPrice = null
+          this.minPrice = null
+        }
+      }
+  },
   methods:{
     setSaleStatus(x) {
       if(this.$store.getters['marketplace/getSaleStatusFilter'] && this.$store.getters['marketplace/getSaleStatusFilter'].name === x.name){
@@ -215,12 +397,12 @@ export default {
       if (this.$route.name == 'Marketplace'){
         if(this.activities){
           await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:null});
-        }
-        else{
-          if(this.$route.path === '/marketplace/shares') {
+        } else{
+          if(this.$route.path === '/marketplace/shares'){
             await this.$store.dispatch('marketplace/fetchSharesSale');
+          } else {
+            await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',null,true);
           }
-          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',null,true);
         }
       }
       else if (this.$route.name == 'Collection'){
@@ -251,7 +433,13 @@ export default {
       await this.$store.dispatch('marketplace/getAndSetCurrentMinPrice', this.minPrice);
       // if (this.maxPrice!=null){
         if (this.$route.name == 'Marketplace') {
-          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
+
+          if(this.$route.path === '/marketplace/shares') {
+            await this.$store.dispatch('marketplace/fetchSharesSale');
+          } else {
+            await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
+          }
+
         }
         else if (this.$route.name == 'Collection') {
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo', this.$route.params.contract_address);
@@ -280,17 +468,19 @@ export default {
         }
       }
       this.isError = this.maxPrice < this.minPrice && this.maxPrice && this.minPrice;
-      this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', this.maxPrice); 
-        
+      this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', this.maxPrice);
+
     },
     async fetchAndSetListingsStartInfoMinPrice() {
       await this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', this.maxPrice);
       await this.$store.dispatch('marketplace/getAndSetCurrentMinPrice', this.minPrice);
-      // if (this.minPrice!=null){
 
         if (this.$route.name == 'Marketplace') {
-          //todo price filer for SharesSale
-          await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
+          if(this.$route.path === '/marketplace/shares') {
+            await this.$store.dispatch('marketplace/fetchSharesSale');
+          } else {
+            await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo');
+          }
         }
         else if (this.$route.name == 'Collection') {
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo', this.$route.params.contract_address);
