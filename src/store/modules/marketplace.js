@@ -31,10 +31,15 @@ export default {
       nextActivitiesLink:null,
       lastActivitiesResponse:null,
       currentActivitiesCategory:null,
-      activitiesByUser:false
+      activitiesByUser:false,
+
+      saleStatusFilter: null
     };
   },
   getters: {
+    getSaleStatusFilter(state) {
+      return state.saleStatusFilter
+    },
     getNextSharesLink(state) {
       return state.nextSharesLink;
     },
@@ -114,6 +119,7 @@ export default {
       if (state.onSale!=false){count++;}
       if (state.searchString!=''){count++;}
       if (state.currentActivitiesCategory){count++;}
+      if (state.saleStatusFilter){count++;}
       return count;
     },
     getCurrentlyGathering(state){
@@ -148,6 +154,9 @@ export default {
     }
   },
   mutations: {
+    setSaleStatusFilter(state, data ){
+      state.saleStatusFilter = data.data
+    },
     setSharesSale(state, _json){
       if (_json!=null){
         state.nextSharesLink = _json.next;
@@ -262,7 +271,7 @@ export default {
   actions: {
     async fetchSharesSale(context, _collectionContractAddress = null, isFirst){
       try {
-        let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.activitiesPerPage}&bid_status=ON%20SALE`
+        let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.listingsPerPage}&bid_status=ON%20SALE&internal_statuses=OWNED&internal_statuses=ON%20SALE`
 
         if (_collectionContractAddress==null){
           if (context.getters.getCurrentCollectionContractAddress != null) {
@@ -277,10 +286,10 @@ export default {
           requestUrl += `&marketplace=${context.getters.getCurrentMarketplaceId}`;
         }
         if (context.getters.getCurrentMinPrice!=null){
-          requestUrl += `&price_gt=${ethers.utils.parseEther(String(context.getters.getCurrentMinPrice)).toString()}`;
+          requestUrl += `&min_share_price=${ethers.utils.parseEther(String(context.getters.getCurrentMinPrice)).toString()}`;
         }
         if (context.getters.getCurrentMaxPrice!=null){
-          requestUrl += `&price_lt=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
+          requestUrl += `&max_share_price=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
         }
         if (context.getters.getSelectedSort!=null){
           requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;
@@ -441,6 +450,7 @@ export default {
       context.commit("setSearchString",'');
       context.commit("setCurrentActivitiesCategory",null)
       context.commit("setSelectedSort",null)
+      context.commit("setSaleStatusFilter", {data: null})
     },
     async setCurrentlyGathering(context,value){
       context.commit("setCurrentlyGathering", value);
@@ -473,6 +483,11 @@ export default {
 
       if(isFirst && !requestUrl.includes('&ordering')){
         requestUrl+='&ordering=-timestamp'
+      }
+
+      //? saleStatus
+      if (context.getters.getSaleStatusFilter){
+        requestUrl+=`${context.getters.getSaleStatusFilter.value}`;
       }
 
       let requestOptions = {
@@ -520,6 +535,12 @@ export default {
       if(isFirst && !requestUrl.includes('&ordering')){
         requestUrl+='&ordering=-timestamp'
       }
+
+      //? saleStatus
+      if (context.getters.getSaleStatusFilter){
+        requestUrl+=`${context.getters.getSaleStatusFilter.value}`;
+      }
+
 
       console.log(requestUrl)
       let requestOptions = {
