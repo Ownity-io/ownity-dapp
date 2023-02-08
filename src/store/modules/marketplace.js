@@ -551,6 +551,9 @@ export default {
       if (context.getters.getCurrentlyGathering){
         requestUrl += `&internal_status=GATHER`;
       }
+      if (context.getters.getCurrentStatus){
+        requestUrl += `&internal_status=${context.getters.getCurrentStatus}`;
+      }
       if (context.getters.getSelectedSort!=null){
         requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;
       }

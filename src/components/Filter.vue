@@ -45,7 +45,7 @@
               type="checkbox"
               id="input-switch"
               v-model="currentlyGathering"
-              @change="fetchAndSetListingsStartInfo"
+              @change="checkedStatus=null;fetchAndSetListingsStartInfo();"
             />
             <label for="input-switch">
               <span>{{ translatesGet("LIVE_GATHER") }}</span>
@@ -67,7 +67,7 @@
               type="checkbox"
               id="input-switch"
               v-model="onSale"
-              @change="fetchAndSetListingsStartInfo"
+              @change="checkedStatus=null;fetchAndSetListingsStartInfo();"
             />
             <label for="input-switch">
               <span>On Sale</span>
@@ -106,7 +106,7 @@
         </li>
       </ul>
     </div>
-    <div class="filter-section" :class="{ 'collapse-section': filterSection9 }" v-if="this.$route.name=='Profile' & !(!onlyFav & !vote)">
+    <div class="filter-section" :class="{ 'collapse-section': filterSection9 }" v-if="this.$route.name=='Profile' & onlyFav">
       <button class="filter-section-name" @click="filterSection9 = !filterSection9">
         <span>Status</span>
         <i class="i-arrow-up-s-line"></i>
@@ -114,17 +114,46 @@
       <ul class="filter-ul">
         <li
           class="filter-li"
-          v-for="item in this.config.profilePageBidsStatuses"
+          v-for="item in this.config.profilePageFavInternalStatuses"
           :key="item"
         >
           <div class="input-checkbox">
             <input
               type="checkbox"
               :id="item.codeName"
-              v-model="checkedBidStatus"
+              v-model="checkedStatus"
               :true-value="item.codeName"
               :false-value="null"
-              @change="fetchAndSetListingsStartInfo"
+              @change="currentlyGathering=null;fetchAndSetListingsStartInfo();"
+            />
+            <label :for="item.codeName">
+              <div class="icon-filter-checkbox"></div>
+              <span>{{ item.name }}</span>
+              <i class="i-check-line"></i>
+            </label>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="filter-section" :class="{ 'collapse-section': filterSection10 }" v-if="this.$route.name=='Profile' & vote">
+      <button class="filter-section-name" @click="filterSection10 = !filterSection10">
+        <span>Status</span>
+        <i class="i-arrow-up-s-line"></i>
+      </button>
+      <ul class="filter-ul">
+        <li
+          class="filter-li"
+          v-for="item in this.config.profilePageVoteInternalStatuses"
+          :key="item"
+        >
+          <div class="input-checkbox">
+            <input
+              type="checkbox"
+              :id="item.codeName"
+              v-model="checkedStatus"
+              :true-value="item.codeName"
+              :false-value="null"
+              @change="onSale=null;fetchAndSetListingsStartInfo();"
             />
             <label :for="item.codeName">
               <div class="icon-filter-checkbox"></div>
@@ -296,6 +325,7 @@ export default {
       filterSection7: false,
       filterSection8: false,
       filterSection9: false,
+      filterSection10: false,
       config:config,
       maxPrice:null,
       minPrice:null,
@@ -495,6 +525,14 @@ export default {
       },
       set(value){
         this.$store.dispatch('marketplace/setCurrentBidStatus',value)
+      }
+    },
+    checkedStatus:{
+      get(){
+        return this.$store.getters['marketplace/getCurrentStatus'];
+      },
+      set(value){
+        this.$store.dispatch('marketplace/setCurrentStatus',value)
       }
     },
     onSale:{
