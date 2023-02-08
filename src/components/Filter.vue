@@ -78,7 +78,7 @@
         class="filter-section-name"
         @click="filterSection5 = !filterSection5"
       >
-        <span>Sale Status</span>
+        <span>Listing status</span>
         <i class="i-arrow-up-s-line"></i>
       </button>
       <ul class="filter-ul">
