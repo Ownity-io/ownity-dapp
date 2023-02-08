@@ -65,6 +65,7 @@
             </button>
           </li>
         </ul>
+
         <ul v-if="this.$store.getters['marketplace/getFiltersCount']>0 & this.$route.name=='Profile'">   
             <li v-if="this.$store.getters['marketplace/getCurrentlyGathering']!=false" @click="this.$store.dispatch('marketplace/setCurrentlyGathering',false);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')">
                 <button class="btn btn-selected-filter">
@@ -123,19 +124,26 @@
                     <i class="i-close-line"></i>
                 </button>
             </li>
+            <li @click="this.$store.commit('marketplace/setSaleStatusFilter', {data: null});this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav', true)">
+            <button v-if="$store.getters['marketplace/getSaleStatusFilter']" class="btn btn-selected-filter">
+              <span>{{$store.getters['marketplace/getSaleStatusFilter'].name}}</span>
+              <i class="i-close-line"></i>
+            </button>
+          </li>
+
             <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')" v-if="!activities && !onlyFav && !vote">
                 <button class="btn btn-selected-filter btn-reset">
                     <span>{{translatesGet('CLEAR_ALL')}}</span>
                     <i class="i-close-line"></i>
                 </button>
             </li>
-          <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav', true)" v-if="!activities && !vote && onlyFav">
+            <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserFav', true)" v-if="!activities && !vote && onlyFav">
             <button class="btn btn-selected-filter btn-reset">
               <span>{{translatesGet('CLEAR_ALL')}}</span>
               <i class="i-close-line"></i>
             </button>
           </li>
-          <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote', true)" v-if="!activities && !onlyFav && vote">
+            <li @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUserVote', true)" v-if="!activities && !onlyFav && vote">
             <button class="btn btn-selected-filter btn-reset">
               <span>{{translatesGet('CLEAR_ALL')}}</span>
               <i class="i-close-line"></i>
@@ -149,13 +157,13 @@
             </li>
         </ul>
 
-        <ul v-if="this.$store.getters['marketplace/getFiltersCount']>0 & this.$route.name=='Collection'">   
+        <ul v-if="this.$store.getters['marketplace/getFiltersCount']>0 & this.$route.name=='Collection'">
             <li v-if="this.$store.getters['marketplace/getCurrentlyGathering']!=false" @click="this.$store.dispatch('marketplace/setCurrentlyGathering',false);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address)">
                 <button class="btn btn-selected-filter">
                     <span>{{translatesGet('LIVE_GATHER')}}</span>
                     <i class="i-close-line"></i>
                 </button>
-            </li> 
+            </li>
             <li  v-if="this.$store.getters['marketplace/getCurrentMarketplaceId']!=null" @click="this.$store.dispatch('marketplace/getAndSetCurrentMarketplaceId',null);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address)">
                 <button class="btn btn-selected-filter">
                     <div class="icon-selected-filter" :style="{backgroundImage: `url(${this.$store.getters['marketplace/getCurrentMarketplace'].logo})`}"></div>
