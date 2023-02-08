@@ -106,6 +106,35 @@
         </li>
       </ul>
     </div>
+    <div class="filter-section" :class="{ 'collapse-section': filterSection9 }" v-if="this.$route.name=='Profile' & !(!onlyFav & !vote)">
+      <button class="filter-section-name" @click="filterSection9 = !filterSection9">
+        <span>Status</span>
+        <i class="i-arrow-up-s-line"></i>
+      </button>
+      <ul class="filter-ul">
+        <li
+          class="filter-li"
+          v-for="item in this.config.profilePageBidsStatuses"
+          :key="item"
+        >
+          <div class="input-checkbox">
+            <input
+              type="checkbox"
+              :id="item.codeName"
+              v-model="checkedBidStatus"
+              :true-value="item.codeName"
+              :false-value="null"
+              @change="fetchAndSetListingsStartInfo"
+            />
+            <label :for="item.codeName">
+              <div class="icon-filter-checkbox"></div>
+              <span>{{ item.name }}</span>
+              <i class="i-check-line"></i>
+            </label>
+          </div>
+        </li>
+      </ul>
+    </div>
     <div class="filter-section" :class="{ 'collapse-section': filterSection5 }" v-if="this.$route.name=='Marketplace'||this.$route.name=='Profile'">
       <button class="filter-section-name" @click="filterSection5 = !filterSection5">
         <span>Collection</span>
@@ -266,6 +295,7 @@ export default {
       filterSection6: false,
       filterSection7: false,
       filterSection8: false,
+      filterSection9: false,
       config:config,
       maxPrice:null,
       minPrice:null,
