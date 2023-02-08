@@ -13,7 +13,7 @@
     <TransSuccess v-if="this.$store.getters['appGlobal/getShowTransSuccessModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/>
     <BuyPart v-if="this.$store.getters['appGlobal/getShowBuyPartModal'] & (this.walletConnected!=null & this.walletConnected!='null')"/> 
     <FractionActivity v-if="this.$store.getters['appGlobal/getShowVoteInfoModal'] & (this.walletConnected!=null & this.walletConnected!='null')" />
-    <contact-us v-if="this.$store.getters['appGlobal/getShowContactUsModal']" />
+    <contact-us v-if="true" />
     <attention-block/>
     <div class="wrapper-main" :class="{fix: (this.$store.getters['appGlobal/getShowMobileBurgerMenu'])}">
         <HeaderComponent/>

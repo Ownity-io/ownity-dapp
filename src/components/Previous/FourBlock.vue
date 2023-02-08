@@ -72,7 +72,7 @@
         </div>
       </div>
       <div class="collection-design">
-        <a class="btn btn-previous" href="#list" style="max-width: 180px;z-index: 2">
+        <a class="btn btn-previous" href="https://ownity.io/main#collection" style="max-width: 180px;z-index: 2">
           To All Collections
         </a>
       </div>

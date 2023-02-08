@@ -21,10 +21,7 @@
           </div>
           <p class="or">or</p>
           <div  class="footer-form">
-            <div class="input-wrapper">
-              <input placeholder="Your email" v-model="this.email">
-              <button type="submit" class="btn btn-subscribe" @click="validateEmail">Send</button>
-            </div>
+              <a type="submit" class="btn btn-subscribe" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSe99VEp-vBxUedhbJN5hRtHi9jZ8xxeELCLy1XMqeDjNMfG7g/viewform" style="margin: 0 auto 20px auto; max-width: 50%; cursor: pointer">Send</a>
             <p class="agree">
               By subscribing, you agree to Ownity
             </p>
