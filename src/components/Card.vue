@@ -522,28 +522,6 @@ export default {
         this.remainTimeString = hours + 'h:' + minutes + 'm:' + seconds + 's';
       }
     },
-    async checkLike(context){
-      if (localStorage.getItem("token") != null & localStorage.getItem("token") != 'null'){
-        if (!this.likeChecked){
-        let requestLink = `${config.backendApiEntryPoint}is-favorite/?lot=${this.item.id}`;
-        let requestOptions = {
-          method: "GET",
-          headers: {
-            accept: "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        };
-        let request = await fetch(requestLink, requestOptions);
-        if (request.ok){
-        let requestJson = await request.json();
-        this.testLike = requestJson.data.favorite;}
-        this.likeChecked = true;}
-      }
-      else{
-        this.testLike = false;
-        this.likeChecked = false;
-      }
-    },
     async changeLike(context){
       if (localStorage.getItem("token") != null) {
         let requestLink = `${config.backendApiEntryPoint}favorite/`;
@@ -668,7 +646,7 @@ export default {
     this.updateTimeString();
     this.itemWithBidsOnSale = await (await fetch(`${config.backendApiEntryPoint}listing-with-on-sale-bids/${this.item.id}`)).json();
     this.setBidOnSale();
-    // await this.checkLike();
+
     if (localStorage.getItem('userAddress')!=null&localStorage.getItem('userAddress')!="null"){
       this.setMaxVoting();
     }
@@ -683,12 +661,15 @@ export default {
         this.bidRewarded=true;
       }
     }
-    await this.checkLike();
+
     this.render=true;
     
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
     }
+
+    this.testLike  = this.item.is_favorite
+
     while(true){
       await delay(1000);
       this.updateTimeString();
@@ -696,7 +677,6 @@ export default {
       this.setUserBidAmount();
       this.allProgressValue = this.useHelpers.toFixedIfNecessary((this.allBidsAmount / this.item.price) * 100, 0);
       this.userProgressValue = this.useHelpers.toFixedIfNecessary((this.userBidAmount / this.item.price) * 100, 0);
-      await this.checkLike();
     }
   }
 };

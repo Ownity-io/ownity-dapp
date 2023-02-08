@@ -48,38 +48,29 @@ export default {
   actions:{
     async getAndSetItem(context,_tokenId){
         let requestUrl = `${config.backendApiEntryPoint}listing/${_tokenId}`;
-        let request = await fetch(requestUrl);
+
+        let data = localStorage.getItem("token") ? {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          }
+        } : {}
+
+        let request = await fetch(requestUrl, data);
         let requestJson = await request.json();
         context.commit('setItem',requestJson);
     },
     async getRecomendations(context,_collection_contract_address){
       let requestUrl = `${config.backendApiEntryPoint}listings/?limit=5&marketplace_status=OPEN&collection=${_collection_contract_address}&currency=0x0000000000000000000000000000000000000000`;
-      let request = await fetch(requestUrl);
+
+      let data = localStorage.getItem("token") ? {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
+      } : {}
+
+      let request = await fetch(requestUrl, data);
       let requestJson = await request.json();
       return requestJson.results;
-    },
-    async checkLike(context){
-      if (localStorage.getItem("token") != null & localStorage.getItem("token") != 'null'){
-        if (!context.getters.getChecked){
-        console.log('check...');
-        let requestLink = `${config.backendApiEntryPoint}is-favorite/?lot=${context.getters.getItem.id}`;
-        let requestOptions = {
-          method: "GET",
-          headers: {
-            accept: "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        };
-        let request = await fetch(requestLink, requestOptions);
-        if (request.ok){
-        let requestJson = await request.json();
-        context.commit("setLike", requestJson.data.favorite);}
-        context.commit("setChecked",true);}
-      }
-      else{
-        context.commit("setLike", false);
-        context.commit("setChecked",false);
-      }
     },
     async changeLike(context){
       if (localStorage.getItem("token") != null) {

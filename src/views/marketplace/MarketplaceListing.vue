@@ -722,6 +722,9 @@ export default {
       await this.$store.dispatch('marketplaceListing/getAndSetItem',this.$route.params.id);
 
       this.item = await this.$store.getters['marketplaceListing/getItem'];
+
+      this.testLike = this.item.is_favorite
+
       this.itemWithBidsOnSale = await (await fetch(`${config.backendApiEntryPoint}listing-with-on-sale-bids/${this.item.id}`)).json();
     },
     setPriceInCurrency(){
@@ -799,10 +802,6 @@ export default {
         return;
       }
     },
-    async checkLike(){
-      await this.$store.dispatch('marketplaceListing/checkLike');
-      this.testLike = this.$store.getters['marketplaceListing/getLike'];
-    },
     async changeLike(){      
       if (localStorage.getItem("token") != null) {
       await this.$store.dispatch('marketplaceListing/changeLike');
@@ -876,8 +875,6 @@ export default {
         this.setAllBidsAmount();
         this.setUserBidAmount();
         this.setChartData();
-        await this.$store.dispatch('marketplaceListing/checkLike');
-        await this.checkLike();
         this.$store.dispatch('marketplaceListing/fetchAndSetContractConfig');
         this.recommendations = await this.$store.dispatch('marketplaceListing/getRecomendations', this.item.collection.contract_address);
         if (await this.$store.getters['marketplaceListing/getModalToShowAtStart'] != null) {
@@ -953,8 +950,6 @@ export default {
     this.setAllBidsAmount();
     this.setUserBidAmount();
     this.setChartData();
-    await this.$store.dispatch('marketplaceListing/checkLike');
-    await this.checkLike();
     this.$store.dispatch('marketplaceListing/fetchAndSetContractConfig');
     this.recommendations = await this.$store.dispatch('marketplaceListing/getRecomendations',this.item.collection.contract_address);
     if (await this.$store.getters['marketplaceListing/getModalToShowAtStart']!=null){
@@ -984,7 +979,6 @@ export default {
       this.setAllBidsAmount();
       this.setUserBidAmount();
       this.setChartData();
-      this.checkLike();
     }
   },
 };

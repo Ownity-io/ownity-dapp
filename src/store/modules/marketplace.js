@@ -304,9 +304,14 @@ export default {
         if (context.getters.getSearchString!=''){
           requestUrl+=`&search=${context.getters.getSearchString}`;
         }
-        // requestUrl+='&marketplace_status=OPEN';
 
-        let request = await fetch(requestUrl);
+        let data = localStorage.getItem("token") ? {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          }
+        } : {}
+
+        let request = await fetch(requestUrl, data);
         let requestCode = request.ok;
         if (requestCode) {
           let requestJson = await request.json();
@@ -357,8 +362,14 @@ export default {
         requestUrl+="&internal_statuses=OWNED";
       }
       requestUrl+='&marketplace_status=OPEN';
-      console.log(requestUrl)
-      let request = await fetch(requestUrl);
+
+      let data = localStorage.getItem("token") ? {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
+      } : {}
+
+      let request = await fetch(requestUrl, data);
       let requestCode = request.ok;
       if (requestCode) {
         let requestJson = await request.json();
