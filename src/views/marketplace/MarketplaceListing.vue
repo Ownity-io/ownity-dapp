@@ -509,7 +509,7 @@
                             <div class="td-wrap-price">
                               <div class="icon-token eth"></div>
                               <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary((bid.amount / (10**this.item.currency.decimals)),6),2)}} ETH</span>
-                              <span class="td-light">≈ $ {{useHelpers.toFixedIfNecessary(useHelpers.abbrNum((bid.amount / (10**this.item.currency.decimals) * currencyToUsdPrice),1),2)}}</span>
+                              <!-- <span class="td-light">≈ $ {{useHelpers.toFixedIfNecessary(useHelpers.abbrNum((bid.amount / (10**this.item.currency.decimals) * currencyToUsdPrice),1),2)}}</span> -->
                             </div>
                           </div>
                         </div>
