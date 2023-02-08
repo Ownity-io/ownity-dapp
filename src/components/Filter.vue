@@ -17,8 +17,8 @@
         </li>
       </ul>
     </div>
-    <div class="filter-section" :class="{ 'collapse-section': filterSection0 }" v-if="this.$route.name=='Profile' & (this.onlyFav||(!this.onlyFav & !this.vote & !this.activities))">
-      <button class="filter-section-name" @click="filterSection0 = !filterSection0">
+    <div class="filter-section" :class="{ 'collapse-section': filterSection2 }" v-if="this.$route.name=='Profile' & (this.onlyFav||(!this.onlyFav & !this.vote & !this.activities))">
+      <button class="filter-section-name" @click="filterSection2 = !filterSection2">
         <span>Status</span>
         <i class="i-arrow-up-s-line"></i>
       </button>
@@ -34,8 +34,8 @@
         </li>
       </ul>
     </div>
-    <div class="filter-section" :class="{ 'collapse-section': filterSection0 }" v-if="this.vote">
-      <button class="filter-section-name" @click="filterSection0 = !filterSection0">
+    <div class="filter-section" :class="{ 'collapse-section': filterSection3 }" v-if="this.vote">
+      <button class="filter-section-name" @click="filterSection3 = !filterSection3">
         <span>Status</span>
         <i class="i-arrow-up-s-line"></i>
       </button>
@@ -51,8 +51,8 @@
         </li>
       </ul>
     </div>
-    <div class="filter-section" :class="{ 'collapse-section': filterSection2 }" v-if="this.$route.name=='Profile' & onlyFav">
-      <button class="filter-section-name" @click="filterSection2 = !filterSection2">
+    <div class="filter-section" :class="{ 'collapse-section': filterSection4 }" v-if="this.$route.name=='Profile' & !onlyFav & !activities & !vote">
+      <button class="filter-section-name" @click="filterSection4 = !filterSection4">
         <span>Bid Status</span>
         <i class="i-arrow-up-s-line"></i>
       </button>
@@ -69,8 +69,8 @@
         </li>
       </ul>
     </div>
-    <div class="filter-section" :class="{ 'collapse-section': filterSection2 }" v-if="this.$route.name=='Marketplace'||this.$route.name=='Profile'">
-      <button class="filter-section-name" @click="filterSection2 = !filterSection2">
+    <div class="filter-section" :class="{ 'collapse-section': filterSection5 }" v-if="this.$route.name=='Marketplace'||this.$route.name=='Profile'">
+      <button class="filter-section-name" @click="filterSection5 = !filterSection5">
         <span>Collection</span>
         <i class="i-arrow-up-s-line"></i>
       </button>
@@ -87,8 +87,8 @@
         </li>
       </ul>
     </div>
-    <div class="filter-section" :class="{ 'collapse-section': filterSection3 }" v-if="!activities">
-      <button class="filter-section-name" @click="filterSection3 = !filterSection3">
+    <div class="filter-section" :class="{ 'collapse-section': filterSection6 }" v-if="!activities">
+      <button class="filter-section-name" @click="filterSection6 = !filterSection6">
         <span>Marketplace</span>
         <i class="i-arrow-up-s-line"></i>
       </button>
@@ -105,8 +105,8 @@
         </li>
       </ul>
     </div>
-    <div class="filter-section" :class="{ 'collapse-section': filterSection3 }" v-if="activities">
-      <button class="filter-section-name" @click="filterSection3 = !filterSection3">
+    <div class="filter-section" :class="{ 'collapse-section': filterSection7 }" v-if="activities">
+      <button class="filter-section-name" @click="filterSection7 = !filterSection7">
         <span>Category</span>
         <i class="i-arrow-up-s-line"></i>
       </button>
@@ -123,8 +123,8 @@
         </li>
       </ul>
     </div>
-    <div class="filter-section" :class="{ 'collapse-section': filterSection4 }" v-if="!activities">
-      <button class="filter-section-name" @click="filterSection4 = !filterSection4">
+    <div class="filter-section" :class="{ 'collapse-section': filterSection8 }" v-if="!activities">
+      <button class="filter-section-name" @click="filterSection8 = !filterSection8">
         <span>Price (ETH)</span>
         <i class="i-arrow-up-s-line"></i>
       </button>
@@ -159,6 +159,10 @@ export default {
       filterSection2: false,
       filterSection3: false,
       filterSection4: false,
+      filterSection5: false,
+      filterSection6: false,
+      filterSection7: false,
+      filterSection8: false,
       config:config,
       maxPrice:null,
       minPrice:null,

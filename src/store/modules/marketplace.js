@@ -569,6 +569,9 @@ export default {
       if(isFirst && !requestUrl.includes('&ordering')){
         requestUrl+='&ordering=-timestamp'
       }
+      if (context.getters.getCurrentBidStatus!=null & context.getters.getCurrentBidStatus!=false){
+        requestUrl += `&bid_status=${context.getters.getCurrentBidStatus}`;
+      }
 
       console.log(requestUrl)
       let requestOptions = {
