@@ -52,6 +52,20 @@
             "codeName":"SOLD"
         }
     ],
+    "profilePageVoteInternalStatuses":[
+        {
+            "name":"Closed",
+            "codeName":"CLOSED"
+        },   
+        {
+            "name":"Owned",
+            "codeName":"OWNED"
+        },
+        {
+            "name":"Sold",
+            "codeName":"SOLD"
+        }
+    ],
     "sortParams":[
         {
             "name":"Price: Low to High",

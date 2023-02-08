@@ -45,7 +45,7 @@
               type="checkbox"
               id="input-switch"
               v-model="currentlyGathering"
-              @change="checkedStatus=false;fetchAndSetListingsStartInfo();"
+              @change="checkedStatus=null;fetchAndSetListingsStartInfo();"
             />
             <label for="input-switch">
               <span>{{ translatesGet("LIVE_GATHER") }}</span>
@@ -67,7 +67,7 @@
               type="checkbox"
               id="input-switch"
               v-model="onSale"
-              @change="fetchAndSetListingsStartInfo"
+              @change="checkedStatus=null;fetchAndSetListingsStartInfo();"
             />
             <label for="input-switch">
               <span>On Sale</span>
@@ -124,7 +124,7 @@
               v-model="checkedStatus"
               :true-value="item.codeName"
               :false-value="null"
-              @change="currentlyGathering=false;fetchAndSetListingsStartInfo();"
+              @change="currentlyGathering=null;fetchAndSetListingsStartInfo();"
             />
             <label :for="item.codeName">
               <div class="icon-filter-checkbox"></div>
@@ -143,17 +143,17 @@
       <ul class="filter-ul">
         <li
           class="filter-li"
-          v-for="item in this.config.profilePageBidsStatuses"
+          v-for="item in this.config.profilePageVoteInternalStatuses"
           :key="item"
         >
           <div class="input-checkbox">
             <input
               type="checkbox"
               :id="item.codeName"
-              v-model="checkedBidStatus"
+              v-model="checkedStatus"
               :true-value="item.codeName"
               :false-value="null"
-              @change="fetchAndSetListingsStartInfo"
+              @change="onSale=null;fetchAndSetListingsStartInfo();"
             />
             <label :for="item.codeName">
               <div class="icon-filter-checkbox"></div>

@@ -34,7 +34,7 @@
                     <i class="i-close-line"></i>
                 </button>
             </li>
-            <li v-if="this.$store.getters['marketplace/getCurrentlyGathering']!=false" @click="this.$store.dispatch('marketplace/setCurrentlyGathering',false);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')">
+            <li v-if="this.$store.getters['marketplace/getCurrentlyGathering']!=null & this.$store.getters['marketplace/getCurrentlyGathering']!=false" @click="this.$store.dispatch('marketplace/setCurrentlyGathering',false);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')">
                 <button class="btn btn-selected-filter">
                     <span>{{translatesGet('LIVE_GATHER')}}</span>
                     <i class="i-close-line"></i>
@@ -67,7 +67,7 @@
         </ul>
 
         <ul v-if="this.$store.getters['marketplace/getFiltersCount']>0 & this.$route.name=='Profile'">   
-            <li v-if="this.$store.getters['marketplace/getCurrentlyGathering']!=false" @click="this.$store.dispatch('marketplace/setCurrentlyGathering',false);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')">
+            <li v-if="this.$store.getters['marketplace/getCurrentlyGathering']!=null & this.$store.getters['marketplace/getCurrentlyGathering']!=false" @click="this.$store.dispatch('marketplace/setCurrentlyGathering',false);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')">
                 <button class="btn btn-selected-filter">
                     <span>{{translatesGet('LIVE_GATHER')}}</span>
                     <i class="i-close-line"></i>
@@ -79,7 +79,7 @@
                     <i class="i-close-line"></i>
                 </button>
             </li> 
-            <li v-if="this.$store.getters['marketplace/getOnSale']!=false" @click="this.$store.dispatch('marketplace/setOnSale',false);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')">
+            <li v-if="this.$store.getters['marketplace/getOnSale']!=false & this.$store.getters['marketplace/getOnSale']!=null" @click="this.$store.dispatch('marketplace/setOnSale',false);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser')">
                 <button class="btn btn-selected-filter">
                     <span>On Sale</span>
                     <i class="i-close-line"></i>
@@ -158,7 +158,7 @@
         </ul>
 
         <ul v-if="this.$store.getters['marketplace/getFiltersCount']>0 & this.$route.name=='Collection'">
-            <li v-if="this.$store.getters['marketplace/getCurrentlyGathering']!=false" @click="this.$store.dispatch('marketplace/setCurrentlyGathering',false);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address)">
+            <li v-if="this.$store.getters['marketplace/getCurrentlyGathering']!=null & this.$store.getters['marketplace/getCurrentlyGathering']!=false" @click="this.$store.dispatch('marketplace/setCurrentlyGathering',false);this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo',this.$route.params.contract_address)">
                 <button class="btn btn-selected-filter">
                     <span>{{translatesGet('LIVE_GATHER')}}</span>
                     <i class="i-close-line"></i>
