@@ -271,7 +271,7 @@ export default {
   actions: {
     async fetchSharesSale(context, _collectionContractAddress = null, isFirst){
       try {
-        let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.activitiesPerPage}&bid_status=ON%20SALE&internal_statuses=OWNED&internal_statuses=ON%20SALE`
+        let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.listingsPerPage}&bid_status=ON%20SALE&internal_statuses=OWNED&internal_statuses=ON%20SALE`
 
         if (_collectionContractAddress==null){
           if (context.getters.getCurrentCollectionContractAddress != null) {
