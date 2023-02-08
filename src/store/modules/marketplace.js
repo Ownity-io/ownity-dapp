@@ -24,6 +24,7 @@ export default {
       currentMarketplace: null,
       currentlyGatehring:false,
       currentBidStatus:null,
+      currentStatus:null,
       selectedSort:null,
       onSale:false,
       searchString:'',
@@ -31,10 +32,15 @@ export default {
       nextActivitiesLink:null,
       lastActivitiesResponse:null,
       currentActivitiesCategory:null,
-      activitiesByUser:false
+      activitiesByUser:false,
+
+      saleStatusFilter: null
     };
   },
   getters: {
+    getSaleStatusFilter(state) {
+      return state.saleStatusFilter
+    },
     getNextSharesLink(state) {
       return state.nextSharesLink;
     },
@@ -111,9 +117,11 @@ export default {
       if (state.currentMaxPrice!=null){count++;}
       if (state.currentlyGatehring!=false){count++;}
       if (state.currentBidStatus!=null){count++;}
+      if (state.currentStatus!=null){count++;}
       if (state.onSale!=false){count++;}
       if (state.searchString!=''){count++;}
       if (state.currentActivitiesCategory){count++;}
+      if (state.saleStatusFilter){count++;}
       return count;
     },
     getCurrentlyGathering(state){
@@ -121,6 +129,9 @@ export default {
     },
     getCurrentBidStatus(state){
       return state.currentBidStatus;
+    },
+    getCurrentStatus(state){
+      return state.currentStatus;
     },
     getSelectedSort(state){
       return state.selectedSort;
@@ -148,6 +159,9 @@ export default {
     }
   },
   mutations: {
+    setSaleStatusFilter(state, data ){
+      state.saleStatusFilter = data.data
+    },
     setSharesSale(state, _json){
       if (_json!=null){
         state.nextSharesLink = _json.next;
@@ -219,6 +233,9 @@ export default {
     setCurrentBidStatus(state,value){
       state.currentBidStatus = value;
     },
+    setCurrentStatus(state,value){
+      state.currentStatus = value;
+    },
     setSelectedSort(state,value){
       state.selectedSort = value;
     },
@@ -262,7 +279,7 @@ export default {
   actions: {
     async fetchSharesSale(context, _collectionContractAddress = null, isFirst){
       try {
-        let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.activitiesPerPage}&bid_status=ON%20SALE`
+        let requestUrl = `${config.backendApiEntryPoint}listings/?limit=${config.listingsPerPage}&bid_status=ON%20SALE&internal_statuses=OWNED&internal_statuses=ON%20SALE`
 
         if (_collectionContractAddress==null){
           if (context.getters.getCurrentCollectionContractAddress != null) {
@@ -277,10 +294,10 @@ export default {
           requestUrl += `&marketplace=${context.getters.getCurrentMarketplaceId}`;
         }
         if (context.getters.getCurrentMinPrice!=null){
-          requestUrl += `&price_gt=${ethers.utils.parseEther(String(context.getters.getCurrentMinPrice)).toString()}`;
+          requestUrl += `&min_share_price=${ethers.utils.parseEther(String(context.getters.getCurrentMinPrice)).toString()}`;
         }
         if (context.getters.getCurrentMaxPrice!=null){
-          requestUrl += `&price_lt=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
+          requestUrl += `&max_share_price=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
         }
         if (context.getters.getSelectedSort!=null){
           requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;
@@ -295,9 +312,14 @@ export default {
         if (context.getters.getSearchString!=''){
           requestUrl+=`&search=${context.getters.getSearchString}`;
         }
-        // requestUrl+='&marketplace_status=OPEN';
 
-        let request = await fetch(requestUrl);
+        let data = localStorage.getItem("token") ? {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          }
+        } : {}
+
+        let request = await fetch(requestUrl, data);
         let requestCode = request.ok;
         if (requestCode) {
           let requestJson = await request.json();
@@ -348,8 +370,14 @@ export default {
         requestUrl+="&internal_statuses=OWNED";
       }
       requestUrl+='&marketplace_status=OPEN';
-      console.log(requestUrl)
-      let request = await fetch(requestUrl);
+
+      let data = localStorage.getItem("token") ? {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
+      } : {}
+
+      let request = await fetch(requestUrl, data);
       let requestCode = request.ok;
       if (requestCode) {
         let requestJson = await request.json();
@@ -437,10 +465,12 @@ export default {
       context.commit("setCurrentMaxPrice", null);
       context.commit("setCurrentlyGathering",false);
       context.commit("setCurrentBidStatus",null);
+      context.commit("setCurrentStatus",null);
       context.commit("setOnSale",false);
       context.commit("setSearchString",'');
       context.commit("setCurrentActivitiesCategory",null)
       context.commit("setSelectedSort",null)
+      context.commit("setSaleStatusFilter", {data: null})
     },
     async setCurrentlyGathering(context,value){
       context.commit("setCurrentlyGathering", value);
@@ -475,6 +505,11 @@ export default {
         requestUrl+='&ordering=-timestamp'
       }
 
+      //? saleStatus
+      if (context.getters.getSaleStatusFilter){
+        requestUrl+=`${context.getters.getSaleStatusFilter.value}`;
+      }
+
       let requestOptions = {
         method: "GET",
         headers: {
@@ -495,6 +530,9 @@ export default {
     setCurrentBidStatus(context,value){
       context.commit("setCurrentBidStatus", value);
     },
+    setCurrentStatus(context,value){
+      context.commit("setCurrentStatus", value);
+    },
     async fetchAndSetListingsStartInfoByUserFav(context, isFirst) {
       let requestUrl = `${config.backendApiEntryPoint}favorite-listings-by-user/?limit=${config.listingsPerPage}`;
       if (context.getters.getCurrentCollectionContractAddress != null) {
@@ -513,6 +551,9 @@ export default {
       if (context.getters.getCurrentlyGathering){
         requestUrl += `&internal_status=GATHER`;
       }
+      if (context.getters.getCurrentStatus){
+        requestUrl += `&internal_status=${context.getters.getCurrentStatus}`;
+      }
       if (context.getters.getSelectedSort!=null){
         requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;
       }
@@ -520,6 +561,12 @@ export default {
       if(isFirst && !requestUrl.includes('&ordering')){
         requestUrl+='&ordering=-timestamp'
       }
+
+      //? saleStatus
+      if (context.getters.getSaleStatusFilter){
+        requestUrl+=`${context.getters.getSaleStatusFilter.value}`;
+      }
+
 
       console.log(requestUrl)
       let requestOptions = {
@@ -568,6 +615,9 @@ export default {
 
       if(isFirst && !requestUrl.includes('&ordering')){
         requestUrl+='&ordering=-timestamp'
+      }
+      if (context.getters.getCurrentBidStatus!=null & context.getters.getCurrentBidStatus!=false){
+        requestUrl += `&bid_status=${context.getters.getCurrentBidStatus}`;
       }
 
       console.log(requestUrl)

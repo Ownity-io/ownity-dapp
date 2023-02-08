@@ -9,7 +9,7 @@
           >
             <button
               class="btn btn-connect"
-              @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal', true)"
+              @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal', true);this.$store.dispatch('appGlobal/setShowMobileBurgerMenu',false)"
             >
             <!-- @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal', true)" -->
               <span>{{translatesGet('CONNECT_WALLET')}}</span>

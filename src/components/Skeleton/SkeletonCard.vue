@@ -103,7 +103,11 @@ export default {
         background-position-x: -300%;
     }
 }
-
-.s-card{}
+@media (min-width: 1980px) {
+    .s-card {
+        max-width: 100%;
+    }
+    
+}
 
 </style>

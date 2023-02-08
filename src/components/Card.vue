@@ -1,9 +1,8 @@
 <template>
   <!-- <a class="card card-finished" :class="{'card-inactive' : false}"> -->
   <img :src="item.media" alt="forLoadCheck" @load="onImgLoad" style="display: none;">
-  <div v-if="render" class="card"  ref="wrpCard" :class="{'card-inactive' : ((this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN'))||(this.item.internal_status=='CLAIMED')||bidRewarded),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER'), 'hides': hidesClass}">
+  <a :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="render" class="card"  ref="wrpCard" :class="{'card-inactive' : ((this.item.marketplace_status=='CLOSED' & (this.item.internal_status=='GATHER'||this.item.internal_status=='OPEN'))||(this.item.internal_status=='CLAIMED')||bidRewarded),'card-finished' : (this.item.marketplace_status=='CLOSED' & this.item.internal_status=='GATHER'), 'hides': hidesClass}">
     <div class="card-main">
-      <div class="loading"></div> <!--  used when loading-->
 
       <!-- <a v-if="item.media" :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="card-img" :style="{backgroundImage: `url(${item.media})`}" ></a>
       <a v-else :href="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="card-img"  ></a> -->
@@ -408,7 +407,7 @@
 
       </div>
     </div>
-  </div>
+  </a>
   <SkeletonCard v-else/>
 </template>
 
@@ -520,28 +519,6 @@ export default {
         this.remainTimeString =  days + 'd:' + hours + 'h:' + minutes + 'm';
       } else {
         this.remainTimeString = hours + 'h:' + minutes + 'm:' + seconds + 's';
-      }
-    },
-    async checkLike(context){
-      if (localStorage.getItem("token") != null & localStorage.getItem("token") != 'null'){
-        if (!this.likeChecked){
-        let requestLink = `${config.backendApiEntryPoint}is-favorite/?lot=${this.item.id}`;
-        let requestOptions = {
-          method: "GET",
-          headers: {
-            accept: "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        };
-        let request = await fetch(requestLink, requestOptions);
-        if (request.ok){
-        let requestJson = await request.json();
-        this.testLike = requestJson.data.favorite;}
-        this.likeChecked = true;}
-      }
-      else{
-        this.testLike = false;
-        this.likeChecked = false;
       }
     },
     async changeLike(context){
@@ -668,7 +645,7 @@ export default {
     this.updateTimeString();
     this.itemWithBidsOnSale = await (await fetch(`${config.backendApiEntryPoint}listing-with-on-sale-bids/${this.item.id}`)).json();
     this.setBidOnSale();
-    // await this.checkLike();
+
     if (localStorage.getItem('userAddress')!=null&localStorage.getItem('userAddress')!="null"){
       this.setMaxVoting();
     }
@@ -683,12 +660,15 @@ export default {
         this.bidRewarded=true;
       }
     }
-    await this.checkLike();
+
     this.render=true;
     
     const delay = (delayInms) => {
       return new Promise(resolve => setTimeout(resolve, delayInms));
     }
+
+    this.testLike  = this.item.is_favorite
+
     while(true){
       await delay(1000);
       this.updateTimeString();
@@ -696,7 +676,6 @@ export default {
       this.setUserBidAmount();
       this.allProgressValue = this.useHelpers.toFixedIfNecessary((this.allBidsAmount / this.item.price) * 100, 0);
       this.userProgressValue = this.useHelpers.toFixedIfNecessary((this.userBidAmount / this.item.price) * 100, 0);
-      await this.checkLike();
     }
   }
 };

@@ -99,10 +99,10 @@
                     <div class="footer-part footer-service-links">
                         <span class="copyright">&#169; Ownity 2022 - 2023 | All rights reserved.</span>
                         <router-link :to="{name: 'TermsOfUse'}">
-                            <span>{{translatesGet('TERMS_OF_USE')}}</span>
+                            <span>Term Of Use</span>
                         </router-link>
                         <router-link :to="{name: 'PrivacyPolicy'}">
-                            <span>{{translatesGet('PRIVACY_POLICY')}}</span>
+                            <span>Privacy Policy</span>
                         </router-link>
                     </div>
                     <div class="footer-part footer-social-links">
