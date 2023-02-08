@@ -30,6 +30,28 @@
             "codeName":"SOLD"
         }        
     ],
+    "profilePageFavInternalStatuses":[
+        {
+            "name":"Closed",
+            "codeName":"CLOSED"
+        },   
+        {
+            "name":"On Sale",
+            "codeName":"ON SALE"
+        },  
+        {
+            "name":"Open",
+            "codeName":"OPEN"
+        },  
+        {
+            "name":"Owned",
+            "codeName":"OWNED"
+        },
+        {
+            "name":"Sold",
+            "codeName":"SOLD"
+        }
+    ],
     "sortParams":[
         {
             "name":"Price: Low to High",
