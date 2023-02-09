@@ -63,11 +63,16 @@
                                 {{translatesGet('PRIVACY_POLICY')}}
                               </a>
                             </li>
-                            <li>
+                            <!-- <li>
                               <a>
                                 Brand Kit  <span class="soon" style="padding-left: 5px; color: #474747">(Soon)</span>
                               </a>
-                            </li>
+                            </li> -->
+                            <li>
+                                <a href="https://ownity.gitbook.io/ownity-documentation/brand-assets" target="_blank">
+                                  Brand Assets
+                                </a>
+                              </li>
                         </ul>
                     </div>
                     <a class="footer-block footer-block-form">

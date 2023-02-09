@@ -70,7 +70,7 @@
                         <li><a href="">Team</a></li>
                     </ul>
                 </li> -->
-                <li class="mobile-menu-item drop-down-item" :class="{more :mobItem2}">
+                <!-- <li class="mobile-menu-item drop-down-item" :class="{more :mobItem2}">
                     <button @click="mobItem2 = !mobItem2" >
                         <span>Docs</span>
                         <i class="i-arrow-down-s-line"></i>
@@ -91,6 +91,11 @@
                             </a>
                         </li>
                     </ul>
+                </li> -->
+                <li class="mobile-menu-item drop-down-item">
+                    <a href="https://ownity.gitbook.io/ownity-documentation/" target="_blank">
+                        <span>Documentation</span>
+                    </a>                        
                 </li>
             </ul>
             </nav>
@@ -154,7 +159,7 @@
                                 </ul>
                             </li>
 
-                            <li class="drop-down-item">
+                            <!-- <li class="drop-down-item">
                                 <button>
                                     <span>Docs</span>
                                     <i class="i-arrow-down-s-line"></i>
@@ -175,6 +180,11 @@
                                         </a>
                                     </li>
                                 </ul>
+                            </li> -->
+                            <li class="drop-down-item">
+                                <a href="https://ownity.gitbook.io/ownity-documentation/" target="_blank">
+                                    <span>Documentation</span>
+                                </a>                        
                             </li>
                         </ul>
                     </nav>
