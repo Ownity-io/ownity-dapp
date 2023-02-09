@@ -7,7 +7,7 @@
             <div class="mobile-menu-container container">
             <div class="btn-container">
               <a href="/main" class="btn btn-connect">
-                <span>Launch App</span>
+                <span>Try Beta</span>
               </a>
             </div>
             </div>
@@ -133,7 +133,7 @@
                     </nav>
                     <div class="btn-container">
                         <a href="/main" class="btn btn-connect">
-                            Launch App
+                            Try Beta
                         </a>
                     </div>
                 </div>
