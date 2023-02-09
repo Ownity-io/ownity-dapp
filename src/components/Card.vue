@@ -278,9 +278,9 @@
         </div>
       </div>
       <div class="btn-container">
-        <button class="btn" v-if="this.$route.name=='Listing'" @click="pushToNewListing">
+        <router-link :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" class="btn" v-if="this.$route.name=='Listing'" @click="pushToNewListing">
           {{translatesGet('BUY_TOGETHER')}}
-        </button>
+        </router-link>
         <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setshowStartCollectingModal');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"  v-if="item.marketplace_status=='OPEN' & item.internal_status=='OPEN' & userAddress!=false & this.$route.name!='Listing'">
           {{translatesGet('BUY_TOGETHER')}}
         </router-link>

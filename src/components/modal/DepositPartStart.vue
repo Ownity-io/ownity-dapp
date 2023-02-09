@@ -1,11 +1,11 @@
 <template>
   <div class="modal" v-if="render">
     <!-- <div class="modal-wrapper" v-click-away="onClickAway"> -->
-    <div class="modal-wrapper-close" @click="this.$store.dispatch('appGlobal/setshowStartCollectingModal',false)"></div>
+    <div class="modal-wrapper-close" @click="this.$store.dispatch('appGlobal/setshowStartCollectingModal',false);this.waitingForTransaction = false;"></div>
     <div class="modal-wrapper">
       <div class="modal-header">
         <div class="modal-name">{{translatesGet('DEPOSIT_PART')}}</div>
-        <button class="btn-close" @click="this.$store.dispatch('appGlobal/setshowStartCollectingModal',false)">
+        <button class="btn-close" @click="this.$store.dispatch('appGlobal/setshowStartCollectingModal',false);this.waitingForTransaction = false;">
           <i class="i-close-line"></i>
         </button>
       </div>
@@ -186,7 +186,8 @@ export default {
       buttonWaiting:false,
       lang: new MultiLang(this),
       contractConfig:null,
-      buyLotFee:0
+      buyLotFee:0,
+      waitingForTransaction:false
     };
   },
   computed: {
@@ -200,6 +201,7 @@ export default {
       return this.lang.get(key);
     },
     async buyLot(){ 
+      this.waitingForTransaction = true;
       this.buttonWaiting = true; 
       let prov = toRaw(this.provider);
       let chainSettings = toRaw(this.config.evmChains[this.item.collection.blockchain])
@@ -333,22 +335,24 @@ export default {
               },
               method:'POST'
             })).json();
-          await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
-          await this.$store.dispatch('appGlobal/setLastTransactionHash',buyLot.hash);
-          await this.$store.dispatch('appGlobal/setshowStartCollectingModal',false)          
-          await this.$store.dispatch('appGlobal/setShowTransSuccessModal',true);
-          // show succesModal and set transactionHash
-          // location.reload();
+          if (this.waitingForTransaction){
+            await this.$store.dispatch('appGlobal/setLastTransSuccess', true)
+            await this.$store.dispatch('appGlobal/setLastTransactionHash', buyLot.hash);
+            await this.$store.dispatch('appGlobal/setshowStartCollectingModal', false)
+            await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
+          }          
         }
         else{
           this.buttonWaiting = false;
-          await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
+          if (this.waitingForTransaction){
+            await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack', false)
           await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
           await this.$store.dispatch('appGlobal/setLastTransSuccess',false)
           await this.$store.dispatch('appGlobal/setLastTransactionHash',buyLot.hash);
           await this.$store.dispatch('appGlobal/setshowStartCollectingModal',false)          
           await this.$store.dispatch('appGlobal/setShowTransSuccessModal',true);
+          }          
           let failedTransactionRequest = await (await fetch(
             `${this.config.backendApiEntryPoint}close-listing/`,
             {
@@ -365,9 +369,11 @@ export default {
       catch (e){
         console.log(e);
         this.buttonWaiting = false; 
-        await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
+        if (this.waitingForTransaction){
+          await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
         await this.$store.dispatch('appGlobal/setGreenSnack', false)
         await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 50)
+        }        
       }
     },
     noExponents (value) {
@@ -419,6 +425,7 @@ export default {
     }
   },
   async mounted(){
+    this.waitingForTransaction=true;
     this.item = await this.$store.getters['marketplaceListing/getItem'];
     this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
     this.signer = await this.$store.getters['walletsAndProvider/getSigner'];
@@ -427,6 +434,16 @@ export default {
     this.buyLotFee = this.noExponents((this.contractConfig[0].buy_lot_fee/100)/100*this.item.price);
     this.render = true;
   },
+  watch: { 
+  '$route': {
+    handler: function() {
+      console.log('route changed');
+      this.waitingForTransaction = false;
+    },
+    deep: true,
+    immediate: true
+  }
+}
 };
 </script>
 

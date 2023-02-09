@@ -909,6 +909,7 @@ export default {
       catch {
         this.isRefreshing = false;
       }      
+      this.isRefreshing=true;
     },
     setUserCanSoldFraction(){
       let userBidOnSaleAmount = 0;
