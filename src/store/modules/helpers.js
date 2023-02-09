@@ -1,4 +1,5 @@
 import {backendApiEntryPoint} from '@/config.json'
+import {ethers} from "ethers";
 
 export default {
     state:{
@@ -20,6 +21,17 @@ export default {
         }
     },
     actions:{
+        async getUserBalance(ctx, address) {
+            try {
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const balance = await provider.getBalance(address);
+                if (balance) {
+                    return balance;
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        },
         async fetchUsdRate({commit}, data){
 
             try {

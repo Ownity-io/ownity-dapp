@@ -113,7 +113,7 @@ import { ethers } from 'ethers';
 import { toRaw } from '@vue/reactivity';
 import config from '@/config';
 import MultiLang from "@/core/multilang";
-import {mapGetters} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import helpers from "@/helpers/helpers";
 
 export default {
@@ -144,6 +144,9 @@ export default {
     this.render = true;
   },
   methods:{
+    ...mapActions([
+        'getUserBalance'
+    ]),
     translatesGet(key) {
       return this.lang.get(key);
     },
@@ -166,7 +169,18 @@ export default {
           await this.$store.dispatch('appGlobal/setGreenSnack',false)
           await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',10)
         }
-      }     
+      }
+
+      if(Number(this.partOnMarket.price) >= Number(await this.getUserBalance(this.$store.getters['walletsAndProvider/getUserAddress']))){
+        this.buttonWaiting = false;
+
+        await this.$store.dispatch('appGlobal/setSnackText', 'Insufficient funds')
+        await this.$store.dispatch('appGlobal/setGreenSnack',false)
+        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
+
+        return
+      }
+
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await prov.getSigner());
       try{
         let buyFraction = await contract.buyFraction(
