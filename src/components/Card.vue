@@ -270,10 +270,10 @@
 
           </div>
         </div>
-        <div class="data-tr data-tr-date" v-if="(remainTimeString!=null & this.item.marketplace_status!='CLOSED' & this.item.internal_status!='SOLD' & this.item.internal_status!='OWNED')" >
+        <div class="data-tr data-tr-date" v-if="$route.path !=='/marketplace/shares' && (remainTimeString!=null & this.item.marketplace_status!='CLOSED' & this.item.internal_status!='SOLD' & this.item.internal_status!='OWNED')" >
           <div>{{translatesGet('ENDS_IN')}} {{remainTimeString}}</div>
         </div>
-        <div class="data-tr data-tr-date" v-else-if="this.item.marketplace_status!='CLOSED' & this.item.internal_status!='SOLD' & this.item.internal_status!='OWNED'">
+        <div class="data-tr data-tr-date" v-else-if="$route.path !=='/marketplace/shares' && this.item.marketplace_status!='CLOSED' & this.item.internal_status!='SOLD' & this.item.internal_status!='OWNED'">
           {{translatesGet('EXPIRED')}}
         </div>
       </div>
