@@ -6,7 +6,7 @@ import Profile from '../views/Profile.vue'
 
 const routes = [
     {
-        path: '/',
+        path: '/main',
         name: 'Index',
         component: Index,
         beforeEnter() {
@@ -88,7 +88,7 @@ const routes = [
     },
     {
         name: 'Previous',
-        path: '/previous',
+        path: '/',
         component: () => import('@/views/Previous.vue'),  
         beforeEnter() {
             window.scrollTo({
