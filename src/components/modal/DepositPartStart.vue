@@ -167,7 +167,7 @@ import config from '@/config.json';
 import { toRaw } from '@vue/reactivity';
 import MultiLang from "@/core/multilang";
 import helpers from "@/helpers/helpers";
-import {mapGetters} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
   data() {
@@ -197,6 +197,7 @@ export default {
     }
   },
   methods:{
+    ...mapActions(['getUserBalance']),
     translatesGet(key) {
       return this.lang.get(key);
     },
@@ -225,6 +226,17 @@ export default {
       let options = {};
       let valueToBuy = this.noExponents((ethers.BigNumber.from(this.noExponents(this.item.price)) / 100) * this.currentPart);
       let valueToBuyWithComissions = this.noExponents((ethers.BigNumber.from(this.noExponents(parseInt(this.item.price) + parseInt(this.buyLotFee))) / 100) * this.currentPart);
+
+      if(Number(valueToBuyWithComissions) >= Number(await this.getUserBalance(this.$store.getters['walletsAndProvider/getUserAddress']))){
+        this.buttonWaiting = false;
+
+        await this.$store.dispatch('appGlobal/setSnackText', 'Insufficient funds')
+        await this.$store.dispatch('appGlobal/setGreenSnack',false)
+        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
+
+        return
+      }
+
       if (parseInt(this.currentPart)==100){
         valueToBuy = this.item.price;
         valueToBuyWithComissions =this.item.price;
