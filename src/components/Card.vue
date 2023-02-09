@@ -299,14 +299,27 @@
         <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setShowClaimRewardModal');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="(item.internal_status=='SOLD' & userBidAmount>0 & !bidRewarded)">
           {{translatesGet('CLAIM_REWARD')}}
         </router-link>
-        <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','FractionMarket');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" v-if="bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0  & userAddress!=false">
+        <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','FractionMarket');" class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"
+                     v-if="$route.path !=='/marketplace/shares' && bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0  & userAddress!=false">
           {{translatesGet('BUY')}}
         </router-link>
+
+
+        <!-- ===== NGP-736 Shares ======-->
+        <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','FractionMarket');"
+                     class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"
+                     v-if="item.internal_status ==='ON SALE' || item.internal_status ==='OWNED' && userAddress!=false && !userBidOnSale">
+          {{translatesGet('BUY')}}
+        </router-link>
+        <!-- ===== NGP-736 ======-->
+
+
         <button class="btn"  @click="this.$store.dispatch('appGlobal/setShowConnectWalletModal',true)" v-if="bidOnSale!=null & item.internal_status=='OWNED' & userBidAmount<=0  & !userAddress">
           {{translatesGet('BUY')}}
         </button>
         <!-- <div v-if="((item.marketplace_status=='CLOSED'||item.marketplace_status=='OPEN') & item.internal_status=='OWNED' & this.voting==null) & userBidAmount>0 & !userBidOnSale" class="container-btn-part container-btn-part-vote"> -->
-          <div v-if="((item.marketplace_status=='CLOSED'||item.marketplace_status=='OPEN') & item.internal_status=='OWNED') & userBidAmount>0 & !userBidOnSale" class="container-btn-part container-btn-part-vote">
+          <div v-if="$route.path !=='/marketplace/shares' && ((item.marketplace_status=='CLOSED'||item.marketplace_status=='OPEN') & item.internal_status=='OWNED') & userBidAmount>0 & !userBidOnSale"
+               class="container-btn-part container-btn-part-vote">
           <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','appGlobal/setShowStartVotingModal');" class="btn btn-vote" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id" >
             {{translatesGet('VOTE')}}
           </router-link>
@@ -376,7 +389,7 @@
           </div>
         </div> 
 
-        <div class="deposit-label" v-if="this.item.internal_status=='ON SALE' & this.voting!=null">
+        <div class="deposit-label" v-if="$route.path !=='/marketplace/shares' && this.item.internal_status=='ON SALE' & this.voting!=null">
           <div class="shopping">
             <i class="i-shopping-bag-line"></i>
             {{translatesGet('ON_SALE')}}: 
@@ -387,7 +400,7 @@
           </div>
         </div>
 
-        <div class="deposit-value" v-if="this.item.internal_status=='ON SALE' & this.voting!=null">
+        <div class="deposit-value" v-if="$route.path !=='/marketplace/shares' && this.item.internal_status ==='ON SALE' & this.voting != null">
           <div class="icon-token eth"></div>
           <span><b>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.voting.amount),4),2)}} ETH</b></span>
           <span class="equivalent">(≈ $ {{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(useHelpers.convertToEther(this.voting.amount)*currencyToUsdPrice,2),2,2)}})</span>
