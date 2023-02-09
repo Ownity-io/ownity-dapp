@@ -54,12 +54,12 @@
                               </a>
                             </li>
                             <li>
-                              <a target="_blank" href="http://localhost:5174/terms_of_use">
+                              <a target="_blank" href="https://ownity.io/terms_of_use">
                               {{translatesGet('TERMS_OF_USE2')}}
                               </a>
                             </li>
                             <li>
-                              <a href="http://localhost:5174/privacy_policy">
+                              <a href="https://ownity.io/privacy_policy">
                                 {{translatesGet('PRIVACY_POLICY')}}
                               </a>
                             </li>
