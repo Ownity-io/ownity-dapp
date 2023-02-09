@@ -174,7 +174,7 @@ export default {
       sellFractionFee:0,
       itemWithBidsOnSale:null,
       userBidOnSaleAmount:0,
-      waitingForTransaction:false;
+      waitingForTransaction:false
     };
   },
   computed: {
