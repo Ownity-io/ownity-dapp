@@ -54,13 +54,13 @@
                               </a>
                             </li>
                             <li>
-                              <a target="_blank">
-                              {{translatesGet('TERMS_OF_USE2')}}<span class="soon" style="padding-left: 5px; color: #474747"> (Soon)</span>
+                              <a target="_blank" href="https://ownity.io/terms_of_use">
+                              {{translatesGet('TERMS_OF_USE2')}}
                               </a>
                             </li>
                             <li>
-                              <a>
-                                {{translatesGet('PRIVACY_POLICY')}}<span class="soon" style="padding-left: 5px; color: #474747"> (Soon)</span>
+                              <a href="https://ownity.io/privacy_policy">
+                                {{translatesGet('PRIVACY_POLICY')}}
                               </a>
                             </li>
                             <li>

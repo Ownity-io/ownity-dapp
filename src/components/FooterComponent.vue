@@ -70,7 +70,7 @@
                                     <span>{{translatesGet('HELP')}}</span>
                                 </router-link>
                             </li>
-                            <li><a href="">{{translatesGet('SITEMAP')}}</a></li>
+<!--                            <li><a href="">{{translatesGet('SITEMAP')}}</a></li>-->
                         </ul>
                     </div>
                     <div class="footer-block footer-block-form">
