@@ -8,10 +8,11 @@
     </div>
     <div class="container container-listing">
       <div class="card-listing">
-        <section class="section-card-img">
+        <section class="section-card-img" style="width:100%">
           <div class="card-img-wrap">
             <img v-if="render & item.media!=null & this.isLoaded" :src="item.media">
-            <SkeletonCardListing v-else />           
+            <div class="card-img card-img-wrap" v-else-if="!item.media"></div>
+            <SkeletonCardListing v-else />
           </div>
         </section>
         <SkeletonCardListingInfo class="listing-main" v-if="!render" />
