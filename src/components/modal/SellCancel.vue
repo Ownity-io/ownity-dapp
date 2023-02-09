@@ -1,10 +1,10 @@
 <template>
   <div class="modal" v-if="render">
-    <div class="modal-wrapper-close" @click="this.$store.dispatch('appGlobal/setShowCancelSellPartModal',false)"></div>
+    <div class="modal-wrapper-close" @click="this.$store.dispatch('appGlobal/setShowCancelSellPartModal',false);this.waitingForTransaction = false;"></div>
     <div class="modal-wrapper">
       <div class="modal-header">
         <div class="modal-name">Cancel Sale</div>
-        <button class="btn-close" @click="this.$store.dispatch('appGlobal/setShowCancelSellPartModal',false)">
+        <button class="btn-close" @click="this.$store.dispatch('appGlobal/setShowCancelSellPartModal',false);this.waitingForTransaction = false;">
           <i class="i-close-line"></i>
         </button>
       </div>
@@ -133,6 +133,7 @@ export default {
       config:config,
       buttonWaiting:false,
       lang: new MultiLang(this),
+      waitingForTransaction:false
     };
   },
   computed: {
@@ -157,9 +158,11 @@ export default {
           await prov.send('wallet_addEthereumChain',[chainSettings]);  
         }
         catch{
-          await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
+          if (this.waitingForTransaction){
+            await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack',false)
           await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',10)
+          }          
         }
       }     
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await prov.getSigner());
@@ -184,13 +187,16 @@ export default {
               },
               method:'POST'
             })).json();
-          await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
+            if (this.waitingForTransaction){
+            await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
           await this.$store.dispatch('appGlobal/setLastTransactionHash', cancelSellFraction.hash);
           await this.$store.dispatch('appGlobal/setShowCancelSellPartModal', false);
           await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
+          }          
         }
         else{
-          await this.$store.dispatch('appGlobal/setLastTransSuccess',false)
+          if (this.waitingForTransaction){
+            await this.$store.dispatch('appGlobal/setLastTransSuccess',false)
           await this.$store.dispatch('appGlobal/setLastTransactionHash', cancelSellFraction.hash);
           await this.$store.dispatch('appGlobal/setShowCancelSellPartModal', false);
           await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
@@ -198,21 +204,35 @@ export default {
           await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack', false)
           await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
+          }          
         }          
       }
       catch{
-        this.buttonWaiting = false;
+        if (this.waitingForTransaction){
+            this.buttonWaiting = false;
         await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
         await this.$store.dispatch('appGlobal/setGreenSnack', false)
         await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
+          }       
       }
     },
   },
   async mounted(){
+    this.waitingForTransaction = true;
     this.item = await this.$store.getters['marketplaceListing/getItem'];
     this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
     this.partOnMarket = await this.$store.getters['appGlobal/getCurrentPartOnMarket'];
     this.render = true;
   },
+  watch: { 
+  '$route': {
+    handler: function() {
+      console.log('route changed');
+      this.waitingForTransaction = false;
+    },
+    deep: true,
+    immediate: true
+  }
+}
 };
 </script>

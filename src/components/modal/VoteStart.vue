@@ -1,10 +1,10 @@
 <template>
   <div class="modal" v-if="render">
-    <div class="modal-wrapper-close" @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',false)"></div>
+    <div class="modal-wrapper-close" @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',false);this.waitingForTransaction = false;"></div>
     <div class="modal-wrapper">
       <div class="modal-header">
         <div class="modal-name">{{translatesGet('TAKE_VOTE')}}</div>
-        <button class="btn-close" @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',false)">
+        <button class="btn-close" @click="this.$store.dispatch('appGlobal/setShowStartVotingModal',false);this.waitingForTransaction = false;">
           <i class="i-close-line"></i>
         </button>
       </div>
@@ -170,7 +170,8 @@ export default {
       sellLotFee:0,
       markeplacesId:[],
       blockPrice:false,
-      displayLowPriceError:false
+      displayLowPriceError:false,
+      waitingForTransaction:false
     };
   },
   computed: {
@@ -223,10 +224,12 @@ export default {
               }
               catch (e){
         console.log(e);
-                this.buttonWaiting=false;
+                if (this.waitingForTransaction){
+                  this.buttonWaiting=false;
                 await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
                 await this.$store.dispatch('appGlobal/setGreenSnack', false)
                 await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
+                }                
               }
             }
             else if(parseInt((requestJson.data[0].voting_percentage)) >= 51){
@@ -262,19 +265,23 @@ export default {
             }
           }
           else {
+            if (this.waitingForTransaction){
             this.buttonWaiting = false;
             await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
             await this.$store.dispatch('appGlobal/setGreenSnack', false)
             await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
+            }
           }
         }
         catch{
+          if (this.waitingForTransaction){
           this.buttonWaiting=false;
           console.log(333)
           location.reload();
           await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack',false)
-          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',3)          
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',3)       
+          }   
         }
         
       }
@@ -312,9 +319,11 @@ export default {
           catch (e) {
             console.log(e);
             console.log(444)
+            if (this.waitingForTransaction){
             await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
             await this.$store.dispatch('appGlobal/setGreenSnack', false)
             await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
+            }
           }
         }
         const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi, await prov.getSigner());
@@ -377,10 +386,12 @@ export default {
               method: 'POST'
             })).json();
           await this.checkSell();
+          if (this.waitingForTransaction){
           await this.$store.dispatch('appGlobal/setLastTransSuccess', true)
           await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);
           await this.$store.dispatch('appGlobal/setShowStartVotingModal', false);
           await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
+          }
         }
         else {
           for (let element of _voting_Ids) {
@@ -400,7 +411,7 @@ export default {
             let requestJson = await request.json();
             console.log(requestJson);
           }
-          
+          if (this.waitingForTransaction){
           await this.$store.dispatch('appGlobal/setLastTransSuccess', false)
           await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);
           await this.$store.dispatch('appGlobal/setShowStartVotingModal', false);
@@ -409,22 +420,27 @@ export default {
           await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack', false)
           await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
+          }
         }
       }
         catch (e){
           console.log(e);
+          if (this.waitingForTransaction){
           this.buttonWaiting = false;
           await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack', false)
           await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
+          }
         }
       }
     catch (e){
         console.log(e);
+        if (this.waitingForTransaction){
         this.buttonWaiting = false;
         await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
         await this.$store.dispatch('appGlobal/setGreenSnack', false)
         await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
+        }
     }
       
     },
@@ -507,6 +523,7 @@ export default {
     }
   },
   async mounted(){
+    this.waitingForTransaction = true;
     this.item = await this.$store.getters['marketplaceListing/getItem'];
     let requestUrl = `${config.backendApiEntryPoint}marketplaces/`;
     let request = await fetch(requestUrl);
@@ -527,6 +544,16 @@ export default {
     this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
     this.setMaxVoting();
     this.render = true;
+  },
+  watch: { 
+  '$route': {
+    handler: function() {
+      console.log('route changed');
+      this.waitingForTransaction = false;
+    },
+    deep: true,
+    immediate: true
   }
+}
 };
 </script>

@@ -1,10 +1,10 @@
 <template>
   <div class="modal" v-if ='render'>
-    <div class="modal-wrapper-close" @click="this.$store.dispatch('appGlobal/setshowDepositCancelModal',false)"></div>
+    <div class="modal-wrapper-close" @click="this.$store.dispatch('appGlobal/setshowDepositCancelModal',false);this.waitingForTransaction = false;"></div>
     <div class="modal-wrapper">
       <div class="modal-header">
         <div class="modal-name">{{translatesGet('CANCEL_DEPOSIT_PART')}}</div>
-        <button class="btn-close" @click="this.$store.dispatch('appGlobal/setshowDepositCancelModal',false)">
+        <button class="btn-close" @click="this.$store.dispatch('appGlobal/setshowDepositCancelModal',false);this.waitingForTransaction = false;">
           <i class="i-close-line"></i>
         </button>
       </div>
@@ -134,6 +134,7 @@ export default {
       userBidAmount:null,
       buttonWaiting:false,
       lang: new MultiLang(this),
+      waitingForTransaction:false
     };
   },
   computed: {
@@ -171,9 +172,11 @@ export default {
           await prov.send('wallet_addEthereumChain',[chainSettings]);  
         }
         catch{
+          if (this.waitingForTransaction){
           await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack',false)
           await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',10)
+          }
         }
       }     
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await prov.getSigner());
@@ -198,12 +201,15 @@ export default {
               },
               method:'POST'
             })).json();
+            if (this.waitingForTransaction){
           await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
           await this.$store.dispatch('appGlobal/setLastTransactionHash',declineBid.hash);
           await this.$store.dispatch('appGlobal/setshowDepositCancelModal',false);
           await this.$store.dispatch('appGlobal/setShowTransSuccessModal',true);
+            }
         }
         else{
+          if (this.waitingForTransaction){
           await this.$store.dispatch('appGlobal/setLastTransSuccess',false)
           await this.$store.dispatch('appGlobal/setLastTransactionHash',declineBid.hash);
           await this.$store.dispatch('appGlobal/setshowDepositCancelModal',false);
@@ -212,22 +218,36 @@ export default {
           await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack', false)
           await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
+          }
         }          
       }
       catch{
+        if (this.waitingForTransaction){
         this.buttonWaiting = false;
         await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
         await this.$store.dispatch('appGlobal/setGreenSnack', false)
         await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
+        }
       }
     },
   },
   async mounted(){
+    this.waitingForTransaction = true;
     this.item = await this.$store.getters['marketplaceListing/getItem'];
     this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
     this.signer = await this.$store.getters['walletsAndProvider/getSigner'];
     this.setUserBidAmount();
     this.render = true;
   },
+  watch: { 
+  '$route': {
+    handler: function() {
+      console.log('route changed');
+      this.waitingForTransaction = false;
+    },
+    deep: true,
+    immediate: true
+  }
+}
 };
 </script>

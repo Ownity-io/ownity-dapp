@@ -1,10 +1,10 @@
 <template>
   <div class="modal" v-if="render">
-    <div class="modal-wrapper-close" @click="this.$store.dispatch('appGlobal/setShowSellPartModal',false)"></div>
+    <div class="modal-wrapper-close" @click="this.$store.dispatch('appGlobal/setShowSellPartModal',false);this.waitingForTransaction = false;"></div>
     <div class="modal-wrapper">
       <div class="modal-header">
         <div class="modal-name">{{translatesGet('SELL_YOUR_NFT')}}</div>
-        <button class="btn-close" @click="this.$store.dispatch('appGlobal/setShowSellPartModal',false)">
+        <button class="btn-close" @click="this.$store.dispatch('appGlobal/setShowSellPartModal',false);this.waitingForTransaction = false;">
           <i class="i-close-line"></i>
         </button>
       </div>
@@ -173,7 +173,8 @@ export default {
       contractConfig:null,
       sellFractionFee:0,
       itemWithBidsOnSale:null,
-      userBidOnSaleAmount:0
+      userBidOnSaleAmount:0,
+      waitingForTransaction:false;
     };
   },
   computed: {
@@ -258,27 +259,33 @@ export default {
               },
               method:'POST'
             })).json();
-        await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
-        await this.$store.dispatch('appGlobal/setLastTransactionHash', sellFraction.hash);
-        await this.$store.dispatch('appGlobal/setShowSellPartModal', false);
-        await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
+        if (this.waitingForTransaction) {
+          await this.$store.dispatch('appGlobal/setLastTransSuccess', true)
+          await this.$store.dispatch('appGlobal/setLastTransactionHash', sellFraction.hash);
+          await this.$store.dispatch('appGlobal/setShowSellPartModal', false);
+          await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
+        }        
       }
       else{
-        await this.$store.dispatch('appGlobal/setLastTransSuccess',false)
-        await this.$store.dispatch('appGlobal/setLastTransactionHash', sellFraction.hash);
-        await this.$store.dispatch('appGlobal/setShowSellPartModal', false);
-        await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
-        this.buttonWaiting = false;
-        await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
-        await this.$store.dispatch('appGlobal/setGreenSnack',false)
-        await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',10)
+        if (this.waitingForTransaction) {
+          await this.$store.dispatch('appGlobal/setLastTransSuccess', false)
+          await this.$store.dispatch('appGlobal/setLastTransactionHash', sellFraction.hash);
+          await this.$store.dispatch('appGlobal/setShowSellPartModal', false);
+          await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
+          this.buttonWaiting = false;
+          await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
+          await this.$store.dispatch('appGlobal/setGreenSnack', false)
+          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
+        }        
       }
     }
     catch{
+      if (this.waitingForTransaction) {
         await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
         await this.$store.dispatch('appGlobal/setGreenSnack', false)
         await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
         this.buttonWaiting = false;
+      }
     }
     },
     translatesGet(key) {
@@ -332,6 +339,7 @@ export default {
     }
   },
   async mounted(){
+    this.waitingForTransaction = true;
     this.item = await this.$store.getters['marketplaceListing/getItem'];
     this.itemWithBidsOnSale = await (await fetch(`${config.backendApiEntryPoint}listing-with-on-sale-bids/${this.item.id}`)).json();
     this.setBidOnSaleAmount();
@@ -340,6 +348,16 @@ export default {
     this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
     this.setSellFractionFee();
     this.render = true;
+  },
+  watch: { 
+  '$route': {
+    handler: function() {
+      console.log('route changed');
+      this.waitingForTransaction = false;
+    },
+    deep: true,
+    immediate: true
   }
+}
 };
 </script>

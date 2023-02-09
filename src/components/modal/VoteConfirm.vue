@@ -1,10 +1,10 @@
 <template>
   <div class="modal" v-if="render">
-    <div class="modal-wrapper-close" @click="this.$store.dispatch('appGlobal/setShowVoteConfirmModal',false)"></div>
+    <div class="modal-wrapper-close" @click="this.$store.dispatch('appGlobal/setShowVoteConfirmModal',false);this.waitingForTransaction = false;"></div>
     <div class="modal-wrapper modal-confirm-vote">
       <div class="modal-header">
         <div class="modal-name">{{translatesGet('VOTE_CONFIRM')}}</div>
-        <button class="btn-close" @click="this.$store.dispatch('appGlobal/setShowVoteConfirmModal',false)">
+        <button class="btn-close" @click="this.$store.dispatch('appGlobal/setShowVoteConfirmModal',false);this.waitingForTransaction = false;">
           <i class="i-close-line"></i>
         </button>
       </div>
@@ -115,6 +115,7 @@ export default {
       provider:null,
       buttonWainting:false,
       lang: new MultiLang(this),
+      waitingForTransaction:false
     };
   },
   computed: {
@@ -162,10 +163,12 @@ export default {
             }
             catch (e){
         console.log(e);
-              this.buttonWainting = false;
-              await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
-              await this.$store.dispatch('appGlobal/setGreenSnack', false)
-              await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
+              if (this.waitingForTransaction) {
+                this.buttonWainting = false;
+                await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
+                await this.$store.dispatch('appGlobal/setGreenSnack', false)
+                await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
+              }              
             }
           }
           else{
@@ -176,10 +179,12 @@ export default {
           }          
         }
         else {
+          if (this.waitingForTransaction) {
           this.buttonWainting = false;
           await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack',false)
           await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',10)
+          }
         }
     },
     async sellLot(_voting_Id) {
@@ -196,9 +201,11 @@ export default {
         }
         catch (e){
         console.log(e);
-          await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
-          await this.$store.dispatch('appGlobal/setGreenSnack',false)
-          await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',10)
+          if (this.waitingForTransaction) {
+            await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
+            await this.$store.dispatch('appGlobal/setGreenSnack', false)
+            await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',10)
+        }
         }
       }     
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,prov.getSigner());      
@@ -254,10 +261,12 @@ export default {
               method:'POST'
             })).json();
         await this.checkSell();
+        if (this.waitingForTransaction) {
         await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
         await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);
         await this.$store.dispatch('appGlobal/setShowVoteConfirmModal', false);
         await this.$store.dispatch('appGlobal/setShowTransSuccessModal', true);
+        }
       }
       else{       
         let requestUrl = `${config.backendApiEntryPoint}revert-vote/`;
@@ -275,6 +284,7 @@ export default {
         let request = await fetch(requestUrl, requestOptions);
         let requestJson = await request.json();
         console.log(requestJson);          
+        if (this.waitingForTransaction) {
         await this.$store.dispatch('appGlobal/setLastTransSuccess',false)
         await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);
         await this.$store.dispatch('appGlobal/setShowVoteConfirmModal', false);
@@ -283,6 +293,7 @@ export default {
         await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
         await this.$store.dispatch('appGlobal/setGreenSnack', false)
         await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
+        }
       }
     }
     catch (e){
@@ -304,10 +315,12 @@ export default {
         let requestJson = await request.json();
         console.log(requestJson);
         console.log('ERROR');
+        if (this.waitingForTransaction) {
         this.buttonWaiting = false;
         await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
         await this.$store.dispatch('appGlobal/setGreenSnack', false)
         await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout', 10)
+        }
     }
     },
     async checkSell() {
@@ -341,10 +354,21 @@ export default {
     }
   },
   async mounted(){
+    this.waitingForTransaction = true;
     this.item = await this.$store.getters['marketplaceListing/getItem'];
     this.voting = this.$store.getters['appGlobal/getCurrentVoting'];
     this.render = true;
     this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
   },
+  watch: { 
+  '$route': {
+    handler: function() {
+      console.log('route changed');
+      this.waitingForTransaction = false;
+    },
+    deep: true,
+    immediate: true
+  }
+}
 };
 </script>
