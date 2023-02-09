@@ -15,25 +15,27 @@
                     </button>                </div>
                 <div class="header-nav">
                     <nav>
-                        <ul class="">
-                            <li>
-                                <a :class="active" href="/marketplace" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/clearListingsInfo');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')">
-                                    <span>{{translatesGet('MARKETPLACE')}}</span>
-                                    <span>{{translatesGet('MARKETPLACE')}}</span>
-                                </a>
-                            </li>
-                            <li v-if="$route.path ==='/'">
-                                <a :class="getActiveCollectionLink && 'active'" ref="screenCollections" href="#screen-collections" >
-                                    <span>{{translatesGet('COLLECTIONS')}}</span>
-                                    <span>{{translatesGet('COLLECTIONS')}}</span>
-                                </a>
-                            </li>
-                            <li v-else  @click="$refs.screenCollections.click()">
-                                <router-link :to="{ name: 'Main' }">
-                                    <span>{{translatesGet('COLLECTIONS')}}</span>
-                                    <span>{{translatesGet('COLLECTIONS')}}</span>
-                                </router-link>
-                            </li>
+                        <ul>
+                          <li>
+                            <a :class="$route.name === 'Marketplace' && 'active'" href="/marketplace" @click="this.$store.dispatch('marketplace/setAllFiltersToNull');this.$store.dispatch('marketplace/clearListingsInfo');this.$store.dispatch('marketplace/fetchAndSetListingsStartInfo')">
+                                <span>{{translatesGet('MARKETPLACE')}}</span>
+                                <span>{{translatesGet('MARKETPLACE')}}</span>
+                            </a>
+                          </li>
+                          <li  v-if="$route.path ==='/main'">
+                            <a :class="getActiveCollectionLink && 'active'"
+                               ref="screenCollections" href="#screen-collections">
+                              <span>{{translatesGet('COLLECTIONS')}}</span>
+                              <span>{{translatesGet('COLLECTIONS')}}</span>
+                            </a>
+                          </li>
+                          <li v-else @click="$refs.screenCollections.click()">
+                            <router-link :class="getActiveCollectionLink && 'active'" :to="{ name: 'Main' }">
+                              <span>{{translatesGet('COLLECTIONS')}}</span>
+                              <span>{{translatesGet('COLLECTIONS')}}</span>
+                            </router-link>
+                          </li>
+
                             <li>
                                 <router-link :class="active" :to="{name: 'Serve'}">
                                     <span>{{translatesGet('HELP')}}</span>
