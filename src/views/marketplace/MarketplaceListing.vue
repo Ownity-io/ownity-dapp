@@ -732,28 +732,34 @@ export default {
     },
     setLinkToMarketplacePage(){
       let exampleStr = this.item.marketplace.listing_link;
+      if (exampleStr){
       let token_id = this.item.token_id;
       let collection_address = this.item.collection.contract_address;      
       exampleStr = exampleStr.replace('${collection_address}',collection_address);
       exampleStr = exampleStr.replace('${token_id}',token_id);
       this.linkToMarketplacePage = exampleStr;
+      }
     },
     getLinkToMarketplacePage(marketplace){
       let exampleStr = marketplace.listing_link;
+      if (exampleStr){
       let token_id = this.item.token_id;
       let collection_address = this.item.collection.contract_address;      
       exampleStr = exampleStr.replace('${collection_address}',collection_address);
       exampleStr = exampleStr.replace('${token_id}',token_id);
       return exampleStr;
+      }
     },
     setLinkToMarketplacePageFromVotingOnSale(){
       if (this.voting){
         let exampleStr = this.voting.marketplace.listing_link;
+        if (exampleStr){
         let token_id = this.item.token_id;
         let collection_address = this.item.collection.contract_address;
         exampleStr = exampleStr.replace('${collection_address}', collection_address);
         exampleStr = exampleStr.replace('${token_id}', token_id);
         this.linkToMarketplacePageFromVoting = exampleStr;
+        }
       }      
     },
     setAllBidsAmount(){
