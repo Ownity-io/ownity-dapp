@@ -308,7 +308,7 @@
         <!-- ===== NGP-736 Shares ======-->
         <router-link @click="this.$store.dispatch('marketplaceListing/setModalToShowAtStart','FractionMarket');"
                      class="btn" :to="'/listing/'+item.collection.contract_address+'/'+item.token_id+'&'+item.id"
-                     v-if="item.internal_status ==='ON SALE' || item.internal_status ==='OWNED' && userAddress!=false && !userBidOnSale">
+                     v-if="$route.path ==='/marketplace/shares' && (item.internal_status ==='ON SALE' || item.internal_status ==='OWNED' && userAddress!=false && !userBidOnSale)">
           {{translatesGet('BUY')}}
         </router-link>
         <!-- ===== NGP-736 ======-->
