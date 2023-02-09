@@ -48,13 +48,13 @@
                           Discord
                         </a>
                       </li>
-                        <li class="link-disabled">
+                        <!-- <li class="link-disabled">
                             <a >
                                 <Telegram />
                                 Telegram
                                 <span class="soon">Soon</span>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
                 <!-- <li class="mobile-menu-item drop-down-item" :class="{more :mobItem3}">
@@ -144,13 +144,13 @@
                                       Discord
                                     </a>
                                   </li>
-                                    <li class="link-disabled">
+                                    <!-- <li class="link-disabled">
                                         <a >
                                             <Telegram />
                                             Telegram
                                             <span class="soon">Soon</span>
                                         </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </li>
 
