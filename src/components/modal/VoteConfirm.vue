@@ -286,7 +286,24 @@ export default {
       }
     }
     catch (e){
+        this.buttonWainting=false;
         console.log(e);
+        let requestUrl = `${config.backendApiEntryPoint}revert-vote/`;
+        let requestOptions = {
+          method: "POST",
+          headers: {
+            accept: "application/json",
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            'voting_id': _voting_Id
+          }),
+        };
+        let request = await fetch(requestUrl, requestOptions);
+        let requestJson = await request.json();
+        console.log(requestJson);
+        console.log('ERROR');
         this.buttonWaiting = false;
         await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
         await this.$store.dispatch('appGlobal/setGreenSnack', false)
