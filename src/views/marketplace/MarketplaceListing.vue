@@ -879,7 +879,13 @@ export default {
         this.recommendations = await this.$store.dispatch('marketplaceListing/getRecomendations', this.item.collection.contract_address);
         if (await this.$store.getters['marketplaceListing/getModalToShowAtStart'] != null) {
           if ((await this.$store.getters['marketplaceListing/getModalToShowAtStart']) == 'FractionMarket') {
-            this.letsCheck2('ListingFractionMarket')
+            if (this.item.itemWithBidsOnSale.length>1){
+              this.letsCheck2('ListingFractionMarket')
+            }
+            else{
+              console.log('SHOW MODAL');
+            }
+            
           } else {
             await this.$store.dispatch(await this.$store.getters['marketplaceListing/getModalToShowAtStart'], true);
             await this.$store.dispatch('marketplaceListing/setModalToShowAtStart', null);
@@ -954,7 +960,13 @@ export default {
     this.recommendations = await this.$store.dispatch('marketplaceListing/getRecomendations',this.item.collection.contract_address);
     if (await this.$store.getters['marketplaceListing/getModalToShowAtStart']!=null){
       if ((await this.$store.getters['marketplaceListing/getModalToShowAtStart'])=='FractionMarket'){
-        this.letsCheck2('ListingFractionMarket')
+            if (this.itemWithBidsOnSale.bids.length>1){
+              this.letsCheck2('ListingFractionMarket')
+            }
+            else{
+              await this.$store.dispatch('appGlobal/setShowBuyPartModal',true); 
+            await this.$store.dispatch('appGlobal/setCurrentPartOnMarket',this.itemWithBidsOnSale.bids[0]);
+            }
       }else{
         await this.$store.dispatch(await this.$store.getters['marketplaceListing/getModalToShowAtStart'],true);
         await this.$store.dispatch('marketplaceListing/setModalToShowAtStart',null);
