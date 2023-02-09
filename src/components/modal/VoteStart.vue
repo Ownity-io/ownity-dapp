@@ -532,14 +532,14 @@ export default {
     this.contractConfig = await this.$store.getters['marketplaceListing/getContractConfig'];
     this.setSellLotFee();
     let k = 0
-    // for (let element of marketplacesTemp){
-    //   console.log(element.id);
-    //   if (element.id=='LORA'){
-    //     console.log(element);
-    //     marketplacesTemp = marketplacesTemp.splice(k+1,2);
-    //   }
-    //   k+=1;
-    // }
+    for (let element of marketplacesTemp){
+      console.log(element.id);
+      if (element.id=='OWNY'){
+        console.log(element);
+        marketplacesTemp.splice(k,1);
+      }
+      k+=1;
+    }
     this.marketplaces = marketplacesTemp;
     this.provider = await this.$store.getters['walletsAndProvider/getGlobalProvider'];
     this.setMaxVoting();
