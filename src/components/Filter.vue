@@ -20,6 +20,7 @@
         <li class="filter-li">
           <div class="input-checkbox input-switcher">
             <input
+              :disabled="getIsFilterInProcess"
               type="checkbox"
               id="input-switch"
               v-model="currentlyGathering"
@@ -43,6 +44,7 @@
         <li class="filter-li">
           <div class="input-checkbox input-switcher">
             <input
+              :disabled="getIsFilterInProcess"
               type="checkbox"
               id="input-switch"
               v-model="currentlyGathering"
@@ -352,6 +354,7 @@
 import config from '@/config.json';
 import MultiLang from "@/core/multilang";
 import { vue3Debounce } from 'vue-debounce';
+import {mapGetters, mapMutations} from "vuex";
 export default {
   props:['onlyFav','vote','activities'],
 
@@ -391,6 +394,7 @@ export default {
       }
   },
   methods:{
+    ...mapMutations(['updateIsFilterInProcess']),
     setSaleStatus(x) {
       if(this.$store.getters['marketplace/getSaleStatusFilter'] && this.$store.getters['marketplace/getSaleStatusFilter'].name === x.name){
         this.$store.commit('marketplace/setSaleStatusFilter', { data: null })
@@ -406,6 +410,8 @@ export default {
     },
 
     async fetchAndSetListingsStartInfo() {
+      this.updateIsFilterInProcess(true)
+
       if (this.$route.name == 'Marketplace'){
         if(this.activities){
           await this.$store.dispatch('marketplace/fetchAndSetActivitiesResult',{userAddress:null,collectionAddress:null});
@@ -438,7 +444,8 @@ export default {
         else{
           await this.$store.dispatch('marketplace/fetchAndSetListingsStartInfoByUser');
         }        
-      }      
+      }
+      this.updateIsFilterInProcess(false)
     },
     async fetchAndSetListingsStartInfoMaxPrice() {
       await this.$store.dispatch('marketplace/getAndSetCurrentMaxPrice', this.maxPrice);
@@ -529,6 +536,7 @@ export default {
     },
   },
   computed:{
+    ...mapGetters(['getIsFilterInProcess']),
     checkedMarketplace:{
       get(){
         return this.$store.getters['marketplace/getCurrentMarketplaceId'];
