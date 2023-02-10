@@ -8,8 +8,12 @@ export default {
         activeCollectionLink: false,
 
         filterMobile: false,
+        isFilterInProcess: false
     },
     mutations:{
+        updateIsFilterInProcess(state, data){
+          state.isFilterInProcess = data
+        },
         updateCollectionsFooter(state, data){
             state.collectionsFooter = data
         },
@@ -68,6 +72,9 @@ export default {
         }
     },
     getters:{
+        getIsFilterInProcess(state){
+            return state.isFilterInProcess
+        },
         getCollectionsFooter(state){
             return state.collectionsFooter
         },

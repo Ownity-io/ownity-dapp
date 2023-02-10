@@ -30,7 +30,7 @@
                             </a>
                           </li>
                           <li v-else @click="$refs.screenCollections.click()">
-                            <router-link :class="getActiveCollectionLink && 'active'" :to="{ name: 'Main' }">
+                            <router-link :to="{ name: 'Main' }">
                               <span>{{translatesGet('COLLECTIONS')}}</span>
                               <span>{{translatesGet('COLLECTIONS')}}</span>
                             </router-link>
