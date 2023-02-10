@@ -1,14 +1,18 @@
-import {backendApiEntryPoint} from '@/config.json'
+import config, {backendApiEntryPoint} from '@/config.json'
 import {ethers} from "ethers";
 
 export default {
     state:{
+        collectionsFooter: [],
         usdRate: null,
         activeCollectionLink: false,
-        
-        filterMobile: false
+
+        filterMobile: false,
     },
     mutations:{
+        updateCollectionsFooter(state, data){
+            state.collectionsFooter = data
+        },
         updateUsdRate(state, data) {
             state.usdRate = data.rates
         },
@@ -21,6 +25,16 @@ export default {
         }
     },
     actions:{
+        async fetchCollectionsFooter(context) {
+            try {
+                let requestUrl = `${config.backendApiEntryPoint}nft-collections/?limit=5`;
+                let response = await fetch(requestUrl);
+                let requestJson = await response.json();
+                context.commit('updateCollectionsFooter', requestJson.results )
+            } catch (e) {
+                console.log(`From fetchCollectionsFooter: `, e.message)
+            }
+        },
         async getUserBalance(ctx, address) {
             try {
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -54,6 +68,9 @@ export default {
         }
     },
     getters:{
+        getCollectionsFooter(state){
+            return state.collectionsFooter
+        },
         getUsdRate(state) {
             return state.usdRate
         },
