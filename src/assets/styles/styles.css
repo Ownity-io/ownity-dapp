@@ -1778,6 +1778,10 @@ ul.tabs {
     max-width: calc(100% - 40px);
 }
 
+.tr .td div:not(.icon-token) {
+    cursor: auto;
+}
+
 .cards-list-empty {
     padding: 12px 16px;
 }
