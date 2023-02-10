@@ -240,7 +240,7 @@
         </li>
       </ul>
     </div>
-    <div class="filter-section" :class="{ 'collapse-section': filterSection6 }" v-if="!activities">
+    <div class="filter-section" :class="{ 'collapse-section': filterSection6 }" v-if="!activities & this.$route.path!='/marketplace' & this.$route.path!='/marketplace/all'">
       <button class="filter-section-name" @click="filterSection6 = !filterSection6">
         <span>Marketplace</span>
         <i class="i-arrow-up-s-line"></i>
@@ -248,7 +248,7 @@
       <ul class="filter-ul">
         <li
           class="filter-li"
-          v-for="item in this.$store.getters['marketplace/getMarketplaces']"
+          v-for="item in this.marketplaces"
           :key="item"
         >
           <div class="input-checkbox">
@@ -296,6 +296,38 @@
               <div
                 class="icon-filter-checkbox"
                 :style="{ backgroundImage: `url(${null})` }"
+              ></div>
+              <span>{{ item.name }}</span>
+              <i class="i-check-line"></i>
+            </label>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="filter-section" :class="{ 'collapse-section': filterSection6 }" v-if="!activities & (this.$route.path=='/marketplace' || this.$route.path=='/marketplace/all')">
+      <button class="filter-section-name" @click="filterSection6 = !filterSection6">
+        <span>Marketplace</span>
+        <i class="i-arrow-up-s-line"></i>
+      </button>
+      <ul class="filter-ul">
+        <li
+          class="filter-li"
+          v-for="item in this.marketplacesWithoutOwnity"
+          :key="item"
+        >
+          <div class="input-checkbox">
+            <input
+              type="checkbox"
+              :id="item.id"
+              v-model="checkedMarketplace"
+              :true-value="item.id"
+              :false-value="null"
+              @change="fetchAndSetListingsStartInfo"
+            />
+            <label :for="item.id">
+              <div
+                class="icon-filter-checkbox"
+                :style="{ backgroundImage: `url(${item.logo})` }"
               ></div>
               <span>{{ item.name }}</span>
               <i class="i-check-line"></i>
@@ -382,7 +414,9 @@ export default {
         {name: 'Share Sale', value: '&bid_status=ON%20SALE'},
         {name: 'Reward', value: '&bid_status=REWARDED'},
         {name: 'History', value: '&internal_statuses=SOLD&CLOSED'},
-      ]
+      ],
+      marketplaces:[],
+      marketplacesWithoutOwnity:[]
     };
   },
   watch: {
@@ -597,8 +631,23 @@ export default {
   directives: {
     debounce: vue3Debounce({ lock: true })
   },
-  mounted(){
+  async mounted(){
     this.userAddress = localStorage.getItem('userAddress');
+    let requestUrl = `${config.backendApiEntryPoint}marketplaces/`;
+    let request = await fetch(requestUrl);
+    this.marketplaces = await request.json();
+    let requestUrl2 = `${config.backendApiEntryPoint}marketplaces/`;
+    let request2 = await fetch(requestUrl2);
+    this.marketplacesWithoutOwnity = await request2.json();
+    let k = 0
+    for (let element of  this.marketplacesWithoutOwnity){
+      console.log(element.id);
+      if (element.id=='OWNY'){
+        console.log(element);
+        this.marketplacesWithoutOwnity.splice(k,1);
+      }
+      k+=1;
+    }
   }
 };
 </script>
