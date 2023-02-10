@@ -4109,6 +4109,7 @@ a.td-wrap-link span {
 }
 .card {
     position: relative;
+    z-index: -1;
 }
 .card.hides .btn-container {
     height: 40px;
