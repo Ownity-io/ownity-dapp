@@ -36,18 +36,18 @@
                                 </button>
                                 <div class="drop-down">
                                     <ul>
-                                        <li>
-                                            <i class="i-pencil-line"></i>
-                                            <span>
-                                                {{translatesGet('EDIT')}}
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <i class="i-share-line"></i>
-                                            <span>
-                                                {{translatesGet('SHARE')}}
-                                            </span>
-                                        </li>
+<!--                                        <li>-->
+<!--                                            <i class="i-pencil-line"></i>-->
+<!--                                            <span>-->
+<!--                                                {{translatesGet('EDIT')}}-->
+<!--                                            </span>-->
+<!--                                        </li>-->
+<!--                                        <li>-->
+<!--                                            <i class="i-share-line"></i>-->
+<!--                                            <span>-->
+<!--                                                {{translatesGet('SHARE')}}-->
+<!--                                            </span>-->
+<!--                                        </li>-->
                                         <!-- <li>
                                             <i class="i-logout-box-line"></i>
                                             <span>
