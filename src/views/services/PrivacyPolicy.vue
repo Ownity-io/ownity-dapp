@@ -509,7 +509,7 @@
           As regards EU data subjects, “personal information,” as used in this Privacy Policy, shall be deemed equivalent to “personal data,” as that term is defined in the European Union General Data Protection Regulation (“GDPR”).
         </p>
         <p class="s-title">
-          J. ANALYTICS AND ADVERTISING
+          A. ANALYTICS AND ADVERTISING
         </p>
         <p>
           We disclose information to vendors and other parties for analytics and advertising-related purposes. These parties may act as our service providers, or in certain contexts, independently decide how to process your information.
@@ -518,19 +518,19 @@
           For more information on advertising and analytics, see section 6 (“ANALYTICS AND ADVERTISEMENT”) hereunder.
         </p>
         <p class="s-title">
-          K. AFFILIATES
+          B. AFFILIATES
         </p>
         <p>
           We disclose information to our affiliates and related entities, including where they act as our service providers or for their own internal purposes.
         </p>
         <p class="s-title">
-          L. PARTNERS
+          C. PARTNERS
         </p>
         <p>
           We disclose information to our partners in connection with offering co-branded services, selling or distributing our products, or engaging in joint marketing activities.
         </p>
         <p class="s-title">
-          M. PUBLIC FORUMS
+          D. PUBLIC FORUMS
         </p>
         <p>
           We disclose information you make public through the Service, such as information that you post on Twitter or in our Discord server. Please think carefully before making information public as you are solely responsible for any information you make public.
@@ -539,25 +539,25 @@
           Once you have posted information, you may not be able to edit or delete such information, subject to additional rights set out in section 7 (“YOUR RIGHTS AND CHOICES”) hereunder.
         </p>
         <p class="s-title">
-          N. MERGER OR ACQUISITION
+          E. MERGER OR ACQUISITION
         </p>
         <p>
           We disclose information in connection with, or during negotiations of, any proposed or actual merger, purchase, sale or any other type of acquisition or business combination of all or any portion of our assets, or transfer of all or a portion of our business to another business.
         </p>
         <p class="s-title">
-          O. SECURITY AND COMPELLED DISCLOSURE
+          F. SECURITY AND COMPELLED DISCLOSURE
         </p>
         <p>
           We disclose information to comply with the law or other legal processes, and where required, in response to lawful requests by public authorities, including to meet national security or law enforcement requirements. We also disclose information to protect the rights, property, life, health, security, and safety of us, the Service, or anyone else.
         </p>
         <p class="s-title">
-          P. FACILITATING REQUESTS
+          G. FACILITATING REQUESTS
         </p>
         <p>
           We disclose information where you direct us to disclose the information.
         </p>
         <p class="s-title">
-          Q. CONSENT
+          H. CONSENT
         </p>
         <p>
           We disclose information with notice to you and your consent.
