@@ -106,7 +106,7 @@ export default {
         handleScroll: async function (el) {
             if ((el.srcElement.offsetHeight + el.srcElement.scrollTop) >= el.srcElement.scrollHeight) {
                 await this.loadNext();
-                console.log('bottom');
+                // //console.log('bottom');
             }
         },
         checkIfInputIsDisabled(){

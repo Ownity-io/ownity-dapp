@@ -239,7 +239,7 @@ export default {
         return ethers.utils.formatEther(String(value));
       }
       catch {
-        console.log('ethers error');
+        //console.log('ethers error');
       }
     },
     async initInfo(){
@@ -260,9 +260,9 @@ export default {
                 return this.$store.getters['marketplace/getSelectedSort'];
             },
             async set(value){
-                console.log(value);
+                //console.log(value);
                 this.$store.dispatch('marketplace/setSelectedSort',value);
-                console.log(await this.$store.getters['marketplace/getSelectedSort']);
+                //console.log(await this.$store.getters['marketplace/getSelectedSort']);
             }
         }
     }

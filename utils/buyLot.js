@@ -8,7 +8,7 @@ async function buyLot(_contractAddress) {
     const provider = new ethers.providers.InfuraProvider('goerli','8b8bea9fc9ec46ec9762b9fc5e385212 ');
     let wallet = new ethers.Wallet(config.privateKey,provider);
     const contract = new ethers.Contract(_contractAddress,ABI.abi,wallet);
-    console.log(await contract.ORACLE_ADDRESS());
+    //console.log(await contract.ORACLE_ADDRESS());
 
     let markeplaceId = ethers.utils.formatBytes32String('OPNS').substring(0,10);
 
@@ -31,7 +31,7 @@ async function buyLot(_contractAddress) {
         '0xdcfe7f75ac08899d45947c86ed4dc97524517fdb834f6e6bc7182d43d4aa40bf02e98a7ac57fbdaef34e4ff1aa2d7fe2dd663e0a69120d9c918dc7db728bfb941c',
         {value:'30000000000000',gasLimit:'1000000'}
     );
-    console.log(buyLot);
+    //console.log(buyLot);
 }
 
 buyLot(contractAddress);

@@ -162,7 +162,7 @@ export default {
               await this.sellLot(requestJson.voting_id)
             }
             catch (e){
-        console.log(e);
+        //console.log(e);
               if (this.waitingForTransaction) {
                 this.buttonWainting = false;
                 await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
@@ -195,12 +195,12 @@ export default {
         await prov.send('wallet_switchEthereumChain',[{chainId: chainSettings.chainId}]);
       }
       catch (e){
-        console.log(e);
+        //console.log(e);
         try{
           await prov.send('wallet_addEthereumChain',[chainSettings]);  
         }
         catch (e){
-        console.log(e);
+        //console.log(e);
           if (this.waitingForTransaction) {
             await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
             await this.$store.dispatch('appGlobal/setGreenSnack', false)
@@ -283,7 +283,7 @@ export default {
         };
         let request = await fetch(requestUrl, requestOptions);
         let requestJson = await request.json();
-        console.log(requestJson);          
+        // //console.log(requestJson);          
         if (this.waitingForTransaction) {
         await this.$store.dispatch('appGlobal/setLastTransSuccess',false)
         await this.$store.dispatch('appGlobal/setLastTransactionHash', sellLot.hash);
@@ -298,7 +298,7 @@ export default {
     }
     catch (e){
         this.buttonWainting=false;
-        console.log(e);
+        //console.log(e);
         let requestUrl = `${config.backendApiEntryPoint}revert-vote/`;
         let requestOptions = {
           method: "POST",
@@ -313,8 +313,8 @@ export default {
         };
         let request = await fetch(requestUrl, requestOptions);
         let requestJson = await request.json();
-        console.log(requestJson);
-        console.log('ERROR');
+        // //console.log(requestJson);
+        // //console.log('ERROR');
         if (this.waitingForTransaction) {
         this.buttonWaiting = false;
         await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
@@ -345,7 +345,7 @@ export default {
             requestJson = await request.json();
             if (requestJson.success == false){
               //show contact us modal
-              console.log('show contact us modal');
+              // //console.log('show contact us modal');
               await this.$store.dispatch('appGlobal/setShowContactUsModal',true);
             }
           }
@@ -363,7 +363,7 @@ export default {
   watch: { 
   '$route': {
     handler: function() {
-      console.log('route changed');
+      // //console.log('route changed');
       this.waitingForTransaction = false;
     },
     deep: true,

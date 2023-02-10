@@ -98,7 +98,7 @@ export default {
 		  });
 	  });
 	  observer.observe(this.$refs.fractional);
-	  console.log(window.innerWidth)
+	  // //console.log(window.innerWidth)
   },
 
   methods: {

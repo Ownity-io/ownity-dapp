@@ -84,7 +84,7 @@ export default {
                 return ethers.utils.formatEther(String(parseInt(value)));
             }
             catch {
-                console.log('ethers error');
+                // //console.log('ethers error');
             }
         },
         async showCancelModal(element){

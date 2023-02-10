@@ -240,7 +240,7 @@ export default {
       },
       async set(value){
         this.$store.dispatch('marketplace/setSelectedSort',value);
-        // console.log(await this.$store.getters['marketplace/getSelectedSort']);
+        // //console.log(await this.$store.getters['marketplace/getSelectedSort']);
       }
     }
   },

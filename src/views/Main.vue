@@ -274,7 +274,7 @@ export default {
     async loadIfVisible(){
       let isVisible = this.checkVisibility();
       if (isVisible){
-        console.log(this.showCardsLoaderAnimation);
+        //console.log(this.showCardsLoaderAnimation);
         await this.loadNextCollectionsInfo();
       }
     },

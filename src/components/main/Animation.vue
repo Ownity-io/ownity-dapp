@@ -97,7 +97,7 @@ export default {
     },
 
     statusAnimation(cursorX, cursorY, obj) {
-      // console.log(
+      // //console.log(
       //   " top: " + obj.top +
       //   " right: " + obj.right +
       //   " bottom: " + obj.bottom +

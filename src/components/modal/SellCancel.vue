@@ -227,7 +227,7 @@ export default {
   watch: { 
   '$route': {
     handler: function() {
-      console.log('route changed');
+      // //console.log('route changed');
       this.waitingForTransaction = false;
     },
     deep: true,

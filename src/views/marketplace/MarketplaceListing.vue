@@ -890,7 +890,7 @@ export default {
               this.letsCheck2('ListingFractionMarket')
             }
             else{
-              console.log('SHOW MODAL');
+              //console.log('SHOW MODAL');
             }
             
           } else {

@@ -31,7 +31,7 @@ export default {
         ]),
         async checkWalletInLS() {
             let connectedWallet = localStorage.getItem('connectedWallet');
-            console.log(connectedWallet);
+            // //console.log(connectedWallet);
             switch (connectedWallet) {
                 case 'metamask':
                     await this.$store.dispatch('walletsAndProvider/connectToMetamask');

@@ -200,9 +200,9 @@ export default {
                 return this.$store.getters['marketplace/getSelectedSort'];
             },
             async set(value){
-                console.log(value);
+                //console.log(value);
                 this.$store.dispatch('marketplace/setSelectedSort',value);
-                console.log(await this.$store.getters['marketplace/getSelectedSort']);
+                //console.log(await this.$store.getters['marketplace/getSelectedSort']);
             }
         }
     }

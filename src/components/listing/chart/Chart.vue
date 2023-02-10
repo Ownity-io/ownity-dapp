@@ -39,7 +39,7 @@ export default {
     }
   },
   mounted(){
-    console.log(this.chartData);
+    // //console.log(this.chartData);
     let tempSeries = [];
     let tempNames = [];
     for (let element of this.chartData){
@@ -51,11 +51,11 @@ export default {
     if (this.series.length>1){
       this.chartOptions.colors[this.series.length-1] = 'rgba(248, 249, 253, 1)';
     }    
-    console.log(tempNames)
+    // //console.log(tempNames)
     if (tempNames[0]=='You'){
       this.chartOptions.colors[0] = '#993CFC';
     }
-    console.log(tempNames);
+    // //console.log(tempNames);
     this.render = true;
   }
 };

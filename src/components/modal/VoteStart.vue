@@ -191,10 +191,10 @@ export default {
       this.buttonWaiting=true;
       if (this.amount>0 & this.checkedMarketplaces.length>0) {
         try {
-          console.log(this.useHelpers.toFixedIfNecessary(this.noExponents(this.amount * 10 ** this.item.currency.decimals),0));
+          // //console.log(this.useHelpers.toFixedIfNecessary(this.noExponents(this.amount * 10 ** this.item.currency.decimals),0));
           let signed_message = await this.$store.dispatch('walletsAndProvider/signMessageWithGlobalProvider',
             `${this.item.id}-${this.item.currency.address}-${this.noExponents(this.useHelpers.toFixedIfNecessary(this.noExponents(this.amount * 10 ** this.item.currency.decimals),0))}-${this.item.end_date}`);
-          console.log(signed_message);
+          // //console.log(signed_message);
           let requestLink = `${config.backendApiEntryPoint}voting-create/`;
           let requestOptions = {
             method: "POST",
@@ -218,12 +218,12 @@ export default {
           let requestJson = await request.json();
           if (requestJson.success) {
             if (parseInt((requestJson.data[0].voting_percentage)) >= 51 & this.item.internal_status!='ON SALE') {
-              console.log('SHO');
+              // //console.log('SHO');
               try{
                 await this.sellLot(requestJson.data)
               }
               catch (e){
-        console.log(e);
+        //console.log(e);
                 if (this.waitingForTransaction){
                   this.buttonWaiting=false;
                 await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
@@ -255,12 +255,12 @@ export default {
               }
               let check = await this.checkSell();
               if (check){
-                console.log('SHO3');
+                // //console.log('SHO3');
                 location.reload();
               }              
             }
             else{
-              console.log('SHo2');
+              // //console.log('SHo2');
               location.reload();
             }
           }
@@ -276,7 +276,7 @@ export default {
         catch{
           if (this.waitingForTransaction){
           this.buttonWaiting=false;
-          console.log(333)
+          // //console.log(333)
           location.reload();
           await this.$store.dispatch('appGlobal/setSnackText','Something went wrong… Try again later')
           await this.$store.dispatch('appGlobal/setGreenSnack',false)
@@ -312,13 +312,13 @@ export default {
           await prov.send('wallet_switchEthereumChain', [{ chainId: chainSettings.chainId }]);
         }
         catch (e) {
-          console.log(e);
+          //console.log(e);
           try {
             await prov.send('wallet_addEthereumChain', [chainSettings]);
           }
           catch (e) {
-            console.log(e);
-            console.log(444)
+            //console.log(e);
+            // //console.log(444)
             if (this.waitingForTransaction){
             await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
             await this.$store.dispatch('appGlobal/setGreenSnack', false)
@@ -409,7 +409,7 @@ export default {
             };
             let request = await fetch(requestUrl,requestOptions);
             let requestJson = await request.json();
-            console.log(requestJson);
+            // //console.log(requestJson);
           }
           if (this.waitingForTransaction){
           await this.$store.dispatch('appGlobal/setLastTransSuccess', false)
@@ -424,7 +424,7 @@ export default {
         }
       }
         catch (e){
-          console.log(e);
+          //console.log(e);
           if (this.waitingForTransaction){
           this.buttonWaiting = false;
           await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
@@ -434,7 +434,7 @@ export default {
         }
       }
     catch (e){
-        console.log(e);
+        //console.log(e);
         if (this.waitingForTransaction){
         this.buttonWaiting = false;
         await this.$store.dispatch('appGlobal/setSnackText', 'Something went wrong… Try again later')
@@ -512,7 +512,7 @@ export default {
             requestJson = await request.json();
             if (requestJson.success == false){
               //show contact us modal
-              console.log('show contact us modal');
+              // //console.log('show contact us modal');
               await this.$store.dispatch('appGlobal/setShowContactUsModal',true);
               return false;
             }
@@ -533,9 +533,9 @@ export default {
     this.setSellLotFee();
     let k = 0
     for (let element of marketplacesTemp){
-      console.log(element.id);
+      // //console.log(element.id);
       if (element.id=='OWNY'){
-        console.log(element);
+        // //console.log(element);
         marketplacesTemp.splice(k,1);
       }
       k+=1;
@@ -548,7 +548,7 @@ export default {
   watch: { 
   '$route': {
     handler: function() {
-      console.log('route changed');
+      // //console.log('route changed');
       this.waitingForTransaction = false;
     },
     deep: true,

@@ -641,9 +641,9 @@ export default {
     this.marketplacesWithoutOwnity = await request2.json();
     let k = 0
     for (let element of  this.marketplacesWithoutOwnity){
-      console.log(element.id);
+      // //console.log(element.id);
       if (element.id=='OWNY'){
-        console.log(element);
+        // //console.log(element);
         this.marketplacesWithoutOwnity.splice(k,1);
       }
       k+=1;

@@ -63,7 +63,7 @@ export default{
         return ethers.utils.formatEther(String(value));
       }
       catch{
-        console.log('ethers error');
+        // //console.log('ethers error');
       }
     },
     translatesGet(key) {

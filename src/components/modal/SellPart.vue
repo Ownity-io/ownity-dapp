@@ -237,9 +237,9 @@ export default {
         }
       }     
       const contract = new ethers.Contract(this.config.contractAddress, this.ABI.abi,await prov.getSigner());  
-      // console.log(`amount:${this.noExponents(this.useHelpers.toFixedIfNecessary(this.item.price/100*this.currentPart,0))}`);
-      // console.log(`price:${ this.noExponents(this.convertFromEtherToWei(this.priceForPart))}`);
-      // console.log(`total:${this.noExponents(this.noExponents(this.convertFromEtherToWei(this.priceForPart))-parseInt(this.sellFractionFee))}`);
+      // //console.log(`amount:${this.noExponents(this.useHelpers.toFixedIfNecessary(this.item.price/100*this.currentPart,0))}`);
+      // //console.log(`price:${ this.noExponents(this.convertFromEtherToWei(this.priceForPart))}`);
+      // //console.log(`total:${this.noExponents(this.noExponents(this.convertFromEtherToWei(this.priceForPart))-parseInt(this.sellFractionFee))}`);
       let sellFraction = await contract.sellFraction(this.item.id, this.noExponents(this.currentPart*10**18), this.noExponents(this.convertFromEtherToWei(this.priceForPart)),
       {gasLimit:'1000000'});
 
@@ -352,7 +352,7 @@ export default {
   watch: { 
   '$route': {
     handler: function() {
-      console.log('route changed');
+      // //console.log('route changed');
       this.waitingForTransaction = false;
     },
     deep: true,

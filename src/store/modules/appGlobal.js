@@ -270,7 +270,7 @@ export default {
       context.commit("setshowContinueCollectingModal", value);
     },
     setshowDepositCancelModal(context,value){
-      console.log(value);
+      // //console.log(value);
       context.commit("setshowDepositCancelModal", value);
     },
     setShowSellPartModal(context,value){
@@ -302,7 +302,7 @@ export default {
     },
     async setShowSnackBarWithTimeout(context,timeout){
       if (!context.getters.getShowSnackBar){
-        console.log('show!');
+        // //console.log('show!');
         context.commit("setShowSnackBar",true);
         const delay = (delayInms) => {
           return new Promise(resolve => setTimeout(resolve, delayInms));

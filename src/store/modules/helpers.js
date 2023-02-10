@@ -36,7 +36,7 @@ export default {
                 let requestJson = await response.json();
                 context.commit('updateCollectionsFooter', requestJson.results )
             } catch (e) {
-                console.log(`From fetchCollectionsFooter: `, e.message)
+                //console.log(`From fetchCollectionsFooter: `, e.message)
             }
         },
         async getUserBalance(ctx, address) {
@@ -47,7 +47,7 @@ export default {
                     return balance;
                 }
             } catch (error) {
-                console.log(error);
+                //console.log(error);
             }
         },
         async fetchUsdRate({commit}, data){
@@ -67,7 +67,7 @@ export default {
                     commit('updateUsdRate', {rates});
                 }
             } catch (e) {
-                console.log('From fetchUsdRate:',  e.message);
+                //console.log('From fetchUsdRate:',  e.message);
             }
         }
     },

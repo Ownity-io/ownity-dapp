@@ -86,7 +86,7 @@ export default {
       if (collections != null) {
         for (let item of collections) {
           if (item.contract_address == address) {
-            console.log(item);
+            // //console.log(item);
             return item;
           }
         }
@@ -328,7 +328,7 @@ export default {
           context.commit("setSharesSale", null);
         }
       } catch (e){
-        console.log(e.message)
+        //console.log(e.message)
       }
     },
     //listings
@@ -560,7 +560,7 @@ export default {
       }
 
 
-      console.log(requestUrl)
+      // //console.log(requestUrl)
       let requestOptions = {
         method: "GET",
         headers: {
@@ -579,7 +579,7 @@ export default {
       }
     },
     async clearListingsInfo(context){
-      console.log('clear');
+      // //console.log('clear');
       context.commit("setListingsInfo", null);
     },
     async fetchAndSetListingsStartInfoByUserVote(context, isFirst) {
@@ -597,7 +597,7 @@ export default {
       if (context.getters.getCurrentMaxPrice!=null){
         requestUrl += `&price_lt=${ethers.utils.parseEther(String(context.getters.getCurrentMaxPrice)).toString()}`;
       }
-      console.log(context.getters.getOnSale);
+      // //console.log(context.getters.getOnSale);
       if (context.getters.getOnSale){
         requestUrl += `&internal_status=ON SALE`;
       }
@@ -609,7 +609,7 @@ export default {
         requestUrl += `&bid_status=${context.getters.getCurrentBidStatus}`;
       }
 
-      console.log(requestUrl)
+      // //console.log(requestUrl)
       let requestOptions = {
         method: "GET",
         headers: {
@@ -637,8 +637,8 @@ export default {
       context.commit('setSearchString',value);
     },
     async fetchAndSetActivitiesResult(context, params = {}){
-      console.log(params.userAddress);
-      console.log(params.collectionAddress);
+      //console.log(params.userAddress);
+      //console.log(params.collectionAddress);
       context.commit("setActivitiesResult", null);
       let requestUrl = null;
       if (params.lotId){
@@ -661,7 +661,7 @@ export default {
         requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`
       }
 
-      console.log(requestUrl)
+      //console.log(requestUrl)
       let request = null;
       if (params.userAddress){
         context.commit('setActivitiesByUser',true);

@@ -25,7 +25,7 @@ export default {
   methods:{
     async validateEmail() {
             if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
-                console.log('Nice email!');
+                // //console.log('Nice email!');
                 //sendEmailHere
                 let requestLink = `${this.config.backendApiEntryPoint}mailing-list-add/`;
                 let requestOptions = {

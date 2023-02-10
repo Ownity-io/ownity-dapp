@@ -49,8 +49,8 @@ export default {
         context.commit('setGlobalProvider',provider);   
         await provider.send('wallet_switchEthereumChain',[{ chainId: "0x5"}]);     
         let userAddress = await provider.getSigner().getAddress();
-        console.log(userAddress);
-        console.log(localStorage.getItem('userAddress'));
+        //console.log(userAddress);
+        //console.log(localStorage.getItem('userAddress'));
         if (localStorage.getItem('userAddress')!=userAddress){
           // localStorage.setItem('userAddress',null);
           // localStorage.setItem('token',null);
@@ -79,11 +79,11 @@ export default {
             }
           );
           let nonce = (await request.json()).data.nonce;
-          console.log(nonce);
+          //console.log(nonce);
           //SignMessage
           let msg = `${config.messageToSignStart}${nonce}`;
           let signedMessage = await provider.getSigner().signMessage(msg);
-          console.log(signedMessage);
+          //console.log(signedMessage);
           //login
           requestUrl = `${config.backendApiEntryPoint}login/`;
           request = await fetch(
@@ -98,7 +98,7 @@ export default {
             }
           );
           let requestJson = await request.json();
-          console.log(requestJson.data.refresh);
+          //console.log(requestJson.data.refresh);
           localStorage.setItem('token', requestJson.data.token);
           localStorage.setItem('tokenEndTimestamp', requestJson.data.expiration_timestamp);
           localStorage.setItem('refreshToken', requestJson.data.refresh);
@@ -138,7 +138,7 @@ export default {
         localStorage.setItem('userAddress',await provider.getSigner().getAddress());
         
         ethereum.on('accountsChanged', async () => {
-          // console.log('CHANGE');
+          // //console.log('CHANGE');
           let connectedWallet = localStorage.getItem('connectedWallet');
           if (connectedWallet == 'metamask'){
             await context.dispatch('connectToMetamask');
@@ -151,7 +151,7 @@ export default {
           //  context.
         })
       } catch (error){
-        console.log(error);
+        //console.log(error);
         // localStorage.setItem('connectedWallet',null);
         // localStorage.setItem('userAddress',null);
         // localStorage.setItem('token',null);
@@ -165,7 +165,7 @@ export default {
         // localStorage.removeItem("refreshToken");
         // localStorage.removeItem("nonce");
         // localStorage.removeItem('connectedWallet');
-        console.log('Metamask Connection Error');
+        //console.log('Metamask Connection Error');
       }
     },
     async connectWithWalletConnect(context){
@@ -209,11 +209,11 @@ export default {
             }
           );
           let nonce = (await request.json()).data.nonce;
-          console.log(nonce);
+          //console.log(nonce);
           //SignMessage
           let msg = `${config.messageToSignStart}${nonce}`;
           let signedMessage = await web3Provider.getSigner().signMessage(msg);
-          console.log(signedMessage);
+          //console.log(signedMessage);
           //login
           requestUrl = `${config.backendApiEntryPoint}login/`;
           request = await fetch(
@@ -228,7 +228,7 @@ export default {
             }
           );
           let requestJson = await request.json();
-          console.log(requestJson.data.refresh);
+          //console.log(requestJson.data.refresh);
           localStorage.setItem('token', requestJson.data.token);
           localStorage.setItem('tokenEndTimestamp', requestJson.data.expiration_timestamp);
           localStorage.setItem('refreshToken', requestJson.data.refresh);
@@ -265,7 +265,7 @@ export default {
         //   localStorage.removeItem('refreshToken');
         //   localStorage.removeItem('nonce');
         //   localStorage.removeItem('connectedWallet');
-        console.log('WalletConnect Connection Error');
+        //console.log('WalletConnect Connection Error');
       }
     },
     async signMessageWithGlobalProvider(context,message){

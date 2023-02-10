@@ -46,15 +46,15 @@ export default {
 		addClasses(){
 			if (this.$route.name == 'Marketplace'){
         this.hidesClass = !this.hidesClass
-				console.log(this.hidesClass)
+				// //console.log(this.hidesClass)
 			}
 			if (this.$route.name == 'Collection'){
 				this.hidesClass = !this.hidesClass
-				console.log(this.hidesClass)
+				// //console.log(this.hidesClass)
 			}
 			if (this.$route.name == 'Profile') {
 				this.hidesClass = false
-				console.log(this.hidesClass)
+				// //console.log(this.hidesClass)
       }
     },
     translatesGet(key) {

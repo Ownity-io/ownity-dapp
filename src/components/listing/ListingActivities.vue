@@ -102,7 +102,7 @@ export default {
       return this.lang.get(key);
     },
         getTimeString(timeStampValue) {
-            console.log(timeStampValue);
+            // //console.log(timeStampValue);
             let timeNow = Date.now() / 1000;
             let remTimeInSeconds = timeNow -timeStampValue;
             var sec_num = parseInt(remTimeInSeconds, 10);

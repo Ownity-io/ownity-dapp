@@ -225,13 +225,13 @@ export default {
       let options = {};
       let valueToBuy = this.noExponents((ethers.BigNumber.from(this.noExponents(this.item.price))/100)*this.currentPart);
       let valueToBuyWithComissions = this.noExponents((ethers.BigNumber.from(this.noExponents(parseInt(this.item.price)+parseInt(this.buyLotFee)))/100)*this.currentPart);
-      // console.log('+++++++++++++++++++++++++++++++++++++++++++');
-      // console.log(`amount:${valueToBuy}`);
-      // console.log(`value:${valueToBuyWithComissions}`);
-      // console.log(`fee:${this.buyLotFee}`);
-      // console.log('+++++++++++++++++++++++++++++++++++++++++++');
+      // //console.log('+++++++++++++++++++++++++++++++++++++++++++');
+      // //console.log(`amount:${valueToBuy}`);
+      // //console.log(`value:${valueToBuyWithComissions}`);
+      // //console.log(`fee:${this.buyLotFee}`);
+      // //console.log('+++++++++++++++++++++++++++++++++++++++++++');
       // if (valueToBuy>(parseInt(this.item.price)-this.allBidsAmount)){
-      //   console.log('Part is too big');
+      //   //console.log('Part is too big');
       //   valueToBuy = parseInt(this.item.price)-this.allBidsAmount;
       // }
       if (this.item.currency.address == '0x0000000000000000000000000000000000000000'){
@@ -256,7 +256,7 @@ export default {
       let request = await fetch(requestUrl,requestOptions);
       let requestJson = await request.json();
       let inputData = requestJson.data.data;
-      // console.log(requestJson);
+      // //console.log(requestJson);
       requestUrl = `${config.backendApiEntryPoint}sign/`;
       requestOptions = {
           method: "POST",
@@ -271,26 +271,26 @@ export default {
         };
       request = await fetch(requestUrl,requestOptions);
       requestJson = await request.json();
-      // console.log(requestJson);
+      // //console.log(requestJson);
       let signature = requestJson.data.signature;
       // let part = (ethers.BigNumber.from(String((parseInt(this.item.price)/100)*this.currentPart))).toString();
       try{
-        // console.log('-----------------');
-        // console.log(`Marketplace ID: ${markeplaceId}`);
-        // console.log(`Lot ID: ${this.item.id}`);
-        // console.log(`Amount: ${valueToBuy}`);
-        // console.log('--------LOT_DATA--------');
-        // console.log(`tokenAddress: ${this.item.currency.address}`);
-        // console.log(`Decimals: ${this.item.currency.decimals}`);
-        // console.log(`price: ${parseInt(this.item.price)}`);
-        // console.log(`tokenContractAddress: ${this.item.collection.contract_address}`);
-        // console.log(`tokenId: ${this.item.token_id}`);
-        // console.log(`tokenAmount: ${this.item.amount}`);
-        // console.log('--------LOT_DATA--------');
-        // console.log(`Input data: ${inputData}`);
-        // console.log(`Signature: ${signature}`);
-        // // console.log(`Options: ${options.value}`);
-        // console.log('-----------------');
+        // //console.log('-----------------');
+        // //console.log(`Marketplace ID: ${markeplaceId}`);
+        // //console.log(`Lot ID: ${this.item.id}`);
+        // //console.log(`Amount: ${valueToBuy}`);
+        // //console.log('--------LOT_DATA--------');
+        // //console.log(`tokenAddress: ${this.item.currency.address}`);
+        // //console.log(`Decimals: ${this.item.currency.decimals}`);
+        // //console.log(`price: ${parseInt(this.item.price)}`);
+        // //console.log(`tokenContractAddress: ${this.item.collection.contract_address}`);
+        // //console.log(`tokenId: ${this.item.token_id}`);
+        // //console.log(`tokenAmount: ${this.item.amount}`);
+        // //console.log('--------LOT_DATA--------');
+        // //console.log(`Input data: ${inputData}`);
+        // //console.log(`Signature: ${signature}`);
+        // // //console.log(`Options: ${options.value}`);
+        // //console.log('-----------------');
         let buyLot = await contract.buyLot(
           markeplaceId,
           this.item.id,
@@ -435,7 +435,7 @@ export default {
   watch: { 
   '$route': {
     handler: function() {
-      console.log('route changed');
+      // //console.log('route changed');
       this.waitingForTransaction = false;
     },
     deep: true,

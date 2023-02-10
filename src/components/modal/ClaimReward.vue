@@ -177,7 +177,7 @@ export default {
               },
               method:'POST'
             })).json();
-          console.log(forceReq);
+          // //console.log(forceReq);
           if (this.waitingForTransaction){
           await this.$store.dispatch('appGlobal/setLastTransSuccess',true)
           await this.$store.dispatch('appGlobal/setLastTransactionHash', claimReward.hash);
@@ -233,7 +233,7 @@ export default {
   watch: { 
   '$route': {
     handler: function() {
-      console.log('route changed');
+      // //console.log('route changed');
       this.waitingForTransaction = false;
     },
     deep: true,
