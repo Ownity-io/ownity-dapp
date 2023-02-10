@@ -119,7 +119,7 @@
                     <div class="td-wrap">
                       <div class="td-wrap-price">
                         <div class="icon-token eth"></div>
-                        <span>{{useHelpers.abbrNum(useHelpers.toFixedIfNecessary(collection.floor_price,2),0)}} ETH</span>
+                        <span>{{useHelpers.abbrNum(this.formaFloorPrice(collection.floor_price),2)}} ETH</span>
                       </div>
                       <!-- <span class="td-light">≈ $ 1000</span> -->
                     </div>
@@ -299,6 +299,17 @@ export default {
     translatesGet(key) {
       return this.lang.get(key);
     },
+    formaFloorPrice(price){
+      if (price<0.0001){
+        return '0.0001'
+      }
+      else if(price<1){
+        return price;
+      }
+      else{
+        return this.useHelpers.toFixedIfNecessary(price,2);
+      }
+    }
   },
 };
 </script>
