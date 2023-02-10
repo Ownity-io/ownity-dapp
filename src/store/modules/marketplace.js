@@ -501,10 +501,6 @@ export default {
         requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;
       }
 
-      if(isFirst && !requestUrl.includes('&ordering')){
-        requestUrl+='&ordering=-timestamp'
-      }
-
       //? saleStatus
       if (context.getters.getSaleStatusFilter){
         requestUrl+=`${context.getters.getSaleStatusFilter.value}`;
@@ -558,10 +554,6 @@ export default {
         requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;
       }
 
-      if(isFirst && !requestUrl.includes('&ordering')){
-        requestUrl+='&ordering=-timestamp'
-      }
-
       //? saleStatus
       if (context.getters.getSaleStatusFilter){
         requestUrl+=`${context.getters.getSaleStatusFilter.value}`;
@@ -613,9 +605,6 @@ export default {
         requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`;
       }
 
-      if(isFirst && !requestUrl.includes('&ordering')){
-        requestUrl+='&ordering=-timestamp'
-      }
       if (context.getters.getCurrentBidStatus!=null & context.getters.getCurrentBidStatus!=false){
         requestUrl += `&bid_status=${context.getters.getCurrentBidStatus}`;
       }
@@ -672,9 +661,6 @@ export default {
         requestUrl+=`&ordering=${context.getters.getSelectedSort.codeName}`
       }
 
-      if(params.isFirst && !requestUrl.includes('&ordering')){
-        requestUrl+='&ordering=-timestamp'
-      }
       console.log(requestUrl)
       let request = null;
       if (params.userAddress){

@@ -31,12 +31,15 @@
                             <span>{{translatesGet('COLLECTIONS')}}</span>
                             <i class="i-arrow-up-s-line"></i>
                         </button>
-                        <ul class="footer-list">
-                            <li><a href="https://jaxscan.com/collection/0xBC51d9f4A816d6Ad60E6A64DEFf0f820307A1e45">sad - sWJozDZPx2</a></li>
-                            <li><a href="https://jaxscan.com/collection/0x1f419B9469D641D333805C4054CA3b65Af54d315">Snakes on a chain</a></li>
-                            <li><a href="https://jaxscan.com/collection/0xd06166878623353947c8715e7F3e9f4D8585726F">Ownable BAYC</a></li>
-                            <li><a href="https://jaxscan.com/collection/0x15987A0417D14cc6f3554166bCB4A590f6891B18">Masa Soul Name (MSN)</a></li>
+
+                        <ul v-if="getCollectionsFooter && getCollectionsFooter.length" class="footer-list">
+                            <li v-for="collection in getCollectionsFooter" :key="collection.contract_address">
+                              <a :href="`/collection/${collection.contract_address}`">
+                                {{collection.name}}
+                              </a>
+                            </li>
                         </ul>
+
                     </div>
                     <div class="footer-block" :class="{'unfolded' : !footerBlock3}">
                         <div class="footer-block-name">
@@ -121,6 +124,7 @@
 <script>
 import MultiLang from "@/core/multilang";
 import config from '@/config.json';
+import {mapActions, mapGetters} from "vuex";
 export default {
 data() {
     return {
@@ -132,7 +136,11 @@ data() {
             config:config
         }
     },
+    computed: {
+    ...mapGetters(['getCollectionsFooter'])
+    },
     methods:{
+        ...mapActions(['fetchCollectionsFooter']),
         goToTop(){
             window.scrollTo(0, 0);
         },
@@ -168,6 +176,9 @@ data() {
                     await this.$store.dispatch('appGlobal/setShowSnackBarWithTimeout',2)
             }
         }
+    },
+    mounted(){
+      this.fetchCollectionsFooter()
     }
 }
 </script>

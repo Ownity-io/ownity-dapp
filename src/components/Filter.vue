@@ -33,6 +33,7 @@
         </li>
       </ul>
     </div>
+
     <div class="filter-section" :class="{ 'collapse-section': filterSection2 }" v-if="this.$route.name=='Profile' & (this.onlyFav||(!this.onlyFav & !this.vote & !this.activities))">
       <button class="filter-section-name" @click="filterSection2 = !filterSection2">
         <span>Status</span>
@@ -55,6 +56,47 @@
         </li>
       </ul>
     </div>
+
+
+
+    <div
+        class="filter-section"
+        :class="{ 'collapse-section': filterSection5 }"
+        v-if="
+        $route.path === '/profile/favorites' || $route.path === '/profile/all'
+      "
+    >
+      <button
+          class="filter-section-name"
+          @click="filterSection5 = !filterSection5"
+      >
+        <span>Listing status</span>
+        <i class="i-arrow-up-s-line"></i>
+      </button>
+      <ul class="filter-ul">
+        <li class="filter-li" v-for="status in statuses" :key="status.name">
+          <div class="input-checkbox">
+            <input
+                type="checkbox"
+                :id="status.value"
+                :checked="
+                $store.getters['marketplace/getSaleStatusFilter'] &&
+                $store.getters['marketplace/getSaleStatusFilter'].name ===
+                  status.name
+              "
+                :value="status.value"
+                @click="setSaleStatus(status)"
+            />
+            <label :for="status.value">
+              <div class="icon-filter-checkbox"></div>
+              <span>{{ status.name }}</span>
+              <i class="i-check-line"></i>
+            </label>
+          </div>
+        </li>
+      </ul>
+    </div>
+
     <div class="filter-section" :class="{ 'collapse-section': filterSection3 }" v-if="this.vote">
       <button class="filter-section-name" @click="filterSection3 = !filterSection3">
         <span>Status</span>
