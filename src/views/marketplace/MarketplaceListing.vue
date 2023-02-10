@@ -123,9 +123,9 @@
               <div class="section-deposit-data">
                 <div class="deposit-img-container">
                   <!-- <a target="_blank" :href='getLinkToMarketplacePage(voting.marketplace)' class="deposit-img" :style="{backgroundImage: `url(${voting.marketplace.logo})`}"></a> -->
-                  <jazzicon :address="userAddress" :diameter="40" class="deposit-img" v-if="userAddress"/>
+                  <jazzicon :address="userAddress" :diameter="48" class="deposit-img prof" v-if="userAddress"/>
                 </div>
-                <div class="deposit-data">
+                <div class="deposit-data prof">
                   <div class="deposit-listened deposit-listened-link">
                     <div>
                       {{this.userAddress.substring(0,6)+'...'+this.userAddress.substring(38,42)}}

@@ -1253,6 +1253,11 @@
         margin-left: 30px;
     }
 
+
+    .deposit-data.prof{
+        padding-left: 30px;
+    }
+
     .recommendations-list li,
     .section-nft.with-filter .cards-list-container .card,
     .section-nft:not(.with-filter) .cards-list-container .card {
