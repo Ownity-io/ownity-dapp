@@ -108,7 +108,6 @@ export default {
         }
     }
     if (this.$route.name=='Profile'){
-      console.log('kek');
       if (this.onlyFav) {
         let requestUrl = `${config.backendApiEntryPoint}favorite-listings-by-user/?limit=${config.listingsPerPage}`;
         let requestOptions = {

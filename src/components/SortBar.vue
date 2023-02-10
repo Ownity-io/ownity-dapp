@@ -36,9 +36,6 @@ export default{
             lang: new MultiLang(this),
         }        
     },
-    mounted(){
-        console.log('kek');
-    },
     computed:{
         selectedSort:{
             get(){
