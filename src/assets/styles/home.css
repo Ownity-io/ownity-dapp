@@ -1,0 +1,208 @@
+.page-wrapper main.main-home {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.section-home {
+    padding-top: 100px;
+}
+
+.section-home.main-screen {
+    padding-bottom: 64px;
+}
+
+.section-home:last-child {
+    padding-bottom: 100px;
+}
+
+.home-page {
+    position: relative;
+    z-index: 1;
+}
+
+.home-page::before {
+    position: absolute;
+    content: '';
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    min-height: 960px;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% auto;
+    background-image: url(../images/main-screen-bg.png);
+}
+
+.main-screen h1.section-name-h1 {
+    font-weight: 700;
+    font-size: min(128px, 5vw);
+    line-height: min(152px, 6vw);;
+    color: #333333;
+}
+
+.main-screen .section-name-h3 {
+    font-size: 18px;
+}
+
+.main-screen-container {
+    /* padding-left: 64px;     */
+    padding-left: 5%;
+    /* padding-right: 64px;     */
+    padding-right: 5%;
+}
+
+.main-screen .btn.btn-home {
+    margin-top: 60px;
+    margin-left: 0;
+    width: fit-content;
+    min-width: 220px;
+    min-height: 48px;
+}
+
+.btn.btn-home {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 150%;
+}
+
+.main-home {
+    position: relative;
+}
+
+.screen-animation {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    min-height:calc( 100vh - 72px);
+}
+.referral-main-container,
+.main-screen-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 100%;
+}
+
+.main-screen-container {
+    /* gap: 120px; */
+    gap: 10.9%;
+}
+.referral-main-container{
+    column-gap: 3%;
+}
+.main-screen-container .section-block {
+    flex: 1;
+}
+
+.main-home .btn-router-to {
+    min-width: fit-content;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.content-home {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.content-home-ui {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    justify-content: space-between;
+}
+
+.content-home-ui div {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 50%;
+    height: fit-content;
+    min-height: 2120px;
+    max-width: calc(1920px / 2);
+}
+
+.content-home-ui div img {
+    width: 100%;
+    height: auto;
+}
+
+.content-home-ui div:nth-child(1) img {
+    margin-top: 50%;
+    margin-bottom: auto;
+}
+
+.content-home-ui div:nth-child(2) img {
+    margin-top: auto;
+    margin-bottom: 10%;
+}
+
+.section-block.block-slider {
+    overflow: hidden;
+    max-width: 100%;
+    display: flex;
+}
+
+.carousel__pagination-button {
+    background: #FFFFFF !important;
+    border: 1px solid #DFE2EA !important;
+    border-radius: 8px;
+    padding: 0 !important;
+    width: 32px;
+    height: 8px;
+    overflow: hidden;
+    transition: width .2s;
+    margin: 4px 8px !important;
+}
+
+.carousel__pagination {
+    margin: 0 auto !important;
+}
+.banner-slider .carousel__pagination {
+  margin-top: 8px !important;
+}
+
+
+.carousel__pagination-button::after {
+    display: none !important;
+    width: 0;
+    transition: width 5s;
+}
+
+.carousel__pagination-button.carousel__pagination-button--active {
+    width: 64px;
+
+}
+
+/* .carousel__pagination-button:hover::after, */
+.carousel__pagination-button.carousel__pagination-button--active::after {
+    display: block !important;
+    background: linear-gradient(89.43deg, #3E80FF -3.17%, #2457D5 109.46%);
+    border-radius: 8px !important;
+    height: 100% !important;
+    /* transition: width 5s;
+    width: 100%; */
+}
+.carousel__pagination-item .carousel__pagination-button::after{
+    animation: unset;
+    width: 0;
+}
+.carousel__pagination-item .carousel__pagination-button.carousel__pagination-button--active::after{
+    animation: width-carousel__pagination linear  5.1s forwards;
+}
+
+@keyframes width-carousel__pagination{
+    from{
+        width: 0;
+    }
+    to{
+        width: 99.8%;
+    }
+}

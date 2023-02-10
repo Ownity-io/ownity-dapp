@@ -1,0 +1,1493 @@
+@media (max-width: 1472px) {
+    .recommendations-list li {
+        width: calc(100% / 4 - 16px);
+    }
+
+    .recommendations-list li:not( :nth-child(-n+4)) {
+        display: none;
+    }
+}
+
+@media (min-width: 1440.5px) {
+
+    .table-referrals .thead .td.td-price,
+    .table-referrals .tr .td.td-price,
+    .table-activity .thead .td.td-price,
+    .table-activity .tr .td.td-price,
+    .table-activities .thead .td.td-price,
+    .table-activities .tr .td.td-price {
+        margin-right: 30px;
+    }
+
+}
+
+@media (max-width: 1440.5px) {
+
+    .filter {
+        width: 248px;
+    }
+
+    .section-nft.with-filter {
+        gap: 16px
+    }
+
+    .container-btn-part {
+        column-gap: 10px;
+    }
+
+    .card-data .btn-container .container-btn-part .btn {
+        padding: 11px;
+    }
+
+    .card-main,
+    .card-data {
+        padding: 12px;
+    }
+
+    .header-search {
+        max-width: 400px;
+    }
+
+
+    .deposit-value {
+        font-size: 18px;
+    }
+
+    .thead .td,
+    .tr .td {
+        padding: 16px 0;
+    }
+
+
+    .table-referrals .thead .td,
+    .table-referrals .tr .td {
+        padding: 16px;
+    }
+
+    /* .card-listing {
+        grid-template-columns: 1fr 1fr;
+    } */
+
+
+    .card-listing .section-card-img {
+        max-width: calc(35% - 16px);
+    }
+
+    .card-listing .listing-main {
+        max-width: 65%;
+    }
+
+
+    .header-nav .btn-container .btn.btn-address,
+    .header-nav .btn-container .btn.btn-connect {
+        min-width: 102px;
+    }
+
+}
+
+@media (max-width: 1245px) {
+
+    .header-nav .btn-container .btn.btn-address,
+    .header-nav .btn-container .btn.btn-connect {
+        margin-left: var(--grid-pad-half);
+    }
+}
+
+
+/* ------ CARDS ------- */
+
+@media (max-width: 1245px) {
+
+    .section-nft.with-filter .cards-list-container .card {
+        width: calc(100% / 3 - 16px);
+    }
+
+    .section-nft:not(.with-filter) .cards-list-container .card {
+        width: calc(100% / 4 - 16px);
+    }
+
+}
+
+@media (max-width: 1440px) {
+
+    .screen-animation-container .img.img1,
+    .screen-animation-container .img.img3 {
+        transform: scale(.8);
+    }
+}
+
+@media (max-width: 1200px) {
+    .screen-animation-container .img.img2 {
+        display: none;
+    }
+
+    .screen-animation-container .img.img1,
+    .screen-animation-container .img.img3 {
+        transform: scale(.7);
+    }
+}
+
+@media (max-width: 991px) {
+    .main-screen-container {
+        padding-left: 0;
+        padding-right: 0;
+        gap: 5%;
+    }
+
+    .section-nft.with-filter .cards-list-container .card {
+        width: calc(100% / 2 - 16px);
+    }
+
+    .recommendations-list li,
+    .section-nft:not(.with-filter) .cards-list-container .card {
+        width: calc(100% / 3 - 16px);
+    }
+
+    .recommendations-list li:not( :nth-child(-n+4)) {
+        display: flex;
+    }
+
+    .screen-animation .screen-animation-container,
+    .content-home-ui div {
+        display: none;
+    }
+
+    .home-page::before {
+        background-image: url(../images/main-screen-bg-mob.png);
+        min-height: 827px;
+    }
+
+    .screen-animation {
+        background-image: url(../images/main-screen-animation-mob.png);
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%;
+        background-position: top center;
+        background-size: 100% auto;
+    }
+
+    /* main-screen-animation-mob.png */
+}
+
+
+@media (max-width: 991px) {
+    .card-listing .section-card-img:not(.section-card-img-mobile) {
+        display: none;
+    }
+
+    .card-listing .section-card-img.section-card-img-mobile {
+        display: flex;
+        position: relative;
+        top: 0;
+        margin-top: 24px;
+        max-width: 328px;
+        margin-left: auto;
+        margin-right: auto;
+        /* margin-bottom: 24px; */
+    }
+
+    .card-listing .section-card-img,
+    .card-listing .listing-main {
+        max-width: 100%;
+    }
+
+    .recommendations-wrap {
+        overflow: hidden;
+        max-width: 100%;
+    }
+
+    .footer-logo,
+    .header-logo {
+        max-width: 156px;
+        flex-grow: 1;
+        width: 100%;
+    }
+
+    .collection {
+        padding: 0;
+        border: none;
+        gap: 24px;
+    }
+
+    .section-collection .collection-data {
+        padding-left: 0;
+
+    }
+
+    .collection .collection-id.collection-label {
+        padding-left: calc(80px + 16px);
+        min-height: 80px;
+        margin-bottom: 20px;
+        white-space: inherit;
+        font-size: 24px;
+        line-height: 150%;
+        padding-right: 0;
+        vertical-align: baseline;
+    }
+
+    /* .collection-id.collection-label i.i-checkbox-circle-fill{
+        top: 0;
+    } */
+    .collection .collection-id.collection-label i.i-checkbox-circle-fill {
+        top: 0;
+        position: relative;
+        transform: unset;
+    }
+
+    .section-collection .collection-statistics {
+        gap: 16px;
+        justify-content: flex-start;
+    }
+
+    .section-collection .collection-statistics li {
+        align-items: flex-start;
+    }
+
+    .section-collection .collection-wrap {
+        position: relative;
+    }
+
+    .section-collection .collection-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+    }
+}
+
+@media (max-width: 991px) {
+
+    .your-deposit {
+        margin-bottom: 0;
+        padding: 0;
+        border: none;
+        border-bottom: 1px solid #DFE2EA;
+        border-radius: 0;
+    }
+    .your-deposit .section-deposit {
+        padding: 0;
+        padding-bottom: 26px;
+    }
+
+    .your-deposit .section-deposit-data {
+        margin-bottom: 16px;
+    }
+
+    .footer-section {
+        row-gap: 0;
+    }
+
+    .footer-form .btn-subscribe {
+        min-width: 140px;
+        padding: 12px 8px;
+    }
+
+    .drop-down-mobile {
+        display: flex;
+    }
+
+    .cards-list-empty {
+        min-height: 300px;
+    }
+
+    /* ----------- LISTING PAGE ----------- */
+
+    .listing-main,
+    .card-listing {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+
+    .listing-name {
+        font-size: 24px;
+        line-height: 28px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 100%;
+        gap: 16px;
+    }
+
+
+    .section-deposit-btns,
+    .section-deposit-data {
+        width: 100%;
+    }
+
+    .section-deposit-btns .btn {
+        flex-grow: 1;
+    }
+
+    [class^='section-listing-']:not(.section-listing-header).section-listing-tabs {
+        /* margin-top: 0; */
+    }
+
+    .section-deposit-btns {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .section-listing-main .section-deposit {
+        gap: 16px;
+    }
+
+
+    .section-listing-main .deposit-data {
+        padding-left: 0;
+        width: 100%;
+    }
+
+    .section-deposit-data {
+        position: relative;
+        margin-top: 16px;
+    }
+
+    .section-deposit-data .deposit-img-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .section-deposit-data .deposit-img {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        min-height: 24px;
+    }
+
+    .section-deposit-data .deposit-value span {
+        font-size: 18px;
+    }
+
+    .deposit-listened,
+    .deposit-listened.deposit-listened-link {
+        margin-left: 32px;
+    }
+
+    .section-listing-main .deposit-value {
+        font-size: 18px;
+        margin-top: 12px;
+    }
+
+    .tab-blocks-list .tab-block span:not(:first-child) {
+        margin-top: 4px;
+    }
+
+    .tab-blocks-list .tab-block {
+        padding: 8px;
+        font-weight: 400;
+        font-size: 12px;
+    }
+
+    .tab-blocks-list .tab-block .value {
+        font-size: 14px;
+    }
+
+    .tab-contain .collection-statistics {
+        gap: 16px;
+    }
+
+    .tab-contain .collection-statistics li {
+        width: 50%;
+        max-width: calc(50% - 8px);
+        flex-grow: 1;
+    }
+
+    .chart-wrap,
+    .table-chart-data {
+        width: 100%;
+    }
+
+    .table-chart-data {
+        padding-left: 0;
+    }
+
+    .section-table-chart {
+        flex-direction: column;
+    }
+
+    .chart-wrap .dx-visibility-change-handler {
+        margin-bottom: 24px;
+        max-height: 240px;
+
+        transform: scale(.5) translateY(-100px);
+        position: absolute;
+        top: 0;
+    }
+
+    .dx-visibility-change-handler {}
+
+    .chart-wrap {
+        overflow: hidden;
+        height: 240px;
+        position: relative;
+        max-height: 240px;
+    }
+
+    .chart-wrap #chart {
+        max-width: 240px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .section-listing-main .collection-data-link,
+    .section-listing-main .deposit-listened {
+        margin-bottom: 0;
+    }
+
+    .tab-info .data-table .data-td {
+        /* max-width: fit-content; */
+        width: fit-content;
+    }
+
+    .section-listing-main {
+        padding: 0;
+        border: none;
+        flex-direction: column;
+    }
+
+    .section-listing-main .section-deposit {
+        padding: 0;
+        padding-bottom: 16px;
+        flex-direction: column;
+    }
+
+    .listing-main .section-listing-header .listing-additional-options {
+        display: none;
+    }
+
+    /* .section-listing-tabs .tabs,
+    .section-tabs .container .tabs {
+        overflow: auto hidden;
+    }
+
+    .section-listing-tabs .tabs::-webkit-scrollbar,
+    .section-tabs .container .tabs::-webkit-scrollbar {
+        display: none;
+        height: 0;
+        width: 0;
+    } */
+
+    .tab-blocks-list {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .page-wrapper main {
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+
+    .page-wrapper.page-referral main {
+        padding-top: 0;
+    }
+
+    .page-wrapper.page-referral .section-referral-main {
+        padding-top: 16px;
+    }
+
+    .breadcrumbs {
+        margin-bottom: 24px;
+    }
+
+    .profile-header .section-name-h1,
+    .section-name-h1 {
+        font-size: 32px;
+        line-height: 38px;
+    }
+
+    .profile-header .icon-profile {
+        margin-bottom: 16px;
+        margin-right: 0;
+    }
+
+    .profile-container-btns {
+        display: none;
+    }
+
+    .header-wrapper .header-search,
+    .header-wrapper .header-nav {
+        display: none;
+    }
+
+    .header-mobile,
+    .btn-filter-mobile,
+    .btn-param.btn-param-mobile {
+        display: flex;
+    }
+
+    .header-search-mobile-btn {
+        position: absolute;
+        display: flex;
+        z-index: 10;
+        height: 100%;
+        padding: 12px 16px;
+        top: 0;
+    }
+
+    .header-search-mobile-btn.btn-arrow {
+        left: 0;
+    }
+
+    .header-search-mobile-btn.btn-close {
+        right: 0;
+    }
+
+    .header-search-mobile-btn i {
+        width: 20px;
+        height: 20px;
+        font-size: 20px;
+    }
+
+    .mobile-search .header-mobile,
+    .mobile-search .header-logo {
+        width: 0;
+        overflow: hidden;
+        margin: 0;
+        min-width: 0;
+        max-width: 0;
+    }
+
+    .mobile-search .header-wrapper .header-search {
+        display: block;
+        max-width: 100%;
+    }
+
+    .mobile-search .header-search {
+        position: relative;
+    }
+
+    .mobile-search .input-wrapper.search-wrapper i.i-search-line {
+        opacity: 0;
+        display: none;
+    }
+
+    .mobile-search .input-wrapper.search-wrapper input {
+        padding-left: 52px;
+        padding-right: 52px;
+    }
+
+    .filter-mobile-wrap {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        display: block;
+        z-index: 100;
+        background: #FFFFFF;
+        width: 100%;
+        height: 100%;
+        /* animation */
+
+        animation: toUp .2s;
+    }
+
+    .filter-mobile-wrap .filter {
+        max-width: 100%;
+        width: 100%;
+        padding: 8px 16px;
+        display: block;
+        max-height: calc(100% - 72px);
+        overflow: hidden auto;
+    }
+
+    .filter-mobile-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+        width: 100%;
+        position: relative;
+        height: 100%;
+    }
+
+    .filter-mobile-container .filter-mobile-header {
+        position: sticky;
+        top: 0;
+        background-color: #FFFFFF;
+        z-index: 1;
+    }
+
+    .filter-mobile-container .filter-mobile-footer {
+        position: sticky;
+        margin-top: auto;
+        bottom: 0;
+        background-color: #FFFFFF;
+        border-top: 1px solid #DFE2EA;
+        box-shadow: 4px 0px 15px rgba(129, 136, 153, 0.25);
+        z-index: 1;
+        display: flex;
+        flex-direction: row;
+        padding: 12px 16px;
+        gap: 16px;
+        border-radius: 8px;
+    }
+
+    .filter-mobile-container .filter-mobile-footer .btn {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 150%;
+        flex-grow: 1;
+    }
+
+    .filter-mobile-header {
+        padding: 16px;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 150%;
+        color: #333333;
+        border-bottom: 1px solid #DFE2EA;
+        display: flex;
+        justify-content: flex-start;
+        padding: 12px 16px;
+        height: 72px;
+    }
+
+    .filter-mobile-header .btn-close {
+        margin-left: auto;
+        color: #818899;
+    }
+
+    .section-tabs {
+        margin-top: 24px;
+        margin-bottom: 24px;
+
+    }
+
+    .section-nft.with-filter {
+        grid-template-columns: 1fr;
+    }
+
+    .section-nft-filter,
+    .btn-param.btn-param-desktop,
+    .params-block.params-block-switch {
+        display: none;
+    }
+
+    .params {
+        flex-wrap: wrap;
+        width: calc(100% + 8px * 2);
+        margin: calc(8px * -1);
+    }
+
+    .params-block.params-block-filter {
+        order: 1;
+    }
+
+    .params-block.params-block-sort {
+        order: 2;
+    }
+
+    .params-block.params-block-search {
+        order: 3;
+    }
+
+    .section-nft-list.card-collapse .card-data {
+        opacity: 1;
+        height: fit-content;
+        overflow: hidden;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .card-main,
+    .card-data {
+        padding: 8px;
+    }
+
+    .params-block.params-block-filter,
+    .params-block.params-block-sort {
+        width: 50%;
+
+    }
+
+    .params-block.params-block-filter,
+    .params-block.params-block-sort,
+    .params-block {
+
+        padding: 8px;
+    }
+
+    .card .data-table .data-tr .data-td-value {
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .card .data-table .data-tr.data-tr-main {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    .btn-like {
+        width: 24px;
+        min-width: 24px;
+        height: 24px;
+        font-size: 16px;
+    }
+
+    .btn-like i {
+        width: 16px;
+        min-width: 16px;
+        height: 16px;
+    }
+
+    .card .card-id {
+        font-weight: 700;
+        font-size: 14px;
+    }
+
+    .card .data-table .data-tr.data-tr-date,
+    .card .card-value span {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 150%;
+    }
+
+    .card .card-value span b {
+        font-weight: 400;
+    }
+
+    .card .data-table .data-tr:not(:first-child) {
+        margin-top: 0;
+    }
+
+    .cards-list-empty .btn,
+    .card-data .btn-container .btn {
+        /* font-weight: 400; */
+        /* font-size: 12px; */
+        /* line-height: 150%; */
+    }
+
+    /* .modal-connect-btns .btn,
+    .modal-wrapper .btn{
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 150%;
+    } */
+
+    .btn {
+        padding: 8px 12px;
+    }
+
+    .vote-progress-container .card-progress {
+        height: 16px;
+    }
+
+    .vote-progress-container .progress-value {
+        font-size: 14px;
+        line-height: 17px;
+    }
+
+    /* footer */
+
+    .footer-section.footer-section-first {
+        flex-direction: column;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .footer-section.footer-section-first .footer-block {
+        border-top: 1px solid #DFE2EA;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .footer-section.footer-section-first .footer-block.footer-block-logo {
+        border-top: 0;
+    }
+
+    .footer-row.footer-row-nav {
+        padding-top: 40px;
+        padding-bottom: 24px;
+    }
+
+    .footer-block,
+    .footer-part {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .footer-logo {
+        margin-bottom: 24px;
+    }
+
+    .footer-block-name {
+        width: 100%;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 19px;
+    }
+
+    .footer-block:not(.footer-block-form) div.footer-block-name {
+        display: none;
+    }
+
+    .footer-block button.footer-block-name {
+        display: flex;
+    }
+
+    .footer-block .footer-block-name i.i-arrow-up-s-line {
+        display: block;
+    }
+
+    .footer-block .footer-list li {
+        margin-top: 0;
+        margin-bottom: 16px;
+        transition: .25s;
+    }
+
+    .footer-block.unfolded .footer-list li {
+        margin-bottom: 0;
+    }
+
+    .footer-block.unfolded .footer-list {
+        height: 0;
+        overflow: hidden;
+    }
+
+    .footer-form {
+        width: 100%;
+        margin-top: 0;
+    }
+
+    .footer-row-info .footer-section {
+        flex-direction: column-reverse;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .faq {
+        width: 100%;
+        margin: -8px 0;
+    }
+
+    .faq-block {
+        max-width: 100%;
+        margin: 8px 0;
+    }
+
+    .footer-row.footer-row-info {
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+
+    .footer-service-links {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .footer-service-links a {
+        order: 1;
+    }
+
+    .footer-service-links .copyright,
+    .footer-service-links a {
+        margin-top: 16px;
+        margin-right: 0;
+        width: fit-content;
+    }
+
+    .footer-service-links .copyright {
+        order: 2;
+        padding-top: 16px;
+        width: 100%;
+        border-top: 1px solid #DFE2EA;
+    }
+
+    .form-contact {
+        padding: 40px 16px;
+    }
+
+    .form-contact .form .container-input {
+        width: 100%;
+    }
+
+    .form-contact .form {
+        gap: 24px;
+    }
+
+    .section-form-title {
+        margin-bottom: 24px;
+    }
+
+    .form-contact .btn.btn-submit {
+        margin-top: 24px;
+    }
+
+    [class^='section-service-']{
+        margin-top: 24px;
+    }
+
+    .profile-header {
+        flex-direction: column;
+    }
+
+    .profile-header .btn.link-wrapper {
+        padding-left: 0;
+        padding-right: 0;
+        margin-top: 8px;
+    }
+
+    .main-screen-container {
+        padding-left: 0;
+        padding-right: 0;
+        flex-direction: column;
+        gap: 80px;
+    }
+
+    .page-wrapper main.main-home {
+        padding-top: 0;
+    }
+
+    .main-screen h1.section-name-h1 {
+        font-size: 72px;
+        line-height: 85px;
+    }
+
+    .main-screen .section-name-h3 {
+        margin-top: 16px;
+    }
+
+    .main-screen .btn.btn-home {
+        min-width: fit-content;
+        width: 100%;
+        margin-top: 40px;
+    }
+
+    .referral-main-container{
+        flex-direction: column;
+        gap: 24px;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .referral-main-block{
+        width: 100%;
+    }
+
+    .section-referral-main{
+        padding-bottom: 66px;
+        gap: 0;
+    }
+
+    .section-referral-other{
+        padding-top: 100px;
+    }
+
+    .section-referral-other:first-child{
+        padding-top: 84px;
+    }
+
+    .dashboard-card-wrap{
+        padding: 24px;
+        row-gap: 16px;
+    }
+
+    .referral-dashboard-card{
+        width: 100%;
+    }
+
+    .referrals-main-data{
+        padding: 24px;
+        width: 100%;
+        min-width: fit-content;
+    }
+
+    .referrals-main-data-header{
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .how-work-container{
+        flex-direction: column;
+    }
+
+    .how-work-arrow{
+        transform: rotate(90deg);
+        width: 88px;
+        height: 88px;
+        margin: 0;
+    }
+
+    .table-referrals .thead .td,
+    .table-referrals .tr .td{
+        font-size: 14px;
+    }
+    .table-referrals .tr .td:not(.td-name){
+        font-size: 12px;
+    }
+    .how-work-arrow.arrow-up{
+        transform: rotate(90deg) scaleY(-1);
+    }
+    .dashboard-card-data{
+        min-width: fit-content;
+    }
+    .dashboard-card-ui{
+        display: none;
+    }
+    .referrals-list-empty{
+        padding-top: 36px;
+    }
+    .how-work-container{
+        padding-bottom: 32px;
+    }
+}
+
+/* ----------------- MODALS ---------------- */
+
+@media (max-width: 768px) {
+    .modal-header {
+        padding: 16px;
+        border-bottom: 1px solid #DFE2EA;
+    }
+
+    .modal-cards-wrapper{
+        width: calc(100% + 16px * 2);
+        max-width: calc(100% + 16px * 2);
+        gap: 16px;
+        padding: 0 16px;
+        margin: 0 -16px 16px;
+    }
+
+.modal-cards-wrapper .card{
+    max-width: calc(100% / 2 - 16px);
+}
+
+    .modal-mint .modal-header{
+        padding-bottom: 16px;
+    }
+
+    .modal-wrapper {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+        height: 100%;
+    }
+
+    .modal-mint .modal-wrapper,
+    .modal-connect .modal-wrapper {
+        max-width: 100%;
+    }
+
+    .modal-connect .modal-content,
+    .modal-content {
+        padding: 24px 16px 0;
+    }
+
+    .modal-header-img,
+    .modal-header,
+    .modal-content,
+    .modal-section-total,
+    .cookies-content {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .cookies-btns-container {
+        padding: 0 16px 16px;
+        justify-content: stretch;
+        gap: 16px;
+    }
+
+    .cookies-btns-container .btn {
+        min-width: calc(100% / 2 - 8px);
+        flex-grow: 1;
+    }
+
+    .cookies-wrap {
+        max-width: 100%;
+    }
+
+    .cookies-wrap {
+        bottom: 0;
+        box-shadow: 4px 0px 15px rgba(129, 136, 153, 0.25);
+        border-top: 1px solid #DFE2EA;
+        border-radius: 0;
+    }
+
+    .modal-section-total {
+        margin-left: -16px;
+        margin-right: -16px;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        background: #F8F9FD;
+    }
+
+    .modal {
+        padding: 0;
+        justify-content: stretch;
+    }
+
+    .modal-section-main-data .modal-main-data-container .modal-data-block {
+        /* max-width: calc(50% - 20px); */
+    }
+
+    .modal-main-input-select .modal-data-block-price {
+        max-width: 100%;
+    }
+
+    .modal-main-data-container.modal-main-input-select {
+        flex-direction: column-reverse;
+    }
+
+    .modal-main-data-container.modal-main-input-select .modal-data-block-price {
+        width: 100%;
+    }
+
+    .modal-section-main-data .modal-main-data-container .modal-data-block .input-selected {
+        min-width: 156px;
+    }
+
+    .modal-mobile-footer {
+        display: flex;
+        padding: 12px 16px;
+        width: 100%;
+        align-items: stretch;
+        justify-content: stretch;
+        background: #FFFFFF;
+        border-top: 1px solid #DFE2EA;
+        box-shadow: 4px 0px 15px rgba(129, 136, 153, 0.25);
+        position: sticky;
+        bottom: 0;
+        z-index: 5;
+    }
+
+    .modal-mobile-footer .btn-modal-main {
+        width: 100%;
+    }
+
+    .modal-desktop-footer {
+        display: none;
+    }
+
+    .modal-wrapper {
+        flex-direction: column;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-align-content: stretch;
+        -ms-flex-line-pack: stretch;
+        align-content: stretch;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+
+        /* animation */
+
+        margin-top: auto;
+        animation: toUp .2s;
+
+    }
+
+    @keyframes toUp {
+        0% {
+            opacity: 0;
+            height: 70%;
+        }
+
+        50% {
+            opacity: 1;
+            height: 100%;
+        }
+    }
+
+    .modal-content {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+
+    .modal-section-nft-data {
+        flex-direction: column;
+    }
+
+    .modal-nft-data {
+        width: 100%;
+    }
+
+    .modal-section-nft-data .modal-current-part {
+        margin-left: 0;
+    }
+
+    .modal-section-main-data .modal-main-data-container {
+        column-gap: 16px
+    }
+
+    .modal-header-img [class^='icon-'],
+    .modal-header-img {
+        margin-top: 0;
+    }
+
+    .modal-header-img {
+        padding-top: 40px;
+        margin-bottom: 0;
+    }
+
+    .cookies-header {
+        padding: 16px;
+    }
+
+    .modal-filter .filter-ul,
+    .modal-filter .filter-ul li {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 991px) {
+    /* @media (max-width: 768px) { */
+    .deposit-value {
+        margin-left: 30px;
+    }
+
+
+    .deposit-data.prof{
+        padding-left: 30px;
+    }
+
+    .recommendations-list li,
+    .section-nft.with-filter .cards-list-container .card,
+    .section-nft:not(.with-filter) .cards-list-container .card {
+        width: calc(100% / 2 - 16px);
+    }
+
+    .recommendations-wrap .btn-mobile-wrap {
+        display: flex;
+        width: 100%;
+    }
+
+    .recommendations-wrap .btn-mobile-wrap .btn-router-to {
+        width: 100%;
+        margin-top: 24px;
+    }
+
+    .recommendations-wrap .header-title-btn .btn-wrap {
+        display: none;
+    }
+}
+
+/* ------ TABLE ------- */
+@media (max-width: 768px) {
+
+    .section-nft-list .table-activities .thead,
+    .section-nft-list .table-activity .thead {
+        display: none;
+    }
+
+    .section-nft-list .table-activity .thead .td,
+    .section-nft-list .table-activity .tr .td {
+        padding: 0;
+    }
+
+    .section-nft-list .table-activity .tr {
+        position: relative;
+        padding: 16px 0;
+        padding-right: calc(24px + 16px);
+        display: flex;
+        flex-wrap: wrap;
+        transition: height .25s;
+        overflow: hidden;
+    }
+
+    .section-nft-list .table-activity .table-activity .thead,
+    .section-nft-list .table-activity .table-activity .tr {
+        gap: 12px;
+    }
+
+    .section-nft-list .table-activity .tr .btn-mobile-tr-collapse {
+        display: flex;
+        position: absolute;
+        top: 36px;
+        right: 0;
+    }
+
+
+    .section-nft-list .table-activity .tr.tr-mob-collapse .td-date,
+    .section-nft-list .table-activity .tr.tr-mob-collapse .td-tx {
+        height: 0;
+        overflow: 0;
+        padding: 0;
+        display: none;
+    }
+
+    .section-nft-list .table-activity .tr:not(.tr-mob-collapse) .td-date,
+    .section-nft-list .table-activity .tr:not(.tr-mob-collapse) .td-tx {
+        height: fit-content;
+    }
+
+    .table-top-collections .thead .td-data,
+    .table-top-collections .tr .td-data {
+        display: none;
+    }
+
+    .table-top-collections .tr .td-wrap-collection .collection-img {
+        margin-left: 0;
+    }
+
+    .thead .td-collection span {
+        padding-left: 0;
+    }
+
+    .table-top-collections .thead,
+    .table-top-collections .tr {
+        grid-template-columns: 2fr 1.5fr 1.5fr;
+    }
+
+    .section-nft-list .table-activity .thead .td,
+    .section-nft-list .table-activity .tr .td,
+    .section-nft-list .table-activity .drop-down ul li,
+    .section-nft-list .table-activity .search-results-wrapper ul li,
+    .section-nft-list .table-activity .td-wrap.td-wrap-collection,
+    .section-nft-list .table-activity .modal-nft-data {
+        font-size: 14px;
+    }
+
+    .section-nft-list .table-activity .tr .td-light {
+        font-size: 12px;
+    }
+
+    .section-nft-list .table-activity .td-wrap-collection .collection-img {
+        margin-left: 0;
+    }
+
+    .section-nft-list .table-activity .deposit-data,
+    .section-nft-list .table-activity .td-wrap-collection .collection-data,
+    .section-nft-list .table-activity .search-results-wrapper ul .results-data {
+        padding-left: 8px;
+    }
+
+    .section-nft-list .table-activity .td {
+        width: fit-content;
+    }
+
+    .section-nft-list .table-activity .td-date,
+    .section-nft-list .table-activity .td-tx {
+        min-width: calc(50% - 16px);
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+    }
+
+    .section-nft-list .table-activity .tr .td.td-price,
+    .section-nft-list .table-activity .tr .td.td-date {
+        text-align: left;
+    }
+
+    .section-nft-list .table-activity .td-category {
+        width: 100%;
+        order: -1;
+        flex-direction: row;
+    }
+
+    .section-nft-list .table-activity .td-wrap-category {
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        align-content: center;
+        margin-bottom: -4px;
+    }
+
+    .section-nft-list .table-activity .thead .td.td-price,
+    .section-nft-list .table-activity .tr .td.td-price,
+    .section-nft-list .table-activity .thead .td.td-price,
+    .section-nft-list .table-activity .tr .td.td-price {
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .section-nft-list .table-activity .td-mob-title {
+        display: block;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 150%;
+        display: flex;
+        align-items: center;
+        color: #9A9A9A;
+    }
+
+    .section-nft-list .table-activity .td-wrap-category .td-light {
+        margin-top: 0;
+        margin-left: 3px;
+        position: relative;
+    }
+
+    .section-nft-list .table-activity .td-wrap-category .td-light::before {
+        content: '( ';
+    }
+
+    .section-nft-list .table-activity .td-wrap-category .td-light::after {
+        content: ' )';
+    }
+
+    .section-nft-list .table-activity .td-wrap-category i,
+    .section-nft-list .table-activity .td-wrap-price i,
+    .section-nft-list .table-activity .token-value .icon-value,
+    .section-nft-list .table-activity .total-block-value .icon-value,
+    .section-nft-list .table-activity .td-wrap-price .icon-token,
+    .section-nft-list .table-activity .collection-data-link i,
+    .section-nft-list .table-activity .deposit-listened.deposit-listened-link i,
+    .section-nft-list .table-activity .td-wrap-link i {
+        width: 16px;
+        height: 16px;
+        font-size: 16px;
+    }
+
+    .section-nft-list .table-activity .td-wrap-category,
+    .section-nft-list .table-activity .td-wrap-price,
+    .section-nft-list .table-activity .token-value {
+        padding-left: 20px;
+    }
+
+    .section-nft-list .table-activity .td-wrap-category,
+    .section-nft-list .table-activity .token-value,
+    .section-nft-list .table-activity .td-wrap-price,
+    .section-nft-list .table-activity .td-wrap-link {
+        min-height: 16px;
+    }
+
+    .section-nft-list .table-activity .td-wrap-category i {
+        top: 2px;
+    }
+
+    .section-nft-list .table-activity .table-activity .tr:hover {
+        background-color: #FFFFFF;
+    }
+
+    .section-nft-list .table-activity .deposit-img,
+    .section-nft-list .table-activity .td-wrap-collection .collection-img,
+    .search-results-wrapper li .results-icon {
+        height: 40px;
+        width: 40px;
+        min-height: 40px;
+        min-width: 40px;
+    }
+}
+
+@media (max-width: 640px) {
+    .footer-form .btn-subscribe {
+        min-width: 100px;
+    }
+
+    .btn-filter-mobile,
+    .params-block.params-block-filter .btn-param,
+    .params-block.params-block-sort .btn-param {
+        min-width: 100px;
+    }
+
+    .tabs li button {
+        min-width: 100px;
+    }
+}

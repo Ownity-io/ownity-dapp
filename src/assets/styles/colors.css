@@ -1,0 +1,188 @@
+.header-nav ul li a.active:after,
+.header-nav ul li a.router-link-exact-active:after,
+.header-nav ul li a:hover:after,
+.tabs .active-tab::after,
+.header-nav ul li button.active:after {
+    background: linear-gradient(89.43deg, #3E80FF -3.17%, #2457D5 109.46%);
+    background-size: 100% 100%;
+    border-width: 0;
+    border: none;
+}
+
+.td-completed,
+.card-data .btn-container .btn.btn-card-completed {
+    color: #2CC07B;
+}
+
+.td-failed {
+    color: #F32727;
+}
+
+/* */
+.section-name-link:hover span,
+.main-data-add:hover button,
+.main-data-add:hover a,
+.main-data-referral-from a:hover span,
+.card .data-td a:hover span,
+.owned-row a:hover span,
+.td-wrap.td-wrap-collection .collection-id:hover,
+.td-wrap-collection .collection-img:hover + .collection-data .collection-id:not(.td-light),
+.deposit-listened.deposit-listened-link:hover a,
+.collection-data-link a:hover,
+.total-block-describe a:hover,
+.footer-list a:hover,
+.breadcrumbs li a:hover span,
+.footer-form .agree a:hover,
+.total-block-describe a:hover,
+.data-td a:hover span,
+a.collection-data:hover span,
+a.collection-id:hover span,
+.btn-more-nft:hover,
+a.td-wrap-link:hover span,
+.footer-row.footer-row-info .footer-part:not(.footer-social-links) a:hover {
+    background-image: linear-gradient(89.43deg, #3E80FF -3.17%, #2457D5 109.46%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;
+    transition: background-image 200ms ease;
+    text-decoration: underline;
+    text-underline-position: under;
+    text-decoration-color: #3E80FF;
+    background-position: center;
+}
+
+.tabs button:hover,
+.tabs button.active-tab {
+    background-color: #F8F9FD;
+}
+
+.btn.btn-clear,
+.card-members-btn,
+.btn-vote,
+.section-deposit-btns .btn.btn-get,
+.card-data .btn-container .btn,
+.cookies-btns-container .btn-additional,
+.modal-connect-btns .btn,
+.cards-list-empty .btn {
+    color: #333333;
+    background: #FFFFFF;
+    border: 2px solid #DFE2EA;
+}
+
+.btn-modal-main,
+.btn.btn-home,
+.btn.btn-submit,
+.btn.btn-buy,
+.btn-dashboard,
+.footer-form .btn-subscribe,
+.cookies-btns-container .btn-main,
+.card-data .btn-container .btn:not(.btn-card-completed, :disabled):hover,
+.card-data .btn-container .container-btn-part-vote .btn.btn-vote,
+.section-deposit-btns .btn.btn-deposit,
+.btn.btn-connect {
+    /* background: linear-gradient(89.43deg, #3E80FF -3.17%, #2457D5 109.46%); */
+    background: linear-gradient(89.43deg, #3E80FF -3.17%, #2457D5 49.91%, #3E80FF 109.46%);
+    box-shadow: 0px 0px 20px rgba(73, 129, 239, 0.5);
+    color: #FFFFFF;
+    background-size: calc((100% + 2px * 2) * 2);
+    background-position: 0 center;
+    border-color: transparent;
+    transition: background-position 250ms ease;
+}
+
+.btn-modal-main:hover,
+.btn.btn-home:hover,
+.btn.btn-submit:hover,
+.btn-dashboard:hover,
+.btn.btn-buy:hover,
+.card-data .btn-container .container-btn-part-vote .btn.btn-vote:hover,
+.footer-form .btn-subscribe:hover,
+.cookies-btns-container .btn-main:hover,
+.section-deposit-btns .btn.btn-deposit:hover,
+.btn.btn-connect:hover {
+    background-position: -100% center;
+}
+
+.btn-modal-main:disabled {
+    background: linear-gradient(89.43deg, #9A9A9A -3.17%, #818387 109.46%);
+    box-shadow: unset;
+}
+
+.switch,
+.btn-param,
+.btn-log-out,
+.btn-drop-down,
+.input-selected,
+.btn-selected-filter,
+.section-listing-main,
+.profile-container-btns button,
+.tab-blocks-list .tab-block,
+.sort.unfolded .drop-down,
+.drop-down-container .drop-down,
+.input-select-wrap.unfolded .drop-down,
+.btn.btn-cancel,
+.btn.btn-address {
+    background: #FFFFFF;
+    border: 1px solid #DFE2EA;
+}
+
+
+
+
+
+
+.btn.btn-clear:hover,
+.card-members-btn:hover,
+.btn-vote:hover,
+.section-deposit-btns .btn.btn-get:hover,
+.card-data .btn-container .btn:not(:disabled):hover,
+.cookies-btns-container .btn-additional:hover,
+.modal-connect-btns .btn:hover,
+.cards-list-empty .btn:hover,
+
+
+
+
+
+.drop-down li:hover,
+.btn-drop-down:hover,
+.btn-selected-filter:hover,
+.input-checkbox label:hover .i-check-line,
+.btn-log-out:hover,
+.btn.btn-cancel:hover,
+.search-results.unfolded ul li:hover,
+/* .table-chart-data .tr:hover, */
+.table-activity .tr:hover,
+.profile-container-btns button:hover,
+.btn.btn-address:hover,
+.listing-additional-options .btn-block:hover,
+.sort.unfolded .btn-sort,
+.input-select-wrap.unfolded .input-selected,
+.main-home .btn-router-to:hover,
+.cards-carousel .carousel__prev:hover,
+.cards-carousel .carousel__next:hover,
+.faq-block.collapse-block:hover,
+.modal-connect-btns .btn:hover,
+.sort .btn-sort:hover,
+.input-selected:hover,
+.btn-router-to:hover,
+.btn-param:hover {
+    background-color: #F4F5FA;
+}
+
+@media (hover: hover) {
+    .card:not(.card-inactive):hover {
+        transform: translateY(-2px);
+        border: 1px solid #DFE2EA;
+        /* Shadow hoder */
+        z-index: 5;
+        box-shadow: 4px 4px 15px rgba(129, 136, 153, 0.25);
+    }
+}
+
+
+.card-data .btn-container .btn:disabled{
+    opacity: 0.5;
+}

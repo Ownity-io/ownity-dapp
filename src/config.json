@@ -1,0 +1,143 @@
+{
+    "backendApiEntryPoint":"https://api.jaxscan.com/",
+    "listingsPerPage":20,
+    "collectionsPerPage":10,
+    "activitiesPerPage":10,
+    "messageToSignStart":"Sign the message to continue working with NFT Aggregator: ",
+    "etherscanTokenUrlStart":"https://goerli.etherscan.io/token/",
+    "etherscanAddressUrlStart":"https://goerli.etherscan.io/address/",
+    "etherscanTxUrlStart":"https://goerli.etherscan.io/tx/",
+    "contractAddress":"0xeA6EC71b9D571513B8dd6C027a7DB7ab097DC4Ee",
+    "profilePageBidsStatuses":[
+        {
+            "name":"On sale",
+            "codeName":"ON SALE"
+        },
+        {
+            "name":"Canceled",
+            "codeName":"CANCELLED"
+        },
+        {
+            "name":"Gathering",
+            "codeName":"IN GATHER"
+        },
+        {
+            "name":"Owned",
+            "codeName":"OWNED"
+        },
+        {
+            "name":"Sold",
+            "codeName":"SOLD"
+        }        
+    ],
+    "profilePageFavInternalStatuses":[
+        {
+            "name":"Closed",
+            "codeName":"CLOSED"
+        },   
+        {
+            "name":"On Sale",
+            "codeName":"ON SALE"
+        },  
+        {
+            "name":"Open",
+            "codeName":"OPEN"
+        },  
+        {
+            "name":"Owned",
+            "codeName":"OWNED"
+        },
+        {
+            "name":"Sold",
+            "codeName":"SOLD"
+        }
+    ],
+    "profilePageVoteInternalStatuses":[
+        {
+            "name":"Closed",
+            "codeName":"CLOSED"
+        },   
+        {
+            "name":"Owned",
+            "codeName":"OWNED"
+        },
+        {
+            "name":"Sold",
+            "codeName":"SOLD"
+        }
+    ],
+    "sortParams":[
+        {
+            "name":"Price: Low to High",
+            "codeName":"price"
+        },
+        {
+            "name":"Price: High to Low",
+            "codeName":"-price"
+        },
+        {
+            "name":"Listing: Old to New",
+            "codeName":"timestamp"
+        },
+        {
+            "name":"Listing: New to Old",
+            "codeName":"-timestamp"
+        }
+    ],
+    "sortParamsActivities":[
+        {
+            "name":"Listing: Old to New",
+            "codeName":"timestamp"
+        },
+        {
+            "name":"Listing: New to Old",
+            "codeName":"-timestamp"
+        }
+    ],
+    "evmChains":{
+        "Binance" : {
+            "chainId": "0x38",
+            "chainName": "BNB Chain",
+            "nativeCurrency": {
+                "name": "Binance Coin",
+                "symbol": "BNB",
+                "decimals": 18
+            },
+            "rpcUrls": ["https://bsc-dataseed.binance.org/"],
+            "blockExplorerUrls": ["https://bscscan.com"]
+        },
+        "Goerli":{
+            "chainId": "0x5",
+            "chainName": "Goerli",
+            "nativeCurrency": {
+                "name": "Goerli Ether",
+                "symbol": "GETH",
+                "decimals": 18
+            },
+            "rpcUrls": ["https://eth-goerli.public.blastapi.io"],
+            "blockExplorerUrls": ["https://goerli.etherscan.io/"]
+        }
+    },
+    "activitiesPart":[
+        {
+            "name":"Votings",
+            "codeName":"Votings"
+        },
+        {
+            "name":"Sale",
+            "codeName":"Sale"
+        },
+        {
+            "name":"Claims",
+            "codeName":"Claims"
+        },
+        {
+            "name":"Fractions",
+            "codeName":"Fractions"
+        },
+        {
+            "name":"Rewards",
+            "codeName":"Rewards"
+        }
+    ]
+}
